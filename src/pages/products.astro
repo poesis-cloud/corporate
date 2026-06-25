@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Products"
+  description="The Poesis stack: SIE (the GSM engine and reference implementation) and ITIP (the first domain application), plus the platform components."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">The stack</p>
+      <h1>The canonical GSM implementation.</h1>
+      <p class="lead">Poesis is the software editor of the reference stack: the engine that hosts GSM, the first domain application built on it, and the platform components around them.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/contact">Request a demo</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud">Browse the repos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        <div class="card"><span class="tag">SIE</span><h3>Systemic Intelligence Engine</h3><p>The GSM engine and reference implementation — Definition Manager, Operator, Blackboard, and supporting services. Hosts GSM; enforces the lifecycle and conformance.</p></div>
+        <div class="card"><span class="tag">ITIP</span><h3>IT Intelligence Platform</h3><p>The first domain application built on SIE — translating GSM into IT intelligence and governance for real organizations.</p></div>
+        <div class="card"><span class="tag tag--muted">Platform</span><h3>Components</h3><p>Definition database, event bus, schema registry, OpenTelemetry collector — the substrate the stack runs on.</p></div>
+        <div class="card"><span class="tag tag--muted">Open core</span><h3>How you run it</h3><p>A free community edition, a paid enterprise edition, a managed SaaS, or on-prem integration and administration in regulated and sovereign environments.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Editor · SaaS · On-prem</p>
+      <h2>Adopt it the way your environment demands.</h2>
+      <p class="lead">Start free, scale to enterprise, run it as a managed service, or deploy and administer it inside your own perimeter. Same stack, three commercial paths.</p>
+      <p><a class="btn btn-ghost" href="/services">Talk to us about deployment →</a></p>
+    </div>
+  </section>
+</BaseLayout>

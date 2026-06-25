@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const modules = import.meta.glob('./*.md', { eager: true });
+const posts = Object.entries(modules)
+  .map(([path, mod]) => {
+    const m = mod as { url?: string; frontmatter?: Record<string, any> };
+    return {
+      url: m.url ?? path.replace('./', '/insights/').replace(/\.md$/, ''),
+      ...(m.frontmatter ?? {}),
+    };
+  })
+  .filter((p: any) => !p.draft)
+  .sort((a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+---
+<BaseLayout
+  title="Insights"
+  description="Essays from Poesis on systemic, AI-native governance — by the creators of GSM."
+>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Insights</p>
+      <h1>Thinking from the THINK layer.</h1>
+      <p class="lead">Essays on systemic governance, the generative inversion, and AI-native systems — by the creators of GSM.</p>
+      <ul class="post-list">
+        {posts.map((p: any) => (
+          <li class="card">
+            <time datetime={new Date(p.pubDate).toISOString()}>
+              {new Date(p.pubDate).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h3 style="margin:0"><a href={p.url}>{p.title}</a></h3>
+            <p class="muted" style="margin:.3rem 0 0">{p.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

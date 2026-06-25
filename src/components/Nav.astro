@@ -1,0 +1,22 @@
+---
+const links = [
+  { href: '/standard', label: 'Standard' },
+  { href: '/products', label: 'Products' },
+  { href: '/framework', label: 'Framework' },
+  { href: '/services', label: 'Services' },
+  { href: '/insights', label: 'Insights' },
+  { href: '/about', label: 'About' },
+];
+---
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/favicon.svg" alt="" width="26" height="26" />
+      Poesis
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a class="btn btn-primary btn-sm" href="/contact">Talk to us</a>
+    </nav>
+  </div>
+</header>

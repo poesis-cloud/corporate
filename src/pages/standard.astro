@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="The Standard (GSM)"
+  description="The Generative System Model (GSM) — an open, vendor-neutral standard for defining and governing software-intensive systems."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Open standard</p>
+      <h1>The Generative System Model.</h1>
+      <p class="lead">GSM is an open, vendor-neutral standard for <strong>defining and governing</strong> software-intensive systems — the THINK layer that the BUILD (pipelines) and RUN (observability) layers enforce and measure against.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/">Read the specification</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud/gsm">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">What it specifies</p>
+      <h2>A small fixed core, an open type system.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card"><h3>Eight primitives</h3><p>Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core.</p></div>
+        <div class="card"><h3>A governance grammar</h3><p>Directives, Norms, and Ascriptions — a three-tempo grammar (DNA) for how obligations bind to subjects.</p></div>
+        <div class="card"><h3>Lifecycle &amp; conformance</h3><p>A normative Ascription lifecycle, and conformance defined for documents, producers, consumers, and processors.</p></div>
+        <div class="card"><h3>Portable by design</h3><p>Two sandboxed expression profiles and a canonical JSON interchange — governed definitions move across conforming tools.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">It composes — it doesn't compete</p>
+      <h2>The model behind the governance your tools already do.</h2>
+      <p class="lead">Norms express SLOs (OpenTelemetry supplies the evidence); Directives drive admission (OPA / Kyverno enforce); supply-chain obligations bind to sigstore / SLSA / in-toto; GDPR / NIS2 / DORA source into Archetypes. GSM is the authoritative definition; existing projects realize it.</p>
+      <p><a href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Stewardship</p>
+      <h2>Built for vendor-neutral governance.</h2>
+      <p class="lead">GSM is published as an open standard and is being prepared for neutral, multi-stakeholder stewardship (a CNCF-style path). Conformance is defined so independent implementations interoperate — the reference implementation holds no privileged status in the specification.</p>
+      <p class="muted" style="font-size:.9rem">Status: open specification, pre-1.0. No third-party endorsement is implied.</p>
+    </div>
+  </section>
+</BaseLayout>

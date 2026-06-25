@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const email = 'clement.cazaud@outlook.com';
+---
+<BaseLayout
+  title="Contact"
+  description="Talk to Poesis about transformation, the Poesis stack, certification, or the GSM standard."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's talk.</h1>
+      <p class="lead">Transformation engagements, the Poesis stack (SaaS or on-prem), certification, design partnerships, or the GSM standard — start the conversation.</p>
+      <p style="margin-top:1.5rem"><a class="btn btn-primary" href={`mailto:${email}`}>Email us</a></p>
+      <p class="muted" style="margin-top:1rem">Or reach the project on <a href="https://github.com/poesis-cloud">GitHub</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">What to expect</p>
+      <h2>A direct line to the people who built it.</h2>
+      <p class="lead">Tell us your context and goal. We'll respond with the shortest credible path — and be honest if Poesis isn't the right fit yet.</p>
+    </div>
+  </section>
+</BaseLayout>

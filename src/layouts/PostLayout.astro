@@ -1,0 +1,23 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+const date = frontmatter.pubDate ? new Date(frontmatter.pubDate) : null;
+---
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article class="section">
+    <div class="container prose">
+      <p class="eyebrow">Insight</p>
+      <h1>{frontmatter.title}</h1>
+      {date && (
+        <p class="muted">
+          <time datetime={date.toISOString()}>
+            {date.toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </p>
+      )}
+      <p class="lead">{frontmatter.description}</p>
+      <slot />
+      <p style="margin-top:2.5rem"><a href="/insights">&larr; All insights</a></p>
+    </div>
+  </article>
+</BaseLayout>
