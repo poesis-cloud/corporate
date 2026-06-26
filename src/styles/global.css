@@ -345,6 +345,16 @@ a:hover {
   font-size: .72rem;
 }
 
+.card--feature {
+  border-top: 3px solid var(--accent);
+}
+
+.card--feature h3 {
+  font-size: 1.35rem;
+  margin-top: .55rem;
+  line-height: 1.2;
+}
+
 /* ---- tags / pills ------------------------------------------------------- */
 .tag {
   display: inline-block;

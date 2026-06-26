@@ -32,10 +32,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">It composes — it doesn't compete</p>
-      <h2>The model behind the governance your tools already do.</h2>
-      <p class="lead">Norms express SLOs (OpenTelemetry supplies the evidence); Directives drive admission (OPA / Kyverno enforce); supply-chain obligations bind to sigstore / SLSA / in-toto; GDPR / NIS2 / DORA source into Archetypes. GSM is the authoritative definition; existing projects realize it.</p>
-      <p><a href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases →</a></p>
+      <p class="eyebrow">In the cloud-native ecosystem</p>
+      <h2>The definition layer beneath the projects you already run.</h2>
+      <p class="lead">GSM doesn't compete with cloud-native infrastructure — it gives it the shared, portable source of truth it never had. Two analogies say it best.</p>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card card--feature">
+          <span class="tag">OpenTelemetry</span>
+          <h3>What OpenTelemetry is to RUN, GSM is to THINK.</h3>
+          <p>OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.</p>
+        </div>
+        <div class="card card--feature">
+          <span class="tag">Kubernetes</span>
+          <h3>Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.</h3>
+          <p>Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype.</p>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:2rem">And it composes with the projects that enforce and observe it — GSM holds the definition; they realize it:</p>
+      <div class="grid grid-3" style="margin-top:1rem">
+        <div class="card"><h3>Policy &amp; admission</h3><p>Directives and Norms are the authoritative obligation; <strong>OPA / Gatekeeper</strong> and <strong>Kyverno</strong> compile from them as enforcement effectors.</p></div>
+        <div class="card"><h3>Supply chain</h3><p>Provenance and signing obligations bind to <strong>sigstore</strong>, <strong>SLSA</strong>, <strong>in-toto</strong>, and <strong>TUF</strong> as attestation evidence.</p></div>
+        <div class="card"><h3>Zero-trust</h3><p>Service couplings are modeled as Interactions, verified against <strong>SPIFFE / SPIRE</strong> identities and realized by <strong>Istio</strong> / <strong>Linkerd</strong>.</p></div>
+        <div class="card"><h3>Evidence</h3><p>Norms express SLOs; <strong>OpenTelemetry</strong> and <strong>Prometheus</strong> supply the descriptive evidence they are evaluated against.</p></div>
+        <div class="card"><h3>Delivery</h3><p>Rollout and GitOps guardrails are governed as definitions; <strong>Argo</strong> and Flux controllers realize them.</p></div>
+        <div class="card"><h3>Regulation</h3><p><strong>GDPR</strong>, <strong>NIS2</strong>, and <strong>DORA</strong> source into Archetypes — one governed definition, many enforcement points.</p></div>
+      </div>
+      <p style="margin-top:1.5rem"><a href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases →</a> &middot; <a href="https://docs.poesis.cloud/gsm/gsm-and-kubernetes/">GSM and the Kubernetes model →</a></p>
     </div>
   </section>
 
