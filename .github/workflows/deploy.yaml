@@ -29,9 +29,6 @@ jobs:
           cache: npm
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # Enable Pages (Actions source) on first run if not already enabled.
-          enablement: true
       - name: Install dependencies
         run: npm ci
       - name: Build
