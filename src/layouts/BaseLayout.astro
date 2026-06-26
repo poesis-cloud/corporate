@@ -10,19 +10,21 @@ interface Props {
 
 const {
   title,
-  description = 'Poesis standardizes and operationalizes the THINK layer of IT — systemic, AI-native governance, by the creators of the Generative System Model (GSM).',
+  description = 'Poesis harnesses the generative AI era so that systems continuously develop on their own — the GSM standard, the SIE engine, and the ITIP application that define and govern systems in software.',
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
-const fullTitle = title === 'Poesis' ? 'Poesis — systemic, AI-native governance for IT' : `${title} · Poesis`;
+const fullTitle = title === 'Poesis' ? 'Poesis — define the world in software, govern it in software' : `${title} · Poesis`;
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

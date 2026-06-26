@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const repos = [
+  { href: 'https://github.com/poesis-cloud/sie-definition-manager', label: 'sie-definition-manager' },
+  { href: 'https://github.com/poesis-cloud/sie-definition-database', label: 'sie-definition-database' },
+  { href: 'https://github.com/poesis-cloud/sie-operator', label: 'sie-operator' },
+  { href: 'https://github.com/poesis-cloud/sie-definition-blackboard-manager', label: 'sie-definition-blackboard-manager' },
+  { href: 'https://github.com/poesis-cloud/sie-definition-blackboard-database', label: 'sie-definition-blackboard-database' },
+  { href: 'https://github.com/poesis-cloud/sie-otel-collector', label: 'sie-otel-collector' },
+];
+---
+<BaseLayout
+  title="SIE"
+  description="SIE — the Systemic Intelligence Engine: the engine that hosts the GSM standard, enforces its lifecycle, and powers every Poesis domain application."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Engine</p>
+      <h1>The Systemic Intelligence Engine.</h1>
+      <p class="lead">SIE is the engine that hosts the <a href="/standard">GSM</a> standard — the Definition Manager, Operator, Blackboard, and supporting services that store governed definitions, enforce their lifecycle, and serve them to every domain application above it, starting with <a href="/itip">ITIP</a>.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/sie-definition/">Read the docs</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud">Browse the repos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What it is</p>
+      <h2>The runtime home of governed definitions.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card"><h3>Definition Manager</h3><p>Hosts GSM, manages the Ascription lifecycle, and enforces the governance grammar (Directives, Norms, Ascriptions).</p></div>
+        <div class="card"><h3>Operator</h3><p>The rule runtime that evaluates Norms and Directives against reality — turning definitions into continuous enforcement.</p></div>
+        <div class="card"><h3>Blackboard</h3><p>A collaborative definition-sourcing service with a sealed, byte-stable contribution lifecycle and an append-only audit ledger.</p></div>
+        <div class="card"><h3>Platform components</h3><p>Definition database, event bus, schema registry, and OpenTelemetry collector — the substrate the stack runs on.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Editor · SaaS · On-prem</p>
+      <h2>Adopt it the way your environment demands.</h2>
+      <p class="lead">Open-core: a free community edition, a paid enterprise edition, a managed SaaS, or on-prem integration and administration in regulated and sovereign environments — the same engine, three commercial paths.</p>
+      <p><a class="btn btn-ghost" href="/services">Talk to us about deployment →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Build with us</p>
+      <h2>Documentation &amp; source.</h2>
+      <ul class="link-list">
+        <li><a href="https://docs.poesis.cloud/sie-definition/">SIE Definition documentation →</a></li>
+        <li><a href="https://docs.poesis.cloud/sie-blackboard/">SIE Blackboard documentation →</a></li>
+        {repos.map((r) => <li><a href={r.href}>{r.label} →</a></li>)}
+      </ul>
+      <p style="margin-top:1.5rem" class="muted">Implements the <a href="/standard">GSM</a> standard · powers <a href="/itip">ITIP</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const demoUrl = 'https://demo.poesis.cloud';
+const azureUrl = 'https://azuremarketplace.microsoft.com';
+const repos = [
+  { href: 'https://github.com/poesis-cloud/itip-web-frontend', label: 'itip-web-frontend' },
+  { href: 'https://github.com/poesis-cloud/itip-web-backend', label: 'itip-web-backend' },
+  { href: 'https://github.com/poesis-cloud/itip-definition-blackboard-repository-sourcer', label: 'itip-definition-blackboard-repository-sourcer' },
+];
+---
+<BaseLayout
+  title="ITIP"
+  description="ITIP — the IT Intelligence Platform: the first domain application built on SIE, governing the IT landscape as a single, machine-operable source of truth."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Application</p>
+      <h1>The IT Intelligence Platform.</h1>
+      <p class="lead">ITIP is where every IT profile converges — architects, developers, ops, project managers, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. It is the first domain application built on <a href="/sie">SIE</a>, translating the <a href="/standard">GSM</a> standard for the IT domain.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={demoUrl}>Try now</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What it does</p>
+      <h2>Architecture, compliance, and impact — continuously governed.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card"><h3>One source of truth</h3><p>Architecture, dependencies, obligations, and constraints live as governed definitions — not as wikis and spreadsheets that drift the moment they are written.</p></div>
+        <div class="card"><h3>Continuous compliance</h3><p>Frameworks and rules become machine-evaluable Norms and Directives, so conformance is checked continuously rather than reconstructed under audit pressure.</p></div>
+        <div class="card"><h3>Impact you can trace</h3><p>“If I change this, what breaks?” answered from real, typed relations — not from the longest-tenured engineer's memory.</p></div>
+        <div class="card"><h3>AI-native by design</h3><p>Because every definition is typed by an Archetype, humans and agents alike can reason and generate from it directly.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">SaaS</p>
+      <h2>Run ITIP as a managed cloud.</h2>
+      <p class="lead">Operated by the team that builds it — start on the demo instance, or deploy from the Azure Marketplace.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={demoUrl}>ITIP demo instance <span class="tag tag--muted">incoming</span></a>
+        <a class="btn btn-ghost" href={azureUrl}>Azure Marketplace <span class="tag tag--muted">coming soon</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Build with us</p>
+      <h2>Documentation &amp; source.</h2>
+      <p class="lead">ITIP is part of the open Poesis stack.</p>
+      <ul class="link-list">
+        <li><a href="https://docs.poesis.cloud/itip/">ITIP documentation →</a></li>
+        {repos.map((r) => <li><a href={r.href}>{r.label} →</a></li>)}
+      </ul>
+      <p style="margin-top:1.5rem" class="muted">Built on <a href="/sie">SIE</a> · implements the <a href="/standard">GSM</a> standard.</p>
+    </div>
+  </section>
+</BaseLayout>

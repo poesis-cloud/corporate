@@ -1,66 +1,68 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const demoUrl = 'https://demo.poesis.cloud';
 ---
 <BaseLayout title="Poesis">
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">THINK · BUILD · RUN</p>
-      <h1>Standardizing the THINK layer of IT.</h1>
-      <p class="lead">OpenTelemetry standardized how systems are <em>observed</em>. Poesis standardizes how they are <em>defined and governed</em> — then builds and operates the reference implementation, and delivers the transformation around it.</p>
+      <p class="motto">Define the world in software; govern it in software.</p>
+      <h1>Harnessing the generative AI era so that systems continuously develop on their own.</h1>
+      <p class="lead">Today, governance lives in prose — architecture wikis, compliance spreadsheets, review boards — that drifts from reality the moment it is written. Poesis turns that prose into typed, versioned, <strong>machine-operable</strong> definitions: governance your systems can act on, generate from, and continuously enforce.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact">Talk to us</a>
-        <a class="btn btn-ghost" href="/standard">Explore the standard</a>
-        <a class="btn btn-ghost" href="/products">See the stack</a>
+        <a class="btn btn-primary" href={demoUrl}>Try now</a>
+        <a class="btn btn-ghost" href="#portfolio">Explore the portfolio</a>
+        <a class="btn btn-ghost" href="/contact">Talk to us</a>
       </div>
-      <p class="hero-note">By the creators of the <a href="/standard">Generative System Model (GSM)</a>.</p>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section id="portfolio" class="section section--soft">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">The gap</p>
-        <h2>Every workload carries obligations no one can port.</h2>
-        <p class="lead">Security posture, SLOs, supply-chain provenance, data-protection rules, delivery guardrails, cost ceilings — today they live in tool-specific config and prose, trapped in proprietary silos. The RUN layer got a neutral standard. The THINK layer didn't.</p>
+        <p class="eyebrow">Portfolio</p>
+        <h2>One standard, one engine, one application — and the transformation around them.</h2>
+        <p class="lead">An open standard defines the meaning; an engine runs it; an application brings it to a domain; services deliver the change. Each piece links to the next.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">The closed loop</p>
-      <h2>Definitions that generate, run, and correct themselves.</h2>
-      <p class="lead">Poesis closes THINK → BUILD → RUN as one governed loop.</p>
-      <div class="loop">
-        <div class="stage"><div class="k">THINK</div><h3>GSM defines</h3><p>An open model expresses each obligation as a governed definition with a lifecycle.</p></div>
-        <div class="stage"><div class="k">BUILD</div><h3>The framework generates</h3><p>The SAFe Agentic Framework turns governed definitions into runnable code.</p></div>
-        <div class="stage"><div class="k">RUN</div><h3>The stack runs &amp; reconciles</h3><p>SIE runs it; telemetry observes; governance reconciles definition vs. reality — and round again.</p></div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card">
+          <span class="tag tag--muted">Application</span>
+          <h3>ITIP</h3>
+          <p>The IT Intelligence Platform — the first domain application, built on SIE, that governs the IT landscape as a single source of truth.</p>
+          <p style="margin-top:.6rem"><a href="/itip">About ITIP →</a></p>
+        </div>
+        <div class="card">
+          <span class="tag tag--muted">Engine</span>
+          <h3>SIE</h3>
+          <p>The Systemic Intelligence Engine — the engine that hosts GSM, enforces its lifecycle, and powers every domain application above it.</p>
+          <p style="margin-top:.6rem"><a href="/sie">About SIE →</a></p>
+        </div>
+        <div class="card">
+          <span class="tag">Standard</span>
+          <h3>GSM</h3>
+          <p>The Generative System Model — the open, vendor-neutral standard for defining and governing systems. Free, open, the top of every funnel.</p>
+          <p style="margin-top:.6rem"><a href="/standard">About GSM →</a></p>
+        </div>
+        <div class="card">
+          <span class="tag tag--muted">Services</span>
+          <h3>Transformation</h3>
+          <p>AI-generative, agentic transformation of your organization — IT first — delivered with the Poesis stack as the governed substrate.</p>
+          <p style="margin-top:.6rem"><a href="/services">How we engage →</a></p>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">What Poesis does</p>
-      <h2>An open standard, an owned stack, and the transformation around it.</h2>
-      <div class="grid grid-3" style="margin-top:1.5rem">
-        <div class="card"><span class="tag">Open</span><h3>The standard</h3><p>GSM — the vendor-neutral model for defining &amp; governing systems. Free, open, the top of every funnel.</p></div>
-        <div class="card"><span class="tag tag--muted">Product</span><h3>The stack</h3><p>SIE (the GSM engine &amp; reference implementation) and ITIP (the first domain application) — open-core, SaaS, or on-prem.</p></div>
-        <div class="card"><span class="tag tag--muted">Services</span><h3>The transformation</h3><p>AI-generative / agentic transformation of your organization, IT first — with certification for partners and practitioners.</p></div>
-      </div>
-      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="/services">How we engage →</a></p>
     </div>
   </section>
 
   <section class="section section--ink">
     <div class="container">
-      <p class="eyebrow">Why Poesis</p>
-      <h2>The reference actor for systemic, AI-native governance.</h2>
-      <p class="lead">We wrote the model, we build the canonical implementation, and we run the transformation. The standard maximizes the audience; the product, cloud, services, brand, and certification are where value is delivered.</p>
+      <p class="eyebrow">Our first custody</p>
+      <h2>Poesis runs on Poesis.</h2>
+      <p class="lead">We are our own first customer. The standard, the framework, and the stack that will govern your systems already define, build, and govern ours — Poesis's development power rests on the very stack we ship.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact">Start a conversation</a>
-        <a class="btn btn-ghost" href="/insights" style="background:transparent;color:#fff;border-color:#334155">Read the thinking</a>
+        <a class="btn btn-primary" href={demoUrl}>Try the ITIP demo</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud" style="background:transparent;color:#fff;border-color:#334155">See it on GitHub</a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
