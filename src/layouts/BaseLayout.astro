@@ -15,7 +15,7 @@ const {
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
-const fullTitle = title === 'Poesis' ? 'Poesis — define the world in software, govern it in software' : `${title} · Poesis`;
+const fullTitle = title === 'Poesis' ? 'Poesis — define the world in software, govern it' : `${title} · Poesis`;
 ---
 <!doctype html>
 <html lang="en">

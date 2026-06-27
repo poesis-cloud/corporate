@@ -437,6 +437,10 @@ a:hover {
   font-size: .72rem;
 }
 
+.card .tag + h3 {
+  margin-top: .85rem;
+}
+
 .card--feature {
   overflow: hidden;
 }
