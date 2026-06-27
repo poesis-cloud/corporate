@@ -1,38 +1,42 @@
 /* ============================================================================
-   Poesis corporate — design tokens + base styles
-   Typography + accent are aligned with docs.poesis.cloud (just-the-docs, teal
-   scheme) so the corporate site and the documentation read as one brand.
+   Poesis corporate — "Deep Field" design system
+   Ultra-high-tech, dark-first, luminous. Aurora glow + a fine engineering grid,
+   monospace technical labels, glassy hairline surfaces, a teal→cyan accent.
    No external fonts (perf + SEO).
    ========================================================================== */
 
 :root {
-  /* Match the docs (just-the-docs) system font stack. */
+  color-scheme: dark;
   --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Helvetica, Roboto, Noto, Arial, sans-serif;
   --font-mono: "SFMono-Regular", Menlo, Consolas, "Roboto Mono", monospace;
 
-  --ink: #0f172a;
-  /* slate-900 */
-  --ink-soft: #334155;
-  /* slate-700 */
-  --muted: #64748b;
-  /* slate-500 */
-  --line: #e2e8f0;
-  /* slate-200 */
-  --bg: #ffffff;
-  --bg-soft: #f8fafc;
-  /* slate-50  */
-  --bg-ink: #0b1020;
-  /* deep navy */
-  --accent: #0fa3a3;
-  /* docs teal */
-  --accent-ink: #0c7c7c;
-  /* darker teal */
-  --accent-soft: #e6f7f7;
-  /* teal tint   */
+  --ink: #eaf0fa;
+  /* near-white */
+  --ink-soft: #c3cdde;
+  /* secondary  */
+  --muted: #8493a9;
+  /* muted      */
+  --line: rgba(255, 255, 255, .09);
+  --line-strong: rgba(255, 255, 255, .16);
+  --bg: #070a12;
+  /* deep space */
+  --bg-soft: #0b1120;
+  /* elevated   */
+  --bg-ink: #0a0f1c;
+  /* feature panel base */
+  --accent: #2dd4bf;
+  /* teal-400 */
+  --accent-2: #38bdf8;
+  /* sky-400  */
+  --accent-3: #818cf8;
+  /* indigo-400 */
+  --accent-ink: #5eead4;
+  /* link teal on dark */
+  --accent-soft: rgba(45, 212, 191, .12);
 
-  --maxw: 1080px;
-  --radius: 14px;
-  --shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 8px 24px rgba(15, 23, 42, .06);
+  --maxw: 1140px;
+  --radius: 16px;
+  --shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 14px 40px rgba(0, 0, 0, .45);
 }
 
 * {
@@ -48,9 +52,41 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--ink);
-  background: var(--bg);
-  line-height: 1.6;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(58rem 38rem at 50% -12%, rgba(45, 212, 191, .12), transparent 60%),
+    radial-gradient(48rem 32rem at 88% 2%, rgba(129, 140, 248, .10), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  line-height: 1.65;
   font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* fine engineering grid, faded toward the edges */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(circle at 50% 28%, #000, transparent 78%);
+  mask-image: radial-gradient(circle at 50% 28%, #000, transparent 78%);
+}
+
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(45, 212, 191, .28);
+  color: #fff;
 }
 
 h1,
@@ -58,14 +94,15 @@ h2,
 h3,
 h4 {
   font-family: var(--font-sans);
-  line-height: 1.15;
-  color: var(--ink);
+  line-height: 1.12;
+  color: #fff;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
   margin: 0 0 .4em;
 }
 
@@ -105,8 +142,8 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, .85);
-  backdrop-filter: saturate(150%) blur(8px);
+  background: rgba(7, 10, 18, .72);
+  backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -135,7 +172,7 @@ a:hover {
 .brand-mark {
   width: 26px;
   height: 26px;
-  border-radius: 7px;
+  filter: brightness(0) invert(1) drop-shadow(0 0 7px rgba(45, 212, 191, .45));
 }
 
 .nav-links {
@@ -194,23 +231,27 @@ a:hover {
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04141a;
+  box-shadow: 0 8px 24px rgba(45, 212, 191, .22);
 }
 
 .btn-primary:hover {
-  background: var(--accent-ink);
-  color: #fff;
+  color: #04141a;
+  filter: brightness(1.08);
+  box-shadow: 0 10px 30px rgba(45, 212, 191, .38);
 }
 
 .btn-ghost {
-  background: #fff;
+  background: rgba(255, 255, 255, .03);
   color: var(--ink);
-  border-color: var(--line);
+  border-color: var(--line-strong);
 }
 
 .btn-ghost:hover {
-  border-color: var(--muted);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, .25), 0 10px 28px rgba(0, 0, 0, .35);
 }
 
 .btn-sm {
@@ -225,13 +266,18 @@ a:hover {
 }
 
 .section--soft {
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, .02);
   border-block: 1px solid var(--line);
 }
 
 .section--ink {
-  background: var(--bg-ink);
-  color: #cbd5e1;
+  position: relative;
+  color: var(--ink-soft);
+  background:
+    radial-gradient(42rem 22rem at 18% -10%, rgba(45, 212, 191, .16), transparent 60%),
+    radial-gradient(42rem 26rem at 92% 120%, rgba(129, 140, 248, .16), transparent 60%),
+    var(--bg-ink);
+  border-block: 1px solid var(--line);
 }
 
 .section--ink h2,
@@ -240,26 +286,36 @@ a:hover {
 }
 
 .section--ink p {
-  color: #94a3b8;
+  color: var(--ink-soft);
 }
 
 .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
   text-transform: uppercase;
-  letter-spacing: .12em;
-  font-size: .76rem;
-  font-weight: 700;
-  color: var(--accent-ink);
-  margin: 0 0 .6rem;
-  font-family: var(--font-sans);
+  letter-spacing: .2em;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 .8rem;
+  font-family: var(--font-mono);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
 
 .section--ink .eyebrow {
-  color: #a5b4fc;
+  color: var(--accent);
 }
 
 .lead {
   font-size: 1.15rem;
-  color: var(--muted);
+  color: var(--ink-soft);
   max-width: 60ch;
 }
 
@@ -270,11 +326,37 @@ a:hover {
 
 /* ---- hero --------------------------------------------------------------- */
 .hero {
-  padding: 5.5rem 0 4rem;
+  position: relative;
+  padding: 6rem 0 4.5rem;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 130%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38rem 22rem at 28% 18%, rgba(45, 212, 191, .18), transparent 60%),
+    radial-gradient(34rem 20rem at 82% 8%, rgba(129, 140, 248, .16), transparent 60%);
+  filter: blur(6px);
+  animation: auroraDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+  from {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(3%, 1.5%, 0) scale(1.08);
+  }
 }
 
 .hero h1 {
   max-width: 16ch;
+  text-shadow: 0 0 44px rgba(45, 212, 191, .16);
 }
 
 .hero .lead {
@@ -298,9 +380,10 @@ a:hover {
 .motto {
   font-family: var(--font-mono);
   font-size: .82rem;
-  letter-spacing: .04em;
-  color: var(--accent-ink);
-  margin: 0 0 1rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.1rem;
 }
 
 /* ---- grids / cards ------------------------------------------------------ */
@@ -326,11 +409,19 @@ a:hover {
 }
 
 .card {
-  background: #fff;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 1.4rem;
+  padding: 1.5rem;
   box-shadow: var(--shadow);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(45, 212, 191, .42);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset, 0 18px 46px rgba(0, 0, 0, .5), 0 0 0 1px rgba(45, 212, 191, .12);
 }
 
 .card h3 {
@@ -347,30 +438,41 @@ a:hover {
 }
 
 .card--feature {
-  border-top: 3px solid var(--accent);
+  overflow: hidden;
+}
+
+.card--feature::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
 .card--feature h3 {
-  font-size: 1.35rem;
-  margin-top: .55rem;
+  font-size: 1.4rem;
+  margin-top: .7rem;
   line-height: 1.2;
 }
 
 /* ---- tags / pills ------------------------------------------------------- */
 .tag {
   display: inline-block;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-weight: 600;
-  font-size: .76rem;
-  padding: .18rem .55rem;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  padding: .2rem .6rem;
   border-radius: 999px;
   background: var(--accent-soft);
-  color: var(--accent-ink);
+  color: var(--accent);
+  border: 1px solid rgba(45, 212, 191, .25);
 }
 
 .tag--muted {
-  background: #f1f5f9;
+  background: rgba(255, 255, 255, .05);
   color: var(--ink-soft);
+  border-color: var(--line);
 }
 
 /* ---- THINK/BUILD/RUN loop ----------------------------------------------- */
@@ -391,7 +493,7 @@ a:hover {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.2rem;
-  background: #fff;
+  background: rgba(255, 255, 255, .03);
 }
 
 .loop .stage .k {
@@ -421,7 +523,7 @@ a:hover {
 .prose code {
   font-family: var(--font-mono);
   font-size: .9em;
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, .06);
   padding: .1em .35em;
   border-radius: 6px;
 }
@@ -449,7 +551,7 @@ a:hover {
 
 /* ---- footer ------------------------------------------------------------- */
 .site-footer {
-  background: var(--bg-soft);
+  background: rgba(255, 255, 255, .02);
   border-top: 1px solid var(--line);
   padding: 3rem 0 2rem;
   margin-top: 2rem;
@@ -545,9 +647,29 @@ a:hover {
 .skip-link:focus {
   left: 1rem;
   top: .6rem;
-  background: #fff;
+  background: var(--bg-soft);
+  color: var(--ink);
   padding: .5rem .8rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 8px;
   z-index: 50;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card:hover {
+    transform: none;
+  }
 }
