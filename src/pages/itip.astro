@@ -25,21 +25,59 @@ const repos = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">What it does</p>
-      <h2>Architecture, compliance, impact — continuously governed, continuously generated.</h2>
+      <p class="eyebrow">Why it matters</p>
+      <h2>From governance that drifts to a model that maintains itself.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card"><h3>One source of truth</h3><p>Architecture, dependencies, obligations, and constraints live as governed definitions — not as wikis and spreadsheets that drift the moment they are written.</p></div>
-        <div class="card"><h3>Continuous compliance</h3><p>Frameworks and rules become machine-evaluable Norms and Directives, so conformance is checked continuously rather than reconstructed under audit pressure.</p></div>
-        <div class="card"><h3>Impact you can trace</h3><p>“If I change this, what breaks?” answered from real, typed relations — not from the longest-tenured engineer's memory.</p></div>
-        <div class="card"><h3>Any deliverable, generated</h3><p>The Artifactory turns governed definitions into operational IT deliverables — ADR packs, compliance evidence packs, architecture baselines, roadmaps, documentation — from Archetype-bound templates, each one traceable to the definitions it was built from.</p></div>
-        <div class="card"><h3>AI-native by design</h3><p>Because every definition is typed by an Archetype, humans and agents alike can reason and generate from it directly.</p></div>
+        <div class="card card--feature">
+          <h3>Governance that stops drifting.</h3>
+          <p>Architecture wikis, compliance spreadsheets, and review boards drift from reality the moment they are written. ITIP makes the <em>definition</em> the living source of truth — sourced from the real system, governed continuously, and never reconstructed under audit pressure.</p>
+        </div>
+        <div class="card card--feature">
+          <h3>A source of truth AI can act on.</h3>
+          <p>Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.</p>
+        </div>
+      </div>
+      <div class="hero-cta" style="margin-top:1.5rem">
+        <a class="btn btn-primary" href={demoUrl}>Try now</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/">Read the docs</a>
       </div>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What it does</p>
+      <h2>Four functional components, one governed loop.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card"><h3>Definition</h3><p>Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth, with impact you can trace through typed relations.</p><p style="margin-top:.6rem"><a href="#definition">Explore ↓</a></p></div>
+        <div class="card"><h3>Truth sourcing</h3><p>Code, API contracts, and infrastructure are sourced into governed definitions — so the model reflects reality instead of drifting from it.</p><p style="margin-top:.6rem"><a href="#truth-sourcing">Explore ↓</a></p></div>
+        <div class="card"><h3>Frameworks</h3><p>TOGAF, ISO 25010 / 25012, GDPR, NIS2, DORA and more — sourced into ready-made Archetypes, Directives, and Norms you can enforce on day one.</p><p style="margin-top:.6rem"><a href="#frameworks">Explore ↓</a></p></div>
+        <div class="card"><h3>Artifactory</h3><p>Generate any IT deliverable from the definitions — ADR packs, compliance evidence, architecture baselines, roadmaps — from Archetype-bound templates.</p><p style="margin-top:.6rem"><a href="#artifactory">Explore ↓</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="definition" class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Definition</p>
+      <h2>One governed source of truth.</h2>
+      <p class="lead">The definition inventory holds your Structures, Interactions, obligations, and constraints as governed, typed definitions — not wikis and spreadsheets. Because relations are typed, “if I change this, what breaks?” is answered by tracing the model, not by asking the longest-tenured engineer. It is the same object the BUILD and RUN layers reference.</p>
+      <p><a href="https://docs.poesis.cloud/itip/general-usage/">Definitions in ITIP →</a></p>
+    </div>
+  </section>
+
+  <section id="truth-sourcing" class="section">
+    <div class="container">
+      <p class="eyebrow">Truth sourcing</p>
+      <h2>The model reflects reality, continuously.</h2>
+      <p class="lead">ITIP sources IT artifacts — source code, API contracts, infrastructure — into governed GSM definitions through the SIE Blackboard, each contribution carrying a confidence score and a provenance envelope. The definition stays anchored to the real system instead of drifting from it.</p>
+      <p><a href="https://docs.poesis.cloud/itip-blackboard-sourcer/">Truth sourcing in ITIP →</a></p>
+    </div>
+  </section>
+
+  <section id="frameworks" class="section section--soft">
     <div class="container">
       <p class="eyebrow">Frameworks</p>
       <h2>Adopt a framework — its governance is already in your model.</h2>
@@ -54,7 +92,16 @@ const repos = [
     </div>
   </section>
 
-  <section class="section">
+  <section id="artifactory" class="section">
+    <div class="container">
+      <p class="eyebrow">Artifactory</p>
+      <h2>Any IT deliverable, generated from the definitions.</h2>
+      <p class="lead">The Artifactory turns governed definitions into operational IT deliverables — ADR packs, compliance evidence packs, architecture baselines, roadmaps, documentation — from Archetype-bound templates, each artifact traceable to the definitions it was built from. Generate from a single source instead of hand-authoring documents that are stale on delivery.</p>
+      <p><a href="https://docs.poesis.cloud/itip/features/">The Artifactory →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
     <div class="container">
       <p class="eyebrow">SaaS</p>
       <h2>Run ITIP as a managed cloud.</h2>
@@ -66,7 +113,7 @@ const repos = [
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
     <div class="container">
       <p class="eyebrow">Build with us</p>
       <h2>Documentation &amp; source.</h2>

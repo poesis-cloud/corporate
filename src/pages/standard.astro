@@ -12,6 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="lead">GSM is an open, vendor-neutral standard for <strong>defining and governing</strong> software-intensive systems — the THINK layer that the BUILD (pipelines) and RUN (observability) layers enforce and measure against.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/">Read the specification</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/primer/">Start with the primer</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud/gsm">View on GitHub</a>
       </div>
     </div>
@@ -19,20 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">What it specifies</p>
-      <h2>A small fixed core, an open type system.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card"><h3>Eight primitives</h3><p>Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core.</p></div>
-        <div class="card"><h3>A governance grammar</h3><p>Directives, Norms, and Ascriptions — a three-tempo grammar (DNA) for how obligations bind to subjects.</p></div>
-        <div class="card"><h3>Lifecycle &amp; conformance</h3><p>A normative Ascription lifecycle, and conformance defined for documents, producers, consumers, and processors.</p></div>
-        <div class="card"><h3>Portable by design</h3><p>Two sandboxed expression profiles and a canonical JSON interchange — governed definitions move across conforming tools.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">In the cloud-native ecosystem</p>
+      <p class="eyebrow">Why it matters</p>
       <h2>The definition layer beneath the projects you already run.</h2>
       <p class="lead">GSM doesn't compete with cloud-native infrastructure — it gives it the shared, portable source of truth it never had. Two analogies say it best.</p>
       <div class="grid grid-2" style="margin-top:1.5rem">
@@ -56,7 +44,59 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="card"><h3>Delivery</h3><p>Rollout and GitOps guardrails are governed as definitions; <strong>Argo</strong> and Flux controllers realize them.</p></div>
         <div class="card"><h3>Regulation</h3><p><strong>GDPR</strong>, <strong>NIS2</strong>, and <strong>DORA</strong> source into Archetypes — one governed definition, many enforcement points.</p></div>
       </div>
-      <p style="margin-top:1.5rem"><a href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases →</a> &middot; <a href="https://docs.poesis.cloud/gsm/gsm-and-kubernetes/">GSM and the Kubernetes model →</a></p>
+      <div class="hero-cta" style="margin-top:1.5rem">
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/gsm-and-kubernetes/">GSM &amp; the Kubernetes model</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What it specifies</p>
+      <h2>A small fixed core, an open type system.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <div class="card"><h3>Eight primitives</h3><p>Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.</p><p style="margin-top:.6rem"><a href="#primitives">Explore ↓</a></p></div>
+        <div class="card"><h3>DNA governance grammar</h3><p>Directives, Norms, and Ascriptions — a three-tempo grammar for how obligations bind to subjects.</p><p style="margin-top:.6rem"><a href="#grammar">Explore ↓</a></p></div>
+        <div class="card"><h3>Archetypes — the type system</h3><p>Typed domain schemas that carry vocabulary, grammar, and semantics, so meaning travels with the type.</p><p style="margin-top:.6rem"><a href="#archetypes">Explore ↓</a></p></div>
+        <div class="card"><h3>Lifecycle, conformance &amp; portability</h3><p>A normative Ascription lifecycle, defined conformance, sandboxed expression profiles, and a canonical JSON interchange.</p><p style="margin-top:.6rem"><a href="#interop">Explore ↓</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="primitives" class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Core</p>
+      <h2>Eight primitives.</h2>
+      <p class="lead">GSM expresses any system with eight primitives — Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, and Norm. The core is deliberately small and fixed: small enough to stay coherent, universal enough to describe any software-intensive system. Primitives carry no free-form prose; meaning is inferred from typed relations and Archetype schemas, which is what keeps the model machine-checkable.</p>
+      <p><a href="https://docs.poesis.cloud/gsm/foundations/">Foundations →</a></p>
+    </div>
+  </section>
+
+  <section id="grammar" class="section">
+    <div class="container">
+      <p class="eyebrow">Governance grammar</p>
+      <h2>The DNA governance grammar.</h2>
+      <p class="lead">Governance is expressed in three tempos — <strong>Directives</strong> (intent), <strong>Norms</strong> (machine-evaluable assertions), and <strong>Ascriptions</strong> (typed instances bound to subjects). DNA is how an obligation becomes something a machine can scope, version, and enforce — not prose to reinterpret on every call.</p>
+      <p><a href="https://docs.poesis.cloud/gsm/specification/">Specification →</a></p>
+    </div>
+  </section>
+
+  <section id="archetypes" class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Type system</p>
+      <h2>Archetypes — the open type system.</h2>
+      <p class="lead">Archetypes are typed schemas (JSON Schema 2020-12) that fix vocabulary, grammar, and semantics for a domain — so meaning travels with the type rather than living in someone's head. The core is fixed; the type system is open, which is how frameworks and domains extend GSM without forking it.</p>
+      <p><a href="https://docs.poesis.cloud/gsm/foundations/">Foundations →</a></p>
+    </div>
+  </section>
+
+  <section id="interop" class="section">
+    <div class="container">
+      <p class="eyebrow">Interoperability</p>
+      <h2>Lifecycle, conformance &amp; portability.</h2>
+      <p class="lead">A normative Ascription lifecycle (DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED) makes governed change auditable. Conformance is defined for documents, producers, consumers, and processors; two sandboxed expression profiles and a canonical JSON interchange make governed definitions portable across conforming tools.</p>
+      <p><a href="https://docs.poesis.cloud/gsm/conformance/">Conformance →</a></p>
     </div>
   </section>
 

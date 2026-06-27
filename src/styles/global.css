@@ -221,6 +221,7 @@ a:hover {
 /* ---- sections ----------------------------------------------------------- */
 .section {
   padding: 4.5rem 0;
+  scroll-margin-top: 84px;
 }
 
 .section--soft {

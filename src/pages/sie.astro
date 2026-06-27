@@ -26,21 +26,67 @@ const repos = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">What it is</p>
-      <h2>The runtime home of governed definitions — and the AI context built on them.</h2>
+      <p class="eyebrow">Why it matters</p>
+      <h2>Not just where definitions live — the context AI operates on.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card"><h3>Definition Manager</h3><p>Implements GSM, manages the Ascription lifecycle, and enforces the governance grammar (Directives, Norms, Ascriptions).</p></div>
-        <div class="card"><h3>Operator</h3><p>The rule runtime that evaluates Norms and Directives against reality — turning definitions into continuous enforcement.</p></div>
-        <div class="card"><h3>Blackboard</h3><p>A collaborative definition-sourcing service with a sealed, byte-stable contribution lifecycle and an append-only audit ledger.</p></div>
-        <div class="card"><h3>A governed AI context</h3><p>SIE leverages the definitions as a typed, machine-readable context — each one carrying its Archetype's meaning — that applications, humans, and agents can reason and generate from directly.</p></div>
-        <div class="card"><h3>Harnessed operations</h3><p>Operations on that context are harnessed by the definitions themselves: Directives and Norms bound what AI and agentic actions may do, so every operation stays governed, checked, and trustworthy.</p></div>
+        <div class="card card--feature">
+          <h3>A governed AI context.</h3>
+          <p>SIE leverages the definitions as a typed, machine-readable context — each one carrying its Archetype's meaning — that applications, humans, and agents can reason and generate from directly. It is the governed account generative models rarely have: what a system <em>is</em>, what it <em>must</em> do, and <em>why</em>.</p>
+        </div>
+        <div class="card card--feature">
+          <h3>Harnessed operations.</h3>
+          <p>Operations on that context are harnessed by the definitions themselves: Directives and Norms bound what AI and agentic actions may do, so every operation stays governed, checked, and trustworthy — intuition proposes, the model disposes.</p>
+        </div>
+      </div>
+      <div class="hero-cta" style="margin-top:1.5rem">
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/sie-definition/">Read the docs</a>
+        <a class="btn btn-ghost" href="/itip">See it run in ITIP</a>
       </div>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">What it does</p>
+      <h2>Three functional components, one engine.</h2>
+      <div class="grid grid-3" style="margin-top:1.5rem">
+        <div class="card"><h3>Definition Manager</h3><p>Implements GSM, manages the Ascription lifecycle, and enforces the governance grammar (Directives, Norms, Ascriptions).</p><p style="margin-top:.6rem"><a href="#definition-manager">Explore ↓</a></p></div>
+        <div class="card"><h3>Operator</h3><p>The rule runtime that evaluates Norms and Directives against reality — turning definitions into continuous enforcement.</p><p style="margin-top:.6rem"><a href="#operator">Explore ↓</a></p></div>
+        <div class="card"><h3>Blackboard</h3><p>Collaborative definition-sourcing with a sealed, byte-stable contribution lifecycle and an append-only audit ledger.</p><p style="margin-top:.6rem"><a href="#blackboard">Explore ↓</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="definition-manager" class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Definition</p>
+      <h2>The Definition Manager.</h2>
+      <p class="lead">The Definition Manager hosts GSM, manages the Ascription lifecycle (DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED), and enforces the DNA governance grammar across tenant schemas. It is the authoritative store of every governed definition — the heart of the engine.</p>
+      <p><a href="https://docs.poesis.cloud/sie-definition/">SIE Definition →</a></p>
+    </div>
+  </section>
+
+  <section id="operator" class="section">
+    <div class="container">
+      <p class="eyebrow">Runtime</p>
+      <h2>The Operator.</h2>
+      <p class="lead">The Operator is the rule runtime: it evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement. Definitions stop being documents and become a running control loop — the THINK layer acting on the RUN layer.</p>
+      <p><a href="https://docs.poesis.cloud/sie-definition/">SIE Definition →</a></p>
+    </div>
+  </section>
+
+  <section id="blackboard" class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Sourcing</p>
+      <h2>The Blackboard.</h2>
+      <p class="lead">The Blackboard is a collaborative definition-sourcing service: contributors post evidence-backed contributions, the board is sealed to a byte-stable state, and every mutation is recorded in an append-only audit ledger. It is how raw artifacts become governed definitions, with provenance intact.</p>
+      <p><a href="https://docs.poesis.cloud/sie-blackboard/">SIE Blackboard →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <p class="eyebrow">Editor · SaaS · On-prem</p>
       <h2>Adopt it the way your environment demands.</h2>
@@ -49,7 +95,7 @@ const repos = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft">
     <div class="container">
       <p class="eyebrow">Build with us</p>
       <h2>Documentation &amp; source.</h2>
