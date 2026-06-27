@@ -328,6 +328,9 @@ a:hover {
 .hero {
   position: relative;
   padding: 6rem 0 4.5rem;
+  /* aurora glow bleeds ±10% horizontally; clip the x-axis only so it can't
+     trigger a page-wide horizontal scrollbar, while keeping the vertical bleed. */
+  overflow-x: clip;
 }
 
 .hero::before {
