@@ -3,14 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="LLM Provider Partnership — Value Vision"
-  description="What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; GSM/SIE disposes. The governed context layer that makes sovereign AI more capable and deployable."
+  description="What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; humans and Poesis dispose. The governed context layer that makes sovereign AI more capable and deployable."
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow">Partnerships</p>
       <h1>LLM Provider Partnership — Value Vision.</h1>
-      <p class="lead">Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of it. That single gap drives both of today's ceilings: the <strong>capability</strong> ceiling and the <strong>deployment</strong> ceiling. Poesis closes both with one layer — and model providers are the natural partners on it.</p>
-      <p class="lead"><strong>Models propose. GSM/SIE disposes.</strong> Every model output is a proposal until the governed definition layer validates it — deterministically, with humans in the loop and an audit trail behind every disposition.</p>
+      <p class="lead">Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of it. That single gap drives both of today's ceilings: the <a href="#capability-ceiling"><strong>capability ceiling</strong></a> and the <a href="#deployment-ceiling"><strong>deployment ceiling</strong></a>. Poesis closes both with one layer — and model providers are the natural partners on it.</p>
+      <p class="lead"><strong>Models propose. Human &amp; Poesis dispose.</strong> Every model output is a proposal until humans, supported by the governed definition layer, validate it — deterministically and with an audit trail behind every disposition.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact">Talk to us</a>
         <a class="btn btn-ghost" href="/gsm">The GSM standard</a>
@@ -24,14 +24,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <p class="eyebrow">Why partner</p>
       <h2>One substrate, two wins.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card card--feature">
+        <div class="card card--feature" id="capability-ceiling">
           <span class="tag">Capability</span>
-          <h3>It makes intelligence more capable.</h3>
+          <h3>It makes artificial intelligence more capable.</h3>
           <p>A model that trains and reasons against an explicit causal model — what affects what, through which mechanism, under which governing intent — works against <em>structure</em> rather than guessing from correlation. It can follow the why behind the why: trace impact, test counterfactuals, plan against real dependencies.</p>
         </div>
-        <div class="card card--feature">
+        <div class="card card--feature" id="deployment-ceiling">
           <span class="tag">Deployability</span>
-          <h3>It makes intelligence deployable.</h3>
+          <h3>It makes artificial intelligence deployable.</h3>
           <p>The same governed model turns output into accountable action: governed context in, proposals out, deterministic disposition against Norms, schemas, and provenance — recorded in an append-only audit ledger. Agentic AI that regulated organisations can actually run.</p>
         </div>
       </div>
@@ -42,14 +42,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container">
       <p class="eyebrow">The value flows</p>
       <h2>An interactive map of the exchange.</h2>
-      <p class="lead">Click a flow to see the mutual value and the components that realize it. Expand a box (▸ components) for internal detail.</p>
 
       <div id="vf">
-        <p class="vf-invariant"><strong>Core invariant:</strong> models <strong>PROPOSE</strong> (inferred, confidence &lt; 1.0) · humans dispose through ITIP · SIE enforces deterministically — <strong>PROPOSE / DISPOSE</strong></p>
+        <div class="vf-notices" aria-label="How to read the value map">
+          <p class="vf-notice vf-notice-info"><strong>Explore the map.</strong> Click a flow to see its mutual value. Click an LLM or Poesis component to see every adherence it has with the other components. Expand a Poesis box for internal detail.</p>
+          <p class="vf-notice vf-notice-invariant"><strong>Core invariant:</strong> models <strong>PROPOSE</strong> (inferred, confidence &lt; 1.0) · humans dispose through ITIP · SIE enforces deterministically — <strong>PROPOSE / DISPOSE</strong>.</p>
+        </div>
 
         <div class="vf-human">
-          <strong>Human governors — always in the loop.</strong>
-          <span>Author intent (Directives · Norms) · dispose every AI proposal (Ascription lifecycle) · receive appraisal &amp; audit evidence. Humans stay sovereign over the model of reality <em>and</em> over agentic delivery.</span>
+          <strong>Human supervision, regulation, and governance — always in the loops.</strong>
+          <ul>
+            <li><b>Owns Intents</b> — creation of Definitions / Ascriptions.</li>
+            <li><b>Owns Approvals</b> — validation of AI-proposed Definitions / Ascriptions.</li>
+            <li><b>Owns Accountability</b> — evaluation and simulation of Definition / Ascription compliance and impacts, and audit of AI and human actions over Definitions / Ascriptions.</li>
+          </ul>
         </div>
 
         <div class="vf-diagram" id="vf-diagram">
@@ -61,20 +67,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 <div class="vf-gtitle">Sovereign LLM partner</div>
                 <div class="vf-gsub">provider-neutral by design — e.g. Mistral, Claude, GPT, open-weight</div>
 
-                <div class="vf-card" id="n-train">
+                <div class="vf-card" id="n-train" data-component="Training &amp; specialisation">
                   <div class="vf-ctitle">Training &amp; specialisation</div>
-                  <div class="vf-csub">learns from causal, governed, rights-clear traces — a corpus no scrape can produce</div>
+                  <div class="vf-csub">learns from causal, governed, rights-clear Definitions — a corpus / structured context for AI no scrape can produce</div>
                 </div>
 
-                <div class="vf-card" id="n-infer">
-                  <div class="vf-ctitle">Grounded inference &amp; agents</div>
-                  <div class="vf-csub">reasoning against causal structure — retrieval, MCP, tool calling</div>
-                  <button class="vf-fold-btn" data-fold="f-infer">▸ components</button>
-                  <div class="vf-fold" id="f-infer">
-                    <div class="vf-comp"><b>model endpoints</b> — self-hosted / sovereign-hosted inference</div>
-                    <div class="vf-comp"><b>agentic surfaces</b> — MCP servers, function calling, orchestration</div>
-                    <div class="vf-comp"><b>agent bench</b> — powers the SAFe Agentic Framework specialist agents that build the stack itself</div>
-                  </div>
+                <div class="vf-card" id="n-infer" data-component="Grounded inference">
+                  <div class="vf-ctitle">Grounded inference</div>
+                  <div class="vf-csub">reasons against causal, governed, rights-clear Definitions — a corpus / structured context for AI no RAG can supply</div>
                 </div>
               </div>
             </div>
@@ -84,43 +84,33 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <div class="vf-col">
               <div class="vf-group" id="g-poesis">
                 <div class="vf-gtitle">Poesis stack</div>
-                <div class="vf-gsub">one sovereign instance per organisation — tenant-owned, federated tomorrow</div>
+                <div class="vf-gsub">one sovereign instance per organisation — tenant-owned, federal tomorrow</div>
 
-                <div class="vf-card" id="n-gsm">
-                  <div class="vf-ctitle">GSM — the open standard (THINK)</div>
-                  <div class="vf-csub">governed, causal, self-describing definition of reality — asserted truth, confidence = 1.0</div>
-                  <button class="vf-fold-btn" data-fold="f-gsm">▸ components</button>
-                  <div class="vf-fold" id="f-gsm">
-                    <div class="vf-comp"><b>8 primitives</b> — Structure · Mechanism · Effector · Receptor · Interaction · Archetype · Directive · Norm</div>
-                    <div class="vf-comp"><b>DNA grammar</b> — Directives (intent) · Norms (machine-evaluable) · Ascriptions (bound instances, full temporal history)</div>
-                  </div>
-                </div>
-
-                <div class="vf-card" id="n-sie">
+                <div class="vf-card" id="n-sie" data-component="SIE — Systemic Intelligence Engine">
                   <div class="vf-ctitle">SIE — Systemic Intelligence Engine</div>
-                  <div class="vf-csub">reference implementation: builds, serves, evaluates, governs GSM at runtime</div>
+                  <div class="vf-csub">reference implementation of GSM containing Definitions / Ascriptions of the organisation and implementing their governance lifecycle</div>
                   <button class="vf-fold-btn" data-fold="f-sie">▸ components</button>
                   <div class="vf-fold" id="f-sie">
                     <div class="vf-comp"><b>sie-definition-manager</b> — hosts GSM, Ascription lifecycle, governance grammar</div>
-                    <div class="vf-comp"><b>sie-definition-blackboard-manager</b> — sourcing surface; validates contributions (confidence &lt; 1.0, provenance-stamped)</div>
+                    <div class="vf-comp"><b>sie-definition-blackboard-manager</b> — Definitions sourcing pipeline</div>
                     <div class="vf-comp"><b>sie-operator</b> — executes Norms &amp; Mechanisms: governance evaluation (application of governance, and governance of governance)</div>
                   </div>
                 </div>
 
-                <div class="vf-card vf-gate" id="n-itip">
-                  <div class="vf-ctitle">ITIP — domain application (IT)</div>
-                  <div class="vf-csub">serves the <b>PROPOSE / DISPOSE gate to humans</b> — review, appraisal, compliance, audited action</div>
+                <div class="vf-card vf-gate" id="n-itip" data-component="ITIP — domain platform (IT)">
+                  <div class="vf-ctitle">ITIP — domain platform (IT)</div>
+                  <div class="vf-csub">serves the <b>PROPOSE / DISPOSE gate to humans</b> — intent, approve, audit, simulate Definitions</div>
                   <button class="vf-fold-btn" data-fold="f-itip">▸ components</button>
                   <div class="vf-fold" id="f-itip">
-                    <div class="vf-comp"><b>itip-web</b> — the human gate: disposition UI, appraisal indicators, audit evidence</div>
-                    <div class="vf-comp"><b>itip frameworks</b> — GDPR, NIS2, DORA, AI Act, TOGAF, ISO… sourced as GSM-typed Directive/Norm schemas</div>
-                    <div class="vf-comp"><b>itip blackboard sourcers</b> — wrap LLMs/agents as KnowledgeSources over code &amp; estate; post to the Blackboard</div>
+                    <div class="vf-comp"><b>itip-web-application</b> — the human gate: intent, approval, simulation, appraisal, and audit</div>
+                    <div class="vf-comp"><b>itip frameworks</b> — GDPR, NIS2, DORA, AI Act, TOGAF, ISO… standard domain vocabulary / semantics and regulation frameworks that compose GSM Definitions</div>
+                    <div class="vf-comp"><b>itip blackboard sourcers</b> — wrap LLMs / agents as KnowledgeSources of Definitions over code repositories, wikis, ticketing tools, online authoritative resources, and other sources</div>
                   </div>
                 </div>
 
-                <div class="vf-card" id="n-saf">
+                <div class="vf-card" id="n-saf" data-component="SAFe Agentic Framework">
                   <div class="vf-ctitle">SAFe Agentic Framework</div>
-                  <div class="vf-csub">governed agentic delivery — LLM agent teams build &amp; evolve the stack through deterministic gates</div>
+                  <div class="vf-csub">governed agentic organisation products delivery through deterministic operational gates</div>
                   <button class="vf-fold-btn" data-fold="f-saf">▸ components</button>
                   <div class="vf-fold" id="f-saf">
                     <div class="vf-comp"><b>orchestrators</b> — portfolio / program / team</div>
@@ -133,15 +123,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
         </div>
 
-        <div class="vf-detail" id="vf-detail" hidden>
-          <h3 id="d-title"></h3>
-          <div class="vf-dsub" id="d-sub"></div>
-          <div class="vf-dcols">
-            <div><h4>Value for the LLM partner</h4><ul id="d-partner"></ul></div>
-            <div><h4>Value for Poesis / the customer</h4><ul id="d-poesis"></ul></div>
-          </div>
-          <div class="vf-comps" id="d-comps"></div>
-        </div>
+        <div class="vf-detail" id="vf-detail" hidden></div>
       </div>
     </div>
   </section>
@@ -180,19 +162,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <style is:global>
   #vf { margin-top: 1.5rem; }
-  #vf .vf-invariant {
-    display: inline-block; background: rgba(251, 191, 36, .10); border: 1px solid rgba(251, 191, 36, .45);
-    border-radius: 10px; padding: .5rem .85rem; font-size: .9rem; color: var(--ink);
+  #vf .vf-notices { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
+  #vf .vf-notice {
+    margin: 0; border-radius: 10px; padding: .65rem .85rem; font-size: .86rem; color: var(--ink-soft);
   }
+  #vf .vf-notice-info { background: rgba(56, 189, 248, .08); border: 1px solid rgba(56, 189, 248, .4); }
+  #vf .vf-notice-invariant { background: rgba(251, 191, 36, .10); border: 1px solid rgba(251, 191, 36, .45); }
   #vf .vf-human {
     border: 1px solid rgba(251, 146, 60, .5); background: rgba(251, 146, 60, .08); border-radius: 12px;
-    padding: .7rem .9rem; margin: 1rem 0 1.2rem; display: flex; gap: .8rem; align-items: baseline; flex-wrap: wrap;
+    padding: .75rem .9rem; margin: 0 0 1.2rem;
   }
   #vf .vf-human strong { color: #fb923c; }
-  #vf .vf-human span { font-size: .87rem; color: var(--ink-soft); }
+  #vf .vf-human ul { margin: .45rem 0 0; padding-left: 1.2rem; font-size: .84rem; color: var(--ink-soft); }
+  #vf .vf-human li { margin-top: .2rem; }
 
   #vf .vf-diagram { position: relative; }
-  #vf #vf-wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  #vf #vf-wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
   #vf .vf-cols { position: relative; display: grid; grid-template-columns: 1fr 250px 1fr; z-index: 1; }
   #vf .vf-col { display: flex; flex-direction: column; gap: 1rem; }
   #vf .vf-gutter { pointer-events: none; }
@@ -206,8 +191,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   #vf .vf-card {
     border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg-ink);
-    padding: .6rem .75rem; margin-top: .6rem;
+    padding: .6rem .75rem; margin-top: .6rem; cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease;
   }
+  #vf .vf-card:hover, #vf .vf-card:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .12); outline: none; }
+  #vf .vf-card.vf-selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .18); }
   #vf .vf-ctitle { font-weight: 600; color: var(--ink); font-size: .89rem; }
   #vf .vf-csub { color: var(--muted); font-size: .78rem; margin-top: .18rem; }
   #vf .vf-gate { background: rgba(251, 191, 36, .07); border-color: rgba(251, 191, 36, .45); }
@@ -225,12 +212,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
   #vf .vf-comp b { font-family: var(--font-mono); font-size: .72rem; color: var(--ink); }
 
-  #vf .vf-chip {
-    position: absolute; z-index: 2; transform: translate(-50%, -50%);
-    border-radius: 999px; border: 1.5px solid; background: var(--bg-soft); cursor: pointer;
-    font-size: .73rem; font-weight: 600; padding: .26rem .6rem; white-space: nowrap;
-    font-family: var(--font-sans);
-  }
+  #vf .vf-flow-hit { pointer-events: stroke; cursor: pointer; }
 
   #vf .vf-detail {
     margin-top: 1.4rem; border: 1px solid var(--line-strong); border-radius: 14px;
@@ -238,18 +220,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
   #vf .vf-detail h3 { margin: 0 0 .3rem; font-size: 1.02rem; }
   #vf .vf-dsub { color: var(--ink-soft); font-size: .87rem; margin-bottom: .85rem; }
+  #vf .vf-adherence + .vf-adherence { border-top: 1px solid var(--line-strong); margin-top: 1rem; padding-top: 1rem; }
+  #vf .vf-adherence h4 { margin: 0 0 .3rem; font-size: .92rem; }
   #vf .vf-dcols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  #vf .vf-dcols h4 { font-size: .78rem; margin: 0 0 .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  #vf .vf-dcols h5 { font-size: .78rem; margin: 0 0 .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
   #vf .vf-dcols ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; color: var(--ink-soft); }
   #vf .vf-dcols li { margin-bottom: .3rem; }
   #vf .vf-comps { margin-top: .9rem; font-size: .78rem; color: var(--muted); }
   #vf .vf-comps b { font-family: var(--font-mono); font-size: .74rem; color: var(--ink); }
 
   @media (max-width: 860px) {
+    #vf .vf-notices { grid-template-columns: 1fr; }
     #vf .vf-cols { grid-template-columns: 1fr; }
     #vf .vf-gutter { display: none; }
     #vf #vf-wires { display: none; }
-    #vf .vf-chip { display: none; }
     #vf .vf-dcols { grid-template-columns: 1fr; }
   }
 </style>
@@ -257,10 +241,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <script>
   const FLOWS = [
     {
-      id: 'B1', hex: '#34d399', from: 'n-gsm', to: 'n-infer',
+      id: 'B1', hex: '#34d399', from: 'n-sie', to: 'n-infer',
       label: 'governed causal context + tools',
       title: 'B1 — Governed causal context & tool surface (Poesis → LLM)',
-      sub: 'GSM serves current definitions, norms, provenance and causal dependencies into the model — plus a tool surface: retrieve Definition, inspect Norm, trace Interaction, validate proposal.',
+      sub: 'SIE serves current Definitions, Norms, provenance and causal dependencies into the model — plus a tool surface to retrieve Definitions, inspect Norms, trace Interactions, and validate proposals.',
       partner: ['Capability edge: reasoning against explicit structure, not correlation — follow the why behind the why', 'Measurably fewer unsupported claims vs retrieval-only baselines — proven, not asserted'],
       poesis: ['Answers grounded in what is actually true and governed', 'Model-neutral context standard — any conforming model can plug in'],
       comps: 'Realized by <b>sie-definition-manager</b> (context + tools) consumed by partner inference / MCP surfaces.',
@@ -272,13 +256,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       sub: 'Every model output is a proposal. ITIP serves the PROPOSE/DISPOSE gate to humans; sie-operator executes the norm, schema and provenance checks; every disposition lands in the audit ledger.',
       partner: ['Deployability: agentic action becomes safe to run in banks, public operators, critical infrastructure', 'The compliance story that unlocks regulated European buyers'],
       poesis: ['AI that acts on the organisation\u2019s actual reality — audited, accountable', 'Every disposition enriches the governed record'],
-      comps: 'Realized by <b>itip-web</b> (human gate) + <b>sie-operator</b> (deterministic evaluation) + audit ledger.',
+      comps: 'Realized by <b>itip-web-application</b> (human gate) + <b>sie-operator</b> (deterministic evaluation) + audit ledger.',
     },
     {
       id: 'A', hex: '#38bdf8', from: 'n-infer', to: 'n-sie',
       label: 'LLM-backed sourcing of GSM',
       title: 'A — Alimentation: LLMs feed GSM (LLM → Poesis)',
-      sub: 'Blackboard sourcers wrap partner models as KnowledgeSources over regulations, frameworks and code. Contributions are confidence-scored (< 1.0) and provenance-stamped; only validated, sealed streams reach the definition manager as asserted definitions.',
+      sub: 'Blackboard sourcers wrap partner models as KnowledgeSources of Definitions over repositories, wikis, ticketing tools, and authoritative online resources. Contributions are confidence-scored (< 1.0) and provenance-stamped; only validated, sealed streams reach the definition manager as asserted Definitions.',
       partner: ['A concrete applied-AI showcase: turning regulation and code into governed, queryable structure', 'R&D feedback loop on extraction, grounding, function calling'],
       poesis: ['Sourcing cost down, coverage up — the fabric fills itself', 'Invariant preserved: LLMs never write governed truth directly'],
       comps: 'Realized by <b>itip blackboard sourcers</b> → <b>sie-definition-blackboard-manager</b> → <b>sie-definition-manager</b>.',
@@ -305,7 +289,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   const svg = document.getElementById('vf-wires');
   const diagram = document.getElementById('vf-diagram');
-  let selected = null;
+  const detail = document.getElementById('vf-detail');
+  let selectedFlow = null;
+  let selectedComponent = null;
 
   function anchor(el, side) {
     const r = el.getBoundingClientRect();
@@ -316,7 +302,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   function draw() {
     if (!svg || !diagram) return;
     svg.innerHTML = '';
-    diagram.querySelectorAll('.vf-chip').forEach((c) => c.remove());
     if (window.innerWidth <= 860) return;
     svg.setAttribute('width', String(diagram.clientWidth));
     svg.setAttribute('height', String(diagram.clientHeight));
@@ -328,61 +313,112 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       const a = anchor(fromEl, fromEl.closest('#g-partner') ? 'right' : 'left');
       const b = anchor(toEl, toEl.closest('#g-partner') ? 'right' : 'left');
       const midX = (a.x + b.x) / 2;
-      const sel = selected === f.id;
+      const related = selectedComponent && (f.from === selectedComponent || f.to === selectedComponent);
+      const sel = selectedFlow === f.id || related;
+
+      const pathData = `M ${a.x} ${a.y} C ${midX} ${a.y}, ${midX} ${b.y}, ${b.x} ${b.y}`;
+
+      const hit = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      hit.setAttribute('d', pathData);
+      hit.setAttribute('fill', 'none');
+      hit.setAttribute('stroke', 'transparent');
+      hit.setAttribute('stroke-width', '20');
+      hit.setAttribute('class', 'vf-flow-hit');
+      hit.setAttribute('aria-label', f.title);
+      hit.addEventListener('click', () => selectFlow(f.id));
+      svg.appendChild(hit);
 
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('d', `M ${a.x} ${a.y} C ${midX} ${a.y}, ${midX} ${b.y}, ${b.x} ${b.y}`);
+      p.setAttribute('d', pathData);
       p.setAttribute('fill', 'none');
       p.setAttribute('stroke', f.hex);
-      p.setAttribute('stroke-width', sel ? '3.5' : '2');
-      p.setAttribute('opacity', selected && !sel ? '0.22' : '0.85');
+      p.setAttribute('stroke-width', sel ? '7' : '5');
+      p.setAttribute('opacity', (selectedFlow || selectedComponent) && !sel ? '0.16' : '0.82');
+      p.setAttribute('pointer-events', 'none');
       if (f.dashed) p.setAttribute('stroke-dasharray', '6 5');
       svg.appendChild(p);
 
       const tip = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       tip.setAttribute('cx', String(b.x));
       tip.setAttribute('cy', String(b.y));
-      tip.setAttribute('r', sel ? '5' : '4');
+      tip.setAttribute('r', sel ? '6' : '5');
       tip.setAttribute('fill', f.hex);
-      tip.setAttribute('opacity', selected && !sel ? '0.22' : '1');
+      tip.setAttribute('opacity', (selectedFlow || selectedComponent) && !sel ? '0.16' : '1');
+      tip.setAttribute('pointer-events', 'none');
       svg.appendChild(tip);
-
-      const chip = document.createElement('button');
-      chip.className = 'vf-chip';
-      chip.textContent = `${f.id} · ${f.label}`;
-      chip.style.borderColor = f.hex;
-      chip.style.color = sel ? '#0b1120' : f.hex;
-      chip.style.background = sel ? f.hex : '';
-      chip.style.left = `${midX}px`;
-      chip.style.top = `${(a.y + b.y) / 2}px`;
-      chip.addEventListener('click', () => select(f.id));
-      diagram.appendChild(chip);
     });
   }
 
-  function select(id) {
-    selected = selected === id ? null : id;
-    const panel = document.getElementById('vf-detail');
-    if (!panel) return;
-    if (!selected) {
-      panel.hidden = true;
-      draw();
-      return;
-    }
-    const f = FLOWS.find((x) => x.id === selected);
-    panel.hidden = false;
-    document.getElementById('d-title').textContent = f.title;
-    document.getElementById('d-title').style.color = f.hex;
-    document.getElementById('d-sub').textContent = f.sub;
-    document.getElementById('d-partner').innerHTML = f.partner.map((x) => `<li>${x}</li>`).join('');
-    document.getElementById('d-poesis').innerHTML = f.poesis.map((x) => `<li>${x}</li>`).join('');
-    document.getElementById('d-comps').innerHTML = `Adherence locus — ${f.comps}`;
-    draw();
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  function adherenceMarkup(flow) {
+    return `<article class="vf-adherence">
+      <h4 style="color:${flow.hex}">${flow.title}</h4>
+      <p class="vf-dsub">${flow.sub}</p>
+      <div class="vf-dcols">
+        <div><h5>Value for the LLM partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
+        <div><h5>Value for Poesis / the customer</h5><ul>${flow.poesis.map((value) => `<li>${value}</li>`).join('')}</ul></div>
+      </div>
+      <div class="vf-comps">Adherence locus — ${flow.comps}</div>
+    </article>`;
   }
 
+  function showAdherences(title, flows) {
+    if (!detail) return;
+    detail.hidden = false;
+    detail.innerHTML = `<h3>${title}</h3>${flows.map(adherenceMarkup).join('')}`;
+    draw();
+    detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function clearSelection() {
+    selectedFlow = null;
+    selectedComponent = null;
+    document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    if (detail) detail.hidden = true;
+    draw();
+  }
+
+  function selectFlow(id) {
+    if (selectedFlow === id && !selectedComponent) {
+      clearSelection();
+      return;
+    }
+    selectedFlow = id;
+    selectedComponent = null;
+    document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    const flow = FLOWS.find((candidate) => candidate.id === id);
+    showAdherences(`Selected value flow — ${flow.label}`, [flow]);
+  }
+
+  function selectComponent(card) {
+    if (selectedComponent === card.id && !selectedFlow) {
+      clearSelection();
+      return;
+    }
+    selectedComponent = card.id;
+    selectedFlow = null;
+    document.querySelectorAll('.vf-card').forEach((candidate) => candidate.classList.toggle('vf-selected', candidate === card));
+    const flows = FLOWS.filter((flow) => flow.from === card.id || flow.to === card.id);
+    showAdherences(`${card.dataset.component} — ${flows.length} connected adherence${flows.length === 1 ? '' : 's'}`, flows);
+  }
+
+  document.querySelectorAll('.vf-card[data-component]').forEach((card) => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('.vf-fold-btn')) return;
+      selectComponent(card);
+    });
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectComponent(card);
+      }
+    });
+  });
+
   document.querySelectorAll('.vf-fold-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (event) => {
+      event.stopPropagation();
       const fold = document.getElementById(btn.dataset.fold);
       if (!fold) return;
       fold.classList.toggle('open');
