@@ -7,6 +7,6 @@ export default defineConfig({
   site: 'https://poesis.cloud',
   integrations: [sitemap()],
   redirects: {
-    '/gsm': '/standard',
+    '/standard': '/gsm',
   },
 });
