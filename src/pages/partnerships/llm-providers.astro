@@ -9,7 +9,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container">
       <p class="eyebrow">Partnerships</p>
       <h1>LLM Provider Partnership — Value Vision.</h1>
-      <p class="lead">Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of it. That single gap drives both of today's ceilings: the <a href="#capability-ceiling"><strong>capability ceiling</strong></a> and the <a href="#deployment-ceiling"><strong>deployment ceiling</strong></a>. Poesis closes both with one layer — and model providers are the natural partners on it.</p>
+      <p class="lead"><strong>Better context beats bigger models.</strong> Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of it. That single gap drives both of today's ceilings: the <a href="#capability-ceiling"><strong>capability ceiling</strong></a> and the <a href="#deployment-ceiling"><strong>deployment ceiling</strong></a>. Poesis closes both with one layer — and model providers are the natural partners on it.</p>
       <p class="lead"><strong>Models propose. Human &amp; Poesis dispose.</strong> Every model output is a proposal until humans, supported by the governed definition layer, validate it — deterministically and with an audit trail behind every disposition.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact">Talk to us</a>
@@ -28,17 +28,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <span class="tag">Capability</span>
           <h3>It makes artificial intelligence more capable.</h3>
           <p>A model that trains and reasons against an explicit causal model — what affects what, through which mechanism, under which governing intent — works against <em>structure</em> rather than guessing from correlation. It can follow the why behind the why: trace impact, test counterfactuals, plan against real dependencies.</p>
+          <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
           <span class="tag">Deployability</span>
           <h3>It makes artificial intelligence deployable.</h3>
           <p>The same governed model turns output into accountable action: governed context in, proposals out, deterministic disposition against Norms, schemas, and provenance — recorded in an append-only audit ledger. Agentic AI that regulated organisations can actually run.</p>
+          <p class="thesis-tagline">The missing infrastructure for enterprise agents.</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="section">
+    <div class="container">
+      <p class="eyebrow">The partnership thesis</p>
+      <h2>Three statements a provider can lead with.</h2>
+      <div class="grid grid-3" style="margin-top:1.5rem">
+        <div class="card card--feature">
+          <span class="tag">Differentiation</span>
+          <h3>Enterprise AI beyond the model race.</h3>
+          <p>Models are becoming commodities. A structured, governed context layer is a capability no model release can commoditize — it turns a model vendor into an enterprise AI platform, and inference deals into transformation deals: AI governance, digital operating models, regulated automation.</p>
+        </div>
+        <div class="card card--feature">
+          <span class="tag">Market access</span>
+          <h3>The fastest path into regulated industries.</h3>
+          <p>Enterprises don't stall because AI isn't powerful enough — they stall because they can't trust it to act. Explainability, governance, auditability, and policy enforcement are the entry ticket, and Poesis supplies them.</p>
+          <div class="sector-chips" aria-label="Regulated sectors">
+            <span>Banking</span><span>Insurance</span><span>Healthcare</span><span>Government</span><span>Critical infrastructure</span><span>Defense</span><span>Energy</span>
+          </div>
+        </div>
+        <div class="card card--feature">
+          <span class="tag">Sovereignty</span>
+          <h3>The foundation of a sovereign AI stack.</h3>
+          <p>Not "a sovereign LLM" — a sovereign AI <em>stack</em>. You provide the sovereign intelligence. Poesis provides the governed context. Together they form the trusted infrastructure enterprises need to deploy AI at scale — and the standard-shaped substrate a sovereign AI economy can build on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
     <div class="container">
       <p class="eyebrow">The values</p>
       <h2>Five concrete reasons to partner.</h2>
@@ -78,7 +107,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section section--soft" id="value-map">
+  <section class="section" id="value-map">
     <div class="container">
       <p class="eyebrow">The value flows</p>
       <h2>An interactive map of the exchange.</h2>
@@ -105,7 +134,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <div class="vf-col">
               <div class="vf-group" id="g-partner">
                 <div class="vf-gtitle">Sovereign LLM partner</div>
-                <div class="vf-gsub">provider-neutral by design — e.g. Mistral, Claude, GPT, open-weight</div>
+                <div class="vf-gsub">provider-neutral by design — any sovereign or frontier model: self-hosted, sovereign-hosted, or open-weight</div>
 
                 <div class="vf-card" id="n-train" data-component="Training &amp; specialisation">
                   <div class="vf-ctitle">Training &amp; specialisation</div>
@@ -168,7 +197,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft">
     <div class="container">
       <p class="eyebrow">Operating principles</p>
       <h2>Why this is trustworthy enough to scale.</h2>
@@ -186,6 +215,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style is:global>
+  .thesis-tagline {
+    margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line);
+    color: var(--accent-ink); font-weight: 700; font-size: .95rem;
+  }
+  .sector-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+  .sector-chips span {
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: .14rem .6rem;
+    font-size: .74rem; color: var(--ink-soft); background: var(--bg-soft); white-space: nowrap;
+  }
+
   .value-grid {
     display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1.5rem;
   }
