@@ -10,12 +10,12 @@ interface Props {
 
 const {
   title,
-  description = 'Poesis harnesses the generative AI era so that systems continuously develop on their own — the GSM standard, the SIE engine, and the ITIP application that define and govern systems in software.',
+  description = 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard, the SIE engine, and the ITIP application defining and governing systems in software.',
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
-const fullTitle = title === 'Poesis' ? 'Poesis — define the world in software, generate it' : `${title} · Poesis`;
+const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesis' : `${title} · Poesis`;
 ---
 <!doctype html>
 <html lang="en">
