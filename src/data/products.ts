@@ -4,7 +4,7 @@ export interface Product {
 }
 
 export const products: Product[] = [
-  { href: '/standard', label: 'GSM' },
+  { href: '/gsm', label: 'Generative System Model' },
   { href: '/sie', label: 'Systemic Intelligence Engine' },
   { href: '/itip', label: 'IT Intelligence Platform' },
   { href: '/framework', label: 'SAFe Agentic Framework' },
