@@ -29,6 +29,17 @@ const external = [
       <span class="nav-sep" aria-hidden="true"></span>
       <a href="/services">Services</a>
       <span class="nav-sep" aria-hidden="true"></span>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Partnerships <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          <li role="none">
+            <a href="/partnerships/llm-providers" role="menuitem">LLM Provider Partnership — Value Vision</a>
+          </li>
+        </ul>
+      </div>
+      <span class="nav-sep" aria-hidden="true"></span>
       {external.map((l) => <a class="nav-ext" href={l.href} target="_blank" rel="noopener">{l.label}</a>)}
       <a class="btn btn-ghost btn-sm" href="/about">About</a>
       <a class="btn btn-primary btn-sm" href="/contact">Talk to us</a>
