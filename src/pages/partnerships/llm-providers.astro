@@ -21,34 +21,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Why partner</p>
-      <h2>One substrate, two wins.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
+      <p class="eyebrow">The partnership thesis</p>
+      <h2>Five reasons to partner.</h2>
+      <div class="thesis-grid">
         <div class="card card--feature" id="capability-ceiling">
           <span class="tag">Capability</span>
-          <h3>It makes artificial intelligence more capable.</h3>
-          <p>A model that trains and reasons against an explicit causal model — what affects what, through which mechanism, under which governing intent — works against <em>structure</em> rather than guessing from correlation. It can follow the why behind the why: trace impact, test counterfactuals, plan against real dependencies.</p>
-          <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
+          <h3>Better intelligence without bigger models.</h3>
+          <p>A model that trains and reasons against causal, governed Definitions works against structure rather than guessing from correlation. It can trace impact, test counterfactuals, and plan against real dependencies.</p>
+          <p class="thesis-tagline">Better context beats bigger models.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
-          <span class="tag">Deployability</span>
-          <h3>It makes artificial intelligence deployable.</h3>
-          <p>The same governed model turns output into accountable action: governed context in, proposals out, deterministic disposition against Norms, schemas, and provenance — recorded in an append-only audit ledger. Agentic AI that regulated organisations can actually run.</p>
+          <span class="tag">Enterprise platform</span>
+          <h3>From model provider to enterprise AI platform.</h3>
+          <p>Governed context, human disposition, deterministic evaluation, and auditability turn inference into deployable enterprise capability — able to act, not only answer.</p>
           <p class="thesis-tagline">The missing infrastructure for enterprise agents.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">The partnership thesis</p>
-      <h2>Three statements a provider can lead with.</h2>
-      <div class="grid grid-3" style="margin-top:1.5rem">
-        <div class="card card--feature">
-          <span class="tag">Differentiation</span>
-          <h3>Enterprise AI beyond the model race.</h3>
-          <p>Models are becoming commodities. A structured, governed context layer is a capability no model release can commoditize — it turns a model vendor into an enterprise AI platform, and inference deals into transformation deals: AI governance, digital operating models, regulated automation.</p>
         </div>
         <div class="card card--feature">
           <span class="tag">Market access</span>
@@ -59,6 +45,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
         </div>
         <div class="card card--feature">
+          <span class="tag">Platform advantage</span>
+          <h3>A defensible advantage beyond model performance.</h3>
+          <p>A sovereign model combined with governed organisational context is harder to commoditize than inference alone. It expands the relationship from model consumption to AI governance, digital operating models, enterprise transformation, and regulated automation.</p>
+        </div>
+        <div class="card card--feature">
           <span class="tag">Sovereignty</span>
           <h3>The foundation of a sovereign AI stack.</h3>
           <p>Not "a sovereign LLM" — a sovereign AI <em>stack</em>. You provide the sovereign intelligence. Poesis provides the governed context. Together they form the trusted infrastructure enterprises need to deploy AI at scale — and the standard-shaped substrate a sovereign AI economy can build on.</p>
@@ -67,11 +58,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
     <div class="container">
-      <p class="eyebrow">The values</p>
-      <h2>Five concrete reasons to partner.</h2>
-      <p class="lead">Each value is realized by a specific adherence between LLM capabilities and the Poesis stack.</p>
+      <p class="eyebrow">The value mechanisms</p>
+      <h2>How the partnership creates value.</h2>
+      <p class="lead">Each business outcome is realized by a specific adherence between LLM capabilities and the Poesis stack.</p>
       <div class="value-grid">
         <button class="card value-card" data-flow="B1" type="button">
           <span class="tag">Inference · B1</span>
@@ -107,7 +98,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section" id="value-map">
+  <section class="section section--soft" id="value-map">
     <div class="container">
       <p class="eyebrow">The value flows</p>
       <h2>An interactive map of the exchange.</h2>
@@ -225,7 +216,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
     <div class="container">
       <p class="eyebrow">Operating principles</p>
       <h2>Why this is trustworthy enough to scale.</h2>
@@ -243,6 +234,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style is:global>
+  .thesis-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1.5rem;
+  }
+  .thesis-grid > .card { grid-column: span 2; }
+  .thesis-grid > .card:nth-child(4) { grid-column: 2 / span 2; }
+
   .thesis-tagline {
     margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line);
     color: var(--accent-ink); font-weight: 700; font-size: .95rem;
@@ -339,6 +336,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   #vf .vf-comps b { font-family: var(--font-mono); font-size: .74rem; color: var(--ink); }
 
   @media (max-width: 860px) {
+    .thesis-grid { grid-template-columns: 1fr; }
+    .thesis-grid > .card, .thesis-grid > .card:nth-child(4) { grid-column: auto; }
     .value-grid { grid-template-columns: 1fr; }
     .value-card, .value-card:nth-child(4) { grid-column: auto; }
     .value-card p { min-height: 0; }
