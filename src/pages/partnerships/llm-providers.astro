@@ -40,6 +40,46 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
+      <p class="eyebrow">The values</p>
+      <h2>Five concrete reasons to partner.</h2>
+      <p class="lead">Each value is realized by a specific adherence between LLM capabilities and the Poesis stack.</p>
+      <div class="value-grid">
+        <button class="card value-card" data-flow="B1" type="button">
+          <span class="tag">Inference · B1</span>
+          <h3>Governed causal grounding</h3>
+          <p>SIE supplies causal, governed, rights-clear Definitions and tools that let models reason beyond document retrieval and trace the why behind the why.</p>
+          <span class="value-link">Show adherence →</span>
+        </button>
+        <button class="card value-card" data-flow="B2" type="button">
+          <span class="tag">Deployment · B2</span>
+          <h3>Governed action in regulated estates</h3>
+          <p>Models propose; humans dispose through ITIP; SIE evaluates deterministically. The result is accountable agentic action with evidence behind every decision.</p>
+          <span class="value-link">Show adherence →</span>
+        </button>
+        <button class="card value-card" data-flow="A" type="button">
+          <span class="tag">Alimentation · A</span>
+          <h3>Definitions sourced at scale</h3>
+          <p>LLMs become KnowledgeSources over repositories, wikis, ticketing systems, and authoritative resources — lowering sourcing cost while preserving human disposition.</p>
+          <span class="value-link">Show adherence →</span>
+        </button>
+        <button class="card value-card" data-flow="C" type="button">
+          <span class="tag">Training · C</span>
+          <h3>A legitimate specialisation substrate</h3>
+          <p>Governed Definitions and Ascription history provide a causal, rights-clear corpus and evaluation oracle that no scrape can reproduce.</p>
+          <span class="value-link">Show adherence →</span>
+        </button>
+        <button class="card value-card" data-flow="D" type="button">
+          <span class="tag">Delivery · D</span>
+          <h3>A governed agentic delivery proof</h3>
+          <p>Partner models power specialist agents while deterministic SAFe operational gates and human approvals govern how organisation products are delivered.</p>
+          <span class="value-link">Show adherence →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" id="value-map">
+    <div class="container">
       <p class="eyebrow">The value flows</p>
       <h2>An interactive map of the exchange.</h2>
 
@@ -128,21 +168,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <section class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">What a provider gains</p>
-      <h2>Beyond the flows.</h2>
-      <div class="grid grid-3" style="margin-top:1.5rem">
-        <div class="card"><h3>A capability edge</h3><p>Not only a compliance one — models grounded in a causal, governed model of the customer's reality, with an evidence-based path to measurable uplift over retrieval-only baselines.</p></div>
-        <div class="card"><h3>The missing context layer</h3><p>What turns sovereign models into deployable enterprise systems — able to <em>act</em>, not only answer.</p></div>
-        <div class="card"><h3>A clean specialisation corpus</h3><p>Causal, governed, rights-clear traces to tune models on — structural <em>and</em> temporal causality, from the full ascription history.</p></div>
-        <div class="card"><h3>A category position</h3><p>The model of choice for the governed causal-context standard Europe is moving toward — named exemplar of an open, vendor-neutral category.</p></div>
-        <div class="card"><h3>Safe agentic action</h3><p>A deterministic governance layer that makes agentic AI safe to run in banks, public operators, and critical infrastructure.</p></div>
-        <div class="card"><h3>A sovereignty narrative</h3><p>Sovereign models grounded in sovereign organisational context, governed by an open, auditable definition standard — EU AI Act, NIS2, DORA ready.</p></div>
-      </div>
-    </div>
-  </section>
-
   <section class="section">
     <div class="container">
       <p class="eyebrow">Operating principles</p>
@@ -161,6 +186,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style is:global>
+  .value-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1.5rem;
+  }
+  .value-card {
+    grid-column: span 2; width: 100%; color: inherit; font: inherit; text-align: left; cursor: pointer;
+    transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+  }
+  .value-card:nth-child(4) { grid-column: 2 / span 2; }
+  .value-card:hover, .value-card:focus-visible {
+    border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .14); transform: translateY(-2px); outline: none;
+  }
+  .value-card h3 { margin-top: .65rem; }
+  .value-card p { min-height: 6.6rem; }
+  .value-link { display: block; color: var(--accent-ink); font-size: .82rem; font-weight: 700; }
+
   #vf { margin-top: 1.5rem; }
   #vf .vf-notices { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
   #vf .vf-notice {
@@ -230,6 +270,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   #vf .vf-comps b { font-family: var(--font-mono); font-size: .74rem; color: var(--ink); }
 
   @media (max-width: 860px) {
+    .value-grid { grid-template-columns: 1fr; }
+    .value-card, .value-card:nth-child(4) { grid-column: auto; }
+    .value-card p { min-height: 0; }
     #vf .vf-notices { grid-template-columns: 1fr; }
     #vf .vf-cols { grid-template-columns: 1fr; }
     #vf .vf-gutter { display: none; }
@@ -241,7 +284,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <script>
   const FLOWS = [
     {
-      id: 'B1', hex: '#34d399', from: 'n-sie', to: 'n-infer',
+      id: 'B1', hex: '#34d399', from: 'n-sie', to: 'n-infer', lane: -32,
       label: 'governed causal context + tools',
       title: 'B1 — Governed causal context & tool surface (Poesis → LLM)',
       sub: 'SIE serves current Definitions, Norms, provenance and causal dependencies into the model — plus a tool surface to retrieve Definitions, inspect Norms, trace Interactions, and validate proposals.',
@@ -250,7 +293,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       comps: 'Realized by <b>sie-definition-manager</b> (context + tools) consumed by partner inference / MCP surfaces.',
     },
     {
-      id: 'B2', hex: '#34d399', from: 'n-infer', to: 'n-itip',
+      id: 'B2', hex: '#34d399', from: 'n-infer', to: 'n-itip', lane: 0,
       label: 'proposals → human disposition',
       title: 'B2 — Proposals disposed through the human gate (LLM → Poesis)',
       sub: 'Every model output is a proposal. ITIP serves the PROPOSE/DISPOSE gate to humans; sie-operator executes the norm, schema and provenance checks; every disposition lands in the audit ledger.',
@@ -259,7 +302,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       comps: 'Realized by <b>itip-web-application</b> (human gate) + <b>sie-operator</b> (deterministic evaluation) + audit ledger.',
     },
     {
-      id: 'A', hex: '#38bdf8', from: 'n-infer', to: 'n-sie',
+      id: 'A', hex: '#38bdf8', from: 'n-infer', to: 'n-sie', lane: 32,
       label: 'LLM-backed sourcing of GSM',
       title: 'A — Alimentation: LLMs feed GSM (LLM → Poesis)',
       sub: 'Blackboard sourcers wrap partner models as KnowledgeSources of Definitions over repositories, wikis, ticketing tools, and authoritative online resources. Contributions are confidence-scored (< 1.0) and provenance-stamped; only validated, sealed streams reach the definition manager as asserted Definitions.',
@@ -268,7 +311,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       comps: 'Realized by <b>itip blackboard sourcers</b> → <b>sie-definition-blackboard-manager</b> → <b>sie-definition-manager</b>.',
     },
     {
-      id: 'C', hex: '#a78bfa', from: 'n-sie', to: 'n-train',
+      id: 'C', hex: '#a78bfa', from: 'n-sie', to: 'n-train', lane: 0,
       label: 'evaluation oracle + specialisation corpus',
       title: 'C — Training & specialisation substrate (Poesis → LLM)',
       sub: 'Governed reality scores model answers (evaluation oracle), and the ascription history yields a causal corpus in two dimensions — structural (mechanisms, interactions) and temporal (time-stamped ascriptions).',
@@ -277,7 +320,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       comps: 'Realized by <b>sie-operator</b> (evaluation) + <b>sie-definition-manager</b> (corpus) under explicit contractual and consent boundaries.',
     },
     {
-      id: 'D', hex: '#94a3b8', from: 'n-infer', to: 'n-saf', dashed: true,
+      id: 'D', hex: '#94a3b8', from: 'n-infer', to: 'n-saf', lane: 0, dashed: true,
       label: 'agent bench builds the stack',
       title: 'D — Agentic delivery: LLM agents build Poesis itself (LLM → Poesis)',
       sub: 'Partner models power the SAFe Agentic Framework\u2019s orchestrators and specialist bench. Agent teams deliver SIE and ITIP through deterministic harness gates with human approval — the same PROPOSE/DISPOSE invariant applied to software delivery.',
@@ -316,7 +359,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       const related = selectedComponent && (f.from === selectedComponent || f.to === selectedComponent);
       const sel = selectedFlow === f.id || related;
 
-      const pathData = `M ${a.x} ${a.y} C ${midX} ${a.y}, ${midX} ${b.y}, ${b.x} ${b.y}`;
+      const lane = f.lane ?? 0;
+      const pathData = `M ${a.x} ${a.y} C ${midX} ${a.y + lane}, ${midX} ${b.y + lane}, ${b.x} ${b.y}`;
 
       const hit = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       hit.setAttribute('d', pathData);
@@ -413,6 +457,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         event.preventDefault();
         selectComponent(card);
       }
+    });
+  });
+
+  document.querySelectorAll('.value-card[data-flow]').forEach((card) => {
+    card.addEventListener('click', () => {
+      selectFlow(card.dataset.flow);
+      document.getElementById('value-map')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
