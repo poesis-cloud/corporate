@@ -6,4 +6,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://poesis.cloud',
   integrations: [sitemap()],
+  redirects: {
+    '/partnerships/llm-providers': '/partnerships/llm-provider-value-proposal',
+  },
 });
