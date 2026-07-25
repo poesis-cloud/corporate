@@ -1,9 +1,9 @@
 ---
 const products = [
-  { href: '/itip', label: 'ITIP' },
-  { href: '/sie', label: 'SIE' },
-  { href: '/standard', label: 'GSM' },
-  { href: '/framework', label: 'SAFe Agentic' },
+  { href: '/standard', label: 'Generative System Model' },
+  { href: '/sie', label: 'Systemic Intelligence Engine' },
+  { href: '/itip', label: 'IT Intelligence Platform' },
+  { href: '/framework', label: 'SAFe Agentic Framework' },
 ];
 const external = [
   { href: 'https://docs.poesis.cloud', label: 'Docs' },
@@ -18,7 +18,18 @@ const external = [
       Poesis
     </a>
     <nav class="nav-links" aria-label="Primary">
-      {products.map((l) => <a href={l.href}>{l.label}</a>)}
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Products <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          {products.map((l) => (
+            <li role="none">
+              <a href={l.href} role="menuitem">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <span class="nav-sep" aria-hidden="true"></span>
       <a href="/services">Services</a>
       <span class="nav-sep" aria-hidden="true"></span>
@@ -28,4 +39,22 @@ const external = [
     </nav>
   </div>
 </header>
+
+<script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
+      const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = dropdown.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', String(isOpen));
+      });
+      dropdown.addEventListener('mouseenter', () => trigger.setAttribute('aria-expanded', 'true'));
+      dropdown.addEventListener('mouseleave', () => {
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+</script>
 
