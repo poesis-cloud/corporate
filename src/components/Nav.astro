@@ -13,7 +13,18 @@ const external = [
       <img class="brand-mark" src="/poesis-logo.png" alt="" width="26" height="26" />
       Poesis
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      aria-label="Open primary menu"
+      hidden
+    >
+      <span class="nav-toggle-icon" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+    <nav class="nav-links" id="primary-navigation" aria-label="Primary">
       <div class="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
           Products <span aria-hidden="true">▾</span>
@@ -49,19 +60,87 @@ const external = [
 
 <script type="module">
   document.addEventListener('DOMContentLoaded', () => {
+    const compactMenuQuery = window.matchMedia('(max-width: 1023px)');
+    const header = document.querySelector('.site-header');
+    const nav = document.getElementById('primary-navigation');
+    const menuToggle = document.querySelector('.nav-toggle');
+    const dropdowns = [...document.querySelectorAll('.nav-dropdown')];
+
+    const closeDropdowns = () => {
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove('open');
+        dropdown.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    };
+
+    const setMenuOpen = (isOpen, restoreFocus = false) => {
+      if (!header || !nav || !menuToggle) return;
+      const nextOpen = compactMenuQuery.matches && isOpen;
+      const focusIsInNav = nav.contains(document.activeElement);
+      header.classList.toggle('menu-open', nextOpen);
+      menuToggle.setAttribute('aria-expanded', String(nextOpen));
+      menuToggle.setAttribute('aria-label', `${nextOpen ? 'Close' : 'Open'} primary menu`);
+      nav.setAttribute('aria-hidden', String(!nextOpen && compactMenuQuery.matches));
+      if (compactMenuQuery.matches && !nextOpen) closeDropdowns();
+      if ((restoreFocus || focusIsInNav) && compactMenuQuery.matches && !nextOpen) menuToggle.focus();
+    };
+
+    const syncCompactMenu = () => {
+      if (!nav || !menuToggle) return;
+      menuToggle.hidden = !compactMenuQuery.matches;
+      setMenuOpen(false);
+      if (!compactMenuQuery.matches) {
+        nav.removeAttribute('aria-hidden');
+        closeDropdowns();
+      }
+    };
+
+    header?.classList.add('nav-ready');
+    menuToggle?.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
     document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
       const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      if (!trigger) return;
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
+        if (compactMenuQuery.matches) {
+          dropdowns.filter((candidate) => candidate !== dropdown).forEach((candidate) => {
+            candidate.classList.remove('open');
+            candidate.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+          });
+        }
         const isOpen = dropdown.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(isOpen));
       });
-      dropdown.addEventListener('mouseenter', () => trigger.setAttribute('aria-expanded', 'true'));
+      dropdown.addEventListener('mouseenter', () => {
+        if (!compactMenuQuery.matches) trigger.setAttribute('aria-expanded', 'true');
+      });
       dropdown.addEventListener('mouseleave', () => {
-        dropdown.classList.remove('open');
-        trigger.setAttribute('aria-expanded', 'false');
+        if (!compactMenuQuery.matches) {
+          dropdown.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
       });
     });
+
+    nav?.addEventListener('click', (event) => {
+      if (compactMenuQuery.matches && event.target instanceof Element && event.target.closest('a')) setMenuOpen(false);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (header && !header.contains(event.target)) setMenuOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      const wasOpen = menuToggle?.getAttribute('aria-expanded') === 'true';
+      setMenuOpen(false, wasOpen);
+    });
+
+    compactMenuQuery.addEventListener('change', syncCompactMenu);
+    syncCompactMenu();
   });
 </script>
 

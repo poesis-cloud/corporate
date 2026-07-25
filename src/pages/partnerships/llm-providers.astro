@@ -190,6 +190,34 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               </div>
             </div>
           </div>
+
+          <div class="vf-mobile-flows" role="group" aria-label="Selectable value relationships">
+            <button class="vf-mobile-flow" type="button" data-flow="B1" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">B1 · Inference</span>
+              <strong>Poesis stack → Sovereign LLM partner</strong>
+              <span>Governed causal context + tools</span>
+            </button>
+            <button class="vf-mobile-flow" type="button" data-flow="B2" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">B2 · Deployment</span>
+              <strong>Sovereign LLM partner → Poesis stack</strong>
+              <span>Proposals → human disposition</span>
+            </button>
+            <button class="vf-mobile-flow" type="button" data-flow="A" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">A · Alimentation</span>
+              <strong>Sovereign LLM partner → Poesis stack</strong>
+              <span>LLM-backed sourcing of GSM</span>
+            </button>
+            <button class="vf-mobile-flow" type="button" data-flow="C" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">C · Training</span>
+              <strong>Poesis stack → Sovereign LLM partner</strong>
+              <span>Evaluation oracle + specialisation corpus</span>
+            </button>
+            <button class="vf-mobile-flow" type="button" data-flow="D" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">D · Delivery</span>
+              <strong>Sovereign LLM partner → Poesis stack</strong>
+              <span>Agent bench builds the stack</span>
+            </button>
+          </div>
         </div>
 
         <div class="vf-detail" id="vf-detail" hidden></div>
@@ -224,6 +252,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     border: 1px solid var(--line-strong); border-radius: 999px; padding: .14rem .6rem;
     font-size: .74rem; color: var(--ink-soft); background: var(--bg-soft); white-space: nowrap;
   }
+
+  #vf .vf-mobile-flows { display: none; }
 
   .value-grid {
     display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1.5rem;
@@ -317,6 +347,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     #vf .vf-gutter { display: none; }
     #vf #vf-wires { display: none; }
     #vf .vf-dcols { grid-template-columns: 1fr; }
+    #vf .vf-mobile-flows { display: grid; gap: .65rem; margin-top: 1rem; }
+    #vf .vf-mobile-flow {
+      display: grid; gap: .18rem; width: 100%; min-width: 0; padding: .8rem .9rem;
+      border: 1px solid var(--line-strong); border-left: 3px solid var(--accent); border-radius: 8px;
+      background: var(--bg-soft); color: var(--ink-soft); font: inherit; font-size: .82rem;
+      text-align: left; cursor: pointer; overflow-wrap: anywhere;
+    }
+    #vf .vf-mobile-flow:hover, #vf .vf-mobile-flow[aria-pressed="true"] {
+      border-color: var(--accent); background: var(--accent-soft);
+    }
+    #vf .vf-mobile-flow strong { color: var(--ink); font-size: .87rem; }
+    #vf .vf-mobile-flow-code { color: var(--accent-ink); font-family: var(--font-mono); font-size: .74rem; font-weight: 700; }
   }
 </style>
 
@@ -456,6 +498,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedFlow = null;
     selectedComponent = null;
     document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => control.setAttribute('aria-pressed', 'false'));
     if (detail) detail.hidden = true;
     draw();
   }
@@ -468,7 +511,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedFlow = id;
     selectedComponent = null;
     document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => {
+      control.setAttribute('aria-pressed', String(control.dataset.flow === id));
+    });
     const flow = FLOWS.find((candidate) => candidate.id === id);
+    if (!flow) {
+      clearSelection();
+      return;
+    }
     showAdherences(`Selected value flow — ${flow.label}`, [flow]);
   }
 
@@ -479,6 +529,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     }
     selectedComponent = card.id;
     selectedFlow = null;
+    document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => control.setAttribute('aria-pressed', 'false'));
     document.querySelectorAll('.vf-card').forEach((candidate) => candidate.classList.toggle('vf-selected', candidate === card));
     const flows = FLOWS.filter((flow) => flow.from === card.id || flow.to === card.id);
     showAdherences(`${card.dataset.component} — ${flows.length} connected adherence${flows.length === 1 ? '' : 's'}`, flows);
@@ -499,10 +550,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     });
   });
 
-  document.querySelectorAll('.value-card[data-flow]').forEach((card) => {
-    card.addEventListener('click', () => {
-      selectFlow(card.dataset.flow);
-      document.getElementById('value-map')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => {
+    control.addEventListener('click', () => {
+      selectFlow(control.dataset.flow);
+      if (control.classList.contains('value-card')) {
+        document.getElementById('value-map')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 
