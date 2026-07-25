@@ -1,4 +1,6 @@
 ---
+import { products } from '../data/products.ts';
+
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -11,12 +13,11 @@ const year = new Date().getFullYear();
         <p class="footer-tag">Harnessing generative AI for an age of governed synthetic autopoiesis.</p>
       </div>
       <div>
-        <h4>Portfolio</h4>
+        <h4>Products</h4>
         <ul>
-          <li><a href="/itip">ITIP</a></li>
-          <li><a href="/sie">SIE</a></li>
-          <li><a href="/standard">GSM</a></li>
-          <li><a href="/framework">SAFe Agentic</a></li>
+          {products.map((p) => (
+            <li><a href={p.href}>{p.label}</a></li>
+          ))}
         </ul>
       </div>
       <div>
