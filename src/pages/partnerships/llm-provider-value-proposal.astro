@@ -3,14 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="LLM Provider Partnership — Value Proposal"
-  description="What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; humans dispose through ITIP; SIE evaluates and enforces governed constraints."
+  description="What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; humans dispose through ITIP; SIE evaluates constraints and executes governed Mechanisms."
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow">Partnerships</p>
       <h1>LLM Provider Partnership — Value Proposal</h1>
-      <p class="lead"><strong>Better context beats bigger models.</strong> Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of it. That single gap drives both of today's ceilings: the <a href="#capability-ceiling"><strong>capability ceiling</strong></a> and the <a href="#deployment-ceiling"><strong>deployment ceiling</strong></a>. Poesis closes both through one governed definition layer implemented across GSM, SIE, and domain platforms such as ITIP — and model providers are the natural partners on it.</p>
-      <p class="lead"><strong>Models propose. Humans dispose through ITIP. SIE evaluates and enforces governed constraints.</strong> Every model output remains a proposal until accountable humans validate it against the governed definition layer.</p>
+      <p class="lead"><strong>Better context beats bigger models.</strong> Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of the world. That single gap drives both of today's ceilings: the <a href="#capability-ceiling"><strong>capability ceiling</strong></a> and the <a href="#deployment-ceiling"><strong>deployment ceiling</strong></a>. Poesis closes both through one governed definition layer specified by GSM, implemented by SIE, and surfaced through domain platforms such as ITIP — and model providers are the natural partners on it.</p>
+      <p class="lead"><strong>Models propose. Humans dispose through ITIP. SIE evaluates constraints and executes governed Mechanisms.</strong> Every model output remains a proposal until accountable humans validate it against the governed definition layer.</p>
       <div class="reference-disclosure">
         <strong>How to read this proposal.</strong> Present tense describes the Poesis reference design and target operating model; it does not imply uniform implementation maturity. The maturity disclosures below distinguish implemented foundations, designed components, partnership implementation tracks, and longer-horizon work.
       </div>
@@ -32,13 +32,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <span class="tag">Capability ceiling</span>
           <h3>Better intelligence without bigger models.</h3>
           <p>A model that trains and reasons against causal, governed Definitions works against explicit structure rather than relying only on correlation. That structure provides a substrate for impact analysis, counterfactual testing, and planning against modeled dependencies.</p>
-          <p class="thesis-mechanisms"><strong>Supported by adherence</strong> B · Governed inference grounding</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> B · Governed inference grounding + D · Model specialisation</p>
           <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
           <span class="tag">Deployment ceiling · Enterprise platform</span>
           <h3>From model provider to enterprise AI platform.</h3>
-          <p>Companies buy solutions, not models. Partner models provide the intelligence; Poesis provides governed context, business rules, human disposition, deterministic evaluation, and accountability. Together they form a deployable enterprise agentic platform — able to act, not only answer.</p>
+          <p>Companies buy solutions, not models. Partner models provide the intelligence; Poesis provides governed context, business rules, a human-disposition gate, deterministic evaluation, and audit evidence for accountability. Together they form a deployable enterprise agentic platform — able to act, not only answer.</p>
           <p class="thesis-mechanisms"><strong>Supported by adherences</strong> B · Governed inference grounding + C · Governed inference deployment</p>
           <p class="thesis-tagline">Transform a model into an enterprise AI platform.</p>
         </div>
@@ -71,70 +71,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <div class="container">
       <p class="eyebrow">The value mechanisms / adherences</p>
       <h2>How the partnership creates value.</h2>
-      <p class="lead">Each business outcome is supported by one or more mechanisms connecting LLM capabilities with the Poesis stack, each forming a locus of value adherence.</p>
+      <p class="lead">An adherence is a concrete interface where partner capabilities and Poesis components combine to create reciprocal value. Each business outcome is supported by one or more such mechanisms.</p>
       <div class="value-grid">
-        <button class="card value-card" data-flow="A" type="button">
+        <button class="card value-card" data-flow="A" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">Context sourcing · A</span>
           <h3>Definitions sourced at scale</h3>
           <p>LLMs can become KnowledgeSources over repositories, wikis, ticketing systems, and authoritative resources — lowering sourcing cost while preserving human disposition.</p>
-          <span class="value-link">Show adherence →</span>
+          <span class="value-link">View flow details</span>
         </button>
-        <button class="card value-card" data-flow="B" type="button">
+        <button class="card value-card" data-flow="B" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">Governed inference loop · B</span>
           <h3>Governed causal grounding</h3>
-          <p>SIE supplies structurally causal, governed, rights-traceable Definitions and tools that let models reason beyond document-only retrieval and trace modeled dependencies.</p>
-          <span class="value-link">Show adherence →</span>
+          <p>SIE supplies governed Definitions that model causal structure and carry traceable provenance, plus tools that let models reason beyond document-only retrieval and trace modeled dependencies.</p>
+          <span class="value-link">View flow details</span>
         </button>
-        <button class="card value-card" data-flow="C" type="button">
+        <button class="card value-card" data-flow="C" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">Governed inference loop · C</span>
           <h3>Governed action in regulated estates</h3>
-          <p>Models propose; humans dispose through ITIP; SIE evaluates deterministically. The result is accountable agentic action with evidence behind every decision.</p>
-          <span class="value-link">Show adherence →</span>
+          <p>Models propose; humans dispose through ITIP; SIE executes governed Mechanisms deterministically. The result is accountable agentic action with evidence logged for each disposition.</p>
+          <span class="value-link">View flow details</span>
         </button>
-        <button class="card value-card" data-flow="D" type="button">
+        <button class="card value-card" data-flow="D" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">Model specialisation · D</span>
           <h3>A legitimate specialisation substrate</h3>
-          <p>Governed Definitions and Ascription history provide a provenance-rich, rights-governed corpus and a basis for an evaluation oracle unavailable from ungoverned scraping alone.</p>
-          <span class="value-link">Show adherence →</span>
+          <p>Governed Definitions and Ascription history provide a provenance-rich corpus, used under explicit rights controls, and a basis for an evaluation oracle unavailable from ungoverned scraping alone.</p>
+          <span class="value-link">View flow details</span>
         </button>
-        <button class="card value-card" data-flow="E" type="button">
+        <button class="card value-card" data-flow="E" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">Agentic delivery · E</span>
           <h3>A governed agentic delivery proof</h3>
           <p>Partner models power specialist agents while deterministic SAFe operational gates and human approvals govern how organisation products are delivered.</p>
-          <span class="value-link">Show adherence →</span>
+          <span class="value-link">View flow details</span>
         </button>
-      </div>
-
-      <div class="maturity-panel" id="maturity">
-        <p class="eyebrow">Maturity disclosure</p>
-        <h3>The reference design is stable; its operational maturity is evolving.</h3>
-        <p>Implementation is part of the partnership exchange, not a hidden prerequisite. A partner can contribute model access, engineering, evaluation, and applied research to turn selected flows into measured operational proofs.</p>
-        <div class="maturity-grid">
-          <article>
-            <span class="maturity-code">A · Partnership implementation track</span>
-            <p>The Blackboard and repository-sourcer contracts are designed. The service lifecycle, KnowledgeSources, client reduction, and Definition Manager registration path remain implementation and experimentation work.</p>
-          </article>
-          <article>
-            <span class="maturity-code">B · Integration and evaluation track</span>
-            <p>GSM, the Definition Manager, and the SIE Operator provide foundations. The model-facing context/tool surface and comparative grounding benchmarks are partnership work.</p>
-          </article>
-          <article>
-            <span class="maturity-code">C · Target composition</span>
-            <p>The governance lifecycle and deterministic runtime foundations exist. The integrated ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof remain to be assembled and validated.</p>
-          </article>
-          <article>
-            <span class="maturity-code">D · Research track</span>
-            <p>GSM provides governed structural definitions and versioned Ascriptions. Corpus permissions, evaluation-oracle construction, specialization experiments, and measured uplift require explicit partner and tenant agreements.</p>
-          </article>
-          <article>
-            <span class="maturity-code">E · Evolving operational proof</span>
-            <p>The SAFe Agentic Framework supplies the delivery pattern and artifacts. Partner-model adoption, controlled execution evidence, and repeatable outcome measures continue to mature through use.</p>
-          </article>
-        </div>
-        <div class="maturity-exchange">
-          <p><strong>Direct value for Poesis:</strong> faster implementation, stronger experiments, benchmark evidence, and production feedback across the reference design.</p>
-          <p><strong>Indirect value for the LLM provider:</strong> a governed enterprise integration proving where its models perform, fail, and improve under accountable operating constraints.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -145,13 +113,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h2>An interactive map of the exchange.</h2>
 
       <div id="vf">
-        <div class="vf-notices" aria-label="How to read the value map">
+        <div class="vf-notices" role="region" aria-label="How to read the value map">
           <p class="vf-notice vf-notice-info"><strong>Explore the map.</strong> Click a flow to see its mutual value. Click an LLM or Poesis component to see every adherence it has with the other components. Expand a Poesis box for internal detail.</p>
-          <p class="vf-notice vf-notice-invariant"><strong>Core invariant:</strong> models <strong>PROPOSE</strong> (inferred, confidence &lt; 1.0) · accountable humans dispose through ITIP · SIE evaluates and enforces governed constraints — <strong>PROPOSE / DISPOSE</strong>.</p>
+          <p class="vf-notice vf-notice-invariant"><strong>Core invariant:</strong> models <strong>PROPOSE</strong> (inferred, confidence &lt; 1.0) · accountable humans dispose through ITIP · SIE evaluates constraints and executes governed Mechanisms — <strong>PROPOSE / DISPOSE</strong>.</p>
         </div>
 
         <div class="vf-human">
-          <strong>Human supervision, regulation, and governance — always in the loops.</strong>
+          <strong>By design, human supervision, regulation, and governance remain in the loops.</strong>
           <ul>
             <li><b>Owns Intents</b> — creation of Definitions / Ascriptions.</li>
             <li><b>Owns Approvals</b> — validation of AI-proposed Definitions / Ascriptions.</li>
@@ -160,7 +128,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="vf-diagram" id="vf-diagram">
-          <svg id="vf-wires"></svg>
+          <svg id="vf-wires" aria-hidden="true" focusable="false"></svg>
           <div class="vf-cols">
 
             <div class="vf-col">
@@ -169,13 +137,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 <div class="vf-gsub">provider-neutral by design — any sovereign or frontier model: self-hosted, sovereign-hosted, or open-weight</div>
 
                 <div class="vf-card" id="n-train" data-component="Training &amp; specialisation">
-                  <div class="vf-ctitle">Training &amp; specialisation</div>
-                  <div class="vf-csub">learns from structurally causal, governed, rights-traceable Definitions — structured context unavailable from ungoverned scraping alone</div>
+                  <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                    <span class="vf-ctitle">Training &amp; specialisation</span>
+                    <span class="vf-csub">learns from governed Definitions that model causal structure and carry traceable provenance — under explicit rights controls</span>
+                  </button>
                 </div>
 
                 <div class="vf-card" id="n-infer" data-component="Grounded inference">
-                  <div class="vf-ctitle">Grounded inference</div>
-                  <div class="vf-csub">reasons against structurally causal, governed, rights-traceable Definitions — explicit context beyond document-only retrieval</div>
+                  <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                    <span class="vf-ctitle">Grounded inference</span>
+                    <span class="vf-csub">reasons against governed Definitions that model causal structure and carry traceable provenance — explicit context beyond document-only retrieval</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -188,32 +160,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 <div class="vf-gsub">one sovereign instance per organisation — tenant-owned, designed for future federation</div>
 
                 <div class="vf-card" id="n-sie" data-component="SIE — Systemic Intelligence Engine">
-                  <div class="vf-ctitle">SIE — Systemic Intelligence Engine</div>
-                  <div class="vf-csub">reference implementation of GSM containing Definitions / Ascriptions of the organisation and implementing their governance lifecycle</div>
-                  <button class="vf-fold-btn" data-fold="f-sie">▸ components</button>
-                  <div class="vf-fold" id="f-sie">
+                  <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                    <span class="vf-ctitle">SIE — Systemic Intelligence Engine</span>
+                    <span class="vf-csub">reference implementation of GSM containing Definitions / Ascriptions of the organisation and implementing their governance lifecycle</span>
+                  </button>
+                  <button class="vf-fold-btn" type="button" data-fold="f-sie" aria-controls="f-sie" aria-expanded="false">▸ components</button>
+                  <div class="vf-fold" id="f-sie" hidden>
                     <div class="vf-comp"><b>sie-definition-manager</b> — hosts GSM, Ascription lifecycle, governance grammar</div>
-                    <div class="vf-comp"><b>sie-definition-blackboard-manager</b> — Definitions sourcing pipeline</div>
-                    <div class="vf-comp"><b>sie-operator</b> — executes Norms &amp; Mechanisms: governance evaluation (application of governance, and governance of governance)</div>
+                    <div class="vf-comp"><b>sie-definition-blackboard-manager</b> — contribution registry and Blackboard-seal lifecycle</div>
+                    <div class="vf-comp"><b>sie-operator</b> — executes Mechanisms and typed effects; governance services evaluate Norms and provenance</div>
                   </div>
                 </div>
 
                 <div class="vf-card vf-gate" id="n-itip" data-component="ITIP — domain platform (IT)">
-                  <div class="vf-ctitle">ITIP — domain platform (IT)</div>
-                  <div class="vf-csub">serves the <b>PROPOSE / DISPOSE gate to humans</b> — intent, approve, audit, simulate Definitions</div>
-                  <button class="vf-fold-btn" data-fold="f-itip">▸ components</button>
-                  <div class="vf-fold" id="f-itip">
+                  <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                    <span class="vf-ctitle">ITIP — domain platform (IT)</span>
+                    <span class="vf-csub">serves the <b>PROPOSE / DISPOSE gate to humans</b> — intent, approve, audit, simulate Definitions</span>
+                  </button>
+                  <button class="vf-fold-btn" type="button" data-fold="f-itip" aria-controls="f-itip" aria-expanded="false">▸ components</button>
+                  <div class="vf-fold" id="f-itip" hidden>
                     <div class="vf-comp"><b>itip web frontend + backend</b> — the human gate: intent, approval, simulation, appraisal, and audit</div>
-                    <div class="vf-comp"><b>itip frameworks</b> — GDPR, NIS2, DORA, AI Act, TOGAF, ISO… standard domain vocabulary / semantics and regulation frameworks that compose GSM Definitions</div>
+                    <div class="vf-comp"><b>itip frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
                     <div class="vf-comp"><b>itip blackboard sourcers</b> — wrap LLMs / agents as KnowledgeSources of Definitions over code repositories, wikis, ticketing tools, online authoritative resources, and other sources</div>
                   </div>
                 </div>
 
                 <div class="vf-card" id="n-saf" data-component="SAFe Agentic Framework">
-                  <div class="vf-ctitle">SAFe Agentic Framework</div>
-                  <div class="vf-csub">governed agentic organisation products delivery through deterministic operational gates</div>
-                  <button class="vf-fold-btn" data-fold="f-saf">▸ components</button>
-                  <div class="vf-fold" id="f-saf">
+                  <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                    <span class="vf-ctitle">SAFe Agentic Framework</span>
+                    <span class="vf-csub">governed agentic organisation products delivery through deterministic operational gates</span>
+                  </button>
+                  <button class="vf-fold-btn" type="button" data-fold="f-saf" aria-controls="f-saf" aria-expanded="false">▸ components</button>
+                  <div class="vf-fold" id="f-saf" hidden>
                     <div class="vf-comp"><b>orchestrators</b> — portfolio / program / team</div>
                     <div class="vf-comp"><b>specialist bench</b> — architecture, dev, QA, security, docs agents</div>
                     <div class="vf-comp"><b>harness</b> — deterministic FSM, artifact &amp; gate checks; humans approve — PROPOSE/DISPOSE applied to delivery</div>
@@ -252,7 +230,49 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
         </div>
 
-        <div class="vf-detail" id="vf-detail" hidden></div>
+        <div class="vf-detail" id="vf-detail" role="region" aria-live="polite" aria-atomic="false" tabindex="-1" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="maturity">
+    <div class="container">
+      <div class="maturity-panel">
+        <p class="eyebrow">Maturity disclosure</p>
+        <h2>Operational maturity by value flow.</h2>
+        <p>Current maturity and partnership work are stated separately for each flow. Implementation is part of the exchange: a partner can contribute model access, engineering, evaluation, and applied research to turn selected flows into measured operational proofs.</p>
+        <div class="maturity-grid">
+          <article>
+            <span class="maturity-flow">Context sourcing</span>
+            <strong class="maturity-status">Current maturity · Designed contracts</strong>
+            <p><strong>Partnership work:</strong> implement and test the Blackboard service lifecycle, KnowledgeSources, client reduction, and Definition Manager registration path.</p>
+          </article>
+          <article>
+            <span class="maturity-flow">Governed inference grounding</span>
+            <strong class="maturity-status">Current maturity · Implemented foundations</strong>
+            <p><strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.</p>
+          </article>
+          <article>
+            <span class="maturity-flow">Governed inference deployment</span>
+            <strong class="maturity-status">Current maturity · Partial foundation</strong>
+            <p><strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.</p>
+          </article>
+          <article>
+            <span class="maturity-flow">Model specialisation</span>
+            <strong class="maturity-status">Current maturity · Research hypothesis</strong>
+            <p><strong>Partnership work:</strong> agree corpus permissions and oracle criteria, run specialisation experiments, and measure uplift.</p>
+          </article>
+          <article>
+            <span class="maturity-flow">Agentic delivery</span>
+            <strong class="maturity-status">Current maturity · Evolving operational proof</strong>
+            <p><strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.</p>
+          </article>
+        </div>
+        <div class="maturity-exchange">
+          <span class="maturity-exchange-title">Cross-cutting operational adherence · Co-implementation</span>
+          <p><strong>Direct value for Poesis:</strong> faster implementation, stronger experiments, benchmark evidence, and production feedback across the reference design.</p>
+          <p><strong>Indirect value for the LLM provider:</strong> a governed enterprise integration proving where its models perform, fail, and improve under accountable operating constraints.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -301,9 +321,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .value-link { display: block; color: var(--accent-ink); font-size: .82rem; font-weight: 700; }
 
   .maturity-panel {
-    margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line-strong);
+    margin: 0; padding: 0;
   }
-  .maturity-panel h3 { max-width: 760px; margin-top: .4rem; }
+  .maturity-panel h2 { max-width: 760px; margin-top: .4rem; }
   .maturity-panel > p:not(.eyebrow) { max-width: 860px; color: var(--ink-soft); }
   .maturity-grid {
     display: grid; grid-template-columns: repeat(6, 1fr); gap: .8rem; margin-top: 1.2rem;
@@ -314,11 +334,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
   .maturity-grid article:nth-child(4) { grid-column: 2 / span 2; }
   .maturity-grid p { margin: .45rem 0 0; color: var(--ink-soft); font-size: .84rem; }
-  .maturity-code { color: var(--accent-ink); font-family: var(--font-mono); font-size: .76rem; font-weight: 700; }
+  .maturity-grid p strong { color: var(--ink); }
+  .maturity-flow {
+    display: block; color: var(--accent-ink); font-family: var(--font-mono);
+    font-size: .76rem; font-weight: 700;
+  }
+  .maturity-status { display: block; margin-top: .35rem; color: var(--ink); font-size: .88rem; }
   .maturity-exchange {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;
     padding: .9rem 1rem; border: 1px solid rgba(56, 189, 248, .4); border-radius: 8px;
     background: rgba(56, 189, 248, .08);
+  }
+  .maturity-exchange-title {
+    grid-column: 1 / -1; color: var(--accent-ink); font-family: var(--font-mono);
+    font-size: .76rem; font-weight: 700;
   }
   .maturity-exchange p { margin: 0; color: var(--ink-soft); font-size: .86rem; }
   .maturity-exchange strong { color: var(--ink); }
@@ -326,7 +355,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   #vf { margin-top: 1.5rem; }
   #vf .vf-notices { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1rem; }
   #vf .vf-notice {
-    margin: 0; border-radius: 10px; padding: .65rem .85rem; font-size: .86rem; color: var(--ink-soft);
+    margin: 0; border-radius: 10px; padding: .65rem .85rem; font-size: .86rem; color: var(--ink);
   }
   #vf .vf-notice-info { background: rgba(56, 189, 248, .08); border: 1px solid rgba(56, 189, 248, .4); }
   #vf .vf-notice-invariant { background: rgba(251, 191, 36, .10); border: 1px solid rgba(251, 191, 36, .45); }
@@ -353,12 +382,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   #vf .vf-card {
     border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg-ink);
-    padding: .6rem .75rem; margin-top: .6rem; cursor: pointer; transition: border-color .16s ease, box-shadow .16s ease;
+    padding: .6rem .75rem; margin-top: .6rem; transition: border-color .16s ease, box-shadow .16s ease;
   }
-  #vf .vf-card:hover, #vf .vf-card:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .12); outline: none; }
+  #vf .vf-card:hover, #vf .vf-card:has(.vf-card-select:focus-visible) { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .12); }
   #vf .vf-card.vf-selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(45, 212, 191, .18); }
-  #vf .vf-ctitle { font-weight: 600; color: var(--ink); font-size: .89rem; }
-  #vf .vf-csub { color: var(--muted); font-size: .78rem; margin-top: .18rem; }
+  #vf .vf-card-select {
+    display: block; width: 100%; padding: 0; border: 0; background: transparent;
+    color: inherit; font: inherit; text-align: left; cursor: pointer;
+  }
+  #vf .vf-card-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 3px; }
+  #vf .vf-ctitle { display: block; font-weight: 600; color: var(--ink); font-size: .89rem; }
+  #vf .vf-csub { display: block; color: var(--muted); font-size: .78rem; margin-top: .18rem; }
   #vf .vf-gate { background: rgba(251, 191, 36, .07); border-color: rgba(251, 191, 36, .45); }
 
   #vf .vf-fold-btn {
@@ -405,6 +439,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .maturity-grid { grid-template-columns: 1fr; }
     .maturity-grid article, .maturity-grid article:nth-child(4) { grid-column: auto; }
     .maturity-exchange { grid-template-columns: 1fr; }
+    .maturity-exchange-title { grid-column: auto; }
     #vf .vf-notices { grid-template-columns: 1fr; }
     #vf .vf-cols { grid-template-columns: 1fr; }
     #vf .vf-gutter { display: none; }
@@ -431,7 +466,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       id: 'A', hex: '#38bdf8', from: 'n-infer', to: 'n-sie', lane: 32,
       label: 'LLM-backed sourcing of GSM',
       title: 'A — Context sourcing: LLMs feed GSM (LLM → Poesis)',
-      maturity: 'Partnership implementation track — contracts and contribution schemas are designed; the service lifecycle, KnowledgeSources, reduction, and registration path remain to be implemented and tested.',
+      maturity: '<strong>Current maturity:</strong> designed contracts. <strong>Partnership work:</strong> implement and test the service lifecycle, KnowledgeSources, client reduction, and registration path.',
       sub: 'Blackboard sourcers wrap partner models as KnowledgeSources over repositories, wikis, ticketing tools, and authoritative online resources. Confidence-scored, provenance-stamped contributions form a validated sealed stream; a client reducer then prepares governed Ascription proposals for human disposition and Definition Manager registration.',
       partner: ['A concrete applied-AI showcase: turning regulation and code into governed, queryable structure', 'R&D feedback loop on extraction, grounding, function calling'],
       poesis: ['Sourcing cost down and coverage up while human disposition remains explicit', 'Invariant preserved: LLMs never write governed truth directly'],
@@ -441,9 +476,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       id: 'B', hex: '#34d399', from: 'n-sie', to: 'n-infer', lane: -32,
       label: 'governed causal context + tools',
       title: 'B — Governed inference grounding (Poesis → LLM)',
-      maturity: 'Integration and evaluation track — GSM, the Definition Manager, and Operator foundations exist; the model-facing tool surface and comparative benchmarks are partnership work.',
+      maturity: '<strong>Current maturity:</strong> implemented foundations. <strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.',
       sub: 'SIE serves in-effect Definitions, Norms, provenance and modeled causal dependencies into the model — plus a tool surface to retrieve Definitions, inspect Norms, trace Interactions, and validate proposals.',
-      partner: ['Capability edge: reasoning against explicit structure rather than correlation alone', 'Target outcome: measurably fewer unsupported claims than document-retrieval baselines'],
+      partner: ['Designed capability: structure-aware reasoning rather than correlation alone', 'Evaluation target: measurably fewer unsupported claims than document-retrieval baselines'],
       poesis: ['Answers grounded in the organisation’s governed, in-effect Definitions', 'Model-neutral context standard — any conforming model can plug in'],
       comps: 'Designed through <b>sie-definition-manager</b> context and tool surfaces consumed by partner inference integrations.',
     },
@@ -451,7 +486,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       id: 'C', hex: '#34d399', from: 'n-infer', to: 'n-itip', lane: 0,
       label: 'proposals → human disposition',
       title: 'C — Governed inference deployment (LLM → Poesis)',
-      maturity: 'Target composition — lifecycle and deterministic runtime foundations exist; the ITIP gate, integrated Norm and provenance evaluation, disposition audit, and regulated proof remain partnership work.',
+      maturity: '<strong>Current maturity:</strong> partial foundation. <strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.',
       sub: 'Every model output is a proposal. ITIP serves the PROPOSE/DISPOSE gate to humans; the SIE runtime executes Mechanisms and schema checks while governance services evaluate Norms and provenance; the target composition records every disposition for audit.',
       partner: ['Deployability: supports the controls required for agentic action in regulated estates', 'A testable assurance case for regulated European buyers'],
       poesis: ['AI that acts against the organisation\u2019s governed Definitions — audited and accountable', 'Every disposition enriches the governed record'],
@@ -461,17 +496,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       id: 'D', hex: '#a78bfa', from: 'n-sie', to: 'n-train', lane: 0,
       label: 'evaluation oracle + specialisation corpus',
       title: 'D — Model training & specialisation substrate (Poesis → LLM)',
-      maturity: 'Research track — governed structural definitions and versioned Ascriptions exist; corpus permissions, oracle construction, specialization experiments, and measured uplift require partner and tenant agreements.',
+      maturity: '<strong>Current maturity:</strong> research hypothesis. <strong>Partnership work:</strong> agree corpus permissions and oracle criteria, run specialisation experiments, and measure uplift.',
       sub: 'Governed Definitions can form an evaluation reference, while Ascription history records how accepted definitions change over time. Structural causality comes from Mechanisms and Interactions; timestamps provide temporal history, not causal proof.',
       partner: ['A differentiated specialisation corpus: structurally causal, governed, provenance-rich, and subject to explicit rights controls', 'Benchmarks against strong baselines: evidence over assertion'],
-      poesis: ['Specialised sovereign models raise inference and sourcing quality — compounding every other flow', 'Legitimacy-gated access: tenant ownership absolute'],
+      poesis: ['Flow D tests whether specialised sovereign models improve inference and sourcing quality', 'Tenant ownership, licensing, and consent govern corpus access'],
       comps: 'Research path through <b>sie-operator</b> evaluation Mechanisms + <b>sie-definition-manager</b> governed history under explicit contractual, licensing, and consent boundaries.',
     },
     {
       id: 'E', hex: '#94a3b8', from: 'n-infer', to: 'n-saf', lane: 0, dashed: true,
       label: 'agent bench builds the stack',
       title: 'E — Agentic delivery: LLM agents build Poesis itself (LLM → Poesis)',
-      maturity: 'Evolving operational proof — the delivery framework and artifacts exist; partner-model adoption, controlled execution evidence, and repeatable outcome measures mature through use.',
+      maturity: '<strong>Current maturity:</strong> evolving operational proof. <strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.',
       sub: 'Partner models power the SAFe Agentic Framework\u2019s orchestrators and specialist bench. Agent teams deliver SIE and ITIP through deterministic harness gates with human approval — the same PROPOSE/DISPOSE invariant applied to software delivery.',
       partner: ['A living reference of governed multi-agent engineering on partner models', 'Dogfooding evidence for the enterprise agentic story'],
       poesis: ['Velocity: the stack is built by the very pattern it sells', 'Delivery traces are themselves governed, auditable artifacts'],
@@ -545,7 +580,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   function adherenceMarkup(flow) {
     return `<article class="vf-adherence">
       <h4 style="color:${flow.hex}">${flow.title}</h4>
-      <p class="vf-maturity"><strong>Maturity:</strong> ${flow.maturity}</p>
+      <p class="vf-maturity">${flow.maturity}</p>
       <p class="vf-dsub">${flow.sub}</p>
       <div class="vf-dcols">
         <div><h5>Value for the LLM partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
@@ -560,6 +595,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     detail.hidden = false;
     detail.innerHTML = `<h3>${title}</h3>${flows.map(adherenceMarkup).join('')}`;
     draw();
+    detail.focus({ preventScroll: true });
     detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -567,6 +603,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedFlow = null;
     selectedComponent = null;
     document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    document.querySelectorAll('.vf-card-select').forEach((control) => control.setAttribute('aria-pressed', 'false'));
     document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => control.setAttribute('aria-pressed', 'false'));
     if (detail) detail.hidden = true;
     draw();
@@ -580,6 +617,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedFlow = id;
     selectedComponent = null;
     document.querySelectorAll('.vf-card').forEach((card) => card.classList.remove('vf-selected'));
+    document.querySelectorAll('.vf-card-select').forEach((control) => control.setAttribute('aria-pressed', 'false'));
     document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => {
       control.setAttribute('aria-pressed', String(control.dataset.flow === id));
     });
@@ -599,33 +637,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     selectedComponent = card.id;
     selectedFlow = null;
     document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => control.setAttribute('aria-pressed', 'false'));
-    document.querySelectorAll('.vf-card').forEach((candidate) => candidate.classList.toggle('vf-selected', candidate === card));
+    document.querySelectorAll('.vf-card').forEach((candidate) => {
+      const selected = candidate === card;
+      candidate.classList.toggle('vf-selected', selected);
+      candidate.querySelector('.vf-card-select')?.setAttribute('aria-pressed', String(selected));
+    });
     const flows = FLOWS.filter((flow) => flow.from === card.id || flow.to === card.id);
     showAdherences(`${card.dataset.component} — ${flows.length} connected adherence${flows.length === 1 ? '' : 's'}`, flows);
   }
 
   document.querySelectorAll('.vf-card[data-component]').forEach((card) => {
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.addEventListener('click', (event) => {
-      if (event.target.closest('.vf-fold-btn')) return;
-      selectComponent(card);
-    });
-    card.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        selectComponent(card);
-      }
-    });
+    card.querySelector('.vf-card-select')?.addEventListener('click', () => selectComponent(card));
   });
 
   document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => {
-    control.addEventListener('click', () => {
-      selectFlow(control.dataset.flow);
-      if (control.classList.contains('value-card')) {
-        document.getElementById('value-map')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+    control.addEventListener('click', () => selectFlow(control.dataset.flow));
   });
 
   document.querySelectorAll('.vf-fold-btn').forEach((btn) => {
@@ -633,8 +659,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       event.stopPropagation();
       const fold = document.getElementById(btn.dataset.fold);
       if (!fold) return;
-      fold.classList.toggle('open');
-      btn.textContent = `${fold.classList.contains('open') ? '▾' : '▸'} components`;
+      const expanded = !fold.classList.contains('open');
+      fold.classList.toggle('open', expanded);
+      fold.hidden = !expanded;
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.textContent = `${expanded ? '▾' : '▸'} components`;
       draw();
     });
   });
