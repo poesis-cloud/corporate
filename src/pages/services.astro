@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { services } from '../data/services.ts';
 ---
 <BaseLayout
   title="Services"
@@ -18,11 +19,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section section--soft">
     <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Engagement models</p>
+        <h2>Choose the operating boundary that fits.</h2>
+        <p class="lead">Start with transformation, a managed platform, sovereign deployment, or the capability to deliver Poesis with confidence.</p>
+      </div>
       <div class="grid grid-2">
-        <div class="card"><h3>Consulting</h3><p>AI-generative / agentic transformation of organizations, IT first — high-touch, outcome-driven, grounded in systemic governance.</p></div>
-        <div class="card"><h3>SaaS</h3><p>The Poesis stack as a managed cloud — durable, recurring, operated by the team that builds it.</p></div>
-        <div class="card"><h3>On-prem integration &amp; administration</h3><p>Deploy, integrate, and administer Poesis products inside regulated, sovereign, and enterprise environments.</p></div>
-        <div class="card"><h3>Certification</h3><p>A Poesis-owned certification for practitioners and partners — scaling delivery and building the ecosystem.</p></div>
+        {services.map((service) => (
+          <article class="card card--feature service-card">
+            <span class="tag">{service.category}</span>
+            <h3>{service.label}</h3>
+            <p>{service.summary}</p>
+            <a class="btn btn-ghost btn-sm service-link" href={service.href}>Explore {service.label}<span aria-hidden="true">→</span></a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -35,3 +45,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .service-card {
+    display: flex;
+    min-height: 15rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-link {
+    margin-top: auto;
+  }
+</style>

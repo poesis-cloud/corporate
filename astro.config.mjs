@@ -7,6 +7,7 @@ export default defineConfig({
   site: 'https://poesis.cloud',
   integrations: [sitemap()],
   redirects: {
-    '/partnerships/llm-providers': '/partnerships/llm-provider-value-proposal',
+    '/partnerships/llm-providers': '/partnerships/llm-vendor-value-proposal',
+    '/partnerships/llm-provider-value-proposal': '/partnerships/llm-vendor-value-proposal',
   },
 });

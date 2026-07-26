@@ -1,5 +1,6 @@
 ---
 import { products } from '../data/products.ts';
+import { services } from '../data/services.ts';
 
 const external = [
   { href: 'https://docs.poesis.cloud', label: 'Docs' },
@@ -38,7 +39,18 @@ const external = [
         </ul>
       </div>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a href="/services">Services</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Services <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          {services.map((service) => (
+            <li role="none">
+              <a href={service.href} role="menuitem">{service.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <span class="nav-sep" aria-hidden="true"></span>
       <div class="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
@@ -46,7 +58,7 @@ const external = [
         </button>
         <ul class="nav-dropdown-menu" role="menu">
           <li role="none">
-            <a href="/partnerships/llm-provider-value-proposal" role="menuitem">LLM Provider Partnership — Value Proposal</a>
+            <a href="/partnerships/llm-vendor-value-proposal" role="menuitem">LLM Vendor Partnership — Value Proposal</a>
           </li>
         </ul>
       </div>

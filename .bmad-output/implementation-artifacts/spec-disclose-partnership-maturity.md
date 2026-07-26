@@ -19,27 +19,27 @@ route: 'one-shot'
 **Interpretation and exchange**
 
 - Establishes present tense as target-design language rather than uniform implementation status.
-  [llm-provider-value-proposal.astro:15](../../src/pages/partnerships/llm-provider-value-proposal.astro#L15)
+  [llm-vendor-value-proposal.astro:15](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L15)
 
 - Defines adherence as a concrete interface for reciprocal value.
-  [llm-provider-value-proposal.astro:74](../../src/pages/partnerships/llm-provider-value-proposal.astro#L74)
+  [llm-vendor-value-proposal.astro:74](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L74)
 
 - Places letter-free maturity disclosure after the complete exchange map.
-  [llm-provider-value-proposal.astro:238](../../src/pages/partnerships/llm-provider-value-proposal.astro#L238)
+  [llm-vendor-value-proposal.astro:238](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L238)
 
 - Separates current maturity from partnership work for every named flow.
-  [llm-provider-value-proposal.astro:247](../../src/pages/partnerships/llm-provider-value-proposal.astro#L247)
+  [llm-vendor-value-proposal.astro:247](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L247)
 
 - Names co-implementation as the cross-cutting operational adherence.
-  [llm-provider-value-proposal.astro:272](../../src/pages/partnerships/llm-provider-value-proposal.astro#L272)
+  [llm-vendor-value-proposal.astro:272](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L272)
 
 **Flow-level grounding**
 
 - Separates sourcing contributions, reduction, human disposition, and governed registration.
-  [llm-provider-value-proposal.astro:470](../../src/pages/partnerships/llm-provider-value-proposal.astro#L470)
+  [llm-vendor-value-proposal.astro:470](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L470)
 
 - Assigns human disposition, runtime execution, governance evaluation, and audit distinctly.
-  [llm-provider-value-proposal.astro:490](../../src/pages/partnerships/llm-provider-value-proposal.astro#L490)
+  [llm-vendor-value-proposal.astro:490](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L490)
 
 - Exposes real component controls, announced details, and synchronized selection state.
-  [llm-provider-value-proposal.astro:583](../../src/pages/partnerships/llm-provider-value-proposal.astro#L583)
+  [llm-vendor-value-proposal.astro:583](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L583)

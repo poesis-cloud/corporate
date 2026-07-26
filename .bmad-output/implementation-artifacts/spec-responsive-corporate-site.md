@@ -38,7 +38,7 @@ context: []
 
 - `src/components/Nav.astro` -- shared primary navigation markup and dropdown/mobile interaction.
 - `src/styles/global.css` -- shared container, navigation, grid, typography, footer, and responsive rules used by every route.
-- `src/pages/partnerships/llm-provider-value-proposal.astro` -- five value cards, interactive two-sided value map, page-local styles, and flow-selection script.
+- `src/pages/partnerships/llm-vendor-value-proposal.astro` -- five value cards, interactive two-sided value map, page-local styles, and flow-selection script.
 - `src/components/Footer.astro` -- shared footer structure validated against narrow layouts.
 - `src/pages/**/*.astro` and `src/pages/insights/*.md` -- complete route set to inspect for regressions and horizontal overflow.
 
@@ -47,7 +47,7 @@ context: []
 **Execution:**
 - [x] `src/components/Nav.astro` -- add a semantic compact-menu control and robust open/close behavior while retaining desktop dropdown behavior.
 - [x] `src/styles/global.css` -- introduce header/menu, narrow container/section/button/card/footer rules, and safe text wrapping exclusively inside sub-1024px media queries.
-- [x] `src/pages/partnerships/llm-provider-value-proposal.astro` -- adapt the value cards and map into a meaningful stacked mobile flow with touch-friendly controls and no fixed-width overflow.
+- [x] `src/pages/partnerships/llm-vendor-value-proposal.astro` -- adapt the value cards and map into a meaningful stacked mobile flow with touch-friendly controls and no fixed-width overflow.
 - [x] All generated routes -- inspect representative 320px, 375px, 768px, 1024px, and 1440px viewports for horizontal overflow, overlap, clipped controls, and unreadable text.
 
 **Acceptance Criteria:**
@@ -92,10 +92,10 @@ Prefer a header-contained disclosure panel over an off-canvas drawer: the naviga
 **Partnership Value Map**
 
 - Adds five directional, selectable relationships for narrow screens.
-	[`llm-provider-value-proposal.astro:191`](../../src/pages/partnerships/llm-provider-value-proposal.astro#L191)
+	[`llm-vendor-value-proposal.astro:191`](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L191)
 
 - Reveals mobile relationships only inside the existing map breakpoint.
-	[`llm-provider-value-proposal.astro:340`](../../src/pages/partnerships/llm-provider-value-proposal.astro#L340)
+	[`llm-vendor-value-proposal.astro:340`](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L340)
 
 - Reuses the existing flow detail model with synchronized accessible state.
-	[`llm-provider-value-proposal.astro:496`](../../src/pages/partnerships/llm-provider-value-proposal.astro#L496)
+	[`llm-vendor-value-proposal.astro:496`](../../src/pages/partnerships/llm-vendor-value-proposal.astro#L496)
