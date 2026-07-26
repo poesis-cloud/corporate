@@ -92,8 +92,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </button>
         <button class="card value-card" data-flow="D" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">D · Model specialisation</span>
-          <h3>A legitimate training substrate</h3>
-          <p>Governed Definitions and Ascription history provide a provenance-rich corpus, used under explicit rights controls, and a basis for an evaluation oracle unavailable from ungoverned scraping alone.</p>
+          <h3>A governed specialisation substrate</h3>
+          <p>Governed Definitions and Ascription history provide a typed, provenance-rich corpus for domain adaptation, subject to explicit rights controls. GSM schemas, relationships, and SIE evaluations can also provide structured supervision and evaluation signals unavailable from ungoverned text alone.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="E" type="button" aria-pressed="false" aria-controls="vf-detail">
@@ -135,10 +135,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 <div class="vf-gtitle">Sovereign LLM partner</div>
                 <div class="vf-gsub">vendor-neutral by design — any sovereign or frontier model: self-hosted, sovereign-hosted, or open-weight</div>
 
-                <div class="vf-card" id="n-train" data-component="Training &amp; specialisation">
+                <div class="vf-card" id="n-train" data-component="Model adaptation &amp; specialisation">
                   <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
-                    <span class="vf-ctitle">Training &amp; specialisation</span>
-                    <span class="vf-csub">learns from governed Definitions that model causal structure and carry traceable provenance — under explicit rights controls</span>
+                    <span class="vf-ctitle">Model adaptation &amp; specialisation</span>
+                    <span class="vf-csub">adapts through governed context, structured supervision, and evaluation signals — under explicit rights controls</span>
                   </button>
                 </div>
 
@@ -466,9 +466,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       label: 'LLM-backed sourcing of GSM',
       title: 'A — Context sourcing: LLMs feed GSM (LLM → Poesis)',
       maturity: '<strong>Current maturity:</strong> designed contracts. <strong>Partnership work:</strong> implement and test the service lifecycle, KnowledgeSources, client reduction, and registration path.',
-      sub: 'Blackboard sourcers wrap partner models as KnowledgeSources over repositories, wikis, ticketing tools, and authoritative online resources. Confidence-scored, provenance-stamped contributions form a validated sealed stream; a client reducer then prepares governed Ascription proposals for human disposition and Definition Manager registration.',
-      partner: ['A concrete applied-AI showcase: turning regulation and code into governed, queryable structure', 'R&D feedback loop on extraction, grounding, function calling'],
-      poesis: ['Sourcing cost down and coverage up while human disposition remains explicit', 'Invariant preserved: LLMs never write governed truth directly'],
+      sub: 'Blackboard sourcers wrap partner models as KnowledgeSources over repositories, wikis, ticketing systems, and authoritative resources. Each contribution is schema-validated, confidence-scored below 1.0, and stamped with evidence and provenance before entering a byte-stable sealed stream. A client-side reducer combines that stream into candidate Ascription proposals; accountable humans, not the model or Blackboard, decide whether they enter the Definition Manager lifecycle.',
+      partner: ['Applied-AI evidence for extracting typed Definitions and relationships from heterogeneous sources', 'Measured feedback on extraction accuracy, evidence use, tool calling, and calibration'],
+      poesis: ['Lower sourcing cost and broader coverage without granting models authority over governed truth', 'Traceable contributions remain attributable to their KnowledgeSources and supporting evidence'],
       comps: 'Designed across <b>itip blackboard sourcers</b> → <b>sie-definition-blackboard-manager</b> → client reduction and human disposition → <b>sie-definition-manager</b>.',
     },
     {
@@ -476,9 +476,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       label: 'governed causal context + tools',
       title: 'B — Governed inference grounding (Poesis → LLM)',
       maturity: '<strong>Current maturity:</strong> implemented foundations. <strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.',
-      sub: 'SIE serves in-effect Definitions, Norms, provenance and modeled causal dependencies into the model — plus a tool surface to retrieve Definitions, inspect Norms, trace Interactions, and validate proposals.',
-      partner: ['Designed capability: structure-aware reasoning rather than correlation alone', 'Evaluation target: measurably fewer unsupported claims than document-retrieval baselines'],
-      poesis: ['Answers grounded in the organisation’s governed, in-effect Definitions', 'Model-neutral context standard — any conforming model can plug in'],
+      sub: 'At inference time, SIE supplies selected in-effect Definitions, Norms, provenance, and explicitly modeled dependencies through retrieval and tools. The model can inspect types, trace Interactions, query applicable constraints, and submit outputs for schema or rule evaluation. This changes the evidence and operations available to the model; it does not change model weights or, by itself, prove causal reasoning.',
+      partner: ['Runtime specialisation through governed context and tools without retraining the model', 'Evaluation target: fewer unsupported claims and more accurate dependency traces than document-retrieval baselines'],
+      poesis: ['Responses grounded in the organisation’s current, governed Definitions rather than an undifferentiated document corpus', 'A model-neutral context and tool contract that can be tested across conforming models'],
       comps: 'Designed through <b>sie-definition-manager</b> context and tool surfaces consumed by partner inference integrations.',
     },
     {
@@ -486,19 +486,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       label: 'proposals → human disposition',
       title: 'C — Governed inference deployment (LLM → Poesis)',
       maturity: '<strong>Current maturity:</strong> partial foundation. <strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.',
-      sub: 'Every model output is a proposal. ITIP serves the PROPOSE/DISPOSE gate to humans; the SIE runtime executes Mechanisms and schema checks while governance services evaluate Norms and provenance; the target composition records every disposition for audit.',
-      partner: ['Deployability: supports the controls required for agentic action in regulated estates', 'A testable assurance case for regulated European buyers'],
-      poesis: ['AI that acts against the organisation\u2019s governed Definitions — audited and accountable', 'Every disposition enriches the governed record'],
+      sub: 'Every model output entering a governed action path remains a proposal. ITIP presents its evidence, provenance, and evaluated constraints to an accountable human for disposition; SIE executes only approved Mechanisms and performs deterministic schema and rule checks. These checks establish conformance to modeled constraints, not the truth of an inference. The target composition records proposals, evaluations, decisions, and resulting effects for audit.',
+      partner: ['A deployable control pattern for supervised model action in regulated environments', 'An assurance case grounded in traceable proposals, deterministic checks, human decisions, and execution evidence'],
+      poesis: ['AI-assisted action constrained by the organisation’s governed Definitions and explicit human authority', 'Disposition and outcome records can support later evaluation, but become learning labels only under defined tasks, measures, and rights controls'],
       comps: 'Designed across the <b>itip web frontend + backend</b> (human gate) + <b>sie-operator</b> (Mechanism execution and schema validation) + governance evaluation and audit services.',
     },
     {
       id: 'D', hex: '#a78bfa', from: 'n-sie', to: 'n-train', lane: 0,
       label: 'evaluation oracle + specialisation corpus',
-      title: 'D — Model training & specialisation substrate (Poesis → LLM)',
-      maturity: '<strong>Current maturity:</strong> research hypothesis. <strong>Partnership work:</strong> agree corpus permissions and oracle criteria, run specialisation experiments, and measure uplift.',
-      sub: 'Governed Definitions can form an evaluation reference, while Ascription history records how accepted definitions change over time. Structural causality comes from Mechanisms and Interactions; timestamps provide temporal history, not causal proof.',
-      partner: ['A differentiated specialisation corpus: structurally causal, governed, provenance-rich, and subject to explicit rights controls', 'Benchmarks against strong baselines: evidence over assertion'],
-      poesis: ['Flow D tests whether specialised sovereign models improve inference and sourcing quality', 'Tenant ownership, licensing, and consent govern corpus access'],
+      title: 'D — Model adaptation & specialisation substrate (Poesis → LLM)',
+      maturity: '<strong>Current maturity:</strong> research hypothesis. <strong>Partnership work:</strong> define adaptation tasks, corpus permissions, evaluation criteria, and baselines; then run controlled experiments and measure uplift.',
+      sub: 'Governed Definitions and Ascription history can supply typed domain examples for continued pre-training, supervised fine-tuning, preference tuning, or distillation. Mechanisms and Interactions encode explicit modeled causal relations; lifecycle timestamps record temporal history but are not causal proof. GSM schemas and SIE rules provide deterministic evaluation signals only where correctness or conformance is derivable from an explicit contract. Human approvals and rejections record governance decisions, not automatically model-quality labels.',
+      partner: ['A differentiated adaptation corpus containing typed identities, modeled relationships, lifecycle state, and provenance under explicit rights controls', 'A reproducible evaluation surface for schema conformance, constraint satisfaction, dependency tracing, and task-specific expected outputs'],
+      poesis: ['Controlled evidence of whether weight adaptation improves sourcing, grounded inference, or other defined tasks over runtime grounding alone', 'Tenant ownership, licensing, consent, privacy, retention, and purpose limitation govern every corpus and feedback use'],
       comps: 'Research path through <b>sie-operator</b> evaluation Mechanisms + <b>sie-definition-manager</b> governed history under explicit contractual, licensing, and consent boundaries.',
     },
     {
@@ -506,9 +506,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       label: 'agent bench builds the stack',
       title: 'E — Agentic delivery: LLM agents build Poesis itself (LLM → Poesis)',
       maturity: '<strong>Current maturity:</strong> evolving operational proof. <strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.',
-      sub: 'Partner models power the SAFe Agentic Framework\u2019s orchestrators and specialist bench. Agent teams deliver SIE and ITIP through deterministic harness gates with human approval — the same PROPOSE/DISPOSE invariant applied to software delivery.',
-      partner: ['A living reference of governed multi-agent engineering on partner models', 'Dogfooding evidence for the enterprise agentic story'],
-      poesis: ['Velocity: the stack is built by the very pattern it sells', 'Delivery traces are themselves governed, auditable artifacts'],
+      sub: 'Partner models power the SAFe Agentic Framework’s orchestrators and specialist agents. Agents propose code and design artifacts; deterministic harness checks verify required artifacts and gate conditions; accountable humans approve consequential transitions. Execution traces, artifacts, gate results, and approvals provide the evidence needed to compare models and workflows without treating agent output as self-authorizing.',
+      partner: ['A living reference for supervised multi-agent engineering using partner models', 'Comparable evidence on task success, rework, gate failures, cost, latency, and human intervention'],
+      poesis: ['Faster delivery where measured outcomes demonstrate an advantage over the baseline workflow', 'Auditable delivery evidence governed by deterministic gates and human approval'],
       comps: 'Realized by the <b>SAFe Agentic Framework</b> (orchestration layers, actor bench, deterministic harness) targeting the SIE/ITIP repos.',
     },
   ];
