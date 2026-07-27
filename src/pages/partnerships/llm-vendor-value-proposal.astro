@@ -197,9 +197,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                   </button>
                   <button class="vf-fold-btn" type="button" data-fold="f-itip" aria-controls="f-itip" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-itip" hidden>
-                    <div class="vf-comp"><b>itip web frontend + backend</b> — planned human gate for intent, approval, simulation, appraisal, and audit</div>
-                    <div class="vf-comp"><b>itip frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
-                    <div class="vf-comp"><b>itip blackboard sourcers</b> — designed to wrap LLMs / agents as KnowledgeSources over code repositories; other source classes require adapters</div>
+                    <div class="vf-comp"><b>itip-web-application</b> — planned human gate for intent, approval, simulation, appraisal, and audit</div>
+                    <div class="vf-comp"><b>itip-frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
+                    <div class="vf-comp"><b>itip-definition-blackboard-*-sourcer</b> — designed to wrap LLMs / agents as KnowledgeSources over code repositories; other source classes require adapters</div>
                   </div>
                 </div>
 
@@ -210,8 +210,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                   </button>
                   <button class="vf-fold-btn" type="button" data-fold="f-saf" aria-controls="f-saf" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-saf" hidden>
-                    <div class="vf-comp"><b>orchestrators</b> — portfolio / program / team</div>
-                    <div class="vf-comp"><b>specialist bench</b> — architecture, dev, QA, security, docs agents</div>
+                    <div class="vf-comp"><b>orchestrator-agent</b> — portfolio / program / team</div>
+                    <div class="vf-comp"><b>specialist-agent</b> — architecture, dev, QA, security, docs agents</div>
                     <div class="vf-comp"><b>harness</b> — specified deterministic FSM, artifact, authorization, and gate checks; runtime implementation remains</div>
                   </div>
                 </div>
@@ -540,7 +540,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       partner: ['Applied-AI evidence for extracting typed Definitions and relationships from repository artifacts', 'Measured feedback on extraction accuracy, evidence use, tool calling, and confidence calibration'],
       poesis: ['Broader sourcing coverage without granting models authority over governed truth', 'A model-agnostic sourcing substrate that widens with each connected KnowledgeSource rather than with any single model generation'],
       shared: ['Repository knowledge surfaced as typed, attributable Definitions instead of remaining tacit', 'Every accepted contribution schema-validated, provenance-bearing, and replayable for audit'],
-      comps: 'Implemented in <b>sie-definition-blackboard-manager</b>; designed through <b>itip blackboard sourcers</b> → client reduction and human disposition → <b>sie-definition-manager</b>.',
+      comps: 'Implemented in <b>sie-definition-blackboard-manager</b>; designed through <b>itip-definition-blackboard-*-sourcer</b> → client reduction and human disposition → <b>sie-definition-manager</b>.',
     },
     {
       id: 'B', hex: '#34d399', from: 'n-sie', to: 'n-infer', lane: -32,
@@ -576,7 +576,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       partner: ['A deployable control pattern for supervised model action in regulated environments', 'An assurance case grounded in traceable proposals, deterministic checks, human decisions, and execution evidence'],
       poesis: ['A governed disposition gate as the single controlled entry point for model-proposed action', 'Disposition and outcome records can support later evaluation, but become learning labels only under defined tasks, measures, and rights controls'],
       shared: ['AI-assisted action constrained by the customer organisation’s governed Definitions and explicit human authority', 'An accountable human decision, with the evidence it rested on, recorded for every model-proposed change'],
-      comps: 'Execution kernel implemented in <b>sie-operator</b> with lifecycle APIs in <b>sie-definition-manager</b>; the <b>itip web frontend + backend</b> human gate, composed audit, and automatic Norm preflight remain to be built.',
+      comps: 'Execution kernel implemented in <b>sie-operator</b> with lifecycle APIs in <b>sie-definition-manager</b>; the <b>itip-web-application</b> human gate, composed audit, and automatic Norm preflight remain to be built.',
     },
     {
       id: 'D', hex: '#a78bfa', from: 'n-sie', to: 'n-train', lane: 0,
