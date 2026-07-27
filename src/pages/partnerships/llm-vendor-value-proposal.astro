@@ -462,9 +462,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   #vf .vf-adherence + .vf-adherence { border-top: 1px solid var(--line-strong); margin-top: 1rem; padding-top: 1rem; }
   #vf .vf-adherence h4 { font-size: .92rem; }
   #vf .vf-dcols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  #vf .vf-dcols h5 { font-size: .78rem; margin: 0 0 .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  #vf .vf-dcols ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; color: var(--ink-soft); }
-  #vf .vf-dcols li { margin-bottom: .3rem; }
+  #vf .vf-dcols h5, #vf .vf-shared h5 { font-size: .78rem; margin: 0 0 .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  #vf .vf-dcols ul, #vf .vf-shared ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; color: var(--ink-soft); }
+  #vf .vf-dcols li, #vf .vf-shared li { margin-bottom: .3rem; }
+  #vf .vf-shared {
+    margin-top: 1rem; padding: .7rem .85rem; border: 1px dashed var(--line-strong);
+    border-radius: 10px; background: var(--bg-ink);
+  }
+  #vf .vf-shared li:last-child { margin-bottom: 0; }
   #vf .vf-comps { margin-top: .9rem; font-size: .78rem; color: var(--muted); }
   #vf .vf-comps b { font-family: var(--font-mono); font-size: .74rem; color: var(--ink); }
 
@@ -507,7 +512,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> the generic Blackboard REST substrate, schema validation, seal lifecycle, immutability, and deterministic stream ordering are implemented. <strong>Partnership work:</strong> implement the repository KnowledgeSources, LLM client, reduction, provenance transfer, and registration path.',
       sub: 'The repository sourcer is designed to wrap partner models as KnowledgeSources over code repositories. Additional source classes require explicit adapters. ITIP contribution schemas require confidence below 1.0, evidence, and provenance; the generic Blackboard validates whichever client-declared slot schema applies, freezes accepted contributions on seal, and returns them in deterministic order. A client reducer then prepares candidate Ascription proposals for human disposition.',
       partner: ['Applied-AI evidence for extracting typed Definitions and relationships from repository artifacts', 'Measured feedback on extraction accuracy, evidence use, tool calling, and confidence calibration'],
-      poesis: ['Broader sourcing without granting models authority over governed truth', 'Schema-validated, attributable contributions on an immutable and replayable substrate'],
+      poesis: ['Broader sourcing coverage without granting models authority over governed truth', 'A model-agnostic sourcing substrate that widens with each connected KnowledgeSource rather than with any single model generation'],
+      shared: ['Repository knowledge surfaced as typed, attributable Definitions instead of remaining tacit', 'Every accepted contribution schema-validated, provenance-bearing, and replayable for audit'],
       comps: 'Implemented in <b>sie-definition-blackboard-manager</b>; designed through <b>itip blackboard sourcers</b> → client reduction and human disposition → <b>sie-definition-manager</b>.',
     },
     {
@@ -517,7 +523,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> implemented foundations. <strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.',
       sub: 'Definition Manager and Operator provide the semantic and execution foundations for serving selected in-effect Definitions, Norms, and explicitly modeled dependencies. A model-facing context and tool facade is not yet implemented. Once built, it can let models inspect types, trace Interactions, retrieve applicable constraints, and submit outputs for explicit evaluation. This changes available evidence and operations; it does not change model weights or prove causal reasoning.',
       partner: ['Runtime specialisation through governed context and tools without retraining the model', 'Evaluation target: fewer unsupported claims and more accurate dependency traces than document-retrieval baselines'],
-      poesis: ['Responses grounded in the organisation’s current, governed Definitions rather than an undifferentiated document corpus', 'A model-neutral context and tool contract that can be tested across conforming models'],
+      poesis: ['A model-neutral context and tool contract that can be tested across conforming models', 'Grounding value that accrues to the governed Definition base rather than to any single model generation'],
+      shared: ['Answers grounded in the customer organisation’s current, governed Definitions rather than an undifferentiated document corpus', 'Grounding scope bounded by the customer organisation’s own definition base, keeping context inside its governance perimeter'],
       comps: 'Foundations implemented in <b>sie-definition-manager</b> and <b>sie-operator</b>; model-facing context selection, provenance projection, and tool contracts remain to be built.',
     },
     {
@@ -527,7 +534,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> partial foundation. <strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.',
       sub: 'Every model output entering a governed action path remains a proposal. The target ITIP gate presents evidence, provenance, and evaluations to an accountable human for disposition; that gate is not yet implemented. Operator already executes only in-effect executable Mechanisms (ACTIVE or DEPRECATED) and performs deterministic schema and rule checks. It does not yet perform automatic Norm preflight. These checks establish conformance to explicit contracts, not the truth of an inference.',
       partner: ['A deployable control pattern for supervised model action in regulated environments', 'An assurance case grounded in traceable proposals, deterministic checks, human decisions, and execution evidence'],
-      poesis: ['AI-assisted action constrained by the organisation’s governed Definitions and explicit human authority', 'Disposition and outcome records can support later evaluation, but become learning labels only under defined tasks, measures, and rights controls'],
+      poesis: ['A governed disposition gate as the single controlled entry point for model-proposed action', 'Disposition and outcome records can support later evaluation, but become learning labels only under defined tasks, measures, and rights controls'],
+      shared: ['AI-assisted action constrained by the customer organisation’s governed Definitions and explicit human authority', 'An accountable human decision, with the evidence it rested on, recorded for every model-proposed change'],
       comps: 'Execution kernel implemented in <b>sie-operator</b> with lifecycle APIs in <b>sie-definition-manager</b>; the <b>itip web frontend + backend</b> human gate, composed audit, and automatic Norm preflight remain to be built.',
     },
     {
@@ -537,7 +545,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> research hypothesis. <strong>Partnership work:</strong> define adaptation tasks, corpus permissions, evaluation criteria, and baselines; then run controlled experiments and measure uplift.',
       sub: 'Governed Definitions and Ascription history could supply typed domain examples for continued pre-training, supervised fine-tuning, preference tuning, or distillation, but no corpus export or training integration exists. Mechanisms and Interactions encode modeled causal relations; lifecycle timestamps record temporal history, not causal proof. Human approvals and rejections are governance decisions, not automatically model-quality labels.',
       partner: ['A potential adaptation corpus containing typed identities, modeled relationships, and lifecycle state', 'Controlled experiments comparing weight adaptation with runtime grounding alone'],
-      poesis: ['Controlled evidence of whether weight adaptation improves sourcing, grounded inference, or other defined tasks over runtime grounding alone', 'Tenant ownership, licensing, consent, privacy, retention, and purpose limitation govern every corpus and feedback use'],
+      poesis: ['Controlled evidence of whether weight adaptation improves sourcing, grounded inference, or other defined tasks over runtime grounding alone', 'A defensible position on when governed material should — and should not — leave the runtime boundary'],
+      shared: ['Tenant ownership, licensing, consent, privacy, retention, and purpose limitation govern every corpus and feedback use', 'No governed material contributes to model adaptation without an explicit, revocable decision by the customer organisation'],
       comps: 'Potential source material exists in <b>sie-definition-manager</b>; corpus selection, provenance integration, serialization, rights enforcement, training integration, and outcome measurement remain research work.',
     },
     {
@@ -557,7 +566,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> schema validation, typed Mechanism execution, lifecycle audit, and an ITIP appraisal integration proof are implemented. <strong>Partnership work:</strong> define model evaluation envelopes, datasets, baselines, assurance criteria, and a repeatable service surface.',
       sub: 'A vendor submits versioned model outputs and inference configurations against defined enterprise tasks. GSM schemas and SIE Mechanisms can evaluate only properties made explicit by those contracts, producing reproducible findings and traces. This can reveal capability, failure boundaries, and regressions without changing model weights; it does not turn every governance rule into ground truth or establish inference truth beyond the evaluated contract.',
       partner: ['Workload-specific evidence about model strengths, regressions, and failure boundaries', 'A governed assurance case grounded in reproducible tests rather than general benchmark claims'],
-      poesis: ['Comparable evidence for selecting models and validating upgrades before governed deployment', 'Reusable evaluation assets derived from explicit enterprise schemas, Mechanisms, and expected outcomes'],
+      poesis: ['Reusable evaluation assets derived from explicit enterprise schemas, Mechanisms, and expected outcomes', 'An evaluation surface that stays meaningful as models change, because it is anchored in enterprise contracts rather than vendor benchmarks'],
+      shared: ['Comparable evidence for selecting models and validating upgrades before governed deployment', 'Regressions detected against the customer organisation’s own workloads rather than against general benchmarks'],
       comps: 'Builds on <b>sie-operator</b> typed execution and appraisal Mechanisms + <b>sie-definition-manager</b> schemas and lifecycle history; generic model-evaluation APIs and trace contracts remain to be designed.',
     },
     {
@@ -567,7 +577,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       maturity: '<strong>Current maturity:</strong> a vendor-neutral model catalog, capability taxonomy, workload declarations, and routing output contracts exist. <strong>Partnership work:</strong> implement the resolver runtime, host bindings, model-version governance, and outcome evidence collection.',
       sub: 'Governed workloads declare capability demand; a deterministic resolver is specified to score canonical model profiles and break ties by cost. Runtime qualification should then incorporate measured task success, schema adherence, rework, latency, cost, and human intervention. The current catalog is configuration, not proof of model fitness, and the harness that performs routing is not yet implemented.',
       partner: ['Evidence-based placement on workloads where the partner model demonstrates comparative value', 'Structured feedback about capability gaps, reliability, cost, and intervention demand'],
-      poesis: ['Model-neutral routing aligned to workload needs instead of a single-provider default', 'Controlled model upgrades and substitutions based on declared demand and measured outcomes'],
+      poesis: ['Model-neutral routing aligned to workload needs instead of a single-provider default', 'A qualification record that makes model placement an evidence decision rather than a procurement default'],
+      shared: ['Controlled model upgrades and substitutions based on declared demand and measured outcomes', 'No structural dependence on a single provider for the customer organisation’s governed workloads'],
       comps: 'Catalog and contracts exist in the <b>SAFe Agentic Framework</b>; resolver implementation, host adapter bindings, dispatch telemetry, and qualification policy remain to be built.',
     },
   ];
@@ -636,13 +647,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   function adherenceMarkup(flow) {
+    const shared = flow.shared && flow.shared.length
+      ? `<div class="vf-shared">
+        <h5>Shared value in the customer organisation</h5>
+        <ul>${flow.shared.map((value) => `<li>${value}</li>`).join('')}</ul>
+      </div>`
+      : '';
     return `<article class="vf-adherence">
       <h4 style="color:${flow.hex}">${flow.title}</h4>
       <p class="vf-dsub">${flow.sub}</p>
       <div class="vf-dcols">
         <div><h5>Value for the LLM vendor partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
-        <div><h5>Value for Poesis / the customer</h5><ul>${flow.poesis.map((value) => `<li>${value}</li>`).join('')}</ul></div>
+        <div><h5>Value for Poesis</h5><ul>${flow.poesis.map((value) => `<li>${value}</li>`).join('')}</ul></div>
       </div>
+      ${shared}
       <div class="vf-comps">Adherence locus — ${flow.comps}</div>
       <p class="vf-maturity">${flow.maturity}</p>
     </article>`;
