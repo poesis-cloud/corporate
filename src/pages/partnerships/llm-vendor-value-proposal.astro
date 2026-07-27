@@ -1,5 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const FLOW_META = {
+  A: { hex: '#38bdf8', name: 'Context sourcing' },
+  B: { hex: '#34d399', name: 'Governed inference grounding' },
+  C: { hex: '#34d399', name: 'Governed inference deployment' },
+  D: { hex: '#a78bfa', name: 'Model specialisation' },
+  E: { hex: '#f59e0b', name: 'Model evaluation and assurance' },
+  F: { hex: '#fb7185', name: 'Model qualification and routing' },
+  G: { hex: '#94a3b8', name: 'Agentic delivery' },
+};
+
+function adherencePills(ids: string[]) {
+  return ids
+    .map((id) => {
+      const meta = FLOW_META[id as keyof typeof FLOW_META];
+      return `<button class="vf-pill" type="button" data-flow="${id}" style="--pill:${meta.hex}" aria-label="View adherence ${id} — ${meta.name}" title="${id} — ${meta.name}">${id}</button>`;
+    })
+    .join('');
+}
 ---
 <BaseLayout
   title="LLM Vendor Partnership — Value Proposal"
@@ -31,35 +50,35 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <span class="tag">Capability ceiling · Structured context</span>
           <h3>Better intelligence without bigger models.</h3>
           <p>A model that trains and reasons against explicit, causal, governed, and snapshot Definitions of the world works against explicit structure rather than relying only on correlation. That structure provides a substrate for impact analysis, counterfactual testing, and planning against modeled dependencies and much more...</p>
-          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> B · Governed inference grounding + D · Model specialisation + E · Model evaluation and assurance</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> <span class="vf-pill-row" set:html={adherencePills(['B', 'D', 'E'])} /></p>
           <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
           <span class="tag">Deployment ceiling · Enterprise platform</span>
           <h3>From language model to enterprise AI platform.</h3>
           <p>Companies buy solutions, not models. Partner models provide the intelligence; Poesis provides structured organizational context, human loop, deterministic evaluation of inference, grounded enterprise agentic development workflows, and audit evidence for accountability. Together they form a deployable enterprise agentic platform — able to act, not only answer.</p>
-          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> B · Governed inference grounding + C · Governed inference deployment + F · Model qualification and routing</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> <span class="vf-pill-row" set:html={adherencePills(['B', 'C', 'F'])} /></p>
           <p class="thesis-tagline">Transform a model into an enterprise AI platform.</p>
         </div>
         <div class="card card--feature">
           <span class="tag">Deployment ceiling · Market access</span>
           <h3>A credible path into regulated industries.</h3>
           <p>Enterprises don't stall because AI isn't powerful enough — they stall because they can't trust it to act. Explainability, governance, auditability, and policy enforcement are entry conditions, and Poesis is designed to provide their shared context and control substrate.</p>
-          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> C · Governed inference deployment + E · Model evaluation and assurance</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> <span class="vf-pill-row" set:html={adherencePills(['C', 'E'])} /></p>
           <p class="thesis-tagline">Governance is the entry ticket to regulated industries.</p>
         </div>
         <div class="card card--feature">
           <span class="tag">Deployment ceiling · Platform advantage</span>
           <h3>A defensible advantage beyond model performance.</h3>
           <p>Grounded inference, governed execution, and model specialisation create a combined platform that is harder to commoditize than standalone inference. It moves the commercial relationship into AI governance, digital operating models, enterprise transformation, and regulated automation — increasing deal scope and strategic relevance.</p>
-          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> B · Governed inference grounding + C · Governed inference deployment + D · Model specialisation + E · Model evaluation and assurance + F · Model qualification and routing</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> <span class="vf-pill-row" set:html={adherencePills(['B', 'C', 'D', 'E', 'F'])} /></p>
           <p class="thesis-tagline">Build a platform advantage, not simply a model advantage.</p>
         </div>
         <div class="card card--feature">
           <span class="tag">Deployment ceiling · Sovereignty</span>
           <h3>The foundation of a sovereign AI stack.</h3>
           <p>Not "a sovereign LLM" — a sovereign AI <em>stack</em>. You provide the sovereign intelligence. Poesis provides the governed context. Together they form the trusted infrastructure enterprises need to deploy AI at scale. <strong>As a neutral, model-independent substrate, GSM/SIE could be advanced as a candidate foundation for future European standardization of governed enterprise AI.</strong></p>
-          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> A–G · The complete governed AI value cycle</p>
+          <p class="thesis-mechanisms"><strong>Supported by adherences</strong> <span class="vf-pill-row" set:html={adherencePills(['A', 'B', 'C', 'D', 'E', 'F', 'G'])} /></p>
           <p class="thesis-tagline">Build the sovereign AI stack, not only a sovereign model.</p>
         </div>
       </div>
@@ -333,6 +352,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     color: var(--ink-soft); font-size: .8rem;
   }
   .thesis-mechanisms strong { color: var(--ink); }
+  .vf-pill-row { display: inline-flex; flex-wrap: wrap; gap: .3rem; margin-left: .35rem; vertical-align: middle; }
+  .vf-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 1.5rem; height: 1.5rem; padding: 0 .1rem; border-radius: 999px;
+    border: 1px solid var(--pill, var(--accent)); color: var(--pill, var(--accent));
+    background: color-mix(in srgb, var(--pill, var(--accent)) 14%, transparent);
+    font-family: var(--font-mono); font-size: .74rem; font-weight: 700; line-height: 1;
+    cursor: pointer; transition: background .16s ease, transform .12s ease;
+  }
+  .vf-pill:hover { background: color-mix(in srgb, var(--pill, var(--accent)) 30%, transparent); transform: translateY(-1px); }
+  .vf-pill:focus-visible { outline: 2px solid var(--pill, var(--accent)); outline-offset: 2px; }
 
   .reference-disclosure {
     max-width: 920px; margin-top: 1.2rem; padding: .8rem 1rem;
@@ -817,7 +847,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     card.querySelector('.vf-card-select')?.addEventListener('click', () => selectComponent(card));
   });
 
-  document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow]').forEach((control) => {
+  document.querySelectorAll('.value-card[data-flow], .vf-mobile-flow[data-flow], .vf-pill[data-flow]').forEach((control) => {
     control.addEventListener('click', () => selectFlow(control.dataset.flow));
   });
 
