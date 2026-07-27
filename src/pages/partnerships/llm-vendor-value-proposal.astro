@@ -144,21 +144,39 @@ function adherencePills(ids: string[]) {
 
       <div id="vf">
         <div class="vf-notices" role="region" aria-label="How to read the value map">
-          <p class="vf-notice vf-notice-info"><strong>Explore the map.</strong> Click a flow to see its mutual value. Click an LLM or Poesis component to see every adherence it has with the other components. Expand a Poesis box for internal detail.</p>
+          <p class="vf-notice vf-notice-info"><strong>Explore the map.</strong> Click a flow to see its mutual value. Click an organisation, LLM, or Poesis component to see every adherence it holds. Expand a Poesis box for internal detail. Solid wires are partnership adherences; dotted orange wires are the organisation’s own governance loop.</p>
           <p class="vf-notice vf-notice-invariant"><strong>Core invariant:</strong> models <strong>PROPOSE</strong> (inferred, confidence &lt; 1.0) · accountable humans dispose through ITIP · SIE evaluates constraints and executes governed Mechanisms — <strong>PROPOSE / DISPOSE</strong>.</p>
-        </div>
-
-        <div class="vf-human">
-          <strong>By design, human supervision, regulation, and governance remain in the loops.</strong>
-          <ul>
-            <li><b>Owns Intents</b> — creation of Definitions / Ascriptions.</li>
-            <li><b>Owns Approvals</b> — validation of AI-proposed Definitions / Ascriptions.</li>
-            <li><b>Owns Accountability</b> — evaluation and simulation of Definition / Ascription compliance and impacts, and audit of AI and human actions over Definitions / Ascriptions.</li>
-          </ul>
         </div>
 
         <div class="vf-diagram" id="vf-diagram">
           <svg id="vf-wires" aria-hidden="true" focusable="false"></svg>
+
+          <div class="vf-human">
+            <div class="vf-gtitle">Organisation operations</div>
+            <div class="vf-gsub">the customer organisation retains supervision, regulation, and governance over its own governed truth — that authority is never delegated to a model, and Poesis is the instrument through which it is exercised</div>
+            <div class="vf-human-ops">
+              <div class="vf-card vf-human-card" id="n-org-sup" data-component="Supervision" data-op="Supervision">
+                <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                  <span class="vf-ctitle">Supervision</span>
+                  <span class="vf-csub">disposes of AI-proposed Definitions / Ascriptions — reviews evidence, provenance, and evaluations, then approves or rejects before anything enters effect</span>
+                </button>
+              </div>
+              <div class="vf-card vf-human-card" id="n-org-reg" data-component="Regulation" data-op="Regulation">
+                <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                  <span class="vf-ctitle">Regulation</span>
+                  <span class="vf-csub">sets and adjusts the constraints that bound the system — Directives, Norms, rights, consent, retention, and purpose limits on what models may receive and do</span>
+                </button>
+              </div>
+              <div class="vf-card vf-human-card" id="n-org-gov" data-component="Governance" data-op="Governance">
+                <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
+                  <span class="vf-ctitle">Governance</span>
+                  <span class="vf-csub">owns intent and accountability — creation of Definitions / Ascriptions, evaluation and simulation of their compliance and impacts, and audit of AI and human action over them</span>
+                </button>
+              </div>
+            </div>
+            <p class="vf-human-note"><strong>No direct adherence exists between the organisation and the models.</strong> The organisation reaches them only through the governed perimeter — which is what makes supervision, regulation, and governance enforceable rather than declarative.</p>
+          </div>
+
           <div class="vf-cols">
 
             <div class="vf-col">
@@ -273,6 +291,21 @@ function adherencePills(ids: string[]) {
               <span class="vf-mobile-flow-code">G · Agentic delivery</span>
               <strong>Sovereign LLM partner → Poesis stack</strong>
               <span>Agent bench builds the stack</span>
+            </button>
+            <button class="vf-mobile-flow vf-mobile-flow-loop" type="button" data-flow="reg" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">Governance loop · Regulation</span>
+              <strong>Organisation → Poesis stack</strong>
+              <span>Constraints set on the governed system</span>
+            </button>
+            <button class="vf-mobile-flow vf-mobile-flow-loop" type="button" data-flow="dis" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">Governance loop · Disposition</span>
+              <strong>Organisation → Poesis stack</strong>
+              <span>AI proposals approved or rejected</span>
+            </button>
+            <button class="vf-mobile-flow vf-mobile-flow-loop" type="button" data-flow="acc" aria-pressed="false" aria-controls="vf-detail">
+              <span class="vf-mobile-flow-code">Governance loop · Intent and accountability</span>
+              <strong>Organisation ↔ Poesis stack</strong>
+              <span>Intent declared, evidence returned</span>
             </button>
           </div>
         </div>
@@ -429,11 +462,17 @@ function adherencePills(ids: string[]) {
   #vf .vf-notice-invariant { background: rgba(251, 191, 36, .10); border: 1px solid rgba(251, 191, 36, .45); }
   #vf .vf-human {
     border: 1px solid rgba(251, 146, 60, .5); background: rgba(251, 146, 60, .08); border-radius: 12px;
-    padding: .75rem .9rem; margin: 0 0 1.2rem;
+    padding: .75rem .9rem; margin: 0 0 2.4rem; position: relative; z-index: 1;
   }
-  #vf .vf-human strong { color: #fb923c; }
-  #vf .vf-human ul { margin: .45rem 0 0; padding-left: 1.2rem; font-size: .84rem; color: var(--ink-soft); }
-  #vf .vf-human li { margin-top: .2rem; }
+  #vf .vf-human .vf-gtitle { color: #fb923c; }
+  #vf .vf-human-ops { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+  #vf .vf-human-card { margin-top: 0; background: rgba(251, 146, 60, .06); border-color: rgba(251, 146, 60, .35); }
+  #vf .vf-human-card:hover, #vf .vf-human-card:has(.vf-card-select:focus-visible) { border-color: rgba(251, 146, 60, .7); box-shadow: none; }
+  #vf .vf-human-card.vf-selected { border-color: #fb923c; box-shadow: 0 0 0 2px rgba(251, 146, 60, .2); }
+  #vf .vf-human-card .vf-ctitle { color: #fb923c; }
+  #vf .vf-human-card .vf-card-select:focus-visible { outline-color: #fb923c; }
+  #vf .vf-human-note { margin: .65rem 0 0; font-size: .78rem; color: var(--ink-soft); }
+  #vf .vf-human-note strong { color: #fb923c; }
 
   #vf .vf-diagram { position: relative; }
   #vf #vf-wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
@@ -477,6 +516,7 @@ function adherencePills(ids: string[]) {
   #vf .vf-comp b { font-family: var(--font-mono); font-size: .72rem; color: var(--ink); }
 
   #vf .vf-flow-hit { pointer-events: stroke; cursor: pointer; }
+  #vf .vf-flow-loop { stroke-linejoin: round; stroke-linecap: round; }
 
   #vf .vf-detail {
     margin-top: 1.4rem; border: 1px solid var(--line-strong); border-radius: 14px;
@@ -511,6 +551,7 @@ function adherencePills(ids: string[]) {
   }
   #vf .vf-actor-poesis { color: var(--accent-ink); border-color: rgba(45, 212, 191, .35); background: rgba(45, 212, 191, .1); }
   #vf .vf-actor-llm { color: #7dd3fc; border-color: rgba(56, 189, 248, .35); background: rgba(56, 189, 248, .1); }
+  #vf .vf-actor-human { color: #fdba74; border-color: rgba(251, 146, 60, .45); background: rgba(251, 146, 60, .14); }
   #vf .vf-schema-legend { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 .5rem; font-size: .68rem; color: var(--muted); }
   #vf .vf-arrow { align-self: center; color: var(--muted); font-size: .82rem; }
   #vf .vf-schema-feedback {
@@ -540,6 +581,7 @@ function adherencePills(ids: string[]) {
     .maturity-exchange { grid-template-columns: 1fr; }
     .maturity-exchange-title { grid-column: auto; }
     #vf .vf-notices { grid-template-columns: 1fr; }
+    #vf .vf-human-ops { grid-template-columns: 1fr; }
     #vf .vf-cols { grid-template-columns: 1fr; }
     #vf .vf-gutter { display: none; }
     #vf #vf-wires { display: none; }
@@ -551,6 +593,7 @@ function adherencePills(ids: string[]) {
       background: var(--bg-soft); color: var(--ink-soft); font: inherit; font-size: .82rem;
       text-align: left; cursor: pointer; overflow-wrap: anywhere;
     }
+    #vf .vf-mobile-flow-loop { border-left-color: #fb923c; }
     #vf .vf-mobile-flow:hover, #vf .vf-mobile-flow[aria-pressed="true"] {
       border-color: var(--accent); background: var(--accent-soft);
     }
@@ -581,13 +624,13 @@ function adherencePills(ids: string[]) {
         },
         {
           label: 'Client reduction + human disposition',
-          actors: [{ n: 'itip-definition-blackboard-*-sourcer' }, { n: 'itip-web-application' }],
+          actors: [{ n: 'itip-definition-blackboard-*-sourcer' }, { n: 'itip-web-application' }, { n: 'Supervision', side: 'human' }],
           note: 'candidate Ascription proposals, accountable decision',
           gate: true,
         },
         {
           label: 'Definitions in effect',
-          actors: [{ n: 'sie-definition-manager' }],
+          actors: [{ n: 'sie-definition-manager' }, { n: 'Governance', side: 'human' }],
           note: 'typed Definitions placed in effect',
         },
       ],
@@ -606,7 +649,7 @@ function adherencePills(ids: string[]) {
       schema: [
         {
           label: 'Governed definition base',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-frameworks' }],
+          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-frameworks' }, { n: 'Regulation', side: 'human' }],
           note: 'in-effect Definitions, Norms, modeled Interactions',
         },
         {
@@ -646,7 +689,7 @@ function adherencePills(ids: string[]) {
         },
         {
           label: 'Human gate',
-          actors: [{ n: 'itip-web-application' }],
+          actors: [{ n: 'itip-web-application' }, { n: 'Supervision', side: 'human' }],
           note: 'evidence, provenance, and evaluations presented for disposition',
           gate: true,
         },
@@ -657,7 +700,7 @@ function adherencePills(ids: string[]) {
         },
         {
           label: 'Composed audit',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-web-application' }],
+          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-web-application' }, { n: 'Governance', side: 'human' }],
           note: 'decision, evidence, and execution recorded',
         },
       ],
@@ -680,7 +723,7 @@ function adherencePills(ids: string[]) {
         },
         {
           label: 'Rights decision',
-          actors: [{ n: 'itip-web-application' }],
+          actors: [{ n: 'itip-web-application' }, { n: 'Regulation', side: 'human' }],
           note: 'ownership, consent, purpose limitation, retention',
           gate: true,
         },
@@ -713,7 +756,11 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> evolving operational proof. <strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.',
       sub: 'Partner models already power the framework’s orchestrators and specialist agents through declarative agent and workflow definitions. The deterministic harness is specified but its runtime is not implemented. Once operational, its artifact, authorization, precondition, and postcondition gates can produce comparable execution evidence without treating agent output as self-authorizing.',
       schema: [
-        { label: 'Agent and workflow definitions', note: 'declarative, in the SAFe Agentic Framework' },
+        {
+          label: 'Agent and workflow definitions',
+          actors: [{ n: 'Governance', side: 'human' }],
+          note: 'declarative, in the SAFe Agentic Framework',
+        },
         {
           label: 'Model-powered agents',
           actors: [{ n: 'Grounded inference', side: 'llm' }, { n: 'orchestrator-agent' }, { n: 'specialist-agent' }],
@@ -725,7 +772,12 @@ function adherencePills(ids: string[]) {
           note: 'artifact, authorization, precondition, postcondition',
           gate: true,
         },
-        { label: 'Human approval', note: 'review and release authority', gate: true },
+        {
+          label: 'Human approval',
+          actors: [{ n: 'Supervision', side: 'human' }],
+          note: 'review and release authority',
+          gate: true,
+        },
         { label: 'Poesis stack artifacts', note: 'code, schemas, design-time models, documentation' },
       ],
       feedback: 'Task success, rework, gate failures, cost, latency, and human intervention are measured per run.',
@@ -762,7 +814,7 @@ function adherencePills(ids: string[]) {
         },
         {
           label: 'Selection or upgrade decision',
-          actors: [{ n: 'itip-web-application' }],
+          actors: [{ n: 'itip-web-application' }, { n: 'Governance', side: 'human' }],
           note: 'evidence gathered before governed deployment',
         },
       ],
@@ -797,7 +849,7 @@ function adherencePills(ids: string[]) {
         { label: 'Measured outcomes', note: 'task success, schema adherence, rework, latency, cost, intervention' },
         {
           label: 'Qualification record',
-          actors: [{ n: 'Model evaluation &amp; qualification', side: 'llm' }, { n: 'harness' }],
+          actors: [{ n: 'Model evaluation &amp; qualification', side: 'llm' }, { n: 'harness' }, { n: 'Regulation', side: 'human' }],
           note: 'placement becomes an evidence decision',
         },
       ],
@@ -806,6 +858,122 @@ function adherencePills(ids: string[]) {
       poesis: ['Model-neutral routing aligned to workload needs instead of a single-provider default', 'A qualification record that makes model placement an evidence decision rather than a procurement default'],
       shared: ['Controlled model upgrades and substitutions based on declared demand and measured outcomes', 'No structural dependence on a single provider for the customer organisation’s governed workloads'],
       comps: 'Catalog and contracts exist in the <b>SAFe Agentic Framework</b>; resolver implementation, host adapter bindings, dispatch telemetry, and qualification policy remain to be built.',
+    },
+    {
+      id: 'reg', loop: true, rail: -9, hex: '#fb923c', from: 'n-org-reg', to: 'n-sie', lane: -66,
+      label: 'constraints set on the governed system',
+      title: 'Governance loop · Regulation — the organisation bounds what the system may do (Organisation → Poesis)',
+      maturity: '<strong>Current maturity:</strong> the governance grammar, Directive and Norm schemas, and the Ascription lifecycle that places constraints in effect are implemented; framework sourcing produces typed vocabulary. <strong>Remaining work:</strong> automatic Norm preflight in the Operator, and appraisal-driven revision of constraints.',
+      sub: 'Directives and Norms are how the organisation states, explicitly and in a single grammar, what it and its models may do. Framework sourcing turns external obligation — GDPR, NIS2, DORA, AI Act, TOGAF, ISO — into the same typed vocabulary as internal policy, so regulatory constraint and internal intent are not two disconnected registers. Nothing in this flow reaches a model directly: constraints bound the LLM adherences from inside the perimeter.',
+      schema: [
+        {
+          label: 'Obligation and policy sources',
+          actors: [{ n: 'itip-frameworks' }],
+          note: 'GDPR, NIS2, DORA, AI Act, TOGAF, ISO, internal policy',
+        },
+        {
+          label: 'Directives and Norms',
+          actors: [{ n: 'Regulation', side: 'human' }, { n: 'sie-definition-manager' }],
+          note: 'typed constraints in one governance grammar',
+        },
+        {
+          label: 'Placed in effect',
+          actors: [{ n: 'Governance', side: 'human' }, { n: 'sie-definition-manager' }],
+          note: 'Ascription lifecycle transition',
+          gate: true,
+        },
+        {
+          label: 'Enforced at execution',
+          actors: [{ n: 'sie-operator' }],
+          note: 'typed inputs and effects checked; automatic Norm preflight remains to be built',
+        },
+        {
+          label: 'Bounds every model adherence',
+          actors: [{ n: 'Grounded inference', side: 'llm' }],
+          note: 'context, rights, and action limits applied from inside the perimeter',
+        },
+      ],
+      feedback: 'Appraisal of outcomes against Norms is what tells the organisation when its own constraints need to change.',
+      organisation: ['Regulatory obligation and internal policy expressed in one enforceable grammar rather than in documents no system reads', 'Constraints that bound model behaviour without depending on any model’s cooperation'],
+      poesis: ['A single constraint grammar that every adherence in this map is evaluated against', 'Governed vocabulary that widens through framework sourcing without changing the runtime'],
+      comps: 'Implemented in <b>sie-definition-manager</b> with vocabulary sourced through <b>itip-frameworks</b>; enforcement in <b>sie-operator</b>, where automatic Norm preflight remains to be built.',
+    },
+    {
+      id: 'dis', loop: true, rail: 0, hex: '#fb923c', from: 'n-org-sup', to: 'n-itip', lane: -6,
+      label: 'AI proposals approved or rejected',
+      title: 'Governance loop · Disposition — nothing AI-proposed enters effect without an accountable decision (Organisation → Poesis)',
+      maturity: '<strong>Current maturity:</strong> the Ascription lifecycle and its transitions are implemented, and the Blackboard produces sealed, replayable candidate contributions. <strong>Remaining work:</strong> the ITIP disposition surface that presents evidence, provenance, and evaluations to an accountable human.',
+      sub: 'This is the DISPOSE half of PROPOSE / DISPOSE, and it is the single controlled entry point through which model work becomes governed truth. A proposal carries confidence below 1.0 together with its evidence and provenance; a named human decides. The decision is recorded with the evidence it rested on, which is what makes supervision auditable rather than merely asserted.',
+      schema: [
+        {
+          label: 'AI proposal',
+          actors: [{ n: 'Grounded inference', side: 'llm' }],
+          note: 'confidence below 1.0, evidence and provenance attached',
+        },
+        {
+          label: 'Evidence assembled',
+          actors: [{ n: 'sie-definition-blackboard-manager' }, { n: 'itip-web-application' }],
+          note: 'sealed contributions, provenance, and evaluations presented',
+        },
+        {
+          label: 'Accountable decision',
+          actors: [{ n: 'Supervision', side: 'human' }],
+          note: 'approve or reject before anything enters effect',
+          gate: true,
+        },
+        {
+          label: 'Ascription transition',
+          actors: [{ n: 'sie-definition-manager' }],
+          note: 'governed truth changes only here',
+        },
+        {
+          label: 'Decision recorded',
+          actors: [{ n: 'itip-web-application' }],
+          note: 'the decision and the evidence it rested on',
+        },
+      ],
+      feedback: 'Rejection rates and rejection reasons are the organisation’s sharpest signal about model fitness.',
+      organisation: ['A single controlled entry point for model-proposed change, rather than model output leaking into systems through many uncontrolled paths', 'Supervision that produces evidence — every decision recorded with what it rested on'],
+      poesis: ['A disposition gate that keeps model authority bounded without slowing the sourcing surface', 'Disposition records that can later support evaluation, under defined tasks, measures, and rights controls'],
+      comps: 'Lifecycle transitions implemented in <b>sie-definition-manager</b>, sealed candidates in <b>sie-definition-blackboard-manager</b>; the <b>itip-web-application</b> disposition surface remains to be built.',
+    },
+    {
+      id: 'acc', loop: true, both: true, rail: 9, hex: '#fb923c', from: 'n-org-gov', to: 'n-itip', lane: 54,
+      label: 'intent declared, evidence returned',
+      title: 'Governance loop · Intent and accountability — the organisation defines itself and answers for the result (Organisation ↔ Poesis)',
+      maturity: '<strong>Current maturity:</strong> Definition and Ascription authoring, lifecycle history, and typed Mechanism execution are implemented, with an ITIP appraisal integration proof. <strong>Remaining work:</strong> the appraisal, simulation, and audit surfaces that return this evidence to the organisation.',
+      sub: 'This is the flow that closes the map. Intent becomes typed Definitions and Ascriptions; those govern operation; operation produces appraisal, simulation, and audit evidence; that evidence returns to the intent that produced it. Without this return path, regulation and disposition would be open-loop — constraint and action with no corrective signal. Systemic viability depends on the return, not on the outbound half.',
+      schema: [
+        {
+          label: 'Intent',
+          actors: [{ n: 'Governance', side: 'human' }],
+          note: 'what the organisation means to be and to do',
+        },
+        {
+          label: 'Definitions and Ascriptions',
+          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-web-application' }],
+          note: 'intent made typed, attributable, and governable',
+        },
+        {
+          label: 'Governed operation',
+          actors: [{ n: 'sie-operator' }],
+          note: 'Mechanisms executed against in-effect constraints',
+        },
+        {
+          label: 'Appraisal, simulation, audit',
+          actors: [{ n: 'sie-operator' }, { n: 'itip-web-application' }],
+          note: 'compliance, impact, and action history made legible',
+        },
+        {
+          label: 'Accountability evidence',
+          actors: [{ n: 'Governance', side: 'human' }],
+          note: 'the organisation answers for outcomes with evidence, not assertion',
+        },
+      ],
+      feedback: 'Evidence returns to intent — this is the corrective path that makes regulation and disposition a loop rather than two one-way declarations.',
+      organisation: ['A definition of itself that is typed, attributable, and current, rather than tacit and dispersed across documents and people', 'Accountability discharged with evidence — appraisal, simulation, and audit of both AI and human action'],
+      poesis: ['The closing return path that makes the governance loop corrective rather than declarative', 'Appraisal and audit assets that stay meaningful as models and workloads change'],
+      comps: 'Authoring, lifecycle history, and appraisal Mechanisms in <b>sie-definition-manager</b> and <b>sie-operator</b>; the <b>itip-web-application</b> appraisal, simulation, and audit surfaces remain to be built.',
     },
   ];
 
@@ -821,6 +989,12 @@ function adherencePills(ids: string[]) {
     return { x: (side === 'right' ? r.right : r.left) - d.left, y: r.top + r.height / 2 - d.top };
   }
 
+  function anchorBottom(el) {
+    const r = el.getBoundingClientRect();
+    const d = diagram.getBoundingClientRect();
+    return { x: r.left + r.width / 2 - d.left, y: r.bottom - d.top };
+  }
+
   function draw() {
     if (!svg || !diagram) return;
     svg.innerHTML = '';
@@ -828,18 +1002,43 @@ function adherencePills(ids: string[]) {
     svg.setAttribute('width', String(diagram.clientWidth));
     svg.setAttribute('height', String(diagram.clientHeight));
 
-    FLOWS.forEach((f) => {
+    const dRect = diagram.getBoundingClientRect();
+    const colsEl = diagram.querySelector('.vf-cols');
+    const gutterEl = diagram.querySelector('.vf-gutter');
+    const railBase = colsEl ? colsEl.getBoundingClientRect().top - dRect.top - 20 : 0;
+    const gutterRect = gutterEl ? gutterEl.getBoundingClientRect() : null;
+    const gutterX = gutterRect ? gutterRect.left + gutterRect.width / 2 - dRect.left : 0;
+
+    const ordered = FLOWS.filter((f) => f.loop).concat(FLOWS.filter((f) => !f.loop));
+
+    ordered.forEach((f) => {
       const fromEl = document.getElementById(f.from);
       const toEl = document.getElementById(f.to);
       if (!fromEl || !toEl) return;
-      const a = anchor(fromEl, fromEl.closest('#g-partner') ? 'right' : 'left');
-      const b = anchor(toEl, toEl.closest('#g-partner') ? 'right' : 'left');
-      const midX = (a.x + b.x) / 2;
       const related = selectedComponent && (f.from === selectedComponent || f.to === selectedComponent);
       const sel = selectedFlow === f.id || related;
+      const dim = (selectedFlow || selectedComponent) && !sel;
 
-      const lane = f.lane ?? 0;
-      const pathData = `M ${a.x} ${a.y} C ${midX} ${a.y + lane}, ${midX} ${b.y + lane}, ${b.x} ${b.y}`;
+      let pathData;
+      let tips;
+      if (f.loop) {
+        const orgFirst = f.from.indexOf('n-org') === 0;
+        const o = anchorBottom(orgFirst ? fromEl : toEl);
+        const s = anchor(orgFirst ? toEl : fromEl, 'left');
+        const railY = railBase + (f.rail || 0);
+        const gx = gutterX + (f.lane || 0);
+        pathData = orgFirst
+          ? `M ${o.x} ${o.y} V ${railY} H ${gx} V ${s.y} H ${s.x}`
+          : `M ${s.x} ${s.y} H ${gx} V ${railY} H ${o.x} V ${o.y}`;
+        tips = f.both ? [o, s] : [orgFirst ? s : o];
+      } else {
+        const a = anchor(fromEl, fromEl.closest('#g-partner') ? 'right' : 'left');
+        const b = anchor(toEl, toEl.closest('#g-partner') ? 'right' : 'left');
+        const midX = (a.x + b.x) / 2;
+        const lane = f.lane ?? 0;
+        pathData = `M ${a.x} ${a.y} C ${midX} ${a.y + lane}, ${midX} ${b.y + lane}, ${b.x} ${b.y}`;
+        tips = [b];
+      }
 
       const hit = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       hit.setAttribute('d', pathData);
@@ -855,20 +1054,29 @@ function adherencePills(ids: string[]) {
       p.setAttribute('d', pathData);
       p.setAttribute('fill', 'none');
       p.setAttribute('stroke', f.hex);
-      p.setAttribute('stroke-width', sel ? '7' : '5');
-      p.setAttribute('opacity', (selectedFlow || selectedComponent) && !sel ? '0.16' : '0.82');
       p.setAttribute('pointer-events', 'none');
-      if (f.dashed) p.setAttribute('stroke-dasharray', '6 5');
+      if (f.loop) {
+        p.setAttribute('class', 'vf-flow-loop');
+        p.setAttribute('stroke-width', sel ? '5' : '3');
+        p.setAttribute('stroke-dasharray', '1 7');
+        p.setAttribute('opacity', dim ? '0.14' : sel ? '0.95' : '0.5');
+      } else {
+        p.setAttribute('stroke-width', sel ? '7' : '5');
+        p.setAttribute('opacity', dim ? '0.16' : '0.82');
+        if (f.dashed) p.setAttribute('stroke-dasharray', '6 5');
+      }
       svg.appendChild(p);
 
-      const tip = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      tip.setAttribute('cx', String(b.x));
-      tip.setAttribute('cy', String(b.y));
-      tip.setAttribute('r', sel ? '6' : '5');
-      tip.setAttribute('fill', f.hex);
-      tip.setAttribute('opacity', (selectedFlow || selectedComponent) && !sel ? '0.16' : '1');
-      tip.setAttribute('pointer-events', 'none');
-      svg.appendChild(tip);
+      tips.forEach((point) => {
+        const tip = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        tip.setAttribute('cx', String(point.x));
+        tip.setAttribute('cy', String(point.y));
+        tip.setAttribute('r', f.loop ? (sel ? '5' : '4') : sel ? '6' : '5');
+        tip.setAttribute('fill', f.hex);
+        tip.setAttribute('opacity', dim ? '0.16' : f.loop && !sel ? '0.6' : '1');
+        tip.setAttribute('pointer-events', 'none');
+        svg.appendChild(tip);
+      });
     });
   }
 
@@ -876,9 +1084,10 @@ function adherencePills(ids: string[]) {
     if (!step.actors || !step.actors.length) return '';
     const chips = step.actors
       .map((actor) => {
-        const llm = actor.side === 'llm';
-        const kind = llm ? 'llm' : 'poesis';
-        const hint = llm ? 'LLM operation' : 'Poesis stack component';
+        const kind = actor.side === 'llm' || actor.side === 'human' ? actor.side : 'poesis';
+        const hint = kind === 'llm'
+          ? 'LLM operation'
+          : kind === 'human' ? 'Organisation operation' : 'Poesis stack component';
         return `<span class="vf-actor vf-actor-${kind}" title="${hint}">${actor.n}</span>`;
       })
       .join('');
@@ -898,7 +1107,7 @@ function adherencePills(ids: string[]) {
       ? `<p class="vf-schema-feedback">&#8617; ${flow.feedback}</p>`
       : '';
     return `<div class="vf-schema" role="img" aria-label="Flow schema: ${flow.schema.map((step) => step.label).join(', then ')}">
-      <p class="vf-schema-legend"><span class="vf-actor vf-actor-llm">LLM operation</span><span class="vf-actor vf-actor-poesis">Poesis stack component</span></p>
+      <p class="vf-schema-legend"><span class="vf-actor vf-actor-llm">LLM operation</span><span class="vf-actor vf-actor-poesis">Poesis stack component</span><span class="vf-actor vf-actor-human">Organisation operation</span></p>
       <div class="vf-schema-row">${steps}</div>
       ${feedback}
     </div>`;
@@ -916,7 +1125,7 @@ function adherencePills(ids: string[]) {
       <p class="vf-dsub">${flow.sub}</p>
       ${schemaMarkup(flow)}
       <div class="vf-dcols">
-        <div><h5>Value for the LLM vendor partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
+        <div><h5>${flow.loop ? 'Value for the customer organisation' : 'Value for the LLM vendor partner'}</h5><ul>${(flow.loop ? flow.organisation : flow.partner).map((value) => `<li>${value}</li>`).join('')}</ul></div>
         <div><h5>Value for Poesis</h5><ul>${flow.poesis.map((value) => `<li>${value}</li>`).join('')}</ul></div>
       </div>
       ${shared}
@@ -977,7 +1186,12 @@ function adherencePills(ids: string[]) {
       candidate.classList.toggle('vf-selected', selected);
       candidate.querySelector('.vf-card-select')?.setAttribute('aria-pressed', String(selected));
     });
-    const flows = FLOWS.filter((flow) => flow.from === card.id || flow.to === card.id);
+    const op = card.dataset.op;
+    const flows = FLOWS.filter((flow) => {
+      if (flow.from === card.id || flow.to === card.id) return true;
+      if (!op || !flow.schema) return false;
+      return flow.schema.some((step) => (step.actors || []).some((actor) => actor.side === 'human' && actor.n === op));
+    });
     showAdherences(`${card.dataset.component} — ${flows.length} connected adherence${flows.length === 1 ? '' : 's'}`, flows);
   }
 
