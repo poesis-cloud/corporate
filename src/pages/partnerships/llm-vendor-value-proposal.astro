@@ -452,7 +452,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     margin-top: 1.4rem; border: 1px solid var(--line-strong); border-radius: 14px;
     background: var(--bg-soft); padding: 1rem 1.1rem;
   }
-  #vf .vf-detail h3 { margin: 0 0 .3rem; font-size: 1.02rem; }
+  #vf .vf-detail h3 { font-size: 1.02rem; }
   #vf .vf-maturity {
     margin: .45rem 0 .65rem; padding: .5rem .65rem; border-left: 3px solid var(--accent);
     background: var(--accent-soft); color: var(--ink-soft); font-size: .8rem;
@@ -460,7 +460,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   #vf .vf-maturity strong { color: var(--ink); }
   #vf .vf-dsub { color: var(--ink-soft); font-size: .87rem; margin-bottom: .85rem; }
   #vf .vf-adherence + .vf-adherence { border-top: 1px solid var(--line-strong); margin-top: 1rem; padding-top: 1rem; }
-  #vf .vf-adherence h4 { margin: 0 0 .3rem; font-size: .92rem; }
+  #vf .vf-adherence h4 { font-size: .92rem; }
   #vf .vf-dcols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   #vf .vf-dcols h5 { font-size: .78rem; margin: 0 0 .35rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
   #vf .vf-dcols ul { margin: 0; padding-left: 1.1rem; font-size: .86rem; color: var(--ink-soft); }
@@ -638,13 +638,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   function adherenceMarkup(flow) {
     return `<article class="vf-adherence">
       <h4 style="color:${flow.hex}">${flow.title}</h4>
-      <p class="vf-maturity">${flow.maturity}</p>
       <p class="vf-dsub">${flow.sub}</p>
       <div class="vf-dcols">
-        <div><h5>Value for the LLM partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
+        <div><h5>Value for the LLM vendor partner</h5><ul>${flow.partner.map((value) => `<li>${value}</li>`).join('')}</ul></div>
         <div><h5>Value for Poesis / the customer</h5><ul>${flow.poesis.map((value) => `<li>${value}</li>`).join('')}</ul></div>
       </div>
       <div class="vf-comps">Adherence locus — ${flow.comps}</div>
+      <p class="vf-maturity">${flow.maturity}</p>
     </article>`;
   }
 
