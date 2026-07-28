@@ -47,7 +47,7 @@ export const solutions: Solution[] = [
     tag: 'Domain Intelligence Platform',
     zone: 'THINK',
     href: '/solutions/itip',
-    tagline: 'The IT Intelligence Platform — for IT organizations to define, govern, regulate, supervise their IT landscape as a single source of truth, and generate automatically any sort of IT artifacts from.',
+    tagline: 'The IT Intelligence Platform — for IT organizations to define, govern, regulate, supervise their IT landscape as a single source of truth, and generate automatically any sort of IT artifacts from, simulate various types of impacts, and evaluate IT compliance to any governance and regulation.',
     description:
       'ITIP is where every IT profile converges — architects, developers, ops, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. The first domain application built on SIE.',
     products: [
@@ -89,7 +89,7 @@ export const solutions: Solution[] = [
           { title: 'Private by design.', body: 'Deterministic tool outputs stay in-memory inside the sourcer process; only confidence-bearing contributions ever leave it, sealed and audited on the blackboard.' },
         ],
         features: [
-          { slug: 'automatic-sourcing-from-code-repos', name: 'Automatic sourcing of GSM Definitions from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.' },
+          { slug: 'automatic-sourcing-from-code-repos', name: 'GSM Definitions automatic sourcing from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/itip-blackboard-sourcer/', label: 'Sourcer documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/itip-definition-blackboard-repository-sourcer', label: 'itip-definition-blackboard-repository-sourcer' }],
@@ -103,7 +103,7 @@ export const solutions: Solution[] = [
     tag: 'Engine',
     zone: 'THINK',
     href: '/solutions/sie',
-    tagline: 'The Systemic Intelligence Engine — reference implementation of GSM, manage definitions and their lifecycle; execute definitions; powers every domain application above it.',
+    tagline: 'The Systemic Intelligence Engine — reference implementation of GSM, Definitions management APIs, retention, operator, and blackboards.',
     description:
       'SIE is the engine that implements and leverages the GSM standard — it stores governed definitions, enforces their lifecycle, and turns them into a governed AI context that every domain application above it operates on.',
     products: [
@@ -175,7 +175,7 @@ export const solutions: Solution[] = [
     slug: 'gsm',
     name: 'GSM',
     fullName: 'Generative System Model',
-    tag: 'Standard',
+    tag: 'Standard Model',
     zone: 'THINK',
     href: '/solutions/gsm',
     tagline: 'The Generative System Model — the vendor-neutral standard for defining systems; grounded in systemics; being to THINK what OpenTelemetry semantic convention is to RUN.',
@@ -231,7 +231,7 @@ export const solutions: Solution[] = [
     slug: 'framework',
     name: 'Agentic Framework',
     fullName: 'SAFe Agentic Framework',
-    tag: 'Framework + Portfolio',
+    tag: 'Agentic Framework',
     zone: 'THINK',
     href: '/solutions/framework',
     tagline: 'The Agentic Framework — for any IT profile to deliver through local agentic orchestrations yielding standard and homogeneous artifacts synchronized on a central shared repo contextualizing other local agentic orchestrations — a safe way — complementing ITIP and integrating with SIE.',
@@ -250,11 +250,11 @@ export const solutions: Solution[] = [
           { title: 'One method, any host.', body: 'The harness is a stable CLI over plain files — the same workflows run in your IDE today and a CI runner tomorrow, with no relearning and no lock-in.' },
         ],
         features: [
-          { slug: 'workflows-steps-resolution', name: 'Workflows & steps resolution', blurb: 'Workflow and step graphs are resolved deterministically from plain files — the same method runs unchanged on any agent host.' },
-          { slug: 'skills-instructions-prompt-injection', name: 'Skills and instructions prompt injection', blurb: 'Skills and instructions are injected into the agent\u2019s context at the right step — knowledge arrives exactly when it\u2019s needed.' },
+          { slug: 'workflows-steps-resolution', name: 'Workflow & step resolution', blurb: 'Workflow and step graphs are resolved deterministically from plain files — the same method runs unchanged on any agent host.' },
+          { slug: 'skills-instructions-prompt-injection', name: 'Skill and instruction prompt injection', blurb: 'Skills and instructions are injected into the agent\u2019s context at the right step — knowledge arrives exactly when it\u2019s needed.' },
           { slug: 'llm-resolution', name: 'LLM resolution', blurb: 'The harness resolves which model backs each step — swappable, host-agnostic, no hard-wired vendor lock-in.' },
           { slug: 'artifact-validation', name: 'Artifact validation', blurb: 'Every artifact produced by a step is validated against its schema before the step is considered complete.' },
-          { slug: 'step-authorization', name: 'Step authorization', blurb: 'Pre, invariant, and post conditions gate every step — agents move through evidence and sequence, not vibes.' },
+          { slug: 'step-authorization', name: 'Agent authorization', blurb: 'Pre, invariant, and post conditions gate every step — agents move through evidence and sequence, not vibes.' },
           { slug: 'logging', name: 'Logging', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework overview' }],
@@ -294,7 +294,7 @@ export const solutions: Solution[] = [
         ],
         features: [
           { slug: 'installer', name: 'Installer', blurb: 'One installer wires the harness, agents, skills, and workflows into your working tree — local-first, sovereign, no lock-in.' },
-          { slug: 'cicd-pipelines', name: 'CI/CD pipelines of artifacts', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },
+          { slug: 'cicd-pipelines', name: 'CI/CD artifacts pipelines', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],

@@ -665,6 +665,12 @@ a:hover {
   border-color: var(--line);
 }
 
+.tag--accent-3 {
+  background: rgba(129, 140, 248, .12);
+  color: var(--accent-3);
+  border-color: rgba(129, 140, 248, .25);
+}
+
 /* ---- THINK/BUILD/RUN loop ----------------------------------------------- */
 .loop {
   display: grid;
@@ -1062,7 +1068,8 @@ a:hover {
 /* feature chips */
 .arch-comps {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
   gap: .4rem;
   margin-top: auto;
 }

@@ -21,9 +21,9 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
     <div class="arch-stack">
         {stack.map((s, i) => (
           <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
-            <article class={`arch-scope${s.slug === 'gsm' ? ' arch-scope--standard' : ''}`}>
+            <article class="arch-scope arch-scope--standard">
               <div class="arch-scope-meta">
-                <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag} · Solution</span>
+                <span class="tag">{s.tag} · Solution</span>
               </div>
               <h3><a href={s.href}>{s.name}</a></h3>
               <p>{s.tagline}</p>
@@ -55,7 +55,7 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
     <aside class="arch-side">
           <article class="arch-scope arch-scope--framework">
             <div class="arch-scope-meta">
-              <span class="tag tag--muted">{framework.tag} · Solution</span>
+              <span class="tag tag--accent-3">{framework.tag} · Solution</span>
             </div>
             <h3><a href={framework.href}>{framework.name}</a></h3>
             <p>{framework.tagline}</p>
