@@ -810,9 +810,18 @@ a:hover {
 
 .arch-grid {
   display: grid;
-  grid-template-columns: 1fr auto minmax(240px, .55fr);
+  grid-template-columns: minmax(170px, .3fr) auto 1fr auto minmax(180px, .32fr);
   gap: 0;
   align-items: stretch;
+}
+
+/* inner THINK layout: solution stack + framework side column */
+.arch-think-grid {
+  display: grid;
+  grid-template-columns: 1fr auto minmax(240px, .8fr);
+  gap: 0;
+  align-items: stretch;
+  flex: 1;
 }
 
 /* THINK / BUILD / RUN zone context boxes */
@@ -848,12 +857,24 @@ a:hover {
   white-space: nowrap;
 }
 
-.arch-zonebox--build .arch-zone-name {
+.arch-zonebox--build .arch-zone-name,
+.arch-zonebox--run .arch-zone-name {
   color: var(--accent-3);
+}
+
+.arch-zonebox--run .arch-zone-name {
+  color: var(--accent);
 }
 
 .arch-zonebox--build {
   border-color: rgba(129, 140, 248, .3);
+}
+
+/* RUN / BUILD context zone boxes (no solution box inside) */
+.arch-context {
+  margin: 0;
+  font-size: .85rem;
+  color: var(--muted);
 }
 
 .arch-stack {
@@ -1175,26 +1196,23 @@ a:hover {
   margin-inline: auto;
 }
 
-/* RUN strip closing the loop */
-.arch-run {
-  flex-direction: row;
-  align-items: baseline;
-  gap: 1rem;
-  padding: .85rem 1.2rem;
-}
-
-.arch-run .arch-zone-name {
-  color: var(--accent);
-}
-
-.arch-run p {
-  margin: 0;
-  font-size: .9rem;
+/* loopback strip closing the RUN ⟲ THINK ⟶ BUILD loop */
+.arch-loopback {
+  margin-top: .7rem;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: .5rem .9rem;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
 @media (max-width: 900px) {
-  .arch-grid {
+  .arch-grid,
+  .arch-think-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1213,11 +1231,6 @@ a:hover {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--accent-3), transparent);
     margin-block: auto;
-  }
-
-  .arch-run {
-    flex-direction: column;
-    gap: .3rem;
   }
 }
 

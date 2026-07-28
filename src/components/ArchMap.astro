@@ -1,47 +1,90 @@
 ---
 /**
  * ArchMap — the Poesis portfolio rendered as an interactive architecture map.
- * Nesting: Portfolio frame > Solution boxes > Product boxes > Feature chips.
+ * Zones: RUN ⟵ THINK ⟶ BUILD context boxes, looping back (BUILD deploys into
+ * RUN, RUN evidences back into THINK). Nesting: zone > Solution boxes >
+ * Product boxes > Feature chips.
  * Every box is clickable: solution → /solutions/[solution],
  * product → /solutions/[solution]/products/[product],
  * feature → /solutions/[solution]/products/[product]#[feature].
  */
 import { solutions } from '../data/solutions.ts';
 
-const think = solutions.filter((s) => s.zone === 'THINK');
-const build = solutions.filter((s) => s.zone === 'BUILD');
+const stack = solutions.filter((s) => s.zone === 'THINK' && s.slug !== 'framework');
+const framework = solutions.find((s) => s.slug === 'framework')!;
 ---
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
-    <span>poesis portfolio · think / build / run · solutions ⊃ products ⊃ features</span>
+    <span>poesis portfolio · run ⟲ think ⟶ build · solutions ⊃ products ⊃ features</span>
     <span>every box is clickable</span>
   </div>
 
   <div class="arch-grid">
+    <section class="arch-zonebox arch-zonebox--run" aria-label="RUN zone">
+      <header class="arch-zone-head"><span class="arch-zone-name">RUN</span><span>enforce · observe</span></header>
+      <p class="arch-context">Your IT landscape — deployed from generated artifacts, enforced by the <a href="/solutions/sie/products/operator">Operator</a>, observed back as evidence into the definitions.</p>
+    </section>
+
+    <div class="arch-bridge" aria-hidden="true"><span>evidence ⇄ enforcement</span></div>
+
     <section class="arch-zonebox arch-zonebox--think" aria-label="THINK zone">
-      <header class="arch-zone-head"><span class="arch-zone-name">THINK</span><span>define · operate · apply</span></header>
-      <div class="arch-stack">
-      {think.map((s, i) => (
-        <>
-          {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
-          <article class={`arch-scope${s.slug === 'gsm' ? ' arch-scope--standard' : ''}`}>
+      <header class="arch-zone-head"><span class="arch-zone-name">THINK</span><span>define · govern · regulate · supervise · generate</span></header>
+      <div class="arch-think-grid">
+        <div class="arch-stack">
+        {stack.map((s, i) => (
+          <>
+            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
+            <article class={`arch-scope${s.slug === 'gsm' ? ' arch-scope--standard' : ''}`}>
+              <div class="arch-scope-meta">
+                <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag} · Solution</span>
+                <span class="arch-zone">{s.zoneLabel}</span>
+              </div>
+              <h3><a href={s.href}>{s.name}</a></h3>
+              <p>{s.tagline}</p>
+              <details class="arch-group" open>
+                <summary>Products</summary>
+                <div class="arch-products">
+                  {s.products.map((p) => (
+                    <section class="arch-product">
+                      <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
+                      <details class="arch-group arch-group--features">
+                        <summary>Features</summary>
+                        <nav class="arch-comps" aria-label={`${p.name} features`}>
+                          {p.features.map((f) => (
+                            <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
+                          ))}
+                        </nav>
+                      </details>
+                    </section>
+                  ))}
+                </div>
+              </details>
+            </article>
+          </>
+        ))}
+        </div>
+
+        <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ generated artifacts</span></div>
+
+        <aside class="arch-side">
+          <article class="arch-scope arch-scope--framework">
             <div class="arch-scope-meta">
-              <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag} · Solution</span>
-              <span class="arch-zone">{s.zoneLabel}</span>
+              <span class="tag tag--muted">{framework.tag} · Solution</span>
+              <span class="arch-zone">{framework.zoneLabel}</span>
             </div>
-            <h3><a href={s.href}>{s.name}</a></h3>
-            <p>{s.tagline}</p>
+            <h3><a href={framework.href}>{framework.name}</a></h3>
+            <p>{framework.tagline}</p>
             <details class="arch-group" open>
               <summary>Products</summary>
               <div class="arch-products">
-                {s.products.map((p) => (
+                {framework.products.map((p) => (
                   <section class="arch-product">
-                    <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
+                    <h4><a href={`${framework.href}/products/${p.slug}`}>{p.name}</a></h4>
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
                         {p.features.map((f) => (
-                          <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
+                          <a class="arch-comp" href={`${framework.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
                         ))}
                       </nav>
                     </details>
@@ -50,52 +93,17 @@ const build = solutions.filter((s) => s.zone === 'BUILD');
               </div>
             </details>
           </article>
-        </>
-      ))}
+        </aside>
       </div>
     </section>
 
-    <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ build artifacts</span></div>
+    <div class="arch-bridge arch-bridge--build" aria-hidden="true"><span>generate → deploy</span></div>
 
     <section class="arch-zonebox arch-zonebox--build" aria-label="BUILD zone">
-      <header class="arch-zone-head"><span class="arch-zone-name">BUILD</span><span>generate</span></header>
-      <aside class="arch-side">
-      {build.map((s) => (
-        <article class="arch-scope arch-scope--framework">
-          <div class="arch-scope-meta">
-            <span class="tag tag--muted">{s.tag} · Solution</span>
-            <span class="arch-zone">{s.zoneLabel}</span>
-          </div>
-          <h3><a href={s.href}>{s.name}</a></h3>
-          <p>{s.tagline}</p>
-          <details class="arch-group" open>
-            <summary>Products</summary>
-            <div class="arch-products">
-              {s.products.map((p) => (
-                <section class="arch-product">
-                  <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
-                  <details class="arch-group arch-group--features">
-                    <summary>Features</summary>
-                    <nav class="arch-comps" aria-label={`${p.name} features`}>
-                      {p.features.map((f) => (
-                        <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
-                      ))}
-                    </nav>
-                  </details>
-                </section>
-              ))}
-            </div>
-          </details>
-        </article>
-      ))}
-      </aside>
+      <header class="arch-zone-head"><span class="arch-zone-name">BUILD</span><span>generate · deploy</span></header>
+      <p class="arch-context">The last <a href={framework.href}>SAFe Agentic</a> orchestration layer: the <a href="/solutions/framework/products/orchestration">iteration layer</a> generates code from governed definitions; pipelines build and deploy it into RUN.</p>
     </section>
   </div>
 
-  <div class="arch-joint" aria-hidden="true"><span>enforces · observes</span></div>
-
-  <div class="arch-zonebox arch-zonebox--run arch-run">
-    <span class="arch-zone-name">RUN</span>
-    <p>Your IT landscape — deployed from generated artifacts, enforced by the <a href="/solutions/sie/products/operator">Operator</a>, observed back as evidence into the definitions.</p>
-  </div>
+  <div class="arch-loopback" aria-hidden="true"><span>⟵ build deploys into run · run evidences back into think — the loop closes ⟲</span></div>
 </div>
