@@ -2,8 +2,9 @@
 /**
  * ArchMap — the Poesis portfolio rendered as an interactive architecture map.
  * Nesting: Portfolio frame > Solution boxes > Product boxes > Feature chips.
- * Every box is clickable: solution → /[solution], product → /[solution]/[product],
- * feature → /[solution]/[product]#[feature].
+ * Every box is clickable: solution → /solutions/[solution],
+ * product → /solutions/[solution]/products/[product],
+ * feature → /solutions/[solution]/products/[product]#[feature].
  */
 import { solutions } from '../data/solutions.ts';
 
@@ -31,10 +32,10 @@ const build = solutions.filter((s) => s.zone === 'BUILD');
             <div class="arch-products">
               {s.products.map((p) => (
                 <section class="arch-product">
-                  <h4><a href={`${s.href}/${p.slug}`}>{p.name}</a></h4>
+                  <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
                   <nav class="arch-comps" aria-label={`${p.name} features`}>
                     {p.features.map((f) => (
-                      <a class="arch-comp" href={`${s.href}/${p.slug}#${f.slug}`}>{f.name}</a>
+                      <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
                     ))}
                   </nav>
                 </section>
@@ -59,10 +60,10 @@ const build = solutions.filter((s) => s.zone === 'BUILD');
           <div class="arch-products">
             {s.products.map((p) => (
               <section class="arch-product">
-                <h4><a href={`${s.href}/${p.slug}`}>{p.name}</a></h4>
+                <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
                 <nav class="arch-comps" aria-label={`${p.name} features`}>
                   {p.features.map((f) => (
-                    <a class="arch-comp" href={`${s.href}/${p.slug}#${f.slug}`}>{f.name}</a>
+                    <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
                   ))}
                 </nav>
               </section>
@@ -77,6 +78,6 @@ const build = solutions.filter((s) => s.zone === 'BUILD');
 
   <div class="arch-run">
     <span class="arch-zone arch-zone--run">RUN</span>
-    <p>Your IT landscape — deployed from generated artifacts, enforced by the <a href="/sie/operator">Operator</a>, observed back as evidence into the definitions.</p>
+    <p>Your IT landscape — deployed from generated artifacts, enforced by the <a href="/solutions/sie/products/operator">Operator</a>, observed back as evidence into the definitions.</p>
   </div>
 </div>

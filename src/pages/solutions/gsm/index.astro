@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { solutions } from '../../data/solutions.ts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { solutions } from '../../../data/solutions.ts';
 
 const gsm = solutions.find((s) => s.slug === 'gsm')!;
 ---
@@ -57,19 +57,22 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
   <section class="section">
     <div class="container">
       <p class="eyebrow">Products</p>
-      <h2>A small fixed core, an open type system.</h2>
-      {gsm.products.map((p) => (
-        <div class="grid grid-2" style="margin-top:1.5rem">
-          {p.features.map((f) => (
-            <div class="card">
-              <h3>{f.name}</h3>
-              <p>{f.blurb}</p>
-              <p style="margin-top:.6rem"><a href={`/gsm/${p.slug}#${f.slug}`}>Explore →</a></p>
-            </div>
-          ))}
-        </div>
-      ))}
-      <p style="margin-top:1.5rem"><a href="/gsm/specification">About the Specification product →</a></p>
+      <h2>One product: the specification.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {gsm.products.map((p) => (
+          <div class="card">
+            <span class="tag tag--muted">Product</span>
+            <h3>{p.name}</h3>
+            <p>{p.tagline}</p>
+            <p style="margin-top:.8rem">
+              {p.features.map((f, i) => (
+                <>{i > 0 && ' · '}<a href={`${gsm.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
+              ))}
+            </p>
+            <p style="margin-top:.6rem"><a href={`${gsm.href}/products/${p.slug}`}>About {p.name} →</a></p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -91,7 +94,7 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
         <li><a href="https://docs.poesis.cloud/gsm/conformance/">Conformance →</a></li>
         <li><a href="https://github.com/poesis-cloud/gsm">github.com/poesis-cloud/gsm →</a></li>
       </ul>
-      <p style="margin-top:1.5rem" class="muted">Implemented by <a href="/sie">SIE</a> · applied to IT by <a href="/itip">ITIP</a>.</p>
+      <p style="margin-top:1.5rem" class="muted">Implemented by <a href="/solutions/sie">SIE</a> · applied to IT by <a href="/solutions/itip">ITIP</a>.</p>
     </div>
   </section>
 </BaseLayout>

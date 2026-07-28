@@ -1,11 +1,6 @@
 ---
-import { solutionLinks } from '../data/solutions.ts';
+import { solutions } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
-
-const solutionsMenu = [
-  { href: '/solutions', label: 'All solutions — the portfolio map' },
-  ...solutionLinks,
-];
 
 const external = [
   { href: 'https://docs.poesis.cloud', label: 'Docs' },
@@ -36,9 +31,24 @@ const external = [
           Solutions <span aria-hidden="true">▾</span>
         </button>
         <ul class="nav-dropdown-menu" role="menu">
-          {solutionsMenu.map((l) => (
-            <li role="none">
-              <a href={l.href} role="menuitem">{l.label}</a>
+          <li role="none">
+            <a href="/solutions" role="menuitem">All solutions — the portfolio map</a>
+          </li>
+          {solutions.map((s) => (
+            <li class="nav-subgroup" role="none">
+              <div class="nav-subgroup-row">
+                <a href={s.href} role="menuitem">{s.fullName}</a>
+                <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${s.name} products`}>
+                  <span aria-hidden="true">▸</span>
+                </button>
+              </div>
+              <ul class="nav-submenu" role="menu">
+                {s.products.map((p) => (
+                  <li role="none">
+                    <a href={`${s.href}/products/${p.slug}`} role="menuitem">{p.name}</a>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
@@ -137,6 +147,17 @@ const external = [
           dropdown.classList.remove('open');
           trigger.setAttribute('aria-expanded', 'false');
         }
+      });
+    });
+
+    document.querySelectorAll('.nav-subgroup-toggle').forEach((toggle) => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const group = toggle.closest('.nav-subgroup');
+        if (!group) return;
+        const isOpen = group.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
       });
     });
 

@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { solutions } from '../../data/solutions.ts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { solutions } from '../../../data/solutions.ts';
 
 const itip = solutions.find((s) => s.slug === 'itip')!;
 const demoUrl = 'https://demo.poesis.cloud';
@@ -19,7 +19,7 @@ const repos = [
     <div class="container">
       <p class="eyebrow">Application</p>
       <h1>The IT Intelligence Platform.</h1>
-      <p class="lead">ITIP is where every IT profile converges — architects, developers, ops, project managers, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. It is the first domain application built on <a href="/sie">SIE</a>, translating the <a href="/gsm">GSM</a> standard for the IT domain.</p>
+      <p class="lead">ITIP is where every IT profile converges — architects, developers, ops, project managers, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. It is the first domain application built on <a href="/solutions/sie">SIE</a>, translating the <a href="/solutions/gsm">GSM</a> standard for the IT domain.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href={demoUrl}>Try now</a>
         <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/">Read the docs</a>
@@ -60,10 +60,10 @@ const repos = [
             <p>{p.tagline}</p>
             <p style="margin-top:.8rem">
               {p.features.map((f, i) => (
-                <>{i > 0 && ' · '}<a href={`/itip/${p.slug}#${f.slug}`}>{f.name}</a></>
+                <>{i > 0 && ' · '}<a href={`${itip.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
               ))}
             </p>
-            <p style="margin-top:.6rem"><a href={`/itip/${p.slug}`}>About {p.name} →</a></p>
+            <p style="margin-top:.6rem"><a href={`${itip.href}/products/${p.slug}`}>About {p.name} →</a></p>
           </div>
         ))}
       </div>
@@ -91,7 +91,7 @@ const repos = [
         <li><a href="https://docs.poesis.cloud/itip/">ITIP documentation →</a></li>
         {repos.map((r) => <li><a href={r.href}>{r.label} →</a></li>)}
       </ul>
-      <p style="margin-top:1.5rem" class="muted">Built on <a href="/sie">SIE</a> · implements the <a href="/gsm">GSM</a> standard.</p>
+      <p style="margin-top:1.5rem" class="muted">Built on <a href="/solutions/sie">SIE</a> · implements the <a href="/solutions/gsm">GSM</a> standard.</p>
     </div>
   </section>
 </BaseLayout>

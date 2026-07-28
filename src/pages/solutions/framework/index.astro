@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { solutions } from '../../data/solutions.ts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { solutions } from '../../../data/solutions.ts';
 
 const framework = solutions.find((s) => s.slug === 'framework')!;
 ---
@@ -53,10 +53,10 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
             <p>{p.tagline}</p>
             <p style="margin-top:.8rem">
               {p.features.map((f, i) => (
-                <>{i > 0 && ' · '}<a href={`/framework/${p.slug}#${f.slug}`}>{f.name}</a></>
+                <>{i > 0 && ' · '}<a href={`${framework.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
               ))}
             </p>
-            <p style="margin-top:.6rem"><a href={`/framework/${p.slug}`}>About {p.name} →</a></p>
+            <p style="margin-top:.6rem"><a href={`${framework.href}/products/${p.slug}`}>About {p.name} →</a></p>
           </div>
         ))}
       </div>
@@ -72,7 +72,7 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
         <li><a href="https://docs.poesis.cloud/safe-agentic-framework/quickstart/">Quickstart →</a></li>
         <li><a href="https://github.com/poesis-cloud/safe-agentic-framework">github.com/poesis-cloud/safe-agentic-framework →</a></li>
       </ul>
-      <p style="margin-top:1.5rem" class="muted">Generates from the <a href="/gsm">GSM</a> standard · runs on <a href="/sie">SIE</a> · integrated into <a href="/itip">ITIP</a>.</p>
+      <p style="margin-top:1.5rem" class="muted">Generates from the <a href="/solutions/gsm">GSM</a> standard · runs on <a href="/solutions/sie">SIE</a> · integrated into <a href="/solutions/itip">ITIP</a>.</p>
     </div>
   </section>
 </BaseLayout>

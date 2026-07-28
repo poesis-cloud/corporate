@@ -1,11 +1,11 @@
 ---
 /**
  * Product sub-page — one page per Product inside each Solution.
- * URL: /[solution]/[product] (e.g. /sie/definition-manager).
+ * URL: /solutions/[solution]/products/[product] (e.g. /solutions/sie/products/definition-manager).
  * Lists the product's Features (each with an anchor targeted by the ArchMap chips).
  */
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { solutions } from '../../data/solutions.ts';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { solutions } from '../../../../data/solutions.ts';
 
 export function getStaticPaths() {
   return solutions.flatMap((solution) =>
@@ -76,7 +76,7 @@ const siblings = solution.products.filter((p) => p.slug !== product.slug);
             <div class="card">
               <h3>{p.name}</h3>
               <p>{p.tagline}</p>
-              <p style="margin-top:.6rem"><a href={`${solution.href}/${p.slug}`}>About {p.name} →</a></p>
+              <p style="margin-top:.6rem"><a href={`${solution.href}/products/${p.slug}`}>About {p.name} →</a></p>
             </div>
           ))}
         </div>

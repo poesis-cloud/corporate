@@ -42,7 +42,7 @@ export const solutions: Solution[] = [
     tag: 'Application',
     zone: 'THINK',
     zoneLabel: 'THINK · apply',
-    href: '/itip',
+    href: '/solutions/itip',
     tagline: 'Govern and define the IT landscape as a single source of truth, and generate IT artifacts.',
     description:
       'ITIP is where every IT profile converges — architects, developers, ops, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. The first domain application built on SIE.',
@@ -103,7 +103,7 @@ export const solutions: Solution[] = [
     tag: 'Engine',
     zone: 'THINK',
     zoneLabel: 'THINK · operate',
-    href: '/sie',
+    href: '/solutions/sie',
     tagline: 'Implements GSM, operates the definitions, enforces their lifecycle — powers every domain application above it.',
     description:
       'SIE is the engine that implements and leverages the GSM standard — it stores governed definitions, enforces their lifecycle, and turns them into a governed AI context that every domain application above it operates on.',
@@ -168,7 +168,7 @@ export const solutions: Solution[] = [
     tag: 'Standard',
     zone: 'THINK',
     zoneLabel: 'THINK · define',
-    href: '/gsm',
+    href: '/solutions/gsm',
     tagline: 'The vendor-neutral standard for defining and governing systems — the top of every funnel.',
     description:
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
@@ -200,7 +200,7 @@ export const solutions: Solution[] = [
     tag: 'Framework + Portfolio',
     zone: 'BUILD',
     zoneLabel: 'BUILD · generate',
-    href: '/framework',
+    href: '/solutions/framework',
     tagline: 'The open (Apache-2.0) BUILD layer — agents that turn prose or definitions into Build artifacts, auditable and reviewable.',
     description:
       'SAFe-shaped multi-agent orchestration that turns governed GSM definitions into runnable code — a method, run by agents, with a human ★ gate at every layer, closing THINK → BUILD → RUN.',

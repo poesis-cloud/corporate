@@ -276,6 +276,68 @@ a:hover {
   text-decoration: none;
 }
 
+/* ---- nav nested solution → products submenu ----------------------------- */
+.nav-subgroup-row {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.nav-subgroup-row > a {
+  flex: 1;
+}
+
+.nav-subgroup-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.nav-subgroup-toggle:hover,
+.nav-subgroup-toggle:focus-visible {
+  background: rgba(45, 212, 191, .1);
+  color: var(--ink);
+}
+
+.nav-subgroup-toggle span {
+  display: inline-block;
+  transition: transform .15s ease;
+}
+
+.nav-subgroup.open > .nav-subgroup-row .nav-subgroup-toggle span {
+  transform: rotate(90deg);
+}
+
+.nav-submenu {
+  display: none;
+  flex-direction: column;
+  gap: .1rem;
+  margin: 0 0 .25rem .9rem;
+  padding: 0 0 0 .6rem;
+  list-style: none;
+  border-left: 1px solid var(--line);
+}
+
+.nav-subgroup.open > .nav-submenu {
+  display: flex;
+}
+
+.nav-submenu a {
+  font-size: .88rem;
+  padding: .4rem .6rem;
+}
+
 @media (max-width: 640px) {
   .nav-dropdown-menu {
     left: auto;

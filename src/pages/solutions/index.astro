@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ArchMap from '../components/ArchMap.astro';
-import { solutions } from '../data/solutions.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArchMap from '../../components/ArchMap.astro';
+import { solutions } from '../../data/solutions.ts';
 ---
 <BaseLayout
   title="Solutions"
@@ -34,7 +34,7 @@ import { solutions } from '../data/solutions.ts';
             <p style="margin-top:.6rem">
               <a href={s.href}>About {s.name} →</a>
               {s.products.map((p) => (
-                <> &middot; <a href={`${s.href}/${p.slug}`}>{p.name}</a></>
+                <> &middot; <a href={`${s.href}/products/${p.slug}`}>{p.name}</a></>
               ))}
             </p>
           </div>

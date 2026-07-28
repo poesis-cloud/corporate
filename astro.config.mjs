@@ -8,6 +8,10 @@ export default defineConfig({
   integrations: [sitemap()],
   redirects: {
     '/products': '/solutions',
+    '/gsm': '/solutions/gsm',
+    '/sie': '/solutions/sie',
+    '/itip': '/solutions/itip',
+    '/framework': '/solutions/framework',
     '/partnerships/llm-providers': '/partnerships/llm-vendor-value-proposal',
     '/partnerships/llm-provider-value-proposal': '/partnerships/llm-vendor-value-proposal',
   },
