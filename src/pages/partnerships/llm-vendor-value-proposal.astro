@@ -535,25 +535,27 @@ function adherencePills(ids: string[]) {
     margin: 0 0 1rem; padding: .7rem .75rem; border: 1px solid var(--line-strong);
     border-radius: 10px; background: var(--bg-ink);
   }
-  #vf .vf-schema-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: .35rem; }
-  #vf .vf-step {
-    flex: 1 1 0; min-width: 120px; padding: .42rem .55rem; border-radius: 8px;
-    border: 1px solid var(--line-strong); border-top: 2px solid var(--line-strong);
-    background: var(--bg-soft); font-size: .74rem; line-height: 1.3; color: var(--muted);
+  #vf .vf-schema-row { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .1rem; }
+  #vf .vf-node {
+    display: inline-flex; flex-direction: column; align-items: flex-start; gap: .1rem;
+    padding: .34rem .5rem; border-radius: 7px; border: 1px solid transparent; max-width: 200px;
+    font-family: var(--font-mono); font-size: .7rem; line-height: 1.25; overflow-wrap: anywhere;
   }
-  #vf .vf-step b { display: block; margin-bottom: .12rem; font-size: .78rem; font-weight: 600; color: var(--ink); }
-  #vf .vf-step-gate { border-color: rgba(251, 191, 36, .5); background: rgba(251, 191, 36, .08); }
-  #vf .vf-step-gate b { color: #fbbf24; }
-  #vf .vf-step-actors { display: flex; flex-wrap: wrap; gap: .2rem; margin: 0 0 .25rem; }
-  #vf .vf-actor {
-    display: inline-block; padding: .04rem .3rem; border-radius: 4px; border: 1px solid transparent;
-    font-family: var(--font-mono); font-size: .65rem; line-height: 1.5; white-space: nowrap;
+  #vf .vf-node-poesis { color: var(--accent-ink); border-color: rgba(45, 212, 191, .4); background: rgba(45, 212, 191, .1); }
+  #vf .vf-node-llm { color: #7dd3fc; border-color: rgba(56, 189, 248, .4); background: rgba(56, 189, 248, .1); }
+  #vf .vf-node-human { color: #fdba74; border-color: rgba(251, 146, 60, .5); background: rgba(251, 146, 60, .14); }
+  #vf .vf-node-material {
+    color: var(--muted); border-color: var(--line-strong); border-style: dashed;
+    background: var(--bg-soft); font-family: inherit; font-size: .73rem;
   }
-  #vf .vf-actor-poesis { color: var(--accent-ink); border-color: rgba(45, 212, 191, .35); background: rgba(45, 212, 191, .1); }
-  #vf .vf-actor-llm { color: #7dd3fc; border-color: rgba(56, 189, 248, .35); background: rgba(56, 189, 248, .1); }
-  #vf .vf-actor-human { color: #fdba74; border-color: rgba(251, 146, 60, .45); background: rgba(251, 146, 60, .14); }
-  #vf .vf-schema-legend { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 .5rem; font-size: .68rem; color: var(--muted); }
-  #vf .vf-arrow { align-self: center; color: var(--muted); font-size: .82rem; }
+  #vf .vf-node-todo {
+    font-family: inherit; font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; opacity: .75;
+  }
+  #vf .vf-edge { display: inline-flex; flex-direction: column; align-items: center; max-width: 132px; padding: 0 .18rem; }
+  #vf .vf-edge-arrow { color: var(--muted); font-size: .8rem; line-height: 1; }
+  #vf .vf-edge-label { font-size: .63rem; line-height: 1.25; color: var(--muted); text-align: center; }
+  #vf .vf-schema-legend { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0 0 .6rem; }
+  #vf .vf-schema-legend .vf-node { font-family: inherit; font-size: .63rem; padding: .12rem .38rem; }
   #vf .vf-schema-feedback {
     margin: .55rem 0 0; padding-top: .5rem; border-top: 1px dashed var(--line-strong);
     font-size: .73rem; color: var(--muted);
@@ -611,28 +613,13 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> the generic Blackboard REST substrate, schema validation, seal lifecycle, immutability, and deterministic stream ordering are implemented. <strong>Partnership work:</strong> implement the repository KnowledgeSources, LLM client, reduction, provenance transfer, and registration path.',
       sub: 'The repository sourcer is designed to wrap partner models as KnowledgeSources over code repositories. Additional source classes require explicit adapters. ITIP contribution schemas require confidence below 1.0, evidence, and provenance; the generic Blackboard validates whichever client-declared slot schema applies, freezes accepted contributions on seal, and returns them in deterministic order. A client reducer then prepares candidate Ascription proposals for human disposition.',
       schema: [
-        { label: 'Repository artifacts', note: 'code, configuration, documentation' },
-        {
-          label: 'Model as KnowledgeSource',
-          actors: [{ n: 'Grounded inference', side: 'llm' }, { n: 'itip-definition-blackboard-*-sourcer' }],
-          note: 'extraction with evidence and calibrated confidence',
-        },
-        {
-          label: 'Blackboard',
-          actors: [{ n: 'sie-definition-blackboard-manager' }],
-          note: 'schema-validated contributions, sealed deterministic stream',
-        },
-        {
-          label: 'Client reduction + human disposition',
-          actors: [{ n: 'itip-definition-blackboard-*-sourcer' }, { n: 'itip-web-application' }, { n: 'Supervision', side: 'human' }],
-          note: 'candidate Ascription proposals, accountable decision',
-          gate: true,
-        },
-        {
-          label: 'Definitions in effect',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'Governance', side: 'human' }],
-          note: 'typed Definitions placed in effect',
-        },
+        { n: 'Repository artifacts', side: 'material' },
+        { n: 'itip-definition-blackboard-*-sourcer', todo: true, via: 'indexes code, configuration, documentation' },
+        { n: 'Grounded inference', side: 'llm', via: 'extraction task + tool contracts' },
+        { n: 'sie-definition-blackboard-manager', via: 'typed contributions — evidence, provenance, confidence &lt; 1.0' },
+        { n: 'itip-definition-blackboard-*-sourcer', todo: true, via: 'sealed, deterministically ordered stream' },
+        { n: 'Supervision', side: 'human', via: 'reduced candidate Ascription proposals' },
+        { n: 'sie-definition-manager', via: 'approved Definitions placed in effect' },
       ],
       feedback: 'Extraction accuracy, evidence use, tool calling, and confidence calibration are measured and returned to the partner.',
       partner: ['Applied-AI evidence for extracting typed Definitions and relationships from repository artifacts', 'Measured feedback on extraction accuracy, evidence use, tool calling, and confidence calibration'],
@@ -647,22 +634,11 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> implemented foundations. <strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.',
       sub: 'Definition Manager and Operator provide the semantic and execution foundations for serving selected in-effect Definitions, Norms, and explicitly modeled dependencies. A model-facing context and tool facade is not yet implemented. Once built, it can let models inspect types, trace Interactions, retrieve applicable constraints, and submit outputs for explicit evaluation. This changes available evidence and operations; it does not change model weights or prove causal reasoning.',
       schema: [
-        {
-          label: 'Governed definition base',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'gsm-frameworks' }, { n: 'Regulation', side: 'human' }],
-          note: 'in-effect Definitions, Norms, modeled Interactions',
-        },
-        {
-          label: 'Context and tool facade',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'sie-operator' }],
-          note: 'selection, provenance projection, tool contracts',
-        },
-        {
-          label: 'Partner model inference',
-          actors: [{ n: 'Grounded inference', side: 'llm' }],
-          note: 'inspects types, traces Interactions, retrieves constraints',
-        },
-        { label: 'Grounded answer', note: 'claims tied to governed Definitions, submitted for evaluation' },
+        { n: 'gsm-frameworks' },
+        { n: 'sie-definition-manager', via: 'sourced obligation and domain vocabulary' },
+        { n: 'sie-operator', via: 'in-effect Definitions, Norms, modeled Interactions' },
+        { n: 'Grounded inference', side: 'llm', via: 'context selection, provenance projection, tool contracts — facade not implemented' },
+        { n: 'Grounded answer', side: 'material', via: 'inspects types, traces Interactions, retrieves constraints' },
       ],
       feedback: 'Evaluated against document-retrieval baselines: unsupported claims and dependency-trace accuracy.',
       partner: ['Runtime specialisation through governed context and tools without retraining the model', 'Evaluation target: fewer unsupported claims and more accurate dependency traces than document-retrieval baselines'],
@@ -677,32 +653,13 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> partial foundation. <strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.',
       sub: 'Every model output entering a governed action path remains a proposal. The target ITIP gate presents evidence, provenance, and evaluations to an accountable human for disposition; that gate is not yet implemented. Operator already executes only in-effect executable Mechanisms (ACTIVE or DEPRECATED) and performs deterministic schema and rule checks. It does not yet perform automatic Norm preflight. These checks establish conformance to explicit contracts, not the truth of an inference.',
       schema: [
-        {
-          label: 'Partner model output',
-          actors: [{ n: 'Grounded inference', side: 'llm' }],
-          note: 'a proposal, never an action',
-        },
-        {
-          label: 'Deterministic checks',
-          actors: [{ n: 'sie-operator' }],
-          note: 'schema and rule conformance',
-        },
-        {
-          label: 'Human gate',
-          actors: [{ n: 'itip-web-application' }, { n: 'Supervision', side: 'human' }],
-          note: 'evidence, provenance, and evaluations presented for disposition',
-          gate: true,
-        },
-        {
-          label: 'Governed execution',
-          actors: [{ n: 'sie-operator' }],
-          note: 'in-effect executable Mechanisms only',
-        },
-        {
-          label: 'Composed audit',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-web-application' }, { n: 'Governance', side: 'human' }],
-          note: 'decision, evidence, and execution recorded',
-        },
+        { n: 'Grounded inference', side: 'llm' },
+        { n: 'sie-operator', via: 'a proposal, never an action' },
+        { n: 'itip-web-application', todo: true, via: 'schema and rule conformance checked' },
+        { n: 'Supervision', side: 'human', via: 'evidence, provenance, evaluations presented' },
+        { n: 'sie-operator', via: 'approved — dispatch to in-effect Mechanisms' },
+        { n: 'sie-definition-manager', via: 'execution effects and lifecycle transition' },
+        { n: 'itip-web-application', todo: true, via: 'decision, evidence, and execution composed into audit' },
       ],
       partner: ['A deployable control pattern for supervised model action in regulated environments', 'An assurance case grounded in traceable proposals, deterministic checks, human decisions, and execution evidence'],
       poesis: ['A governed disposition gate as the single controlled entry point for model-proposed action', 'Disposition and outcome records can support later evaluation, but become learning labels only under defined tasks, measures, and rights controls'],
@@ -716,32 +673,11 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> research hypothesis. <strong>Partnership work:</strong> define adaptation tasks, corpus permissions, evaluation criteria, and baselines; then run controlled experiments and measure uplift.',
       sub: 'Governed Definitions and Ascription history could supply typed domain examples for continued pre-training, supervised fine-tuning, preference tuning, or distillation, but no corpus export or training integration exists. Mechanisms and Interactions encode modeled causal relations; lifecycle timestamps record temporal history, not causal proof. Human approvals and rejections are governance decisions, not automatically model-quality labels.',
       schema: [
-        {
-          label: 'Governed Definitions',
-          actors: [{ n: 'sie-definition-manager' }],
-          note: 'typed identities, modeled relations, Ascription history',
-        },
-        {
-          label: 'Rights decision',
-          actors: [{ n: 'itip-web-application' }, { n: 'Regulation', side: 'human' }],
-          note: 'ownership, consent, purpose limitation, retention',
-          gate: true,
-        },
-        {
-          label: 'Corpus selection and export',
-          actors: [{ n: 'sie-definition-manager' }],
-          note: 'not implemented; provenance and rights enforcement required',
-        },
-        {
-          label: 'Model adaptation',
-          actors: [{ n: 'Model adaptation &amp; specialisation', side: 'llm' }],
-          note: 'continued pre-training, fine-tuning, preference tuning, distillation',
-        },
-        {
-          label: 'Controlled evaluation',
-          actors: [{ n: 'Model evaluation &amp; qualification', side: 'llm' }, { n: 'sie-operator' }],
-          note: 'uplift measured against runtime grounding alone',
-        },
+        { n: 'sie-definition-manager' },
+        { n: 'Regulation', side: 'human', via: 'candidate corpus — typed identities, relations, Ascription history' },
+        { n: 'Model adaptation &amp; specialisation', side: 'llm', via: 'rights-bounded corpus export — not implemented' },
+        { n: 'Model evaluation &amp; qualification', side: 'llm', via: 'adapted weights' },
+        { n: 'sie-operator', via: 'controlled evaluation against runtime grounding alone' },
       ],
       feedback: 'The result decides whether governed material should leave the runtime boundary at all, and the decision stays revocable.',
       partner: ['A potential adaptation corpus containing typed identities, modeled relationships, and lifecycle state', 'Controlled experiments comparing weight adaptation with runtime grounding alone'],
@@ -756,29 +692,13 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> evolving operational proof. <strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.',
       sub: 'Partner models already power the framework’s orchestrators and specialist agents through declarative agent and workflow definitions. The deterministic harness is specified but its runtime is not implemented. Once operational, its artifact, authorization, precondition, and postcondition gates can produce comparable execution evidence without treating agent output as self-authorizing.',
       schema: [
-        {
-          label: 'Agent and workflow definitions',
-          actors: [{ n: 'Governance', side: 'human' }],
-          note: 'declarative, in the SAFe Agentic Framework',
-        },
-        {
-          label: 'Model-powered agents',
-          actors: [{ n: 'Grounded inference', side: 'llm' }, { n: 'orchestrator-agent' }, { n: 'specialist-agent' }],
-          note: 'partner models power orchestration and specialist work',
-        },
-        {
-          label: 'Deterministic harness gates',
-          actors: [{ n: 'harness' }],
-          note: 'artifact, authorization, precondition, postcondition',
-          gate: true,
-        },
-        {
-          label: 'Human approval',
-          actors: [{ n: 'Supervision', side: 'human' }],
-          note: 'review and release authority',
-          gate: true,
-        },
-        { label: 'Poesis stack artifacts', note: 'code, schemas, design-time models, documentation' },
+        { n: 'Governance', side: 'human' },
+        { n: 'orchestrator-agent', via: 'declarative agent and workflow definitions' },
+        { n: 'Grounded inference', side: 'llm', via: 'task context and tool calls' },
+        { n: 'specialist-agent', via: 'architecture, dev, QA, security, docs work' },
+        { n: 'harness', todo: true, via: 'artifact, authorization, precondition, postcondition gates' },
+        { n: 'Supervision', side: 'human', via: 'gated candidate changes' },
+        { n: 'Poesis stack artifacts', side: 'material', via: 'released code, schemas, design-time models, documentation' },
       ],
       feedback: 'Task success, rework, gate failures, cost, latency, and human intervention are measured per run.',
       partner: ['A living reference for supervised multi-agent engineering using partner models', 'A planned evidence surface for task success, rework, gate failures, cost, latency, and human intervention'],
@@ -792,31 +712,11 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> schema validation, typed Mechanism execution, lifecycle audit, and an ITIP appraisal integration proof are implemented. <strong>Partnership work:</strong> define model evaluation envelopes, datasets, baselines, assurance criteria, and a repeatable service surface.',
       sub: 'A vendor submits versioned model outputs and inference configurations against defined enterprise tasks. GSM schemas and SIE Mechanisms can evaluate only properties made explicit by those contracts, producing reproducible findings and traces. This can reveal capability, failure boundaries, and regressions without changing model weights; it does not turn every governance rule into ground truth or establish inference truth beyond the evaluated contract.',
       schema: [
-        {
-          label: 'Enterprise tasks',
-          actors: [{ n: 'sie-definition-manager' }],
-          note: 'GSM schemas, Mechanisms, expected outcomes',
-        },
-        {
-          label: 'Vendor submission',
-          actors: [{ n: 'Model evaluation &amp; qualification', side: 'llm' }],
-          note: 'versioned model outputs and inference configuration',
-        },
-        {
-          label: 'Typed execution',
-          actors: [{ n: 'sie-operator' }],
-          note: 'deterministic evaluation of explicitly contracted properties',
-        },
-        {
-          label: 'Reproducible findings and traces',
-          actors: [{ n: 'sie-operator' }, { n: 'itip-web-application' }],
-          note: 'capability, failure boundaries, regressions',
-        },
-        {
-          label: 'Selection or upgrade decision',
-          actors: [{ n: 'itip-web-application' }, { n: 'Governance', side: 'human' }],
-          note: 'evidence gathered before governed deployment',
-        },
+        { n: 'sie-definition-manager' },
+        { n: 'Model evaluation &amp; qualification', side: 'llm', via: 'enterprise task envelopes — GSM schemas, Mechanisms, expected outcomes' },
+        { n: 'sie-operator', via: 'versioned model outputs and inference configuration' },
+        { n: 'itip-web-application', todo: true, via: 'deterministic evaluation of contracted properties' },
+        { n: 'Governance', side: 'human', via: 'reproducible findings and traces — capability, failure boundaries, regressions' },
       ],
       feedback: 'Findings return to the vendor as workload-specific evidence rather than general benchmark claims.',
       partner: ['Workload-specific evidence about model strengths, regressions, and failure boundaries', 'A governed assurance case grounded in reproducible tests rather than general benchmark claims'],
@@ -831,27 +731,11 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> a vendor-neutral model catalog, capability taxonomy, workload declarations, and routing output contracts exist. <strong>Partnership work:</strong> implement the resolver runtime, host bindings, model-version governance, and outcome evidence collection.',
       sub: 'Governed workloads declare capability demand; a deterministic resolver is specified to score canonical model profiles and break ties by cost. Runtime qualification should then incorporate measured task success, schema adherence, rework, latency, cost, and human intervention. The current catalog is configuration, not proof of model fitness, and the harness that performs routing is not yet implemented.',
       schema: [
-        {
-          label: 'Governed workload',
-          actors: [{ n: 'orchestrator-agent' }, { n: 'specialist-agent' }],
-          note: 'declares capability demand',
-        },
-        {
-          label: 'Deterministic resolver',
-          actors: [{ n: 'harness' }],
-          note: 'scores canonical model profiles, breaks ties by cost',
-        },
-        {
-          label: 'Host binding and dispatch',
-          actors: [{ n: 'harness' }, { n: 'Grounded inference', side: 'llm' }],
-          note: 'not implemented; adapter bindings remain to be built',
-        },
-        { label: 'Measured outcomes', note: 'task success, schema adherence, rework, latency, cost, intervention' },
-        {
-          label: 'Qualification record',
-          actors: [{ n: 'Model evaluation &amp; qualification', side: 'llm' }, { n: 'harness' }, { n: 'Regulation', side: 'human' }],
-          note: 'placement becomes an evidence decision',
-        },
+        { n: 'orchestrator-agent' },
+        { n: 'harness', todo: true, via: 'workload capability demand declared' },
+        { n: 'Grounded inference', side: 'llm', via: 'resolver scores model profiles, binds host — dispatch not implemented' },
+        { n: 'harness', todo: true, via: 'task success, schema adherence, rework, latency, cost, intervention' },
+        { n: 'Regulation', side: 'human', via: 'qualification record — placement becomes an evidence decision' },
       ],
       feedback: 'Qualification feeds the next resolution, so placement changes with measured behaviour rather than with a procurement default.',
       partner: ['Evidence-based placement on workloads where the partner model demonstrates comparative value', 'Structured feedback about capability gaps, reliability, cost, and intervention demand'],
@@ -866,32 +750,12 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> the governance grammar, Directive and Norm schemas, and the Ascription lifecycle that places constraints in effect are implemented; framework sourcing produces typed vocabulary. <strong>Remaining work:</strong> automatic Norm preflight in the Operator, and appraisal-driven revision of constraints.',
       sub: 'Directives and Norms are how the organisation states, explicitly and in a single grammar, what it and its models may do. Framework sourcing turns external obligation — GDPR, NIS2, DORA, AI Act, TOGAF, ISO — into the same typed vocabulary as internal policy, so regulatory constraint and internal intent are not two disconnected registers. Nothing in this flow reaches a model directly: constraints bound the LLM adherences from inside the perimeter.',
       schema: [
-        {
-          label: 'Obligation and policy sources',
-          actors: [{ n: 'gsm-frameworks' }],
-          note: 'GDPR, NIS2, DORA, AI Act, TOGAF, ISO, internal policy',
-        },
-        {
-          label: 'Directives and Norms',
-          actors: [{ n: 'Regulation', side: 'human' }, { n: 'sie-definition-manager' }],
-          note: 'typed constraints in one governance grammar',
-        },
-        {
-          label: 'Placed in effect',
-          actors: [{ n: 'Governance', side: 'human' }, { n: 'sie-definition-manager' }],
-          note: 'Ascription lifecycle transition',
-          gate: true,
-        },
-        {
-          label: 'Enforced at execution',
-          actors: [{ n: 'sie-operator' }],
-          note: 'typed inputs and effects checked; automatic Norm preflight remains to be built',
-        },
-        {
-          label: 'Bounds every model adherence',
-          actors: [{ n: 'Grounded inference', side: 'llm' }],
-          note: 'context, rights, and action limits applied from inside the perimeter',
-        },
+        { n: 'gsm-frameworks' },
+        { n: 'Regulation', side: 'human', via: 'GDPR, NIS2, DORA, AI Act, TOGAF, ISO vocabulary' },
+        { n: 'sie-definition-manager', via: 'Directives and Norms authored' },
+        { n: 'Governance', side: 'human', via: 'lifecycle transition proposed' },
+        { n: 'sie-operator', via: 'constraints placed in effect' },
+        { n: 'Grounded inference', side: 'llm', via: 'typed checks — automatic Norm preflight planned' },
       ],
       feedback: 'Appraisal of outcomes against Norms is what tells the organisation when its own constraints need to change.',
       organisation: ['Regulatory obligation and internal policy expressed in one enforceable grammar rather than in documents no system reads', 'Constraints that bound model behaviour without depending on any model’s cooperation'],
@@ -905,32 +769,12 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> the Ascription lifecycle and its transitions are implemented, and the Blackboard produces sealed, replayable candidate contributions. <strong>Remaining work:</strong> the ITIP disposition surface that presents evidence, provenance, and evaluations to an accountable human.',
       sub: 'This is the DISPOSE half of PROPOSE / DISPOSE, and it is the single controlled entry point through which model work becomes governed truth. A proposal carries confidence below 1.0 together with its evidence and provenance; a named human decides. The decision is recorded with the evidence it rested on, which is what makes supervision auditable rather than merely asserted.',
       schema: [
-        {
-          label: 'AI proposal',
-          actors: [{ n: 'Grounded inference', side: 'llm' }],
-          note: 'confidence below 1.0, evidence and provenance attached',
-        },
-        {
-          label: 'Evidence assembled',
-          actors: [{ n: 'sie-definition-blackboard-manager' }, { n: 'itip-web-application' }],
-          note: 'sealed contributions, provenance, and evaluations presented',
-        },
-        {
-          label: 'Accountable decision',
-          actors: [{ n: 'Supervision', side: 'human' }],
-          note: 'approve or reject before anything enters effect',
-          gate: true,
-        },
-        {
-          label: 'Ascription transition',
-          actors: [{ n: 'sie-definition-manager' }],
-          note: 'governed truth changes only here',
-        },
-        {
-          label: 'Decision recorded',
-          actors: [{ n: 'itip-web-application' }],
-          note: 'the decision and the evidence it rested on',
-        },
+        { n: 'Grounded inference', side: 'llm' },
+        { n: 'sie-definition-blackboard-manager', via: 'proposals — confidence &lt; 1.0, evidence, provenance' },
+        { n: 'itip-web-application', todo: true, via: 'sealed, replayable contributions' },
+        { n: 'Supervision', side: 'human', via: 'evidence, provenance, evaluations presented' },
+        { n: 'sie-definition-manager', via: 'approve or reject' },
+        { n: 'itip-web-application', todo: true, via: 'Ascription transition recorded with its evidence' },
       ],
       feedback: 'Rejection rates and rejection reasons are the organisation’s sharpest signal about model fitness.',
       organisation: ['A single controlled entry point for model-proposed change, rather than model output leaking into systems through many uncontrolled paths', 'Supervision that produces evidence — every decision recorded with what it rested on'],
@@ -944,31 +788,12 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> Definition and Ascription authoring, lifecycle history, and typed Mechanism execution are implemented, with an ITIP appraisal integration proof. <strong>Remaining work:</strong> the appraisal, simulation, and audit surfaces that return this evidence to the organisation.',
       sub: 'This is the flow that closes the map. Intent becomes typed Definitions and Ascriptions; those govern operation; operation produces appraisal, simulation, and audit evidence; that evidence returns to the intent that produced it. Without this return path, regulation and disposition would be open-loop — constraint and action with no corrective signal. Systemic viability depends on the return, not on the outbound half.',
       schema: [
-        {
-          label: 'Intent',
-          actors: [{ n: 'Governance', side: 'human' }],
-          note: 'what the organisation means to be and to do',
-        },
-        {
-          label: 'Definitions and Ascriptions',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-web-application' }],
-          note: 'intent made typed, attributable, and governable',
-        },
-        {
-          label: 'Governed operation',
-          actors: [{ n: 'sie-operator' }],
-          note: 'Mechanisms executed against in-effect constraints',
-        },
-        {
-          label: 'Appraisal, simulation, audit',
-          actors: [{ n: 'sie-operator' }, { n: 'itip-web-application' }],
-          note: 'compliance, impact, and action history made legible',
-        },
-        {
-          label: 'Accountability evidence',
-          actors: [{ n: 'Governance', side: 'human' }],
-          note: 'the organisation answers for outcomes with evidence, not assertion',
-        },
+        { n: 'Governance', side: 'human' },
+        { n: 'itip-web-application', todo: true, via: 'intent — what the organisation means to be and to do' },
+        { n: 'sie-definition-manager', via: 'Definitions and Ascriptions authored' },
+        { n: 'sie-operator', via: 'in-effect constraints and Mechanisms' },
+        { n: 'itip-web-application', todo: true, via: 'execution history, appraisal measures and findings' },
+        { n: 'Governance', side: 'human', via: 'compliance, impact, and audit evidence' },
       ],
       feedback: 'Evidence returns to intent — this is the corrective path that makes regulation and disposition a loop rather than two one-way declarations.',
       organisation: ['A definition of itself that is typed, attributable, and current, rather than tacit and dispersed across documents and people', 'Accountability discharged with evidence — appraisal, simulation, and audit of both AI and human action'],
@@ -1080,35 +905,24 @@ function adherencePills(ids: string[]) {
     });
   }
 
-  function actorMarkup(step) {
-    if (!step.actors || !step.actors.length) return '';
-    const chips = step.actors
-      .map((actor) => {
-        const kind = actor.side === 'llm' || actor.side === 'human' ? actor.side : 'poesis';
-        const hint = kind === 'llm'
-          ? 'LLM operation'
-          : kind === 'human' ? 'Organisation operation' : 'Poesis stack component';
-        return `<span class="vf-actor vf-actor-${kind}" title="${hint}">${actor.n}</span>`;
-      })
-      .join('');
-    return `<span class="vf-step-actors">${chips}</span>`;
-  }
-
   function schemaMarkup(flow) {
     if (!flow.schema || !flow.schema.length) return '';
-    const steps = flow.schema
-      .map((step) => {
-        const gate = step.gate ? ' vf-step-gate' : '';
-        const tint = step.gate ? '' : ` style="border-top-color:${flow.hex}"`;
-        return `<div class="vf-step${gate}"${tint}><b>${step.label}</b>${actorMarkup(step)}${step.note || ''}</div>`;
+    const chain = flow.schema
+      .map((node, index) => {
+        const side = node.side;
+        const kind = side === 'llm' || side === 'human' || side === 'material' ? side : 'poesis';
+        const todo = node.todo ? '<span class="vf-node-todo">planned</span>' : '';
+        const box = `<span class="vf-node vf-node-${kind}">${node.n}${todo}</span>`;
+        if (index === 0 || !node.via) return box;
+        return `<span class="vf-edge"><span class="vf-edge-arrow" aria-hidden="true">&#8594;</span><span class="vf-edge-label">${node.via}</span></span>${box}`;
       })
-      .join('<span class="vf-arrow" aria-hidden="true">&#8594;</span>');
+      .join('');
     const feedback = flow.feedback
       ? `<p class="vf-schema-feedback">&#8617; ${flow.feedback}</p>`
       : '';
-    return `<div class="vf-schema" role="img" aria-label="Flow schema: ${flow.schema.map((step) => step.label).join(', then ')}">
-      <p class="vf-schema-legend"><span class="vf-actor vf-actor-llm">LLM operation</span><span class="vf-actor vf-actor-poesis">Poesis stack component</span><span class="vf-actor vf-actor-human">Organisation operation</span></p>
-      <div class="vf-schema-row">${steps}</div>
+    return `<div class="vf-schema" role="img" aria-label="Flow: ${flow.schema.map((node) => node.n).join(' to ')}">
+      <p class="vf-schema-legend"><span class="vf-node vf-node-llm">LLM operation</span><span class="vf-node vf-node-poesis">Poesis stack component</span><span class="vf-node vf-node-human">organisation operation</span><span class="vf-node vf-node-material">material</span></p>
+      <div class="vf-schema-row">${chain}</div>
       ${feedback}
     </div>`;
   }
@@ -1190,7 +1004,7 @@ function adherencePills(ids: string[]) {
     const flows = FLOWS.filter((flow) => {
       if (flow.from === card.id || flow.to === card.id) return true;
       if (!op || !flow.schema) return false;
-      return flow.schema.some((step) => (step.actors || []).some((actor) => actor.side === 'human' && actor.n === op));
+      return flow.schema.some((node) => node.side === 'human' && node.n === op);
     });
     showAdherences(`${card.dataset.component} — ${flows.length} connected adherence${flows.length === 1 ? '' : 's'}`, flows);
   }
