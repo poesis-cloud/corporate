@@ -24,7 +24,6 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
             <article class={`arch-scope${s.slug === 'gsm' ? ' arch-scope--standard' : ''}`}>
               <div class="arch-scope-meta">
                 <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag} · Solution</span>
-                <span class="arch-zone">{s.zoneLabel}</span>
               </div>
               <h3><a href={s.href}>{s.name}</a></h3>
               <p>{s.tagline}</p>
@@ -57,7 +56,6 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
           <article class="arch-scope arch-scope--framework">
             <div class="arch-scope-meta">
               <span class="tag tag--muted">{framework.tag} · Solution</span>
-              <span class="arch-zone">{framework.zoneLabel}</span>
             </div>
             <h3><a href={framework.href}>{framework.name}</a></h3>
             <p>{framework.tagline}</p>

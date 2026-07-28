@@ -27,7 +27,6 @@ export interface Solution {
   fullName: string;
   tag: string;
   zone: 'THINK' | 'BUILD';
-  zoneLabel: string;
   href: string;
   tagline: string;
   description: string;
@@ -41,23 +40,24 @@ export const solutions: Solution[] = [
     fullName: 'IT Intelligence Platform',
     tag: 'Domain Intelligence Platform',
     zone: 'THINK',
-    zoneLabel: 'apply',
     href: '/solutions/itip',
-    tagline: 'The IT Intelligence Platform — govern and define the IT landscape as a single source of truth, and generate IT artifacts.',
+    tagline: 'The IT Intelligence Platform — for IT organizations to define, govern, regulate, supervise their IT landscape as a single source of truth, and generate automatically any sort of IT artifacts from.',
     description:
       'ITIP is where every IT profile converges — architects, developers, ops, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. The first domain application built on SIE.',
     products: [
       {
         slug: 'web-application',
-        name: 'ITIP Web Application',
+        name: 'Web Application',
         tagline: 'The platform every IT profile works in — definition, governance, generation.',
         description:
           'The web application and its backend-for-frontend: the governed definition inventory, the framework catalog & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
         features: [
-          { slug: 'definition-inventory', name: 'Definition inventory', blurb: 'Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth, with impact you can trace through typed relations.' },
-          { slug: 'framework-catalog-composer', name: 'Framework Catalog & Composer', blurb: 'The published catalogue of frameworks sourced into GSM — TOGAF, ISO 25010 / 25012, GDPR, NIS2, DORA and more — attach them and compose them into one coherent, enforceable governance fabric on day one.' },
-          { slug: 'artifactory', name: 'Artifactory', blurb: 'Generate any IT deliverable from the definitions — ADR packs, compliance evidence, architecture baselines, roadmaps — from Archetype-bound templates, each artifact traceable to its definitions.' },
-          { slug: 'evaluation-dashboard', name: 'Evaluation Dashboard', blurb: 'Continuous governance indicators — measures and findings computed from the model, so coverage and conformance are observed, not reconstructed before each audit.' },
+          { slug: 'it-artifact-factory', name: 'IT artifact factory', blurb: 'Generate any IT deliverable from the definitions — ADR packs, compliance evidence, architecture baselines, roadmaps — each artifact traceable to its definitions.' },
+          { slug: 'it-compliance-evaluation', name: 'IT compliance evaluation', blurb: 'Continuous governance indicators — measures and findings computed from the model, so compliance is observed, not reconstructed before each audit.' },
+          { slug: 'it-impact-simulation', name: 'IT impact simulation', blurb: 'Simulate the ripple effect of a change through typed relations before it happens — impact you can trace, not guess.' },
+          { slug: 'definitions-truth-sourcing-management', name: 'GSM Definitions truth sourcing management', blurb: 'Manage and review the sourcing pipelines that keep the model anchored to the real, running system.' },
+          { slug: 'definitions-management', name: 'GSM Definitions management', blurb: 'Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth.' },
+          { slug: 'frameworks-management', name: 'GSM Frameworks management', blurb: 'Browse, attach, and compose the published catalogue of frameworks sourced into GSM — a coherent governance fabric from day one.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/itip/', label: 'ITIP documentation' }],
         repos: [
@@ -67,15 +67,12 @@ export const solutions: Solution[] = [
       },
       {
         slug: 'repository-definition-sourcer',
-        name: 'Repository Definition Sourcer',
+        name: 'Definition Blackboard Code Sourcer',
         tagline: 'Truth sourcing — the model reflects reality, continuously.',
         description:
           'The sourcing pipeline that reads real IT artifacts — source code, API contracts, infrastructure — and posts them as evidence-backed contributions to the SIE Definition Blackboard Manager, so the definition stays anchored to the real system instead of drifting from it.',
         features: [
-          { slug: 'truth-sourcing', name: 'Code, API & infra sourcing', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs.' },
-          { slug: 'knowledge-sources', name: 'Knowledge-source pipeline', blurb: 'A bench of knowledge sources — code index, property graph, dependency analysis, inference — each contributing what it knows, staged over shared panels.' },
-          { slug: 'provenance', name: 'Confidence & provenance', blurb: 'Every contribution carries a confidence score and a provenance envelope — which source, which revision, which tools — so every definition is explainable.' },
-          { slug: 'contribution-flow', name: 'Blackboard contribution flow', blurb: 'Contributions post to the SIE Definition Blackboard Manager, are validated, sealed byte-stable, and promoted into governed definitions with the audit trail intact.' },
+          { slug: 'automatic-sourcing-from-code-repos', name: 'Automatic sourcing of GSM Definitions from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/itip-blackboard-sourcer/', label: 'Sourcer documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/itip-definition-blackboard-repository-sourcer', label: 'itip-definition-blackboard-repository-sourcer' }],
@@ -88,9 +85,8 @@ export const solutions: Solution[] = [
     fullName: 'Systemic Intelligence Engine',
     tag: 'Engine',
     zone: 'THINK',
-    zoneLabel: 'operate',
     href: '/solutions/sie',
-    tagline: 'The Systemic Intelligence Engine — implements GSM, operates the definitions, enforces their lifecycle; powers every domain application above it.',
+    tagline: 'The Systemic Intelligence Engine — reference implementation of GSM, manage definitions and their lifecycle; execute definitions; powers every domain application above it.',
     description:
       'SIE is the engine that implements and leverages the GSM standard — it stores governed definitions, enforces their lifecycle, and turns them into a governed AI context that every domain application above it operates on.',
     products: [
@@ -101,10 +97,9 @@ export const solutions: Solution[] = [
         description:
           'The Definition Manager hosts GSM, manages the Ascription lifecycle, and enforces the DNA governance grammar across tenant schemas. It is the authoritative store of every governed definition.',
         features: [
-          { slug: 'gsm-hosting', name: 'GSM hosting', blurb: 'The reference implementation of the GSM standard — the eight primitives, Archetype schemas, and governance grammar, served as a live model.' },
-          { slug: 'ascription-lifecycle', name: 'Ascription lifecycle', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a state transition, auditable end to end.' },
-          { slug: 'dna-enforcement', name: 'DNA grammar enforcement', blurb: 'Directives, Norms, and Ascriptions are validated against the governance grammar at write time — malformed governance never enters the model.' },
-          { slug: 'tenancy', name: 'Multi-tenant schemas', blurb: 'Each tenant\u2019s definitions live in isolated schemas with shared archetypes — one engine, many governed worlds.' },
+          { slug: 'definitions-management-api', name: 'GSM Definitions management RESTful API', blurb: 'A RESTful API to create, read, update, and query every governed GSM definition — the authoritative interface to the model.' },
+          { slug: 'definitions-lifecycle-enforcement', name: 'GSM Definitions lifecycle enforcement', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a validated state transition, auditable end to end.' },
+          { slug: 'definitions-retention', name: 'GSM Definitions retention', blurb: 'Definitions and their history are retained and versioned — nothing governed is silently overwritten or lost.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/sie-definition/', label: 'SIE Definition documentation' }],
         repos: [
@@ -119,10 +114,8 @@ export const solutions: Solution[] = [
         description:
           'The Operator evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement — the THINK layer acting on the RUN layer.',
         features: [
-          { slug: 'rule-evaluation', name: 'Norm & Directive evaluation', blurb: 'Machine-evaluable assertions checked continuously against reality — governance as a control loop, not a review meeting.' },
-          { slug: 'rule-sandbox', name: 'Sandboxed rule runtime', blurb: 'Rules run in a sandboxed, deterministic profile — no ambient authority, reproducible verdicts.' },
-          { slug: 'effector-dispatch', name: 'Effector dispatch', blurb: 'Verdicts trigger typed effectors through protocol dispatchers — enforcement actions are themselves governed definitions.' },
-          { slug: 'enforcement-loop', name: 'Continuous enforcement', blurb: 'Observed state in, verdicts and actions out — the loop that keeps the landscape converging to its definition.' },
+          { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state — governance as a control loop, not a review meeting.' },
+          { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms — verdicts and rules become dispatched, effector-driven actions.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/sie-definition/', label: 'SIE documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/sie-operator', label: 'sie-operator' }],
@@ -134,10 +127,9 @@ export const solutions: Solution[] = [
         description:
           'The Definition Blackboard Manager is a collaborative definition-sourcing service: contributors post evidence-backed contributions over declared panels, the board is sealed to a byte-stable state, and every mutation lands in an append-only audit ledger.',
         features: [
-          { slug: 'panels', name: 'Panels & contributions', blurb: 'Contributors declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.' },
-          { slug: 'seal-lifecycle', name: 'Seal lifecycle', blurb: 'OPEN → SEALED → BYTE_STABLE — sealed boards are immutable, and the contribution stream is byte-stable for reproducible promotion.' },
-          { slug: 'validation', name: 'Contribution validation', blurb: 'Confidence scores and provenance envelopes are validated before persistence — invalid evidence never enters the board.' },
-          { slug: 'audit-ledger', name: 'Append-only audit ledger', blurb: 'Every mutation produces an immutable audit entry, transactional with the mutation it records.' },
+          { slug: 'ks-contributions-management-api', name: 'KS Contributions management RESTful API', blurb: 'A RESTful API for knowledge sources to declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.' },
+          { slug: 'ks-contributions-lifecycle-enforcement', name: 'KS Contributions lifecycle enforcement', blurb: 'OPEN → SEALED → BYTE_STABLE — sealed boards are immutable, and the contribution stream is byte-stable for reproducible promotion.' },
+          { slug: 'ks-contributions-retention', name: 'KS Contributions retention', blurb: 'Every contribution and its provenance envelope is retained — an append-only, auditable record of how each definition was sourced.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/sie-blackboard/', label: 'Definition Blackboard Manager documentation' }],
         repos: [
@@ -153,23 +145,22 @@ export const solutions: Solution[] = [
     fullName: 'Generative System Model',
     tag: 'Standard',
     zone: 'THINK',
-    zoneLabel: 'define',
     href: '/solutions/gsm',
-    tagline: 'The Generative System Model — the vendor-neutral standard for defining and governing systems; the top of every funnel.',
+    tagline: 'The Generative System Model — the vendor-neutral standard for defining systems; grounded in systemics; being to THINK what OpenTelemetry semantic convention is to RUN.',
     description:
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
     products: [
       {
         slug: 'specification',
-        name: 'The Specification',
-        tagline: 'A small fixed core, an open type system — machine-checkable meaning.',
+        name: 'Specifications',
+        tagline: 'The core spec — eight primitives, DNA grammar, Archetyping, and the systemic lifecycle.',
         description:
-          'The GSM specification: eight primitives, the DNA governance grammar, the open Archetype type system, and a normative lifecycle with defined conformance — the published artifact every implementation is measured against.',
+          'The GSM specification: eight systemic primitives, the DNA governance grammar, Archetyping as the open type system, and systemic lifecycle management — the published artifact every implementation is measured against.',
         features: [
-          { slug: 'primitives', name: 'Eight primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
-          { slug: 'grammar', name: 'DNA governance grammar', blurb: 'Directives (intent), Norms (machine-evaluable assertions), Ascriptions (typed instances bound to subjects) — a three-tempo grammar for how obligations bind.' },
-          { slug: 'archetypes', name: 'Archetypes — the type system', blurb: 'Typed JSON Schema domain schemas that carry vocabulary, grammar, and semantics — meaning travels with the type; frameworks extend GSM without forking it.' },
-          { slug: 'interop', name: 'Lifecycle, conformance & portability', blurb: 'A normative Ascription lifecycle, conformance for documents / producers / consumers / processors, sandboxed expression profiles, canonical JSON interchange.' },
+          { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
+          { slug: 'dna-grammar', name: 'DNA grammar', blurb: 'Directives, Norms, and Ascriptions — the three-tempo grammar for how intent becomes an evaluable, bound obligation.' },
+          { slug: 'archetyping', name: 'Archetyping', blurb: 'Typed JSON Schema domain schemas that carry vocabulary, grammar, and semantics — meaning travels with the type.' },
+          { slug: 'systemic-lifecycle-management', name: 'Systemic lifecycle management', blurb: 'A normative Ascription lifecycle governs how every definition is drafted, approved, activated, and deprecated.' },
         ],
         docs: [
           { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM documentation' },
@@ -179,15 +170,16 @@ export const solutions: Solution[] = [
       },
       {
         slug: 'frameworks',
-        name: 'GSM Frameworks',
-        tagline: 'Established bodies of knowledge, sourced into GSM — ready to enforce.',
+        name: 'Frameworks',
+        tagline: 'Domain, standard, and legal vocabularies — sourced into GSM, ready to enforce.',
         description:
-          'The published, versioned catalogue of governance, compliance, architecture, and regulatory frameworks sourced into GSM-compatible schemas — ready-made Archetypes, Directives, and Norms you attach instead of authoring from scratch. Surfaced in ITIP through the Framework Catalog & Composer.',
+          'The published, versioned catalogue of vocabularies and governance content sourced into GSM-compatible schemas: domain and standard semantics, legal vocabularies, evaluable Directives and Norms, and executable Mechanisms. Surfaced in ITIP through the Framework Catalog & Composer.',
         features: [
-          { slug: 'architecture-frameworks', name: 'Architecture frameworks', blurb: 'TOGAF and peers sourced as typed Archetypes — the architecture vocabulary lives in the type system, not in someone\u2019s head.' },
-          { slug: 'quality-models', name: 'Quality models', blurb: 'ISO 25010 / 25012 quality characteristics as measurable Norms — \u201creliability\u201d means the same thing in every review.' },
-          { slug: 'regulations', name: 'Regulations', blurb: 'GDPR, NIS2, DORA sourced into Directives and Norms — each clause traceable to its source, coverage continuous and provable.' },
-          { slug: 'composition', name: 'Composable governance fabric', blurb: 'Every framework speaks the same DNA grammar, so a regulation, a quality model, and an architecture framework layer into one coherent fabric — overlaps merged, no silos.' },
+          { slug: 'domain-vocabularies', name: 'Domain vocabularies & semantics', blurb: 'Domain-specific concepts and meaning sourced as typed Archetypes — the vocabulary of a business or technical domain, machine-readable.' },
+          { slug: 'standard-vocabularies', name: 'Standard vocabularies & semantics', blurb: 'Architecture and quality standards — TOGAF, ISO 25010 / 25012, and peers — sourced as typed Archetypes.' },
+          { slug: 'legal-vocabularies', name: 'Legal vocabularies & semantics', blurb: 'Regulatory concepts — GDPR, NIS2, DORA, and peers — sourced as typed Archetypes, legal vocabulary made machine-readable.' },
+          { slug: 'legal-directives-norms', name: 'Legal Directives & Norms (evaluable)', blurb: 'Regulatory obligations sourced into evaluable Directives and Norms — each clause traceable to its source, coverage continuous and provable.' },
+          { slug: 'standard-mechanisms', name: 'Standard Mechanisms (executable)', blurb: 'Standard behaviors sourced into executable Mechanisms — governance that runs, not just documents.' },
         ],
         repos: [{ href: 'https://github.com/poesis-cloud/gsm-frameworks', label: 'gsm-frameworks' }],
       },
@@ -195,56 +187,57 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'framework',
-    name: 'SAFe Agentic',
+    name: 'Agentic Framework',
     fullName: 'SAFe Agentic Framework',
     tag: 'Framework + Portfolio',
     zone: 'THINK',
-    zoneLabel: 'orchestrate · generate',
     href: '/solutions/framework',
-    tagline: 'The SAFe Agentic Framework — open (Apache-2.0) agentic orchestration across portfolio, program, and iteration; BUILD is its last orchestration layer.',
+    tagline: 'The Agentic Framework — for any IT profile to deliver through local agentic orchestrations yielding standard and homogeneous artifacts synchronized on a central shared repo contextualizing other local agentic orchestrations — a safe way — complementing ITIP and integrating with SIE.',
     description:
       'SAFe-shaped multi-agent orchestration spanning THINK — portfolio, product, and team workflows — down to the BUILD hand-off, where code is generated from governed GSM definitions and deployed; a human ★ gate at every layer closes THINK → BUILD → RUN.',
     products: [
       {
-        slug: 'orchestration',
-        name: 'Orchestration Framework',
-        tagline: 'Portfolio → program → iteration — an org chart of agents, not a flat swarm.',
-        description:
-          'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
-        features: [
-          { slug: 'orchestrators', name: 'Three-layer orchestration', blurb: 'Portfolio, program, and iteration orchestrators run the show — with a human ★ gate at every layer.' },
-          { slug: 'bench', name: 'Specialist bench', blurb: 'Product, architecture, security, QA, UX, DevOps specialists dispatched into each ceremony as stateless subagents — division of labor makes each agent small and accurate.' },
-          { slug: 'ceremonies', name: 'Ceremonies & artifacts', blurb: 'SAFe ceremonies as governed workflows producing typed artifacts — epics, features, stories, ADRs — validated against schemas, not vibes.' },
-          { slug: 'human-gates', name: 'Human ★ gates', blurb: 'Every layer ends at a human decision point — agents propose through evidence; humans dispose.' },
-        ],
-        docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/distributed-agentic-safe/', label: 'Distributed Agentic SAFe' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
-      },
-      {
         slug: 'harness',
-        name: 'Deterministic Harness',
+        name: 'Agentic Harness',
         tagline: 'Gates, conditions, and a ledger that keep probabilistic agents on rails.',
         description:
           'The workflow step graphs are validated by a deterministic harness — methodology- and host-agnostic, so the same method runs unchanged on any agent host, and work state lives in your own files and git history.',
         features: [
-          { slug: 'gates', name: 'Step gates & conditions', blurb: 'Pre, invariant, and post conditions checked deterministically at every step — agents move through evidence and sequence, not vibes.' },
-          { slug: 'ledger', name: 'Append-only ledger', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
-          { slug: 'portable', name: 'Portable across hosts', blurb: 'The harness resolves, checks, injects, and records against plain files and a stable CLI — VS Code today, another IDE or CI runner tomorrow, no lock-in.' },
-          { slug: 'local-first', name: 'Local-first & sovereign', blurb: 'The agent loop runs on your machine against your working tree — sensitive information never leaves; state lives in your files and git history.' },
+          { slug: 'workflows-steps-resolution', name: 'Workflows & steps resolution', blurb: 'Workflow and step graphs are resolved deterministically from plain files — the same method runs unchanged on any agent host.' },
+          { slug: 'skills-instructions-prompt-injection', name: 'Skills and instructions prompt injection', blurb: 'Skills and instructions are injected into the agent\u2019s context at the right step — knowledge arrives exactly when it\u2019s needed.' },
+          { slug: 'llm-resolution', name: 'LLM resolution', blurb: 'The harness resolves which model backs each step — swappable, host-agnostic, no hard-wired vendor lock-in.' },
+          { slug: 'artifact-validation', name: 'Artifact validation', blurb: 'Every artifact produced by a step is validated against its schema before the step is considered complete.' },
+          { slug: 'step-authorization', name: 'Step authorization', blurb: 'Pre, invariant, and post conditions gate every step — agents move through evidence and sequence, not vibes.' },
+          { slug: 'logging', name: 'Logging', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework overview' }],
         repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
       },
       {
-        slug: 'portfolio',
-        name: 'Agentic Portfolio',
-        tagline: 'The SAFe portfolio itself, as governed files — epics to stories, synced.',
+        slug: 'orchestration',
+        name: 'SAFe Agentic Organization',
+        tagline: 'Portfolio → program → iteration — an org chart of agents, not a flat swarm.',
         description:
-          'The portfolio artifact layer: epic / feature / story templates, kanbans, and sprint plans as typed, schema-validated files in git — with synchronization to GitHub Projects, so orchestration state is inspectable and versioned.',
+          'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
         features: [
-          { slug: 'artifacts', name: 'Typed SAFe artifacts', blurb: 'Epics, features, stories, retros, PI objectives as schema-validated artifacts — the backlog is data, not prose.' },
-          { slug: 'kanbans', name: 'Kanbans & sprints', blurb: 'Portfolio and iteration kanbans as files in git — state transitions are commits, history is the audit trail.' },
-          { slug: 'sync', name: 'GitHub Projects sync', blurb: 'The file-based portfolio syncs to GitHub Projects — one source of truth, visible where teams already work.' },
+          { slug: 'agents', name: 'Agents', blurb: 'Role agents — architect, developer, QA, product, security — dispatched into each SAFe ceremony as stateless subagents.' },
+          { slug: 'skills', name: 'Skills', blurb: 'Reusable, tested capabilities agents load on demand — domain knowledge and refined workflows, not ad hoc prompting.' },
+          { slug: 'workflows', name: 'Workflows', blurb: 'SAFe ceremonies as governed workflows — portfolio, program, and iteration — producing typed artifacts, not prose.' },
+          { slug: 'instructions', name: 'Instructions', blurb: 'Persistent conventions and rules that shape how agents write and edit — the org\u2019s engineering standards, enforced at every step.' },
+          { slug: 'artifacts', name: 'Artifacts', blurb: 'Epics, features, stories, ADRs — schema-validated outputs every ceremony produces and every gate checks.' },
+        ],
+        docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/distributed-agentic-safe/', label: 'Distributed Agentic SAFe' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
+      },
+      {
+        slug: 'portfolio',
+        name: 'Agentic Workspace',
+        tagline: 'Wire the framework into your working tree and your pipelines.',
+        description:
+          'The distribution layer: an installer that wires the Agentic Harness, the SAFe Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
+        features: [
+          { slug: 'installer', name: 'Installer', blurb: 'One installer wires the harness, agents, skills, and workflows into your working tree — local-first, sovereign, no lock-in.' },
+          { slug: 'cicd-pipelines', name: 'CI/CD pipelines of artifacts', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],

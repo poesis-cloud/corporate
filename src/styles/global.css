@@ -869,19 +869,9 @@ a:hover {
 .arch-scope-meta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: .6rem;
   flex-wrap: wrap;
   margin-bottom: .7rem;
-}
-
-.arch-zone {
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
 }
 
 .arch-scope h3 {
