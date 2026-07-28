@@ -1211,6 +1211,7 @@ a:hover {
 }
 
 @media (max-width: 900px) {
+
   .arch-grid,
   .arch-think-grid {
     grid-template-columns: 1fr;
