@@ -283,7 +283,7 @@ a:hover {
   gap: .25rem;
 }
 
-.nav-subgroup-row > a {
+.nav-subgroup-row>a {
   flex: 1;
 }
 
@@ -315,7 +315,7 @@ a:hover {
   transition: transform .15s ease;
 }
 
-.nav-subgroup.open > .nav-subgroup-row .nav-subgroup-toggle span {
+.nav-subgroup.open>.nav-subgroup-row .nav-subgroup-toggle span {
   transform: rotate(90deg);
 }
 
@@ -329,7 +329,7 @@ a:hover {
   border-left: 1px solid var(--line);
 }
 
-.nav-subgroup.open > .nav-submenu {
+.nav-subgroup.open>.nav-submenu {
   display: flex;
 }
 
