@@ -235,7 +235,7 @@ function adherencePills(ids: string[]) {
                   <button class="vf-fold-btn" type="button" data-fold="f-itip" aria-controls="f-itip" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-itip" hidden>
                     <div class="vf-comp"><b>itip-web-application</b> — planned human gate for intent, approval, simulation, appraisal, and audit</div>
-                    <div class="vf-comp"><b>itip-frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
+                    <div class="vf-comp"><b>gsm-frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
                     <div class="vf-comp"><b>itip-definition-blackboard-*-sourcer</b> — designed to wrap LLMs / agents as KnowledgeSources over code repositories; other source classes require adapters</div>
                   </div>
                 </div>
@@ -649,7 +649,7 @@ function adherencePills(ids: string[]) {
       schema: [
         {
           label: 'Governed definition base',
-          actors: [{ n: 'sie-definition-manager' }, { n: 'itip-frameworks' }, { n: 'Regulation', side: 'human' }],
+          actors: [{ n: 'sie-definition-manager' }, { n: 'gsm-frameworks' }, { n: 'Regulation', side: 'human' }],
           note: 'in-effect Definitions, Norms, modeled Interactions',
         },
         {
@@ -868,7 +868,7 @@ function adherencePills(ids: string[]) {
       schema: [
         {
           label: 'Obligation and policy sources',
-          actors: [{ n: 'itip-frameworks' }],
+          actors: [{ n: 'gsm-frameworks' }],
           note: 'GDPR, NIS2, DORA, AI Act, TOGAF, ISO, internal policy',
         },
         {
@@ -896,7 +896,7 @@ function adherencePills(ids: string[]) {
       feedback: 'Appraisal of outcomes against Norms is what tells the organisation when its own constraints need to change.',
       organisation: ['Regulatory obligation and internal policy expressed in one enforceable grammar rather than in documents no system reads', 'Constraints that bound model behaviour without depending on any model’s cooperation'],
       poesis: ['A single constraint grammar that every adherence in this map is evaluated against', 'Governed vocabulary that widens through framework sourcing without changing the runtime'],
-      comps: 'Implemented in <b>sie-definition-manager</b> with vocabulary sourced through <b>itip-frameworks</b>; enforcement in <b>sie-operator</b>, where automatic Norm preflight remains to be built.',
+      comps: 'Implemented in <b>sie-definition-manager</b> with vocabulary sourced through <b>gsm-frameworks</b>; enforcement in <b>sie-operator</b>, where automatic Norm preflight remains to be built.',
     },
     {
       id: 'dis', loop: true, rail: 0, hex: '#fb923c', from: 'n-org-sup', to: 'n-itip', lane: -6,
