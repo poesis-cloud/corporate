@@ -809,88 +809,10 @@ a:hover {
 }
 
 .arch-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-/* inner THINK layout: solution stack + framework side column */
-.arch-think-grid {
   display: grid;
-  grid-template-columns: 1fr auto minmax(240px, .8fr);
+  grid-template-columns: 1fr auto minmax(240px, .55fr);
   gap: 0;
   align-items: stretch;
-  flex: 1;
-}
-
-/* THINK / BUILD / RUN zone context boxes */
-.arch-zonebox {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  border: 1px dashed var(--line-strong);
-  border-radius: 14px;
-  padding: .85rem;
-  background: rgba(255, 255, 255, .015);
-}
-
-.arch-zone-head {
-  display: flex;
-  align-items: baseline;
-  gap: .7rem;
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: .75rem;
-}
-
-.arch-zone-name {
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.arch-zonebox--build .arch-zone-name,
-.arch-zonebox--run .arch-zone-name {
-  color: var(--accent-3);
-}
-
-.arch-zonebox--run .arch-zone-name {
-  color: var(--accent);
-}
-
-.arch-zonebox--build {
-  border-color: rgba(129, 140, 248, .3);
-}
-
-/* RUN / BUILD context zone boxes (no solution box inside) */
-.arch-context {
-  margin: 0;
-  font-size: .85rem;
-  color: var(--muted);
-}
-
-/* RUN / BUILD as full-width horizontal strips above/below THINK */
-.arch-zonebox--strip {
-  flex-direction: row;
-  align-items: baseline;
-  gap: 1rem;
-  padding: .85rem 1.2rem;
-}
-
-.arch-zonebox--strip .arch-zone-head {
-  margin-bottom: 0;
-  flex-shrink: 0;
-}
-
-.arch-zonebox--strip .arch-context {
-  flex: 1;
 }
 
 .arch-stack {
@@ -1212,41 +1134,9 @@ a:hover {
   margin-inline: auto;
 }
 
-/* horizontal variant: bridges between stacked zones */
-.arch-bridge--h {
-  padding: .35rem 0;
-  min-width: 0;
-}
-
-.arch-bridge--h span {
-  writing-mode: horizontal-tb;
-}
-
-.arch-bridge--h span::before,
-.arch-bridge--h span::after {
-  width: 2.4rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-3), transparent);
-  margin-block: auto;
-}
-
-/* loopback strip closing the RUN ⟲ THINK ⟶ BUILD loop */
-.arch-loopback {
-  margin-top: .7rem;
-  border: 1px dashed var(--line);
-  border-radius: 10px;
-  padding: .5rem .9rem;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: .66rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 @media (max-width: 900px) {
 
-  .arch-think-grid {
+  .arch-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1276,11 +1166,6 @@ a:hover {
   .arch-legend {
     flex-direction: column;
     gap: .15rem;
-  }
-
-  .arch-zonebox--strip {
-    flex-direction: column;
-    gap: .35rem;
   }
 }
 

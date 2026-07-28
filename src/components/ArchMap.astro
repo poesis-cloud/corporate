@@ -1,39 +1,26 @@
 ---
 /**
  * ArchMap — the Poesis portfolio rendered as an interactive architecture map.
- * Zones: RUN ⟵ THINK ⟶ BUILD context boxes, looping back (BUILD deploys into
- * RUN, RUN evidences back into THINK). Nesting: zone > Solution boxes >
- * Product boxes > Feature chips.
+ * Nesting: Solution boxes > Product boxes > Feature chips.
  * Every box is clickable: solution → /solutions/[solution],
  * product → /solutions/[solution]/products/[product],
  * feature → /solutions/[solution]/products/[product]#[feature].
  */
 import { solutions } from '../data/solutions.ts';
 
-const stack = solutions.filter((s) => s.zone === 'THINK' && s.slug !== 'framework');
+const stack = solutions.filter((s) => s.slug !== 'framework');
 const framework = solutions.find((s) => s.slug === 'framework')!;
 ---
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
-    <span>poesis portfolio · run ⟲ think ⟶ build · solutions ⊃ products ⊃ features</span>
+    <span>poesis portfolio · solutions ⊃ products ⊃ features</span>
     <span>every box is clickable</span>
   </div>
 
   <div class="arch-grid">
-    <section class="arch-zonebox arch-zonebox--run arch-zonebox--strip" aria-label="RUN zone">
-      <header class="arch-zone-head"><span class="arch-zone-name">RUN</span><span>enforce · observe</span></header>
-      <p class="arch-context">Your IT landscape — deployed from generated artifacts, enforced by the <a href="/solutions/sie/products/operator">Operator</a>, observed back as evidence into the definitions.</p>
-    </section>
-
-    <div class="arch-bridge arch-bridge--h" aria-hidden="true"><span>evidence ⇄ enforcement</span></div>
-
-    <section class="arch-zonebox arch-zonebox--think" aria-label="THINK zone">
-      <header class="arch-zone-head"><span class="arch-zone-name">THINK</span><span>define · govern · regulate · supervise · generate</span></header>
-      <div class="arch-think-grid">
-        <div class="arch-stack">
+    <div class="arch-stack">
         {stack.map((s, i) => (
-          <>
-            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
+          <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
             <article class={`arch-scope${s.slug === 'gsm' ? ' arch-scope--standard' : ''}`}>
               <div class="arch-scope-meta">
                 <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag} · Solution</span>
@@ -62,11 +49,11 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
             </article>
           </>
         ))}
-        </div>
+    </div>
 
-        <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ generated artifacts</span></div>
+    <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ generated artifacts</span></div>
 
-        <aside class="arch-side">
+    <aside class="arch-side">
           <article class="arch-scope arch-scope--framework">
             <div class="arch-scope-meta">
               <span class="tag tag--muted">{framework.tag} · Solution</span>
@@ -94,16 +81,5 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
             </details>
           </article>
         </aside>
-      </div>
-    </section>
-
-    <div class="arch-bridge arch-bridge--h" aria-hidden="true"><span>generate → deploy</span></div>
-
-    <section class="arch-zonebox arch-zonebox--build arch-zonebox--strip" aria-label="BUILD zone">
-      <header class="arch-zone-head"><span class="arch-zone-name">BUILD</span><span>generate · deploy</span></header>
-      <p class="arch-context">The last <a href={framework.href}>SAFe Agentic</a> orchestration layer: the <a href="/solutions/framework/products/orchestration">iteration layer</a> generates code from governed definitions; pipelines build and deploy it into RUN.</p>
-    </section>
   </div>
-
-  <div class="arch-loopback" aria-hidden="true"><span>⟵ build deploys into run · run evidences back into think — the loop closes ⟲</span></div>
 </div>
