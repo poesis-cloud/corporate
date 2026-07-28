@@ -39,9 +39,9 @@ export const solutions: Solution[] = [
     slug: 'itip',
     name: 'ITIP',
     fullName: 'IT Intelligence Platform',
-    tag: 'Application',
+    tag: 'Domain Platform',
     zone: 'THINK',
-    zoneLabel: 'THINK · apply',
+    zoneLabel: 'apply',
     href: '/solutions/itip',
     tagline: 'Govern and define the IT landscape as a single source of truth, and generate IT artifacts.',
     description:
@@ -102,7 +102,7 @@ export const solutions: Solution[] = [
     fullName: 'Systemic Intelligence Engine',
     tag: 'Engine',
     zone: 'THINK',
-    zoneLabel: 'THINK · operate',
+    zoneLabel: 'operate',
     href: '/solutions/sie',
     tagline: 'Implements GSM, operates the definitions, enforces their lifecycle — powers every domain application above it.',
     description:
@@ -167,7 +167,7 @@ export const solutions: Solution[] = [
     fullName: 'Generative System Model',
     tag: 'Standard',
     zone: 'THINK',
-    zoneLabel: 'THINK · define',
+    zoneLabel: 'define',
     href: '/solutions/gsm',
     tagline: 'The vendor-neutral standard for defining and governing systems — the top of every funnel.',
     description:
@@ -199,7 +199,7 @@ export const solutions: Solution[] = [
     fullName: 'SAFe Agentic Framework',
     tag: 'Framework + Portfolio',
     zone: 'BUILD',
-    zoneLabel: 'BUILD · generate',
+    zoneLabel: 'generate',
     href: '/solutions/framework',
     tagline: 'The open (Apache-2.0) BUILD layer — agents that turn prose or definitions into Build artifacts, auditable and reviewable.',
     description:

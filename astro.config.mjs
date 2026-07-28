@@ -7,7 +7,8 @@ export default defineConfig({
   site: 'https://poesis.cloud',
   integrations: [sitemap()],
   redirects: {
-    '/products': '/solutions',
+    '/products': '/#portfolio',
+    '/solutions': '/#portfolio',
     '/gsm': '/solutions/gsm',
     '/sie': '/solutions/sie',
     '/itip': '/solutions/itip',

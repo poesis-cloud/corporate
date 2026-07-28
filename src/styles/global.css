@@ -815,15 +815,58 @@ a:hover {
   align-items: stretch;
 }
 
+/* THINK / BUILD / RUN zone context boxes */
+.arch-zonebox {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px dashed var(--line-strong);
+  border-radius: 14px;
+  padding: .85rem;
+  background: rgba(255, 255, 255, .015);
+}
+
+.arch-zone-head {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .75rem;
+}
+
+.arch-zone-name {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.arch-zonebox--build .arch-zone-name {
+  color: var(--accent-3);
+}
+
+.arch-zonebox--build {
+  border-color: rgba(129, 140, 248, .3);
+}
+
 .arch-stack {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 1;
 }
 
 .arch-side {
   display: flex;
   min-width: 0;
+  flex: 1;
 }
 
 /* functional scope block */
@@ -911,6 +954,57 @@ a:hover {
 .arch-scope>p {
   font-size: .92rem;
   margin-bottom: .9rem;
+}
+
+/* collapsible Products / Features groups */
+.arch-group {
+  margin: 0;
+  min-width: 0;
+}
+
+.arch-group > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  user-select: none;
+  padding: .15rem 0;
+  transition: color .15s ease;
+}
+
+.arch-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.arch-group > summary::before {
+  content: "▸";
+  font-size: .7rem;
+  color: var(--accent);
+  transition: transform .15s ease;
+}
+
+.arch-scope--framework .arch-group > summary::before {
+  color: var(--accent-3);
+}
+
+.arch-group[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.arch-group > summary:hover,
+.arch-group > summary:focus-visible {
+  color: var(--ink);
+}
+
+.arch-group[open] > summary {
+  margin-bottom: .55rem;
 }
 
 /* product boxes nested inside a solution box */
@@ -1083,18 +1177,14 @@ a:hover {
 
 /* RUN strip closing the loop */
 .arch-run {
-  display: flex;
+  flex-direction: row;
   align-items: baseline;
   gap: 1rem;
-  border: 1px dashed var(--line-strong);
-  border-radius: 12px;
   padding: .85rem 1.2rem;
-  background: rgba(255, 255, 255, .015);
 }
 
-.arch-zone--run {
+.arch-run .arch-zone-name {
   color: var(--accent);
-  font-size: .78rem;
 }
 
 .arch-run p {
