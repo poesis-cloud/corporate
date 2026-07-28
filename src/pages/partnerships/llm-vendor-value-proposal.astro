@@ -535,7 +535,10 @@ function adherencePills(ids: string[]) {
     margin: 0 0 1rem; padding: .7rem .75rem; border: 1px solid var(--line-strong);
     border-radius: 10px; background: var(--bg-ink);
   }
-  #vf .vf-schema-row { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .1rem; }
+  #vf .vf-schema-body { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .8rem 1.4rem; align-items: start; }
+  #vf .vf-schema-graph { position: relative; padding: .15rem 2.6rem; min-width: 0; }
+  #vf .vf-schema-wires { position: absolute; inset: 0; pointer-events: none; }
+  #vf .vf-schema-nodes { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 1.7rem; }
   #vf .vf-node {
     display: inline-flex; flex-direction: column; align-items: flex-start; gap: .1rem;
     padding: .34rem .5rem; border-radius: 7px; border: 1px solid transparent; max-width: 200px;
@@ -551,9 +554,14 @@ function adherencePills(ids: string[]) {
   #vf .vf-node-todo {
     font-family: inherit; font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; opacity: .75;
   }
-  #vf .vf-edge { display: inline-flex; flex-direction: column; align-items: center; max-width: 132px; padding: 0 .18rem; }
-  #vf .vf-edge-arrow { color: var(--muted); font-size: .8rem; line-height: 1; }
-  #vf .vf-edge-label { font-size: .63rem; line-height: 1.25; color: var(--muted); text-align: center; }
+  #vf .vf-schema-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: .42rem; align-content: start; }
+  #vf .vf-schema-steps li { display: flex; gap: .5rem; align-items: baseline; font-size: .72rem; line-height: 1.35; color: var(--muted); }
+  #vf .vf-step-num {
+    flex: none; width: 1.05rem; height: 1.05rem; border-radius: 50%; align-self: flex-start;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line-strong); background: var(--bg-soft); color: var(--ink);
+    font-family: var(--font-mono); font-size: .58rem;
+  }
   #vf .vf-schema-legend { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 0 0 .6rem; }
   #vf .vf-schema-legend .vf-node { font-family: inherit; font-size: .63rem; padding: .12rem .38rem; }
   #vf .vf-schema-feedback {
@@ -588,6 +596,7 @@ function adherencePills(ids: string[]) {
     #vf .vf-gutter { display: none; }
     #vf #vf-wires { display: none; }
     #vf .vf-dcols { grid-template-columns: 1fr; }
+    #vf .vf-schema-body { grid-template-columns: 1fr; }
     #vf .vf-mobile-flows { display: grid; gap: .65rem; margin-top: 1rem; }
     #vf .vf-mobile-flow {
       display: grid; gap: .18rem; width: 100%; min-width: 0; padding: .8rem .9rem;
@@ -905,26 +914,118 @@ function adherencePills(ids: string[]) {
     });
   }
 
+  function schemaGraph(flow) {
+    const nodes = [];
+    const indexByName = new Map();
+    flow.schema.forEach((entry) => {
+      if (!indexByName.has(entry.n)) {
+        indexByName.set(entry.n, nodes.length);
+        nodes.push({ n: entry.n, side: entry.side, todo: Boolean(entry.todo) });
+      } else if (entry.todo) {
+        nodes[indexByName.get(entry.n)].todo = true;
+      }
+    });
+    const edges = [];
+    for (let i = 1; i < flow.schema.length; i += 1) {
+      edges.push({
+        from: indexByName.get(flow.schema[i - 1].n),
+        to: indexByName.get(flow.schema[i].n),
+        label: flow.schema[i].via || '',
+      });
+    }
+    return { nodes, edges };
+  }
+
   function schemaMarkup(flow) {
     if (!flow.schema || !flow.schema.length) return '';
-    const chain = flow.schema
+    const { nodes, edges } = schemaGraph(flow);
+    const boxes = nodes
       .map((node, index) => {
         const side = node.side;
         const kind = side === 'llm' || side === 'human' || side === 'material' ? side : 'poesis';
         const todo = node.todo ? '<span class="vf-node-todo">planned</span>' : '';
-        const box = `<span class="vf-node vf-node-${kind}">${node.n}${todo}</span>`;
-        if (index === 0 || !node.via) return box;
-        return `<span class="vf-edge"><span class="vf-edge-arrow" aria-hidden="true">&#8594;</span><span class="vf-edge-label">${node.via}</span></span>${box}`;
+        return `<span class="vf-node vf-node-${kind}" data-n="${index}">${node.n}${todo}</span>`;
       })
+      .join('');
+    const steps = edges
+      .map((edge, index) => `<li><span class="vf-step-num">${index + 1}</span><span>${edge.label || '&mdash;'}</span></li>`)
       .join('');
     const feedback = flow.feedback
       ? `<p class="vf-schema-feedback">&#8617; ${flow.feedback}</p>`
       : '';
-    return `<div class="vf-schema" role="img" aria-label="Flow: ${flow.schema.map((node) => node.n).join(' to ')}">
+    return `<div class="vf-schema">
       <p class="vf-schema-legend"><span class="vf-node vf-node-llm">LLM operation</span><span class="vf-node vf-node-poesis">Poesis stack component</span><span class="vf-node vf-node-human">organisation operation</span><span class="vf-node vf-node-material">material</span></p>
-      <div class="vf-schema-row">${chain}</div>
+      <div class="vf-schema-body">
+        <div class="vf-schema-graph" data-schema-flow="${flow.id}" role="img" aria-label="Flow: ${flow.schema.map((node) => node.n).join(' to ')}">
+          <svg class="vf-schema-wires" aria-hidden="true"></svg>
+          <div class="vf-schema-nodes">${boxes}</div>
+        </div>
+        <ol class="vf-schema-steps">${steps}</ol>
+      </div>
       ${feedback}
     </div>`;
+  }
+
+  function drawSchemas() {
+    document.querySelectorAll('.vf-schema-graph[data-schema-flow]').forEach((graph) => {
+      const flow = FLOWS.find((candidate) => candidate.id === graph.dataset.schemaFlow);
+      const wires = graph.querySelector('.vf-schema-wires');
+      if (!flow || !wires) return;
+      const boxes = Array.from(graph.querySelectorAll('.vf-node[data-n]'));
+      if (!boxes.length) return;
+      const gRect = graph.getBoundingClientRect();
+      wires.setAttribute('width', String(graph.clientWidth));
+      wires.setAttribute('height', String(graph.clientHeight));
+      const box = (index) => {
+        const r = boxes[index].getBoundingClientRect();
+        return {
+          left: r.left - gRect.left,
+          right: r.right - gRect.left,
+          top: r.top - gRect.top,
+          bottom: r.bottom - gRect.top,
+          midY: r.top + r.height / 2 - gRect.top,
+        };
+      };
+      const stackLeft = box(0).left;
+      const maxRight = boxes.reduce(
+        (max, el) => Math.max(max, el.getBoundingClientRect().right - gRect.left),
+        0,
+      );
+      const wire = (d) => `<path d="${d}" fill="none" stroke-width="1.5" style="stroke: var(--muted)" opacity="0.85"/>`;
+      const head = (d) => `<path d="${d}" style="fill: var(--muted)" opacity="0.85"/>`;
+      const badge = (x, y, n) =>
+        `<circle cx="${x}" cy="${y}" r="7.5" style="fill: var(--bg-soft); stroke: var(--line-strong)"/>` +
+        `<text x="${x}" y="${y + 3}" text-anchor="middle" style="fill: var(--ink); font: 600 9px var(--font-mono)">${n}</text>`;
+      let leftLanes = 0;
+      let rightLanes = 0;
+      const usedAdjacent = new Set();
+      let markup = '';
+      schemaGraph(flow).edges.forEach((edge, index) => {
+        const a = box(edge.from);
+        const b = box(edge.to);
+        const num = index + 1;
+        if (edge.to === edge.from + 1 && !usedAdjacent.has(`${edge.from}-${edge.to}`)) {
+          usedAdjacent.add(`${edge.from}-${edge.to}`);
+          const x = stackLeft + 16;
+          markup += wire(`M ${x} ${a.bottom} V ${b.top - 5}`);
+          markup += head(`M ${x} ${b.top - 1} L ${x - 3.5} ${b.top - 7} L ${x + 3.5} ${b.top - 7} Z`);
+          markup += badge(x + 17, (a.bottom + b.top) / 2, num);
+        } else if (edge.to > edge.from) {
+          leftLanes += 1;
+          const lane = stackLeft - 10 - leftLanes * 9;
+          markup += wire(`M ${a.left} ${a.midY} H ${lane} V ${b.midY} H ${b.left - 6}`);
+          markup += head(`M ${b.left - 1} ${b.midY} L ${b.left - 7} ${b.midY - 3.5} L ${b.left - 7} ${b.midY + 3.5} Z`);
+          markup += badge(lane, (a.midY + b.midY) / 2, num);
+        } else {
+          rightLanes += 1;
+          const lane = maxRight + 10 + rightLanes * 9;
+          markup += wire(`M ${a.right} ${a.midY} H ${lane} V ${b.midY} H ${b.right + 6}`);
+          markup += head(`M ${b.right + 1} ${b.midY} L ${b.right + 7} ${b.midY - 3.5} L ${b.right + 7} ${b.midY + 3.5} Z`);
+          markup += badge(lane, (a.midY + b.midY) / 2, num);
+        }
+      });
+      wires.innerHTML = markup;
+    });
   }
 
   function adherenceMarkup(flow) {
@@ -953,6 +1054,7 @@ function adherencePills(ids: string[]) {
     detail.hidden = false;
     detail.innerHTML = `<h3>${title}</h3>${flows.map(adherenceMarkup).join('')}`;
     draw();
+    drawSchemas();
     detail.focus({ preventScroll: true });
     detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -1031,6 +1133,9 @@ function adherencePills(ids: string[]) {
     });
   });
 
-  window.addEventListener('resize', draw);
+  window.addEventListener('resize', () => {
+    draw();
+    drawSchemas();
+  });
   draw();
 </script>

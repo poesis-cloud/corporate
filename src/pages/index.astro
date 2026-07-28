@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArchMap from '../components/ArchMap.astro';
 
 const demoUrl = 'https://demo.poesis.cloud';
 ---
@@ -27,91 +28,7 @@ const demoUrl = 'https://demo.poesis.cloud';
         <p class="lead">GSM roots the <i>definitions</i> (governance intents and specifications) into systemics field; SIE operates the <i>definitions</i>; ITIP applies that to IT; the SAFe Agentic generates <i>definitions</i> and operational artifacts from <i>definitions</i>; and Poesis services deliver the change. Each piece links to the other to close the IT Think-Build-Run loop, <strong>systematically and autonomously</strong>, <strong>with humans in the loop.</strong></p>
       </div>
 
-      <div class="arch" aria-label="Poesis stack — functional architecture map">
-        <div class="arch-legend" aria-hidden="true">
-          <span>poesis stack · functional architecture</span>
-          <span>every block is clickable</span>
-        </div>
-
-        <div class="arch-grid">
-          <div class="arch-stack">
-            <article class="arch-scope">
-              <div class="arch-scope-meta">
-                <span class="tag tag--muted">Application</span>
-                <span class="arch-zone">THINK · apply</span>
-              </div>
-              <h3><a href="/itip">ITIP</a></h3>
-              <p>The IT Intelligence Platform — govern and define the IT landscape as a single source of truth, and generate IT artifacts.</p>
-              <nav class="arch-comps" aria-label="ITIP components">
-                <a class="arch-comp" href="/itip#definition">Definition</a>
-                <a class="arch-comp" href="/itip#truth-sourcing">Truth sourcing</a>
-                <a class="arch-comp" href="/itip#frameworks">Frameworks</a>
-                <a class="arch-comp" href="/itip#artifactory">Artifactory</a>
-              </nav>
-            </article>
-
-            <div class="arch-joint" aria-hidden="true"><span>built on · powered by</span></div>
-
-            <article class="arch-scope">
-              <div class="arch-scope-meta">
-                <span class="tag tag--muted">Engine</span>
-                <span class="arch-zone">THINK · operate</span>
-              </div>
-              <h3><a href="/sie">SIE</a></h3>
-              <p>The Systemic Intelligence Engine — implements GSM, operates the <i>definitions</i>, enforces their lifecycle, and powers every domain application above it.</p>
-              <nav class="arch-comps" aria-label="SIE components">
-                <a class="arch-comp" href="/sie#definition-manager">Definition Manager</a>
-                <a class="arch-comp" href="/sie#operator">Operator</a>
-                <a class="arch-comp" href="/sie#blackboard">Blackboard</a>
-              </nav>
-            </article>
-
-            <div class="arch-joint" aria-hidden="true"><span>implements</span></div>
-
-            <article class="arch-scope arch-scope--standard">
-              <div class="arch-scope-meta">
-                <span class="tag">Standard</span>
-                <span class="arch-zone">THINK · define</span>
-              </div>
-              <h3><a href="/gsm">GSM</a></h3>
-              <p>The Generative System Model — the vendor-neutral standard for defining and governing systems. Publicly readable, the top of every funnel.</p>
-              <nav class="arch-comps" aria-label="GSM components">
-                <a class="arch-comp" href="/gsm#primitives">Eight primitives</a>
-                <a class="arch-comp" href="/gsm#grammar">DNA grammar</a>
-                <a class="arch-comp" href="/gsm#archetypes">Archetypes</a>
-                <a class="arch-comp" href="/gsm#interop">Lifecycle &amp; conformance</a>
-              </nav>
-            </article>
-          </div>
-
-          <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ build artifacts</span></div>
-
-          <aside class="arch-side">
-            <article class="arch-scope arch-scope--framework">
-              <div class="arch-scope-meta">
-                <span class="tag tag--muted">Framework + Portfolio</span>
-                <span class="arch-zone">BUILD · generate</span>
-              </div>
-              <h3><a href="/framework">SAFe Agentic</a></h3>
-              <p>The open (Apache-2.0) BUILD layer — a portfolio-to-iteration orchestration of AI agents that turns prose or <i>definitions</i> into Build artifacts, an analytical, auditable, and reviewable way.</p>
-              <nav class="arch-comps" aria-label="SAFe Agentic components">
-                <a class="arch-comp" href="/framework#orchestration">Orchestration</a>
-                <a class="arch-comp" href="/framework#bench">Specialist bench</a>
-                <a class="arch-comp" href="/framework#harness">Deterministic harness</a>
-                <a class="arch-comp" href="/framework#local-first">Local-first</a>
-                <a class="arch-comp" href="/framework#portable">Portable</a>
-              </nav>
-            </article>
-          </aside>
-        </div>
-
-        <div class="arch-joint" aria-hidden="true"><span>enforces · observes</span></div>
-
-        <div class="arch-run">
-          <span class="arch-zone arch-zone--run">RUN</span>
-          <p>Your IT landscape — deployed from generated artifacts, enforced by the Operator, observed back as evidence into the definitions.</p>
-        </div>
-      </div>
+      <ArchMap />
     </div>
   </section>
 

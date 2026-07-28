@@ -1,0 +1,87 @@
+---
+/**
+ * Product sub-page — one page per Product inside each Solution.
+ * URL: /[solution]/[product] (e.g. /sie/definition-manager).
+ * Lists the product's Features (each with an anchor targeted by the ArchMap chips).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { solutions } from '../../data/solutions.ts';
+
+export function getStaticPaths() {
+  return solutions.flatMap((solution) =>
+    solution.products.map((product) => ({
+      params: { solution: solution.slug, product: product.slug },
+      props: { solution, product },
+    }))
+  );
+}
+
+const { solution, product } = Astro.props;
+const siblings = solution.products.filter((p) => p.slug !== product.slug);
+---
+<BaseLayout
+  title={`${product.name} · ${solution.name}`}
+  description={`${product.name} — a product of the ${solution.fullName} solution. ${product.tagline}`}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow"><a href={solution.href}>{solution.fullName}</a> · Product</p>
+      <h1>{product.name}.</h1>
+      <p class="lead">{product.tagline}</p>
+      <p class="lead">{product.description}</p>
+      {(product.docs || product.repos) && (
+        <div class="hero-cta">
+          {product.docs?.[0] && <a class="btn btn-primary" href={product.docs[0].href}>Read the docs</a>}
+          {product.repos?.[0] && <a class="btn btn-ghost" href={product.repos[0].href}>Source on GitHub</a>}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">Features</p>
+      <h2>What {product.name} does.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {product.features.map((f) => (
+          <div class="card" id={f.slug}>
+            <h3>{f.name}</h3>
+            <p>{f.blurb}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {(product.docs || product.repos) && (
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Build with us</p>
+        <h2>Documentation &amp; source.</h2>
+        <ul class="link-list">
+          {product.docs?.map((d) => <li><a href={d.href}>{d.label} →</a></li>)}
+          {product.repos?.map((r) => <li><a href={r.href}>{r.label} →</a></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {siblings.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <p class="eyebrow">In the same solution</p>
+        <h2>The other {solution.name} products.</h2>
+        <div class="grid grid-2" style="margin-top:1.5rem">
+          {siblings.map((p) => (
+            <div class="card">
+              <h3>{p.name}</h3>
+              <p>{p.tagline}</p>
+              <p style="margin-top:.6rem"><a href={`${solution.href}/${p.slug}`}>About {p.name} →</a></p>
+            </div>
+          ))}
+        </div>
+        <p style="margin-top:1.5rem" class="muted"><a href={solution.href}>← Back to {solution.fullName}</a> &middot; <a href="/solutions">Portfolio map</a></p>
+      </div>
+    </section>
+  )}
+</BaseLayout>

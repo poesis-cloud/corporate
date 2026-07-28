@@ -1,5 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { solutions } from '../../data/solutions.ts';
+
+const gsm = solutions.find((s) => s.slug === 'gsm')!;
 ---
 <BaseLayout
   title="The Standard (GSM)"
@@ -53,50 +56,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">What it specifies</p>
+      <p class="eyebrow">Products</p>
       <h2>A small fixed core, an open type system.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card"><h3>Eight primitives</h3><p>Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.</p><p style="margin-top:.6rem"><a href="#primitives">Explore ↓</a></p></div>
-        <div class="card"><h3>DNA governance grammar</h3><p>Directives, Norms, and Ascriptions — a three-tempo grammar for how obligations bind to subjects.</p><p style="margin-top:.6rem"><a href="#grammar">Explore ↓</a></p></div>
-        <div class="card"><h3>Archetypes — the type system</h3><p>Typed domain schemas that carry vocabulary, grammar, and semantics, so meaning travels with the type.</p><p style="margin-top:.6rem"><a href="#archetypes">Explore ↓</a></p></div>
-        <div class="card"><h3>Lifecycle, conformance &amp; portability</h3><p>A normative Ascription lifecycle, defined conformance, sandboxed expression profiles, and a canonical JSON interchange.</p><p style="margin-top:.6rem"><a href="#interop">Explore ↓</a></p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="primitives" class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">Core</p>
-      <h2>Eight primitives.</h2>
-      <p class="lead">GSM expresses any system with eight primitives — Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, and Norm. The core is deliberately small and fixed: small enough to stay coherent, universal enough to describe any software-intensive system. Primitives carry no free-form prose; meaning is inferred from typed relations and Archetype schemas, which is what keeps the model machine-checkable.</p>
-      <p><a href="https://docs.poesis.cloud/gsm/foundations/">Foundations →</a></p>
-    </div>
-  </section>
-
-  <section id="grammar" class="section">
-    <div class="container">
-      <p class="eyebrow">Governance grammar</p>
-      <h2>The DNA governance grammar.</h2>
-      <p class="lead">Governance is expressed in three tempos — <strong>Directives</strong> (intent), <strong>Norms</strong> (machine-evaluable assertions), and <strong>Ascriptions</strong> (typed instances bound to subjects). DNA is how an obligation becomes something a machine can scope, version, and enforce — not prose to reinterpret on every call.</p>
-      <p><a href="https://docs.poesis.cloud/gsm/specification/">Specification →</a></p>
-    </div>
-  </section>
-
-  <section id="archetypes" class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">Type system</p>
-      <h2>Archetypes — the open type system.</h2>
-      <p class="lead">Archetypes are typed schemas (JSON Schema 2020-12) that fix vocabulary, grammar, and semantics for a domain — so meaning travels with the type rather than living in someone's head. The core is fixed; the type system is open, which is how frameworks and domains extend GSM without forking it.</p>
-      <p><a href="https://docs.poesis.cloud/gsm/foundations/">Foundations →</a></p>
-    </div>
-  </section>
-
-  <section id="interop" class="section">
-    <div class="container">
-      <p class="eyebrow">Interoperability</p>
-      <h2>Lifecycle, conformance &amp; portability.</h2>
-      <p class="lead">A normative Ascription lifecycle (DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED) makes governed change auditable. Conformance is defined for documents, producers, consumers, and processors; two sandboxed expression profiles and a canonical JSON interchange make governed definitions portable across conforming tools.</p>
-      <p><a href="https://docs.poesis.cloud/gsm/conformance/">Conformance →</a></p>
+      {gsm.products.map((p) => (
+        <div class="grid grid-2" style="margin-top:1.5rem">
+          {p.features.map((f) => (
+            <div class="card">
+              <h3>{f.name}</h3>
+              <p>{f.blurb}</p>
+              <p style="margin-top:.6rem"><a href={`/gsm/${p.slug}#${f.slug}`}>Explore →</a></p>
+            </div>
+          ))}
+        </div>
+      ))}
+      <p style="margin-top:1.5rem"><a href="/gsm/specification">About the Specification product →</a></p>
     </div>
   </section>
 

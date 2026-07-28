@@ -1,50 +1,49 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArchMap from '../components/ArchMap.astro';
+import { solutions } from '../data/solutions.ts';
 ---
 <BaseLayout
-  title="Portfolio"
-  description="The Poesis portfolio: the GSM standard, the SIE engine, the ITIP application, the SAFe Agentic Framework, and the transformation services around them."
+  title="Solutions"
+  description="The Poesis portfolio as an architecture map: the GSM standard, the SIE engine, the ITIP application, and the SAFe Agentic Framework — each solution, its products, and their features."
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Portfolio</p>
-      <h1>One standard, one engine, one application.</h1>
-      <p class="lead">The pieces compose top to bottom: GSM defines the meaning, SIE runs it, ITIP applies it to IT, the framework generates from it, and services deliver the change.</p>
+      <p class="eyebrow">Solutions</p>
+      <h1>One standard, one engine, one application — and the agents that build from them.</h1>
+      <p class="lead">The portfolio composes top to bottom: GSM defines the meaning, SIE runs it, ITIP applies it to IT, and the SAFe Agentic Framework generates from it. Every box below is clickable — solutions open their page, products open their sub-page, features jump to their section.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="grid grid-2">
-        <div class="card">
-          <span class="tag">Standard</span>
-          <h3>GSM</h3>
-          <p>The Generative System Model — the open, vendor-neutral standard for defining and governing systems.</p>
-          <p style="margin-top:.6rem"><a href="/gsm">About GSM →</a> &middot; <a href="https://docs.poesis.cloud/gsm/">Docs</a> &middot; <a href="https://github.com/poesis-cloud/gsm">Repo</a></p>
-        </div>
-        <div class="card">
-          <span class="tag tag--muted">Engine</span>
-          <h3>SIE</h3>
-          <p>The Systemic Intelligence Engine — hosts GSM, enforces its lifecycle, and powers the domain applications above it.</p>
-          <p style="margin-top:.6rem"><a href="/sie">About SIE →</a> &middot; <a href="https://docs.poesis.cloud/sie-definition/">Docs</a> &middot; <a href="https://github.com/poesis-cloud">Repos</a></p>
-        </div>
-        <div class="card">
-          <span class="tag tag--muted">Application</span>
-          <h3>ITIP</h3>
-          <p>The IT Intelligence Platform — the first domain application, governing the IT landscape as a single source of truth.</p>
-          <p style="margin-top:.6rem"><a href="/itip">About ITIP →</a> &middot; <a href="https://docs.poesis.cloud/itip/">Docs</a> &middot; <a href="https://github.com/poesis-cloud">Repos</a></p>
-        </div>
-        <div class="card">
-          <span class="tag tag--muted">Framework</span>
-          <h3>SAFe Agentic Framework</h3>
-          <p>The open (Apache-2.0) BUILD layer that turns governed definitions into runnable code.</p>
-          <p style="margin-top:.6rem"><a href="/framework">About the framework →</a> &middot; <a href="https://github.com/poesis-cloud/safe-agentic-framework">Repo</a></p>
-        </div>
-      </div>
+      <ArchMap />
     </div>
   </section>
 
   <section class="section section--soft">
+    <div class="container">
+      <p class="eyebrow">The solutions</p>
+      <h2>Four solutions, one governed loop.</h2>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {solutions.map((s) => (
+          <div class="card">
+            <span class={`tag${s.slug === 'gsm' ? '' : ' tag--muted'}`}>{s.tag}</span>
+            <h3>{s.fullName}</h3>
+            <p>{s.description}</p>
+            <p style="margin-top:.6rem">
+              <a href={s.href}>About {s.name} →</a>
+              {s.products.map((p) => (
+                <> &middot; <a href={`${s.href}/${p.slug}`}>{p.name}</a></>
+              ))}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container center">
       <h2>Bring it to your organization.</h2>
       <p class="lead" style="margin-inline:auto">The transformation services deploy the whole stack as the governed substrate of your change.</p>

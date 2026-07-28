@@ -1,5 +1,5 @@
 ---
-import { products } from '../data/products.ts';
+import { solutionLinks } from '../data/solutions.ts';
 
 const year = new Date().getFullYear();
 ---
@@ -13,11 +13,12 @@ const year = new Date().getFullYear();
         <p class="footer-tag">Harnessing generative AI for an age of governed synthetic autopoiesis.</p>
       </div>
       <div>
-        <h4>Products</h4>
+        <h4>Solutions</h4>
         <ul>
-          {products.map((p) => (
+          {solutionLinks.map((p) => (
             <li><a href={p.href}>{p.label}</a></li>
           ))}
+          <li><a href="/solutions">The portfolio map</a></li>
         </ul>
       </div>
       <div>

@@ -851,11 +851,69 @@ a:hover {
   margin-bottom: .9rem;
 }
 
-/* component chips */
+/* product boxes nested inside a solution box */
+.arch-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: .7rem;
+}
+
+.arch-scope--framework .arch-products {
+  grid-template-columns: 1fr;
+}
+
+.arch-product {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: .8rem .85rem;
+  background: rgba(255, 255, 255, .02);
+  min-width: 0;
+  transition: border-color .15s ease;
+}
+
+.arch-product:hover {
+  border-color: rgba(45, 212, 191, .35);
+}
+
+.arch-scope--framework .arch-product:hover {
+  border-color: rgba(129, 140, 248, .45);
+}
+
+.arch-product h4 {
+  margin: 0 0 .55rem;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.arch-product h4 a {
+  color: var(--ink);
+}
+
+.arch-product h4 a::after {
+  content: " →";
+  color: var(--accent-ink);
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+.arch-product:hover h4 a::after,
+.arch-product h4 a:focus-visible::after {
+  opacity: 1;
+}
+
+.arch-product h4 a:hover {
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+/* feature chips */
 .arch-comps {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: .4rem;
   margin-top: auto;
 }
 
@@ -864,10 +922,10 @@ a:hover {
   align-items: center;
   gap: .4rem;
   font-family: var(--font-mono);
-  font-size: .8rem;
+  font-size: .74rem;
   font-weight: 600;
   letter-spacing: .02em;
-  padding: .38rem .7rem;
+  padding: .3rem .55rem;
   border-radius: 8px;
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, .03);

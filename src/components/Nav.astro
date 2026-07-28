@@ -1,6 +1,11 @@
 ---
-import { products } from '../data/products.ts';
+import { solutionLinks } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
+
+const solutionsMenu = [
+  { href: '/solutions', label: 'All solutions — the portfolio map' },
+  ...solutionLinks,
+];
 
 const external = [
   { href: 'https://docs.poesis.cloud', label: 'Docs' },
@@ -28,10 +33,10 @@ const external = [
     <nav class="nav-links" id="primary-navigation" aria-label="Primary">
       <div class="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Products <span aria-hidden="true">▾</span>
+          Solutions <span aria-hidden="true">▾</span>
         </button>
         <ul class="nav-dropdown-menu" role="menu">
-          {products.map((l) => (
+          {solutionsMenu.map((l) => (
             <li role="none">
               <a href={l.href} role="menuitem">{l.label}</a>
             </li>
