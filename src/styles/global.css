@@ -962,7 +962,7 @@ a:hover {
   min-width: 0;
 }
 
-.arch-group > summary {
+.arch-group>summary {
   list-style: none;
   cursor: pointer;
   display: inline-flex;
@@ -979,31 +979,31 @@ a:hover {
   transition: color .15s ease;
 }
 
-.arch-group > summary::-webkit-details-marker {
+.arch-group>summary::-webkit-details-marker {
   display: none;
 }
 
-.arch-group > summary::before {
+.arch-group>summary::before {
   content: "▸";
   font-size: .7rem;
   color: var(--accent);
   transition: transform .15s ease;
 }
 
-.arch-scope--framework .arch-group > summary::before {
+.arch-scope--framework .arch-group>summary::before {
   color: var(--accent-3);
 }
 
-.arch-group[open] > summary::before {
+.arch-group[open]>summary::before {
   transform: rotate(90deg);
 }
 
-.arch-group > summary:hover,
-.arch-group > summary:focus-visible {
+.arch-group>summary:hover,
+.arch-group>summary:focus-visible {
   color: var(--ink);
 }
 
-.arch-group[open] > summary {
+.arch-group[open]>summary {
   margin-bottom: .55rem;
 }
 
