@@ -20,12 +20,12 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
   </div>
 
   <div class="arch-grid">
-    <section class="arch-zonebox arch-zonebox--run" aria-label="RUN zone">
+    <section class="arch-zonebox arch-zonebox--run arch-zonebox--strip" aria-label="RUN zone">
       <header class="arch-zone-head"><span class="arch-zone-name">RUN</span><span>enforce · observe</span></header>
       <p class="arch-context">Your IT landscape — deployed from generated artifacts, enforced by the <a href="/solutions/sie/products/operator">Operator</a>, observed back as evidence into the definitions.</p>
     </section>
 
-    <div class="arch-bridge" aria-hidden="true"><span>evidence ⇄ enforcement</span></div>
+    <div class="arch-bridge arch-bridge--h" aria-hidden="true"><span>evidence ⇄ enforcement</span></div>
 
     <section class="arch-zonebox arch-zonebox--think" aria-label="THINK zone">
       <header class="arch-zone-head"><span class="arch-zone-name">THINK</span><span>define · govern · regulate · supervise · generate</span></header>
@@ -97,9 +97,9 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
       </div>
     </section>
 
-    <div class="arch-bridge arch-bridge--build" aria-hidden="true"><span>generate → deploy</span></div>
+    <div class="arch-bridge arch-bridge--h" aria-hidden="true"><span>generate → deploy</span></div>
 
-    <section class="arch-zonebox arch-zonebox--build" aria-label="BUILD zone">
+    <section class="arch-zonebox arch-zonebox--build arch-zonebox--strip" aria-label="BUILD zone">
       <header class="arch-zone-head"><span class="arch-zone-name">BUILD</span><span>generate · deploy</span></header>
       <p class="arch-context">The last <a href={framework.href}>SAFe Agentic</a> orchestration layer: the <a href="/solutions/framework/products/orchestration">iteration layer</a> generates code from governed definitions; pipelines build and deploy it into RUN.</p>
     </section>

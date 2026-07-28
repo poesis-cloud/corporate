@@ -809,9 +809,8 @@ a:hover {
 }
 
 .arch-grid {
-  display: grid;
-  grid-template-columns: minmax(170px, .3fr) auto 1fr auto minmax(180px, .32fr);
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   align-items: stretch;
 }
 
@@ -875,6 +874,23 @@ a:hover {
   margin: 0;
   font-size: .85rem;
   color: var(--muted);
+}
+
+/* RUN / BUILD as full-width horizontal strips above/below THINK */
+.arch-zonebox--strip {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .85rem 1.2rem;
+}
+
+.arch-zonebox--strip .arch-zone-head {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.arch-zonebox--strip .arch-context {
+  flex: 1;
 }
 
 .arch-stack {
@@ -1196,6 +1212,24 @@ a:hover {
   margin-inline: auto;
 }
 
+/* horizontal variant: bridges between stacked zones */
+.arch-bridge--h {
+  padding: .35rem 0;
+  min-width: 0;
+}
+
+.arch-bridge--h span {
+  writing-mode: horizontal-tb;
+}
+
+.arch-bridge--h span::before,
+.arch-bridge--h span::after {
+  width: 2.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-3), transparent);
+  margin-block: auto;
+}
+
 /* loopback strip closing the RUN ⟲ THINK ⟶ BUILD loop */
 .arch-loopback {
   margin-top: .7rem;
@@ -1212,7 +1246,6 @@ a:hover {
 
 @media (max-width: 900px) {
 
-  .arch-grid,
   .arch-think-grid {
     grid-template-columns: 1fr;
   }
@@ -1243,6 +1276,11 @@ a:hover {
   .arch-legend {
     flex-direction: column;
     gap: .15rem;
+  }
+
+  .arch-zonebox--strip {
+    flex-direction: column;
+    gap: .35rem;
   }
 }
 
