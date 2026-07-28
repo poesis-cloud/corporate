@@ -1,15 +1,14 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const itip = solutions.find((s) => s.slug === 'itip')!;
+const [h1, ...rest] = itip.tagline.split(' — ');
+const lead = rest.join(' — ');
+const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 const demoUrl = 'https://demo.poesis.cloud';
 const azureUrl = 'https://azuremarketplace.microsoft.com';
-const repos = [
-  { href: 'https://github.com/poesis-cloud/itip-web-frontend', label: 'itip-web-frontend' },
-  { href: 'https://github.com/poesis-cloud/itip-web-backend', label: 'itip-web-backend' },
-  { href: 'https://github.com/poesis-cloud/itip-definition-blackboard-repository-sourcer', label: 'itip-definition-blackboard-repository-sourcer' },
-];
 ---
 <BaseLayout
   title="ITIP"
@@ -17,12 +16,13 @@ const repos = [
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Domain Intelligence Platform</p>
-      <h1>The IT Intelligence Platform.</h1>
-      <p class="lead">ITIP is where every IT profile converges — architects, developers, ops, project managers, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. It is the first domain application built on <a href="/solutions/sie">SIE</a>, translating the <a href="/solutions/gsm">GSM</a> standard for the IT domain.</p>
+      <p class="eyebrow">{itip.tag} · Solution</p>
+      <h1>{h1}.</h1>
+      <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href={demoUrl}>Try now</a>
         <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/">Read the docs</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud">Browse the repos</a>
       </div>
     </div>
   </section>
@@ -40,10 +40,14 @@ const repos = [
           <h3>A source of truth AI can act on.</h3>
           <p>Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.</p>
         </div>
-      </div>
-      <div class="hero-cta" style="margin-top:1.5rem">
-        <a class="btn btn-primary" href={demoUrl}>Try now</a>
-        <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/">Read the docs</a>
+        <div class="card card--feature">
+          <h3>Every IT profile converges.</h3>
+          <p>Architects define, developers consult, ops watch drift, project managers track state, security audits coverage — one platform, one governed inventory, no translation silos between the people who run your IT.</p>
+        </div>
+        <div class="card card--feature">
+          <h3>Frameworks stacked, not siloed.</h3>
+          <p>TOGAF, ISO 25000-series, GDPR, NIS2, DORA — attached from the catalogue and composed into one enforceable governance fabric, so regulations and quality models inform every decision instead of living in separate lists.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -52,21 +56,7 @@ const repos = [
     <div class="container">
       <p class="eyebrow">Products</p>
       <h2>Two products, one governed loop.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        {itip.products.map((p) => (
-          <div class="card">
-            <span class="tag tag--muted">Product</span>
-            <h3>{p.name}</h3>
-            <p>{p.tagline}</p>
-            <p style="margin-top:.8rem">
-              {p.features.map((f, i) => (
-                <>{i > 0 && ' · '}<a href={`${itip.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
-              ))}
-            </p>
-            <p style="margin-top:.6rem"><a href={`${itip.href}/products/${p.slug}`}>About {p.name} →</a></p>
-          </div>
-        ))}
-      </div>
+      <ProductCards solution={itip} />
     </div>
   </section>
 
@@ -79,19 +69,6 @@ const repos = [
         <a class="btn btn-primary" href={demoUrl}>ITIP demo instance <span class="tag tag--muted">incoming</span></a>
         <a class="btn btn-ghost" href={azureUrl}>Azure Marketplace <span class="tag tag--muted">coming soon</span></a>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">Build with us</p>
-      <h2>Documentation &amp; source.</h2>
-      <p class="lead">ITIP is part of the open Poesis stack.</p>
-      <ul class="link-list">
-        <li><a href="https://docs.poesis.cloud/itip/">ITIP documentation →</a></li>
-        {repos.map((r) => <li><a href={r.href}>{r.label} →</a></li>)}
-      </ul>
-      <p style="margin-top:1.5rem" class="muted">Built on <a href="/solutions/sie">SIE</a> · implements the <a href="/solutions/gsm">GSM</a> standard.</p>
     </div>
   </section>
 </BaseLayout>

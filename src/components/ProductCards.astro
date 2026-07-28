@@ -1,0 +1,29 @@
+---
+/**
+ * ProductCards — the Products section grid shared by all solution pages.
+ * One clickable card per Product (→ product page), with one pill per
+ * Feature (→ feature anchor on the product page).
+ */
+import type { Solution } from '../data/solutions.ts';
+
+interface Props {
+  solution: Solution;
+}
+
+const { solution } = Astro.props;
+const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
+---
+<div class={`grid ${cols}`} style="margin-top:1.5rem">
+  {solution.products.map((p) => (
+    <div class="card card--product">
+      <span class="tag tag--muted">Product</span>
+      <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
+      <p>{p.tagline}</p>
+      <div class="pill-row">
+        {p.features.map((f) => (
+          <a class="pill" href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

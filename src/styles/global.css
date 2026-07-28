@@ -600,6 +600,51 @@ a:hover {
   line-height: 1.2;
 }
 
+/* ---- clickable product cards + feature pills ---------------------------- */
+.card--product h3 {
+  margin-top: .85rem;
+}
+
+.card-cover {
+  color: inherit;
+}
+
+.card-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin-top: 1rem;
+}
+
+.pill {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  line-height: 1.3;
+  padding: .28rem .65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+
+.pill:hover,
+.pill:focus-visible {
+  border-color: rgba(45, 212, 191, .45);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
 /* ---- tags / pills ------------------------------------------------------- */
 .tag {
   display: inline-block;

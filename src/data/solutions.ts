@@ -11,11 +11,17 @@ export interface Feature {
   blurb: string;
 }
 
+export interface Value {
+  title: string;
+  body: string;
+}
+
 export interface ProductDef {
   slug: string;
   name: string;
   tagline: string;
   description: string;
+  values: Value[];
   features: Feature[];
   docs?: { href: string; label: string }[];
   repos?: { href: string; label: string }[];
@@ -51,6 +57,12 @@ export const solutions: Solution[] = [
         tagline: 'The platform every IT profile works in — definition, governance, generation.',
         description:
           'The web application and its backend-for-frontend: the governed definition inventory, the framework catalog & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
+        values: [
+          { title: 'One place every IT profile works.', body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
+          { title: 'Compliance observed, not reconstructed.', body: 'Continuous appraisal indicators are computed from the model across meta-governance and governance zones — your compliance posture is a live dashboard, not a spreadsheet rebuilt before each audit.' },
+          { title: 'Deliverables fall out of the model.', body: 'ADR packs, compliance evidence, architecture baselines, roadmaps — generated from the definitions, each artifact traceable back to the exact definitions it derives from.' },
+          { title: 'See the impact before you commit.', body: 'Changes ripple through typed relations, so the blast radius of a decision is simulated from the model — traced, not guessed in a meeting.' },
+        ],
         features: [
           { slug: 'it-artifact-factory', name: 'IT artifact factory', blurb: 'Generate any IT deliverable from the definitions — ADR packs, compliance evidence, architecture baselines, roadmaps — each artifact traceable to its definitions.' },
           { slug: 'it-compliance-evaluation', name: 'IT compliance evaluation', blurb: 'Continuous governance indicators — measures and findings computed from the model, so compliance is observed, not reconstructed before each audit.' },
@@ -71,6 +83,11 @@ export const solutions: Solution[] = [
         tagline: 'Truth sourcing — the model reflects reality, continuously.',
         description:
           'The sourcing pipeline that reads real IT artifacts — source code, API contracts, infrastructure — and posts them as evidence-backed contributions to the SIE Definition Blackboard Manager, so the definition stays anchored to the real system instead of drifting from it.',
+        values: [
+          { title: 'The model reflects what actually runs.', body: 'A bench of knowledge sources — code index, property graph, SBOM, dependency analysis, inference — continuously reads your repositories and sources them into governed GSM definitions, so governance never drifts from implementation.' },
+          { title: 'Every definition is explainable.', body: 'Each identification is posted with a confidence score and a full provenance envelope — which source, which revision, which tools — never as an unexplained fact.' },
+          { title: 'Private by design.', body: 'Deterministic tool outputs stay in-memory inside the sourcer process; only confidence-bearing contributions ever leave it, sealed and audited on the blackboard.' },
+        ],
         features: [
           { slug: 'automatic-sourcing-from-code-repos', name: 'Automatic sourcing of GSM Definitions from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.' },
         ],
@@ -96,6 +113,11 @@ export const solutions: Solution[] = [
         tagline: 'The authoritative store of every governed definition — the heart of the engine.',
         description:
           'The Definition Manager hosts GSM, manages the Ascription lifecycle, and enforces the DNA governance grammar across tenant schemas. It is the authoritative store of every governed definition.',
+        values: [
+          { title: 'Governance you can\u2019t corrupt.', body: 'The Ascription lifecycle is a validated state machine with referee preconditions — invalid transitions, malformed grammar, and orphaned references never enter the model.' },
+          { title: 'An API, not a document store.', body: 'Definitions are served through a RESTful API with live OpenAPI and structured problem responses — machine-operable at scale, across isolated tenant schemas.' },
+          { title: 'Audit-ready by construction.', body: 'Every governed change is a retained, versioned state transition — the history of the model is the audit trail, not a report assembled after the fact.' },
+        ],
         features: [
           { slug: 'definitions-management-api', name: 'GSM Definitions management RESTful API', blurb: 'A RESTful API to create, read, update, and query every governed GSM definition — the authoritative interface to the model.' },
           { slug: 'definitions-lifecycle-enforcement', name: 'GSM Definitions lifecycle enforcement', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a validated state transition, auditable end to end.' },
@@ -113,6 +135,11 @@ export const solutions: Solution[] = [
         tagline: 'The rule runtime — definitions become a running control loop.',
         description:
           'The Operator evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement — the THINK layer acting on the RUN layer.',
+        values: [
+          { title: 'A runtime for governance.', body: 'Like a JVM for definitions: the Operator resolves a Mechanism, type-checks its inputs against Archetype schemas, evaluates its rule, and dispatches typed effects — five deterministic phases, every boundary validated.' },
+          { title: 'Sandboxed, reproducible verdicts.', body: 'Rules run in a step-limited sandbox with no ambient authority and no side effects — the same inputs always produce the same verdict, so enforcement is trustworthy by construction.' },
+          { title: 'The model stays analyzable.', body: 'Effectors and receptors are derived from the rule code itself, not declared by hand — the governance topology is always exactly what the rules actually do.' },
+        ],
         features: [
           { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state — governance as a control loop, not a review meeting.' },
           { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms — verdicts and rules become dispatched, effector-driven actions.' },
@@ -126,6 +153,11 @@ export const solutions: Solution[] = [
         tagline: 'Collaborative definition-sourcing with provenance intact.',
         description:
           'The Definition Blackboard Manager is a collaborative definition-sourcing service: contributors post evidence-backed contributions over declared panels, the board is sealed to a byte-stable state, and every mutation lands in an append-only audit ledger.',
+        values: [
+          { title: 'Evidence, never guesses.', body: 'Every contribution carries a confidence score and a provenance envelope — probabilistic identifications are labeled as such, and deterministic facts never masquerade as contributions.' },
+          { title: 'Sealed means sealed.', body: 'OPEN → SEALED → BYTE_STABLE, no way back — a sealed board is immutable and its contribution stream byte-stable, so promotion into governed definitions is reproducible.' },
+          { title: 'Every mutation on the ledger.', body: 'Contributions, seals, panel updates — each one produces an immutable audit entry, transactional with the mutation it records. The sourcing history cannot be rewritten.' },
+        ],
         features: [
           { slug: 'ks-contributions-management-api', name: 'KS Contributions management RESTful API', blurb: 'A RESTful API for knowledge sources to declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.' },
           { slug: 'ks-contributions-lifecycle-enforcement', name: 'KS Contributions lifecycle enforcement', blurb: 'OPEN → SEALED → BYTE_STABLE — sealed boards are immutable, and the contribution stream is byte-stable for reproducible promotion.' },
@@ -156,6 +188,11 @@ export const solutions: Solution[] = [
         tagline: 'The core spec — eight primitives, DNA grammar, Archetyping, and the systemic lifecycle.',
         description:
           'The GSM specification: eight systemic primitives, the DNA governance grammar, Archetyping as the open type system, and systemic lifecycle management — the published artifact every implementation is measured against.',
+        values: [
+          { title: 'Define, don\u2019t describe.', body: 'A description trails the system; a definition declares what it must become. BUILD implements from the definition and RUN measures against it — documentation stops drifting because it is the source, not the echo.' },
+          { title: 'Traceable governance, end to end.', body: 'The DNA grammar chains every obligation: a Directive opens the scope, Norms make it measurable, Ascriptions carry the concrete bindings — no floating constraints, no untraceable rules.' },
+          { title: 'Meaning that travels.', body: 'Archetypes carry vocabulary and semantics as typed schemas, so a definition means the same thing in every tool that reads it — portable across vendors, precise across teams.' },
+        ],
         features: [
           { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
           { slug: 'dna-grammar', name: 'DNA grammar', blurb: 'Directives, Norms, and Ascriptions — the three-tempo grammar for how intent becomes an evaluable, bound obligation.' },
@@ -174,6 +211,11 @@ export const solutions: Solution[] = [
         tagline: 'Domain, standard, and legal vocabularies — sourced into GSM, ready to enforce.',
         description:
           'The published, versioned catalogue of vocabularies and governance content sourced into GSM-compatible schemas: domain and standard semantics, legal vocabularies, evaluable Directives and Norms, and executable Mechanisms. Surfaced in ITIP through the Framework Catalog & Composer.',
+        values: [
+          { title: 'Day-one governance, not a blank page.', body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
+          { title: 'The authority\u2019s own taxonomy, clause by clause.', body: 'Each framework is organized by its own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
+          { title: 'Frameworks that compose, not collide.', body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
+        ],
         features: [
           { slug: 'domain-vocabularies', name: 'Domain vocabularies & semantics', blurb: 'Domain-specific concepts and meaning sourced as typed Archetypes — the vocabulary of a business or technical domain, machine-readable.' },
           { slug: 'standard-vocabularies', name: 'Standard vocabularies & semantics', blurb: 'Architecture and quality standards — TOGAF, ISO 25010 / 25012, and peers — sourced as typed Archetypes.' },
@@ -202,6 +244,11 @@ export const solutions: Solution[] = [
         tagline: 'Gates, conditions, and a ledger that keep probabilistic agents on rails.',
         description:
           'The workflow step graphs are validated by a deterministic harness — methodology- and host-agnostic, so the same method runs unchanged on any agent host, and work state lives in your own files and git history.',
+        values: [
+          { title: 'Deterministic rails for probabilistic agents.', body: 'Every step passes precondition, authorization, and postcondition checks grounded in persisted configuration — agents advance through evidence and sequence, not vibes.' },
+          { title: 'Invalid bytes never land.', body: 'Agents stage writes in the working tree; the harness validates artifacts against their schemas before commit — invalid output is discarded and restored, so committed state is always clean.' },
+          { title: 'One method, any host.', body: 'The harness is a stable CLI over plain files — the same workflows run in your IDE today and a CI runner tomorrow, with no relearning and no lock-in.' },
+        ],
         features: [
           { slug: 'workflows-steps-resolution', name: 'Workflows & steps resolution', blurb: 'Workflow and step graphs are resolved deterministically from plain files — the same method runs unchanged on any agent host.' },
           { slug: 'skills-instructions-prompt-injection', name: 'Skills and instructions prompt injection', blurb: 'Skills and instructions are injected into the agent\u2019s context at the right step — knowledge arrives exactly when it\u2019s needed.' },
@@ -219,6 +266,11 @@ export const solutions: Solution[] = [
         tagline: 'Portfolio → program → iteration — an org chart of agents, not a flat swarm.',
         description:
           'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
+        values: [
+          { title: 'An org chart, not a swarm.', body: 'Portfolio, program, and iteration orchestrators dispatch a bench of specialist role agents — each one small, bounded, and well-specified, which is exactly when probabilistic models are most reliable and cheapest.' },
+          { title: 'A method agents must implement.', body: 'SAFe ceremonies become governed workflows producing typed, schema-validated artifacts — the method is an enforceable contract between human and machine, not a suggestion.' },
+          { title: 'Agents propose, humans dispose.', body: 'Every layer ends at a human ★ gate — agents bring evidence through checks and sequence; the decision that matters stays yours.' },
+        ],
         features: [
           { slug: 'agents', name: 'Agents', blurb: 'Role agents — architect, developer, QA, product, security — dispatched into each SAFe ceremony as stateless subagents.' },
           { slug: 'skills', name: 'Skills', blurb: 'Reusable, tested capabilities agents load on demand — domain knowledge and refined workflows, not ad hoc prompting.' },
@@ -235,6 +287,11 @@ export const solutions: Solution[] = [
         tagline: 'Wire the framework into your working tree and your pipelines.',
         description:
           'The distribution layer: an installer that wires the Agentic Harness, the SAFe Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
+        values: [
+          { title: 'Your files, your history, your state.', body: 'Work state lives in plain files under your own git history — the event log is your repository, not a vendor\u2019s cloud. Sensitive context never leaves your machine.' },
+          { title: 'Install once, deliver governed.', body: 'One installer wires the harness, agents, skills, and workflows into any working tree — a governed agentic delivery organization, minutes after clone.' },
+          { title: 'The same gates run in CI.', body: 'The pipelines validate and publish the artifacts agents produce with the same deterministic checks that run locally — what passed on your machine passes in the pipeline.' },
+        ],
         features: [
           { slug: 'installer', name: 'Installer', blurb: 'One installer wires the harness, agents, skills, and workflows into your working tree — local-first, sovereign, no lock-in.' },
           { slug: 'cicd-pipelines', name: 'CI/CD pipelines of artifacts', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },

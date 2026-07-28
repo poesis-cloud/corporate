@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const framework = solutions.find((s) => s.slug === 'framework')!;
+const [h1, ...rest] = framework.tagline.split(' — ');
+const lead = rest.join(' — ');
+const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
+const demoUrl = 'https://demo.poesis.cloud';
+const azureUrl = 'https://azuremarketplace.microsoft.com';
 ---
 <BaseLayout
   title="The Framework"
@@ -10,11 +16,12 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Open · Apache-2.0</p>
-      <h1>The SAFe Agentic Framework.</h1>
-      <p class="lead">Open agentic orchestration for the whole THINK space — portfolio, product, and team workflows — down to BUILD, its last orchestration layer, where governed GSM definitions become runnable code — closing THINK → BUILD → RUN.</p>
+      <p class="eyebrow">{framework.tag} · Solution</p>
+      <h1>{h1}.</h1>
+      <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/safe-agentic-framework/">Read the docs</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/safe-agentic-framework/quickstart/">Quickstart</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud/safe-agentic-framework">Get it on GitHub</a>
       </div>
     </div>
@@ -33,10 +40,14 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
           <h3>A method, run by agents, as a harness.</h3>
           <p>AI runs on intuition — exactly like we do — and methods are how intuition becomes reliable. SAFe, run by agents with a human ★ gate at every layer, is the cognitive harness that makes agentic delivery trustworthy. You don't wait for a smarter model; you make it implement a method.</p>
         </div>
-      </div>
-      <div class="hero-cta" style="margin-top:1.5rem">
-        <a class="btn btn-primary" href="https://github.com/poesis-cloud/safe-agentic-framework">Get it on GitHub</a>
-        <a class="btn btn-ghost" href="https://docs.poesis.cloud/safe-agentic-framework/quickstart/">Quickstart</a>
+        <div class="card card--feature">
+          <h3>Many small agents beat one big one.</h3>
+          <p>A probabilistic model is most reliable — and cheapest — when its task is small, bounded, and well-specified. SAFe's portfolio → program → iteration hierarchy decomposes delivery once, so every agent stays focused and every layer adds a check.</p>
+        </div>
+        <div class="card card--feature">
+          <h3>Open, local-first, sovereign.</h3>
+          <p>Apache-2.0, running on your machine against your working tree — work state lives in your own files and git history, not a vendor's cloud. Standard, homogeneous artifacts synchronize through your shared repo, contextualizing every other local orchestration.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -45,34 +56,19 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
     <div class="container">
       <p class="eyebrow">Products</p>
       <h2>Three products, one governed delivery loop.</h2>
-      <div class="grid grid-3" style="margin-top:1.5rem">
-        {framework.products.map((p) => (
-          <div class="card">
-            <span class="tag tag--muted">Product</span>
-            <h3>{p.name}</h3>
-            <p>{p.tagline}</p>
-            <p style="margin-top:.8rem">
-              {p.features.map((f, i) => (
-                <>{i > 0 && ' · '}<a href={`${framework.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
-              ))}
-            </p>
-            <p style="margin-top:.6rem"><a href={`${framework.href}/products/${p.slug}`}>About {p.name} →</a></p>
-          </div>
-        ))}
-      </div>
+      <ProductCards solution={framework} />
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Build with us</p>
-      <h2>Documentation &amp; source.</h2>
-      <ul class="link-list">
-        <li><a href="https://docs.poesis.cloud/safe-agentic-framework/">Framework documentation →</a></li>
-        <li><a href="https://docs.poesis.cloud/safe-agentic-framework/quickstart/">Quickstart →</a></li>
-        <li><a href="https://github.com/poesis-cloud/safe-agentic-framework">github.com/poesis-cloud/safe-agentic-framework →</a></li>
-      </ul>
-      <p style="margin-top:1.5rem" class="muted">Generates from the <a href="/solutions/gsm">GSM</a> standard · runs on <a href="/solutions/sie">SIE</a> · integrated into <a href="/solutions/itip">ITIP</a>.</p>
+      <p class="eyebrow">SaaS</p>
+      <h2>Pair it with the managed cloud.</h2>
+      <p class="lead">The framework complements ITIP and integrates with SIE — see the governed definitions it generates against, live on the managed instance.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={demoUrl}>ITIP demo instance <span class="tag tag--muted">incoming</span></a>
+        <a class="btn btn-ghost" href={azureUrl}>Azure Marketplace <span class="tag tag--muted">coming soon</span></a>
+      </div>
     </div>
   </section>
 </BaseLayout>

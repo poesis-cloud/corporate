@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const gsm = solutions.find((s) => s.slug === 'gsm')!;
+const [h1, ...rest] = gsm.tagline.split(' — ');
+const lead = rest.join(' — ');
+const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
+const demoUrl = 'https://demo.poesis.cloud';
+const azureUrl = 'https://azuremarketplace.microsoft.com';
 ---
 <BaseLayout
   title="The Standard (GSM)"
@@ -10,12 +16,13 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Candidate open standard</p>
-      <h1>The Generative System Model.</h1>
-      <p class="lead">GSM is a vendor-neutral standard for <strong>defining and governing</strong> software-intensive systems — the THINK layer that the BUILD (pipelines) and RUN (observability) layers enforce and measure against.</p>
+      <p class="eyebrow">{gsm.tag} · Solution</p>
+      <h1>{h1}.</h1>
+      <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/">Read the specification</a>
         <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/primer/">Start with the primer</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/conformance/">Conformance</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud/gsm">View on GitHub</a>
       </div>
     </div>
@@ -25,31 +32,23 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
     <div class="container">
       <p class="eyebrow">Why it matters</p>
       <h2>The definition layer beneath the projects you already run.</h2>
-      <p class="lead">GSM doesn't compete with cloud-native infrastructure — it gives it the shared, portable source of truth it never had. Two analogies say it best.</p>
       <div class="grid grid-2" style="margin-top:1.5rem">
         <div class="card card--feature">
-          <span class="tag">OpenTelemetry</span>
           <h3>What OpenTelemetry is to RUN, GSM is to THINK.</h3>
           <p>OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.</p>
         </div>
         <div class="card card--feature">
-          <span class="tag">Kubernetes</span>
           <h3>Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.</h3>
           <p>Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype.</p>
         </div>
-      </div>
-      <p class="lead" style="margin-top:2rem">And it composes with the projects that enforce and observe it — GSM holds the definition; they realize it:</p>
-      <div class="grid grid-3" style="margin-top:1rem">
-        <div class="card"><h3>Policy &amp; admission</h3><p>Directives and Norms are the authoritative obligation; <strong>OPA / Gatekeeper</strong> and <strong>Kyverno</strong> compile from them as enforcement effectors.</p></div>
-        <div class="card"><h3>Supply chain</h3><p>Provenance and signing obligations bind to <strong>sigstore</strong>, <strong>SLSA</strong>, <strong>in-toto</strong>, and <strong>TUF</strong> as attestation evidence.</p></div>
-        <div class="card"><h3>Zero-trust</h3><p>Service couplings are modeled as Interactions, verified against <strong>SPIFFE / SPIRE</strong> identities and realized by <strong>Istio</strong> / <strong>Linkerd</strong>.</p></div>
-        <div class="card"><h3>Evidence</h3><p>Norms express SLOs; <strong>OpenTelemetry</strong> and <strong>Prometheus</strong> supply the descriptive evidence they are evaluated against.</p></div>
-        <div class="card"><h3>Delivery</h3><p>Rollout and GitOps guardrails are governed as definitions; <strong>Argo</strong> and Flux controllers realize them.</p></div>
-        <div class="card"><h3>Regulation</h3><p><strong>GDPR</strong>, <strong>NIS2</strong>, and <strong>DORA</strong> source into Archetypes — one governed definition, many enforcement points.</p></div>
-      </div>
-      <div class="hero-cta" style="margin-top:1.5rem">
-        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/cloud-native-use-cases/">Cloud-native use cases</a>
-        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/gsm-and-kubernetes/">GSM &amp; the Kubernetes model</a>
+        <div class="card card--feature">
+          <h3>It composes with what enforces and observes it.</h3>
+          <p>GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.</p>
+        </div>
+        <div class="card card--feature">
+          <h3>Vendor-neutral by design.</h3>
+          <p>GSM is being prepared for neutral, multi-stakeholder stewardship (a CNCF-style path), with conformance defined so independent implementations interoperate — the reference implementation holds no privileged status in the specification.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -58,43 +57,19 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
     <div class="container">
       <p class="eyebrow">Products</p>
       <h2>The specification — and the frameworks sourced into it.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        {gsm.products.map((p) => (
-          <div class="card">
-            <span class="tag tag--muted">Product</span>
-            <h3>{p.name}</h3>
-            <p>{p.tagline}</p>
-            <p style="margin-top:.8rem">
-              {p.features.map((f, i) => (
-                <>{i > 0 && ' · '}<a href={`${gsm.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></>
-              ))}
-            </p>
-            <p style="margin-top:.6rem"><a href={`${gsm.href}/products/${p.slug}`}>About {p.name} →</a></p>
-          </div>
-        ))}
-      </div>
+      <ProductCards solution={gsm} />
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Stewardship</p>
-      <h2>Built for vendor-neutral governance.</h2>
-      <p class="lead">GSM is being prepared for neutral, multi-stakeholder stewardship (a CNCF-style path), with an open-license transition planned at contribution. Conformance is defined so independent implementations interoperate — the reference implementation holds no privileged status in the specification.</p>
-      <p class="muted" style="font-size:.9rem">Status: pre-1.0 working draft, source-available under BUSL-1.1 — not yet an OSI/open-standard license. No third-party endorsement is implied.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">Build with us</p>
-      <h2>Documentation &amp; source.</h2>
-      <ul class="link-list">
-        <li><a href="https://docs.poesis.cloud/gsm/">GSM documentation →</a></li>
-        <li><a href="https://docs.poesis.cloud/gsm/conformance/">Conformance →</a></li>
-        <li><a href="https://github.com/poesis-cloud/gsm">github.com/poesis-cloud/gsm →</a></li>
-      </ul>
-      <p style="margin-top:1.5rem" class="muted">Implemented by <a href="/solutions/sie">SIE</a> · applied to IT by <a href="/solutions/itip">ITIP</a>.</p>
+      <p class="eyebrow">SaaS</p>
+      <h2>See the standard live.</h2>
+      <p class="lead">GSM in action — the managed ITIP cloud defines, governs, and generates from it. Start on the demo instance, or deploy from the Azure Marketplace.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href={demoUrl}>ITIP demo instance <span class="tag tag--muted">incoming</span></a>
+        <a class="btn btn-ghost" href={azureUrl}>Azure Marketplace <span class="tag tag--muted">coming soon</span></a>
+      </div>
     </div>
   </section>
 </BaseLayout>
