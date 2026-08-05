@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
+import { services } from '../data/services.ts';
 ---
 <BaseLayout title="Poesis">
   <section class="hero">
@@ -30,11 +31,24 @@ import ArchMap from '../components/ArchMap.astro';
     </div>
   </section>
 
-  <section class="section">
-    <div class="container center">
-      <h2>Bring the whole stack to your organization.</h2>
-      <p class="lead" style="margin-inline:auto">AI-generative, agentic transformation — IT first — delivered with the Poesis stack as the governed substrate of your change.</p>
-      <p><a class="btn btn-primary" href="/services">How we engage →</a></p>
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Services</p>
+        <h2>Choose the operating boundary that fits.</h2>
+        <p class="lead">Start with transformation, a managed platform, sovereign deployment, or the capability to deliver Poesis with confidence.</p>
+      </div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {services.map((service) => (
+          <article class="card card--feature card--static">
+            <span class="tag">{service.category}</span>
+            <h3>{service.label}</h3>
+            <p>{service.summary}</p>
+            <a class="btn btn-ghost btn-sm service-link" href={service.href}><Icon name="external" /> Explore {service.label}</a>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/contact"><Icon name="external" /> Talk to us</a></p>
     </div>
   </section>
 
@@ -45,6 +59,8 @@ import ArchMap from '../components/ArchMap.astro';
       <p class="lead">We are our own first customer. The Poesis stack that will integrate your systems already define, build, and govern ours — Poesis's development power rests on the very stack it ships.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/solutions/itip"><Icon name="play" /> Explore ITIP</a>
+        <a class="btn btn-ghost" href="/solutions/sie"><Icon name="play" /> Explore SIE</a>
+        <a class="btn btn-ghost" href="/solutions/framework"><Icon name="play" /> Explore Agentic Framework</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> See it on GitHub</a>
       </div>
     </div>

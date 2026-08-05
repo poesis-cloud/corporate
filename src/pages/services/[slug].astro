@@ -18,12 +18,12 @@ const { service } = Astro.props;
 <BaseLayout title={service.label} description={service.summary}>
   <section class="hero service-hero">
     <div class="container">
-      <p class="eyebrow"><a href="/services">Services</a><span aria-hidden="true">/</span>{service.category}</p>
+      <p class="eyebrow"><a href="/#services">Services</a><span aria-hidden="true">/</span>{service.category}</p>
       <h1>{service.title}</h1>
       <p class="lead">{service.lead}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact">Discuss your context</a>
-        <a class="btn btn-ghost" href="/services">All services</a>
+        <a class="btn btn-ghost" href="/#services">All services</a>
       </div>
     </div>
   </section>
