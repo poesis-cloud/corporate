@@ -127,23 +127,13 @@ const external = [
       if (!trigger) return;
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
-        if (compactMenuQuery.matches) {
-          dropdowns.filter((candidate) => candidate !== dropdown).forEach((candidate) => {
-            candidate.classList.remove('open');
-            candidate.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
-          });
-        }
+        if (!compactMenuQuery.matches) return;
+        dropdowns.filter((candidate) => candidate !== dropdown).forEach((candidate) => {
+          candidate.classList.remove('open');
+          candidate.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+        });
         const isOpen = dropdown.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(isOpen));
-      });
-      dropdown.addEventListener('mouseenter', () => {
-        if (!compactMenuQuery.matches) trigger.setAttribute('aria-expanded', 'true');
-      });
-      dropdown.addEventListener('mouseleave', () => {
-        if (!compactMenuQuery.matches) {
-          dropdown.classList.remove('open');
-          trigger.setAttribute('aria-expanded', 'false');
-        }
       });
     });
 
