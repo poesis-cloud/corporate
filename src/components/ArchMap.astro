@@ -33,6 +33,7 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
                   {s.products.map((p) => (
                     <section class="arch-product">
                       <h4><a href={`${s.href}/products/${p.slug}`}>{p.name}</a></h4>
+                      <p class="arch-product-tagline">{p.tagline}</p>
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
                         <nav class="arch-comps" aria-label={`${p.name} features`}>
@@ -65,6 +66,7 @@ const framework = solutions.find((s) => s.slug === 'framework')!;
                 {framework.products.map((p) => (
                   <section class="arch-product">
                     <h4><a href={`${framework.href}/products/${p.slug}`}>{p.name}</a></h4>
+                    <p class="arch-product-tagline">{p.tagline}</p>
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
