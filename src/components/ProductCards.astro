@@ -15,7 +15,7 @@ const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
 ---
 <div class={`grid ${cols}`} style="margin-top:1.5rem">
   {solution.products.map((p) => (
-    <div class="card--disclosure card--product">
+    <div class="card card--product">
       <span class="tag tag--muted">Product</span>
       <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
       <p>{p.tagline}</p>
