@@ -54,7 +54,7 @@ export const solutions: Solution[] = [
       {
         slug: 'web-application',
         name: 'Web Application',
-        tagline: 'The platform every IT profile works in — definition, governance, generation.',
+        tagline: 'The application every IT profile works in — for defining, governing, regulating, and supervising their IT landscape.',
         description:
           'The web application and its backend-for-frontend: the governed definition inventory, the framework catalog & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
         values: [
@@ -80,7 +80,7 @@ export const solutions: Solution[] = [
       {
         slug: 'repository-definition-sourcer',
         name: 'Definition Blackboard Code Sourcer',
-        tagline: 'Truth sourcing — the model reflects reality, continuously.',
+        tagline: 'Truth sourcing — for IT information to reflect reality, continuously, as GSM Definitions.',
         description:
           'The sourcing pipeline that reads real IT artifacts — source code, API contracts, infrastructure — and posts them as evidence-backed contributions to the SIE Definition Blackboard Manager, so the definition stays anchored to the real system instead of drifting from it.',
         values: [
@@ -110,7 +110,7 @@ export const solutions: Solution[] = [
       {
         slug: 'definition-manager',
         name: 'Definition Manager',
-        tagline: 'The authoritative store of every governed definition — the heart of the engine.',
+        tagline: 'The authoritative API, lifecycle enforcer, and store of every governed GSM Definition — the heart of the engine.',
         description:
           'The Definition Manager hosts GSM, manages the Ascription lifecycle, and enforces the DNA governance grammar across tenant schemas. It is the authoritative store of every governed definition.',
         values: [
@@ -132,7 +132,7 @@ export const solutions: Solution[] = [
       {
         slug: 'operator',
         name: 'Operator',
-        tagline: 'The rule runtime — definitions become a running control loop.',
+        tagline: 'The GSM Definition runtime — for evaluating and executing GSM Definitions such as Norms and Mechanisms.',
         description:
           'The Operator evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement — the THINK layer acting on the RUN layer.',
         values: [
@@ -150,7 +150,7 @@ export const solutions: Solution[] = [
       {
         slug: 'definition-blackboard-manager',
         name: 'Definition Blackboard Manager',
-        tagline: 'Collaborative definition-sourcing with provenance intact.',
+        tagline: 'Collaborative agentic Definition-sourcing pipeline — for following and tracking automatic sourcing of GSM Definitions.',
         description:
           'The Definition Blackboard Manager is a collaborative definition-sourcing service: contributors post evidence-backed contributions over declared panels, the board is sealed to a byte-stable state, and every mutation lands in an append-only audit ledger.',
         values: [
@@ -241,7 +241,7 @@ export const solutions: Solution[] = [
       {
         slug: 'harness',
         name: 'Agentic Harness',
-        tagline: 'Gates, conditions, and a ledger that keep probabilistic agents on rails.',
+        tagline: 'Deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
         description:
           'The workflow step graphs are validated by a deterministic harness — methodology- and host-agnostic, so the same method runs unchanged on any agent host, and work state lives in your own files and git history.',
         values: [
@@ -263,7 +263,7 @@ export const solutions: Solution[] = [
       {
         slug: 'orchestration',
         name: 'SAFe Agentic Organization',
-        tagline: 'Portfolio → program → iteration — an org chart of agents, not a flat swarm.',
+        tagline: 'Portfolio → program → iteration — a preset, IT-scaled agile org chart of agents — for operating efficiently on day-to-day strategic, tactical, and technical concerns.',
         description:
           'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
         values: [
@@ -284,7 +284,7 @@ export const solutions: Solution[] = [
       {
         slug: 'portfolio',
         name: 'Agentic Workspace',
-        tagline: 'Wire the framework into your working tree and your pipelines.',
+        tagline: 'A shared remote workspace storing local agentic workflow artifacts, enabling local personal agents to operate on the required inputs of other local personal agents — for an end-to-end decentralized agentic workflow model.',
         description:
           'The distribution layer: an installer that wires the Agentic Harness, the SAFe Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
         values: [
