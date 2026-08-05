@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
@@ -7,8 +8,6 @@ const gsm = solutions.find((s) => s.slug === 'gsm')!;
 const [h1, ...rest] = gsm.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
-const demoUrl = 'https://demo.poesis.cloud';
-const azureUrl = 'https://azuremarketplace.microsoft.com';
 ---
 <BaseLayout
   title="The Standard (GSM)"
@@ -20,10 +19,10 @@ const azureUrl = 'https://azuremarketplace.microsoft.com';
       <h1>{h1}.</h1>
       <p class="lead">{leadText}</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/">Read the specification</a>
-        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/primer/">Start with the primer</a>
-        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/conformance/">Conformance</a>
-        <a class="btn btn-ghost" href="https://github.com/poesis-cloud/gsm">View on GitHub</a>
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/"><Icon name="docs" /> Read the specification</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/primer/"><Icon name="docs" /> Start with the primer</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/conformance/"><Icon name="docs" /> Conformance</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud/gsm"><Icon name="github" /> View on GitHub</a>
       </div>
     </div>
   </section>
@@ -61,15 +60,4 @@ const azureUrl = 'https://azuremarketplace.microsoft.com';
     </div>
   </section>
 
-  <section class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">SaaS</p>
-      <h2>See the standard live.</h2>
-      <p class="lead">GSM in action — the managed ITIP cloud defines, governs, and generates from it. Start on the demo instance, or deploy from the Azure Marketplace.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href={demoUrl}>ITIP demo instance <span class="tag tag--muted">incoming</span></a>
-        <a class="btn btn-ghost" href={azureUrl}>Azure Marketplace <span class="tag tag--muted">coming soon</span></a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>

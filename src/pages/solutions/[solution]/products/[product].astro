@@ -6,6 +6,7 @@
  * Why it matters (value cards) → Features (one card per feature, anchored).
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Icon from '../../../../components/Icon.astro';
 import { solutions } from '../../../../data/solutions.ts';
 
 export function getStaticPaths() {
@@ -29,8 +30,8 @@ const { solution, product } = Astro.props;
       <h1>{product.name}.</h1>
       <p class="lead">{product.tagline}</p>
       <div class="hero-cta">
-        {product.docs?.map((d, i) => <a class={`btn ${i === 0 ? 'btn-primary' : 'btn-ghost'}`} href={d.href}>{d.label}</a>)}
-        {product.repos?.map((r) => <a class="btn btn-ghost" href={r.href}>{r.label}</a>)}
+        {product.docs?.map((d, i) => <a class={`btn ${i === 0 ? 'btn-primary' : 'btn-ghost'}`} href={d.href}><Icon name="docs" /> {d.label}</a>)}
+        {product.repos?.map((r) => <a class="btn btn-ghost" href={r.href}><Icon name="github" /> {r.label}</a>)}
       </div>
     </div>
   </section>
