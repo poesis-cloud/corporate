@@ -189,9 +189,9 @@ export const solutions: Solution[] = [
         description:
           'The GSM specification: eight systemic primitives, the DNA governance grammar, Archetyping as the open type system, and systemic lifecycle management — the published artifact every implementation is measured against.',
         values: [
-          { title: 'Define, don\u2019t describe.', body: 'A description trails the system; a definition declares what it must become. BUILD implements from the definition and RUN measures against it — documentation stops drifting because it is the source, not the echo.' },
-          { title: 'Traceable governance, end to end.', body: 'The DNA grammar chains every obligation: a Directive opens the scope, Norms make it measurable, Ascriptions carry the concrete bindings — no floating constraints, no untraceable rules.' },
-          { title: 'Meaning that travels.', body: 'Archetypes carry vocabulary and semantics as typed schemas, so a definition means the same thing in every tool that reads it — portable across vendors, precise across teams.' },
+          { title: 'One published contract for every implementation.', body: 'SIE, ITIP, blackboard sourcers, and third-party tools all read the same specification — the GSM primitives, DNA grammar, Archetyping, and lifecycle are not reinterpreted per vendor. Like OpenTelemetry semantic conventions give RUN a shared vocabulary, GSM Specifications give THINK one.' },
+          { title: 'Conformance is testable, not assumed.', body: 'The specification is the yardstick: an implementation can be checked against the primitives, grammar rules, and lifecycle transitions it defines. Builders and auditors both point to the same artifact.' },
+          { title: 'Built for neutral stewardship.', body: 'The spec is maintained as a public, versioned publication — ready for foundation governance such as CNCF sandbox incubation — rather than living as vendor documentation. Standards live longest when no single product owns them.' },
         ],
         features: [
           { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
