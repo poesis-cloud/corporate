@@ -44,6 +44,7 @@ const { solution, product } = Astro.props;
       <div class="grid grid-2" style="margin-top:1.5rem">
         {product.values.map((v) => (
           <div class="card card--feature card--static">
+            <span class="tag tag--value">Value</span>
             <h3>{v.title}</h3>
             <p>{v.body}</p>
           </div>
@@ -59,6 +60,7 @@ const { solution, product } = Astro.props;
       <div class="grid grid-2" style="margin-top:1.5rem">
         {product.features.map((f) => (
           <div class="card card--feature card--static" id={f.slug}>
+            <span class="tag tag--feature-pill">Feature</span>
             <h3>{f.name}</h3>
             <p>{f.blurb}</p>
           </div>
