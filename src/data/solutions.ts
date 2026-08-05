@@ -178,7 +178,7 @@ export const solutions: Solution[] = [
     tag: 'Standard Model',
     zone: 'THINK',
     href: '/solutions/gsm',
-    tagline: 'The Generative System Model — the vendor-neutral standard for defining systems; grounded in systemics; being to THINK what OpenTelemetry semantic convention is to RUN.',
+    tagline: 'The Generative System Model — the vendor-neutral standard for defining systems — being to THINK what OpenTelemetry semantic convention is to RUN — grounded in systemics, synthesizing Beer\u2019s cybernetics Viable System Model, von Bertalanffy\u2019s General System Theory, Wiener and Ashby\u2019s cybernetic feedback and requisite variety, and Maturana and Varela\u2019s biological theory of autopoiesis into a single generative definition of systems.',
     description:
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
     products: [
