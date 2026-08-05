@@ -15,15 +15,16 @@ const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
 ---
 <div class={`grid ${cols}`} style="margin-top:1.5rem">
   {solution.products.map((p) => (
-    <div class="card card--product">
+    <div class="card card--feature card--product card--static">
       <span class="tag tag--muted">Product</span>
       <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
       <p>{p.tagline}</p>
-      <div class="pill-row">
+      <p class="card-features-label">Features</p>
+      <ul class="feature-list">
         {p.features.map((f) => (
-          <a class="pill" href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
+          <li><a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></li>
         ))}
-      </div>
+      </ul>
     </div>
   ))}
 </div>
