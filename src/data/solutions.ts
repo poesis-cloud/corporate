@@ -197,7 +197,7 @@ export const solutions: Solution[] = [
           { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
           { slug: 'dna-grammar', name: 'DNA grammar', blurb: 'Directives, Norms, and Ascriptions — the three-tempo grammar for how intent becomes an evaluable, bound obligation.' },
           { slug: 'archetyping', name: 'Archetyping', blurb: 'Typed JSON Schema domain schemas that carry vocabulary, grammar, and semantics — meaning travels with the type.' },
-          { slug: 'systemic-lifecycle-management', name: 'Systemic lifecycle management', blurb: 'A normative state machine governs how every definition is drafted, proposed, approved, activated, deprecated, and retired — according to related definitions.' },
+          { slug: 'systemic-lifecycle-management', name: 'Systemic lifecycle management', blurb: 'A normative state machine governs how every definition is drafted, proposed, approved, activated, deprecated, and retired — accordingly to related dependent definitions.' },
         ],
         docs: [
           { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM documentation' },
