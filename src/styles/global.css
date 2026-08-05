@@ -141,7 +141,7 @@ a:hover {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 1000;
   background: rgba(7, 10, 18, .72);
   backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -152,6 +152,10 @@ a:hover {
   align-items: center;
   gap: 1.25rem;
   height: 64px;
+}
+
+.nav-links {
+  isolation: isolate;
 }
 
 .brand {
