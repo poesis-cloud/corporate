@@ -57,7 +57,7 @@ const { solution, product } = Astro.props;
       <h2>What {product.name} does.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
         {product.features.map((f) => (
-          <div class="card" id={f.slug}>
+          <div class="card card--feature card--static" id={f.slug}>
             <h3>{f.name}</h3>
             <p>{f.blurb}</p>
           </div>
