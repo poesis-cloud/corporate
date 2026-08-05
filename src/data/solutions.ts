@@ -215,6 +215,7 @@ export const solutions: Solution[] = [
           { title: 'Day-one governance, not a blank page.', body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
           { title: 'The authority\u2019s own taxonomy, clause by clause.', body: 'Each framework is organized by its own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
           { title: 'Frameworks that compose, not collide.', body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
+          { title: 'Maintained as the real world changes.', body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
         ],
         features: [
           { slug: 'domain-vocabularies', name: 'Domain vocabularies & semantics', blurb: 'Domain-specific concepts and meaning sourced as typed Archetypes — the vocabulary of a business or technical domain, machine-readable.' },
