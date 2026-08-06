@@ -165,17 +165,26 @@ const insights = [
 
     async function initSearch() {
       const target = document.getElementById('nav-search');
-      if (!target) return;
+      if (!target || typeof window === 'undefined') return;
+
+      const loadScript = (src) => new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+
       try {
-        const pagefind = await import('/pagefind/pagefind.js');
-        await pagefind.options({ excerptLength: 18 });
-        const { add } = await pagefind.searchUI({
+        await loadScript('/pagefind/pagefind-ui.js');
+        if (!window.PagefindUI) throw new Error('PagefindUI not loaded');
+        new window.PagefindUI({
+          element: '#nav-search',
           showImages: false,
           showSubResults: false,
           resetStyles: false,
-          debounceTimeoutMs: 150,
           autofocus: true,
-          element: '#nav-search',
           translations: {
             placeholder: 'Search poesis.cloud...',
             zero_results: 'No results for "%s"',
@@ -183,7 +192,6 @@ const insights = [
             one_result: '1 result for "%s"',
           },
         });
-        add(target);
       } catch (err) {
         target.innerHTML = '<p class="search-error">Search unavailable.</p>';
         // eslint-disable-next-line no-console
