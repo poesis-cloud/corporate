@@ -15,7 +15,8 @@
     <polygon points="200,148 320,178 200,208 80,178" fill="#101a30" stroke="#334155" stroke-width="1.5"/>
     <polygon points="80,178 200,208 200,216 80,186" fill="#0b1120"/>
     <polygon points="320,178 200,208 200,216 320,186" fill="#0d1526"/>
-    <text x="212" y="196" font-family="ui-sans-serif,system-ui" font-size="10" fill="#94a3b8">audit evidence</text>
+    <line x1="30" y1="178" x2="74" y2="178" stroke="#334155" stroke-width="1.2"/>
+    <text x="30" y="172" font-family="ui-sans-serif,system-ui" font-size="10" fill="#94a3b8">audit evidence</text>
   </g>
 
   <!-- layer 2: human loop -->
@@ -23,12 +24,13 @@
     <polygon points="200,118 300,143 200,168 100,143" fill="#12203a" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.55"/>
     <polygon points="100,143 200,168 200,176 100,151" fill="#0d1830"/>
     <polygon points="300,143 200,168 200,176 300,151" fill="#0f1c36"/>
-    <!-- little human figure at the gate -->
-    <g transform="translate(255,150)">
-      <circle cx="0" cy="-6" r="3.4" fill="#eaf0fa"/>
-      <path d="M-5,4 C-5,-1 5,-1 5,4 Z" fill="#eaf0fa"/>
+    <!-- accountable human standing on the layer -->
+    <g transform="translate(272,140)">
+      <circle cx="0" cy="-9" r="3.4" fill="#eaf0fa"/>
+      <path d="M-5,1 C-5,-4 5,-4 5,1 Z" fill="#eaf0fa"/>
     </g>
-    <text x="140" y="152" font-family="ui-sans-serif,system-ui" font-size="10" fill="#7dd3fc">human loop</text>
+    <line x1="30" y1="143" x2="94" y2="143" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.55"/>
+    <text x="30" y="137" font-family="ui-sans-serif,system-ui" font-size="10" fill="#7dd3fc">human loop</text>
   </g>
 
   <!-- layer 1: governed context -->
@@ -36,7 +38,8 @@
     <polygon points="200,88 280,108 200,128 120,108" fill="#123231" stroke="#2dd4bf" stroke-width="1.5" stroke-opacity="0.7"/>
     <polygon points="120,108 200,128 200,136 120,116" fill="#0e2827"/>
     <polygon points="280,108 200,128 200,136 280,116" fill="#102c2b"/>
-    <text x="152" y="112" font-family="ui-sans-serif,system-ui" font-size="10" fill="#5eead4">governed context</text>
+    <line x1="30" y1="108" x2="114" y2="108" stroke="#2dd4bf" stroke-width="1.2" stroke-opacity="0.7"/>
+    <text x="30" y="102" font-family="ui-sans-serif,system-ui" font-size="10" fill="#5eead4">governed context</text>
   </g>
 
   <!-- ===== the model chip, docking into the stack ===== -->
@@ -50,17 +53,14 @@
     </g>
   </g>
 
-  <!-- docking beam -->
-  <g stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" opacity="0.8">
-    <line x1="192" y1="62" x2="196" y2="84"/>
-    <line x1="208" y1="62" x2="204" y2="84"/>
-  </g>
-  <path d="M195,74 L200,82 L205,74" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- docking arrow, chip → stack apex -->
+  <line x1="200" y1="63" x2="200" y2="78" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" opacity="0.85"/>
+  <path d="M195,76 L200,84 L205,76" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- output: the platform acts -->
+  <!-- output: the assembled platform acts -->
   <g filter="url(#glow)">
-    <path d="M304,148 C330,140 348,124 356,102" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M348,104 L357,99 L358,109" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="342" y="90" font-family="ui-sans-serif,system-ui" font-size="11" font-weight="700" fill="#5eead4">acts</text>
+    <path d="M286,106 C316,96 336,80 346,60" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M338,62 L347,57 L348,67" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="332" y="48" font-family="ui-sans-serif,system-ui" font-size="11" font-weight="700" fill="#5eead4">acts</text>
   </g>
 </svg>

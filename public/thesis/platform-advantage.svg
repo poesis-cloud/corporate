@@ -8,75 +8,81 @@
 
   <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
 
-  <!-- LEFT: commodity models — identical chips sliding on a conveyor -->
+  <!-- ===== LEFT: standalone model — swappable commodity ===== -->
   <g>
-    <line x1="28" y1="168" x2="164" y2="168" stroke="#334155" stroke-width="2"/>
-    <circle cx="44" cy="174" r="5" fill="none" stroke="#334155" stroke-width="2"/>
-    <circle cx="80" cy="174" r="5" fill="none" stroke="#334155" stroke-width="2"/>
-    <circle cx="116" cy="174" r="5" fill="none" stroke="#334155" stroke-width="2"/>
-    <circle cx="150" cy="174" r="5" fill="none" stroke="#334155" stroke-width="2"/>
+    <!-- swap cycle arrows around the chips -->
+    <path d="M96,60 A46,46 0 0 1 142,106" stroke="#64748b" stroke-width="1.8" fill="none"/>
+    <path d="M136,98 L143,107 L133,110" stroke="#64748b" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+    <path d="M96,152 A46,46 0 0 1 50,106" stroke="#64748b" stroke-width="1.8" fill="none"/>
+    <path d="M56,114 L49,105 L59,102" stroke="#64748b" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
 
-    <g opacity="0.9">
-      <rect x="34" y="138" width="34" height="24" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
-      <text x="51" y="154" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model</text>
+    <!-- ghost chips cycling -->
+    <g opacity="0.45">
+      <rect x="52" y="52" width="44" height="30" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
+      <text x="74" y="71" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model B</text>
     </g>
-    <g opacity="0.7">
-      <rect x="78" y="138" width="34" height="24" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
-      <text x="95" y="154" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model</text>
+    <g opacity="0.45">
+      <rect x="52" y="130" width="44" height="30" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
+      <text x="74" y="149" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model C</text>
     </g>
-    <g opacity="0.5">
-      <rect x="122" y="138" width="34" height="24" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
-      <text x="139" y="154" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model</text>
+    <g>
+      <rect x="74" y="91" width="44" height="30" rx="4" fill="#101a30" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="96" y="110" font-family="ui-sans-serif,system-ui" font-size="9" fill="#c3cdde" text-anchor="middle">model A</text>
     </g>
-    <text x="42" y="196" font-family="ui-sans-serif,system-ui" font-size="10" fill="#64748b">interchangeable</text>
 
-    <!-- price-drop arrow over the conveyor -->
-    <path d="M40,118 C70,124 110,128 148,126" stroke="#64748b" stroke-width="1.6" fill="none" stroke-dasharray="3 4"/>
-    <path d="M142,120 L150,126 L141,131" stroke="#64748b" stroke-width="1.6" fill="none"/>
-    <text x="58" y="112" font-family="ui-sans-serif,system-ui" font-size="10" fill="#64748b">$ commodity</text>
+    <text x="96" y="188" font-family="ui-sans-serif,system-ui" font-size="10" fill="#64748b" text-anchor="middle">standalone — swappable</text>
   </g>
 
   <!-- divider -->
-  <line x1="186" y1="24" x2="186" y2="196" stroke="rgba(148,163,184,0.25)" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <line x1="172" y1="26" x2="172" y2="194" stroke="rgba(148,163,184,0.25)" stroke-width="1.5" stroke-dasharray="4 6"/>
 
-  <!-- RIGHT: the platform castle on the hill (moat = hard to commoditize) -->
+  <!-- ===== RIGHT: same model soldered into the governed platform board ===== -->
   <g>
-    <!-- hill -->
-    <path d="M212,196 C232,160 260,144 292,144 C324,144 352,160 372,196 Z" fill="#101a30" stroke="#334155" stroke-width="1.5"/>
+    <!-- circuit board -->
+    <rect x="192" y="34" width="188" height="146" rx="8" fill="#0d1b2b" stroke="#2dd4bf" stroke-width="1.6" stroke-opacity="0.55"/>
 
-    <!-- moat -->
-    <path d="M204,200 C230,188 254,184 292,184 C330,184 354,188 380,200"
-          stroke="#38bdf8" stroke-width="3" fill="none" stroke-opacity="0.65"/>
-    <path d="M214,207 C240,197 262,193 292,193 C322,193 344,197 370,207"
-          stroke="#38bdf8" stroke-width="2" fill="none" stroke-opacity="0.35"/>
-
-    <!-- keep: three interlocking towers = grounded inference / governed execution / specialisation -->
+    <!-- LLM chip seated in socket -->
     <g filter="url(#glow)">
-      <rect x="238" y="88" width="26" height="58" fill="#0e2827" stroke="#2dd4bf" stroke-width="2"/>
-      <rect x="278" y="66" width="30" height="80" fill="#0e2827" stroke="#2dd4bf" stroke-width="2"/>
-      <rect x="322" y="94" width="26" height="52" fill="#0e2827" stroke="#2dd4bf" stroke-width="2"/>
-      <!-- battlements -->
-      <path d="M238,88 L238,80 L244,80 L244,88 M248,88 L248,80 L254,80 L254,88 M258,88 L258,80 L264,80 L264,88" stroke="#2dd4bf" stroke-width="2" fill="none"/>
-      <path d="M278,66 L278,58 L285,58 L285,66 M289,66 L289,58 L297,58 L297,66 M301,66 L301,58 L308,58 L308,66" stroke="#2dd4bf" stroke-width="2" fill="none"/>
-      <path d="M322,94 L322,86 L328,86 L328,94 M332,94 L332,86 L338,86 L338,94 M342,94 L342,86 L348,86 L348,94" stroke="#2dd4bf" stroke-width="2" fill="none"/>
-      <!-- connecting walls -->
-      <rect x="264" y="112" width="14" height="34" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.6"/>
-      <rect x="308" y="116" width="14" height="30" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.6"/>
+      <rect x="256" y="82" width="60" height="44" rx="5" fill="#101a30" stroke="#818cf8" stroke-width="2"/>
+      <text x="286" y="108" font-family="ui-sans-serif,system-ui" font-size="12" font-weight="700" fill="#a5b4fc" text-anchor="middle">LLM</text>
+    </g>
+    <!-- socket frame -->
+    <rect x="250" y="76" width="72" height="56" rx="7" fill="none" stroke="#2dd4bf" stroke-width="1.4" stroke-dasharray="3 3" stroke-opacity="0.8"/>
+
+    <!-- traces to platform modules -->
+    <g stroke="#2dd4bf" stroke-width="1.8" fill="none" stroke-opacity="0.85">
+      <path d="M270,82 L270,66 L246,66 L246,58"/>
+      <path d="M302,82 L302,66 L330,66 L330,58"/>
+      <path d="M286,126 L286,146"/>
+    </g>
+    <!-- solder joints -->
+    <g fill="#5eead4">
+      <circle cx="246" cy="58" r="2.6"/>
+      <circle cx="330" cy="58" r="2.6"/>
+      <circle cx="286" cy="146" r="2.6"/>
     </g>
 
-    <!-- gate + drawbridge over the moat: the commercial relationship enters on your terms -->
-    <path d="M285,146 L285,128 C285,120 301,120 301,128 L301,146" fill="#0a0f1c" stroke="#5eead4" stroke-width="1.8"/>
-    <polygon points="285,146 301,146 305,196 281,196" fill="#123231" stroke="#2dd4bf" stroke-width="1.4"/>
-
-    <!-- flag -->
-    <line x1="293" y1="58" x2="293" y2="38" stroke="#eaf0fa" stroke-width="2"/>
-    <path d="M293,38 L313,43 L293,49 Z" fill="#818cf8" filter="url(#glow)"/>
-
-    <!-- windows lit -->
-    <g fill="#5eead4" opacity="0.85">
-      <rect x="248" y="100" width="5" height="8" rx="1"/>
-      <rect x="289" y="80" width="6" height="9" rx="1"/>
-      <rect x="330" y="106" width="5" height="8" rx="1"/>
+    <!-- platform modules -->
+    <g>
+      <rect x="202" y="42" width="86" height="16" rx="4" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.4"/>
+      <text x="245" y="53" font-family="ui-sans-serif,system-ui" font-size="8.5" fill="#5eead4" text-anchor="middle">grounded inference</text>
     </g>
+    <g>
+      <rect x="290" y="42" width="86" height="16" rx="4" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.4"/>
+      <text x="333" y="53" font-family="ui-sans-serif,system-ui" font-size="8" fill="#5eead4" text-anchor="middle">governed execution</text>
+    </g>
+    <g>
+      <rect x="238" y="146" width="96" height="16" rx="4" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.4"/>
+      <text x="286" y="157" font-family="ui-sans-serif,system-ui" font-size="8.5" fill="#5eead4" text-anchor="middle">model specialisation</text>
+    </g>
+
+    <!-- shield: defensible -->
+    <g transform="translate(360,168)" filter="url(#glow)">
+      <path d="M0,-13 L11,-8 L11,1 C11,8 5.5,13 0,15.5 C-5.5,13 -11,8 -11,1 L-11,-8 Z"
+            fill="#0e2827" stroke="#2dd4bf" stroke-width="1.8"/>
+      <path d="M-4.5,0 L-1,4 L5.5,-4.5" stroke="#5eead4" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <text x="286" y="196" font-family="ui-sans-serif,system-ui" font-size="10" fill="#5eead4" text-anchor="middle">platform-embedded — defensible</text>
   </g>
 </svg>

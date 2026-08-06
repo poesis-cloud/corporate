@@ -8,34 +8,19 @@
       <stop offset="0" stop-color="rgba(45,212,191,0.28)"/>
       <stop offset="1" stop-color="rgba(45,212,191,0.02)"/>
     </linearGradient>
+    <radialGradient id="horizon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="rgba(94,234,212,0.28)"/>
+      <stop offset="1" stop-color="rgba(94,234,212,0)"/>
+    </radialGradient>
   </defs>
 
   <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
 
-  <!-- skyline of the regulated city (destination) -->
-  <g fill="#12203a" stroke="#334155" stroke-width="1">
-    <rect x="118" y="34" width="22" height="34"/>
-    <rect x="144" y="22" width="26" height="46"/>
-    <rect x="174" y="30" width="18" height="38"/>
-    <rect x="230" y="26" width="24" height="42"/>
-    <rect x="258" y="36" width="20" height="32"/>
-  </g>
-  <!-- bank/institution with pediment at center -->
-  <g>
-    <rect x="196" y="42" width="30" height="26" fill="#152742" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.7"/>
-    <polygon points="193,42 211,30 229,42" fill="#152742" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.7"/>
-    <g stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.8">
-      <line x1="202" y1="48" x2="202" y2="66"/>
-      <line x1="211" y1="48" x2="211" y2="66"/>
-      <line x1="220" y1="48" x2="220" y2="66"/>
-    </g>
-  </g>
-  <!-- lit windows -->
-  <g fill="#5eead4" opacity="0.7">
-    <rect x="150" y="30" width="4" height="4"/><rect x="160" y="40" width="4" height="4"/>
-    <rect x="124" y="42" width="4" height="4"/><rect x="238" y="34" width="4" height="4"/>
-    <rect x="246" y="48" width="4" height="4"/><rect x="264" y="44" width="4" height="4"/>
-  </g>
+  <!-- destination glow at the vanishing point -->
+  <ellipse cx="221" cy="68" rx="120" ry="34" fill="url(#horizon)"/>
+  <line x1="48" y1="68" x2="394" y2="68" stroke="#334155" stroke-width="1.2" stroke-opacity="0.8"/>
+  <circle cx="221" cy="62" r="7" fill="#5eead4" opacity="0.9" filter="url(#glow)"/>
+  <text x="221" y="44" font-family="ui-sans-serif,system-ui" font-size="10" fill="#7dd3fc" text-anchor="middle">regulated market</text>
 
   <!-- the road, perspective from bottom to the city -->
   <polygon points="211,68 231,68 322,208 100,208" fill="url(#road)"/>
