@@ -3,9 +3,16 @@ import { solutions } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
 
 const external = [
-  { href: 'https://docs.poesis.cloud', label: 'Docs' },
   { href: 'https://github.com/poesis-cloud', label: 'GitHub' },
   { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
+];
+
+const insights = [
+  { href: '/insights', label: 'All insights' },
+  { href: '/insights/case-studies', label: 'Case Studies' },
+  { href: '/insights/articles', label: 'Articles' },
+  { href: '/insights/research', label: 'Research' },
+  { href: '/insights/publications', label: 'Publications' },
 ];
 ---
 <header class="site-header">
@@ -72,6 +79,19 @@ const external = [
           </li>
         </ul>
       </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Insights <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          {insights.map((item) => (
+            <li role="none">
+              <a href={item.href} role="menuitem">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <a class="nav-ext" href="https://docs.poesis.cloud" target="_blank" rel="noopener">Docs</a>
       <span class="nav-sep" aria-hidden="true"></span>
       {external.map((l) => <a class="nav-ext" href={l.href} target="_blank" rel="noopener">{l.label}</a>)}
       <a class="btn btn-ghost btn-sm" href="/about">About</a>

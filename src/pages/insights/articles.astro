@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const category = 'Articles';
+const posts = (await getCollection('insights'))
+  .filter((p) => p.data.category === category)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout
+  title={`${category} · Insights`}
+  description={`Poesis ${category.toLowerCase()} — perspectives on systemic governance and AI-native systems.`}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow"><a href="/insights">Insights</a> / {category}</p>
+      <h1>{category}</h1>
+      <p class="lead">Shorter takes on the ideas behind GSM, SIE, ITIP, and the agentic framework.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="grid grid-2">
+        {posts.map((post) => (
+          <article class="card card--feature card--static">
+            <span class="tag">{post.data.category}</span>
+            <h3><a href={`/insights/${post.id}`}>{post.data.title}</a></h3>
+            <p>{post.data.summary}</p>
+            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

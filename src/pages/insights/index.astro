@@ -1,38 +1,90 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection } from 'astro:content';
 
-const modules = import.meta.glob('./*.md', { eager: true });
-const posts = Object.entries(modules)
-  .map(([path, mod]) => {
-    const m = mod as { url?: string; frontmatter?: Record<string, any> };
-    return {
-      url: m.url ?? path.replace('./', '/insights/').replace(/\.md$/, ''),
-      ...(m.frontmatter ?? {}),
-    };
-  })
-  .filter((p: any) => !p.draft)
-  .sort((a: any, b: any) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+const posts = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const categories = [...new Set(posts.map((p) => p.data.category))];
+
+const searchIndex = posts.map((p) => ({
+  slug: p.id,
+  title: p.data.title,
+  category: p.data.category,
+  summary: p.data.summary,
+  href: `/insights/${p.id}`,
+}));
 ---
 <BaseLayout
   title="Insights"
-  description="Essays from Poesis on systemic, AI-native governance — by the creators of GSM."
+  description="Case studies, articles, research, and publications from Poesis."
 >
-  <section class="section">
+  <section class="hero">
     <div class="container">
       <p class="eyebrow">Insights</p>
-      <h1>Thinking from the THINK layer.</h1>
-      <p class="lead">Essays on systemic governance, the generative inversion, and AI-native systems — by the creators of GSM.</p>
-      <ul class="post-list">
-        {posts.map((p: any) => (
-          <li class="card">
-            <time datetime={new Date(p.pubDate).toISOString()}>
-              {new Date(p.pubDate).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
-            <h3 style="margin:0"><a href={p.url}>{p.title}</a></h3>
-            <p class="muted" style="margin:.3rem 0 0">{p.description}</p>
-          </li>
+      <h1>How Poesis is applied, argued, and advanced.</h1>
+      <p class="lead">Case studies, articles, research notes, and publications on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
+      <div class="hero-cta">
+        <a class="btn btn-ghost" href="/contact"><Icon name="external" /> Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <label class="search-box" for="insights-search">
+          <span class="sr-only">Search insights</span>
+          <Icon name="docs" size={20} />
+          <input id="insights-search" type="search" placeholder="Search insights by title, category, or keyword..." autocomplete="off" />
+        </label>
+        <p class="search-status" aria-live="polite"></p>
+      </div>
+
+      <div class="insights-grid" id="insights-results">
+        {categories.map((category) => (
+          <div class="insight-group" data-category={category}>
+            <h2>{category}</h2>
+            <div class="grid grid-2">
+              {posts.filter((p) => p.data.category === category).map((post) => (
+                <article class="card card--feature card--static" data-search={`${post.data.title} ${post.data.category} ${post.data.summary}`.toLowerCase()}>
+                  <span class="tag">{post.data.category}</span>
+                  <h3><a href={`/insights/${post.id}`}>{post.data.title}</a></h3>
+                  <p>{post.data.summary}</p>
+                  <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                </article>
+              ))}
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<script type="module" define:vars={{ searchIndex }}>
+  const input = document.getElementById('insights-search');
+  const results = document.getElementById('insights-results');
+  const status = document.querySelector('.search-status');
+  if (!input || !results || !status) return;
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    const cards = [...results.querySelectorAll('[data-search]')];
+    const groups = [...results.querySelectorAll('.insight-group')];
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const match = !q || card.dataset.search?.includes(q);
+      card.hidden = !match;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+
+    groups.forEach((group) => {
+      const hasVisible = [...group.querySelectorAll('[data-search]')].some((c) => !c.hidden);
+      group.style.display = hasVisible ? '' : 'none';
+    });
+
+    status.textContent = q ? `${visible} result${visible === 1 ? '' : 's'} for "${input.value.trim()}"` : '';
+  });
+</script>
