@@ -1,5 +1,6 @@
 ---
 import { solutionLinks } from '../data/solutions.ts';
+import { services } from '../data/services.ts';
 
 const year = new Date().getFullYear();
 ---
@@ -21,19 +22,31 @@ const year = new Date().getFullYear();
         </ul>
       </div>
       <div>
+        <h4>Services</h4>
+        <ul>
+          {services.map((s) => (
+            <li><a href={s.href}>{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://github.com/poesis-cloud">GitHub repos</a></li>
+          <li><a href="https://github.com/orgs/poesis-cloud/discussions">GitHub discussions</a></li>
+          <li><a href="https://www.linkedin.com/company/poesis-cloud">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
         <h4>Resources</h4>
         <ul>
           <li><a href="https://docs.poesis.cloud">Documentation</a></li>
           <li><a href="/insights">Insights</a></li>
-          <li><a href="https://github.com/poesis-cloud">GitHub</a></li>
-          <li><a href="https://github.com/orgs/poesis-cloud/discussions">Discussions</a></li>
-          <li><a href="https://www.linkedin.com/company/poesis-cloud">LinkedIn</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="/#services">Services</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>

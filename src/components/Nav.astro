@@ -3,8 +3,9 @@ import Icon from './Icon.astro';
 import { solutions } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
 
-const external = [
-  { href: 'https://github.com/poesis-cloud', label: 'GitHub' },
+const community = [
+  { href: 'https://github.com/poesis-cloud', label: 'GitHub repos' },
+  { href: 'https://github.com/orgs/poesis-cloud/discussions', label: 'GitHub discussions' },
   { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
 ];
 
@@ -104,6 +105,18 @@ const insights = [
           <li role="none"><a href="https://docs.poesis.cloud/safe-agentic-framework/" role="menuitem">Agentic Framework documentation</a></li>
         </ul>
       </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Community <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          {community.map((item) => (
+            <li role="none">
+              <a href={item.href} role="menuitem" target="_blank" rel="noopener">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="nav-dropdown nav-dropdown--search">
         <button class="nav-dropdown-trigger nav-dropdown-trigger--icon" aria-haspopup="true" aria-expanded="false" aria-label="Search">
           <Icon name="search" size={18} />
@@ -113,8 +126,6 @@ const insights = [
           <div class="search-box" id="nav-search" role="search"></div>
         </div>
       </div>
-      <span class="nav-sep" aria-hidden="true"></span>
-      {external.map((l) => <a class="nav-ext" href={l.href} target="_blank" rel="noopener">{l.label}</a>)}
       <a class="btn btn-ghost btn-sm" href="/about">About</a>
       <a class="btn btn-primary btn-sm" href="/contact">Talk to us</a>
     </nav>
