@@ -5,14 +5,6 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const categories = [...new Set(posts.map((p) => p.data.category))];
-
-const searchIndex = posts.map((p) => ({
-  slug: p.id,
-  title: p.data.title,
-  category: p.data.category,
-  summary: p.data.summary,
-  href: `/insights/${p.id}`,
-}));
 ---
 <BaseLayout
   title="Insights"
@@ -32,12 +24,8 @@ const searchIndex = posts.map((p) => ({
   <section class="section section--soft">
     <div class="container">
       <div class="section-head">
-        <label class="search-box" for="insights-search">
-          <span class="sr-only">Search insights</span>
-          <Icon name="docs" size={20} />
-          <input id="insights-search" type="search" placeholder="Search insights by title, category, or keyword..." autocomplete="off" />
-        </label>
-        <p class="search-status" aria-live="polite"></p>
+        <div class="search-box" id="search" role="search"></div>
+        <p class="search-status" id="search-status" aria-live="polite"></p>
       </div>
 
       <div class="insights-grid" id="insights-results">
@@ -61,30 +49,45 @@ const searchIndex = posts.map((p) => ({
   </section>
 </BaseLayout>
 
-<script type="module" define:vars={{ searchIndex }}>
-  const input = document.getElementById('insights-search');
-  const results = document.getElementById('insights-results');
-  const status = document.querySelector('.search-status');
-  if (!input || !results || !status) return;
+<script type="module">
+  async function initSearch() {
+    const target = document.getElementById('search');
+    const status = document.getElementById('search-status');
+    if (!target) return;
 
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    const cards = [...results.querySelectorAll('[data-search]')];
-    const groups = [...results.querySelectorAll('.insight-group')];
-    let visible = 0;
+    try {
+      const pagefind = await import('/pagefind/pagefind.js');
+      await pagefind.options({ excerptLength: 18 });
+      const { add } = await pagefind.searchUI({
+        showImages: false,
+        showSubResults: false,
+        resetStyles: false,
+        debounceTimeoutMs: 150,
+        autofocus: false,
+        element: '#search',
+        translations: {
+          placeholder: 'Search insights by keyword...',
+          zero_results: 'No results for "%s"',
+          many_results: '%s results for "%s"',
+          one_result: '1 result for "%s"',
+        },
+      });
 
-    cards.forEach((card) => {
-      const match = !q || card.dataset.search?.includes(q);
-      card.hidden = !match;
-      card.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
+      if (status) {
+        target.addEventListener('pagefind-search-updated', (e) => {
+          status.textContent = e.detail?.count != null && e.detail.count > 0
+            ? `${e.detail.count} result${e.detail.count === 1 ? '' : 's'}`
+            : '';
+        });
+      }
 
-    groups.forEach((group) => {
-      const hasVisible = [...group.querySelectorAll('[data-search]')].some((c) => !c.hidden);
-      group.style.display = hasVisible ? '' : 'none';
-    });
+      add(target);
+    } catch (err) {
+      target.innerHTML = '<p class="search-error">Search unavailable.</p>';
+      // eslint-disable-next-line no-console
+      console.error('Pagefind failed to load', err);
+    }
+  }
 
-    status.textContent = q ? `${visible} result${visible === 1 ? '' : 's'} for "${input.value.trim()}"` : '';
-  });
+  initSearch();
 </script>
