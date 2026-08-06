@@ -49,6 +49,7 @@ function adherencePills(ids: string[]) {
       <p class="lead">One partnership addresses two limits: structured context raises the <strong>capability ceiling</strong>; enterprise platform, market access, platform advantage, and sovereignty raise the <strong>deployment ceiling</strong>.</p>
       <div class="thesis-grid">
         <div class="card card--feature" id="capability-ceiling">
+          <img class="thesis-illustration" src="/thesis/structured-context.svg" alt="A brain split in two: the left half is a fuzzy cloud of statistical dots, the right half an explicit causal graph of connected nodes" loading="lazy" />
           <span class="tag">Capability ceiling · Structured context</span>
           <h3>Better intelligence without bigger models.</h3>
           <p>A model that trains and reasons against explicit, causal, governed, and snapshot Definitions of the world works against explicit structure rather than relying only on correlation. That structure provides a substrate for impact analysis, counterfactual testing, and planning against modeled dependencies and much more...</p>
@@ -56,6 +57,7 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
+          <img class="thesis-illustration" src="/thesis/enterprise-platform.svg" alt="An LLM chip docking into a three-layer isometric platform: governed context, human loop, and audit evidence — with an arrow showing it acts" loading="lazy" />
           <span class="tag">Deployment ceiling · Enterprise platform</span>
           <h3>From language model to enterprise AI platform.</h3>
           <p>Companies buy solutions, not models. Partner models provide the intelligence; Poesis provides structured organizational context, human loop, deterministic evaluation of inference, grounded enterprise agentic development workflows, and audit evidence for accountability. Together they form a deployable enterprise agentic platform — able to act, not only answer.</p>
@@ -63,6 +65,7 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Transform a model into an enterprise AI platform.</p>
         </div>
         <div class="card card--feature">
+          <img class="thesis-illustration" src="/thesis/regulated-access.svg" alt="A road leading to a regulated city skyline through three checkpoint arches, with the nearest barrier raised and a shield check mark beside the gate" loading="lazy" />
           <span class="tag">Deployment ceiling · Market access</span>
           <h3>A credible path into regulated industries.</h3>
           <p>Enterprises don't stall because AI isn't powerful enough — they stall because they can't trust it to act. Explainability, governance, auditability, and policy enforcement are entry conditions, and Poesis is designed to provide their shared context and control substrate.</p>
@@ -70,6 +73,7 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Governance is the entry ticket to regulated industries.</p>
         </div>
         <div class="card card--feature">
+          <img class="thesis-illustration" src="/thesis/platform-advantage.svg" alt="Interchangeable model chips on a commodity conveyor belt on one side; on the other, a castle with three interlocking towers protected by a moat" loading="lazy" />
           <span class="tag">Deployment ceiling · Platform advantage</span>
           <h3>A defensible advantage beyond model performance.</h3>
           <p>Grounded inference, governed execution, and model specialisation create a combined platform that is harder to commoditize than standalone inference. It moves the commercial relationship into AI governance, digital operating models, enterprise transformation, and regulated automation — increasing deal scope and strategic relevance.</p>
@@ -77,6 +81,7 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Build a platform advantage, not simply a model advantage.</p>
         </div>
         <div class="card card--feature">
+          <img class="thesis-illustration" src="/thesis/sovereign-stack.svg" alt="A building of three floors — sovereign LLM on governed context on trusted infrastructure — enclosed in a locked sovereignty boundary under an arc of European stars" loading="lazy" />
           <span class="tag">Deployment ceiling · Sovereignty</span>
           <h3>The foundation of a sovereign AI stack.</h3>
           <p>Not "a sovereign LLM" — a sovereign AI <em>stack</em>. You provide the sovereign intelligence. Poesis provides the governed context. Together they form the trusted infrastructure enterprises need to deploy AI at scale. <strong>As a neutral, model-independent substrate, GSM/SIE could be advanced as a candidate foundation for future European standardization of governed enterprise AI.</strong></p>
@@ -377,6 +382,11 @@ function adherencePills(ids: string[]) {
   }
   .thesis-grid > .card { grid-column: span 2; }
   .thesis-grid > .card:nth-child(4) { grid-column: 2 / span 2; }
+
+  .thesis-illustration {
+    display: block; width: 100%; height: auto; margin-bottom: 1rem;
+    border-radius: 10px; border: 1px solid var(--line);
+  }
 
   .thesis-tagline {
     margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line);

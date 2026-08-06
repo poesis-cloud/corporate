@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" role="img">
+  <defs>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
+
+  <!-- ===== isometric platform layers (bottom to top) ===== -->
+
+  <!-- layer 3: audit & accountability (base) -->
+  <g>
+    <polygon points="200,148 320,178 200,208 80,178" fill="#101a30" stroke="#334155" stroke-width="1.5"/>
+    <polygon points="80,178 200,208 200,216 80,186" fill="#0b1120"/>
+    <polygon points="320,178 200,208 200,216 320,186" fill="#0d1526"/>
+    <text x="212" y="196" font-family="ui-sans-serif,system-ui" font-size="10" fill="#94a3b8">audit evidence</text>
+  </g>
+
+  <!-- layer 2: human loop -->
+  <g>
+    <polygon points="200,118 300,143 200,168 100,143" fill="#12203a" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.55"/>
+    <polygon points="100,143 200,168 200,176 100,151" fill="#0d1830"/>
+    <polygon points="300,143 200,168 200,176 300,151" fill="#0f1c36"/>
+    <!-- little human figure at the gate -->
+    <g transform="translate(255,150)">
+      <circle cx="0" cy="-6" r="3.4" fill="#eaf0fa"/>
+      <path d="M-5,4 C-5,-1 5,-1 5,4 Z" fill="#eaf0fa"/>
+    </g>
+    <text x="140" y="152" font-family="ui-sans-serif,system-ui" font-size="10" fill="#7dd3fc">human loop</text>
+  </g>
+
+  <!-- layer 1: governed context -->
+  <g>
+    <polygon points="200,88 280,108 200,128 120,108" fill="#123231" stroke="#2dd4bf" stroke-width="1.5" stroke-opacity="0.7"/>
+    <polygon points="120,108 200,128 200,136 120,116" fill="#0e2827"/>
+    <polygon points="280,108 200,128 200,136 280,116" fill="#102c2b"/>
+    <text x="152" y="112" font-family="ui-sans-serif,system-ui" font-size="10" fill="#5eead4">governed context</text>
+  </g>
+
+  <!-- ===== the model chip, docking into the stack ===== -->
+  <g transform="translate(200,40)" filter="url(#glow)">
+    <rect x="-26" y="-18" width="52" height="36" rx="6" fill="#101a30" stroke="#818cf8" stroke-width="2"/>
+    <text x="0" y="5" font-family="ui-sans-serif,system-ui" font-size="12" font-weight="700" fill="#a5b4fc" text-anchor="middle">LLM</text>
+    <!-- chip pins -->
+    <g stroke="#818cf8" stroke-width="2">
+      <line x1="-32" y1="-8" x2="-26" y2="-8"/><line x1="-32" y1="0" x2="-26" y2="0"/><line x1="-32" y1="8" x2="-26" y2="8"/>
+      <line x1="26" y1="-8" x2="32" y2="-8"/><line x1="26" y1="0" x2="32" y2="0"/><line x1="26" y1="8" x2="32" y2="8"/>
+    </g>
+  </g>
+
+  <!-- docking beam -->
+  <g stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" opacity="0.8">
+    <line x1="192" y1="62" x2="196" y2="84"/>
+    <line x1="208" y1="62" x2="204" y2="84"/>
+  </g>
+  <path d="M195,74 L200,82 L205,74" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- output: the platform acts -->
+  <g filter="url(#glow)">
+    <path d="M304,148 C330,140 348,124 356,102" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M348,104 L357,99 L358,109" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="342" y="90" font-family="ui-sans-serif,system-ui" font-size="11" font-weight="700" fill="#5eead4">acts</text>
+  </g>
+</svg>

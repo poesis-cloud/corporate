@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" role="img">
+  <defs>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
+
+  <!-- European stars arc above the stack -->
+  <g fill="#818cf8" filter="url(#glow)">
+    <path d="M200,18 l1.8,3.8 4.2,.6 -3,3 .7,4.2 -3.7,-2 -3.7,2 .7,-4.2 -3,-3 4.2,-.6 Z"/>
+    <path d="M156,26 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>
+    <path d="M244,26 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>
+    <path d="M118,42 l1.4,3 3.4,.5 -2.4,2.4 .5,3.4 -3,-1.6 -2.9,1.6 .5,-3.4 -2.4,-2.4 3.4,-.5 Z" opacity="0.6"/>
+    <path d="M282,42 l1.4,3 3.4,.5 -2.4,2.4 .5,3.4 -3,-1.6 -2.9,1.6 .5,-3.4 -2.4,-2.4 3.4,-.5 Z" opacity="0.6"/>
+  </g>
+
+  <!-- ===== the stack as a building ===== -->
+
+  <!-- top floor: sovereign model -->
+  <g filter="url(#glow)">
+    <rect x="140" y="64" width="120" height="34" rx="5" fill="#161c38" stroke="#818cf8" stroke-width="2"/>
+    <text x="200" y="85" font-family="ui-sans-serif,system-ui" font-size="12" font-weight="700" fill="#a5b4fc" text-anchor="middle">sovereign LLM</text>
+  </g>
+
+  <!-- middle floor: governed context (Poesis) -->
+  <g filter="url(#glow)">
+    <rect x="116" y="106" width="168" height="34" rx="5" fill="#0e2827" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="200" y="127" font-family="ui-sans-serif,system-ui" font-size="12" font-weight="700" fill="#5eead4" text-anchor="middle">governed context — GSM / SIE</text>
+  </g>
+
+  <!-- foundation slab: trusted infrastructure -->
+  <g>
+    <rect x="92" y="148" width="216" height="30" rx="5" fill="#12203a" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.8"/>
+    <text x="200" y="167" font-family="ui-sans-serif,system-ui" font-size="11" fill="#7dd3fc" text-anchor="middle">trusted infrastructure</text>
+  </g>
+
+  <!-- bedrock hatching -->
+  <g stroke="#334155" stroke-width="2" stroke-linecap="round">
+    <line x1="96" y1="188" x2="110" y2="182"/>
+    <line x1="124" y1="190" x2="138" y2="184"/>
+    <line x1="152" y1="192" x2="166" y2="186"/>
+    <line x1="180" y1="192" x2="194" y2="186"/>
+    <line x1="208" y1="192" x2="222" y2="186"/>
+    <line x1="236" y1="192" x2="250" y2="186"/>
+    <line x1="264" y1="190" x2="278" y2="184"/>
+    <line x1="292" y1="188" x2="304" y2="182"/>
+  </g>
+
+  <!-- load-bearing joints between floors -->
+  <g stroke="#5eead4" stroke-width="2" opacity="0.8">
+    <line x1="164" y1="98" x2="164" y2="106"/>
+    <line x1="200" y1="98" x2="200" y2="106"/>
+    <line x1="236" y1="98" x2="236" y2="106"/>
+    <line x1="140" y1="140" x2="140" y2="148"/>
+    <line x1="200" y1="140" x2="200" y2="148"/>
+    <line x1="260" y1="140" x2="260" y2="148"/>
+  </g>
+
+  <!-- perimeter: sovereignty boundary around the whole stack -->
+  <rect x="74" y="52" width="252" height="140" rx="12" fill="none"
+        stroke="#818cf8" stroke-width="1.6" stroke-dasharray="6 6" stroke-opacity="0.55"/>
+  <!-- padlock on the boundary -->
+  <g transform="translate(326,52)" filter="url(#glow)">
+    <rect x="-11" y="-6" width="22" height="17" rx="4" fill="#0a0f1c" stroke="#818cf8" stroke-width="2"/>
+    <path d="M-6,-6 L-6,-11 C-6,-18 6,-18 6,-11 L6,-6" stroke="#818cf8" stroke-width="2" fill="none"/>
+    <circle cx="0" cy="2" r="2.4" fill="#a5b4fc"/>
+  </g>
+
+  <!-- keys stay inside: no external tether -->
+  <g transform="translate(96,66)">
+    <circle cx="0" cy="0" r="6" fill="none" stroke="#5eead4" stroke-width="2"/>
+    <line x1="4" y1="4" x2="14" y2="14" stroke="#5eead4" stroke-width="2" stroke-linecap="round"/>
+    <line x1="10" y1="10" x2="14" y2="6" stroke="#5eead4" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
