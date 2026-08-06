@@ -91,7 +91,18 @@ const insights = [
           ))}
         </ul>
       </div>
-      <a class="nav-ext" href="https://docs.poesis.cloud" target="_blank" rel="noopener">Docs</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Docs <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          <li role="none"><a href="https://docs.poesis.cloud" role="menuitem">Poesis documentation</a></li>
+          <li role="none"><a href="https://docs.poesis.cloud/gsm/" role="menuitem">GSM specification</a></li>
+          <li role="none"><a href="https://docs.poesis.cloud/itip/" role="menuitem">ITIP documentation</a></li>
+          <li role="none"><a href="https://docs.poesis.cloud/sie-definition/" role="menuitem">SIE documentation</a></li>
+          <li role="none"><a href="https://docs.poesis.cloud/safe-agentic-framework/" role="menuitem">Agentic Framework documentation</a></li>
+        </ul>
+      </div>
       <span class="nav-sep" aria-hidden="true"></span>
       {external.map((l) => <a class="nav-ext" href={l.href} target="_blank" rel="noopener">{l.label}</a>)}
       <a class="btn btn-ghost btn-sm" href="/about">About</a>

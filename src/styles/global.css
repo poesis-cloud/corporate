@@ -627,6 +627,10 @@ a:hover {
   line-height: 1.2;
 }
 
+.service-link {
+  margin-top: 1.25rem;
+}
+
 /* ---- clickable product cards + feature pills ---------------------------- */
 .card--product h3 {
   margin-top: .85rem;
