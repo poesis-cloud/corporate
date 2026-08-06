@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { solutions } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
 
@@ -103,6 +104,15 @@ const insights = [
           <li role="none"><a href="https://docs.poesis.cloud/safe-agentic-framework/" role="menuitem">Agentic Framework documentation</a></li>
         </ul>
       </div>
+      <div class="nav-dropdown nav-dropdown--search">
+        <button class="nav-dropdown-trigger nav-dropdown-trigger--icon" aria-haspopup="true" aria-expanded="false" aria-label="Search">
+          <Icon name="search" size={18} />
+          <span class="sr-only">Search</span>
+        </button>
+        <div class="nav-dropdown-menu nav-dropdown-menu--search" role="dialog" aria-label="Site search">
+          <div class="search-box" id="nav-search" role="search"></div>
+        </div>
+      </div>
       <span class="nav-sep" aria-hidden="true"></span>
       {external.map((l) => <a class="nav-ext" href={l.href} target="_blank" rel="noopener">{l.label}</a>)}
       <a class="btn btn-ghost btn-sm" href="/about">About</a>
@@ -152,6 +162,36 @@ const insights = [
     menuToggle?.addEventListener('click', () => {
       setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
     });
+
+    async function initSearch() {
+      const target = document.getElementById('nav-search');
+      if (!target) return;
+      try {
+        const pagefind = await import('/pagefind/pagefind.js');
+        await pagefind.options({ excerptLength: 18 });
+        const { add } = await pagefind.searchUI({
+          showImages: false,
+          showSubResults: false,
+          resetStyles: false,
+          debounceTimeoutMs: 150,
+          autofocus: true,
+          element: '#nav-search',
+          translations: {
+            placeholder: 'Search poesis.cloud...',
+            zero_results: 'No results for "%s"',
+            many_results: '%s results for "%s"',
+            one_result: '1 result for "%s"',
+          },
+        });
+        add(target);
+      } catch (err) {
+        target.innerHTML = '<p class="search-error">Search unavailable.</p>';
+        // eslint-disable-next-line no-console
+        console.error('Pagefind failed to load', err);
+      }
+    }
+
+    initSearch();
 
     document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
       const trigger = dropdown.querySelector('.nav-dropdown-trigger');

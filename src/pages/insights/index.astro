@@ -23,18 +23,13 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 
   <section class="section section--soft">
     <div class="container">
-      <div class="section-head">
-        <div class="search-box" id="search" role="search"></div>
-        <p class="search-status" id="search-status" aria-live="polite"></p>
-      </div>
-
       <div class="insights-grid" id="insights-results">
         {categories.map((category) => (
           <div class="insight-group" data-category={category}>
             <h2>{category}</h2>
             <div class="grid grid-2">
               {posts.filter((p) => p.data.category === category).map((post) => (
-                <article class="card card--feature card--static" data-search={`${post.data.title} ${post.data.category} ${post.data.summary}`.toLowerCase()}>
+                <article class="card card--feature card--static">
                   <span class="tag">{post.data.category}</span>
                   <h3><a href={`/insights/${post.id}`}>{post.data.title}</a></h3>
                   <p>{post.data.summary}</p>
@@ -48,46 +43,3 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
     </div>
   </section>
 </BaseLayout>
-
-<script type="module">
-  async function initSearch() {
-    const target = document.getElementById('search');
-    const status = document.getElementById('search-status');
-    if (!target) return;
-
-    try {
-      const pagefind = await import('/pagefind/pagefind.js');
-      await pagefind.options({ excerptLength: 18 });
-      const { add } = await pagefind.searchUI({
-        showImages: false,
-        showSubResults: false,
-        resetStyles: false,
-        debounceTimeoutMs: 150,
-        autofocus: false,
-        element: '#search',
-        translations: {
-          placeholder: 'Search insights by keyword...',
-          zero_results: 'No results for "%s"',
-          many_results: '%s results for "%s"',
-          one_result: '1 result for "%s"',
-        },
-      });
-
-      if (status) {
-        target.addEventListener('pagefind-search-updated', (e) => {
-          status.textContent = e.detail?.count != null && e.detail.count > 0
-            ? `${e.detail.count} result${e.detail.count === 1 ? '' : 's'}`
-            : '';
-        });
-      }
-
-      add(target);
-    } catch (err) {
-      target.innerHTML = '<p class="search-error">Search unavailable.</p>';
-      // eslint-disable-next-line no-console
-      console.error('Pagefind failed to load', err);
-    }
-  }
-
-  initSearch();
-</script>
