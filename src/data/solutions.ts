@@ -78,7 +78,7 @@ export const solutions: Solution[] = [
         ],
       },
       {
-        slug: 'repository-definition-sourcer',
+        slug: 'definition-blackboard-code-sourcer',
         name: 'Definition Blackboard Code Sourcer',
         tagline: 'Truth sourcing — for IT information to reflect reality, continuously, as GSM Definitions.',
         description:
@@ -183,7 +183,7 @@ export const solutions: Solution[] = [
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
     products: [
       {
-        slug: 'specification',
+        slug: 'specifications',
         name: 'Specifications',
         tagline: 'The core spec — eight primitives, DNA grammar, Archetyping, and the systemic lifecycle.',
         description:
@@ -229,18 +229,18 @@ export const solutions: Solution[] = [
     ],
   },
   {
-    slug: 'framework',
+    slug: 'saf',
     name: 'SAF',
     fullName: 'Systemic Agentic Framework',
     tag: 'Systemic Agentic Framework',
     zone: 'THINK',
-    href: '/solutions/framework',
+    href: '/solutions/saf',
     tagline: 'The Systemic Agentic Framework — for any IT profile to deliver through local agentic orchestrations yielding standard and homogeneous artifacts synchronized on a central shared repo contextualizing other local agentic orchestrations — a safe way — complementing ITIP and integrating with SIE.',
     description:
       'SAFe-shaped multi-agent orchestration spanning THINK — portfolio, product, and team workflows — down to the BUILD hand-off, where code is generated from governed GSM definitions and deployed; a human ★ gate at every layer closes THINK → BUILD → RUN.',
     products: [
       {
-        slug: 'harness',
+        slug: 'agentic-harness',
         name: 'Agentic Harness',
         tagline: 'Deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
         description:
@@ -262,7 +262,7 @@ export const solutions: Solution[] = [
         repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
       },
       {
-        slug: 'orchestration',
+        slug: 'safe-agentic-organization',
         name: 'SAFe Agentic Organization',
         tagline: 'Portfolio → program → iteration — a preset, IT-scaled agile org chart of agents — for operating efficiently on day-to-day strategic, tactical, and technical concerns.',
         description:
@@ -283,7 +283,7 @@ export const solutions: Solution[] = [
         repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
       },
       {
-        slug: 'portfolio',
+        slug: 'agentic-workspace',
         name: 'Agentic Workspace',
         tagline: 'A shared remote workspace storing local agentic workflow artifacts, enabling local personal agents to operate on the required inputs of other local personal agents — for an end-to-end decentralized agentic workflow model.',
         description:

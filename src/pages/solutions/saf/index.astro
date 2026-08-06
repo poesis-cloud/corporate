@@ -4,8 +4,8 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
-const framework = solutions.find((s) => s.slug === 'framework')!;
-const [h1, ...rest] = framework.tagline.split(' — ');
+const saf = solutions.find((s) => s.slug === 'saf')!;
+const [h1, ...rest] = saf.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 ---
@@ -16,7 +16,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">{framework.tag} · Solution</p>
+      <p class="eyebrow">{saf.tag} · Solution</p>
       <h1>{h1}.</h1>
       <p class="lead">{leadText}</p>
       <div class="hero-cta">
@@ -60,7 +60,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
     <div class="container">
       <p class="eyebrow">Products</p>
       <h2>Three products, one governed delivery loop.</h2>
-      <ProductCards solution={framework} />
+      <ProductCards solution={saf} />
     </div>
   </section>
 

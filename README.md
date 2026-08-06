@@ -30,7 +30,7 @@ Requires Node 18+ (developed on Node 22).
 src/
   layouts/     BaseLayout (SEO/nav/footer) + PostLayout (Insights)
   components/  Nav, Footer
-  pages/       index, standard, products, framework, services, about, contact
+  pages/       index, solutions, services, partnerships, insights, about, contact
     insights/  blog index + Markdown posts
   styles/      global.css (design tokens — typographic brand placeholder)
 public/        robots.txt, favicon, CNAME

@@ -95,7 +95,7 @@ const insightPosts = (await getCollection('insights'))
             <p class="insight-meta">
               <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
             </p>
-            <a class="btn btn-ghost btn-sm service-link" href={`/insights/${post.id}`}><Icon name="book-open" /> Read {post.data.title.split(':')[0]}</a>
+            <a class="btn btn-ghost btn-sm service-link" href={`/insights/${post.id.replace(/\.md$/, '')}`}><Icon name="book-open" /> Read {post.data.title.split(':')[0]}</a>
           </article>
         ))}
       </div>
@@ -111,7 +111,7 @@ const insightPosts = (await getCollection('insights'))
       <div class="hero-cta">
         <a class="btn btn-primary" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
         <a class="btn btn-ghost" href="/solutions/sie"><Icon name="layers" /> Explore SIE</a>
-        <a class="btn btn-ghost" href="/solutions/framework"><Icon name="spark" /> Explore SAF</a>
+        <a class="btn btn-ghost" href="/solutions/saf"><Icon name="spark" /> Explore SAF</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> See it on GitHub</a>
       </div>
     </div>
