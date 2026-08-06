@@ -3,6 +3,30 @@ import { solutionLinks } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
 
 const year = new Date().getFullYear();
+
+const insights = [
+  { href: '/insights', label: 'All insights' },
+  { href: '/insights/case-studies', label: 'Case Studies' },
+  { href: '/insights/research', label: 'Research' },
+];
+
+const docs = [
+  { href: 'https://docs.poesis.cloud', label: 'Poesis documentation' },
+  { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM specification' },
+  { href: 'https://docs.poesis.cloud/itip/', label: 'ITIP documentation' },
+  { href: 'https://docs.poesis.cloud/sie-definition/', label: 'SIE documentation' },
+  { href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Agentic Framework documentation' },
+];
+
+const partnerships = [
+  { href: '/partnerships/llm-vendor-value-proposal', label: 'LLM Vendor Partnership — Value Proposal' },
+];
+
+const community = [
+  { href: 'https://github.com/poesis-cloud', label: 'GitHub repos' },
+  { href: 'https://github.com/orgs/poesis-cloud/discussions', label: 'GitHub discussions' },
+  { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
+];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -30,18 +54,35 @@ const year = new Date().getFullYear();
         </ul>
       </div>
       <div>
-        <h4>Community</h4>
+        <h4>Partnerships</h4>
         <ul>
-          <li><a href="https://github.com/poesis-cloud">GitHub repos</a></li>
-          <li><a href="https://github.com/orgs/poesis-cloud/discussions">GitHub discussions</a></li>
-          <li><a href="https://www.linkedin.com/company/poesis-cloud">LinkedIn</a></li>
+          {partnerships.map((p) => (
+            <li><a href={p.href}>{p.label}</a></li>
+          ))}
         </ul>
       </div>
       <div>
-        <h4>Resources</h4>
+        <h4>Insights</h4>
         <ul>
-          <li><a href="https://docs.poesis.cloud">Documentation</a></li>
-          <li><a href="/insights">Insights</a></li>
+          {insights.map((i) => (
+            <li><a href={i.href}>{i.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Docs</h4>
+        <ul>
+          {docs.map((d) => (
+            <li><a href={d.href}>{d.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul>
+          {community.map((c) => (
+            <li><a href={c.href} target="_blank" rel="noopener">{c.label}</a></li>
+          ))}
         </ul>
       </div>
       <div>
