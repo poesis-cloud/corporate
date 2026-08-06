@@ -201,9 +201,9 @@ export const solutions: Solution[] = [
         ],
         docs: [
           { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM documentation' },
+          { href: 'https://docs.poesis.cloud/gsm/specification/', label: 'Specification' },
           { href: 'https://docs.poesis.cloud/gsm/conformance/', label: 'Conformance' },
         ],
-        repos: [{ href: 'https://github.com/poesis-cloud/gsm', label: 'gsm' }],
       },
       {
         slug: 'frameworks',
