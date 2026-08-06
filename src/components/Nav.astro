@@ -188,6 +188,7 @@ const insights = [
           processResult: (result) => {
             const type = result.meta?.type || 'Page';
             result.meta.title = `[${type}] ${result.meta.title}`;
+            result.meta.image = '';
             return result;
           },
           translations: {
