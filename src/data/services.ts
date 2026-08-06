@@ -61,7 +61,7 @@ export const services: Service[] = [
     label: 'SaaS',
     category: 'Managed cloud',
     title: 'Run Poesis as a managed service.',
-    summary: 'A managed cloud path for operating the Poesis stack without owning its underlying platform engineering.',
+    summary: 'A managed cloud path for owning the Poesis stack without operating its underlying platform engineering.',
     lead: 'Use the Poesis stack as a managed capability while retaining authority over the definitions, constraints, and decisions that govern your systems.',
     proposition: 'The SaaS service is designed for organizations that want durable access to Poesis capabilities, continuous platform evolution, and a clear operating boundary between their governance and the managed technical substrate.',
     outcomes: [
