@@ -302,9 +302,8 @@ a:hover {
 }
 
 .nav-dropdown-menu--search {
-  min-width: 0;
+  min-width: 320px;
   max-width: calc(100vw - 2rem);
-  width: 360px;
   padding: .75rem;
   right: 0;
   left: auto;
@@ -321,6 +320,7 @@ a:hover {
 
 .nav-dropdown-menu--search .pagefind-ui__form {
   margin: 0;
+  width: 100%;
 }
 
 .nav-dropdown-menu--search .pagefind-ui__search-input {
@@ -900,8 +900,7 @@ a:hover {
 
 .pagefind-ui__search-input:placeholder-shown+.pagefind-ui__search-clear,
 .pagefind-ui__search-input:placeholder-shown~.pagefind-ui__search-clear {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .pagefind-ui__results {
