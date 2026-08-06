@@ -4,6 +4,9 @@
       <feGaussianBlur stdDeviation="3" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <marker id="swap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#94a3b8"/>
+    </marker>
   </defs>
 
   <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
@@ -11,10 +14,8 @@
   <!-- ===== LEFT: standalone model — swappable commodity ===== -->
   <g>
     <!-- swap cycle arrows around the chips -->
-    <path d="M96,60 A46,46 0 0 1 142,106" stroke="#64748b" stroke-width="1.8" fill="none"/>
-    <path d="M136,98 L143,107 L133,110" stroke="#64748b" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
-    <path d="M96,152 A46,46 0 0 1 50,106" stroke="#64748b" stroke-width="1.8" fill="none"/>
-    <path d="M56,114 L49,105 L59,102" stroke="#64748b" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+    <path d="M96,60 A46,46 0 0 1 140,102" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#swap)"/>
+    <path d="M96,152 A46,46 0 0 1 52,110" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#swap)"/>
 
     <!-- ghost chips cycling -->
     <g opacity="0.45">

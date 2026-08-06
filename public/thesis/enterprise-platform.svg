@@ -57,10 +57,10 @@
   <line x1="200" y1="63" x2="200" y2="78" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" opacity="0.85"/>
   <path d="M195,76 L200,84 L205,76" stroke="#818cf8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- output: the assembled platform acts -->
+  <!-- output: disposition through the human loop acts -->
   <g filter="url(#glow)">
-    <path d="M286,106 C316,96 336,80 346,60" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M338,62 L347,57 L348,67" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="332" y="48" font-family="ui-sans-serif,system-ui" font-size="11" font-weight="700" fill="#5eead4">acts</text>
+    <path d="M306,141 C334,132 352,116 360,96" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M352,98 L361,93 L362,103" stroke="#2dd4bf" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="348" y="84" font-family="ui-sans-serif,system-ui" font-size="11" font-weight="700" fill="#5eead4">acts</text>
   </g>
 </svg>

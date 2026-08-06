@@ -21,16 +21,6 @@
            C272,30 232,22 200,32 Z"
         fill="rgba(244,114,182,0.07)" stroke="#f472b6" stroke-width="2.2" stroke-opacity="0.85"/>
 
-  <!-- gyri hints along the outline -->
-  <g stroke="rgba(249,168,212,0.45)" stroke-width="1.6" fill="none" stroke-linecap="round">
-    <path d="M124,52 C132,60 128,70 136,76"/>
-    <path d="M100,96 C110,100 112,112 106,122"/>
-    <path d="M126,162 C136,158 146,164 152,172"/>
-    <path d="M276,52 C268,60 272,70 264,76"/>
-    <path d="M300,96 C290,100 288,112 294,122"/>
-    <path d="M274,162 C264,158 254,164 248,172"/>
-  </g>
-
   <!-- hemispheric divider -->
   <path d="M200,32 C194,60 206,84 198,108 C192,132 206,158 200,182"
         stroke="rgba(249,168,212,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3 5"/>
@@ -83,4 +73,11 @@
     <circle cx="245" cy="132" r="5"/>
     <circle cx="220" cy="151" r="5"/>
   </g>
+
+  <!-- verdicts: correlation fails, structure holds -->
+  <g stroke="#f87171" stroke-width="3" stroke-linecap="round" filter="url(#glow)">
+    <line x1="52" y1="92" x2="72" y2="112"/>
+    <line x1="72" y1="92" x2="52" y2="112"/>
+  </g>
+  <path d="M328,108 L338,118 L356,88" stroke="#2dd4bf" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
 </svg>
