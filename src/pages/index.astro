@@ -19,6 +19,8 @@ const insightPosts = (await getCollection('insights'))
       <p class="lead">Today, IT's Think — governance and specifications — live in prose — architecture wiki, compliance spreadsheets, review boards — that drifts from reality the moment it is written. Poesis stack turns that prose into governed, typed, versioned, <strong>machine-operable</strong> <i>definitions</i> it can act on, generate from, and continuously enforce.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#portfolio"><Icon name="marketplace" /> Explore the portfolio</a>
+        <a class="btn btn-ghost" href="#services"><Icon name="external" /> Explore the services</a>
+        <a class="btn btn-ghost" href="#insights"><Icon name="docs" /> Explore the insights</a>
         <a class="btn btn-ghost" href="/contact"><Icon name="external" /> Talk to us</a>
       </div>
     </div>
@@ -33,27 +35,6 @@ const insightPosts = (await getCollection('insights'))
       </div>
 
       <ArchMap />
-    </div>
-  </section>
-
-  <section id="insights" class="section">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Insights</p>
-        <h2>How Poesis is applied, argued, and advanced.</h2>
-        <p class="lead">Case studies, articles, research notes, and publications on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
-      </div>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        {insightPosts.map((post) => (
-          <article class="card card--feature card--static">
-            <span class="tag">{post.data.category}</span>
-            <h3><a href={`/insights/${post.id}`}>{post.data.title}</a></h3>
-            <p>{post.data.summary}</p>
-            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </article>
-        ))}
-      </div>
-      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights"><Icon name="docs" /> Browse all insights</a></p>
     </div>
   </section>
 
@@ -75,6 +56,27 @@ const insightPosts = (await getCollection('insights'))
         ))}
       </div>
       <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/contact"><Icon name="external" /> Talk to us</a></p>
+    </div>
+  </section>
+
+  <section id="insights" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Insights</p>
+        <h2>How Poesis is applied, argued, and advanced.</h2>
+        <p class="lead">Case studies, articles, research notes, and publications on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
+      </div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {insightPosts.map((post) => (
+          <article class="card card--feature card--static">
+            <span class="tag">{post.data.category}</span>
+            <h3><a href={`/insights/${post.id}`}>{post.data.title}</a></h3>
+            <p>{post.data.summary}</p>
+            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights"><Icon name="docs" /> Browse all insights</a></p>
     </div>
   </section>
 
