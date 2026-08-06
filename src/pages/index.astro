@@ -18,12 +18,12 @@ const insightPosts = (await getCollection('insights'))
       <p class="lead">Poesis closes the IT <strong>THINK → BUILD → RUN</strong> loop — <strong>systematically and autonomously, with humans in the loop.</strong>
       <p class="lead">Today, IT's Think — governance and specifications — live in prose — architecture wiki, compliance spreadsheets, review boards — that drifts from reality the moment it is written. Poesis stack turns that prose into governed, typed, versioned, <strong>machine-operable</strong> <i>definitions</i> it can act on, generate from, and continuously enforce.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#portfolio"><Icon name="marketplace" /> Portfolio</a>
-        <a class="btn btn-primary" href="#services"><Icon name="external" /> Services</a>
-        <a class="btn btn-primary" href="#partnerships"><Icon name="external" /> Partnerships</a>
-        <a class="btn btn-primary" href="#insights"><Icon name="docs" /> Insights</a>
-        <a class="btn btn-primary" href="#custody"><Icon name="play" /> Custody</a>
-        <a class="btn btn-ghost" href="/contact"><Icon name="external" /> Talk to us</a>
+        <a class="btn btn-primary" href="#portfolio"><Icon name="grid" /> Portfolio</a>
+        <a class="btn btn-primary" href="#services"><Icon name="briefcase" /> Services</a>
+        <a class="btn btn-primary" href="#partnerships"><Icon name="handshake" /> Partnerships</a>
+        <a class="btn btn-primary" href="#insights"><Icon name="lightbulb" /> Insights</a>
+        <a class="btn btn-primary" href="#custody"><Icon name="shield" /> Custody</a>
+        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
       </div>
     </div>
   </section>
@@ -53,11 +53,11 @@ const insightPosts = (await getCollection('insights'))
             <span class="tag">{service.category}</span>
             <h3>{service.label}</h3>
             <p>{service.summary}</p>
-            <a class="btn btn-ghost btn-sm service-link" href={service.href}><Icon name="external" /> Explore {service.label}</a>
+            <a class="btn btn-ghost btn-sm service-link" href={service.href}><Icon name="arrow-right" /> Explore {service.label}</a>
           </article>
         ))}
       </div>
-      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/contact"><Icon name="external" /> Talk to us</a></p>
+      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a></p>
     </div>
   </section>
 
@@ -73,7 +73,7 @@ const insightPosts = (await getCollection('insights'))
           <span class="tag">LLM vendors</span>
           <h3>LLM Vendor Partnership</h3>
           <p>What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; humans dispose through ITIP; SIE evaluates constraints and executes governed Mechanisms.</p>
-          <a class="btn btn-ghost btn-sm service-link" href="/partnerships/llm-vendor-value-proposal"><Icon name="external" /> Read the value proposal</a>
+          <a class="btn btn-ghost btn-sm service-link" href="/partnerships/llm-vendor-value-proposal"><Icon name="arrow-right" /> Read the value proposal</a>
         </article>
       </div>
     </div>
@@ -95,11 +95,11 @@ const insightPosts = (await getCollection('insights'))
             <p class="insight-meta">
               <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
             </p>
-            <a class="btn btn-ghost btn-sm service-link" href={`/insights/${post.id}`}><Icon name="docs" /> Read {post.data.title.split(':')[0]}</a>
+            <a class="btn btn-ghost btn-sm service-link" href={`/insights/${post.id}`}><Icon name="book-open" /> Read {post.data.title.split(':')[0]}</a>
           </article>
         ))}
       </div>
-      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights"><Icon name="docs" /> Browse all insights</a></p>
+      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights"><Icon name="list" /> Browse all insights</a></p>
     </div>
   </section>
 
@@ -109,9 +109,9 @@ const insightPosts = (await getCollection('insights'))
       <h2>Poesis runs on Poesis.</h2>
       <p class="lead">We are our own first customer. The Poesis stack that will integrate your systems already define, build, and govern ours — Poesis's development power rests on the very stack it ships.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/solutions/itip"><Icon name="play" /> Explore ITIP</a>
-        <a class="btn btn-ghost" href="/solutions/sie"><Icon name="play" /> Explore SIE</a>
-        <a class="btn btn-ghost" href="/solutions/framework"><Icon name="play" /> Explore Agentic Framework</a>
+        <a class="btn btn-primary" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
+        <a class="btn btn-ghost" href="/solutions/sie"><Icon name="layers" /> Explore SIE</a>
+        <a class="btn btn-ghost" href="/solutions/framework"><Icon name="spark" /> Explore Agentic Framework</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> See it on GitHub</a>
       </div>
     </div>

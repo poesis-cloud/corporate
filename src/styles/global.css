@@ -466,9 +466,11 @@ a:hover {
 
 .btn-icon {
   flex: none;
-  width: 1.1em;
-  height: 1.1em;
-  opacity: .9;
+  width: 1.15em;
+  height: 1.15em;
+  opacity: .92;
+  display: block;
+  overflow: visible;
 }
 
 /* ---- sections ----------------------------------------------------------- */

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
 import { services, type Service } from '../../data/services.ts';
 
 export function getStaticPaths() {
@@ -22,8 +23,8 @@ const { service } = Astro.props;
       <h1>{service.title}</h1>
       <p class="lead">{service.lead}</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact">Discuss your context</a>
-        <a class="btn btn-ghost" href="/#services">All services</a>
+        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Discuss your context</a>
+        <a class="btn btn-ghost" href="/#services"><Icon name="list" /> All services</a>
       </div>
     </div>
   </section>
@@ -80,7 +81,7 @@ const { service } = Astro.props;
       <p class="eyebrow centered-eyebrow">Next step</p>
       <h2>Start with the boundary that matters most.</h2>
       <p class="lead closing-lead">We will locate the smallest engagement that can produce useful evidence without losing sight of the system around it.</p>
-      <p><a class="btn btn-primary" href="/contact">Talk to Poesis</a></p>
+      <p><a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to Poesis</a></p>
     </div>
   </section>
 </BaseLayout>

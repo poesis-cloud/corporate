@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
 
 const FLOW_META = {
   A: { hex: '#38bdf8', name: 'Context sourcing' },
@@ -34,9 +35,9 @@ function adherencePills(ids: string[]) {
         <strong>How to read this proposal.</strong> Present tense describes the Poesis reference design and target operating model which might not yet be fully implemented or operational. Partnership adherences described below may therefore include work to advance Poesis components from their explicitly stated maturity levels.
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact">Talk to us</a>
-        <a class="btn btn-ghost" href="/solutions/gsm">The GSM standard</a>
-        <a class="btn btn-ghost" href="/solutions/sie">The SIE engine</a>
+        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a>
+        <a class="btn btn-ghost" href="/solutions/gsm"><Icon name="docs" /> The GSM standard</a>
+        <a class="btn btn-ghost" href="/solutions/sie"><Icon name="layers" /> The SIE engine</a>
       </div>
     </div>
   </section>
