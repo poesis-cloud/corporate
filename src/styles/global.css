@@ -881,6 +881,7 @@ a:hover {
   font-family: var(--font-sans) !important;
   font-size: .85rem !important;
   line-height: 1 !important;
+  cursor: pointer !important;
   transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
 
