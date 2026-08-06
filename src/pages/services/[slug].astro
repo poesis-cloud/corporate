@@ -15,7 +15,7 @@ interface Props {
 
 const { service } = Astro.props;
 ---
-<BaseLayout title={service.label} description={service.summary}>
+<BaseLayout title={service.label} description={service.summary} pageType="Service">
   <section class="hero service-hero">
     <div class="container">
       <p class="eyebrow"><a href="/#services">Services</a><span aria-hidden="true">/</span>{service.category}</p>

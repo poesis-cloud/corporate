@@ -6,11 +6,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  pageType?: string;
 }
 
 const {
   title,
   description = 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard, the SIE engine, and the ITIP application defining and governing systems in software.',
+  pageType,
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
@@ -37,7 +39,8 @@ const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesi
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body>
+  <body data-page-type={pageType}>
+    {pageType && <span data-pagefind-meta="type" style="display:none">{pageType}</span>}
     <a class="skip-link" href="#main">Skip to content</a>
     <Nav />
     <main id="main">

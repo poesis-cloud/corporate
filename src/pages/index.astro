@@ -9,7 +9,7 @@ const insightPosts = (await getCollection('insights'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 4);
 ---
-<BaseLayout title="Poesis">
+<BaseLayout title="Poesis" pageType="Home">
   <section class="hero">
     <div class="container">
       <p class="motto">Define the world in software; generate it.</p>

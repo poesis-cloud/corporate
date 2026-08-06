@@ -11,6 +11,7 @@ const posts = (await getCollection('insights'))
 <BaseLayout
   title={`${category} · Insights`}
   description={`Poesis ${category.toLowerCase()} — real applications of governed synthetic autopoiesis.`}
+  pageType={category}
 >
   <section class="hero">
     <div class="container">

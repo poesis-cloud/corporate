@@ -23,6 +23,7 @@ const { solution, product } = Astro.props;
 <BaseLayout
   title={`${product.name} · ${solution.name}`}
   description={`${product.name} — a product of the ${solution.fullName} solution. ${product.tagline}`}
+  pageType="Product"
 >
   <section class="hero">
     <div class="container">

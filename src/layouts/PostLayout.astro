@@ -3,7 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 const date = frontmatter.pubDate ? new Date(frontmatter.pubDate) : null;
 ---
-<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+<BaseLayout title={frontmatter.title} description={frontmatter.description} pageType={frontmatter.pageType ?? 'Insight'}>
   <article class="section">
     <div class="container prose">
       <p class="eyebrow">Insight</p>

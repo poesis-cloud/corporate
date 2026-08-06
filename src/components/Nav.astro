@@ -185,11 +185,16 @@ const insights = [
           showSubResults: false,
           resetStyles: false,
           autofocus: true,
+          processResult: (result) => {
+            const type = result.meta?.type || 'Page';
+            result.meta.title = `[${type}] ${result.meta.title}`;
+            return result;
+          },
           translations: {
             placeholder: 'Search poesis.cloud...',
-            zero_results: 'No results for "%s"',
-            many_results: '%s results for "%s"',
-            one_result: '1 result for "%s"',
+            zero_results: 'No results',
+            many_results: '%s results',
+            one_result: '1 result',
           },
         });
       } catch (err) {

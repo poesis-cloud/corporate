@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<BaseLayout title={post.data.title} description={post.data.summary}>
+<BaseLayout title={post.data.title} description={post.data.summary} pageType={post.data.category}>
   <article class="article">
     <div class="container narrow">
       <p class="eyebrow">{post.data.category}</p>
