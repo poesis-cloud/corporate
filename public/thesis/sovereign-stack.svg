@@ -9,7 +9,7 @@
   <rect width="400" height="220" rx="10" fill="#0a0f1c"/>
 
   <!-- European stars arc above the stack -->
-  <g fill="#818cf8" filter="url(#glow)">
+  <g fill="#ffcc00" filter="url(#glow)" transform="translate(0,-7)">
     <path d="M200,18 l1.8,3.8 4.2,.6 -3,3 .7,4.2 -3.7,-2 -3.7,2 .7,-4.2 -3,-3 4.2,-.6 Z"/>
     <path d="M156,26 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>
     <path d="M244,26 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>

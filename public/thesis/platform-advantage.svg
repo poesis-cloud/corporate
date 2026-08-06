@@ -20,15 +20,21 @@
     <!-- ghost chips cycling -->
     <g opacity="0.45">
       <rect x="52" y="52" width="44" height="30" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
-      <text x="74" y="71" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model B</text>
+      <text x="74" y="71" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">LLM B</text>
     </g>
     <g opacity="0.45">
       <rect x="52" y="130" width="44" height="30" rx="4" fill="#101a30" stroke="#64748b" stroke-width="1.5"/>
-      <text x="74" y="149" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">model C</text>
+      <text x="74" y="149" font-family="ui-sans-serif,system-ui" font-size="9" fill="#94a3b8" text-anchor="middle">LLM C</text>
     </g>
     <g>
       <rect x="74" y="91" width="44" height="30" rx="4" fill="#101a30" stroke="#94a3b8" stroke-width="1.5"/>
-      <text x="96" y="110" font-family="ui-sans-serif,system-ui" font-size="9" fill="#c3cdde" text-anchor="middle">model A</text>
+      <text x="96" y="110" font-family="ui-sans-serif,system-ui" font-size="9" fill="#c3cdde" text-anchor="middle">LLM A</text>
+    </g>
+
+    <!-- anti-check: no defensibility on this side -->
+    <g stroke="#f87171" stroke-width="3" stroke-linecap="round" filter="url(#glow)">
+      <line x1="24" y1="160" x2="40" y2="176"/>
+      <line x1="40" y1="160" x2="24" y2="176"/>
     </g>
 
     <text x="96" y="188" font-family="ui-sans-serif,system-ui" font-size="10" fill="#64748b" text-anchor="middle">standalone — swappable</text>

@@ -5,8 +5,8 @@
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <linearGradient id="road" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="rgba(45,212,191,0.28)"/>
-      <stop offset="1" stop-color="rgba(45,212,191,0.02)"/>
+      <stop offset="0" stop-color="rgba(56,189,248,0.28)"/>
+      <stop offset="1" stop-color="rgba(56,189,248,0.02)"/>
     </linearGradient>
     <radialGradient id="horizon" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0" stop-color="rgba(94,234,212,0.28)"/>
@@ -19,21 +19,21 @@
   <!-- destination: the regulated (EU) market -->
   <ellipse cx="221" cy="68" rx="120" ry="34" fill="url(#horizon)"/>
   <line x1="48" y1="68" x2="394" y2="68" stroke="#334155" stroke-width="1.2" stroke-opacity="0.8"/>
-  <g fill="#818cf8" filter="url(#glow)">
+  <g fill="#ffcc00" filter="url(#glow)">
     <path d="M221,14 l1.8,3.8 4.2,.6 -3,3 .7,4.2 -3.7,-2 -3.7,2 .7,-4.2 -3,-3 4.2,-.6 Z"/>
     <path d="M193,22 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>
     <path d="M249,22 l1.6,3.4 3.8,.5 -2.7,2.7 .6,3.8 -3.3,-1.8 -3.3,1.8 .6,-3.8 -2.7,-2.7 3.8,-.5 Z" opacity="0.85"/>
   </g>
-  <text x="221" y="60" font-family="ui-sans-serif,system-ui" font-size="24" font-weight="700" fill="#5eead4" text-anchor="middle" filter="url(#glow)">€</text>
+  <text x="221" y="60" font-family="ui-sans-serif,system-ui" font-size="24" font-weight="700" fill="#38bdf8" text-anchor="middle" filter="url(#glow)">€</text>
 
   <!-- the road, perspective from bottom to the horizon -->
   <polygon points="211,68 231,68 332,208 110,208" fill="url(#road)"/>
-  <g stroke="#2dd4bf" stroke-width="2" stroke-opacity="0.6">
+  <g stroke="#38bdf8" stroke-width="2" stroke-opacity="0.6">
     <line x1="211" y1="68" x2="110" y2="208"/>
     <line x1="231" y1="68" x2="332" y2="208"/>
   </g>
   <!-- centre dashes -->
-  <g stroke="#5eead4" stroke-width="3" stroke-linecap="round" opacity="0.85">
+  <g stroke="#7dd3fc" stroke-width="3" stroke-linecap="round" opacity="0.85">
     <line x1="221" y1="78" x2="221" y2="86"/>
     <line x1="221" y1="102" x2="221" y2="114"/>
     <line x1="221" y1="134" x2="221" y2="150"/>
@@ -42,8 +42,8 @@
 
   <!-- checkpoint arch 1 (far): explainability -->
   <g filter="url(#glow)">
-    <path d="M195,96 L195,80 L247,80 L247,96" stroke="#38bdf8" stroke-width="2.5" fill="none"/>
-    <rect x="205" y="72" width="32" height="10" rx="3" fill="#0d1830" stroke="#38bdf8" stroke-width="1.2"/>
+    <path d="M195,96 L195,80 L247,80 L247,96" stroke="#2dd4bf" stroke-width="2.5" fill="none"/>
+    <rect x="205" y="72" width="32" height="10" rx="3" fill="#0e2827" stroke="#2dd4bf" stroke-width="1.2"/>
     <circle cx="221" cy="77" r="2.4" fill="#5eead4"/>
   </g>
   <g transform="translate(262,84) scale(0.5)" filter="url(#glow)">
