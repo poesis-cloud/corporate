@@ -263,7 +263,7 @@ export const solutions: Solution[] = [
       },
       {
         slug: 'orchestration',
-        name: 'Systemic Agentic Organization',
+        name: 'SAFe Agentic Organization',
         tagline: 'Portfolio → program → iteration — a preset, IT-scaled agile org chart of agents — for operating efficiently on day-to-day strategic, tactical, and technical concerns.',
         description:
           'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
@@ -287,7 +287,7 @@ export const solutions: Solution[] = [
         name: 'Agentic Workspace',
         tagline: 'A shared remote workspace storing local agentic workflow artifacts, enabling local personal agents to operate on the required inputs of other local personal agents — for an end-to-end decentralized agentic workflow model.',
         description:
-          'The distribution layer: an installer that wires the Agentic Harness, the Systemic Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
+          'The distribution layer: an installer that wires the Agentic Harness, the SAFe Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
         values: [
           { title: 'Your files, your history, your state.', body: 'Work state lives in plain files under your own git history — the event log is your repository, not a vendor\u2019s cloud. Sensitive context never leaves your machine.' },
           { title: 'Install once, deliver governed.', body: 'One installer wires the harness, agents, skills, and workflows into any working tree — a governed agentic delivery organization, minutes after clone.' },
