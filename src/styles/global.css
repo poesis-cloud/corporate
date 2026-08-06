@@ -870,18 +870,24 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.8rem;
-  height: 1.8rem;
+  min-width: 2rem;
+  min-height: 2rem;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: .35rem !important;
   background: rgba(255, 255, 255, .06) !important;
   border: 1px solid var(--line) !important;
   border-radius: 6px !important;
   color: var(--ink-soft) !important;
   font-family: var(--font-sans) !important;
-  font-size: .8rem !important;
+  font-size: .85rem !important;
   line-height: 1 !important;
   transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.pagefind-ui__search-clear svg,
+.pagefind-ui__search-clear::before {
+  width: .9rem !important;
+  height: .9rem !important;
 }
 
 .pagefind-ui__search-clear:hover {
