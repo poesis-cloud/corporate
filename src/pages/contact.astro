@@ -13,63 +13,21 @@ const email = 'clement.cazaud@outlook.com';
       <p class="eyebrow">Contact</p>
       <h1>Let's talk.</h1>
       <p class="lead">Transformation engagements, the Poesis stack (SaaS or on-prem), certification, design partnerships, or the GSM standard — start the conversation.</p>
+      <p class="lead">Poesis is early, open, and ambitious. If you work on systemic governance, generative AI, enterprise architecture, or the kind of engineering that turns standards into running systems, we'd like to hear from you — even if there's no formal opening listed yet.</p>
+      <div class="hero-cta" style="margin-top:1.75rem">
+        <a class="btn btn-primary" href={`mailto:${email}`}><Icon name="external" /> Email us</a>
+        <a class="btn btn-ghost" href={`mailto:${email}?subject=Joining%20Poesis`}><Icon name="external" /> Introduce yourself</a>
+        <a class="btn btn-ghost" href="https://github.com/orgs/poesis-cloud/discussions" target="_blank" rel="noopener"><Icon name="github" /> GitHub Discussions</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/company/poesis-cloud" target="_blank" rel="noopener"><Icon name="external" /> LinkedIn</a>
+      </div>
     </div>
   </section>
 
   <section class="section section--soft">
-    <div class="container narrow">
-      <form class="contact-form" name="contact" method="POST" action={`mailto:${email}`} enctype="text/plain">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@organization.com" required />
-        </div>
-        <div class="field">
-          <label for="organization">Organization</label>
-          <input id="organization" name="organization" type="text" autocomplete="organization" placeholder="Organization" />
-        </div>
-        <div class="field">
-          <label for="topic">Topic</label>
-          <select id="topic" name="topic" required>
-            <option value="" disabled selected>Select a topic</option>
-            <option value="transformation">Transformation / consulting</option>
-            <option value="saas">Managed cloud (SaaS)</option>
-            <option value="on-prem">Sovereign / on-prem deployment</option>
-            <option value="certification">Certification</option>
-            <option value="partnership">Partnership</option>
-            <option value="gsm">GSM standard</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Tell us about your context and goal..." required></textarea>
-        </div>
-        <div class="field field--submit">
-          <button class="btn btn-primary" type="submit"><Icon name="external" /> Send message</button>
-        </div>
-      </form>
-      <p class="muted" style="margin-top:1.5rem;text-align:center">Or email us directly at <a href={`mailto:${email}`}>{email}</a>. Join the conversation on <a href="https://github.com/orgs/poesis-cloud/discussions">GitHub Discussions</a>, browse the code on <a href="https://github.com/poesis-cloud">GitHub</a>, or follow us on <a href="https://www.linkedin.com/company/poesis-cloud">LinkedIn</a>.</p>
-    </div>
-  </section>
-
-  <section class="section">
     <div class="container">
       <p class="eyebrow">What to expect</p>
       <h2>A direct line to the people who built it.</h2>
       <p class="lead">Tell us your context and goal. We'll respond with the shortest credible path — and be honest if Poesis isn't the right fit yet.</p>
-    </div>
-  </section>
-
-  <section class="section section--soft">
-    <div class="container">
-      <p class="eyebrow">Join us</p>
-      <h2>Help build the generative governance era.</h2>
-      <p class="lead">Poesis is early, open, and ambitious. If you work on systemic governance, generative AI, enterprise architecture, or the kind of engineering that turns standards into running systems, we'd like to hear from you — even if there's no formal opening listed yet.</p>
-      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href={`mailto:${email}?subject=Joining%20Poesis`}>Introduce yourself →</a></p>
     </div>
   </section>
 </BaseLayout>
