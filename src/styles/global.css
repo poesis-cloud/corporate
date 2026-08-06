@@ -302,8 +302,9 @@ a:hover {
 }
 
 .nav-dropdown-menu--search {
-  min-width: 360px;
+  min-width: 0;
   max-width: calc(100vw - 2rem);
+  width: 360px;
   padding: .75rem;
   right: 0;
   left: auto;
@@ -1191,7 +1192,7 @@ a:hover {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 1.4fr) repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
