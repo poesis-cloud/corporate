@@ -103,7 +103,7 @@ export const solutions: Solution[] = [
     tag: 'Engine',
     zone: 'THINK',
     href: '/solutions/sie',
-    tagline: 'The Systemic Intelligence Engine — reference implementation of GSM. What Kubernetes is to software infrastructures, the Systemic Intelligence Engine is to the world. Both are declarative reconciliation engines: you define the desired state as typed, versioned, API-managed objects, and the engine continuously evaluates the real world against that definition and acts to close the gap. And this is precisely what is missing to generative AI for a capable and trustworthy synthetic autopoiesis.',
+    tagline: 'The Systemic Intelligence Engine — reference implementation of GSM. What Kubernetes is to software infrastructures, the Systemic Intelligence Engine is to the world. Both are declarative reconciliation engines: you define the desired state as typed, versioned, API-managed objects, and the engine continuously evaluates the real world against that definition and acts to close the gap. From virtualized and managed computing resources to virtualized and managed world resources. This is the logical and natural evolution path as we enter the generative AI era. The key to this evolution path is the systemics model: GSM. This evolution enables generative AI to operate a capable and trustworthy synthetic autopoiesis.',
     description:
       'SIE is the engine that implements and leverages the GSM standard — it stores governed definitions, enforces their lifecycle, and turns them into a governed AI context that every domain application and frameworks above it operates on.',
     products: [
@@ -178,7 +178,7 @@ export const solutions: Solution[] = [
     tag: 'Standard Model',
     zone: 'THINK',
     href: '/solutions/gsm',
-    tagline: 'The Generative System Model — the vendor-neutral standard for defining systems — being to world\'s THINK what OpenTelemetry semantic convention is to IT\'s RUN — grounded in systemics, synthesizing Beer\u2019s cybernetics Viable System Model, von Bertalanffy\u2019s General System Theory, Wiener and Ashby\u2019s cybernetic feedback and requisite variety, and Maturana and Varela\u2019s biological theory of autopoiesis into a single generative definition of systems.',
+    tagline: 'The Generative System Model — the vendor-neutral standard for defining systems — being to the world\'s THINK-BUILD-RUN of itself what OpenTelemetry semantic convention is to IT\'s systems observability — grounded in systemics, synthesizing Beer\u2019s cybernetics Viable System Model, von Bertalanffy\u2019s General System Theory, Wiener and Ashby\u2019s cybernetic feedback and requisite variety, and Maturana and Varela\u2019s biological theory of autopoiesis into a single generative definition of systems.',
     description:
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
     products: [
