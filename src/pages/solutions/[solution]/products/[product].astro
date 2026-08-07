@@ -41,7 +41,16 @@ const { solution, product } = Astro.props;
     <div class="container">
       <p class="eyebrow">Why it matters</p>
       <h2>What {product.name} changes for you.</h2>
-      <p class="lead">{product.description}</p>
+      {product.description.split('\n\n').map((para) => (
+        <p class="lead">
+          {para.split('\n').map((line, index, lines) => (
+            <>
+              {line}
+              {index < lines.length - 1 && <br />}
+            </>
+          ))}
+        </p>
+      ))}
       <div class="grid grid-2" style="margin-top:1.5rem">
         {product.values.map((v) => (
           <div class="card card--feature card--static">
