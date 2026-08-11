@@ -280,7 +280,7 @@ export const solutions: Solution[] = [
           { slug: 'artifacts', name: 'Artifacts', blurb: 'Epics, features, stories, ADRs — schema-validated outputs every ceremony produces and every gate checks.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/saf/safe-agentic-organization/', label: 'Distributed Agentic SAFe' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/saf-safe-agentic-organization', label: 'saf-safe-agentic-organization' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-organization', label: 'saf-agentic-organization' }],
       },
       {
         slug: 'agentic-workspace',
