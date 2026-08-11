@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Icon from '../../components/Icon.astro';
 
 const FLOW_META = {
   A: { hex: '#38bdf8', name: 'Context sourcing' },
@@ -24,7 +23,6 @@ function adherencePills(ids: string[]) {
 <BaseLayout
   title="LLM Vendor Partnership — Value Proposal"
   description="What the Poesis stack brings to LLM capabilities — and what LLMs bring to Poesis. Models propose; humans dispose through ITIP; SIE evaluates constraints and executes governed Mechanisms."
-  pageType="Partnership value proposal"
 >
   <section class="hero">
     <div class="container">
@@ -35,9 +33,9 @@ function adherencePills(ids: string[]) {
         <strong>How to read this proposal.</strong> Present tense describes the Poesis reference design and target operating model which might not yet be fully implemented or operational. Partnership adherences described below may therefore include work to advance Poesis components from their explicitly stated maturity levels.
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a>
-        <a class="btn btn-ghost" href="/solutions/gsm"><Icon name="docs" /> The GSM standard</a>
-        <a class="btn btn-ghost" href="/solutions/sie"><Icon name="layers" /> The SIE engine</a>
+        <a class="btn btn-primary" href="/contact">Talk to us</a>
+        <a class="btn btn-ghost" href="/gsm">The GSM standard</a>
+        <a class="btn btn-ghost" href="/sie">The SIE engine</a>
       </div>
     </div>
   </section>
@@ -49,7 +47,6 @@ function adherencePills(ids: string[]) {
       <p class="lead">One partnership addresses two limits: structured context raises the <strong>capability ceiling</strong>; enterprise platform, market access, platform advantage, and sovereignty raise the <strong>deployment ceiling</strong>.</p>
       <div class="thesis-grid">
         <div class="card card--feature" id="capability-ceiling">
-          <img class="thesis-illustration" src="/thesis/structured-context.svg" alt="A brain split in two: the left half is a fuzzy cloud of statistical dots, the right half an explicit causal graph of connected nodes" loading="lazy" />
           <span class="tag">Capability ceiling · Structured context</span>
           <h3>Better intelligence without bigger models.</h3>
           <p>A model that trains and reasons against explicit, causal, governed, and snapshot Definitions of the world works against explicit structure rather than relying only on correlation. That structure provides a substrate for impact analysis, counterfactual testing, and planning against modeled dependencies and much more...</p>
@@ -57,7 +54,6 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Don't compete on larger models. Compete on better intelligence.</p>
         </div>
         <div class="card card--feature" id="deployment-ceiling">
-          <img class="thesis-illustration" src="/thesis/enterprise-platform.svg" alt="An LLM chip docking into a three-layer isometric platform: governed context, human loop, and audit evidence — with an arrow showing it acts" loading="lazy" />
           <span class="tag">Deployment ceiling · Enterprise platform</span>
           <h3>From language model to enterprise AI platform.</h3>
           <p>Companies buy solutions, not models. Partner models provide the intelligence; Poesis provides structured organizational context, human loop, deterministic evaluation of inference, grounded enterprise agentic development workflows, and audit evidence for accountability. Together they form a deployable enterprise agentic platform — able to act, not only answer.</p>
@@ -65,7 +61,6 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Transform a model into an enterprise AI platform.</p>
         </div>
         <div class="card card--feature">
-          <img class="thesis-illustration" src="/thesis/regulated-access.svg" alt="A road leading to a euro symbol under three stars on the horizon, passing through three checkpoint arches, each with a green light and a shield check mark beside it" loading="lazy" />
           <span class="tag">Deployment ceiling · Market access</span>
           <h3>A credible path into regulated industries.</h3>
           <p>Enterprises don't stall because AI isn't powerful enough — they stall because they can't trust it to act. Explainability, governance, auditability, and policy enforcement are entry conditions, and Poesis is designed to provide their shared context and control substrate.</p>
@@ -73,7 +68,6 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Governance is the entry ticket to regulated industries.</p>
         </div>
         <div class="card card--feature">
-          <img class="thesis-illustration" src="/thesis/platform-advantage.svg" alt="Interchangeable model chips cycling on one side; on the other, the same LLM chip soldered into a circuit board wired to grounded inference, governed execution, and model specialisation modules, with a shield check" loading="lazy" />
           <span class="tag">Deployment ceiling · Platform advantage</span>
           <h3>A defensible advantage beyond model performance.</h3>
           <p>Grounded inference, governed execution, and model specialisation create a combined platform that is harder to commoditize than standalone inference. It moves the commercial relationship into AI governance, digital operating models, enterprise transformation, and regulated automation — increasing deal scope and strategic relevance.</p>
@@ -81,7 +75,6 @@ function adherencePills(ids: string[]) {
           <p class="thesis-tagline">Build a platform advantage, not simply a model advantage.</p>
         </div>
         <div class="card card--feature">
-          <img class="thesis-illustration" src="/thesis/sovereign-stack.svg" alt="A building of three floors — sovereign LLM on governed context on trusted infrastructure — enclosed in a locked sovereignty boundary under an arc of European stars" loading="lazy" />
           <span class="tag">Deployment ceiling · Sovereignty</span>
           <h3>The foundation of a sovereign AI stack.</h3>
           <p>Not "a sovereign LLM" — a sovereign AI <em>stack</em>. You provide the sovereign intelligence. Poesis provides the governed context. Together they form the trusted infrastructure enterprises need to deploy AI at scale. <strong>As a neutral, model-independent substrate, GSM/SIE could be advanced as a candidate foundation for future European standardization of governed enterprise AI.</strong></p>
@@ -247,9 +240,9 @@ function adherencePills(ids: string[]) {
                   </div>
                 </div>
 
-                <div class="vf-card" id="n-saf" data-component="Systemic Agentic Framework">
+                <div class="vf-card" id="n-saf" data-component="SAFe Agentic Framework">
                   <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
-                    <span class="vf-ctitle">Systemic Agentic Framework</span>
+                    <span class="vf-ctitle">SAFe Agentic Framework</span>
                     <span class="vf-csub">agentic organisation product delivery through declared workflows today, with a deterministic operational harness specified</span>
                   </button>
                   <button class="vf-fold-btn" type="button" data-fold="f-saf" aria-controls="f-saf" aria-expanded="false">▸ components</button>
@@ -382,11 +375,6 @@ function adherencePills(ids: string[]) {
   }
   .thesis-grid > .card { grid-column: span 2; }
   .thesis-grid > .card:nth-child(4) { grid-column: 2 / span 2; }
-
-  .thesis-illustration {
-    display: block; width: 100%; height: auto; margin-bottom: 1rem;
-    border-radius: 10px; border: 1px solid var(--line);
-  }
 
   .thesis-tagline {
     margin-top: .9rem; padding-top: .7rem; border-top: 1px solid var(--line);
@@ -724,7 +712,7 @@ function adherencePills(ids: string[]) {
       feedback: 'Task success, rework, gate failures, cost, latency, and human intervention are measured per run.',
       partner: ['A living reference for supervised multi-agent engineering using partner models', 'A planned evidence surface for task success, rework, gate failures, cost, latency, and human intervention'],
       poesis: ['Faster delivery where measured outcomes demonstrate an advantage over the baseline workflow', 'Auditable delivery evidence governed by deterministic gates and human approval'],
-      comps: 'Agent definitions, workflows, model catalog, and harness contracts exist in the <b>Systemic Agentic Framework</b>; the deterministic harness runtime and persisted evidence collection remain to be implemented.',
+      comps: 'Agent definitions, workflows, model catalog, and harness contracts exist in the <b>SAFe Agentic Framework</b>; the deterministic harness runtime and persisted evidence collection remain to be implemented.',
     },
     {
       id: 'E', hex: '#f59e0b', from: 'n-sie', to: 'n-eval', lane: 28,
@@ -762,7 +750,7 @@ function adherencePills(ids: string[]) {
       partner: ['Evidence-based placement on workloads where the partner model demonstrates comparative value', 'Structured feedback about capability gaps, reliability, cost, and intervention demand'],
       poesis: ['Model-neutral routing aligned to workload needs instead of a single-provider default', 'A qualification record that makes model placement an evidence decision rather than a procurement default'],
       shared: ['Controlled model upgrades and substitutions based on declared demand and measured outcomes', 'No structural dependence on a single provider for the customer organisation’s governed workloads'],
-      comps: 'Catalog and contracts exist in the <b>Systemic Agentic Framework</b>; resolver implementation, host adapter bindings, dispatch telemetry, and qualification policy remain to be built.',
+      comps: 'Catalog and contracts exist in the <b>SAFe Agentic Framework</b>; resolver implementation, host adapter bindings, dispatch telemetry, and qualification policy remain to be built.',
     },
     {
       id: 'reg', loop: true, rail: -9, hex: '#fb923c', from: 'n-org-reg', to: 'n-sie', lane: -66,
