@@ -71,7 +71,7 @@ export const solutions: Solution[] = [
           { slug: 'definitions-management', name: 'GSM Definitions management', blurb: 'Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth.' },
           { slug: 'frameworks-management', name: 'GSM Frameworks management', blurb: 'Browse, attach, and compose the published catalogue of frameworks sourced into GSM — a coherent governance fabric from day one.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/itip/', label: 'ITIP documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/itip/web-application/', label: 'Web Application documentation' }],
         repos: [
           { href: 'https://github.com/poesis-cloud/itip-web-frontend', label: 'itip-web-frontend' },
           { href: 'https://github.com/poesis-cloud/itip-web-backend', label: 'itip-web-backend' },
@@ -91,7 +91,7 @@ export const solutions: Solution[] = [
         features: [
           { slug: 'automatic-sourcing-from-code-repos', name: 'GSM Definitions automatic sourcing from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/itip-blackboard-sourcer/', label: 'Sourcer documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/itip/definition-blackboard-code-sourcer/', label: 'Sourcer documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/itip-definition-blackboard-repository-sourcer', label: 'itip-definition-blackboard-repository-sourcer' }],
       },
     ],
@@ -123,7 +123,7 @@ export const solutions: Solution[] = [
           { slug: 'definitions-lifecycle-enforcement', name: 'GSM Definitions lifecycle enforcement', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a validated state transition, auditable end to end.' },
           { slug: 'definitions-retention', name: 'GSM Definitions retention', blurb: 'Definitions and their history are retained and versioned — nothing governed is silently overwritten or lost.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/sie-definition/', label: 'SIE Definition documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/sie/definition-manager/', label: 'SIE Definition documentation' }],
         repos: [
           { href: 'https://github.com/poesis-cloud/sie-definition-manager', label: 'sie-definition-manager' },
           { href: 'https://github.com/poesis-cloud/sie-definition-database', label: 'sie-definition-database' },
@@ -144,7 +144,7 @@ export const solutions: Solution[] = [
           { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state — governance as a control loop, not a review meeting.' },
           { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms — verdicts and rules become dispatched, effector-driven actions.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/sie-definition/', label: 'SIE documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/sie/operator/', label: 'Operator documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/sie-operator', label: 'sie-operator' }],
       },
       {
@@ -163,7 +163,7 @@ export const solutions: Solution[] = [
           { slug: 'ks-contributions-lifecycle-enforcement', name: 'KS Contributions lifecycle enforcement', blurb: 'OPEN → SEALED → BYTE_STABLE — sealed boards are immutable, and the contribution stream is byte-stable for reproducible promotion.' },
           { slug: 'ks-contributions-retention', name: 'KS Contributions retention', blurb: 'Every contribution and its provenance envelope is retained — an append-only, auditable record of how each definition was sourced.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/sie-blackboard/', label: 'Definition Blackboard Manager documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/sie/definition-blackboard-manager/', label: 'Definition Blackboard Manager documentation' }],
         repos: [
           { href: 'https://github.com/poesis-cloud/sie-definition-blackboard-manager', label: 'sie-definition-blackboard-manager' },
           { href: 'https://github.com/poesis-cloud/sie-definition-blackboard-database', label: 'sie-definition-blackboard-database' },
@@ -201,8 +201,8 @@ export const solutions: Solution[] = [
         ],
         docs: [
           { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM documentation' },
-          { href: 'https://docs.poesis.cloud/gsm/specification/', label: 'Specification' },
-          { href: 'https://docs.poesis.cloud/gsm/conformance/', label: 'Conformance' },
+          { href: 'https://docs.poesis.cloud/gsm/specifications/specification/', label: 'Specification' },
+          { href: 'https://docs.poesis.cloud/gsm/specifications/conformance/', label: 'Conformance' },
         ],
       },
       {
@@ -258,8 +258,8 @@ export const solutions: Solution[] = [
           { slug: 'step-authorization', name: 'Agent authorization', blurb: 'Pre, invariant, and post conditions gate every step — agents move through evidence and sequence, not vibes.' },
           { slug: 'logging', name: 'Logging', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework overview' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
+        docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-harness/', label: 'Agentic Harness documentation' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/agentic-harness', label: 'agentic-harness' }],
       },
       {
         slug: 'safe-agentic-organization',
@@ -279,8 +279,8 @@ export const solutions: Solution[] = [
           { slug: 'instructions', name: 'Instructions', blurb: 'Persistent conventions and rules that shape how agents write and edit — the org\u2019s engineering standards, enforced at every step.' },
           { slug: 'artifacts', name: 'Artifacts', blurb: 'Epics, features, stories, ADRs — schema-validated outputs every ceremony produces and every gate checks.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/distributed-agentic-safe/', label: 'Distributed Agentic SAFe' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
+        docs: [{ href: 'https://docs.poesis.cloud/saf/safe-agentic-organization/', label: 'Distributed Agentic SAFe' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-organization', label: 'safe-agentic-organization' }],
       },
       {
         slug: 'agentic-workspace',
@@ -297,8 +297,8 @@ export const solutions: Solution[] = [
           { slug: 'installer', name: 'Installer', blurb: 'One installer wires the harness, agents, skills, and workflows into your working tree — local-first, sovereign, no lock-in.' },
           { slug: 'cicd-pipelines', name: 'CI/CD artifacts pipelines', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/safe-agentic-framework/', label: 'Framework documentation' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-framework', label: 'safe-agentic-framework' }],
+        docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-workspace/', label: 'Agentic Workspace documentation' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/agentic-workspace', label: 'agentic-workspace' }],
       },
     ],
   },
