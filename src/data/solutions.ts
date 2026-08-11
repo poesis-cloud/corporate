@@ -259,7 +259,7 @@ export const solutions: Solution[] = [
           { slug: 'logging', name: 'Logging', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-harness/', label: 'Agentic Harness documentation' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/agentic-harness', label: 'agentic-harness' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-harness', label: 'saf-agentic-harness' }],
       },
       {
         slug: 'safe-agentic-organization',
@@ -280,7 +280,7 @@ export const solutions: Solution[] = [
           { slug: 'artifacts', name: 'Artifacts', blurb: 'Epics, features, stories, ADRs — schema-validated outputs every ceremony produces and every gate checks.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/saf/safe-agentic-organization/', label: 'Distributed Agentic SAFe' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/safe-agentic-organization', label: 'safe-agentic-organization' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/saf-safe-agentic-organization', label: 'saf-safe-agentic-organization' }],
       },
       {
         slug: 'agentic-workspace',
@@ -298,7 +298,7 @@ export const solutions: Solution[] = [
           { slug: 'cicd-pipelines', name: 'CI/CD artifacts pipelines', blurb: 'CI/CD pipelines validate and publish the artifacts agents produce — the same gates that run locally, run in the pipeline.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-workspace/', label: 'Agentic Workspace documentation' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/agentic-workspace', label: 'agentic-workspace' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-workspace', label: 'saf-agentic-workspace' }],
       },
     ],
   },
