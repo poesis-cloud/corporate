@@ -88,6 +88,14 @@ const articleLd = article
     <meta name="generator" content={Astro.generator} />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
     {articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
+    {/* Google tag (gtag.js) — GA4 measurement G-KZGGY5D9GW */}
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KZGGY5D9GW');
+    </script>
   </head>
   <body data-page-type={pageType}>
     {pageType && <span data-pagefind-meta="type" style="display:none">{pageType}</span>}
