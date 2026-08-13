@@ -1,0 +1,51 @@
+---
+import { getAuthor } from '../data/authors';
+
+interface Props {
+  authorId?: string;
+}
+
+const { authorId } = Astro.props;
+const author = getAuthor(authorId);
+---
+<div class="author-card">
+  <img class="author-avatar" src={author.avatar} alt={`Portrait of ${author.name}`} width="48" height="48" loading="lazy" />
+  <div class="author-meta">
+    <a class="author-name" href={author.linkedin} target="_blank" rel="noopener">{author.name}</a>
+    <p class="author-title">{author.title}</p>
+  </div>
+</div>
+
+<style>
+  .author-card {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1rem 0 2rem;
+  }
+  .author-avatar {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, .12);
+  }
+  .author-meta {
+    line-height: 1.3;
+  }
+  .author-name {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .author-name:hover {
+    text-decoration: underline;
+  }
+  .author-title {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+</style>

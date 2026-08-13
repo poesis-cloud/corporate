@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import AuthorCard from '../components/AuthorCard.astro';
 const { frontmatter } = Astro.props;
 const date = frontmatter.pubDate ? new Date(frontmatter.pubDate) : null;
 ---
@@ -16,6 +17,7 @@ const date = frontmatter.pubDate ? new Date(frontmatter.pubDate) : null;
         </p>
       )}
       <p class="lead">{frontmatter.description}</p>
+      <AuthorCard authorId={frontmatter.author} />
       <slot />
       <p style="margin-top:2.5rem"><a href="/insights/research">&larr; All insights</a></p>
     </div>
