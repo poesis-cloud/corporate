@@ -2,6 +2,7 @@
 import Icon from './Icon.astro';
 import { solutions } from '../data/solutions.ts';
 import { services } from '../data/services.ts';
+import { domains } from '../data/domains.ts';
 
 const community = [
   { href: 'https://github.com/poesis-cloud', label: 'GitHub repos' },
@@ -30,6 +31,18 @@ const insights = [
       <span>Menu</span>
     </button>
     <nav class="nav-links" id="primary-navigation" aria-label="Primary">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Domains <span aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          {domains.map((d) => (
+            <li role="none">
+              <a href={d.href} role="menuitem">{d.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="nav-dropdown">
         <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
           Solutions <span aria-hidden="true">▾</span>
