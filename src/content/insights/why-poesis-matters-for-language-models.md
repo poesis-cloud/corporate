@@ -51,7 +51,7 @@ Human authority remains decisive where judgment and accountability require it. D
 
 ## Probabilistic contribution becomes governable material
 
-Language models are probabilistic sources. Treating their outputs as if they were facts is the category error behind many enterprise AI failures. Poesis instead treats uncertain contributions as candidates that must carry enough context to be inspected, compared, and governed.
+Language models are probabilistic sources — no more and no less than the human reasoning they automate, as [Generative AI is as probabilistic as human intelligence](/insights/as-probabilistic-as-human-intelligence/) argues. Treating their outputs as if they were facts is the category error behind many enterprise AI failures. Poesis instead treats uncertain contributions as candidates that must carry enough context to be inspected, compared, and governed.
 
 The conceptual pattern is simple:
 

@@ -27,7 +27,7 @@ An instruction in a prompt is a preference expressed to the process: the entity 
 
 Systemics has held this point for decades: regulation requires a regulator distinct from the process it regulates, carrying its own model of that process. In agentic research today, that regulator is the harness — the scaffold of prompts and loops around the model — and it is typically invisible, unversioned, and unenforced. The executive function exists; it is simply not an object anyone can inspect, govern, or reproduce.
 
-The same asymmetry governs enterprise assistants: a model that decides for itself which retrieved passage is authoritative is judging its own compliance. Making that judgment external is what [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/) calls disposition — models propose, governed systems dispose.
+The same asymmetry governs enterprise assistants: a model that decides for itself which retrieved passage is authoritative is judging its own compliance. Making that judgment external is what [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/) calls disposition — models propose, governed systems dispose. Why disposition can never be delegated to the model — because concerns are owned by stakeholders, and a model can hold no institutional standing — is stated as the full Poesis position in [Governance owns the concerns](/insights/governance-owns-the-concerns/).
 
 This is why the five failures are one. Judgment, stewardship, responsiveness, reconsideration, and compliance are not five skills a process lacks. They are five obligations that had no layer to live in.
 
