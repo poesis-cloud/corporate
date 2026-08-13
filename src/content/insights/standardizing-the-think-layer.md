@@ -1,8 +1,8 @@
 ---
-layout: ../../layouts/PostLayout.astro
-title: Standardizing the THINK layer of IT
-description: OpenTelemetry gave the RUN layer a neutral standard. The definitions those runtimes enforce — the THINK layer — still have none. Here is why that matters.
-pubDate: 2026-06-26
+title: 'Standardizing the THINK layer of IT'
+category: 'Research'
+date: 2026-06-26
+summary: 'OpenTelemetry gave the RUN layer a neutral standard. The definitions those runtimes enforce — the THINK layer — still have none. Here is why that matters.'
 ---
 
 Cloud-native systems are governed systems. Every workload carries obligations: a security posture, service-level objectives, supply-chain provenance, data-protection rules, delivery guardrails, cost ceilings. None of that is optional, and all of it is supposed to be true at runtime.
@@ -19,7 +19,7 @@ The Generative System Model is that missing standard. It specifies a small, fixe
 
 Crucially, GSM **composes** with the cloud-native ecosystem rather than competing with it. Norms express SLOs while OpenTelemetry supplies the evidence; Directives are the authoritative obligation while OPA and Kyverno enforce; supply-chain rules bind to sigstore, SLSA, and in-toto. GSM is the definition; existing projects realize it.
 
-The same composition holds outside the cloud-native stack: regulatory, architecture, and quality frameworks can each keep their own taxonomy while GSM connects them to the subjects and evidence they govern — the pattern set out in [Continuous regulatory compliance](/insights/itip-compliance-proof/).
+The same composition holds outside the cloud-native stack: regulatory, architecture, and quality frameworks can each keep their own taxonomy while GSM connects them to the subjects and evidence they govern — the pattern set out in [Continuous regulatory compliance](/insights/continuous-regulatory-compliance/).
 
 ## Why a standard, not a product
 

@@ -1,8 +1,8 @@
 ---
-layout: ../../layouts/PostLayout.astro
-title: The generative inversion — from describing systems to defining them
-description: Classical systemics describes systems after the fact. GSM inverts that — it defines the system, and the definition generates and governs the running thing.
-pubDate: 2026-06-20
+title: 'The generative inversion — from describing systems to defining them'
+category: 'Research'
+date: 2026-06-20
+summary: 'Classical systemics describes systems after the fact. GSM inverts that — it defines the system, and the definition generates and governs the running thing.'
 ---
 
 Classical systems thinking is **descriptive**. You observe a system, then build a model to understand it: a diagram, an architecture document, an enterprise-architecture repository. The model trails the reality it describes.

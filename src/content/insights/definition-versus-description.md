@@ -77,7 +77,7 @@ Several breaks are possible:
 
 Calling all of these “drift between description and definition” loses the diagnosis. GSM's value is to make the relations explicit enough that the question becomes: **which conformance relation broke?**
 
-The same applies to compliance. Written intent becomes governable only when Directives establish scope, Norms make it evaluable, and evidence can assess the affected Ascriptions. Compliance is a relation among intent, definitions, realization, and observation, not a property of documents. [Continuous regulatory compliance](/insights/itip-compliance-proof/) develops that relation into a reusable, framework-independent model.
+The same applies to compliance. Written intent becomes governable only when Directives establish scope, Norms make it evaluable, and evidence can assess the affected Ascriptions. Compliance is a relation among intent, definitions, realization, and observation, not a property of documents. [Continuous regulatory compliance](/insights/continuous-regulatory-compliance/) develops that relation into a reusable, framework-independent model.
 
 ## What description uniquely contributes
 
