@@ -1,32 +1,32 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('insights')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const category = 'Research';
+const posts = (await getCollection('insights'))
+  .filter((p) => p.data.category === category)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const insightHref = (id: string) => `/insights/${id.replace(/\.md$/, '')}`;
 ---
 <BaseLayout
-  title="Insights"
-  description="Research notes from Poesis."
-  pageType="Insights"
+  title={`${category} · Insights`}
+  description={`Poesis ${category.toLowerCase()} — experiments, benchmarks, and reference-design notes.`}
+  pageType={category}
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Insights</p>
-      <h1>How Poesis is applied, argued, and advanced.</h1>
-      <p class="lead">Research notes on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
-      <div class="hero-cta">
-        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
-      </div>
+      <p class="eyebrow">{category}</p>
+      <h1>{category}</h1>
+      <p class="lead">Controlled experiments, benchmarks, and reference-design notes from the Poesis engineering team.</p>
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container">
-      <div class="grid grid-2" id="insights-results">
+      <div class="grid grid-2">
         {posts.map((post) => (
           <article class="card card--feature card--static">
+            <span class="tag">{post.data.category}</span>
             <h3><a href={insightHref(post.id)}>{post.data.title}</a></h3>
             <p>{post.data.summary}</p>
             <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>

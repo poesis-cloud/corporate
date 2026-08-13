@@ -1,5 +1,6 @@
 ---
 title: 'The Poesis stack as a research system'
+category: 'Research'
 date: 2026-08-06
 summary: 'Open-ended research is not a workflow to accelerate but an institution to constitute. The recurring failures of agentic research — judgment, resources, feedback, backtracking, compliance — are one failure seen five ways: institutional work performed without institutional semantics.'
 ---

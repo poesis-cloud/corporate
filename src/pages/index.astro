@@ -83,11 +83,12 @@ const insightPosts = (await getCollection('insights'))
       <div class="section-head">
         <p class="eyebrow">Insights</p>
         <h2>How Poesis is applied, argued, and advanced.</h2>
-        <p class="lead">Research notes on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
+        <p class="lead">Case studies and research notes on governed synthetic autopoiesis, systemic IT governance, and agentic delivery.</p>
       </div>
       <div class="grid grid-2" style="margin-top:1.5rem">
         {insightPosts.map((post) => (
           <article class="card card--feature card--static">
+            <span class="tag">{post.data.category}</span>
             <h3>{post.data.title}</h3>
             <p>{post.data.summary}</p>
             <p class="insight-meta">
@@ -97,7 +98,7 @@ const insightPosts = (await getCollection('insights'))
           </article>
         ))}
       </div>
-      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights"><Icon name="list" /> Browse all insights</a></p>
+      <p style="margin-top:2.5rem;text-align:center"><a class="btn btn-primary" href="/insights/research"><Icon name="list" /> Browse all insights</a></p>
     </div>
   </section>
 

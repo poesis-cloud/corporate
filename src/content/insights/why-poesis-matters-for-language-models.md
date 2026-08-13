@@ -1,5 +1,6 @@
 ---
 title: 'Better context beats bigger models: why Poesis matters for language models'
+category: 'Research'
 date: 2026-08-12
 summary: 'Language models are asked to infer organisational reality, authority, and permission from prose on every request. Poesis changes the environment: models propose against governed definitions, while deterministic and human governance decides what may become action. Smaller models may benefit most — a hypothesis the architecture makes testable.'
 ---
