@@ -5,20 +5,19 @@ import ProductCards from '../../../components/ProductCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const gsm = solutions.find((s) => s.slug === 'gsm')!;
-const [h1, ...rest] = gsm.tagline.split(' — ');
-const lead = rest.join(' — ');
-const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
+const [h1] = gsm.tagline.split(' — ');
 ---
 <BaseLayout
-  title="GSM"
-  description="The Generative System Model (GSM) — a vendor-neutral standard for defining and governing software-intensive systems, developed as a candidate open standard."
+  title="GSM — Generative System Model"
+  description="The Generative System Model (GSM) — the vendor-neutral open standard for defining and governing systems: governance as code, grounded in systemics, developed as a candidate open standard."
   pageType="Solution"
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow">{gsm.tag} · Solution</p>
       <h1>{h1}.</h1>
-      <p class="lead">{leadText}</p>
+      <p class="lead">The vendor-neutral standard for defining systems — governance as code, not governance as prose. GSM is to the world's THINK–BUILD–RUN what OpenTelemetry's semantic conventions are to observability: one open model every tool can share.</p>
+      <p class="lead">It is grounded in systemics — synthesizing Beer's Viable System Model, von Bertalanffy's General System Theory, Wiener and Ashby's cybernetics, and Maturana and Varela's autopoiesis into a single generative definition of systems.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/specifications/specification/"><Icon name="docs" /> Read the specification</a>
         <a class="btn btn-ghost" href="https://docs.poesis.cloud/gsm/specifications/primer/"><Icon name="book-open" /> Start with the primer</a>
@@ -45,7 +44,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
         </div>
         <div class="card card--feature card--static">
           <span class="tag tag--value">Value</span>
-          <h3>It composes with what enforces and observes it.</h3>
+          <h3>Governance as code, composed with policy as code.</h3>
           <p>GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.</p>
         </div>
         <div class="card card--feature card--static">
