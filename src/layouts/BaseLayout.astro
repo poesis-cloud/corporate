@@ -7,17 +7,55 @@ interface Props {
   title: string;
   description?: string;
   pageType?: string;
+  noindex?: boolean;
+  /** Set for insight/blog posts — switches og:type to article and emits BlogPosting JSON-LD. */
+  article?: {
+    publishedTime: string;
+    authorName: string;
+    authorUrl?: string;
+  };
 }
 
 const {
   title,
   description = 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard, the SIE engine, and the ITIP application defining and governing systems in software.',
   pageType,
+  noindex = false,
+  article,
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
 const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesis' : `${title} · Poesis`;
+const ogImage = new URL('/og-default.png', site).href;
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Poesis',
+  url: site.href,
+  logo: new URL('/poesis-logo.png', site).href,
+  slogan: 'Define the world in software; generate it.',
+  sameAs: ['https://www.linkedin.com/company/poesis-cloud', 'https://github.com/poesis-cloud'],
+};
+
+const articleLd = article
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      url: canonical,
+      datePublished: article.publishedTime,
+      image: ogImage,
+      author: {
+        '@type': 'Person',
+        name: article.authorName,
+        ...(article.authorUrl ? { url: article.authorUrl } : {}),
+      },
+      publisher: { '@type': 'Organization', name: 'Poesis', url: site.href },
+    }
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -30,14 +68,26 @@ const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesi
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Poesis" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Poesis — governed synthetic autopoiesis" />
+    {article && <meta property="article:published_time" content={article.publishedTime} />}
+    {article && <meta property="article:author" content={article.authorName} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    {articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
   </head>
   <body data-page-type={pageType}>
     {pageType && <span data-pagefind-meta="type" style="display:none">{pageType}</span>}
