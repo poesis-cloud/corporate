@@ -1,6 +1,5 @@
 ---
 title: 'The Poesis stack as a research system'
-category: 'Research'
 date: 2026-08-06
 summary: 'Agentic research keeps failing in the same five ways: abandoned hypotheses, unspent budgets, inert feedback, no backtracking, ignored instructions. Read closely, all five are governance failures — and each one maps onto machinery the Poesis stack defines: governed lifecycles, measurable Norms, deterministic verdicts, and provenance-carrying evidence.'
 ---

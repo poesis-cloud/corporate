@@ -1,6 +1,5 @@
 ---
 title: 'Continuous regulatory compliance: a reusable governance model'
-category: 'Research'
 date: 2026-08-06
 summary: 'A framework-independent reference model for turning regulatory obligations into governed definitions, evaluable Norms, and continuous evidence without flattening each framework into a generic control list.'
 ---

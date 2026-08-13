@@ -1097,19 +1097,6 @@ a:hover {
   justify-content: center;
 }
 
-.insights-grid h2 {
-  margin: 2rem 0 1rem;
-  font-size: 1.1rem;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-}
-
-.insight-group:first-child h2 {
-  margin-top: 0;
-}
-
 /* ---- THINK/BUILD/RUN loop ----------------------------------------------- */
 .loop {
   display: grid;
