@@ -1128,6 +1128,37 @@ a:hover {
   margin: .2rem 0 .3rem;
 }
 
+/* ---- proof strip (verifiable facts, custody section) --------------------- */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 2.25rem;
+  text-align: left;
+}
+
+.proof-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  background: rgba(255, 255, 255, .03);
+}
+
+.proof-item .k {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: .35rem;
+}
+
+.proof-item p {
+  margin: 0;
+  font-size: .95rem;
+}
+
 /* ---- prose (Insights posts) --------------------------------------------- */
 .prose {
   max-width: 70ch;

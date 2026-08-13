@@ -8,6 +8,10 @@ const insights = [
   { href: '/insights/research', label: 'Research' },
 ];
 
+const domains = [
+  { href: '/it/', label: 'Poesis for IT' },
+];
+
 const docs = [
   { href: 'https://docs.poesis.cloud', label: 'Poesis documentation' },
   { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM specification' },
@@ -33,6 +37,14 @@ const community = [
           <img class="brand-mark" src="/poesis-logo.png" alt="" width="26" height="26" /> Poesis
         </a>
         <p class="footer-tag">Harnessing generative AI for an age of governed synthetic autopoiesis.</p>
+      </div>
+      <div>
+        <h4>Domains</h4>
+        <ul>
+          {domains.map((d) => (
+            <li><a href={d.href}>{d.label}</a></li>
+          ))}
+        </ul>
       </div>
       <div>
         <h4>Solutions</h4>

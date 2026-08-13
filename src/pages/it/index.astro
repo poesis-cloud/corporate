@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+---
+<BaseLayout
+  title="IT Governance Platform"
+  description="Poesis for IT — an IT governance platform uniting enterprise architecture management, continuous compliance automation, and impact analysis in one governed, machine-readable source of truth your teams and AI agents can act on."
+  pageType="Domain"
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Poesis for IT · Domain</p>
+      <h1>The IT governance platform where definitions do the governing.</h1>
+      <p class="lead">Enterprise architecture repositories describe your systems. Compliance tooling checklists them. Poesis <em>defines</em> them — one governed, machine-readable source of truth for your entire IT landscape, from which artifacts are generated, impacts simulated, and compliance continuously proven.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/"><Icon name="docs" /> Read the docs</a>
+        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="container">
+      <p class="eyebrow">The mental model</p>
+      <h2>What Kubernetes did for infrastructure, Poesis does for IT governance.</h2>
+      <p class="lead">Kubernetes let you <em>declare</em> the desired state of your infrastructure and trust a reconciliation loop to converge reality toward it. Poesis extends that principle to everything that governs your IT: architectures, obligations, constraints, and processes become declared definitions — continuously evaluated against the real system, with drift observed the moment it appears and humans disposing of every consequential change.</p>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What it replaces</p>
+        <h2>Five practices, one governed model.</h2>
+        <p class="lead">Each of these is sold today as a separate tool with a separate copy of the truth. In Poesis they are facets of the same governed definitions.</p>
+      </div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <article class="card card--feature card--static">
+          <span class="tag">Enterprise architecture</span>
+          <h3>An EA repository that cannot drift.</h3>
+          <p>Instead of an architecture wiki maintained by hand, your landscape is a governed inventory of typed definitions — sourced from the code, contracts, and infrastructure that actually run, so the map never detaches from the territory.</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">Compliance automation</span>
+          <h3>Compliance observed, not reconstructed.</h3>
+          <p>Continuous appraisal indicators compute measures and findings from the model across governance and meta-governance zones. Your regulatory posture — GDPR, NIS2, DORA, ISO — is a live dashboard, not a spreadsheet rebuilt before each audit.</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">Impact analysis</span>
+          <h3>See the blast radius before you commit.</h3>
+          <p>Changes ripple through typed relations, so the impact of a decision is simulated from the model — traced through the definitions it touches, not guessed in a meeting.</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">Artifact generation</span>
+          <h3>Deliverables fall out of the model.</h3>
+          <p>ADR packs, compliance evidence, architecture baselines, roadmaps — generated from the definitions, each artifact traceable back to the exact definitions it derives from.</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">Truth sourcing</span>
+          <h3>The model reflects what actually runs.</h3>
+          <p>A bench of knowledge sources continuously reads your repositories, API contracts, SBOMs, and infrastructure and posts them as evidence-backed, confidence-scored contributions — so governance never drifts from implementation.</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">AI-ready governance</span>
+          <h3>A source of truth AI agents can act on.</h3>
+          <p>Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems are and must do.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Built on an open standard</p>
+        <h2>Governance you can inspect, not a black box.</h2>
+        <p class="lead">Poesis for IT is delivered by <a href="/solutions/itip">ITIP</a>, the first domain application built on the <a href="/solutions/sie">SIE</a> engine and the <a href="/solutions/gsm">GSM</a> standard — the vendor-neutral model for defining and governing systems, the way OpenTelemetry standardized observing them.</p>
+      </div>
+      <div class="hero-cta" style="margin-top:1.5rem;justify-content:center">
+        <a class="btn btn-primary" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
+        <a class="btn btn-ghost" href="/insights/continuous-regulatory-compliance"><Icon name="book-open" /> Read: continuous regulatory compliance</a>
+        <a class="btn btn-ghost" href="/insights/definition-versus-description"><Icon name="book-open" /> Read: definition versus description</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
