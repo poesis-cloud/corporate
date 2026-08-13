@@ -81,5 +81,3 @@ Confidence and provenance do not make a contribution true; a source can be confi
 Before building another retrieval pipeline, it is worth asking what the assistant is really for.
 
 If it helps people find and digest material, retrieval is the right foundation. If it is expected to state what the organization currently requires, permits, or owns — and to be relied upon when it does — then the missing ingredient is not a better index or a larger model. It is a governed definition of the answer.
-
-That distinction is the same one we draw in [the missing layer behind GenAI project failure](/insights/genai-project-failure-governance): capability is rarely what fails in production. Institutional truth, left in documents, is.
