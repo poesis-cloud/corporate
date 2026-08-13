@@ -59,6 +59,32 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 
   <section class="section">
     <div class="container">
+      <p class="eyebrow">Product preview</p>
+      <h2>What working in ITIP looks like.</h2>
+      <p class="lead">Design previews from the ITIP Web Application — the screens the product is being built against.</p>
+      <div class="preview-grid">
+        <figure class="preview-item">
+          <img src="/previews/itip-definition-inventory.png" alt="ITIP definition inventory dashboard showing Directives, Norms, Definitions counts, chain completion, lifecycle distribution, and framework contribution" width="1440" height="900" loading="lazy" />
+          <figcaption>Definition inventory — the governed single source of truth, with D→N→A chain completion and lifecycle distribution.</figcaption>
+        </figure>
+        <figure class="preview-item">
+          <img src="/previews/itip-stack-composer.png" alt="ITIP Stack Composer showing TOGAF, ISO 25000, NIS2, GDPR and enterprise frameworks composed into one stack with overlaps, conflicts, and coverage map" width="1440" height="900" loading="lazy" />
+          <figcaption>Stack Composer — TOGAF, ISO 25000, NIS2, GDPR composed into one governance fabric, overlaps and conflicts detected.</figcaption>
+        </figure>
+        <figure class="preview-item">
+          <img src="/previews/itip-directive-impact.png" alt="ITIP impact analysis for a Data Encryption Standard directive showing affected structures, impacted ascriptions, and cascading directives with severity" width="1440" height="900" loading="lazy" />
+          <figcaption>Impact analysis — the blast radius of a Directive traced through typed relations before you commit.</figcaption>
+        </figure>
+        <figure class="preview-item">
+          <img src="/previews/itip-truth-sourcing.png" alt="ITIP truth sources screen listing connected git repositories, artifact stores and schema registries with sync status and definition counts" width="1440" height="900" loading="lazy" />
+          <figcaption>Truth sourcing — repositories, registries, and artifact stores continuously sourced into governed definitions.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
       <p class="eyebrow">Products</p>
       <h2>Two products, one governed loop.</h2>
       <ProductCards solution={itip} />
