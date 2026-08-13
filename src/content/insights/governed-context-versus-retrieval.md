@@ -5,8 +5,6 @@ date: 2026-08-11
 summary: 'Retrieval answers which passages resemble a prompt. Enterprise assistants usually need something else: which definition is in effect, which policy binds this scope, and which action is permitted. Where a domain is modeled, governed context can replace the retrieval layer rather than supplement it.'
 ---
 
-# Governed context or document retrieval
-
 Most enterprise AI assistants are built the same way. Documents are chunked, embedded, and indexed; a question retrieves the most similar passages; a model composes an answer from them. This works well, and for open-ended exploration of a large document estate it remains the right design.
 
 It is also frequently the wrong tool for the question actually being asked.
@@ -34,9 +32,11 @@ The alternative is to treat context as something governed rather than something 
 - **Derived context** — evaluations, deviations, impact projections, and feasibility assessments.
 - **Provenance context** — why something is believed, approved, and currently applicable.
 
+The first two are the working pair. Asserted context makes observation intelligible — it supplies the categories under which evidence counts as evidence; observed context makes assertion corrigible. That relation, and why it is a loop rather than an opposition, is the subject of [Definition versus description](/insights/definition-versus-description/).
+
 These are not documents about the organization. They are typed, versioned definitions governed through [GSM](https://docs.poesis.cloud/gsm/), the published specification underneath the stack. A definition has a stable identity, an explicit lifecycle, an owner, and a version history. Asking which policy is in effect is a query, not an inference.
 
-Today, asserted context is served by the [Definition Manager](https://github.com/poesis-cloud/sie-definition-manager), and the [Operator](https://github.com/poesis-cloud/sie-operator) evaluates typed rules deterministically over it. The observation and derivation planes are still in development. We separate what is implemented from what is designed because a piece arguing for inspectable context should be inspectable itself.
+Today, asserted context is served by the [Definition Manager](https://github.com/poesis-cloud/sie-definition-manager), and the [Operator](https://github.com/poesis-cloud/sie-operator) evaluates typed rules deterministically over it. The Definition Blackboard, the observation and derivation planes, and the observability floor are in development. We separate what is implemented from what is designed because a piece arguing for inspectable context should be inspectable itself.
 
 ## When governed context replaces retrieval
 
@@ -60,7 +60,7 @@ Governed context does not subsume every use case, and claiming otherwise would b
 
 Conventional retrieval remains appropriate where the corpus is large and unmodeled, where the task is genuinely exploratory, where the material is narrative rather than normative, or where the cost of modeling exceeds the value of governing the answer. Meeting notes, research literature, support transcripts, and market intelligence are usually better retrieved than defined.
 
-The practical architecture is therefore often hybrid. Semantic retrieval discovers candidate material across the document estate; the governed model determines what is accepted, what is in effect, and what may be acted upon. Retrieval proposes; governance disposes. As definitions mature in a given domain, the boundary moves — and parts of an SIE instance progressively subsume the retrieval application that preceded it.
+The practical architecture is therefore often hybrid. Semantic retrieval discovers candidate material across the document estate; the governed model determines what is accepted, what is in effect, and what may be acted upon. Retrieval proposes; governance disposes — the same division that separates model proposal from governed action in [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/), applied here to the context supply rather than to the model. As definitions mature in a given domain, the boundary moves — and parts of an SIE instance progressively subsume the retrieval application that preceded it.
 
 ## The honest objection: modeling costs something
 
@@ -68,13 +68,13 @@ The fair criticism of this position is effort. Indexing documents is cheap and n
 
 Three things make the cost tractable.
 
-**Frameworks are sourced once.** Regulatory and architectural corpora — NIS2, DORA, TOGAF, the ISO 25000 series — are expressed as reusable definitions rather than re-derived per organization. Most enterprises are not inventing their obligations; they are adopting and specializing them.
+**Frameworks are sourced once.** Regulatory and architectural corpora — NIS2, DORA, TOGAF, the ISO 25000 series — are expressed as reusable definitions rather than re-derived per organization. Most enterprises are not inventing their obligations; they are adopting and specializing them. [Continuous regulatory compliance](/insights/itip-compliance-proof/) sets out how those models are sourced without flattening their differences, and how they compose over the same subject.
 
 **Sourcing is collaborative and assisted.** The Definition Blackboard, currently in development, is designed as a path for agentic and human sourcers to propose definitions with a confidence envelope and a provenance envelope attached, which deterministic reduction and governance review then accept or reject. Language models are well suited to proposing candidate definitions from existing documents; they are not suited to deciding unilaterally what becomes authoritative.
 
 **Coverage can be partial.** Nothing requires modeling the entire organization before value appears. Model the domain where wrong answers are expensive — compliance obligations, architecture standards, approval boundaries — and leave the rest to retrieval.
 
-Confidence and provenance do not make a contribution true; a source can be confidently wrong. They make it inspectable enough to be governed, which is the property retrieval scores cannot provide.
+Confidence and provenance do not make a contribution true — a source can be confidently wrong. They make it inspectable enough to be governed, which is the property retrieval scores cannot provide.
 
 ## The question to ask of your own assistant
 

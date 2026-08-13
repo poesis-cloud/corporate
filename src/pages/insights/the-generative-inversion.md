@@ -19,4 +19,6 @@ This is the generative inversion: **constraining becomes defining**. A Norm isn'
 
 Once definitions are generative, quality stops being a checklist applied afterward and becomes **viability**: the capacity of the system to keep satisfying its own governing definitions as its environment changes. Governance is no longer a periodic review; it is a continuous, closed loop.
 
-This is the thesis behind SIE and ITIP — and the subject of the forthcoming foundational paper, *The Generative Inversion: from descriptive to definitional systemics*.
+The inversion concerns *primacy*, not elimination: description does not leave that loop, it stops being its foundation. Definition establishes what counts as a deviation; description supplies the evidence that one occurred. Why the two are facets of a single reflexive process rather than rivals is worked out in [Definition versus description](/insights/definition-versus-description/).
+
+This is the thesis behind SIE and ITIP — and the subject of the forthcoming foundational paper, *The Generative Inversion: from descriptive to definitional systemics*. For the case that such definitions must also be portable across tools, see [Standardizing the THINK layer of IT](/insights/standardizing-the-think-layer/).

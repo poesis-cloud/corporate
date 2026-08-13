@@ -77,13 +77,13 @@ Several breaks are possible:
 
 Calling all of these “drift between description and definition” loses the diagnosis. GSM's value is to make the relations explicit enough that the question becomes: **which conformance relation broke?**
 
-The same applies to compliance. Written intent becomes governable only when Directives establish scope, Norms make it evaluable, and evidence can assess the affected Ascriptions. Compliance is a relation among intent, definitions, realization, and observation, not a property of documents.
+The same applies to compliance. Written intent becomes governable only when Directives establish scope, Norms make it evaluable, and evidence can assess the affected Ascriptions. Compliance is a relation among intent, definitions, realization, and observation, not a property of documents. [Continuous regulatory compliance](/insights/itip-compliance-proof/) develops that relation into a reusable, framework-independent model.
 
 ## What description uniquely contributes
 
 Description contributes what definitions cannot produce alone: surprise. It can reveal unanticipated consequences, hidden relationships, or definitions that no longer preserve viability. It is the receptor surface of a reflexive system, capable of challenging every definitional layer.
 
-But evidence cannot confer legitimacy. Description can falsify an expectation; governance determines what should replace it.
+But evidence cannot confer legitimacy. Description can falsify an expectation; governance determines what should replace it. This is why observation, judgment, and enforcement must sit in separate layers: a system that measures, judges, and enforces itself is not governed — an argument taken further in [The Poesis stack as a research system](/insights/poesis-stack-as-research-system/).
 
 ## Why Poesis is definition-centric
 
@@ -91,7 +91,7 @@ Definition-centric does not mean imposing one pristine model on reality. It give
 
 Poesis makes definitions stable in identity, typed across domains, versioned through Ascriptions, explicit in authority, and revisable through evidence. Description has evidential primacy: it determines what is happening and whether definition, realization, or governance must change.
 
-The [generative inversion](/insights/the-generative-inversion/) is therefore a passage from **fragmented, weakly governed definitions** to **explicit definitions connected to evidence and capable of regulating their own evolution**. Authority is explicit, but never confused with infallibility.
+The [generative inversion](/insights/the-generative-inversion/) is therefore a passage from **fragmented, weakly governed definitions** to **explicit definitions connected to evidence and capable of regulating their own evolution**. Authority is explicit, but never confused with infallibility. In an operating assistant the same distinction appears as the difference between asserted and observed context, examined in [Governed context or document retrieval](/insights/governed-context-versus-retrieval/).
 
 ## The synthesis: a closed definitional loop
 

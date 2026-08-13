@@ -16,7 +16,7 @@ The recurring problem is not specific to NIS2, DORA, GDPR, or any other framewor
 - collect evidence about what is actually realized;
 - expose deviations and govern corrective change.
 
-Poesis provides a common grammar for that work. It does not reduce frameworks to one universal checklist. Each model keeps its own taxonomy and meaning, while GSM connects its concepts to the same definitional governance loop.
+Poesis provides a common grammar for that work. It does not reduce frameworks to one universal checklist. Each model keeps its own taxonomy and meaning, while [GSM](https://docs.poesis.cloud/gsm/) connects its concepts to the same definitional governance loop — the loop set out in [Definition versus description](/insights/definition-versus-description/), where governing intent yields evaluable criteria, criteria constrain operative definitions, realization produces evidence, and evidence adapts the definitions.
 
 This article presents a **reference model**, not a customer deployment. Published content in `gsm-frameworks` currently includes concrete regulatory Directives and Norms for NIS2 and GDPR, alongside TOGAF, the ISO 25000 quality models, SCAP security-identification vocabularies, HTTP semantics, and ITIP sourcing definitions. DORA and several other models are planned or reserved rather than fully sourced. The integrated compliance experience remains in development.
 
@@ -68,6 +68,8 @@ The reusable pattern has seven steps.
 Framework concepts are organized by the source model's own taxonomy and retain provenance to the relevant authority and clause. Regulatory concepts become vocabulary schemas and, where the source creates concrete obligations, governed Directive and Norm instances.
 
 This is where framework-specific interpretation belongs. NIS2 entity classification must not be replaced by GDPR controller/processor roles, and neither should be approximated by a generic `regulatedEntity` field.
+
+Sourcing is also the step where language models are most useful and least trustworthy. They are well suited to proposing candidate definitions from regulatory text; they are not suited to deciding what becomes authoritative. The Definition Blackboard, in development, is designed to accept such proposals only with a confidence envelope and a provenance envelope attached, for deterministic reduction and governance review to accept or reject — the contribution pattern described in [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/).
 
 ### 2. Determine applicability
 
@@ -121,7 +123,7 @@ NIS2 may govern supply-chain cybersecurity and incident handling. GDPR governs t
 
 A spreadsheet can list all of these controls. A governed model can express their different authority, scope, subjects, versions, and evidence while showing where they converge on the same supplier relationship.
 
-If the supplier changes a subprocess, hosting region, technology platform, or subcontractor, the question is no longer “which audit documents should we update?” It becomes “which governed definitions, obligations, Norms, and evidence are affected?” That is a tractable impact query rather than a new compliance reconstruction.
+If the supplier changes a subprocess, hosting region, technology platform, or subcontractor, the question is no longer “which audit documents should we update?” It becomes “which governed definitions, obligations, Norms, and evidence are affected?” That is a tractable impact query rather than a new compliance reconstruction — and a query, rather than an inference over retrieved passages, which is the distinction drawn in [Governed context or document retrieval](/insights/governed-context-versus-retrieval/).
 
 ## What the reference model proves — and what it does not
 
@@ -135,6 +137,6 @@ That boundary is useful. The reusable model belongs here. Framework-specific int
 
 The central shift is simple: stop treating compliance as a report assembled after the fact, and start treating it as a governed relation among obligations, organizational definitions, realized operation, and evidence.
 
-Frameworks will continue to multiply and overlap. A durable compliance architecture cannot be rebuilt around each one. It needs a stable governance grammar that preserves each framework's authority and meaning while composing them over the same organization.
+Frameworks will continue to multiply and overlap. A durable compliance architecture cannot be rebuilt around each one. It needs a stable governance grammar that preserves each framework's authority and meaning while composing them over the same organization — and that grammar has to be portable across tools rather than trapped in one, which is the case made in [Standardizing the THINK layer of IT](/insights/standardizing-the-think-layer/).
 
 That is the general use case for `gsm-frameworks`: source each model once, specialize it without corrupting its semantics, and connect it through GSM to the subjects and evidence it governs. The result is not one more control library. It is a path toward compliance that remains inspectable as both regulation and reality change.

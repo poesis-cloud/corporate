@@ -19,6 +19,10 @@ The Generative System Model is that missing standard. It specifies a small, fixe
 
 Crucially, GSM **composes** with the cloud-native ecosystem rather than competing with it. Norms express SLOs while OpenTelemetry supplies the evidence; Directives are the authoritative obligation while OPA and Kyverno enforce; supply-chain rules bind to sigstore, SLSA, and in-toto. GSM is the definition; existing projects realize it.
 
+The same composition holds outside the cloud-native stack: regulatory, architecture, and quality frameworks can each keep their own taxonomy while GSM connects them to the subjects and evidence they govern — the pattern set out in [Continuous regulatory compliance](/insights/itip-compliance-proof/).
+
 ## Why a standard, not a product
 
 Portability requires neutrality. A definition standard owned by one vendor isn't a standard — it's a lock-in with extra steps. So GSM is open and vendor-neutral, and the reference implementation holds no privileged status in the specification. Poesis builds the best implementation; the model belongs to everyone.
+
+Why definitions must be primary before they can be portable is the argument of [The generative inversion](/insights/the-generative-inversion/); what a runtime does with them once they are is examined in [Governed context or document retrieval](/insights/governed-context-versus-retrieval/).

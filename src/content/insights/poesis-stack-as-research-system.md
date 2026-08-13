@@ -27,6 +27,8 @@ An instruction in a prompt is a preference expressed to the process: the entity 
 
 Systemics has held this point for decades: regulation requires a regulator distinct from the process it regulates, carrying its own model of that process. In agentic research today, that regulator is the harness — the scaffold of prompts and loops around the model — and it is typically invisible, unversioned, and unenforced. The executive function exists; it is simply not an object anyone can inspect, govern, or reproduce.
 
+The same asymmetry governs enterprise assistants: a model that decides for itself which retrieved passage is authoritative is judging its own compliance. Making that judgment external is what [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/) calls disposition — models propose, governed systems dispose.
+
 This is why the five failures are one. Judgment, stewardship, responsiveness, reconsideration, and compliance are not five skills a process lacks. They are five obligations that had no layer to live in.
 
 ## What a governance substrate must provide
@@ -41,7 +43,7 @@ If the diagnosis is constitutional rather than cognitive, the remedy is a substr
 
 **Evaluable norms with temporal tolerance.** Institutional obligations are rarely instantaneous. An hour of idleness violates nothing; chronic under-use of a mandate does. A substrate must distinguish momentary deviation from sustained violation, and render the difference as a verdict rather than an impression.
 
-**Separated measurement, judgment, and enforcement.** The layer that observes a fact, the layer that judges it, and the layer that acts on the judgment must be distinct — because a process that measures, judges, and enforces itself is precisely the ungoverned condition being remedied.
+**Separated measurement, judgment, and enforcement.** The layer that observes a fact, the layer that judges it, and the layer that acts on the judgment must be distinct — because a process that measures, judges, and enforces itself is precisely the ungoverned condition being remedied. This is the same separation that keeps description from conferring its own legitimacy, argued in [Definition versus description](/insights/definition-versus-description/).
 
 **Deterministic verdicts.** Whether an obligation was met must have exactly one answer, computable by anyone holding the definitions and the record. Governance that cannot be reproduced is opinion.
 
@@ -57,7 +59,7 @@ The Poesis stack is our attempt to build this layer — not an agent framework, 
 
 The [Definition Manager](https://github.com/poesis-cloud/sie-definition-manager) hosts that model and refuses incoherent states — identity cannot mutate, lifecycles cannot skip. The [Operator](https://github.com/poesis-cloud/sie-operator) evaluates typed rules deterministically over it: same definitions, same inputs, same verdict. The Definition Blackboard, in development, admits contributions only with confidence and provenance envelopes attached, over an append-only audit ledger. An observability floor, also in development, is designed so that governance-relevant behavior is never unobserved.
 
-As elsewhere in these pages, implemented and designed are kept distinct. The Definition Manager and the Operator exist; the evidence and observation planes are being built. The argument of this article is architectural, not a product demonstration.
+As elsewhere in these pages, implemented and designed are kept distinct: the Definition Manager and the Operator exist; the Definition Blackboard, the observation and derivation planes, and the observability floor are in development. The argument of this article is architectural, not a product demonstration.
 
 Under such a substrate, the five failures change status. Abandoning a hypothesis becomes a lifecycle event with an evidential basis, not a silence. A budget becomes an owned obligation whose chronic neglect is a verdict, not a log entry. A review becomes a governed coupling whose persistent disregard is measurable. A retired direction remains a re-openable identity rather than a lost branch. An instruction becomes a constraint whose violation prevents the act instead of annotating it. Nothing in this list makes the researching process smarter; every item makes the *epistemic process* governed.
 
@@ -71,7 +73,7 @@ That reframes self-improvement itself: from a mystical loop of agents improving 
 
 ## The reflexive note
 
-One reason we hold this thesis with some confidence is that the stack applies it to itself. GSM's criterion for systemness is reflexivity — a structure becomes a system when its own mechanisms produce its own governance — and the Poesis stack is built that way, from the self-typing archetype at the root of its type system to the governed portfolio process through which agentic teams deliver it. The failure pattern catalogued at the outset is the one our own delivery process is constituted against, for the same reason and with the same machinery.
+One reason we hold this thesis with some confidence is that the stack applies it to itself. GSM's criterion for systemness is reflexivity — a structure becomes a system when its own mechanisms produce its own governance — and the Poesis stack is built that way, from the self-typing archetype at the root of its type system to the governed portfolio process through which agentic teams deliver it. That delivery process runs on SAF, whose separation of a deterministic harness from the agentic organization it executes is described in [Better context beats bigger models](/insights/why-poesis-matters-for-language-models/). The failure pattern catalogued at the outset is the one our own delivery process is constituted against, for the same reason and with the same machinery.
 
 ## Conclusion
 
