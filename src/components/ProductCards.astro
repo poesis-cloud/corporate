@@ -29,12 +29,14 @@ const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
             const status = featureStatus(roadmap, f.slug);
             return (
               <li>
-                <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
-                {status && (
-                  <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                    {status.shipped ? '✓' : `v${status.version}`}
-                  </span>
-                )}
+                <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>
+                  {f.name}
+                  {status && (
+                    <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
+                      {status.shipped ? '✓' : `v${status.version}`}
+                    </span>
+                  )}
+                </a>
               </li>
             );
           })}
