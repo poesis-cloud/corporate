@@ -31,13 +31,13 @@ export const roadmaps: ProductRoadmap[] = [
     current: '0.1',
     milestones: [
       { version: '0.1', label: 'First pre-GA increment — application & BFF foundation', shipped: true },
-      { version: '1.0', label: 'MVP/GA — GSM Definitions & Frameworks management, hardened', ga: true },
+      { version: '1.0', label: 'MVP/GA — GSM Definitions & Frameworks management, RBAC/ABAC, hardened', ga: true },
       { version: '1.x', label: 'Truth sourcing · artifact factory · compliance evaluation · impact simulation (unordered)' },
     ],
     featureVersions: {
       'definitions-management': '1.0',
       'frameworks-management': '1.0',
-      'role-based-workspaces': '1.x',
+      'rbac-abac': '1.0',
       'definitions-truth-sourcing-management': '1.x',
       'it-artifact-factory': '1.x',
       'it-compliance-evaluation': '1.x',
@@ -67,7 +67,7 @@ export const roadmaps: ProductRoadmap[] = [
       'definitions-management-api': '1.0',
       'definitions-lifecycle-enforcement': '1.0',
       'definitions-retention': '1.0',
-      'governed-context-mcp': '1.x',
+      'definitions-tooling-serving': '1.x',
     },
   },
   {
@@ -81,9 +81,7 @@ export const roadmaps: ProductRoadmap[] = [
     ],
     featureVersions: {
       'norms-evaluation-api': '1.0',
-      'sandboxed-rule-runtime': '1.0',
       'mechanisms-execution-api': '1.x',
-      'derived-topology': '1.x',
     },
   },
   {
@@ -120,13 +118,13 @@ export const roadmaps: ProductRoadmap[] = [
     current: '0.1',
     milestones: [
       { version: '0.1', label: 'First frameworks sourced', shipped: true },
-      { version: '1.0', label: 'MVP/GA — HTTP, TOGAF, and ITIP domain archetypes complete & validated', ga: true },
+      { version: '1.0', label: 'MVP/GA — HTTP, TOGAF, and ITIP complete & validated', ga: true },
       { version: '1.x', label: 'Remaining protocol semantics · ISO 25010 · ISO 25012 · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)' },
     ],
     featureVersions: {
       http: '1.0',
       togaf: '1.0',
-      'itip-domain-archetypes': '1.0',
+      itip: '1.0',
       'protocol-semantics': '1.x',
       'iso-25010': '1.x',
       'iso-25012': '1.x',

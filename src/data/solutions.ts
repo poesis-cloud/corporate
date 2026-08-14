@@ -79,7 +79,7 @@ export const solutions: Solution[] = [
         description:
           'The web application and its backend-for-frontend: the governed definition inventory, the framework catalog & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
         values: [
-          { title: 'One place every IT profile works.', features: ['definitions-management', 'role-based-workspaces'], body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
+          { title: 'One place every IT profile works.', features: ['definitions-management', 'rbac-abac'], body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
           { title: 'Compliance observed, not reconstructed.', features: ['it-compliance-evaluation'], body: 'Continuous appraisal indicators are computed from the model across meta-governance and governance zones — your compliance posture is a live dashboard, not a spreadsheet rebuilt before each audit.' },
           { title: 'Deliverables fall out of the model.', features: ['it-artifact-factory'], body: 'ADR packs, compliance evidence, architecture baselines, roadmaps — generated from the definitions, each artifact traceable back to the exact definitions it derives from.' },
           { title: 'See the impact before you commit.', features: ['it-impact-simulation'], body: 'Changes ripple through typed relations, so the blast radius of a decision is simulated from the model — traced, not guessed in a meeting.' },
@@ -91,7 +91,7 @@ export const solutions: Solution[] = [
           { slug: 'definitions-truth-sourcing-management', name: 'GSM Definitions truth sourcing management', blurb: 'Manage and review the sourcing pipelines that keep the model anchored to the real, running system.' },
           { slug: 'definitions-management', name: 'GSM Definitions management', blurb: 'Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth.' },
           { slug: 'frameworks-management', name: 'GSM Frameworks management', blurb: 'Browse, attach, and compose the published catalogue of frameworks sourced into GSM — a coherent governance fabric from day one.' },
-          { slug: 'role-based-workspaces', name: 'Role-based workspaces', blurb: 'One platform where every IT profile works — architects define, developers consult, ops watch drift, security audits — with no translation silos.' },
+          { slug: 'rbac-abac', name: 'RBAC and ABAC', blurb: 'Role- and attribute-based access control — every IT profile works on the same governed inventory, each seeing and touching exactly what their role and attributes allow.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/itip/web-application/', label: 'Web Application documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/itip-web-frontend', label: 'itip-web-frontend' }],
@@ -147,7 +147,7 @@ export const solutions: Solution[] = [
           { slug: 'definitions-management-api', name: 'GSM Definitions management RESTful API', blurb: 'A RESTful API to create, read, update, and query every governed GSM definition — the authoritative interface to the model.' },
           { slug: 'definitions-lifecycle-enforcement', name: 'GSM Definitions lifecycle enforcement', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a validated state transition, auditable end to end.' },
           { slug: 'definitions-retention', name: 'GSM Definitions retention', blurb: 'Definitions and their history are retained and versioned — nothing governed is silently overwritten or lost.' },
-          { slug: 'governed-context-mcp', name: 'Governed context serving (MCP)', blurb: 'The governed model served to AI applications and agents over the Model Context Protocol — definitions as typed, trustworthy context instead of stale wikis.' },
+          { slug: 'definitions-tooling-serving', name: 'GSM Definitions and tooling serving', blurb: 'The governed model and its tooling served to AI applications and agents (MCP) — definitions as typed, trustworthy context instead of stale wikis.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/sie/definition-manager/', label: 'Definition Manager documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/sie-definition-manager', label: 'sie-definition-manager' }],
@@ -159,15 +159,12 @@ export const solutions: Solution[] = [
         description:
           'The Operator evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement — the THINK layer acting on the RUN layer.',
         values: [
-          { title: 'A runtime for governance.', features: ['mechanisms-execution-api', 'sandboxed-rule-runtime'], body: 'Like a JVM for definitions: the Operator resolves a Mechanism, type-checks its inputs against Archetype schemas, evaluates its rule, and dispatches typed effects — five deterministic phases, every boundary validated.' },
-          { title: 'Sandboxed, reproducible verdicts.', features: ['sandboxed-rule-runtime', 'norms-evaluation-api'], body: 'Rules run in a step-limited sandbox with no ambient authority and no side effects — the same inputs always produce the same verdict, so enforcement is trustworthy by construction.' },
-          { title: 'The model stays analyzable.', features: ['derived-topology'], body: 'Effectors and receptors are derived from the rule code itself, not declared by hand — the governance topology is always exactly what the rules actually do.' },
+          { title: 'A runtime for governance.', features: ['mechanisms-execution-api'], body: 'Like a JVM for definitions: the Operator resolves a Mechanism, type-checks its inputs against Archetype schemas, evaluates its rule, and dispatches typed effects — five deterministic phases, every boundary validated.' },
+          { title: 'Sandboxed, reproducible verdicts.', features: ['norms-evaluation-api', 'mechanisms-execution-api'], body: 'Rules run in a step-limited sandbox with no ambient authority and no side effects — the same inputs always produce the same verdict, so enforcement is trustworthy by construction.' },
         ],
         features: [
-          { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state — governance as a control loop, not a review meeting.' },
-          { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms — verdicts and rules become dispatched, effector-driven actions.' },
-          { slug: 'sandboxed-rule-runtime', name: 'Sandboxed rule runtime', blurb: 'Rules run step-limited, with no ambient authority and no side effects — the same inputs always produce the same verdict.' },
-          { slug: 'derived-topology', name: 'Derived effector/receptor topology', blurb: 'Effectors and receptors are derived from the rule code itself — the governance topology is always exactly what the rules actually do.' },
+          { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state in a sandboxed, reproducible rule runtime — governance as a control loop, not a review meeting.' },
+          { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms in the same sandboxed, reproducible rule runtime — verdicts and rules become dispatched, effector-driven actions.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/sie/operator/', label: 'Operator documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/sie-operator', label: 'sie-operator' }],
@@ -240,13 +237,13 @@ export const solutions: Solution[] = [
         values: [
           { title: 'Day-one governance, not a blank page.', features: ['togaf', 'iso-25010', 'iso-25012', 'gdpr', 'nis2', 'scap'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
           { title: 'The authority\u2019s own taxonomy, clause by clause.', features: ['gdpr', 'nis2', 'togaf'], body: 'Each framework is organized by its own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
-          { title: 'Frameworks that compose, not collide.', features: ['http', 'protocol-semantics', 'itip-domain-archetypes'], body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
+          { title: 'Frameworks that compose, not collide.', features: ['http', 'protocol-semantics', 'itip'], body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
           { title: 'Maintained as the real world changes.', features: ['catalogue-update-stream', 'dora', 'safe', 'itil'], body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
         ],
         features: [
           { slug: 'http', name: 'HTTP', blurb: 'HTTP interaction semantics sourced as typed Archetypes — methods, status, caching, content negotiation, machine-readable.' },
           { slug: 'togaf', name: 'TOGAF', blurb: 'Enterprise-architecture vocabulary sourced as typed Archetypes — organized by the framework’s own taxonomy, clause by clause.' },
-          { slug: 'itip-domain-archetypes', name: 'ITIP domain archetypes', blurb: 'The IT-domain vocabulary and semantics ITIP governs with — structures, mechanisms, interactions, typed.' },
+          { slug: 'itip', name: 'ITIP', blurb: 'The IT-domain vocabulary and semantics ITIP governs with — structures, mechanisms, interactions, typed.' },
           { slug: 'protocol-semantics', name: 'Protocol semantics', blurb: 'gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket — further interaction vocabularies sourced as typed Archetypes.' },
           { slug: 'iso-25010', name: 'ISO 25010', blurb: 'The software quality model sourced as typed Archetypes — quality characteristics as machine-readable vocabulary.' },
           { slug: 'iso-25012', name: 'ISO 25012', blurb: 'The data quality model sourced as typed Archetypes.' },

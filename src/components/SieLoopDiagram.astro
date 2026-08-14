@@ -1,17 +1,18 @@
 ---
 /**
- * SieLoopDiagram — the closed self-sustaining loop SIE runs, in principle:
- * the same reconciliation shape Kubernetes runs on infrastructure,
- * generalized to any governed system.
+ * SieLoopDiagram — the closed self-sustaining loop SIE runs, in the systemic
+ * vocabulary (VSM-like): governance defines the state space, regulation steers
+ * toward it, operation produces the actual state, supervision evaluates it —
+ * and adaptation regenerates the definitions themselves (autopoiesis).
  */
 const stations = [
-  { step: 'Define', body: 'The desired state as typed, versioned, governed definitions', product: 'Definition Manager' },
-  { step: 'Realize', body: 'Systems and agents act toward the definition', product: 'generated artifacts · effectors' },
-  { step: 'Observe', body: 'The actual state is captured from running reality', product: 'receptors · truth sourcing' },
-  { step: 'Evaluate', body: 'Actual vs. defined — Norms render deterministic verdicts', product: 'Operator' },
+  { step: 'Governance', body: 'Define the state space — what the system must be, as typed, versioned, governed definitions', product: 'Definition Manager' },
+  { step: 'Regulation', body: 'Steer toward the defined state — AI generation and executed Mechanisms realize the definitions', product: 'AI generation · Operator' },
+  { step: 'Operation', body: 'The system runs in its state space, producing the actual state', product: 'your systems · generated artifacts' },
+  { step: 'Supervision', body: 'Evaluate the actual state against the defined — observability capacities feed Norm verdicts', product: 'observability · Operator' },
 ];
 ---
-<div class="loopd" role="img" aria-label="The closed loop: define, realize, observe, evaluate, then adapt the definitions and repeat">
+<div class="loopd" role="img" aria-label="The closed loop: governance defines the state space, regulation steers toward it, operation produces the actual state, supervision evaluates it, and adaptation regenerates the definitions">
   <ol class="loopd-track">
     {stations.map((s) => (
       <li class="loopd-station">
@@ -23,10 +24,10 @@ const stations = [
   </ol>
   <div class="loopd-return" aria-hidden="true">
     <span class="loopd-return-arrow">⟲</span>
-    <span>adapt — divergences and evidence-backed contributions refresh the definitions <em>(Definition Blackboard Manager)</em></span>
+    <span><strong>Adaptation</strong> — verdicts and evidence-backed contributions regenerate the definitions themselves: AI generation proposes, the Definition Blackboard qualifies, governance disposes. The organization re-produces itself — autopoiesis.</span>
   </div>
   <p class="loopd-note text-small">
-    The same loop Kubernetes runs on infrastructure — <code>spec</code> → controllers → <code>status</code> → reconcile — generalized beyond infrastructure to any governed system: the system continuously regenerates itself against its own definition.
+    Each pass rewrites the definitions it started from, so the loop never closes on the same point — a spiral, not a circle. Kubernetes runs the same shape on infrastructure — <code>spec</code> → controllers → <code>status</code> → reconcile — SIE generalizes it to any governed system.
   </p>
 </div>
 

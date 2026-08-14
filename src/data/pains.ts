@@ -108,7 +108,7 @@ export const pains: Pain[] = [
         remedy: 'Every definition is typed by a GSM Archetype \u2014 humans and AI agents reason and generate from the same governed account of what your systems are and must do.',
         addressedBy: [
             { solution: 'itip', product: 'web-application', feature: 'definitions-management' },
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },            { solution: 'sie', product: 'definition-manager', feature: 'governed-context-mcp' },
+            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },            { solution: 'sie', product: 'definition-manager', feature: 'definitions-tooling-serving' },
         ],
     },
     {
