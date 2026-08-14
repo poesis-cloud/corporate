@@ -27,6 +27,8 @@ export interface Alternative {
     rows: CompareRow[];
     whenThem: string;
     whenPoesis: string;
+    /** When set, the page closes on an integrate-rather-than-compete callout. */
+    integrationNote?: string;
 }
 
 export const alternatives: Alternative[] = [
@@ -79,6 +81,8 @@ export const alternatives: Alternative[] = [
             'If you want a curated, architect-owned application portfolio with mature reporting and a large ecosystem, the established EA category is a safe choice.',
         whenPoesis:
             'If you need the model to stay true to what actually runs, obligations to be evaluated continuously rather than audited annually, and a source of truth AI agents can act on — that is what Poesis for IT is built for.',
+        integrationNote:
+            'For many estates this is not either/or: an EA repository is a curated account of intent, and intent is an input. Poesis can treat it as a knowledge source — checked continuously against what the code, contracts, and infrastructure say is actually true.',
     },
     {
         slug: 'vanta',
@@ -179,6 +183,8 @@ export const alternatives: Alternative[] = [
             'If you need a developer home page — catalog, templates, docs — the developer-portal category is the right tool, and it can feed Poesis.',
         whenPoesis:
             'If you need the governance layer — obligations with owners, posture computed continuously, definitions AI agents can act on — that is Poesis for IT, alongside or above your portal.',
+        integrationNote:
+            'Backstage is less an alternative than a neighbor: the catalog teams already maintain is a natural knowledge source for the governed model, and golden paths can consume governed definitions. Keep the portal — Poesis governs what it describes.',
     },
     {
         slug: 'servicenow',
@@ -234,5 +240,7 @@ export const alternatives: Alternative[] = [
             'If you need enterprise-scale operational workflows — incidents, changes, requests — the ITSM category is purpose-built for it.',
         whenPoesis:
             'If the question is what your estate is and what it must comply with — answered continuously, from reality, in a form AI agents can act on — that is Poesis for IT, beside your ITSM.',
+        integrationNote:
+            'In practice Poesis completes an ITSM estate rather than competing with it: the governed model gives workflows a definition layer to operate on, and a CMDB is a natural knowledge source to reconcile against reality. Keep the workflows — Poesis governs what they act on.',
     },
 ];

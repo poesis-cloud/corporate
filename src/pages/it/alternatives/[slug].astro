@@ -85,6 +85,13 @@ const { alt } = Astro.props;
           <p>{alt.whenPoesis}</p>
         </article>
       </div>
+      {alt.integrationNote && (
+        <article class="card card--feature card--static" style="margin-top:1.1rem">
+          <span class="tag">Integrate, don't replace</span>
+          <p>{alt.integrationNote}</p>
+          <p style="margin-top:.6rem"><a href="/it/#works-with">See what Poesis works with →</a></p>
+        </article>
+      )}
       <div class="hero-cta" style="margin-top:2rem;justify-content:center">
         <a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a>
         <a class="btn btn-ghost" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
