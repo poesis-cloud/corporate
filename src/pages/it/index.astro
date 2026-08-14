@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { profilesForDomain } from '../../data/profiles';
+
+const itProfiles = profilesForDomain('it');
 ---
 <BaseLayout
   title="IT Governance Platform"
@@ -73,7 +76,27 @@ import Icon from '../../components/Icon.astro';
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Built on an open standard</p>
+        <p class="eyebrow">Who it's for</p>
+        <h2>Every IT profile, one governed model.</h2>
+        <p class="lead">Architects author, developers consult, ops watch drift, security proves posture — all on the same governed definitions, with no translation silos between them.</p>
+      </div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        {itProfiles.map((profile) => (
+          <article class="card card--feature card--static">
+            <span class="tag">{profile.name}</span>
+            <h3>{profile.hook}</h3>
+            <p>{profile.body}</p>
+            <p><a href={profile.cta.href} data-profile-cta={profile.id}>{profile.cta.label} →</a></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Built on a vendor-neutral standard</p>
         <h2>Governance you can inspect, not a black box.</h2>
         <p class="lead">Poesis for IT is delivered by <a href="/solutions/itip">ITIP</a>, the first domain application built on the <a href="/solutions/sie">SIE</a> engine and the <a href="/solutions/gsm">GSM</a> standard — the vendor-neutral model for defining and governing systems, the way OpenTelemetry standardized observing them.</p>
       </div>

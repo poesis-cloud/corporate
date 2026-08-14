@@ -95,6 +95,16 @@ const articleLd = article
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-KZGGY5D9GW');
+      // Delegated GA4 event for profile-card CTAs (data-profile-cta) on domain pages
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[data-profile-cta]') : null;
+        if (!a) return;
+        gtag('event', 'profile_cta_click', {
+          profile_id: a.getAttribute('data-profile-cta'),
+          link_url: a.getAttribute('href'),
+          page_path: location.pathname,
+        });
+      });
     </script>
   </head>
   <body data-page-type={pageType}>

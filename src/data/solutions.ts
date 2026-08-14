@@ -201,8 +201,6 @@ export const solutions: Solution[] = [
         ],
         docs: [
           { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM documentation' },
-          { href: 'https://docs.poesis.cloud/gsm/specifications/specification/', label: 'Specification' },
-          { href: 'https://docs.poesis.cloud/gsm/specifications/conformance/', label: 'Conformance' },
         ],
       },
       {

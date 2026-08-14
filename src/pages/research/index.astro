@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import { profilesForDomain } from '../../data/profiles';
+
+const researchProfiles = profilesForDomain('research');
 ---
 <BaseLayout
   title="Agentic Research Governance"
@@ -66,6 +69,26 @@ import Icon from '../../components/Icon.astro';
           <h3>Verdicts anyone can recompute.</h3>
           <p>Whether an obligation was met has exactly one answer, computable from the definitions and the record. The history of decisions, evidence, and verdicts is the substrate's own queryable state — not archaeology over logs.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Who it's for</p>
+        <h2>Constituted for the people who answer for research.</h2>
+        <p class="lead">Whether you run an agentic program, a lab, or the platform research runs on — the substrate carries the obligations you are held to.</p>
+      </div>
+      <div class="grid grid-3" style="margin-top:1.5rem">
+        {researchProfiles.map((profile) => (
+          <article class="card card--feature card--static">
+            <span class="tag">{profile.name}</span>
+            <h3>{profile.hook}</h3>
+            <p>{profile.body}</p>
+            <p><a href={profile.cta.href} data-profile-cta={profile.id}>{profile.cta.label} →</a></p>
+          </article>
+        ))}
       </div>
     </div>
   </section>

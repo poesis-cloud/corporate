@@ -34,7 +34,7 @@ The alternative is to treat context as something governed rather than something 
 
 The first two are the working pair. Asserted context makes observation intelligible — it supplies the categories under which evidence counts as evidence; observed context makes assertion corrigible. That relation, and why it is a loop rather than an opposition, is the subject of [Definition versus description](/insights/definition-versus-description/).
 
-These are not documents about the organization. They are typed, versioned definitions governed through [GSM](https://docs.poesis.cloud/gsm/), the published specification underneath the stack. A definition has a stable identity, an explicit lifecycle, an owner, and a version history. Asking which policy is in effect is a query, not an inference.
+These are not documents about the organization. They are typed, versioned definitions governed through [GSM](https://docs.poesis.cloud/gsm/), the specification underneath the stack. A definition has a stable identity, an explicit lifecycle, an owner, and a version history. Asking which policy is in effect is a query, not an inference.
 
 Today, asserted context is served by the [Definition Manager](https://github.com/poesis-cloud/sie-definition-manager), and the [Operator](https://github.com/poesis-cloud/sie-operator) evaluates typed rules deterministically over it. The Definition Blackboard, the observation and derivation planes, and the observability floor are in development. We separate what is implemented from what is designed because a piece arguing for inspectable context should be inspectable itself.
 
