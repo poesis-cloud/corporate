@@ -123,7 +123,7 @@ export const solutions: Solution[] = [
           { slug: 'definitions-lifecycle-enforcement', name: 'GSM Definitions lifecycle enforcement', blurb: 'DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED — every governed change is a validated state transition, auditable end to end.' },
           { slug: 'definitions-retention', name: 'GSM Definitions retention', blurb: 'Definitions and their history are retained and versioned — nothing governed is silently overwritten or lost.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/sie/definition-manager/', label: 'SIE Definition documentation' }],
+        docs: [{ href: 'https://docs.poesis.cloud/sie/definition-manager/', label: 'Definition Manager documentation' }],
         repos: [
           { href: 'https://github.com/poesis-cloud/sie-definition-manager', label: 'sie-definition-manager' },
           { href: 'https://github.com/poesis-cloud/sie-definition-database', label: 'sie-definition-database' },
@@ -222,6 +222,7 @@ export const solutions: Solution[] = [
           { slug: 'legal-directives-norms', name: 'Legal Directives & Norms (evaluable)', blurb: 'Regulatory obligations sourced into evaluable Directives and Norms — each clause traceable to its source, coverage continuous and provable.' },
           { slug: 'standard-mechanisms', name: 'Standard Mechanisms (executable)', blurb: 'Standard behaviors sourced into executable Mechanisms — governance that runs, not just documents.' },
         ],
+        docs: [{ href: 'https://docs.poesis.cloud/gsm/frameworks/', label: 'Frameworks documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/gsm-frameworks', label: 'gsm-frameworks' }],
       },
     ],
@@ -277,7 +278,7 @@ export const solutions: Solution[] = [
           { slug: 'instructions', name: 'Instructions', blurb: 'Persistent conventions and rules that shape how agents write and edit — the org\u2019s engineering standards, enforced at every step.' },
           { slug: 'artifacts', name: 'Artifacts', blurb: 'Epics, features, stories, ADRs — schema-validated outputs every ceremony produces and every gate checks.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/saf/safe-agentic-organization/', label: 'Distributed Agentic SAFe' }],
+        docs: [{ href: 'https://docs.poesis.cloud/saf/safe-agentic-organization/', label: 'SAFe Agentic Organization documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-organization', label: 'saf-agentic-organization' }],
       },
       {
