@@ -1,0 +1,34 @@
+---
+/**
+ * PainGrid — the shared pain-first card grid used by every domain page.
+ * Renders pains from the central pain graph (data/pains.ts); each card names
+ * the pain, its cost, the remedy, and links to the features addressing it.
+ */
+import { type Pain, resolveFeatureRef } from '../data/pains.ts';
+
+interface Props {
+  pains: Pain[];
+}
+
+const { pains } = Astro.props;
+---
+<div class="grid grid-2" style="margin-top:1.5rem">
+  {pains.map((p) => (
+    <article class="card card--feature card--static" id={p.id}>
+      <span class="tag">{p.tag}</span>
+      <h3>{p.pain}</h3>
+      <p>{p.cost} <strong>{p.remedy}</strong></p>
+      <p class="pain-addressed">
+        Addressed by{' '}
+        {p.addressedBy.map(resolveFeatureRef).map((r, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={`${r.solution.href}/products/${r.product.slug}#${r.feature.slug}`}>
+              {r.feature.name}
+            </a>
+          </>
+        ))}
+      </p>
+    </article>
+  ))}
+</div>

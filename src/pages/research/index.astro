@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
+import PainGrid from '../../components/PainGrid.astro';
 import { profilesForDomain } from '../../data/profiles';
+import { painsForDomain } from '../../data/pains';
 
 const researchProfiles = profilesForDomain('research');
+const researchPains = painsForDomain('research');
 ---
 <BaseLayout
   title="Agentic Research Governance"
@@ -18,7 +21,7 @@ const researchProfiles = profilesForDomain('research');
       <div class="hero-cta">
         <a class="btn btn-primary" href="/insights/poesis-stack-as-research-system"><Icon name="book-open" /> Read the research thesis</a>
         <a class="btn btn-ghost" href="/solutions/sie"><Icon name="layers" /> Explore SIE</a>
-        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
+        <a class="btn btn-ghost" href="/contact" data-demo-cta="research-hero"><Icon name="message" /> Request a demo</a>
       </div>
     </div>
   </section>
@@ -35,41 +38,10 @@ const researchProfiles = profilesForDomain('research');
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">What the substrate provides</p>
-        <h2>Five failures, one remedy: obligations with a layer to live in.</h2>
-        <p class="lead">Stated as properties of the substrate — independent of any particular agent framework or model.</p>
+        <h2>Six failures, one remedy: obligations with a layer to live in.</h2>
+        <p class="lead">Stated as properties of the substrate — independent of any particular agent framework or model — each failure traceable to the features that remedy it.</p>
       </div>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        <article class="card card--feature card--static">
-          <span class="tag">Ontology</span>
-          <h3>What a hypothesis <em>is</em>, defined.</h3>
-          <p>What a hypothesis, a budget, a review, or a deadline is must be defined before any process can be held to it. Semantics carried only in prose bind no one — GSM supplies the explicit ontology and governance grammar.</p>
-        </article>
-        <article class="card card--feature card--static">
-          <span class="tag">Identity &amp; lifecycle</span>
-          <h3>Retired, not lost.</h3>
-          <p>Research objects persist across trajectories, with state changes that are attributable, ordered events. What was retired remains a re-openable identity — because the record of its retirement exists.</p>
-        </article>
-        <article class="card card--feature card--static">
-          <span class="tag">Qualified evidence</span>
-          <h3>Claims enter with provenance, or not at all.</h3>
-          <p>An observation enters the institution with its confidence and provenance attached. Qualification does not make a claim true — it makes it governable.</p>
-        </article>
-        <article class="card card--feature card--static">
-          <span class="tag">Evaluable norms</span>
-          <h3>Deviation distinguished from violation.</h3>
-          <p>An hour of idleness violates nothing; chronic neglect of a mandate does. Norms carry temporal tolerance and render the difference as a verdict, not an impression.</p>
-        </article>
-        <article class="card card--feature card--static">
-          <span class="tag">Separation of powers</span>
-          <h3>Measure, judge, and enforce — separately.</h3>
-          <p>A process that measures, judges, and enforces itself is precisely the ungoverned condition being remedied. The layers are distinct primitives, by design.</p>
-        </article>
-        <article class="card card--feature card--static">
-          <span class="tag">Deterministic record</span>
-          <h3>Verdicts anyone can recompute.</h3>
-          <p>Whether an obligation was met has exactly one answer, computable from the definitions and the record. The history of decisions, evidence, and verdicts is the substrate's own queryable state — not archaeology over logs.</p>
-        </article>
-      </div>
+      <PainGrid pains={researchPains} />
     </div>
   </section>
 

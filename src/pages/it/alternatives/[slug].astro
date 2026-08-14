@@ -93,7 +93,7 @@ const { alt } = Astro.props;
         </article>
       )}
       <div class="hero-cta" style="margin-top:2rem;justify-content:center">
-        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a>
+        <a class="btn btn-primary" href="/contact" data-demo-cta={`alt-${alt.slug}`}><Icon name="message" /> Request a demo</a>
         <a class="btn btn-ghost" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
         <a class="btn btn-ghost" href="/insights/definition-versus-description"><Icon name="book-open" /> Read: definition versus description</a>
       </div>

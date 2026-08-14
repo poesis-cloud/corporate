@@ -749,6 +749,17 @@ a:hover {
   border-left: 1px solid var(--line);
 }
 
+/* ---- pain graph (PainGrid + product pain sections) ----------------------- */
+.pain-addressed {
+  margin-top: .8rem;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+.pain-addressed a {
+  color: var(--accent);
+}
+
 
 .card-cover {
   color: inherit;

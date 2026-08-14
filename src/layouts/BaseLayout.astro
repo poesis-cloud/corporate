@@ -95,15 +95,26 @@ const articleLd = article
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-KZGGY5D9GW');
-      // Delegated GA4 event for profile-card CTAs (data-profile-cta) on domain pages
+      // Delegated GA4 events for profile-card CTAs and demo CTAs
       document.addEventListener('click', function (e) {
-        var a = e.target && e.target.closest ? e.target.closest('a[data-profile-cta]') : null;
-        if (!a) return;
-        gtag('event', 'profile_cta_click', {
-          profile_id: a.getAttribute('data-profile-cta'),
-          link_url: a.getAttribute('href'),
-          page_path: location.pathname,
-        });
+        var t = e.target && e.target.closest ? e.target : null;
+        if (!t) return;
+        var profile = t.closest('a[data-profile-cta]');
+        if (profile) {
+          gtag('event', 'profile_cta_click', {
+            profile_id: profile.getAttribute('data-profile-cta'),
+            link_url: profile.getAttribute('href'),
+            page_path: location.pathname,
+          });
+        }
+        var demo = t.closest('a[data-demo-cta]');
+        if (demo) {
+          gtag('event', 'demo_cta_click', {
+            cta_id: demo.getAttribute('data-demo-cta'),
+            link_url: demo.getAttribute('href'),
+            page_path: location.pathname,
+          });
+        }
       });
     </script>
   </head>

@@ -13,6 +13,8 @@ export interface Domain {
   label: string;
   tag: string;
   blurb: string;
+  /** Solutions whose products deliver in this domain (validated against the pain graph). */
+  solutions?: string[];
   /** Sub-pages/sections shown as a nav submenu, like Solutions → Products. */
   subitems?: DomainSubitem[];
 }
@@ -26,6 +28,7 @@ export const domains: Domain[] = [
     tag: 'First domain — shipping',
     blurb:
       'Define, govern, and prove your IT landscape — enterprise architecture, continuous compliance, impact simulation — through one governed source of truth, delivered by ITIP.',
+    solutions: ['itip', 'sie', 'gsm'],
     subitems: [
       { href: '/it/#works-with', label: 'Integrations — works with your stack' },
       ...alternatives.map((a) => ({
@@ -42,5 +45,6 @@ export const domains: Domain[] = [
     tag: 'Emerging domain',
     blurb:
       'Constitute open-ended and agentic research as a governed institution — hypotheses with identity and lifecycle, evidence with provenance, obligations with owners, verdicts that are deterministic.',
+    solutions: ['sie', 'gsm'],
   },
 ];

@@ -8,6 +8,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
 import { solutions } from '../../../../data/solutions.ts';
+import { painsForProduct, domainHref } from '../../../../data/pains.ts';
 
 export function getStaticPaths() {
   return solutions.flatMap((solution) =>
@@ -19,6 +20,7 @@ export function getStaticPaths() {
 }
 
 const { solution, product } = Astro.props;
+const addressedPains = painsForProduct(solution.slug, product.slug);
 ---
 <BaseLayout
   title={`${product.name} — ${solution.fullName}`}
@@ -81,5 +83,24 @@ const { solution, product } = Astro.props;
       </p>
     </div>
   </section>
+
+  {addressedPains.length > 0 && (
+    <section class="section section--soft">
+      <div class="container">
+        <p class="eyebrow">Pain points addressed</p>
+        <h2>The pains {product.name} answers.</h2>
+        <div class="grid grid-2" style="margin-top:1.5rem">
+          {addressedPains.map((p) => (
+            <div class="card card--static">
+              <span class="tag">{p.tag}</span>
+              <h3>{p.pain}</h3>
+              <p>{p.remedy}</p>
+              <p class="pain-addressed"><a href={`${domainHref(p.domainSlug)}#${p.id}`}>See it in Poesis for {p.domainSlug === 'it' ? 'IT' : 'Research'} →</a></p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
