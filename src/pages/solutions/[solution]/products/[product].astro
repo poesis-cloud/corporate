@@ -80,7 +80,7 @@ const roadmap = roadmapFor(solution.slug, product.slug);
               <span class="tag tag--feature-pill">Feature</span>
               {status && (
                 <span class={`tag ${status.shipped ? 'tag--value' : 'tag--muted'}`}>
-                  {status.shipped ? `shipped · ${status.version}` : `planned · ${status.version}`}
+                  {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
                 </span>
               )}
               <h3>{f.name}</h3>

@@ -16,7 +16,7 @@ const { roadmap } = Astro.props;
     {roadmap.milestones.map((m) => (
       <li class={`roadmap-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}>
         <span class="roadmap-dot" aria-hidden="true"></span>
-        <span class="roadmap-version">{m.version}{m.shipped && ' ✓'}</span>
+        <span class="roadmap-version">v{m.version}{m.shipped && ' ✓'}</span>
         <span class="roadmap-label">{m.label}</span>
       </li>
     ))}

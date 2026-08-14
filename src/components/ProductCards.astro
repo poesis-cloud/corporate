@@ -31,8 +31,8 @@ const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
               <li>
                 <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
                 {status && (
-                  <span class="feature-version" title={status.shipped ? `Shipped in ${status.version}` : `Planned for ${status.version}`}>
-                    {status.shipped ? '✓' : status.version}
+                  <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
+                    {status.shipped ? '✓' : `v${status.version}`}
                   </span>
                 )}
               </li>
