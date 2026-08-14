@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
+import SieLoopDiagram from '../../../components/SieLoopDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const sie = solutions.find((s) => s.slug === 'sie')!;
@@ -22,8 +23,8 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/sie/"><Icon name="docs" /> Read the docs</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> Browse the repos</a>
-        <span class="btn btn-ghost" aria-disabled="true"><Icon name="azure" /> Azure demo <span class="tag tag--muted">coming soon</span></span>
-        <span class="btn btn-ghost" aria-disabled="true"><Icon name="store" /> Azure Marketplace <span class="tag tag--muted">coming soon</span></span>
+        <span class="btn btn-ghost" aria-disabled="true"><Icon name="azure" /> SaaS demo instance on Azure <span class="tag tag--muted">coming soon</span></span>
+        <span class="btn btn-ghost" aria-disabled="true"><Icon name="store" /> SaaS product on Azure Marketplace <span class="tag tag--muted">coming soon</span></span>
       </div>
     </div>
   </section>
@@ -45,8 +46,8 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
         </div>
         <div class="card card--feature card--static">
           <span class="tag tag--value">Value</span>
-          <h3>One closed governance loop.</h3>
-          <p>Define → realize → evaluate → refine: definitions are stored and lifecycle-enforced, executed against observed state, and refreshed from collaborative sourcing — every divergence surfaces immediately, not at audit time.</p>
+          <h3>One closed self-sustaining loop.</h3>
+          <p>Define → realize → evaluate → refine: definitions are stored and lifecycle-enforced, executed against observed state, and refreshed from collaborative sourcing — the system continuously regenerates itself against its own definition, and every divergence surfaces immediately, not at audit time.</p>
         </div>
         <div class="card card--feature card--static">
           <span class="tag tag--value">Value</span>
@@ -54,6 +55,15 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
           <p>The Definition Blackboard Manager lets code sourcers, manual authors, and external frameworks contribute evidence-backed identifications — sealed, audited, and promoted into governed definitions, so the model tracks the real system.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The loop</p>
+      <h2>One loop, from definition to reality — and back.</h2>
+      <p class="lead">In principle, the loop is universal: any system governed by its own definition runs it — Kubernetes runs it on infrastructure; SIE runs it on anything you can define.</p>
+      <SieLoopDiagram />
     </div>
   </section>
 

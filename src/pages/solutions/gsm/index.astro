@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
+import GsmModelDiagram from '../../../components/GsmModelDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const gsm = solutions.find((s) => s.slug === 'gsm')!;
@@ -51,6 +52,15 @@ const [h1] = gsm.tagline.split(' — ');
           <p>GSM is being prepared for neutral, multi-stakeholder stewardship (a CNCF-style path), with conformance defined so independent implementations interoperate — the reference implementation holds no privileged status in the specification.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The model</p>
+      <h2>The data model, simplified.</h2>
+      <p class="lead">Everything is a typed definition. Archetypes carry the meaning; eight primitives define the system; the DNA grammar binds governing intent to subjects through lifecycle-managed Ascriptions.</p>
+      <GsmModelDiagram />
     </div>
   </section>
 

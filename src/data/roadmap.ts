@@ -28,9 +28,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'itip',
     product: 'web-application',
-    current: '0.0',
+    current: '0.1',
     milestones: [
-      { version: '0.x', label: 'Pre-GA increments toward the MVP' },
+      { version: '0.1', label: 'First pre-GA increment — application & BFF foundation', shipped: true },
       { version: '1.0', label: 'MVP/GA — GSM Definitions & Frameworks management, hardened', ga: true },
       { version: '1.x', label: 'Truth sourcing · artifact factory · compliance evaluation · impact simulation (unordered)' },
     ],
@@ -58,23 +58,22 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'sie',
     product: 'definition-manager',
-    current: '0.1',
+    current: '1.0',
     milestones: [
-      { version: '0.1', label: 'API, lifecycle enforcement, retention implemented', shipped: true },
-      { version: '1.0', label: 'GA — production hardening; conformance to GSM 1.0', ga: true },
+      { version: '1.0', label: 'MVP/GA — Definitions management API, lifecycle enforcement, retention', shipped: true, ga: true },
     ],
     featureVersions: {
-      'definitions-management-api': '0.1',
-      'definitions-lifecycle-enforcement': '0.1',
-      'definitions-retention': '0.1',
+      'definitions-management-api': '1.0',
+      'definitions-lifecycle-enforcement': '1.0',
+      'definitions-retention': '1.0',
     },
   },
   {
     solution: 'sie',
     product: 'operator',
-    current: '0.0',
+    current: '0.1',
     milestones: [
-      { version: '0.x', label: 'Mechanism runtime basis (partial today)' },
+      { version: '0.1', label: 'Basic Mechanism runtime', shipped: true },
       { version: '1.0', label: 'MVP/GA — GSM Norms evaluation API', ga: true },
       { version: '1.x', label: 'GSM Mechanisms execution API' },
     ],
@@ -86,15 +85,14 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'sie',
     product: 'definition-blackboard-manager',
-    current: '0.1',
+    current: '1.0',
     milestones: [
-      { version: '0.1', label: 'Seal lifecycle, validation, audit ledger implemented', shipped: true },
-      { version: '1.0', label: 'GA — production hardening; stable client contract', ga: true },
+      { version: '1.0', label: 'MVP/GA — contributions API, seal lifecycle, audit ledger', shipped: true, ga: true },
     ],
     featureVersions: {
-      'ks-contributions-management-api': '0.1',
-      'ks-contributions-lifecycle-enforcement': '0.1',
-      'ks-contributions-retention': '0.1',
+      'ks-contributions-management-api': '1.0',
+      'ks-contributions-lifecycle-enforcement': '1.0',
+      'ks-contributions-retention': '1.0',
     },
   },
   {
@@ -102,7 +100,8 @@ export const roadmaps: ProductRoadmap[] = [
     product: 'specifications',
     current: '1.0',
     milestones: [
-      { version: '1.0', label: 'Normative content frozen — primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending, target \u2248 Oct 2026)', shipped: true, ga: true },
+      { version: '1.0', label: 'Normative content frozen — primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)', shipped: true, ga: true },
+      { version: '1.1', label: 'Enhanced Directives and Norms model' },
     ],
     featureVersions: {
       primitives: '1.0',
@@ -116,19 +115,20 @@ export const roadmaps: ProductRoadmap[] = [
     product: 'frameworks',
     current: '0.1',
     milestones: [
-      { version: '0.1', label: 'First frameworks sourced — TOGAF, ISO 25010/25012, GDPR, NIS2, SCAP, protocol semantics, ITIP archetypes', shipped: true },
-      { version: '1.0', label: 'MVP/GA — TOGAF, ITIP domain archetypes, and protocol semantics complete & validated', ga: true },
-      { version: '1.x', label: 'ISO 25010 · ISO 25012 · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)' },
+      { version: '0.1', label: 'First frameworks sourced', shipped: true },
+      { version: '1.0', label: 'MVP/GA — HTTP, TOGAF, and ITIP domain archetypes complete & validated', ga: true },
+      { version: '1.x', label: 'Remaining protocol semantics · ISO 25010 · ISO 25012 · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)' },
     ],
     featureVersions: {
-      togaf: '0.1',
-      'iso-25010': '0.1',
-      'iso-25012': '0.1',
-      gdpr: '0.1',
-      nis2: '0.1',
-      scap: '0.1',
-      'protocol-semantics': '0.1',
-      'itip-domain-archetypes': '0.1',
+      http: '1.0',
+      togaf: '1.0',
+      'itip-domain-archetypes': '1.0',
+      'protocol-semantics': '1.x',
+      'iso-25010': '1.x',
+      'iso-25012': '1.x',
+      gdpr: '1.x',
+      nis2: '1.x',
+      scap: '1.x',
       dora: '1.x',
       safe: '1.x',
       itil: '1.x',
@@ -137,9 +137,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'agentic-harness',
-    current: '0.0',
+    current: '0.1',
     milestones: [
-      { version: '0.x', label: 'Pre-GA increments (core in construction)' },
+      { version: '0.1', label: 'First pre-GA increment — core scaffold', shipped: true },
       { version: '1.0', label: 'MVP/GA — resolution, injection, LLM routing, validation, authorization, logging', ga: true },
     ],
     featureVersions: {
@@ -154,9 +154,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'safe-agentic-organization',
-    current: '0.0',
+    current: '0.1',
     milestones: [
-      { version: '0.x', label: 'Pre-GA increments (scaffold today)' },
+      { version: '0.1', label: 'First pre-GA increment — framework scaffold', shipped: true },
       { version: '1.0', label: 'MVP/GA — agents, skills, workflows, instructions, artifacts', ga: true },
     ],
     featureVersions: {
@@ -170,9 +170,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'agentic-workspace',
-    current: '0.0',
+    current: '0.1',
     milestones: [
-      { version: '0.x', label: 'Pre-GA increments' },
+      { version: '0.1', label: 'First pre-GA increment — workspace scaffold', shipped: true },
       { version: '1.0', label: 'MVP/GA — installer + CI/CD artifact pipelines', ga: true },
     ],
     featureVersions: {

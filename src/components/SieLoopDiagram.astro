@@ -1,0 +1,118 @@
+---
+/**
+ * SieLoopDiagram — the closed self-sustaining loop SIE runs, in principle:
+ * the same reconciliation shape Kubernetes runs on infrastructure,
+ * generalized to any governed system.
+ */
+const stations = [
+  { step: 'Define', body: 'The desired state as typed, versioned, governed definitions', product: 'Definition Manager' },
+  { step: 'Realize', body: 'Systems and agents act toward the definition', product: 'generated artifacts · effectors' },
+  { step: 'Observe', body: 'The actual state is captured from running reality', product: 'receptors · truth sourcing' },
+  { step: 'Evaluate', body: 'Actual vs. defined — Norms render deterministic verdicts', product: 'Operator' },
+];
+---
+<div class="loopd" role="img" aria-label="The closed loop: define, realize, observe, evaluate, then adapt the definitions and repeat">
+  <ol class="loopd-track">
+    {stations.map((s) => (
+      <li class="loopd-station">
+        <span class="loopd-step">{s.step}</span>
+        <span class="loopd-body">{s.body}</span>
+        <span class="loopd-product">{s.product}</span>
+      </li>
+    ))}
+  </ol>
+  <div class="loopd-return" aria-hidden="true">
+    <span class="loopd-return-arrow">⟲</span>
+    <span>adapt — divergences and evidence-backed contributions refresh the definitions <em>(Definition Blackboard Manager)</em></span>
+  </div>
+  <p class="loopd-note text-small">
+    The same loop Kubernetes runs on infrastructure — <code>spec</code> → controllers → <code>status</code> → reconcile — generalized beyond infrastructure to any governed system: the system continuously regenerates itself against its own definition.
+  </p>
+</div>
+
+<style>
+  .loopd {
+    margin-top: 1.75rem;
+  }
+  .loopd-track {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+  }
+  .loopd-station {
+    position: relative;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    padding: 1.1rem 1.2rem;
+  }
+  .loopd-station:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -1.35rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+  .loopd-step {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .loopd-body {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  .loopd-product {
+    display: block;
+    margin-top: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .loopd-return {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+    padding: 0.65rem 1.1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .loopd-return-arrow {
+    color: var(--accent);
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+  .loopd-note {
+    margin-top: 1.1rem;
+    color: var(--muted);
+  }
+  @media (max-width: 900px) {
+    .loopd-track {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .loopd-station:not(:last-child)::after {
+      content: '↓';
+      right: auto;
+      left: 50%;
+      top: auto;
+      bottom: -1.6rem;
+      transform: translateX(-50%);
+    }
+  }
+</style>

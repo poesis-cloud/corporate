@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
+import SafFlowDiagram from '../../../components/SafFlowDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const saf = solutions.find((s) => s.slug === 'saf')!;
@@ -53,6 +54,15 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
           <p>Apache-2.0, running on your machine against your working tree — work state lives in your own files and git history, not a vendor's cloud. Standard, homogeneous artifacts synchronize through your shared repo, contextualizing every other local orchestration.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">The method</p>
+      <h2>Three layers, three gates, one merged commit.</h2>
+      <p class="lead">Strategic intent descends the SAFe layers — each orchestrated by agents, each closed by a human ★ gate — until it lands as a validated, merged commit whose artifacts contextualize every other orchestration.</p>
+      <SafFlowDiagram />
     </div>
   </section>
 

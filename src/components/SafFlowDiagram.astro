@@ -1,0 +1,149 @@
+---
+/**
+ * SafFlowDiagram — the SAF method as a schema: strategic intent descends
+ * three orchestrated SAFe layers, each closed by a human ★ gate, down to a
+ * merged commit; committed artifacts sync out and feed back as context.
+ */
+const layers = [
+  { name: 'Portfolio', agent: '@vmo-orchestrator', tests: 'tests the strategic bet', artifacts: 'Epics · lean business cases' },
+  { name: 'Program', agent: '@rte-orchestrator', tests: 'tests the feature shape & architecture', artifacts: 'Features · ADRs · PI plans' },
+  { name: 'Iteration', agent: '@sm-orchestrator', tests: 'tests the code that ships', artifacts: 'Stories · PR packets' },
+];
+---
+<div class="safd" role="img" aria-label="SAF method: strategic intent descends portfolio, program, and iteration layers, each closed by a human gate, to a merged commit; artifacts sync to the git host and feed back as context">
+  <div class="safd-input">Strategic intent <span aria-hidden="true">↓</span></div>
+  <ol class="safd-layers">
+    {layers.map((l) => (
+      <li class="safd-layer">
+        <div class="safd-layer-head">
+          <strong>{l.name}</strong>
+          <code>{l.agent}</code>
+        </div>
+        <span class="safd-tests">{l.tests}</span>
+        <span class="safd-artifacts">{l.artifacts}</span>
+        <div class="safd-gate"><span class="safd-star" aria-hidden="true">★</span> human gate — agents propose, you dispose</div>
+      </li>
+    ))}
+  </ol>
+  <div class="safd-output">
+    <strong>Merged commit</strong> — validated artifacts land in your git history
+  </div>
+  <div class="safd-return" aria-hidden="true">
+    <span class="safd-return-arrow">⟲</span>
+    <span>committed artifacts sync to your git host (boards, tickets, wiki) and contextualize every other local orchestration</span>
+  </div>
+</div>
+
+<style>
+  .safd {
+    margin-top: 1.75rem;
+    max-width: 46rem;
+  }
+  .safd-input {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .safd-layers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+  .safd-layer {
+    position: relative;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    padding: 1rem 1.2rem;
+  }
+  .safd-layer + .safd-layer {
+    margin-top: 1.9rem;
+  }
+  .safd-layer + .safd-layer::before {
+    content: '↓ dispatch';
+    position: absolute;
+    top: -1.55rem;
+    left: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .safd-layer-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .safd-layer-head strong {
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+  .safd-layer-head code {
+    font-size: 0.74rem;
+    color: var(--accent-ink);
+  }
+  .safd-tests {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .safd-artifacts {
+    display: block;
+    margin-top: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .safd-gate {
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--line);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  .safd-star {
+    color: var(--accent);
+  }
+  .safd-output {
+    margin-top: 1.9rem;
+    position: relative;
+    border: 1px solid rgba(45, 212, 191, 0.35);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    padding: 0.9rem 1.2rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .safd-output::before {
+    content: '↓';
+    position: absolute;
+    top: -1.5rem;
+    left: 1.2rem;
+    color: var(--accent);
+  }
+  .safd-output strong {
+    color: var(--ink);
+  }
+  .safd-return {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.1rem;
+    padding: 0.65rem 1.1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .safd-return-arrow {
+    color: var(--accent);
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+</style>

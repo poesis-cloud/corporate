@@ -216,9 +216,10 @@ export const solutions: Solution[] = [
           { title: 'Maintained as the real world changes.', body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
         ],
         features: [
-          { slug: 'togaf', name: 'TOGAF', blurb: 'Enterprise-architecture vocabulary sourced as typed Archetypes — organized by the framework\u2019s own taxonomy, clause by clause.' },
+          { slug: 'http', name: 'HTTP', blurb: 'HTTP interaction semantics sourced as typed Archetypes — methods, status, caching, content negotiation, machine-readable.' },
+          { slug: 'togaf', name: 'TOGAF', blurb: 'Enterprise-architecture vocabulary sourced as typed Archetypes — organized by the framework’s own taxonomy, clause by clause.' },
           { slug: 'itip-domain-archetypes', name: 'ITIP domain archetypes', blurb: 'The IT-domain vocabulary and semantics ITIP governs with — structures, mechanisms, interactions, typed.' },
-          { slug: 'protocol-semantics', name: 'Protocol semantics', blurb: 'HTTP, gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket — interaction vocabularies sourced as typed Archetypes.' },
+          { slug: 'protocol-semantics', name: 'Protocol semantics', blurb: 'gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket — further interaction vocabularies sourced as typed Archetypes.' },
           { slug: 'iso-25010', name: 'ISO 25010', blurb: 'The software quality model sourced as typed Archetypes — quality characteristics as machine-readable vocabulary.' },
           { slug: 'iso-25012', name: 'ISO 25012', blurb: 'The data quality model sourced as typed Archetypes.' },
           { slug: 'gdpr', name: 'GDPR', blurb: 'Regulation vocabulary plus evaluable Directives and Norms, each citing the clause it derives from.' },
