@@ -1,0 +1,30 @@
+---
+/**
+ * RoadmapNote — the standard delivery-status note auto-rendered on every
+ * insight article, so no article carries its own hand-written disclaimer.
+ */
+import { CLAUSE_URL } from '../data/roadmap.ts';
+---
+<aside class="roadmap-note">
+  <p class="text-small">
+    <strong>Delivery status.</strong> Capabilities discussed here may be implemented,
+    on the roadmap, or exploratory. Implemented and designed are kept explicitly
+    distinct; anything unshipped follows the canonical
+    <a href={CLAUSE_URL}>Milestones &amp; Versions</a> register — ordered intent,
+    not delivery commitments or dates.
+  </p>
+</aside>
+
+<style>
+  .roadmap-note {
+    margin: 2rem 0 0;
+    padding: 0.85rem 1.1rem;
+    border-left: 3px solid var(--accent, #10b981);
+    background: rgba(16, 185, 129, 0.06);
+    border-radius: 0 6px 6px 0;
+  }
+  .roadmap-note p {
+    margin: 0;
+    opacity: 0.85;
+  }
+</style>

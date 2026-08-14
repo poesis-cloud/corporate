@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthorCard from '../../components/AuthorCard.astro';
+import RoadmapNote from '../../components/RoadmapNote.astro';
 import { getCollection, render } from 'astro:content';
 import { getAuthor } from '../../data/authors';
 
@@ -33,6 +34,7 @@ const author = getAuthor(post.data.author);
       <p class="lead">{post.data.summary}</p>
       <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
       <AuthorCard authorId={post.data.author} />
+      <RoadmapNote />
       <div class="article-body">
         <Content />
       </div>

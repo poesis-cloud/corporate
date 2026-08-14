@@ -7,7 +7,9 @@
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
+import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
 import { solutions } from '../../../../data/solutions.ts';
+import { roadmapFor, featureStatus } from '../../../../data/roadmap.ts';
 import { painsForProduct, domainHref } from '../../../../data/pains.ts';
 
 export function getStaticPaths() {
@@ -21,6 +23,7 @@ export function getStaticPaths() {
 
 const { solution, product } = Astro.props;
 const addressedPains = painsForProduct(solution.slug, product.slug);
+const roadmap = roadmapFor(solution.slug, product.slug);
 ---
 <BaseLayout
   title={`${product.name} — ${solution.fullName}`}
@@ -70,17 +73,32 @@ const addressedPains = painsForProduct(solution.slug, product.slug);
       <p class="eyebrow">Features</p>
       <h2>What {product.name} does.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        {product.features.map((f) => (
-          <div class="card card--feature card--static" id={f.slug}>
-            <span class="tag tag--feature-pill">Feature</span>
-            <h3>{f.name}</h3>
-            <p>{f.blurb}</p>
-          </div>
-        ))}
+        {product.features.map((f) => {
+          const status = featureStatus(roadmap, f.slug);
+          return (
+            <div class="card card--feature card--static" id={f.slug}>
+              <span class="tag tag--feature-pill">Feature</span>
+              {status && (
+                <span class={`tag ${status.shipped ? 'tag--value' : 'tag--muted'}`}>
+                  {status.shipped ? `shipped · ${status.version}` : `planned · ${status.version}`}
+                </span>
+              )}
+              <h3>{f.name}</h3>
+              <p>{f.blurb}</p>
+            </div>
+          );
+        })}
       </div>
-      <p class="text-small" style="margin-top:1rem;opacity:.75">
-        Features ship per the canonical <a href="https://docs.poesis.cloud/milestones/">Milestones &amp; Versions</a> register — ordered intent, not delivery commitments or dates.
-      </p>
+      {roadmap ? (
+        <>
+          <p class="eyebrow" style="margin-top:2.5rem">Roadmap</p>
+          <ProductRoadmap roadmap={roadmap} />
+        </>
+      ) : (
+        <p class="text-small" style="margin-top:1rem;opacity:.75">
+          Features ship per the canonical <a href="https://docs.poesis.cloud/milestones/">Milestones &amp; Versions</a> register — ordered intent, not delivery commitments or dates.
+        </p>
+      )}
     </div>
   </section>
 

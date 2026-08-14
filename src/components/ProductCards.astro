@@ -5,6 +5,7 @@
  * Feature (→ feature anchor on the product page).
  */
 import type { Solution } from '../data/solutions.ts';
+import { roadmapFor, featureStatus } from '../data/roadmap.ts';
 
 interface Props {
   solution: Solution;
@@ -14,17 +15,40 @@ const { solution } = Astro.props;
 const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
 ---
 <div class={`grid ${cols}`} style="margin-top:1.5rem">
-  {solution.products.map((p) => (
-    <div class="card card--feature card--product card--static">
-      <span class="tag tag--muted">Product</span>
-      <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
-      <p>{p.tagline}</p>
-      <p class="card-features-label">Features</p>
-      <ul class="feature-list">
-        {p.features.map((f) => (
-          <li><a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a></li>
-        ))}
-      </ul>
-    </div>
-  ))}
+  {solution.products.map((p) => {
+    const roadmap = roadmapFor(solution.slug, p.slug);
+    return (
+      <div class="card card--feature card--product card--static">
+        <span class="tag tag--muted">Product</span>
+        {roadmap && <span class="tag tag--muted">v{roadmap.current}</span>}
+        <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
+        <p>{p.tagline}</p>
+        <p class="card-features-label">Features</p>
+        <ul class="feature-list">
+          {p.features.map((f) => {
+            const status = featureStatus(roadmap, f.slug);
+            return (
+              <li>
+                <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
+                {status && (
+                  <span class="feature-version" title={status.shipped ? `Shipped in ${status.version}` : `Planned for ${status.version}`}>
+                    {status.shipped ? '✓' : status.version}
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  })}
 </div>
+
+<style>
+  .feature-version {
+    margin-left: 0.4rem;
+    font-size: 0.72rem;
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+</style>

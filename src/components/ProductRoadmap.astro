@@ -1,0 +1,99 @@
+---
+/**
+ * ProductRoadmap — compact visual version timeline for one product,
+ * rendered from src/data/roadmap.ts (mirror of the canonical register).
+ */
+import { CLAUSE_URL, type ProductRoadmap } from '../data/roadmap.ts';
+
+interface Props {
+  roadmap: ProductRoadmap;
+}
+
+const { roadmap } = Astro.props;
+---
+<div class="roadmap">
+  <ol class="roadmap-track">
+    {roadmap.milestones.map((m) => (
+      <li class={`roadmap-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}>
+        <span class="roadmap-dot" aria-hidden="true"></span>
+        <span class="roadmap-version">{m.version}{m.shipped && ' ✓'}</span>
+        <span class="roadmap-label">{m.label}</span>
+      </li>
+    ))}
+  </ol>
+  <p class="text-small roadmap-clause">
+    Ordered intent, not delivery commitments or dates — per the canonical
+    <a href={CLAUSE_URL}>Milestones &amp; Versions</a> register.
+  </p>
+</div>
+
+<style>
+  .roadmap {
+    margin-top: 2rem;
+  }
+  .roadmap-track {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .roadmap-step {
+    position: relative;
+    flex: 1 1 9rem;
+    min-width: 9rem;
+    padding: 0 1rem 0 0;
+  }
+  /* connector line */
+  .roadmap-step::before {
+    content: '';
+    position: absolute;
+    top: 0.45rem;
+    left: 0.9rem;
+    right: 0;
+    height: 2px;
+    background: var(--border, rgba(127, 127, 127, 0.35));
+  }
+  .roadmap-step:last-child::before {
+    display: none;
+  }
+  .roadmap-dot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    border: 2px solid var(--border, rgba(127, 127, 127, 0.6));
+    background: var(--bg, transparent);
+  }
+  .roadmap-step.is-shipped .roadmap-dot {
+    background: var(--accent, #10b981);
+    border-color: var(--accent, #10b981);
+  }
+  .roadmap-step.is-ga .roadmap-dot {
+    border-color: var(--accent, #10b981);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  }
+  .roadmap-version {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .roadmap-step.is-ga .roadmap-version {
+    color: var(--accent, #10b981);
+  }
+  .roadmap-label {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.8rem;
+    opacity: 0.75;
+    line-height: 1.35;
+  }
+  .roadmap-clause {
+    margin-top: 1.25rem;
+    opacity: 0.75;
+  }
+</style>
