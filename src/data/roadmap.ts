@@ -37,6 +37,7 @@ export const roadmaps: ProductRoadmap[] = [
     featureVersions: {
       'definitions-management': '1.0',
       'frameworks-management': '1.0',
+      'role-based-workspaces': '1.x',
       'definitions-truth-sourcing-management': '1.x',
       'it-artifact-factory': '1.x',
       'it-compliance-evaluation': '1.x',
@@ -66,6 +67,7 @@ export const roadmaps: ProductRoadmap[] = [
       'definitions-management-api': '1.0',
       'definitions-lifecycle-enforcement': '1.0',
       'definitions-retention': '1.0',
+      'governed-context-mcp': '1.x',
     },
   },
   {
@@ -79,7 +81,9 @@ export const roadmaps: ProductRoadmap[] = [
     ],
     featureVersions: {
       'norms-evaluation-api': '1.0',
+      'sandboxed-rule-runtime': '1.0',
       'mechanisms-execution-api': '1.x',
+      'derived-topology': '1.x',
     },
   },
   {
@@ -132,6 +136,7 @@ export const roadmaps: ProductRoadmap[] = [
       dora: '1.x',
       safe: '1.x',
       itil: '1.x',
+      'catalogue-update-stream': '1.x',
     },
   },
   {
@@ -176,6 +181,7 @@ export const roadmaps: ProductRoadmap[] = [
       { version: '1.0', label: 'MVP/GA — installer + CI/CD artifact pipelines', ga: true },
     ],
     featureVersions: {
+      'workspace-data-plane': '1.0',
       installer: '1.0',
       'cicd-pipelines': '1.0',
     },

@@ -108,8 +108,56 @@ export const pains: Pain[] = [
         remedy: 'Every definition is typed by a GSM Archetype \u2014 humans and AI agents reason and generate from the same governed account of what your systems are and must do.',
         addressedBy: [
             { solution: 'itip', product: 'web-application', feature: 'definitions-management' },
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },
+            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },            { solution: 'sie', product: 'definition-manager', feature: 'governed-context-mcp' },
         ],
+    },
+    {
+        id: 'it-ungoverned-change',
+        domainSlug: 'it',
+        tag: 'Change governance',
+        pain: 'Anything can change anything — there is no approval trail.',
+        cost: 'Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable.',
+        remedy: 'Every governed change is a validated lifecycle transition — proposed, approved, activated, retired — with the full history retained as the audit trail.',
+        addressedBy: [
+            { solution: 'sie', product: 'definition-manager', feature: 'definitions-lifecycle-enforcement' },
+            { solution: 'sie', product: 'definition-manager', feature: 'definitions-retention' },
+        ],
+    },
+    {
+        id: 'it-framework-collision',
+        domainSlug: 'it',
+        tag: 'Framework composition',
+        pain: 'Every framework lives in its own silo — and they collide on your desk.',
+        cost: 'TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident.',
+        remedy: 'Frameworks are sourced into one typed catalogue and composed through the governance layer — overlaps and conflicts surface in the composer, not in audits.',
+        addressedBy: [
+            { solution: 'itip', product: 'web-application', feature: 'frameworks-management' },
+            { solution: 'gsm', product: 'frameworks', feature: 'togaf' },
+        ],
+    },
+    {
+        id: 'it-governance-lockin',
+        domainSlug: 'it',
+        tag: 'Vendor neutrality',
+        pain: 'Your governance model is trapped in a vendor’s proprietary format.',
+        cost: 'Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance.',
+        remedy: 'Definitions follow a vendor-neutral standard — typed, portable, and machine-readable across tools — so the model outlives any product choice.',
+        addressedBy: [
+            { solution: 'gsm', product: 'specifications', feature: 'primitives' },
+            { solution: 'gsm', product: 'specifications', feature: 'archetyping' },
+        ],
+    },
+    {
+        id: 'it-ungoverned-agents',
+        domainSlug: 'it',
+        tag: 'Agentic delivery',
+        pain: 'AI agents ship work nobody scoped, gated, or can replay.',
+        cost: 'Agentic delivery state is trapped in chat sessions; pull requests appear without a mandate; there is no event log and no human authority at the layer where it matters.',
+        remedy: 'Delivery runs as governed workflows with a human gate at every layer — every step authorized, every artifact validated, every action journaled in your own git history.',
+        addressedBy: [
+            { solution: 'saf', product: 'agentic-harness', feature: 'step-authorization' },
+            { solution: 'saf', product: 'agentic-harness', feature: 'artifact-validation' },
+            { solution: 'saf', product: 'safe-agentic-organization', feature: 'workflows' },        ],
     },
     // ---- Poesis for Research ----------------------------------------------
     {
@@ -223,6 +271,23 @@ for (const pain of pains) {
             throw new Error(
                 `pains.ts: pain '${pain.id}' (domain '${pain.domainSlug}') references solution '${ref.solution}' not delivered in that domain`
             );
+        }
+    }
+}
+
+// Every feature must be grounded: referenced by >=1 product value or >=1 pain.
+for (const sol of solutions) {
+    for (const prod of sol.products) {
+        for (const feat of prod.features) {
+            const inValue = prod.values.some((v) => v.features.includes(feat.slug));
+            const inPain = pains.some((p) =>
+                p.addressedBy.some((r) => r.solution === sol.slug && r.product === prod.slug && r.feature === feat.slug)
+            );
+            if (!inValue && !inPain) {
+                throw new Error(
+                    `pains.ts: feature '${sol.slug}/${prod.slug}#${feat.slug}' is referenced by no value and no pain — ground it or remove it`
+                );
+            }
         }
     }
 }

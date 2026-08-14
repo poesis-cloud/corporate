@@ -28,7 +28,7 @@ export const domains: Domain[] = [
     tag: 'First domain — shipping',
     blurb:
       'Define, govern, and prove your IT landscape — enterprise architecture, continuous compliance, impact simulation — through one governed source of truth, delivered by ITIP.',
-    solutions: ['itip', 'sie', 'gsm'],
+    solutions: ['itip', 'sie', 'gsm', 'saf'],
     subitems: [
       { href: '/it/#works-with', label: 'Integrations — works with your stack' },
       ...alternatives.map((a) => ({

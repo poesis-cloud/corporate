@@ -20,7 +20,8 @@ const [h1] = gsm.tagline.split(' — ');
       <p class="lead">The vendor-neutral standard for defining systems — governance as code, not governance as prose. GSM is to the world's THINK–BUILD–RUN what OpenTelemetry's semantic conventions are to observability: one shared model every tool can use.</p>
       <p class="lead">It is grounded in systemics — synthesizing Beer's Viable System Model, von Bertalanffy's General System Theory, Wiener and Ashby's cybernetics, and Maturana and Varela's autopoiesis into a single generative definition of systems.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/"><Icon name="docs" /> GSM documentation</a>
+        <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/"><Icon name="docs" /> Read the docs</a>
+        <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> Browse the repos</a>
         <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
       </div>
     </div>
@@ -31,26 +32,13 @@ const [h1] = gsm.tagline.split(' — ');
       <p class="eyebrow">Why it matters</p>
       <h2>The definition layer beneath the projects you already run.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        <div class="card card--feature card--static">
-          <span class="tag tag--value">Value</span>
-          <h3>What OpenTelemetry is to RUN, GSM is to THINK.</h3>
-          <p>OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.</p>
-        </div>
-        <div class="card card--feature card--static">
-          <span class="tag tag--value">Value</span>
-          <h3>Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.</h3>
-          <p>Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype.</p>
-        </div>
-        <div class="card card--feature card--static">
-          <span class="tag tag--value">Value</span>
-          <h3>Governance as code, composed with policy as code.</h3>
-          <p>GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.</p>
-        </div>
-        <div class="card card--feature card--static">
-          <span class="tag tag--value">Value</span>
-          <h3>Vendor-neutral by design.</h3>
-          <p>GSM is being prepared for neutral, multi-stakeholder stewardship (a CNCF-style path), with conformance defined so independent implementations interoperate — the reference implementation holds no privileged status in the specification.</p>
-        </div>
+        {gsm.values.map((v) => (
+          <div class="card card--feature card--static">
+            <span class="tag tag--value">Value</span>
+            <h3>{v.title}</h3>
+            <p set:html={v.body} />
+          </div>
+        ))}
       </div>
     </div>
   </section>
