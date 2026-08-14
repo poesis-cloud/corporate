@@ -46,7 +46,7 @@ const movements: { label: string; title: string; intro: string; articles: { slug
   {
     label: 'III',
     title: 'The name — what it commits us to',
-    intro: 'Poiesis (\u03C0\u03BF\u03AF\u03B7\u03C3\u03B9\u03C2) is the Greek word for bringing-forth. Maturana and Varela joined it to auto — self — and named the property that distinguishes living systems: producing the components that produce you.',
+    intro: 'Poiesis (\u03C0\u03BF\u03AF\u03B7\u03C3\u03B9\u03C2) is the Greek word for bringing-forth. Maturana and Varela joined it to auto — self — and named the property that distinguishes living systems: producing the components that produce it.',
     articles: [
       {
         slug: 'governed-synthetic-autopoiesis',
@@ -72,7 +72,7 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
     <div class="container">
       <p class="motto">Define the world in software; generate it.</p>
       <h1>The enterprise its research defines.</h1>
-      <p class="lead">The rest of this site shows what Poesis ships. This page is about where that comes from: a blocker met in practice, a research program that worked it out in public, and the conclusions that now define the enterprise — its initiative, its intent, its DNA.</p>
+      <p class="lead">Poesis builds the stack that turns an organization&rsquo;s definitions — architectures, obligations, processes, constraints — into governed software that generative AI can safely act on. This page is about where that comes from: a blocker met in practice, a research program that worked it out in public, and the conclusions that became the enterprise&rsquo;s DNA.</p>
     </div>
   </section>
 
@@ -80,9 +80,9 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
     <div class="container">
       <p class="eyebrow">Origin</p>
       <h2>It began with a blocker, not a product.</h2>
-      <p class="lead">Poesis&rsquo;s founders spent their careers inside large IT estates — architecting them, governing them, selling and scaling the platforms they run on. Every estate ran on definitions: architectures, obligations, processes, constraints. And every estate kept those definitions in prose — wikis, slide decks, compliance spreadsheets — decaying from the day they were written.</p>
-      <p class="lead">The deeper observation was about automation. Prose is not just where definitions decay; it is where automatism stops. A definition in a document can be read, debated, and forgotten — it cannot be executed, evaluated, or regenerated. Every automated system downstream of it needs a human to re-interpret the prose into code, configuration, and tickets, and the loop a viable system depends on — act, observe, correct — breaks exactly at that boundary. Prose is the blocker of autopoiesis.</p>
-      <p class="lead">Then generative AI made production cheap: code, configuration, whole systems brought forth on demand. The blocker turned existential — systems now produce the components that produce them, while the organization they must conserve still lives in documents nothing can act on. Out of that tension came the research; out of the research, the enterprise.</p>
+      <p class="lead">Poesis&rsquo;s founders spent their careers inside large IT estates: architecting them, governing them, selling and scaling the platforms they run on. Every estate ran on definitions — architectures, obligations, processes, constraints. And every estate kept them in prose. Wikis, slide decks, compliance spreadsheets, all decaying from the day they were written.</p>
+      <p class="lead">The deeper observation was about automation. Prose is not just where definitions decay; it is where automation stops. A definition in a document can be read, debated, and forgotten. It cannot be executed, evaluated, or regenerated. Every automated system downstream needs a human to re-interpret the prose into code, configuration, and tickets, so the loop a viable system depends on — act, observe, correct — breaks at that boundary. Prose blocks autopoiesis: a system&rsquo;s capacity to produce and renew itself.</p>
+      <p class="lead">Then generative AI made production cheap. Code, configuration, whole systems, brought forth on demand. The blocker turned existential: systems now produce the components that produce them, while the organization they must conserve still lives in documents nothing can act on. Out of that tension came the research. Out of the research, the enterprise.</p>
     </div>
   </section>
 
@@ -91,11 +91,11 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
       <div class="section-head">
         <p class="eyebrow">The research</p>
         <h2>The argument the enterprise is built on.</h2>
-        <p class="lead">Poesis did not write a pitch and retrofit a theory. The position was built as a chain of published research notes — each one establishing a step the stack now embodies. Read in order, they are the company&rsquo;s reasoning.</p>
+        <p class="lead">The position was built as a chain of published research notes, each establishing a step the stack now embodies. Read in order, they are the company&rsquo;s reasoning.</p>
       </div>
       {movements.map((m) => (
         <div class="movement">
-          <h3><span class="movement-label">{m.label}</span> {m.title}</h3>
+          <h3><span class="movement-label" aria-hidden="true">{m.label}</span> {m.title}</h3>
           <p class="movement-intro">{m.intro}</p>
           <ol class="chain">
             {m.articles.map(({ slug, establishes }) => {
@@ -118,9 +118,9 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
     <div class="container">
       <p class="eyebrow">The thesis</p>
       <h2>Definitions belong in software, not in prose.</h2>
-      <p class="lead">The eight notes converge on one thesis. Every organization already runs on definitions — architectures, obligations, processes, constraints — and those definitions must be typed, versioned, machine-operable objects: primary and generative, realized into systems that produce evidence, evidence that corrects the definitions. Not a model drawn after the fact, but a loop operated continuously.</p>
-      <p class="lead">The generative era sets the terms of that loop. Probabilistic reasoners — human or synthetic — are not made deterministic; they are governed. Concerns stay owned by human stakeholders and carried by explicit governance: the model proposes against governed context, deterministic evaluation and human disposition decide what becomes action.</p>
-      <p class="lead">Held together, these commitments name what the enterprise exists to make real: <strong>governed synthetic autopoiesis</strong> — systems that continuously produce and renew their own organization without escaping the definitions, constraints, and human purposes that govern them. The theory is not ours to invent — it is systemics: Beer&rsquo;s Viable System Model, von Bertalanffy&rsquo;s General System Theory, Wiener and Ashby&rsquo;s cybernetics, Maturana and Varela&rsquo;s autopoiesis. Our contribution is making that lineage executable.</p>
+      <p class="lead">The notes converge on one thesis. An organization&rsquo;s definitions must be typed, versioned, machine-operable objects: primary and generative, realized into systems that produce evidence, evidence that corrects the definitions. Not a model drawn after the fact. A loop operated continuously.</p>
+      <p class="lead">The generative era sets the terms of that loop. Probabilistic reasoners, human or synthetic, are not made deterministic; they are governed. Concerns stay owned by human stakeholders and carried by explicit governance. The model proposes against governed context; deterministic evaluation and human disposition decide what becomes action.</p>
+      <p class="lead">Held together, these commitments name what the enterprise exists to make real: <strong>governed synthetic autopoiesis</strong> — systems that continuously produce and renew their own organization without escaping the definitions, constraints, and human purposes that govern them. The theory is not ours to invent; it is systemics, from Beer&rsquo;s Viable System Model and von Bertalanffy&rsquo;s General System Theory to Wiener and Ashby&rsquo;s cybernetics and Maturana and Varela&rsquo;s autopoiesis. Our contribution is making that lineage executable.</p>
     </div>
   </section>
 
@@ -132,11 +132,11 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
       <div class="proof-grid">
         <div class="proof-item">
           <span class="k">A standard, because prose is the blocker</span>
-          <p>If automatism stops at prose, the definitions themselves must become machine-operable — typed, versioned, evaluable. <a href="/solutions/gsm">GSM</a> is that missing THINK-layer standard, published openly and prepared for neutral stewardship.</p>
+          <p>Definitions that machines must act on need a shared, vendor-neutral form. <a href="/solutions/gsm">GSM</a> is that THINK-layer standard: typed, versioned, evaluable, published openly and prepared for neutral stewardship.</p>
         </div>
         <div class="proof-item">
           <span class="k">An engine, because a loop must be operated</span>
-          <p>Definition generates, realization produces evidence, evidence corrects the definition. <a href="/solutions/sie">SIE</a> is that loop running — continuous evaluation and reconciliation, not documentation.</p>
+          <p>Definition generates, realization produces evidence, evidence corrects the definition. <a href="/solutions/sie">SIE</a> is that loop running: continuous evaluation and reconciliation of the real world against its governed definitions.</p>
         </div>
         <div class="proof-item">
           <span class="k">Institutions, because generative AI is probabilistic</span>
@@ -144,8 +144,12 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
         </div>
         <div class="proof-item">
           <span class="k">Self-custody, because the claim binds the claimant</span>
-          <p>An enterprise claiming governed self-production must run on it. Every Poesis repository — engine, applications, these sites — is defined and governed on Poesis&rsquo;s own stack. Autopoiesis, applied first to ourselves.</p>
+          <p>An enterprise claiming governed self-production must run on it. Every Poesis repository — engine, applications, these sites — is defined and governed on Poesis&rsquo;s own stack, <a href="https://github.com/poesis-cloud" target="_blank" rel="noopener">inspectable on GitHub</a>. Autopoiesis, applied first to ourselves.</p>
         </div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/insights/research"><Icon name="book-open" /> Read the research</a>
+        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
       </div>
     </div>
   </section>
@@ -178,7 +182,7 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
             </div>
           </div>
           <p>A career at the intersection of enterprise software and commercial strategy — SaaS, AI, digital trust, and enterprise sales. Brahim designs the go-to-market systems that turn complex platforms into adopted ones. At Poesis he leads growth, ecosystem development, and customer engagement — keeping the platform accountable to real enterprise problems, not just to its own architecture.</p>
-          <p style="margin-top:.6rem"><a href="https://www.linkedin.com/company/poesis-cloud" target="_blank" rel="noopener">Poesis on LinkedIn →</a></p>
+          <p style="margin-top:.6rem"><a href="https://www.linkedin.com/in/brahim-ben-helal-50273856/" target="_blank" rel="noopener">Brahim on LinkedIn →</a></p>
         </div>
         <div class="card">
           <div class="founder-head">
