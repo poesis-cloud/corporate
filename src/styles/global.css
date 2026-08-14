@@ -695,6 +695,61 @@ a:hover {
   margin-top: .85rem;
 }
 
+/* ---- comparison tables (tool-class contrast + alternative pages) -------- */
+.compare-wrap {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
+}
+
+.compare {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  font-size: .93rem;
+}
+
+.compare th,
+.compare td {
+  padding: .85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.compare thead th {
+  font-size: .74rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .03);
+}
+
+.compare tbody th {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.compare tbody td {
+  color: var(--ink-soft);
+}
+
+.compare tbody tr:last-child th,
+.compare tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.compare td.compare-poesis,
+.compare thead th.compare-poesis {
+  color: var(--accent);
+  border-left: 1px solid var(--line);
+}
+
+
 .card-cover {
   color: inherit;
 }

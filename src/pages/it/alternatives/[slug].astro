@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { alternatives, type Alternative } from '../../../data/alternatives.ts';
+
+export function getStaticPaths() {
+  return alternatives.map((alt) => ({
+    params: { slug: alt.slug },
+    props: { alt },
+  }));
+}
+
+interface Props {
+  alt: Alternative;
+}
+
+const { alt } = Astro.props;
+---
+<BaseLayout title={alt.title} description={alt.description} pageType="Comparison">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow"><a href="/it/">Poesis for IT</a><span aria-hidden="true">/</span>Comparison</p>
+      <h1>{alt.h1}</h1>
+      <p class="lead">{alt.lead}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/it/"><Icon name="compass" /> Explore Poesis for IT</a>
+        <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Credit where due</p>
+        <h2>What the {alt.category} category does well.</h2>
+        <p class="lead">{alt.strengths}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Where the approaches differ</p>
+        <h2>Description versus definition.</h2>
+        <p class="lead">{alt.differenceIntro}</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col">Dimension</th>
+              <th scope="col">{alt.themLabel}</th>
+              <th scope="col" class="compare-poesis">Poesis for IT</th>
+            </tr>
+          </thead>
+          <tbody>
+            {alt.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.dimension}</th>
+                <td>{row.them}</td>
+                <td class="compare-poesis">{row.poesis}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">An honest answer</p>
+        <h2>When to choose which.</h2>
+      </div>
+      <div class="grid grid-2" style="margin-top:1.5rem">
+        <article class="card card--static">
+          <span class="tag">{alt.name}</span>
+          <p>{alt.whenThem}</p>
+        </article>
+        <article class="card card--feature card--static">
+          <span class="tag">Poesis for IT</span>
+          <p>{alt.whenPoesis}</p>
+        </article>
+      </div>
+      <div class="hero-cta" style="margin-top:2rem;justify-content:center">
+        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to us</a>
+        <a class="btn btn-ghost" href="/solutions/itip"><Icon name="compass" /> Explore ITIP</a>
+        <a class="btn btn-ghost" href="/insights/definition-versus-description"><Icon name="book-open" /> Read: definition versus description</a>
+      </div>
+      <p style="margin-top:2rem;font-size:.8rem;color:var(--muted)">{alt.trademarkNote}</p>
+    </div>
+  </section>
+</BaseLayout>

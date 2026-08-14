@@ -76,6 +76,67 @@ const itProfiles = profilesForDomain('it');
   <section class="section">
     <div class="container">
       <div class="section-head">
+        <p class="eyebrow">How it compares</p>
+        <h2>Tool classes describe. Poesis defines.</h2>
+        <p class="lead">Each tool class holds a partial, descriptive copy of the truth. Poesis holds the governed definition they all derive from.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col">Concern</th>
+              <th scope="col">EA repository</th>
+              <th scope="col">GRC suite</th>
+              <th scope="col">CMDB</th>
+              <th scope="col" class="compare-poesis">Poesis for IT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Source of truth</th>
+              <td>Hand-maintained model</td>
+              <td>Declared controls</td>
+              <td>Discovered inventory</td>
+              <td class="compare-poesis">Sourced from code, contracts, SBOMs, infrastructure</td>
+            </tr>
+            <tr>
+              <th scope="row">Drift</th>
+              <td>Noticed at review time</td>
+              <td>Found at audit</td>
+              <td>Chronic staleness</td>
+              <td class="compare-poesis">Observed the moment it appears</td>
+            </tr>
+            <tr>
+              <th scope="row">Compliance posture</th>
+              <td>Referenced documents</td>
+              <td>Checklist snapshots</td>
+              <td>Out of scope</td>
+              <td class="compare-poesis">Computed continuously from the model</td>
+            </tr>
+            <tr>
+              <th scope="row">Impact of change</th>
+              <td>Static diagrams</td>
+              <td>Out of scope</td>
+              <td>Dependency lists</td>
+              <td class="compare-poesis">Simulated through typed relations</td>
+            </tr>
+            <tr>
+              <th scope="row">AI-readiness</th>
+              <td>Exports</td>
+              <td>Reports</td>
+              <td>CIs without semantics</td>
+              <td class="compare-poesis">Typed, governed definitions agents act on</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:1.25rem;text-align:center">Evaluating a specific tool? <a href="/it/alternatives/leanix/">LeanIX</a> · <a href="/it/alternatives/vanta/">Vanta</a> · <a href="/it/alternatives/backstage/">Backstage</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
         <p class="eyebrow">Who it's for</p>
         <h2>Every IT profile, one governed model.</h2>
         <p class="lead">Architects author, developers consult, ops watch drift, security proves posture — all on the same governed definitions, with no translation silos between them.</p>
