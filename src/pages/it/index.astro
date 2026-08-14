@@ -87,50 +87,57 @@ const itProfiles = profilesForDomain('it');
               <th scope="col">Concern</th>
               <th scope="col">EA repository</th>
               <th scope="col">GRC suite</th>
-              <th scope="col">CMDB</th>
+              <th scope="col">CMDB / ITSM</th>
               <th scope="col" class="compare-poesis">Poesis for IT</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Source of truth</th>
-              <td>Hand-maintained model</td>
-              <td>Declared controls</td>
-              <td>Discovered inventory</td>
-              <td class="compare-poesis">Sourced from code, contracts, SBOMs, infrastructure</td>
-            </tr>
-            <tr>
-              <th scope="row">Drift</th>
-              <td>Noticed at review time</td>
-              <td>Found at audit</td>
-              <td>Chronic staleness</td>
-              <td class="compare-poesis">Observed the moment it appears</td>
-            </tr>
-            <tr>
-              <th scope="row">Compliance posture</th>
-              <td>Referenced documents</td>
-              <td>Checklist snapshots</td>
+              <th scope="row">Enterprise architecture</th>
+              <td>Hand-maintained inventory that drifts</td>
               <td>Out of scope</td>
-              <td class="compare-poesis">Computed continuously from the model</td>
+              <td>Flat CI lists without architecture semantics</td>
+              <td class="compare-poesis">Governed inventory of typed definitions, sourced from what runs</td>
             </tr>
             <tr>
-              <th scope="row">Impact of change</th>
+              <th scope="row">Compliance automation</th>
+              <td>Referenced documents</td>
+              <td>Checklist snapshots rebuilt per audit</td>
+              <td>GRC modules on declared controls</td>
+              <td class="compare-poesis">Posture computed continuously from the model</td>
+            </tr>
+            <tr>
+              <th scope="row">Impact analysis</th>
               <td>Static diagrams</td>
               <td>Out of scope</td>
-              <td>Dependency lists</td>
-              <td class="compare-poesis">Simulated through typed relations</td>
+              <td>Dependency lists, CAB approvals</td>
+              <td class="compare-poesis">Blast radius simulated through typed relations</td>
             </tr>
             <tr>
-              <th scope="row">AI-readiness</th>
+              <th scope="row">Artifact generation</th>
+              <td>Manual exports and diagrams</td>
+              <td>Audit reports</td>
+              <td>CI reports</td>
+              <td class="compare-poesis">ADR packs, evidence, baselines, roadmaps — generated, traceable to definitions</td>
+            </tr>
+            <tr>
+              <th scope="row">Truth sourcing</th>
+              <td>Surveys, imports, curation</td>
+              <td>Integration evidence sampling</td>
+              <td>Discovery scans, manual registration</td>
+              <td class="compare-poesis">Continuous sourcing from code, contracts, SBOMs, infra — confidence + provenance</td>
+            </tr>
+            <tr>
+              <th scope="row">AI-ready governance</th>
               <td>Exports</td>
               <td>Reports</td>
               <td>CIs without semantics</td>
-              <td class="compare-poesis">Typed, governed definitions agents act on</td>
+              <td class="compare-poesis">Typed, governed definitions humans and agents act on</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:1.25rem;text-align:center">Evaluating a specific tool? <a href="/it/alternatives/leanix/">LeanIX</a> · <a href="/it/alternatives/vanta/">Vanta</a> · <a href="/it/alternatives/backstage/">Backstage</a></p>
+      <p style="margin-top:1.25rem;text-align:center">Evaluating a specific tool? <a href="/it/alternatives/leanix/">LeanIX</a> · <a href="/it/alternatives/vanta/">Vanta</a> · <a href="/it/alternatives/servicenow/">ServiceNow</a> · <a href="/it/alternatives/backstage/">Backstage</a></p>
     </div>
   </section>
 
