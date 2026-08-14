@@ -37,9 +37,27 @@ const insights = [
         </button>
         <ul class="nav-dropdown-menu" role="menu">
           {domains.map((d) => (
-            <li role="none">
-              <a href={d.href} role="menuitem">{d.label}</a>
-            </li>
+            d.subitems ? (
+              <li class="nav-subgroup" role="none">
+                <div class="nav-subgroup-row">
+                  <a href={d.href} role="menuitem">{d.label}</a>
+                  <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${d.name} pages`}>
+                    <span aria-hidden="true">▸</span>
+                  </button>
+                </div>
+                <ul class="nav-submenu" role="menu">
+                  {d.subitems.map((item) => (
+                    <li role="none">
+                      <a href={item.href} role="menuitem">{item.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li role="none">
+                <a href={d.href} role="menuitem">{d.label}</a>
+              </li>
+            )
           ))}
         </ul>
       </div>
