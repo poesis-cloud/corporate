@@ -174,13 +174,13 @@ export const solutions: Solution[] = [
       {
         slug: 'definition-blackboard-manager',
         name: 'Definition Blackboard Manager',
-        tagline: 'The shared board where humans, AI, and tools propose model changes — reviewed before anything becomes governed truth.',
+        tagline: 'The shared board where humans, AI, and tools think together about what your systems are — partial views composed into definition proposals.',
         description:
-          'What a pull-request system is to code changes, the Definition Blackboard Manager is to model changes: humans, AI agents, and analysis tools work a shared board of qualified proposals about what your systems are — and nothing enters the governed model until the board is complete, frozen, and reviewed. It is the quarantine between what gets proposed and what becomes truth.',
+          'The classic blackboard architecture, made a service: no single source — human, AI agent, or analysis tool — sees the whole system, so each posts what it knows onto shared panels as qualified, competing contributions. When the board is complete it is frozen, and its composition enters the Definition Manager as draft definitions — the blackboard is where the collective thinking happens; the governed lifecycle is where the deciding happens.',
         values: [
-          { title: 'AI can propose; it cannot decide.', features: ['ks-contributions-management-api'], body: 'Every proposal arrives labeled with how confident its source is and where it came from — an AI identification is never mistaken for an established fact, and unqualified claims are rejected at the door.' },
-          { title: 'A finished board cannot change under you.', features: ['ks-contributions-lifecycle-enforcement'], body: 'When sourcing completes, the board is frozen — reviewing, comparing, or re-running the promotion later works on exactly what was there, not on a moving target.' },
-          { title: 'You can always answer \u201cwhy is this in the model?\u201d', features: ['ks-contributions-retention'], body: 'Every proposal, acceptance, and freeze is kept as a permanent record — each governed definition traces back to who proposed it, from what source, with what confidence. Sourcing history that cannot be rewritten.' },
+          { title: 'No single mind sees the whole system.', features: ['ks-contributions-management-api'], body: 'A code indexer knows the call graph, a scanner knows the dependencies, an AI infers the intent, an engineer remembers the history — none knows everything. The board is where those partial views meet: competing identifications side by side, each labeled with its confidence and its origin.' },
+          { title: 'Thinking here, deciding there.', features: ['ks-contributions-lifecycle-enforcement'], body: 'The board is a deliberation space, not an approval gate: when sourcing completes it is frozen, and what was composed enters the Definition Manager as drafts — where the governed lifecycle decides. Exploration stays free and reproducible; governance stays strict, in one place.' },
+          { title: 'You can always answer \u201cwhy is this in the model?\u201d', features: ['ks-contributions-retention'], body: 'Every contribution and every freeze is kept as a permanent record — each definition traces back to the board it was composed from: who proposed what, from which source, with what confidence. Sourcing history that cannot be rewritten.' },
         ],
         features: [
           { slug: 'ks-contributions-management-api', name: 'KS Contributions management RESTful API', blurb: 'A RESTful API for knowledge sources to declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.' },
