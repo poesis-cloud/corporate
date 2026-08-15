@@ -29,8 +29,8 @@ const itPains = painsForDomain('it');
   <section class="section section--ink">
     <div class="container">
       <p class="eyebrow">The mental model</p>
-      <h2>What Kubernetes did for infrastructure, Poesis does for IT governance.</h2>
-      <p class="lead">Kubernetes let you <em>declare</em> the desired state of your infrastructure and trust a reconciliation loop to converge reality toward it. Poesis extends that principle to everything that governs your IT: architectures, obligations, constraints, and processes become declared definitions — continuously evaluated against the real system, with drift observed the moment it appears and humans disposing of every consequential change.</p>
+      <h2>What Kubernetes did for infrastructure, Poesis does for all of IT: governed autopoiesis.</h2>
+      <p class="lead">Kubernetes let you <em>declare</em> the desired state of your infrastructure and trust a reconciliation loop to converge reality toward it. Poesis extends that principle to everything that constitutes your IT: architectures, obligations, constraints, and processes become declared definitions — continuously evaluated against the real system, with drift observed the moment it appears and humans disposing of every consequential change. The estate stops merely being governed and starts regenerating itself against its own definition — autopoiesis, under governance.</p>
     </div>
   </section>
 
@@ -38,7 +38,7 @@ const itPains = painsForDomain('it');
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">What it replaces</p>
-        <h2>Six pains, one governed model.</h2>
+        <h2>{itPains.length} pains, one governed model.</h2>
         <p class="lead">Each of these pains is sold a separate tool today, each tool holding its own copy of the truth. In Poesis they are facets of the same governed definitions — every pain traceable to the features that address it.</p>
       </div>
       <PainGrid pains={itPains} />
