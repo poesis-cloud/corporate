@@ -7,7 +7,10 @@
  * of every kind. The DNA grammar governs it all.
  */
 ---
-<div class="gsmd" role="img" aria-label="Simplified GSM data model: every GSM object is a Definition; Ascriptions are its governed, versioned snapshots, lifecycle-managed; every Ascription is typed by an Archetype, itself a Definition; frameworks instantiate ascriptions of every kind — the DNA grammar is Directive, operationalized by Norm, bound by Ascription">
+<div class="gsmd" role="img" aria-label="Simplified GSM data model: the DNA grammar — Directives as strategic intents, operationalized by Norms as tactical measurable constraints, versioned and bound by Ascriptions; every GSM object is a Definition; Ascriptions are its governed, versioned snapshots, lifecycle-managed; every Ascription is typed by an Archetype, itself a Definition; frameworks instantiate ascriptions of every kind">
+  <div class="gsmd-dna">
+    <strong>The DNA grammar.</strong> A <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Directive</span> carries a <em>strategic intent / objective</em>; it is <em>operationalized by</em> <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Norms</span> — <em>tactical, measurable constraints / objectives</em> that make the intent evaluable; and every one of them lives as <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Ascriptions</span> — versioned, lifecycle-governed snapshots bound to their subjects. Intent → measure → governed binding: how governance becomes machine-evaluable.
+  </div>
   <div class="gsmd-band gsmd-band--define">
     <span class="gsmd-band-label">Define</span>
     <div class="gsmd-box">
@@ -20,17 +23,14 @@
         <div class="gsmd-chips">
           <span class="gsmd-chip">Structure</span>
           <span class="gsmd-chip">Mechanism</span>
-          <span class="gsmd-chip">Effector</span>
-          <span class="gsmd-chip">Receptor</span>
           <span class="gsmd-chip">Interaction</span>
         </div>
       </div>
       <div class="gsmd-group">
         <span class="gsmd-group-label">the governing intent</span>
         <div class="gsmd-chips">
-          <span class="gsmd-chip gsmd-chip--gov" title="Strategic intent / objective">Directive<small>strategic intent</small></span>
-          <span class="gsmd-arrow" aria-hidden="true">→ operationalized by →</span>
-          <span class="gsmd-chip gsmd-chip--gov" title="Tactical, measurable constraint / objective">Norm<small>tactical, measurable constraint</small></span>
+          <span class="gsmd-chip gsmd-chip--gov">Directive</span>
+          <span class="gsmd-chip gsmd-chip--gov">Norm</span>
         </div>
       </div>
       <div class="gsmd-group">
@@ -73,10 +73,6 @@
       <span class="gsmd-extend-note">domain Archetypes that extend the base GSM types, and sourced Directives and Norms carrying the framework's normative content — all entering the model as governed ascriptions</span>
     </div>
   </div>
-
-  <p class="gsmd-dna">
-    <strong>The DNA grammar</strong> = <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Directive</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Norm</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Ascription</span> — strategic intent, operationalized into measurable constraints, versioned and bound under lifecycle governance.
-  </p>
 </div>
 
 <style>
@@ -153,7 +149,7 @@
   }
   .gsmd-cols {
     display: grid;
-    grid-template-columns: 1.1fr 1.4fr 0.6fr;
+    grid-template-columns: 1.2fr 0.8fr 0.6fr;
     gap: 1.4rem;
     margin-top: 0.85rem;
   }
@@ -181,12 +177,6 @@
     color: var(--ink-soft);
     background: rgba(255, 255, 255, 0.03);
   }
-  .gsmd-chip small {
-    display: block;
-    font-size: 0.62rem;
-    opacity: 0.75;
-    letter-spacing: 0.02em;
-  }
   .gsmd-chip--gov {
     border-color: rgba(45, 212, 191, 0.35);
     color: var(--accent-ink);
@@ -200,19 +190,15 @@
     font-size: 0.7rem;
     padding: 0.12rem 0.5rem;
   }
-  .gsmd-arrow {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-  }
   .gsmd-dna {
-    margin: 1.2rem 0 0;
-    padding: 0.7rem 1.1rem;
-    border: 1px dashed var(--line-strong);
-    border-radius: 999px;
-    font-size: 0.85rem;
+    margin: 0 0 2.1rem;
+    padding: 0.9rem 1.2rem;
+    border: 1px dashed rgba(45, 212, 191, 0.45);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    font-size: 0.88rem;
     color: var(--ink-soft);
-    line-height: 1.9;
+    line-height: 2;
   }
   .gsmd-dna strong {
     color: var(--ink);
@@ -229,9 +215,6 @@
       white-space: normal;
       text-align: center;
       width: 90%;
-    }
-    .gsmd-dna {
-      border-radius: var(--radius);
     }
   }
 </style>
