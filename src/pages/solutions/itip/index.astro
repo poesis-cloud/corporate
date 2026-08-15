@@ -6,7 +6,7 @@ import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const itip = solutions.find((s) => s.slug === 'itip')!;
-const [h1, ...rest] = itip.tagline.split(' — ');
+const [, ...rest] = itip.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 ---
@@ -18,7 +18,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
   <section class="hero">
     <div class="container">
       <p class="eyebrow"><a href="/#portfolio">{itip.tag} · Solution</a></p>
-      <h1>{h1}.</h1>
+      <h1>The IT Intelligence Platform — the digital twin of your IT landscape.</h1>
       <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/itip/"><Icon name="docs" /> Read the docs</a>
