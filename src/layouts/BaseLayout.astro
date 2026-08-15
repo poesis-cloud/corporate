@@ -18,7 +18,7 @@ interface Props {
 
 const {
   title,
-  description = 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — the foundation of the autonomous enterprise: the GSM standard, the SIE engine, and the ITIP application defining and governing systems in software.',
+  description = 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard, the SIE engine, and the ITIP application defining and governing systems in software.',
   pageType,
   noindex = false,
   article,
@@ -26,7 +26,7 @@ const {
 
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
-const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesis · the foundation of the autonomous enterprise' : `${title} · Poesis`;
+const fullTitle = title === 'Poesis' ? 'Poesis — governed synthetic autopoiesis' : `${title} · Poesis`;
 const ogImage = new URL('/og-default.png', site).href;
 
 const organizationLd = {
