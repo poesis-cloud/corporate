@@ -299,7 +299,10 @@ export const solutions: Solution[] = [
           { slug: 'step-authorization', name: 'Agent authorization', blurb: 'Pre, invariant, and post conditions gate every step — agents move through evidence and sequence, not vibes.' },
           { slug: 'logging', name: 'Logging', blurb: 'Every step execution is journaled — the delivery history is an auditable event log, not a chat scrollback.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-harness/', label: 'Agentic Harness documentation' }],
+        docs: [
+          { href: 'https://docs.poesis.cloud/saf/agentic-harness/', label: 'Agentic Harness documentation' },
+          { href: '/insights/what-is-an-agentic-harness/', label: 'What is an agentic harness?' },
+        ],
         repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-harness', label: 'saf-agentic-harness' }],
       },
       {
