@@ -283,7 +283,7 @@ export const solutions: Solution[] = [
       {
         slug: 'agentic-harness',
         name: 'Agentic Harness',
-        tagline: 'Deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
+        tagline: 'The agent harness — deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
         description:
           'The workflow step graphs are validated by a deterministic harness — methodology- and host-agnostic, so the same method runs unchanged on any agent host, and work state lives in your own files and git history.',
         values: [

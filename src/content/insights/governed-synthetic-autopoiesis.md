@@ -2,7 +2,7 @@
 title: 'Governed synthetic autopoiesis — why Poesis is called Poesis'
 category: 'Research'
 date: 2026-08-13
-summary: 'Autopoiesis names the capacity of a system to produce the components that produce it. Generative AI has made self-production cheap for organizations and software alike — what it has not made is the conserved organization that keeps self-production from becoming dissolution. That is the gap Poesis is named for.'
+summary: 'Autopoiesis names the capacity of a system to produce the components that produce it. Generative AI has made self-production cheap for organizations and software alike — what it has not made is the conserved organization that keeps self-production from becoming dissolution. That is the gap Poesis is named for — and the missing foundation of the autonomous enterprise.'
 ---
 
 *Poiesis* (ποίησις) is the Greek word for bringing-forth — the act by which something that did not exist comes to exist. It is the root of *poetry*, but the Greeks used it for every kind of making: a craftsman's, a legislator's, nature's. In 1972, Humberto Maturana and Francisco Varela joined it to *auto* — self — and coined **autopoiesis**: the property that distinguishes a living system from every other kind of machine. An autopoietic system is one that continuously produces the very components whose interactions produce it.

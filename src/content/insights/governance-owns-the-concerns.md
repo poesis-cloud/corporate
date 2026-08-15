@@ -2,7 +2,7 @@
 title: 'Governance owns the concerns: the Poesis position on operational AI'
 category: 'Research'
 date: 2026-08-13
-summary: 'Poesis takes a single position on the challenges of operational generative AI: concerns are owned by stakeholders and carried by governance, never by the model. The model proposes; the stack and the human dispose. This article states that position once and shows how each challenge resolves under it.'
+summary: 'Poesis takes a single position on the challenges of operational generative AI: concerns are owned by stakeholders and carried by governance, never by the model. The model proposes; the stack and the human dispose. This article states that position once and shows how each challenge resolves under it — the discipline the market is beginning to name operational AI governance.'
 ---
 
 Every serious deployment of generative AI now confronts the same list of challenges: grounding answers in what the organization actually holds true, keeping generated action inside regulatory and architectural bounds, governing agents that increasingly produce the systems that run them, proving compliance continuously rather than forensically, and doing all of it without binding the enterprise to a single vendor's dialect.

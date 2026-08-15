@@ -24,7 +24,7 @@ export const services: Service[] = [
     category: 'Transformation',
     title: 'Transform the operating system of IT.',
     summary: 'AI-generative and agentic transformation, grounded in systemic governance and focused first on the organization of IT.',
-    lead: 'Move from isolated AI experiments to an operating model in which definitions, decisions, and agentic work remain connected to accountable governance.',
+    lead: 'Agentic transformation, with a method: move from isolated AI experiments to an operating model in which definitions, decisions, and agentic work remain connected to accountable governance.',
     proposition: 'Poesis consulting joins systems thinking, enterprise architecture, and agentic engineering around a concrete transformation path. IT is the first proving ground because it exposes the organization\'s structures, constraints, dependencies, and delivery feedback loops.',
     outcomes: [
       {

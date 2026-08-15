@@ -2,7 +2,7 @@
 title: 'Governed context or document retrieval'
 category: 'Research'
 date: 2026-08-11
-summary: 'Retrieval answers which passages resemble a prompt. Enterprise assistants usually need something else: which definition is in effect, which policy binds this scope, and which action is permitted. Where a domain is modeled, governed context can replace the retrieval layer rather than supplement it.'
+summary: 'Retrieval answers which passages resemble a prompt. Enterprise assistants usually need something else: which definition is in effect, which policy binds this scope, and which action is permitted. Where a domain is modeled, governed context can replace the retrieval layer rather than supplement it — the layer context engineering is still missing.'
 ---
 
 Most enterprise AI assistants are built the same way. Documents are chunked, embedded, and indexed; a question retrieves the most similar passages; a model composes an answer from them. This works well, and for open-ended exploration of a large document estate it remains the right design.
