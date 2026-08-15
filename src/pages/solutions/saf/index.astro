@@ -7,20 +7,20 @@ import SafFlowDiagram from '../../../components/SafFlowDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const saf = solutions.find((s) => s.slug === 'saf')!;
-const [h1, ...rest] = saf.tagline.split(' — ');
+const [, ...rest] = saf.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 ---
 <BaseLayout
-  title="The first distributed agentic SAFe engine — agentic transformation with a method"
+  title="The Systemic Agentic Framework — the first distributed agentic SAFe engine"
   description="The first distributed agentic SAFe engine: AI agents run SAFe across portfolio, program, and iteration — open, Apache-2.0, local-first, with a human gate at every layer. Agentic transformation with a method — spec-driven delivery from governed definitions."
   pageType="Solution"
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow"><a href="/#portfolio">{saf.tag} · Solution</a></p>
-      <h1>The first distributed agentic SAFe engine — agentic transformation with a method.</h1>
-      <p class="lead">{h1} — {leadText}</p>
+      <h1>The Systemic Agentic Framework — the first distributed agentic SAFe engine.</h1>
+      <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/saf/"><Icon name="docs" /> Read the docs</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> Browse the repos</a>
