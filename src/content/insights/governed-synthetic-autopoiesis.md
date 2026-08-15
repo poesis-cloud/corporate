@@ -54,4 +54,4 @@ The name comes first in that story. *Poiesis* is bringing-forth; *autopoiesis* i
 
 ## The foundation of the autonomous enterprise
 
-It is also, precisely, the missing foundation of what the industry now calls the **autonomous enterprise**: an enterprise can only be autonomous against a governed definition of itself. Autonomy without that conserved definition is not an operating model — it is dissolution on a schedule.
+It is also, precisely, the missing foundation of what the industry now calls the [**autonomous enterprise**](/insights/the-autonomous-enterprise/): an enterprise can only be autonomous against a governed definition of itself. Autonomy without that conserved definition is not an operating model — it is dissolution on a schedule.
