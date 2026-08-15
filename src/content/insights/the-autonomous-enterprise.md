@@ -13,6 +13,8 @@ What we can bring to the conversation is a piece of theory the category will, we
 
 Etymologically, *auto-nomos* is **self-law**: a system giving itself its own law and answering to it. Systems theory made this precise. In the biology of cognition — the tradition of Maturana and Varela that our own [research program](/insights/governed-synthetic-autopoiesis/) descends from — an autonomous system is one that maintains its own *organization*: there is a conserved account of what the system is, and its ongoing operation continuously regenerates and respects that account. Autonomy, in this lineage, is never the absence of constraint. It is constraint held *internally* — a law the system carries as part of itself.
 
+That conserved account is, in our own vocabulary, exactly a **definition** rather than a description — the same pairing argued in [Definition versus description](/insights/definition-versus-description/). So the question below is not a new one for us; it is that essay's question, asked of a whole enterprise instead of a single system.
+
 Applied to the enterprise, this yields a question worth sitting with: **autonomous against what?** An enterprise can only be autonomous relative to some account of what it is, what it requires, and what may never follow from its actions. Most enterprises hold that account in fragments — architecture wikis, policy documents, configuration, institutional memory. The law exists; it is real; people navigate by it daily. It just is not *stated* anywhere a machine — or often a colleague — can act on.
 
 That, we believe, is the actual foundation the category is reaching for. Not a bigger model or a faster agent platform, but the enterprise's definition of itself, made explicit.

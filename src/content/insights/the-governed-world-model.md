@@ -7,6 +7,8 @@ summary: 'A learned model can retrieve and reason over what an enterprise has de
 
 The most ambitious research programs in AI now share a destination: the **world model**. Instead of predicting the next token, the systems being built learn compressed, predictive models of how the world evolves — from video, from simulation, from embodied interaction. The bet is that intelligence needs a model of the world, not just a model of language.
 
+This stack has been drawing a version of that same distinction since [Definition versus description](/insights/definition-versus-description/): a definition constitutes standing, a description only reports it — no accumulation of accurate reports ever becomes the authority to decide. World models, learned or governed, turn out to be that distinction again, at the scale of an entire enterprise.
+
 The bet is right. The enterprise conclusion usually drawn from it is not.
 
 ## What a learned world model can know

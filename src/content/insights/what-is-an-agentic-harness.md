@@ -11,7 +11,7 @@ The etymology is a good starting point, because it carries the design intent bet
 
 ## Deriving the concept
 
-Start from what agents are: probabilistic reasoners — no more and no less than the human reasoning they automate, as we argued in [Generative AI is as probabilistic as human intelligence](/insights/as-probabilistic-as-human-intelligence/). Humanity has long experience getting reliable outcomes out of unreliable reasoners; it never did it by making the reasoners deterministic. It built *arrangements* around them — methods, checklists, reviews, records — so that reliability lives in the arrangement rather than in any single mind.
+We did not start from the word. We started from the premise that already runs through this research program: agents are probabilistic reasoners — no more and no less than the human reasoning they automate, as we argued in [Generative AI is as probabilistic as human intelligence](/insights/as-probabilistic-as-human-intelligence/). Humanity has long experience getting reliable outcomes out of unreliable reasoners; it never did it by making the reasoners deterministic. It built *arrangements* around them — methods, checklists, reviews, records — so that reliability lives in the arrangement rather than in any single mind.
 
 An agentic harness, we think, is that arrangement mechanized. Follow the derivation and four responsibilities fall out, none of which is *think*:
 

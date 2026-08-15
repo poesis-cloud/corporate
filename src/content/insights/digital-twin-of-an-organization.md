@@ -7,6 +7,8 @@ summary: 'The digital twin is one of engineering''s most trusted patterns: a liv
 
 The **digital twin** is one of engineering's most trusted patterns, and it earned that trust the hard way. NASA maintained physical twins of its capsules to reason about spacecraft it could no longer touch; Michael Grieves gave the idea its modern product-lifecycle formulation; and today jet engines, factories, and buildings run alongside live digital counterparts — models continuously fed from the real asset, on which you simulate a change before committing it to reality. When Gartner extended the ambition to the enterprise itself — the **digital twin of an organization** — it named something genuinely worth wanting.
 
+Seen through this stack's own terms, a twin is [definition and description](/insights/definition-versus-description/) working as a pair: the asset's telemetry is description, continuously supplied; the model it updates only has standing if it is a definition, not a snapshot of readings. The organizational extension is the same pair, applied to an institution instead of a machine — which is exactly where it gets harder.
+
 The extension also inherits a question the physical pattern never had to ask.
 
 ## Sensors and physics

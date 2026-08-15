@@ -7,6 +7,8 @@ summary: 'Regulators, consultancies, and research journals converged this year o
 
 A remarkable convergence happened this year. Regulators published notes on agentic AI and data protection; consultancies built governance, risk, and control frameworks for agents; research journals proposed governance profiles for agentic systems. Different vocabularies, one conclusion: **as agents gain authority, governance becomes the primary constraint.** We think that conclusion is exactly right, and the work behind it — profiles, frameworks, regulatory groundwork — is the field doing what it should.
 
+We reached the same conclusion from our own premise — [governance owns the concerns](/insights/governance-owns-the-concerns/), never the model — and giving agents authority only sharpens what that premise already implied: if concerns must stay owned and disposed of by governance, then as the pace of action rises, governance has to keep pace with it.
+
 It also opens a question that the whole field, ourselves included, now has to answer: governance *how*, at what tempo?
 
 ## An old principle, newly urgent
