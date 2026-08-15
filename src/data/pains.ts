@@ -141,10 +141,23 @@ export const pains: Pain[] = [
         tag: 'Vendor neutrality',
         pain: 'Your governance model is trapped in a vendor’s proprietary format.',
         cost: 'Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance.',
-        remedy: 'Definitions follow a vendor-neutral standard — typed, portable, and machine-readable across tools — so the model outlives any product choice.',
+        remedy: 'Definitions follow a vendor-neutral standard — typed, portable, and machine-readable across tools — so the model outlives any product choice, and the unlock compounds with every vendor that adopts it.',
         addressedBy: [
             { solution: 'gsm', product: 'specifications', feature: 'primitives' },
             { solution: 'gsm', product: 'specifications', feature: 'archetyping' },
+        ],
+    },
+    {
+        id: 'it-tool-silos',
+        domainSlug: 'it',
+        tag: 'Interoperability',
+        pain: 'Architecture, compliance, and quality tools don’t speak to each other.',
+        cost: 'Each tool keeps its own model of the same IT reality; integrations are bespoke mappings that rot, and knowledge stays siloed per tool and per team.',
+        remedy: 'One vendor-neutral vocabulary and grammar — the OpenTelemetry move, applied to THINK: tools and solutions interoperate through the same typed definitions, and the silos between them fall.',
+        addressedBy: [
+            { solution: 'gsm', product: 'specifications', feature: 'primitives' },
+            { solution: 'gsm', product: 'specifications', feature: 'archetyping' },
+            { solution: 'gsm', product: 'specifications', feature: 'dna-grammar' },
         ],
     },
     {
