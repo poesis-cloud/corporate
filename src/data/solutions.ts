@@ -169,7 +169,10 @@ export const solutions: Solution[] = [
           { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state in a sandboxed, reproducible rule runtime — governance as a control loop, not a review meeting.' },
           { slug: 'mechanisms-execution-api', name: 'GSM Mechanisms execution API', blurb: 'An API to execute governed Mechanisms in the same sandboxed, reproducible rule runtime — verdicts and rules become dispatched, effector-driven actions.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/sie/operator/', label: 'Operator documentation' }],
+        docs: [
+          { href: 'https://docs.poesis.cloud/sie/operator/', label: 'Operator documentation' },
+          { href: '/insights/agentic-ai-governance-that-executes/', label: 'Agentic AI governance that executes' },
+        ],
         repos: [{ href: 'https://github.com/poesis-cloud/sie-operator', label: 'sie-operator' }],
       },
       {
