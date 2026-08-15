@@ -174,13 +174,13 @@ export const solutions: Solution[] = [
       {
         slug: 'definition-blackboard-manager',
         name: 'Definition Blackboard Manager',
-        tagline: 'Collaborative agentic Definition-sourcing pipeline — for following and tracking automatic sourcing of GSM Definitions.',
+        tagline: 'The shared board where humans, AI, and tools propose model changes — reviewed before anything becomes governed truth.',
         description:
-          'The Definition Blackboard Manager is a collaborative definition-sourcing service: contributors post evidence-backed contributions over declared panels, the board is sealed to a byte-stable state, and every mutation lands in an append-only audit ledger.',
+          'What a pull-request system is to code changes, the Definition Blackboard Manager is to model changes: humans, AI agents, and analysis tools work a shared board of qualified proposals about what your systems are — and nothing enters the governed model until the board is complete, frozen, and reviewed. It is the quarantine between what gets proposed and what becomes truth.',
         values: [
-          { title: 'Evidence, never guesses.', features: ['ks-contributions-management-api'], body: 'Every contribution carries a confidence score and a provenance envelope — probabilistic identifications are labeled as such, and deterministic facts never masquerade as contributions.' },
-          { title: 'Sealed means sealed.', features: ['ks-contributions-lifecycle-enforcement'], body: 'OPEN → SEALED → BYTE_STABLE, no way back — a sealed board is immutable and its contribution stream byte-stable, so promotion into governed definitions is reproducible.' },
-          { title: 'Every mutation on the ledger.', features: ['ks-contributions-retention'], body: 'Contributions, seals, panel updates — each one produces an immutable audit entry, transactional with the mutation it records. The sourcing history cannot be rewritten.' },
+          { title: 'AI can propose; it cannot decide.', features: ['ks-contributions-management-api'], body: 'Every proposal arrives labeled with how confident its source is and where it came from — an AI identification is never mistaken for an established fact, and unqualified claims are rejected at the door.' },
+          { title: 'A finished board cannot change under you.', features: ['ks-contributions-lifecycle-enforcement'], body: 'When sourcing completes, the board is frozen — reviewing, comparing, or re-running the promotion later works on exactly what was there, not on a moving target.' },
+          { title: 'You can always answer \u201cwhy is this in the model?\u201d', features: ['ks-contributions-retention'], body: 'Every proposal, acceptance, and freeze is kept as a permanent record — each governed definition traces back to who proposed it, from what source, with what confidence. Sourcing history that cannot be rewritten.' },
         ],
         features: [
           { slug: 'ks-contributions-management-api', name: 'KS Contributions management RESTful API', blurb: 'A RESTful API for knowledge sources to declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.' },
