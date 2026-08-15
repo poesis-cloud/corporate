@@ -1,5 +1,5 @@
 ---
-title: 'Governance owns the concerns: the Poesis position on operational AI'
+title: 'Operational AI governance: the Poesis position — governance owns the concerns'
 category: 'Research'
 date: 2026-08-13
 summary: 'Poesis takes a single position on the challenges of operational generative AI: concerns are owned by stakeholders and carried by governance, never by the model. The model proposes; the stack and the human dispose. This article states that position once and shows how each challenge resolves under it — the discipline the market is beginning to name operational AI governance.'

@@ -52,4 +52,6 @@ This is the background against which the Poesis slogan is meant to be read, term
 
 The name comes first in that story. *Poiesis* is bringing-forth; *autopoiesis* is a system bringing forth itself; **Poesis** is the wager that the age now beginning will be defined by systems that do so under governance — and by the infrastructure that makes their self-production something an institution can trust.
 
+## The foundation of the autonomous enterprise
+
 It is also, precisely, the missing foundation of what the industry now calls the **autonomous enterprise**: an enterprise can only be autonomous against a governed definition of itself. Autonomy without that conserved definition is not an operating model — it is dissolution on a schedule.
