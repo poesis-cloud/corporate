@@ -1,16 +1,30 @@
 ---
 /**
  * GsmModelDiagram — the GSM data model, simplified and meaningful:
- * Archetypes type everything; eight primitives define the system;
- * the DNA grammar binds governance to subjects through Ascriptions.
+ * Archetypes type everything (frameworks extend them); eight primitives define
+ * the system; the DNA grammar — Directive, operationalized by Norms, bound by
+ * lifecycle-managed Ascriptions — governs it.
  */
 ---
-<div class="gsmd" role="img" aria-label="Simplified GSM data model: Archetypes type definitions; eight primitives define the system; Directives refine into Norms and bind to subjects through lifecycle-managed Ascriptions">
+<div class="gsmd" role="img" aria-label="Simplified GSM data model: Archetypes type every definition and frameworks extend them; eight primitives define the system; Directives are operationalized by Norms and bound to subjects through lifecycle-managed Ascriptions — the DNA grammar">
   <div class="gsmd-band gsmd-band--type">
     <span class="gsmd-band-label">Type</span>
-    <div class="gsmd-box gsmd-box--archetype">
+    <div class="gsmd-box">
       <strong>Archetype</strong>
       <span>typed JSON Schema domain semantics — meaning travels with the type</span>
+    </div>
+    <div class="gsmd-extend">
+      <span class="gsmd-extend-label">extended by frameworks —</span>
+      <span class="gsmd-chips gsmd-chips--inline">
+        <span class="gsmd-chip gsmd-chip--fw">TOGAF</span>
+        <span class="gsmd-chip gsmd-chip--fw">GDPR</span>
+        <span class="gsmd-chip gsmd-chip--fw">NIS2</span>
+        <span class="gsmd-chip gsmd-chip--fw">ISO 25000</span>
+        <span class="gsmd-chip gsmd-chip--fw">HTTP</span>
+        <span class="gsmd-chip gsmd-chip--fw">ITIP</span>
+        <span class="gsmd-chip gsmd-chip--fw">…</span>
+      </span>
+      <span class="gsmd-extend-note">each framework publishes domain Archetypes that specialize the base GSM types — its vocabulary, grammar, and normative content become typed definitions</span>
     </div>
     <div class="gsmd-rel" aria-hidden="true">types every definition ↓</div>
   </div>
@@ -31,9 +45,9 @@
       <div class="gsmd-group">
         <span class="gsmd-group-label">the governing intent</span>
         <div class="gsmd-chips">
-          <span class="gsmd-chip gsmd-chip--gov">Directive</span>
-          <span class="gsmd-arrow" aria-hidden="true">→ refines into →</span>
-          <span class="gsmd-chip gsmd-chip--gov">Norm</span>
+          <span class="gsmd-chip gsmd-chip--gov" title="Strategic intent / objective">Directive<small>strategic intent</small></span>
+          <span class="gsmd-arrow" aria-hidden="true">→ operationalized by →</span>
+          <span class="gsmd-chip gsmd-chip--gov" title="Tactical, measurable constraint / objective">Norm<small>tactical, measurable constraint</small></span>
         </div>
       </div>
     </div>
@@ -42,11 +56,16 @@
 
   <div class="gsmd-band gsmd-band--bind">
     <span class="gsmd-band-label">Bind</span>
-    <div class="gsmd-box gsmd-box--ascription">
+    <div class="gsmd-box">
       <strong>Ascription</strong>
-      <span>the versioned, lifecycle-managed binding of a definition to its subject — <code>DRAFT → … → ACTIVE → … → RETIRED</code></span>
+      <span>A <em>Definition</em> says what something is or must be; an <em>Ascription</em> is the governed act of binding that Definition to its subject — versioned and lifecycle-managed.</span>
+      <span class="gsmd-lifecycle"><code>DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED → RETIRED</code> — every transition is a validated state change with referee preconditions; retirement cascades follow dependent definitions; nothing governed is skipped or silently overwritten.</span>
     </div>
   </div>
+
+  <p class="gsmd-dna">
+    <strong>The DNA grammar</strong> = <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Directive</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Norm</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Ascription</span> — strategic intent, operationalized into measurable constraints, bound to subjects under lifecycle governance.
+  </p>
 </div>
 
 <style>
@@ -88,6 +107,28 @@
     color: var(--ink-soft);
     line-height: 1.45;
   }
+  .gsmd-lifecycle {
+    font-size: 0.8rem !important;
+    color: var(--muted) !important;
+  }
+  .gsmd-extend {
+    margin-top: 0.8rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--line);
+  }
+  .gsmd-extend-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-right: 0.4rem;
+  }
+  .gsmd-extend-note {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
   .gsmd-rel {
     position: absolute;
     left: 50%;
@@ -101,7 +142,7 @@
   }
   .gsmd-cols {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 1.4rem;
   }
   .gsmd-group-label {
@@ -116,6 +157,9 @@
     align-items: center;
     gap: 0.45rem;
   }
+  .gsmd-chips--inline {
+    display: inline-flex;
+  }
   .gsmd-chip {
     font-family: var(--font-mono);
     font-size: 0.78rem;
@@ -125,15 +169,41 @@
     color: var(--ink-soft);
     background: rgba(255, 255, 255, 0.03);
   }
+  .gsmd-chip small {
+    display: block;
+    font-size: 0.62rem;
+    opacity: 0.75;
+    letter-spacing: 0.02em;
+  }
   .gsmd-chip--gov {
     border-color: rgba(45, 212, 191, 0.35);
     color: var(--accent-ink);
     background: var(--accent-soft);
   }
+  .gsmd-chip--fw {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+  }
+  .gsmd-chip--sm {
+    font-size: 0.7rem;
+    padding: 0.12rem 0.5rem;
+  }
   .gsmd-arrow {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--muted);
+    color: var(--accent);
+  }
+  .gsmd-dna {
+    margin: 1.2rem 0 0;
+    padding: 0.7rem 1.1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.9;
+  }
+  .gsmd-dna strong {
+    color: var(--ink);
   }
   @media (max-width: 820px) {
     .gsmd-band {
@@ -147,6 +217,9 @@
       white-space: normal;
       text-align: center;
       width: 90%;
+    }
+    .gsmd-dna {
+      border-radius: var(--radius);
     }
   }
 </style>

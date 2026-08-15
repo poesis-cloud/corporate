@@ -1,34 +1,57 @@
 ---
 /**
- * SieLoopDiagram — the closed self-sustaining loop SIE runs, in the systemic
- * vocabulary (VSM-like): governance defines the state space, regulation steers
- * toward it, operation produces the actual state, supervision evaluates it —
- * and adaptation regenerates the definitions themselves (autopoiesis).
+ * SieLoopDiagram — the SIE systemic functions and the state plane:
+ * governance generates Directives; regulation operationalizes them into Norms;
+ * supervision evaluates definitions and subjects against the Norms; operations
+ * produce the state plane and keep it normalized from evaluation feedbacks.
+ * Every function is realized by humans, AI, and/or executable GSM Mechanisms.
  */
-const stations = [
-  { step: 'Governance', body: 'Define the state space — what the system must be, as typed, versioned, governed definitions', product: 'Definition Manager' },
-  { step: 'Regulation', body: 'Steer toward the defined state — AI generation and executed Mechanisms realize the definitions', product: 'AI generation · Operator' },
-  { step: 'Operation', body: 'The system runs in its state space, producing the actual state', product: 'your systems · generated artifacts' },
-  { step: 'Supervision', body: 'Evaluate the actual state against the defined — observability capacities feed Norm verdicts', product: 'observability · Operator' },
+const functions = [
+  {
+    name: 'Governance',
+    role: 'Generates Directives — strategic intents / objectives',
+    io: 'registers Directives in the Definition Manager',
+  },
+  {
+    name: 'Regulation',
+    role: 'Operationalizes Directives by generating Norms — tactical, measurable constraints / objectives',
+    io: 'fetches Directives, registers Norms — Definition Manager',
+  },
+  {
+    name: 'Supervision',
+    role: 'Evaluates Definitions and defined subjects against the Norms',
+    io: 'fetches Norms — Definition Manager; evaluates — Operator',
+  },
+  {
+    name: 'Operations',
+    role: 'Produces the state plane and maintains it normalized from evaluation feedbacks',
+    io: 'acts on the state plane',
+  },
 ];
+const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
 ---
-<div class="loopd" role="img" aria-label="The closed loop: governance defines the state space, regulation steers toward it, operation produces the actual state, supervision evaluates it, and adaptation regenerates the definitions">
+<div class="loopd" role="img" aria-label="Governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms and feeds evaluations back to operations, which produce and normalize the state plane">
   <ol class="loopd-track">
-    {stations.map((s) => (
-      <li class="loopd-station">
-        <span class="loopd-step">{s.step}</span>
-        <span class="loopd-body">{s.body}</span>
-        <span class="loopd-product">{s.product}</span>
+    {functions.map((f, i) => (
+      <li class="loopd-station" data-flow={i < flows.length ? flows[i] : undefined}>
+        <span class="loopd-step">{f.name}</span>
+        <span class="loopd-body">{f.role}</span>
+        <span class="loopd-product">{f.io}</span>
       </li>
     ))}
   </ol>
+  <div class="loopd-plane-links" aria-hidden="true">
+    <span class="loopd-plane-link loopd-plane-link--evaluates">supervision evaluates ↓</span>
+    <span class="loopd-plane-link loopd-plane-link--produces">↓ operations produce · maintain normalized</span>
+  </div>
+  <div class="loopd-plane">
+    <span class="loopd-plane-label">State plane</span>
+    <span class="loopd-plane-body">Your organization — its definitions, data, software, processes, teams, obligations — the state the functions above define, realize, evaluate, and normalize.</span>
+  </div>
   <div class="loopd-return" aria-hidden="true">
     <span class="loopd-return-arrow">⟲</span>
-    <span><strong>Adaptation</strong> — verdicts and evidence-backed contributions regenerate the definitions themselves: AI generation proposes, the Definition Blackboard qualifies, governance disposes. The organization re-produces itself — autopoiesis.</span>
+    <span>Every function is realized by <strong>humans and/or AI</strong> and/or <strong>deterministic, executable GSM Mechanisms</strong> — the organization re-produces itself under its own definition: autopoiesis.</span>
   </div>
-  <p class="loopd-note text-small">
-    Each pass rewrites the definitions it started from, so the loop never closes on the same point — a spiral, not a circle. Kubernetes runs the same shape on infrastructure — <code>spec</code> → controllers → <code>status</code> → reconcile — SIE generalizes it to any governed system.
-  </p>
 </div>
 
 <style>
@@ -39,7 +62,7 @@ const stations = [
     list-style: none;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.75rem;
+    gap: 2.4rem;
     margin: 0;
     padding: 0;
   }
@@ -50,14 +73,18 @@ const stations = [
     background: var(--bg-soft);
     padding: 1.1rem 1.2rem;
   }
-  .loopd-station:not(:last-child)::after {
-    content: '→';
+  .loopd-station[data-flow]::after {
+    content: attr(data-flow) ' →';
     position: absolute;
-    right: -1.35rem;
+    right: -2.3rem;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(0deg);
+    width: 2.2rem;
     color: var(--accent);
-    font-size: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    line-height: 1.25;
+    text-align: center;
   }
   .loopd-step {
     display: block;
@@ -71,7 +98,7 @@ const stations = [
   .loopd-body {
     display: block;
     margin-top: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--ink-soft);
     line-height: 1.45;
   }
@@ -79,8 +106,42 @@ const stations = [
     display: block;
     margin-top: 0.65rem;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: var(--muted);
+    line-height: 1.4;
+  }
+  .loopd-plane-links {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 6% 0.55rem 52%;
+    gap: 1rem;
+  }
+  .loopd-plane-link {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+  .loopd-plane {
+    border: 1px solid rgba(45, 212, 191, 0.35);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    padding: 1rem 1.2rem;
+  }
+  .loopd-plane-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .loopd-plane-body {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
   }
   .loopd-return {
     display: flex;
@@ -98,22 +159,25 @@ const stations = [
     font-size: 1.15rem;
     line-height: 1;
   }
-  .loopd-note {
-    margin-top: 1.1rem;
-    color: var(--muted);
-  }
   @media (max-width: 900px) {
     .loopd-track {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.1rem;
     }
-    .loopd-station:not(:last-child)::after {
-      content: '↓';
+    .loopd-station[data-flow]::after {
+      content: attr(data-flow) ' ↓';
       right: auto;
       left: 50%;
       top: auto;
-      bottom: -1.6rem;
+      bottom: -1.7rem;
       transform: translateX(-50%);
+      width: auto;
+      white-space: nowrap;
+    }
+    .loopd-plane-links {
+      padding: 0.55rem 0;
+      flex-direction: column;
+      gap: 0.2rem;
     }
   }
 </style>

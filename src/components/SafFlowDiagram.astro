@@ -1,51 +1,112 @@
 ---
 /**
- * SafFlowDiagram — the SAF method as a schema: strategic intent descends
- * three orchestrated SAFe layers, each closed by a human ★ gate, down to a
- * merged commit; committed artifacts sync out and feed back as context.
+ * SafFlowDiagram — the SAFe Agentic Organization on the user's local computer:
+ * three orchestrated layers, each with its workflows (agents + delivered
+ * artifacts), a human ★ gate, and the user's concerns entering per layer;
+ * the Agentic Harness checks every workflow step; committed artifacts sync
+ * with the central Agentic Workspace.
  */
 const layers = [
-  { name: 'Portfolio', agent: '@vmo-orchestrator', tests: 'tests the strategic bet', artifacts: 'Epics · lean business cases' },
-  { name: 'Program', agent: '@rte-orchestrator', tests: 'tests the feature shape & architecture', artifacts: 'Features · ADRs · PI plans' },
-  { name: 'Iteration', agent: '@sm-orchestrator', tests: 'tests the code that ships', artifacts: 'Stories · PR packets' },
+  {
+    name: 'Portfolio',
+    agent: '@vmo-orchestrator',
+    concern: 'strategic concerns',
+    workflows: [
+      { name: 'Epic Lean Business Case', agents: 'BO · EA · Security · RAI', artifact: 'Epic + lean business case' },
+      { name: 'Architectural Vision', agents: 'EA · BO', artifact: 'architectural vision' },
+      { name: 'Strategic Portfolio Review · Portfolio Sync', agents: 'BO · EA · Epic owners', artifact: 'portfolio kanban + gate records' },
+    ],
+  },
+  {
+    name: 'Program',
+    agent: '@rte-orchestrator',
+    concern: 'tactical concerns',
+    workflows: [
+      { name: 'Feature Backlog Refinement', agents: 'PM · Architect · Dev · QA · UX · Security', artifact: 'Features (WSJF-ranked)' },
+      { name: 'Architectural Runway Extension', agents: 'SA · Security · DevOps · Dev', artifact: 'ADRs + runway items' },
+      { name: 'PI Planning · System Demo · Inspect & Adapt', agents: 'the ART', artifact: 'PI plan + demo records' },
+    ],
+  },
+  {
+    name: 'Iteration',
+    agent: '@sm-orchestrator',
+    concern: 'technical concerns',
+    workflows: [
+      { name: 'Iteration & Story Backlog Refinement', agents: 'PO · pairs', artifact: 'Stories (estimated, sprint-assigned)' },
+      { name: 'Pair micro-cycle', agents: 'Dev · Dev · Security', artifact: 'code + PR packet' },
+      { name: 'Verification & Sign-off', agents: 'QA · Security', artifact: 'sign-off + gate records' },
+    ],
+  },
 ];
 ---
-<div class="safd" role="img" aria-label="SAF method: strategic intent descends portfolio, program, and iteration layers, each closed by a human gate, to a merged commit; artifacts sync to the git host and feed back as context">
-  <div class="safd-input">Strategic intent <span aria-hidden="true">↓</span></div>
-  <ol class="safd-layers">
-    {layers.map((l) => (
-      <li class="safd-layer">
-        <div class="safd-layer-head">
-          <strong>{l.name}</strong>
-          <code>{l.agent}</code>
-        </div>
-        <span class="safd-tests">{l.tests}</span>
-        <span class="safd-artifacts">{l.artifacts}</span>
-        <div class="safd-gate"><span class="safd-star" aria-hidden="true">★</span> human gate — agents propose, you dispose</div>
-      </li>
-    ))}
-  </ol>
-  <div class="safd-output">
-    <strong>Merged commit</strong> — validated artifacts land in your git history
+<div class="safd" role="img" aria-label="On your local computer, the SAFe Agentic Organization runs three orchestrated layers — portfolio, program, iteration — each receiving your strategic, tactical, or technical concerns, running workflows with role agents that deliver artifacts, gated by you, with every step checked by the Agentic Harness; committed artifacts sync with the central Agentic Workspace">
+  <div class="safd-local">
+    <span class="safd-scope-label">Your local computer — IDE / agent host</span>
+    <div class="safd-grid">
+      <ol class="safd-layers">
+        {layers.map((l) => (
+          <li class="safd-layer">
+            <div class="safd-concern" aria-hidden="true">you emit <strong>{l.concern}</strong> →</div>
+            <div class="safd-layer-head">
+              <strong>{l.name}</strong>
+              <code>{l.agent}</code>
+            </div>
+            <ul class="safd-workflows">
+              {l.workflows.map((w) => (
+                <li>
+                  <span class="safd-wf-name">{w.name}</span>
+                  <span class="safd-wf-meta">agents: {w.agents}</span>
+                  <span class="safd-wf-meta">delivers: <em>{w.artifact}</em></span>
+                </li>
+              ))}
+            </ul>
+            <div class="safd-gate"><span class="safd-star" aria-hidden="true">★</span> human gate — agents propose, you dispose</div>
+          </li>
+        ))}
+      </ol>
+      <aside class="safd-harness">
+        <strong>Agentic Harness</strong>
+        <span>checks every workflow step, deterministically:</span>
+        <ul>
+          <li>resolves workflow, step, model, session context</li>
+          <li>gates pre / invariant / post conditions</li>
+          <li>authorizes the acting agent</li>
+          <li>validates every artifact against its schema before commit</li>
+          <li>journals each step — the event log is your git history</li>
+        </ul>
+      </aside>
+    </div>
   </div>
-  <div class="safd-return" aria-hidden="true">
-    <span class="safd-return-arrow">⟲</span>
-    <span>committed artifacts sync to your git host (boards, tickets, wiki) and contextualize every other local orchestration</span>
+  <div class="safd-sync" aria-hidden="true">⇅ committed artifacts sync — and contextualize every other local orchestration</div>
+  <div class="safd-central">
+    <span class="safd-scope-label safd-scope-label--central">Central Agentic Workspace — your organization's git host</span>
+    <span class="safd-central-body">Epics · Features · Stories · ADRs · kanbans · gate records — validated, committed, shared; mirrored to boards, tickets, and wiki.</span>
   </div>
 </div>
 
 <style>
   .safd {
     margin-top: 1.75rem;
-    max-width: 46rem;
   }
-  .safd-input {
+  .safd-local {
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.2rem 1.2rem;
+  }
+  .safd-scope-label {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .safd-grid {
+    display: grid;
+    grid-template-columns: 1fr 15rem;
+    gap: 1.2rem;
+    align-items: start;
   }
   .safd-layers {
     list-style: none;
@@ -62,16 +123,22 @@ const layers = [
     padding: 1rem 1.2rem;
   }
   .safd-layer + .safd-layer {
-    margin-top: 1.9rem;
+    margin-top: 2rem;
   }
   .safd-layer + .safd-layer::before {
     content: '↓ dispatch';
     position: absolute;
-    top: -1.55rem;
+    top: -1.6rem;
     left: 1.2rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     color: var(--muted);
+  }
+  .safd-concern {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent-ink);
+    margin-bottom: 0.4rem;
   }
   .safd-layer-head {
     display: flex;
@@ -87,21 +154,31 @@ const layers = [
     font-size: 0.74rem;
     color: var(--accent-ink);
   }
-  .safd-tests {
-    display: block;
-    margin-top: 0.35rem;
-    font-size: 0.88rem;
-    color: var(--ink-soft);
+  .safd-workflows {
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
   }
-  .safd-artifacts {
+  .safd-workflows li {
+    border-left: 2px solid var(--line-strong);
+    padding-left: 0.7rem;
+  }
+  .safd-wf-name {
     display: block;
-    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .safd-wf-meta {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.66rem;
     color: var(--muted);
+    line-height: 1.5;
   }
   .safd-gate {
-    margin-top: 0.7rem;
+    margin-top: 0.75rem;
     padding-top: 0.6rem;
     border-top: 1px dashed var(--line);
     font-size: 0.8rem;
@@ -110,40 +187,60 @@ const layers = [
   .safd-star {
     color: var(--accent);
   }
-  .safd-output {
-    margin-top: 1.9rem;
-    position: relative;
+  .safd-harness {
+    position: sticky;
+    top: 1rem;
     border: 1px solid rgba(45, 212, 191, 0.35);
     border-radius: var(--radius);
     background: var(--accent-soft);
-    padding: 0.9rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.95rem 1.05rem;
+    font-size: 0.8rem;
     color: var(--ink-soft);
   }
-  .safd-output::before {
-    content: '↓';
-    position: absolute;
-    top: -1.5rem;
-    left: 1.2rem;
-    color: var(--accent);
-  }
-  .safd-output strong {
+  .safd-harness strong {
+    display: block;
     color: var(--ink);
+    font-size: 0.9rem;
   }
-  .safd-return {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 1.1rem;
-    padding: 0.65rem 1.1rem;
-    border: 1px dashed var(--line-strong);
-    border-radius: 999px;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
+  .safd-harness > span {
+    display: block;
+    margin-top: 0.3rem;
   }
-  .safd-return-arrow {
+  .safd-harness ul {
+    margin: 0.55rem 0 0;
+    padding-left: 1.05rem;
+    display: grid;
+    gap: 0.3rem;
+    line-height: 1.4;
+  }
+  .safd-sync {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     color: var(--accent);
-    font-size: 1.15rem;
-    line-height: 1;
+    padding: 0.7rem 0;
+  }
+  .safd-central {
+    border: 1px solid rgba(45, 212, 191, 0.35);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    padding: 1rem 1.2rem;
+  }
+  .safd-scope-label--central {
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+  .safd-central-body {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .safd-grid {
+      grid-template-columns: 1fr;
+    }
+    .safd-harness {
+      position: static;
+    }
   }
 </style>
