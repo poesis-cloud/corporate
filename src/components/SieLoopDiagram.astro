@@ -4,39 +4,70 @@
  * governance generates Directives; regulation operationalizes them into Norms;
  * supervision evaluates definitions and subjects against the Norms; operations
  * produce the state plane and keep it normalized from evaluation feedbacks.
- * Every function is realized by humans, AI, and/or executable GSM Mechanisms.
+ * Actors (humans, AI, GSM Mechanisms) realize the four functions.
  */
+import Icon from './Icon.astro';
+
+const actors = [
+  { icon: 'user-plus', name: 'Humans' },
+  { icon: 'spark', name: 'AI' },
+  { icon: 'grid', name: 'GSM Mechanisms', note: 'deterministic, executable' },
+] as const;
+
 const functions = [
   {
+    icon: 'compass',
     name: 'Governance',
     role: 'Generates Directives — strategic intents / objectives',
-    io: 'registers Directives in the Definition Manager',
+    components: ['Definition Manager'],
   },
   {
+    icon: 'shield',
     name: 'Regulation',
     role: 'Operationalizes Directives by generating Norms — tactical, measurable constraints / objectives',
-    io: 'fetches Directives, registers Norms — Definition Manager',
+    components: ['Definition Manager'],
   },
   {
+    icon: 'search',
     name: 'Supervision',
     role: 'Evaluates Definitions and defined subjects against the Norms',
-    io: 'fetches Norms — Definition Manager; evaluates — Operator',
+    components: ['Definition Manager', 'Operator'],
   },
   {
+    icon: 'play',
     name: 'Operations',
     role: 'Produces the state plane and maintains it normalized from evaluation feedbacks',
-    io: 'acts on the state plane',
+    components: [],
   },
-];
+] as const;
 const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
 ---
-<div class="loopd" role="img" aria-label="Governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms and feeds evaluations back to operations, which produce and normalize the state plane">
+<div class="loopd" role="img" aria-label="Humans, AI, and GSM Mechanisms realize four functions: governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms and feeds evaluations back to operations, which produce and normalize the state plane">
+  <div class="loopd-actors">
+    {actors.map((a) => (
+      <div class="loopd-actor">
+        <span class="loopd-actor-icon"><Icon name={a.icon} size={16} /></span>
+        <span class="loopd-actor-name">{a.name}</span>
+        {a.note && <span class="loopd-actor-note">{a.note}</span>}
+      </div>
+    ))}
+  </div>
+  <div class="loopd-realize" aria-hidden="true">
+    <span class="loopd-realize-line"></span>
+    <span class="loopd-realize-label">realize</span>
+  </div>
   <ol class="loopd-track">
     {functions.map((f, i) => (
       <li class="loopd-station" data-flow={i < flows.length ? flows[i] : undefined}>
-        <span class="loopd-step">{f.name}</span>
+        <span class="loopd-step"><Icon name={f.icon} size={15} /> {f.name}</span>
         <span class="loopd-body">{f.role}</span>
-        <span class="loopd-product">{f.io}</span>
+        {f.components.length > 0 && (
+          <span class="loopd-components">
+            {f.components.map((c) => (
+              <span class="loopd-component">{c}</span>
+            ))}
+          </span>
+        )}
       </li>
     ))}
   </ol>
@@ -45,12 +76,8 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
     <span class="loopd-plane-link loopd-plane-link--produces">↓ operations produce · maintain normalized</span>
   </div>
   <div class="loopd-plane">
-    <span class="loopd-plane-label">State plane</span>
+    <span class="loopd-plane-label"><Icon name="layers" size={15} /> State plane</span>
     <span class="loopd-plane-body">Your organization — its definitions, data, software, processes, teams, obligations — the state the functions above define, realize, evaluate, and normalize.</span>
-  </div>
-  <div class="loopd-return" aria-hidden="true">
-    <span class="loopd-return-arrow">⟲</span>
-    <span>Every function is realized by <strong>humans and/or AI</strong> and/or <strong>deterministic, executable GSM Mechanisms</strong> — the organization re-produces itself under its own definition: autopoiesis.</span>
   </div>
 </div>
 
@@ -58,13 +85,77 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
   .loopd {
     margin-top: 1.75rem;
   }
+  .loopd-actors {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .loopd-actor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--bg-soft);
+    padding: 0.5rem 0.9rem;
+  }
+  .loopd-actor-icon {
+    display: inline-flex;
+    color: var(--accent);
+  }
+  .loopd-actor-name {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .loopd-actor-note {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+  }
+  .loopd-realize {
+    position: relative;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loopd-realize-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1px dashed var(--accent);
+    opacity: 0.6;
+  }
+  .loopd-realize-label {
+    position: relative;
+    background: var(--bg);
+    padding: 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--accent);
+  }
   .loopd-track {
     list-style: none;
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2.4rem;
+    gap: 3.4rem;
     margin: 0;
     padding: 0;
+  }
+  /* horizontal dashed bus linking the realize line to every function stub */
+  .loopd-track::before {
+    content: '';
+    position: absolute;
+    top: -0.85rem;
+    left: 12%;
+    right: 12%;
+    border-top: 1px dashed var(--accent);
+    opacity: 0.45;
   }
   .loopd-station {
     position: relative;
@@ -73,21 +164,38 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
     background: var(--bg-soft);
     padding: 1.1rem 1.2rem;
   }
+  /* dashed actor edge into each function box */
+  .loopd-station::before {
+    content: '';
+    position: absolute;
+    top: -0.85rem;
+    left: 50%;
+    height: 0.85rem;
+    border-left: 1px dashed var(--accent);
+    opacity: 0.45;
+  }
   .loopd-station[data-flow]::after {
     content: attr(data-flow) ' →';
     position: absolute;
-    right: -2.3rem;
+    right: 0;
     top: 50%;
-    transform: translateY(-50%) rotate(0deg);
-    width: 2.2rem;
+    transform: translate(50%, -50%);
+    width: 3.1rem;
+    margin-right: -1.55rem;
+    background: var(--bg);
+    padding: 0.15rem 0.1rem;
+    border-radius: 4px;
     color: var(--accent);
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    line-height: 1.25;
+    font-size: 0.6rem;
+    line-height: 1.3;
     text-align: center;
+    z-index: 2;
   }
   .loopd-step {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
     font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 600;
@@ -98,17 +206,25 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
   .loopd-body {
     display: block;
     margin-top: 0.5rem;
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    line-height: 1.45;
-  }
-  .loopd-product {
-    display: block;
-    margin-top: 0.65rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .loopd-components {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+  }
+  .loopd-component {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    padding: 0.18rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
     color: var(--muted);
-    line-height: 1.4;
   }
   .loopd-plane-links {
     display: flex;
@@ -128,7 +244,9 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
     padding: 1rem 1.2rem;
   }
   .loopd-plane-label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
     font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 600;
@@ -143,35 +261,20 @@ const flows = ['Directives', 'Norms', 'evaluation feedbacks'];
     color: var(--ink-soft);
     line-height: 1.45;
   }
-  .loopd-return {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 1.1rem;
-    padding: 0.65rem 1.1rem;
-    border: 1px dashed var(--line-strong);
-    border-radius: 999px;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-  }
-  .loopd-return-arrow {
-    color: var(--accent);
-    font-size: 1.15rem;
-    line-height: 1;
-  }
   @media (max-width: 900px) {
     .loopd-track {
       grid-template-columns: 1fr;
-      gap: 2.1rem;
+      gap: 2.2rem;
     }
     .loopd-station[data-flow]::after {
       content: attr(data-flow) ' ↓';
       right: auto;
       left: 50%;
       top: auto;
-      bottom: -1.7rem;
-      transform: translateX(-50%);
-      width: auto;
+      bottom: 0;
+      margin-right: 0;
+      transform: translate(-50%, 50%);
+      width: max-content;
       white-space: nowrap;
     }
     .loopd-plane-links {
