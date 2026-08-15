@@ -7,7 +7,7 @@
  * supervision evaluates the state plane, operations produce and normalize it.
  */
 ---
-<svg class="loopd" viewBox="0 0 1200 570" role="img" aria-label="Humans, AI, and GSM Mechanisms realize four functions: governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms — evaluating the state plane through operations in a round trip — and feeds back to regulation and operations; regulation feeds back to governance; operations produce and normalize the state plane.">
+<svg class="loopd" viewBox="0 0 1200 570" role="img" aria-label="Humans, AI, and GSM Mechanisms realize four functions: governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms — evaluating the state plane through operations in a round trip — and feeds back to regulation and operations; regulation feeds back to governance; operations produce, evaluate, and normalize the state plane.">
   <defs>
     <marker id="loopd-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0 0 L10 5 L0 10 z" class="loopd-arrhead" />
@@ -70,7 +70,7 @@
     <rect x="940" y="132" width="250" height="150" rx="14" />
     <g transform="translate(954,146) scale(0.62)"><polygon class="loopd-ic" points="5 3 19 12 5 21 5 3" /></g>
     <text class="loopd-fn-name" x="976" y="158">Operations</text>
-    <text class="loopd-fn-body" x="954" y="184"><tspan x="954" dy="0">Produces the state plane</tspan><tspan x="954" dy="16">and maintains it normalized</tspan><tspan x="954" dy="16">from evaluation feedbacks</tspan></text>
+    <text class="loopd-fn-body" x="954" y="184"><tspan x="954" dy="0">Produces and evaluates the</tspan><tspan x="954" dy="16">state plane, maintaining it</tspan><tspan x="954" dy="16">normalized from evaluation</tspan><tspan x="954" dy="16">feedbacks</tspan></text>
   </g>
 
   <!-- flow edges between functions -->
@@ -95,9 +95,11 @@
 
   <!-- ============ edges to the state plane ============ -->
   <g class="loopd-flow">
-    <line x1="1065" y1="282" x2="1065" y2="426" marker-end="url(#loopd-arr)" />
+    <line x1="990" y1="282" x2="990" y2="426" marker-end="url(#loopd-arr)" />
+    <line x1="1090" y1="282" x2="1090" y2="426" marker-end="url(#loopd-arr)" />
   </g>
-  <text class="loopd-edge" x="1072" y="368" text-anchor="start"><tspan x="1072" dy="0">produces ·</tspan><tspan x="1072" dy="12">maintains normalized</tspan></text>
+  <text class="loopd-edge" x="983" y="368" text-anchor="end">evaluates</text>
+  <text class="loopd-edge" x="1090" y="368" text-anchor="middle"><tspan x="1090" dy="0">produces ·</tspan><tspan x="1090" dy="12">maintains normalized</tspan></text>
 
   <!-- ============ state plane ============ -->
   <g class="loopd-plane">
