@@ -19,7 +19,7 @@ const { service } = Astro.props;
 <BaseLayout title={`${service.label} — ${service.category}`} description={service.summary} pageType="Service">
   <section class="hero service-hero">
     <div class="container">
-      <p class="eyebrow"><a href="/#services">Services</a><span aria-hidden="true">/</span>{service.category}</p>
+      <p class="eyebrow"><a href="/#services">{service.category} · Service</a></p>
       <h1>{service.title}</h1>
       <p class="lead">{service.lead}</p>
       <div class="hero-cta">
