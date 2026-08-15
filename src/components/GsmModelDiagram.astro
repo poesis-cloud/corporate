@@ -1,36 +1,19 @@
 ---
 /**
  * GsmModelDiagram — the GSM data model, simplified and meaningful:
- * Archetypes type everything (frameworks extend them); eight primitives define
- * the system; the DNA grammar — Directive, operationalized by Norms, bound by
- * lifecycle-managed Ascriptions — governs it.
+ * every GSM object is a Definition (stable identity); Ascriptions are its
+ * governed, versioned snapshots; every Ascription is typed by an Archetype —
+ * itself a Definition with Ascriptions; frameworks instantiate ascriptions
+ * of every kind. The DNA grammar governs it all.
  */
 ---
-<div class="gsmd" role="img" aria-label="Simplified GSM data model: Archetypes type every definition and frameworks extend them; eight primitives define the system; Directives are operationalized by Norms and bound to subjects through lifecycle-managed Ascriptions — the DNA grammar">
-  <div class="gsmd-band gsmd-band--type">
-    <span class="gsmd-band-label">Type</span>
-    <div class="gsmd-box">
-      <strong>Archetype</strong>
-      <span>typed JSON Schema domain semantics — meaning travels with the type</span>
-    </div>
-    <div class="gsmd-extend">
-      <span class="gsmd-extend-label">extended by frameworks —</span>
-      <span class="gsmd-chips gsmd-chips--inline">
-        <span class="gsmd-chip gsmd-chip--fw">TOGAF</span>
-        <span class="gsmd-chip gsmd-chip--fw">GDPR</span>
-        <span class="gsmd-chip gsmd-chip--fw">NIS2</span>
-        <span class="gsmd-chip gsmd-chip--fw">ISO 25000</span>
-        <span class="gsmd-chip gsmd-chip--fw">HTTP</span>
-        <span class="gsmd-chip gsmd-chip--fw">ITIP</span>
-        <span class="gsmd-chip gsmd-chip--fw">…</span>
-      </span>
-      <span class="gsmd-extend-note">each framework publishes domain Archetypes that specialize the base GSM types — its vocabulary, grammar, and normative content become typed definitions</span>
-    </div>
-    <div class="gsmd-rel" aria-hidden="true">types every definition ↓</div>
-  </div>
-
+<div class="gsmd" role="img" aria-label="Simplified GSM data model: every GSM object is a Definition; Ascriptions are its governed, versioned snapshots, lifecycle-managed; every Ascription is typed by an Archetype, itself a Definition; frameworks instantiate ascriptions of every kind — the DNA grammar is Directive, operationalized by Norm, bound by Ascription">
   <div class="gsmd-band gsmd-band--define">
     <span class="gsmd-band-label">Define</span>
+    <div class="gsmd-box">
+      <strong>Definition</strong>
+      <span>The stable identity — <em>what something is</em>, bound to its subject. Every GSM object is a Definition, of one of the eight classes:</span>
+    </div>
     <div class="gsmd-cols">
       <div class="gsmd-group">
         <span class="gsmd-group-label">the acting system</span>
@@ -50,21 +33,49 @@
           <span class="gsmd-chip gsmd-chip--gov" title="Tactical, measurable constraint / objective">Norm<small>tactical, measurable constraint</small></span>
         </div>
       </div>
+      <div class="gsmd-group">
+        <span class="gsmd-group-label">the typing</span>
+        <div class="gsmd-chips">
+          <span class="gsmd-chip">Archetype</span>
+        </div>
+      </div>
     </div>
-    <div class="gsmd-rel" aria-hidden="true">bound to subjects through ↓</div>
+    <div class="gsmd-rel" aria-hidden="true">versioned &amp; governed as ↓</div>
   </div>
 
-  <div class="gsmd-band gsmd-band--bind">
-    <span class="gsmd-band-label">Bind</span>
+  <div class="gsmd-band gsmd-band--version">
+    <span class="gsmd-band-label">Version</span>
     <div class="gsmd-box">
       <strong>Ascription</strong>
-      <span>A <em>Definition</em> says what something is or must be; an <em>Ascription</em> is the governed act of binding that Definition to its subject — versioned and lifecycle-managed.</span>
-      <span class="gsmd-lifecycle"><code>DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED → RETIRED</code> — every transition is a validated state change with referee preconditions; retirement cascades follow dependent definitions; nothing governed is skipped or silently overwritten.</span>
+      <span>A governed <em>version / snapshot</em> of its Definition at a point in time — the Definition binds its Ascriptions to the subject; each approved Ascription gets the next version number.</span>
+      <span class="gsmd-lifecycle"><code>DRAFT → PROPOSED → APPROVED → ACTIVE → DEPRECATED → RETIRED</code> — every transition is a validated state change with referee preconditions; retirement cascades follow dependent definitions; identity-bound properties never change across versions.</span>
+    </div>
+    <div class="gsmd-rel" aria-hidden="true">every Ascription is typed by ↓</div>
+  </div>
+
+  <div class="gsmd-band gsmd-band--type">
+    <span class="gsmd-band-label">Type</span>
+    <div class="gsmd-box">
+      <strong>Archetype</strong>
+      <span>The JSON Schema that types an Ascription and validates its content — meaning travels with the type. An Archetype is <em>itself a Definition with Ascriptions</em>, governed like everything else.</span>
+    </div>
+    <div class="gsmd-extend">
+      <span class="gsmd-extend-label">frameworks instantiate ascriptions of every kind —</span>
+      <span class="gsmd-chips gsmd-chips--inline">
+        <span class="gsmd-chip gsmd-chip--fw">TOGAF</span>
+        <span class="gsmd-chip gsmd-chip--fw">GDPR</span>
+        <span class="gsmd-chip gsmd-chip--fw">NIS2</span>
+        <span class="gsmd-chip gsmd-chip--fw">ISO 25000</span>
+        <span class="gsmd-chip gsmd-chip--fw">HTTP</span>
+        <span class="gsmd-chip gsmd-chip--fw">ITIP</span>
+        <span class="gsmd-chip gsmd-chip--fw">…</span>
+      </span>
+      <span class="gsmd-extend-note">domain Archetypes that extend the base GSM types, and sourced Directives and Norms carrying the framework's normative content — all entering the model as governed ascriptions</span>
     </div>
   </div>
 
   <p class="gsmd-dna">
-    <strong>The DNA grammar</strong> = <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Directive</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Norm</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Ascription</span> — strategic intent, operationalized into measurable constraints, bound to subjects under lifecycle governance.
+    <strong>The DNA grammar</strong> = <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Directive</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Norm</span> + <span class="gsmd-chip gsmd-chip--gov gsmd-chip--sm">Ascription</span> — strategic intent, operationalized into measurable constraints, versioned and bound under lifecycle governance.
   </p>
 </div>
 
@@ -142,8 +153,9 @@
   }
   .gsmd-cols {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1.1fr 1.4fr 0.6fr;
     gap: 1.4rem;
+    margin-top: 0.85rem;
   }
   .gsmd-group-label {
     display: block;
