@@ -7,7 +7,7 @@
  * supervision evaluates the state plane, operations produce and normalize it.
  */
 ---
-<svg class="loopd" viewBox="0 0 1200 760" role="img" aria-label="Humans, AI, and GSM Mechanisms realize four functions: governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms and feeds back to regulation and operations; regulation feeds back to governance; operations produce and normalize the state plane. Governance, regulation, and supervision interact with the Definition Manager; supervision evaluates through the Operator, which fetches definitions and Norms from the Definition Manager.">
+<svg class="loopd" viewBox="0 0 1200 570" role="img" aria-label="Humans, AI, and GSM Mechanisms realize four functions: governance generates Directives; regulation operationalizes them into Norms; supervision evaluates definitions and subjects against the Norms and feeds back to regulation and operations; regulation feeds back to governance; operations produce and normalize the state plane.">
   <defs>
     <marker id="loopd-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0 0 L10 5 L0 10 z" class="loopd-arrhead" />
@@ -90,44 +90,20 @@
   <text class="loopd-edge" x="600" y="194" text-anchor="middle">Norms</text>
   <text class="loopd-edge loopd-fb-t" x="910" y="258" text-anchor="middle">feedbacks</text>
 
-  <!-- ============ interaction edges functions → components ============ -->
-  <g class="loopd-dash">
-    <line x1="135" y1="282" x2="135" y2="426" marker-end="url(#loopd-arr)" />
-    <line x1="390" y1="282" x2="230" y2="426" marker-end="url(#loopd-arr)" />
-    <line x1="660" y1="282" x2="285" y2="426" marker-end="url(#loopd-arr)" />
-    <polyline points="755,282 755,448 604,448" fill="none" class="loopd-dashline" marker-end="url(#loopd-arr)" />
-  </g>
-  <text class="loopd-edge" x="142" y="360" text-anchor="start">registers Directives</text>
-  <text class="loopd-edge" x="326" y="346" text-anchor="start"><tspan x="326" dy="0">fetches Directives</tspan><tspan x="326" dy="12">registers Norms</tspan></text>
-  <text class="loopd-edge" x="500" y="352" text-anchor="start">fetches Norms</text>
-  <text class="loopd-edge" x="762" y="352" text-anchor="start"><tspan x="762" dy="0">evaluates</tspan><tspan x="762" dy="12">through</tspan></text>
-
-  <!-- ============ components ============ -->
-  <g class="loopd-comp">
-    <rect x="10" y="430" width="290" height="52" rx="12" />
-    <text x="155" y="461" text-anchor="middle">Definition Manager</text>
-  </g>
-  <g class="loopd-comp">
-    <rect x="420" y="430" width="180" height="52" rx="12" />
-    <text x="510" y="461" text-anchor="middle">Operator</text>
-  </g>
-  <line class="loopd-flow-line" x1="420" y1="456" x2="304" y2="456" marker-end="url(#loopd-arr)" />
-  <text class="loopd-edge" x="360" y="436" text-anchor="middle"><tspan x="360" dy="0">fetches</tspan><tspan x="360" dy="12">Definitions &amp; Norms</tspan></text>
-
   <!-- ============ edges to the state plane ============ -->
   <g class="loopd-flow">
-    <line x1="860" y1="282" x2="860" y2="560" marker-end="url(#loopd-arr)" />
-    <line x1="1065" y1="282" x2="1065" y2="560" marker-end="url(#loopd-arr)" />
+    <line x1="755" y1="282" x2="755" y2="426" marker-end="url(#loopd-arr)" />
+    <line x1="1065" y1="282" x2="1065" y2="426" marker-end="url(#loopd-arr)" />
   </g>
-  <text class="loopd-edge" x="867" y="540" text-anchor="start">evaluates</text>
-  <text class="loopd-edge" x="1072" y="528" text-anchor="start"><tspan x="1072" dy="0">produces ·</tspan><tspan x="1072" dy="12">maintains normalized</tspan></text>
+  <text class="loopd-edge" x="762" y="380" text-anchor="start">evaluates</text>
+  <text class="loopd-edge" x="1072" y="368" text-anchor="start"><tspan x="1072" dy="0">produces ·</tspan><tspan x="1072" dy="12">maintains normalized</tspan></text>
 
   <!-- ============ state plane ============ -->
   <g class="loopd-plane">
-    <rect x="10" y="564" width="1170" height="120" rx="14" />
-    <g transform="translate(24,580) scale(0.62)"><polygon class="loopd-ic" points="12 2 2 7 12 12 22 7 12 2" /><polyline class="loopd-ic" points="2 17 12 22 22 17" /><polyline class="loopd-ic" points="2 12 12 17 22 12" /></g>
-    <text class="loopd-fn-name" x="46" y="592">State plane</text>
-    <text class="loopd-fn-body" x="24" y="620"><tspan x="24" dy="0">Your organization — its definitions, data, software, processes, teams, obligations —</tspan><tspan x="24" dy="17">the state the functions above define, realize, evaluate, and normalize.</tspan></text>
+    <rect x="10" y="430" width="1170" height="120" rx="14" />
+    <g transform="translate(24,446) scale(0.62)"><polygon class="loopd-ic" points="12 2 2 7 12 12 22 7 12 2" /><polyline class="loopd-ic" points="2 17 12 22 22 17" /><polyline class="loopd-ic" points="2 12 12 17 22 12" /></g>
+    <text class="loopd-fn-name" x="46" y="458">State plane</text>
+    <text class="loopd-fn-body" x="24" y="486"><tspan x="24" dy="0">Your organization — its definitions, data, software, processes, teams, obligations —</tspan><tspan x="24" dy="17">the state the functions above define, realize, evaluate, and normalize.</tspan></text>
   </g>
 </svg>
 
