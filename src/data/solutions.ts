@@ -157,10 +157,12 @@ export const solutions: Solution[] = [
         name: 'Operator',
         tagline: 'The GSM Definition runtime — for evaluating and executing GSM Definitions such as Norms and Mechanisms.',
         description:
-          'The Operator evaluates Norms and Directives against the observed state, dispatches effectors, and turns governed definitions into continuous enforcement — the THINK layer acting on the RUN layer.',
+          'What a language runtime is to code, the Operator is to governed definitions: it runs them exactly as defined — evaluating Norms into verdicts and executing Mechanisms into actions, fresh from the model on every run — the THINK layer acting on your organization\u2019s operations, and on the model itself.',
         values: [
-          { title: 'A runtime for governance.', features: ['mechanisms-execution-api'], body: 'Like a JVM for definitions: the Operator resolves a Mechanism, type-checks its inputs against Archetype schemas, evaluates its rule, and dispatches typed effects — five deterministic phases, every boundary validated.' },
-          { title: 'Sandboxed, reproducible verdicts.', features: ['norms-evaluation-api', 'mechanisms-execution-api'], body: 'Rules run in a step-limited sandbox with no ambient authority and no side effects — the same inputs always produce the same verdict, so enforcement is trustworthy by construction.' },
+          { title: 'Governance that executes.', features: ['norms-evaluation-api', 'mechanisms-execution-api'], body: 'Norms stop being documents someone must remember to check: the Operator evaluates them into deterministic verdicts, and Mechanisms carry the resulting actions — enforcement becomes a control loop that runs, not a review meeting that lags.' },
+          { title: 'Sandboxed, reproducible verdicts.', features: ['norms-evaluation-api', 'mechanisms-execution-api'], body: 'Rules run in an isolated sandbox with no ambient authority and no side effects — the same definitions and the same inputs always produce the same verdict, so every judgment can be replayed, audited, and trusted.' },
+          { title: 'Nothing runs unless the model says so.', features: ['mechanisms-execution-api'], body: 'Only definitions the lifecycle has activated can execute, and only where the model explicitly wires them to an Operator — execution rights are governed facts in the model, not configuration on a server.' },
+          { title: 'Always the current governed version.', features: ['norms-evaluation-api', 'mechanisms-execution-api'], body: 'The Operator stores nothing: every run resolves the definition fresh from the Definition Manager and discards its context afterwards — what executes is always the version governance approved, never a stale copy.' },
         ],
         features: [
           { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state in a sandboxed, reproducible rule runtime — governance as a control loop, not a review meeting.' },
