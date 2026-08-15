@@ -55,6 +55,6 @@ The stack does not make the model deterministic — nothing does, and [the compa
 
 The industry's question — how do we make models trustworthy? — misplaces the trust. Organizations have never trusted reasoners; they trust arrangements. The reasoner contributes capability; the arrangement contributes accountability; confusing the two is how fluent generation gets mistaken for permitted action.
 
-Poesis's position is that arrangement, integrated by design: concerns owned by stakeholders, carried by governance, evaluated deterministically, disposed of by the stack where decidable and by humans where accountable — with the model doing what it is genuinely good at, inside a frame it does not control.
+Poesis's position is that arrangement, integrated by design: concerns owned by stakeholders, carried by governance, evaluated deterministically, disposed of by the stack where decidable and by humans where accountable — with the model doing what it is genuinely good at, inside a frame it does not control. The market is beginning to name this discipline **operational AI governance**; this is what it looks like when it executes rather than audits.
 
 The model proposes. The stack and the human dispose. Everything else on these pages is that sentence, worked out.

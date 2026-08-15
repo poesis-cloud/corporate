@@ -7,7 +7,7 @@ summary: 'Retrieval answers which passages resemble a prompt. Enterprise assista
 
 Most enterprise AI assistants are built the same way. Documents are chunked, embedded, and indexed; a question retrieves the most similar passages; a model composes an answer from them. This works well, and for open-ended exploration of a large document estate it remains the right design.
 
-It is also frequently the wrong tool for the question actually being asked.
+It is also frequently the wrong tool for the question actually being asked. **Context engineering** has made assembling the model's context a first-class discipline — but it inherited retrieval's blind spot: it engineers *which text* reaches the model, not *which definition is in effect*.
 
 ## What similarity cannot tell you
 
