@@ -7,6 +7,34 @@ const posts = (await getCollection('insights'))
   .filter((p) => p.data.category === category)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const insightHref = (id: string) => `/insights/${id.replace(/\.md$/, '')}`;
+
+/** Editorial map of what each premise implies, downstream — curated, since a citation graph can't be inferred automatically. */
+const appliesIn: Record<string, { label: string; slug: string }[]> = {
+  'as-probabilistic-as-human-intelligence': [
+    { label: 'agentic harness', slug: 'what-is-an-agentic-harness' },
+    { label: 'agentic SAFe', slug: 'agentic-safe' },
+  ],
+  'governance-owns-the-concerns': [
+    { label: 'agentic AI governance', slug: 'agentic-ai-governance-that-executes' },
+  ],
+  'definition-versus-description': [
+    { label: 'governed world model', slug: 'the-governed-world-model' },
+    { label: 'autonomous enterprise', slug: 'the-autonomous-enterprise' },
+    { label: 'digital twin', slug: 'digital-twin-of-an-organization' },
+  ],
+  'the-generative-inversion': [
+    { label: 'spec-driven development', slug: 'spec-driven-development-without-spec-drift' },
+    { label: 'digital twin', slug: 'digital-twin-of-an-organization' },
+  ],
+  'governed-context-versus-retrieval': [
+    { label: 'agentic AI governance (conduct vs. consequence)', slug: 'agentic-ai-governance-that-executes' },
+  ],
+  'governed-synthetic-autopoiesis': [
+    { label: 'autonomous enterprise', slug: 'the-autonomous-enterprise' },
+    { label: 'agentic harness', slug: 'what-is-an-agentic-harness' },
+  ],
+};
+const premises = posts.filter((p) => p.data.tags.includes('Premise'));
 ---
 <BaseLayout
   title="Research notes"
@@ -26,39 +54,27 @@ const insightHref = (id: string) => `/insights/${id.replace(/\.md$/, '')}`;
       <div class="section-head">
         <p class="eyebrow">How these ideas fit together</p>
         <h2>A small set of premises, and what follows from them.</h2>
-        <p class="lead">These notes are not independent essays. A handful of foundational pieces state the premises; the rest are what those premises imply once applied to a specific question.</p>
+        <p class="lead">These notes are not independent essays. A handful of foundational pieces, tagged <span class="tag">Premise</span> below, state the premises; the rest are what those premises imply once applied to a specific question.</p>
       </div>
       <div class="grid grid-2" style="margin-top:1.5rem">
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/as-probabilistic-as-human-intelligence/">Generative AI is as probabilistic as human intelligence</a></h3>
-          <p>Reasoners — human or model — get reliability from institutions, never from being made deterministic. Applied in: <a href="/insights/what-is-an-agentic-harness/">agentic harness</a>, <a href="/insights/agentic-safe/">agentic SAFe</a>.</p>
-        </article>
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/governance-owns-the-concerns/">Governance owns the concerns</a></h3>
-          <p>Concerns are owned by stakeholders and carried by governance; the model proposes, the stack and the human dispose. Applied in: <a href="/insights/agentic-ai-governance-that-executes/">agentic AI governance</a>.</p>
-        </article>
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/definition-versus-description/">Definition versus description</a></h3>
-          <p>A definition constitutes standing; a description only reports it. Applied in: <a href="/insights/the-governed-world-model/">governed world model</a>, <a href="/insights/the-autonomous-enterprise/">autonomous enterprise</a>, <a href="/insights/digital-twin-of-an-organization/">digital twin</a>.</p>
-        </article>
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/the-generative-inversion/">The generative inversion</a></h3>
-          <p>The definition generates the system, rather than the system being described after the fact. Applied in: <a href="/insights/spec-driven-development-without-spec-drift/">spec-driven development</a>, <a href="/insights/digital-twin-of-an-organization/">digital twin</a>.</p>
-        </article>
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/governed-context-versus-retrieval/">Governed context or document retrieval</a></h3>
-          <p>Governed context answers standing; retrieval only answers resemblance. Applied in: <a href="/insights/agentic-ai-governance-that-executes/">agentic AI governance</a> (conduct vs. consequence).</p>
-        </article>
-        <article class="card card--static">
-          <span class="tag">Premise</span>
-          <h3><a href="/insights/governed-synthetic-autopoiesis/">Governed synthetic autopoiesis</a></h3>
-          <p>Self-production needs a conserved organization, or it is dissolution on a schedule. Applied in: <a href="/insights/the-autonomous-enterprise/">autonomous enterprise</a>, <a href="/insights/what-is-an-agentic-harness/">agentic harness</a>.</p>
-        </article>
+        {premises.map((post) => (
+          <article class="card card--static">
+            <span class="tag">Premise</span>
+            <h3><a href={insightHref(post.id)}>{post.data.title}</a></h3>
+            <p>{post.data.summary}</p>
+            {appliesIn[post.id.replace(/\.md$/, '')] && (
+              <p class="pain-addressed">
+                Applied in:{' '}
+                {appliesIn[post.id.replace(/\.md$/, '')].map((a, i) => (
+                  <>
+                    {i > 0 && ' · '}
+                    <a href={insightHref(a.slug)}>{a.label}</a>
+                  </>
+                ))}
+              </p>
+            )}
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -69,6 +85,7 @@ const insightHref = (id: string) => `/insights/${id.replace(/\.md$/, '')}`;
         {posts.map((post) => (
           <article class="card card--feature card--static">
             <span class="tag">{post.data.category}</span>
+            {post.data.tags.includes('Premise') && <span class="tag tag--value">Premise</span>}
             <h3><a href={insightHref(post.id)}>{post.data.title}</a></h3>
             <p>{post.data.summary}</p>
             <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>

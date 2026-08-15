@@ -1,6 +1,7 @@
 ---
 title: 'The generative inversion — from describing systems to defining them'
 category: 'Research'
+tags: ['Premise']
 date: 2026-06-20
 summary: 'Classical systemics describes systems after the fact. GSM inverts that — it defines the system, and the definition generates and governs the running thing.'
 ---

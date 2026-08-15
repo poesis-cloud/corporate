@@ -1,6 +1,7 @@
 ---
 title: "Context engineering's missing layer: governed context, not retrieval"
 category: 'Research'
+tags: ['Premise']
 date: 2026-08-11
 summary: 'Retrieval answers which passages resemble a prompt. Enterprise assistants usually need something else: which definition is in effect, which policy binds this scope, and which action is permitted. Where a domain is modeled, governed context can replace the retrieval layer rather than supplement it — the layer context engineering is still missing.'
 ---

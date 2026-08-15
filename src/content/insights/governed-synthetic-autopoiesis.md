@@ -1,6 +1,7 @@
 ---
 title: 'Governed synthetic autopoiesis — why Poesis is called Poesis'
 category: 'Research'
+tags: ['Premise']
 date: 2026-08-13
 summary: 'Autopoiesis names the capacity of a system to produce the components that produce it. Generative AI has made self-production cheap for organizations and software alike — what it has not made is the conserved organization that keeps self-production from becoming dissolution. That is the gap Poesis is named for — and the missing foundation of the autonomous enterprise.'
 ---

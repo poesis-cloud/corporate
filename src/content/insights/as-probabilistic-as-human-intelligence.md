@@ -1,6 +1,7 @@
 ---
 title: 'Generative AI is as probabilistic as human intelligence'
 category: 'Research'
+tags: ['Premise']
 date: 2026-08-13
 summary: 'The standard indictment of language models — that they reason probabilistically — describes human intelligence just as well. Humanity never remedied this by making minds deterministic; it built methodologies and institutions around them. Generative AI automates our reasoning. It should inherit our discipline as well.'
 ---

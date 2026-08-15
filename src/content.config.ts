@@ -6,6 +6,8 @@ const insights = defineCollection({
     schema: z.object({
         title: z.string(),
         category: z.enum(['Research']),
+        /** Additive classification alongside category — e.g. 'Premise' for foundational pieces the rest of the corpus derives from. */
+        tags: z.array(z.enum(['Premise'])).default([]),
         date: z.coerce.date(),
         summary: z.string(),
         author: z.string().default(defaultAuthorId),

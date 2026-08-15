@@ -111,6 +111,7 @@ const insightPosts = (await getCollection('insights'))
         {insightPosts.map((post) => (
           <article class="card card--feature card--static">
             <span class="tag">{post.data.category}</span>
+            {post.data.tags.includes('Premise') && <span class="tag tag--value">Premise</span>}
             <h3>{post.data.title}</h3>
             <p>{post.data.summary}</p>
             <p class="insight-meta">

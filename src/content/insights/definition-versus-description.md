@@ -1,6 +1,7 @@
 ---
 title: 'Definition versus description: an opposition that may not exist'
 category: 'Research'
+tags: ['Premise']
 date: 2026-08-12
 summary: 'Poesis and GSM are definition-centric because no description is definition-free. Definition makes observation intelligible; description supplies evidence from realization; that evidence can then inform the next definition.'
 ---
