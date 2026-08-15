@@ -7,19 +7,19 @@ import SieLoopDiagram from '../../../components/SieLoopDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const sie = solutions.find((s) => s.slug === 'sie')!;
-const [h1, ...rest] = sie.tagline.split(' — ');
+const [, ...rest] = sie.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 ---
 <BaseLayout
-  title="SIE — Systemic Intelligence Engine: the governed AI context"
+  title="The Systemic Intelligence Engine — the governed AI context"
   description="SIE — the Systemic Intelligence Engine: the reference implementation of GSM. A governed AI context — the layer context engineering is missing — with definitions management APIs, lifecycle enforcement, the Operator runtime, and the Definition Blackboard Manager."
   pageType="Solution"
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow"><a href="/#portfolio">{sie.tag} · Solution</a></p>
-      <h1>{h1}.</h1>
+      <h1>The Systemic Intelligence Engine — the governed AI context.</h1>
       <p class="lead">{leadText}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/sie/"><Icon name="docs" /> Read the docs</a>

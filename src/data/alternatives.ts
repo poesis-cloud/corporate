@@ -144,7 +144,7 @@ export const alternatives: Alternative[] = [
         title: 'Backstage Alternative — Governed Definitions, Not Just a Catalog',
         description:
             'Considering a Backstage alternative — or a governance layer above it? Compare the developer-portal catalog with Poesis: typed, governed definitions with lifecycle, obligations, and verdicts.',
-        h1: 'Beyond the service catalog: definitions that govern',
+        h1: 'A Backstage alternative: definitions that govern, beyond the catalog',
         lead:
             'Internal developer portals like Backstage gave platform teams a service catalog and a home for golden paths. Poesis for IT addresses the layer a catalog does not: what services are *obliged* to be — typed definitions with lifecycle, ownership, and machine-evaluable obligations.',
         strengths:

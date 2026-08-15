@@ -9,7 +9,7 @@ const posts = (await getCollection('insights'))
 const insightHref = (id: string) => `/insights/${id.replace(/\.md$/, '')}`;
 ---
 <BaseLayout
-  title={`${category} Notes · Insights`}
+  title="Research notes"
   description="Poesis research notes — controlled experiments, benchmarks, and reference-design notes on governed systems and agentic delivery."
   pageType={category}
 >
