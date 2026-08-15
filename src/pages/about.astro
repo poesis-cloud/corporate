@@ -64,15 +64,15 @@ const posts = await getCollection('insights');
 const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
 ---
 <BaseLayout
-  title="The enterprise its research defines"
-  description="Poesis is the enterprise its research defines — the blocker met in practice, the argument built in public, and the conclusions that became its DNA."
+  title="The project its research defines"
+  description="Poesis is the project its research defines — an open-source initiative born from a blocker met in practice, an argument built in public, and the conclusions that became its DNA."
   pageType="About"
 >
   <section class="hero">
     <div class="container">
       <p class="motto">Define the world in software; generate it.</p>
-      <h1>The enterprise its research defines.</h1>
-      <p class="lead">Poesis builds the stack that turns an organization&rsquo;s definitions — architectures, obligations, processes, constraints — into governed software that generative AI can safely act on. This page is about where that comes from: a blocker met in practice, a research program that worked it out in public, and the conclusions that became the enterprise&rsquo;s DNA.</p>
+      <h1>The project its research defines.</h1>
+      <p class="lead">Poesis builds the stack that turns an organization&rsquo;s definitions — architectures, obligations, processes, constraints — into governed software that generative AI can safely act on. It is, before anything else, an open-source initiative. This page is about where it comes from: a blocker met in practice, a research program that worked it out in public, and the conclusions that became the project&rsquo;s DNA.</p>
     </div>
   </section>
 
@@ -82,7 +82,7 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
       <h2>It began with a blocker, not a product.</h2>
       <p class="lead">Poesis&rsquo;s founders spent their careers inside large IT estates: architecting them, governing them, selling and scaling the platforms they run on. Every estate ran on definitions — architectures, obligations, processes, constraints. And every estate kept them in prose. Wikis, slide decks, compliance spreadsheets, all decaying from the day they were written.</p>
       <p class="lead">The deeper observation was about automation. Prose is not just where definitions decay; it is where automation stops. A definition in a document can be read, debated, and forgotten. It cannot be executed, evaluated, or regenerated. Every automated system downstream needs a human to re-interpret the prose into code, configuration, and tickets, so the loop a viable system depends on — act, observe, correct — breaks at that boundary. Prose blocks autopoiesis: a system&rsquo;s capacity to produce and renew itself.</p>
-      <p class="lead">Then generative AI made production cheap. Code, configuration, whole systems, brought forth on demand. The blocker turned existential: systems now produce the components that produce them, while the organization they must conserve still lives in documents nothing can act on. Out of that tension came the research. Out of the research, the enterprise.</p>
+      <p class="lead">Then generative AI made production cheap. Code, configuration, whole systems, brought forth on demand. The blocker turned existential: systems now produce the components that produce them, while the organization they must conserve still lives in documents nothing can act on. Out of that tension came the research. Out of the research, the project.</p>
     </div>
   </section>
 
@@ -143,12 +143,17 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
           <p>Humanity never made its reasoners deterministic; it built institutions around them. <a href="/solutions/itip">ITIP</a> and <a href="/solutions/saf">SAF</a> are those institutions for machine reasoners — the model proposes, humans dispose, in the first domain and in delivery itself.</p>
         </div>
         <div class="proof-item">
+          <span class="k">Open source, because trust cannot be proprietary</span>
+          <p>Poesis is first an open-source initiative: the GSM standard is published openly, the SAF framework is Apache-2.0, and the engine is source-available on a scheduled path to open. A stack that claims to carry an organization&rsquo;s definitions must be inspectable by the organizations asked to trust it.</p>
+        </div>
+        <div class="proof-item">
           <span class="k">Self-custody, because the claim binds the claimant</span>
           <p>An enterprise claiming governed self-production must run on it. Every Poesis repository — engine, applications, these sites — is defined and governed on Poesis&rsquo;s own stack, <a href="https://github.com/poesis-cloud" target="_blank" rel="noopener">inspectable on GitHub</a>. Autopoiesis, applied first to ourselves.</p>
         </div>
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/insights/research"><Icon name="book-open" /> Read the research</a>
+        <a class="btn btn-ghost" href="/"><Icon name="compass" /> See what the research became</a>
         <a class="btn btn-ghost" href="/contact"><Icon name="message" /> Talk to us</a>
       </div>
     </div>
@@ -169,7 +174,7 @@ const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
               <p class="title">Chief Executive, Product &amp; Architecture Officer</p>
             </div>
           </div>
-          <p>Enterprise and solutions architect, software engineer, agentic AI expert, and systems thinker. Clément has spent his career turning sprawling IT landscapes into coherent, governed systems — mapping architectures, leading transformations, and building the tooling that makes governance executable rather than aspirational. GSM and the Poesis stack are the generalization of that work, made tractable by the agentic AI era.</p>
+          <p>Enterprise and solutions architect, software engineer, agentic AI expert, and systems thinker. Clément has spent his career turning sprawling IT landscapes into coherent, governed systems — driven by a lifelong instinct to systematize: whatever he works on, he turns into explicit structure. GSM and the Poesis stack are that instinct, generalized — made tractable by the agentic AI era.</p>
           <p style="margin-top:.6rem"><a href="https://www.linkedin.com/in/clement-cazaud" target="_blank" rel="noopener">Clément on LinkedIn →</a></p>
         </div>
         <div class="card">
