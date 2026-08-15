@@ -69,7 +69,7 @@ export const pains: Pain[] = [
         id: 'it-blind-change',
         domainSlug: 'it',
         tag: 'Impact analysis',
-        pain: 'The blast radius of a change is guessed in a meeting.',
+        pain: 'Impact analysis is a guess made in a meeting.',
         cost: 'Coupling is discovered in incident reviews, after the change shipped.',
         remedy: 'Changes ripple through typed relations, so impact is simulated from the model \u2014 traced through the definitions it touches.',
         addressedBy: [
