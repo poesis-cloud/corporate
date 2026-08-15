@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
+import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import GsmModelDiagram from '../../../components/GsmModelDiagram.astro';
 import { solutions } from '../../../data/solutions.ts';
 
@@ -31,15 +32,7 @@ const [h1] = gsm.tagline.split(' — ');
     <div class="container">
       <p class="eyebrow">Why it matters</p>
       <h2>The definition layer beneath the projects you already run.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        {gsm.values.map((v) => (
-          <div class="card card--feature card--static">
-            <span class="tag tag--value">Value</span>
-            <h3>{v.title}</h3>
-            <p set:html={v.body} />
-          </div>
-        ))}
-      </div>
+      <SolutionValueCards solution={gsm} />
     </div>
   </section>
 

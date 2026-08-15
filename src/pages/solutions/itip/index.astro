@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
+import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import { solutions } from '../../../data/solutions.ts';
 
 const itip = solutions.find((s) => s.slug === 'itip')!;
@@ -32,15 +33,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
     <div class="container">
       <p class="eyebrow">Why it matters</p>
       <h2>From governance that drifts to a model that maintains itself.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
-        {itip.values.map((v) => (
-          <div class="card card--feature card--static">
-            <span class="tag tag--value">Value</span>
-            <h3>{v.title}</h3>
-            <p set:html={v.body} />
-          </div>
-        ))}
-      </div>
+      <SolutionValueCards solution={itip} />
     </div>
   </section>
 

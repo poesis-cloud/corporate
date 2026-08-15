@@ -1,0 +1,35 @@
+---
+/**
+ * SolutionValueCards — the shared value-card grid for solution pages.
+ * Each card links to the product(s) that deliver the value; emergent values
+ * name the product interaction they arise from (never a single feature —
+ * that mapping lives on the product pages).
+ */
+import type { Solution } from '../data/solutions.ts';
+
+interface Props {
+  solution: Solution;
+}
+
+const { solution } = Astro.props;
+const productName = (slug: string) => solution.products.find((p) => p.slug === slug)!.name;
+---
+<div class="grid grid-2" style="margin-top:1.5rem">
+  {solution.values.map((v) => (
+    <div class="card card--feature card--static">
+      <span class="tag tag--value">Value</span>
+      {v.emergent && <span class="tag tag--muted">Emergent</span>}
+      <h3>{v.title}</h3>
+      <p set:html={v.body} />
+      <p class="pain-addressed">
+        {v.emergent ? 'Emerges from' : 'Delivered by'}{' '}
+        {v.products.map((ps, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={`${solution.href}/products/${ps}`}>{productName(ps)}</a>
+          </>
+        ))}
+      </p>
+    </div>
+  ))}
+</div>

@@ -62,6 +62,19 @@ const roadmap = roadmapFor(solution.slug, product.slug);
             <span class="tag tag--value">Value</span>
             <h3>{v.title}</h3>
             <p>{v.body}</p>
+            {v.features.length > 0 ? (
+              <p class="pain-addressed">
+                Delivered by{' '}
+                {v.features.map((fs, i) => (
+                  <>
+                    {i > 0 && ' · '}
+                    <a href={`#${fs}`}>{product.features.find((f) => f.slug === fs)!.name}</a>
+                  </>
+                ))}
+              </p>
+            ) : (
+              <p class="pain-addressed">A property of the product — how it is built, not a feature.</p>
+            )}
           </div>
         ))}
       </div>
