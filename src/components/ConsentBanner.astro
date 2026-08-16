@@ -41,10 +41,12 @@
     var KEY = 'poesis_consent_v1';
     var LEGACY_KEY = 'poesis-consent-v1';
 
-    // Cookie is scoped to the registrable domain so subdomains share the choice.
+    // Registrable domain, so the apex and every subdomain share one choice.
+    // (A host-only cookie on poesis.cloud would be invisible to docs.poesis.cloud.)
     function consentDomain() {
-      var parts = location.hostname.split('.');
-      return parts.length > 2 ? '.' + parts.slice(-2).join('.') : null;
+      var host = location.hostname;
+      if (host.indexOf('.') === -1 || /^[0-9.]+$/.test(host)) return null;
+      return '.' + host.split('.').slice(-2).join('.');
     }
 
     function readConsent() {
@@ -68,6 +70,8 @@
       var domain = consentDomain();
       var attrs = '; path=/; max-age=15552000; SameSite=Lax';
       if (location.protocol === 'https:') attrs += '; Secure';
+      // Drop any host-only copy first so only the shared domain cookie remains.
+      document.cookie = KEY + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
       document.cookie = KEY + '=' + value + attrs + (domain ? '; domain=' + domain : '');
     }
 
