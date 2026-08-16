@@ -42,9 +42,14 @@
       try { return localStorage.getItem(KEY); } catch (e) { return null; }
     }
 
-    function writeConsent(value) {
+    function writeConsent(value, clearStale) {
       try { localStorage.setItem(KEY, value); } catch (e) { /* ignore */ }
       if (value === 'granted') {
+        // On an explicit accept click, clear any stale duplicate GA cookies
+        // (host-only vs parent-domain) so GA writes a single parent-scoped
+        // cookie. On a stored-consent page load we skip this — the cookie is
+        // already correct and clearing it would force a new client ID each visit.
+        if (clearStale) deleteGACookies();
         // Load GA4 now (it is not on the page until consent is granted).
         if (typeof window.poesisLoadGA4 === 'function') window.poesisLoadGA4();
       } else {
@@ -79,7 +84,7 @@
     banner.addEventListener('click', function (e) {
       var btn = e.target && e.target.closest ? e.target.closest('[data-consent]') : null;
       if (!btn) return;
-      writeConsent(btn.getAttribute('data-consent'));
+      writeConsent(btn.getAttribute('data-consent'), /* clearStale */ true);
       hide();
     });
 
@@ -90,8 +95,8 @@
       show();
     });
 
-    // Apply a stored choice. On 'granted' this loads GA4; on 'denied' it just
-    // clears any stray GA cookie. No stored choice => show the banner.
+    // Apply a stored choice. On 'granted' this loads GA4 (without clearing the
+    // valid cookie); on 'denied' it just clears any stray GA cookie.
     var stored = readConsent();
     if (stored === 'granted') {
       writeConsent('granted');

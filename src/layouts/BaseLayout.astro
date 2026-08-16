@@ -117,7 +117,10 @@ const articleLd = article
         s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW';
         document.head.appendChild(s);
         gtag('js', new Date());
-        gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true });
+        // Pin the cookie to the parent domain so a single _ga cookie is shared
+        // across poesis.cloud and docs.poesis.cloud (avoids duplicate same-name
+        // host-only vs parent-domain cookies when both sites load the same ID).
+        gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true, cookie_domain: 'poesis.cloud' });
       };
       // Delegated GA4 events for profile-card CTAs and demo CTAs. The gtag stub
       // just queues these into dataLayer; they are only actually sent if/when GA4
