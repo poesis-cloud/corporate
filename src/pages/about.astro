@@ -64,15 +64,15 @@ const posts = await getCollection('insights');
 const postBySlug = new Map(posts.map((p) => [p.id.replace(/\.md$/, ''), p]));
 ---
 <BaseLayout
-  title="The project its research defines"
-  description="Poesis is the project its research defines — an open-source initiative born from a blocker met in practice, an argument built in public, and the conclusions that became its DNA."
+  title="A thesis that refused to stay prose"
+  description="Every organization's definitions — its DNA: architectures, processes, decisions, standards, contracts, responsibilities — live in prose, where they decay and automation stops. Poesis, with generative AI, ends that: definitions become typed, versioned objects carrying their own semantics — published as open research before becoming an open-source stack."
   pageType="About"
 >
   <section class="hero">
     <div class="container">
       <p class="motto">Define the world in software; generate it.</p>
-      <h1>The project its research defines.</h1>
-      <p class="lead">Poesis builds the stack that turns an organization&rsquo;s definitions — architectures, obligations, processes, constraints — into governed software that generative AI can safely act on. It is, before anything else, an open-source initiative. This page is about where it comes from: a blocker met in practice, a research program that worked it out in public, and the conclusions that became the project&rsquo;s DNA.</p>
+      <h1>A thesis that refused to stay prose.</h1>
+      <p class="lead">Every organization&rsquo;s definitions, its DNA — architectures, processes, decisions, standards, contracts, responsibilities — live in prose, where they decay and automation stops. Poesis, with generative AI, is designed to end that. A definition — the generative precondition — stops being an unmaintainable document and becomes a typed, versioned object carrying its own semantics: structured, executable, verifiable, continuously reconciled with the system it defines — enabling the generative AI that acts on it to maintain systems autonomously. The thesis was published as open research before it became an open-source stack.</p>
     </div>
   </section>
 
