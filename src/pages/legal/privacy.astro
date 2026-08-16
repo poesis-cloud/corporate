@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const email = 'clement.cazaud@outlook.com';
+---
+
+<BaseLayout
+  title="Privacy policy"
+  description="How poesis.cloud and docs.poesis.cloud handle personal data — what is collected, why, and your rights."
+  pageType="Legal"
+>
+  <section class="section">
+    <div class="container legal-doc">
+      <h1>Privacy policy</h1>
+      <p class="legal-note">Last updated: 2026-08-16.</p>
+      <p>
+        This policy covers poesis.cloud and docs.poesis.cloud (together, "the
+        sites").
+      </p>
+
+      <h2>Data controller</h2>
+      <p>
+        The data controller is Poesis (company registration pending — see the
+        <a href="/legal/mentions-legales">legal notice</a>), reachable at
+        <a href={`mailto:${email}`}>{email}</a>.
+      </p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li>
+          <strong>Website analytics (Google Analytics 4).</strong> If you accept
+          analytics cookies, we collect pseudonymous usage data (pages visited,
+          approximate location derived from a truncated IP address, device and
+          browser information). IP anonymization is enabled.
+        </li>
+        <li>
+          <strong>Contact.</strong> If you email us, we process your email address
+          and message content to respond to you.
+        </li>
+      </ul>
+      <p>
+        The sites have no contact forms, no accounts, and no newsletters — no
+        other personal data is collected through the sites themselves.
+      </p>
+
+      <h2>Purpose and legal basis</h2>
+      <ul>
+        <li>
+          <strong>Analytics:</strong> understanding how the sites are used, to
+          improve them. Legal basis: your consent (which you can withdraw at any
+          time via "Cookie settings" in the footer).
+        </li>
+        <li>
+          <strong>Responding to emails:</strong> handling your request. Legal
+          basis: our legitimate interest in answering professional enquiries, and
+          pre-contractual steps where relevant.
+        </li>
+      </ul>
+
+      <h2>Processors and international transfers</h2>
+      <p>
+        Analytics data is processed by Google Ireland Limited / Google LLC. This
+        involves a transfer to the United States, covered by the EU–US Data
+        Privacy Framework.
+      </p>
+      <p>
+        The sites are hosted by GitHub, Inc. (United States), also under the
+        EU–US Data Privacy Framework.
+      </p>
+
+      <h2>Retention</h2>
+      <p>
+        Google Analytics data is retained for 14 months. Emails are kept as long
+        as needed to handle the exchange, then deleted or archived per our
+        internal retention practices.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You have the right to access, rectify, erase, restrict, or object to the
+        processing of your personal data, and the right to data portability. To
+        exercise these rights, contact
+        <a href={`mailto:${email}`}>{email}</a>. You also have the right to lodge
+        a complaint with the CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        See the <a href="/legal/cookies">cookie policy</a> for the list of cookies
+        used and how to manage your consent.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

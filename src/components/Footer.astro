@@ -26,6 +26,12 @@ const community = [
   { href: 'https://github.com/orgs/poesis-cloud/discussions', label: 'GitHub discussions' },
   { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
 ];
+
+const legal = [
+  { href: '/legal/mentions-legales', label: 'Legal notice' },
+  { href: '/legal/privacy', label: 'Privacy policy' },
+  { href: '/legal/cookies', label: 'Cookie policy' },
+];
 ---
 <footer class="site-footer">
   <div class="container">
@@ -97,6 +103,15 @@ const community = [
         <ul>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          {legal.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+          <li><a href="/legal/cookies" data-cookie-settings>Cookie settings</a></li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,87 @@
+---
+/**
+ * ConsentBanner — minimal GDPR/ePrivacy consent gate for GA4.
+ *
+ * Consent state is stored in localStorage under `poesis-consent-v1` as
+ * 'granted' | 'denied'. No choice yet => banner shown. 'Cookie settings'
+ * links (any element with [data-cookie-settings]) reopen the banner.
+ * Bump the storage key to re-prompt all users after a policy change.
+ */
+---
+
+<div
+  id="consent-banner"
+  class="consent-banner"
+  role="dialog"
+  aria-modal="false"
+  aria-label="Cookie consent"
+  aria-describedby="consent-banner-text"
+  hidden
+>
+  <p id="consent-banner-text" class="consent-banner-text">
+    We use Google Analytics to understand how the site is used. Analytics cookies
+    are only set with your consent. See our
+    <a href="/legal/cookies">cookie policy</a> and
+    <a href="/legal/privacy">privacy policy</a>.
+  </p>
+  <div class="consent-banner-actions">
+    <button type="button" class="btn btn-ghost btn-sm" data-consent="denied">
+      Reject
+    </button>
+    <button type="button" class="btn btn-primary btn-sm" data-consent="granted">
+      Accept
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'poesis-consent-v1';
+
+    function readConsent() {
+      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+
+    function writeConsent(value) {
+      try { localStorage.setItem(KEY, value); } catch (e) { /* ignore */ }
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          analytics_storage: value,
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+      }
+    }
+
+    var banner = document.getElementById('consent-banner');
+    if (!banner) return;
+
+    function show() { banner.hidden = false; }
+    function hide() { banner.hidden = true; }
+
+    banner.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('[data-consent]') : null;
+      if (!btn) return;
+      writeConsent(btn.getAttribute('data-consent'));
+      hide();
+    });
+
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target.closest('[data-cookie-settings]') : null;
+      if (!t) return;
+      e.preventDefault();
+      show();
+    });
+
+    // Apply a stored choice (or show the banner if none). With consent mode
+    // 'default: denied' already set in the head, 'denied' is a no-op — but
+    // writing it again keeps behaviour explicit and versioned.
+    var stored = readConsent();
+    if (stored === 'granted' || stored === 'denied') {
+      writeConsent(stored);
+    } else {
+      show();
+    }
+  })();
+</script>

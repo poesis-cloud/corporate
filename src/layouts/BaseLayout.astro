@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -88,13 +89,25 @@ const articleLd = article
     <meta name="generator" content={Astro.generator} />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
     {articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
-    {/* Google tag (gtag.js) — GA4 measurement G-KZGGY5D9GW */}
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW"></script>
+    {/* Consent mode default — must run BEFORE the gtag.js script below so no
+        analytics cookies are set until the user grants consent (GDPR/ePrivacy). */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500
+      });
+    </script>
+    {/* Google tag (gtag.js) — GA4 measurement G-KZGGY5D9GW, stays in consent-denied
+        cookieless mode until ConsentBanner grants 'analytics_storage'. */}
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW"></script>
+    <script is:inline>
       gtag('js', new Date());
-      gtag('config', 'G-KZGGY5D9GW');
+      gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true });
       // Delegated GA4 events for profile-card CTAs and demo CTAs
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target : null;
@@ -126,5 +139,6 @@ const articleLd = article
       <slot />
     </main>
     <Footer />
+    <ConsentBanner />
   </body>
 </html>
