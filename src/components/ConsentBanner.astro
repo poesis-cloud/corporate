@@ -51,10 +51,15 @@
       var match = document.cookie.split(';').map(function (c) { return c.trim(); })
         .filter(function (c) { return c.indexOf(KEY + '=') === 0; })[0];
       if (match) return match.split('=')[1];
-      // Migrate a pre-cookie choice made on this origin.
+      // Migrate a pre-cookie choice made on this origin, then drop it so that
+      // clearing cookies is a real reset instead of being undone by localStorage.
       try {
         var legacy = localStorage.getItem(LEGACY_KEY);
-        if (legacy) { storeConsent(legacy); return legacy; }
+        if (legacy) {
+          localStorage.removeItem(LEGACY_KEY);
+          storeConsent(legacy);
+          return legacy;
+        }
       } catch (e) { /* ignore */ }
       return null;
     }
