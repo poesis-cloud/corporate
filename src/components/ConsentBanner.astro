@@ -2,10 +2,12 @@
 /**
  * ConsentBanner — minimal GDPR/ePrivacy consent gate for GA4.
  *
- * Consent state is stored in localStorage under `poesis-consent-v1` as
- * 'granted' | 'denied'. No choice yet => banner shown. 'Cookie settings'
- * links (any element with [data-cookie-settings]) reopen the banner.
- * Bump the storage key to re-prompt all users after a policy change.
+ * The choice ('granted' | 'denied') is stored in a `poesis_consent_v1` cookie
+ * scoped to the parent domain, so it is shared across poesis.cloud and
+ * docs.poesis.cloud (localStorage is per-origin and would re-prompt on each).
+ * This consent cookie is strictly necessary and needs no consent itself.
+ * No choice yet => banner shown. 'Cookie settings' links (any element with
+ * [data-cookie-settings]) reopen the banner. Bump the key to re-prompt everyone.
  */
 ---
 
@@ -36,14 +38,36 @@
 
 <script is:inline>
   (function () {
-    var KEY = 'poesis-consent-v1';
+    var KEY = 'poesis_consent_v1';
+    var LEGACY_KEY = 'poesis-consent-v1';
+
+    // Cookie is scoped to the registrable domain so subdomains share the choice.
+    function consentDomain() {
+      var parts = location.hostname.split('.');
+      return parts.length > 2 ? '.' + parts.slice(-2).join('.') : null;
+    }
 
     function readConsent() {
-      try { return localStorage.getItem(KEY); } catch (e) { return null; }
+      var match = document.cookie.split(';').map(function (c) { return c.trim(); })
+        .filter(function (c) { return c.indexOf(KEY + '=') === 0; })[0];
+      if (match) return match.split('=')[1];
+      // Migrate a pre-cookie choice made on this origin.
+      try {
+        var legacy = localStorage.getItem(LEGACY_KEY);
+        if (legacy) { storeConsent(legacy); return legacy; }
+      } catch (e) { /* ignore */ }
+      return null;
+    }
+
+    function storeConsent(value) {
+      var domain = consentDomain();
+      var attrs = '; path=/; max-age=15552000; SameSite=Lax';
+      if (location.protocol === 'https:') attrs += '; Secure';
+      document.cookie = KEY + '=' + value + attrs + (domain ? '; domain=' + domain : '');
     }
 
     function writeConsent(value, clearStale) {
-      try { localStorage.setItem(KEY, value); } catch (e) { /* ignore */ }
+      storeConsent(value);
       if (value === 'granted') {
         // On an explicit accept click, clear any stale duplicate GA cookies
         // (host-only vs parent-domain) so GA writes a single parent-scoped
