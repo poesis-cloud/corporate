@@ -89,8 +89,10 @@ const articleLd = article
     <meta name="generator" content={Astro.generator} />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
     {articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}
-    {/* Consent mode default — must run BEFORE the gtag.js script below so no
-        analytics cookies are set until the user grants consent (GDPR/ePrivacy). */}
+    {/* Consent mode default + dataLayer stub. The gtag.js script itself is NOT
+        loaded here — it is injected by ConsentBanner only after the user grants
+        analytics consent. This guarantees "reject = zero GA cookies": with
+        consent mode alone, gtag.js would still write the _ga cookie on load. */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -98,17 +100,28 @@ const articleLd = article
         analytics_storage: 'denied',
         ad_storage: 'denied',
         ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        wait_for_update: 500
+        ad_personalization: 'denied'
       });
-    </script>
-    {/* Google tag (gtag.js) — GA4 measurement G-KZGGY5D9GW, stays in consent-denied
-        cookieless mode until ConsentBanner grants 'analytics_storage'. */}
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW"></script>
-    <script is:inline>
-      gtag('js', new Date());
-      gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true });
-      // Delegated GA4 events for profile-card CTAs and demo CTAs
+      // Lazily inject the GA4 script + config. Called by ConsentBanner on grant.
+      window.poesisLoadGA4 = function () {
+        if (window.__poesisGA4Loaded) return;
+        window.__poesisGA4Loaded = true;
+        gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KZGGY5D9GW';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true });
+      };
+      // Delegated GA4 events for profile-card CTAs and demo CTAs. The gtag stub
+      // just queues these into dataLayer; they are only actually sent if/when GA4
+      // is loaded after consent.
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target : null;
         if (!t) return;
