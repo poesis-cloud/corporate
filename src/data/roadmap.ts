@@ -140,10 +140,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'agentic-harness',
-    current: '0.0',
+    current: '1.0',
     milestones: [
-      { version: '0.x', label: 'Pre-GA increments — core scaffold' },
-      { version: '1.0', label: 'MVP/GA — resolution, injection, LLM routing, validation, authorization, logging', ga: true },
+      { version: '1.0', label: 'MVP/GA — resolution, injection, LLM routing, validation, authorization, logging', shipped: true, ga: true },
     ],
     featureVersions: {
       'workflows-steps-resolution': '1.0',
