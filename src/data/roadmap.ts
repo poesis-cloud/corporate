@@ -140,9 +140,9 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'agentic-harness',
-    current: '0.1',
+    current: '0.0',
     milestones: [
-      { version: '0.1', label: 'First pre-GA increment — core scaffold', shipped: true },
+      { version: '0.x', label: 'Pre-GA increments — core scaffold' },
       { version: '1.0', label: 'MVP/GA — resolution, injection, LLM routing, validation, authorization, logging', ga: true },
     ],
     featureVersions: {
@@ -173,15 +173,27 @@ export const roadmaps: ProductRoadmap[] = [
   {
     solution: 'saf',
     product: 'agentic-workspace',
-    current: '0.1',
+    current: '0.0',
     milestones: [
-      { version: '0.1', label: 'First pre-GA increment — workspace scaffold', shipped: true },
-      { version: '1.0', label: 'MVP/GA — installer + CI/CD artifact pipelines', ga: true },
+      { version: '0.x', label: 'Pre-GA increments' },
+      { version: '1.0', label: 'MVP/GA — workspace data plane, installer, CI/CD artifact pipelines', ga: true },
     ],
     featureVersions: {
       'workspace-data-plane': '1.0',
       installer: '1.0',
       'cicd-pipelines': '1.0',
+    },
+  },
+  {
+    solution: 'saf',
+    product: 'saf-sie-bridge',
+    current: '0.0',
+    milestones: [
+      { version: '0.x', label: 'Pre-GA increments' },
+      { version: '1.0', label: 'MVP/GA — harness history sourcing into GSM contributions on the Definition Blackboard Manager', ga: true },
+    ],
+    featureVersions: {
+      'harness-history-sourcing': '1.0',
     },
   },
 ];
