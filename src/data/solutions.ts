@@ -210,7 +210,7 @@ export const solutions: Solution[] = [
       { title: 'What OpenTelemetry is to RUN, GSM is to THINK.', products: ['specifications'], body: 'OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.' },
       { title: 'Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.', products: ['specifications'], body: 'Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype. The result is an explicit, governed world model — declared, not learned.' },
       { title: 'Governance as code, composed with policy as code.', products: ['specifications', 'frameworks'], emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
-      { title: 'Trust the standard, not the vendor.', products: ['specifications', 'frameworks'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (a CNCF-style path) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
+      { title: 'Trust the standard, not the vendor.', products: ['specifications', 'frameworks'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
     ],
     products: [
       {
@@ -222,7 +222,7 @@ export const solutions: Solution[] = [
         values: [
           { title: 'Tools that interoperate, silos that fall.', features: ['primitives', 'archetyping', 'dna-grammar'], body: 'Architecture, compliance, and quality live today in tools that don\u2019t speak to each other \u2014 every integration a bespoke mapping, every team its own silo. The spec\u2019s shared vocabulary and grammar end the mapping: solutions interoperate through the same typed definitions instead of translating each other.' },
           { title: 'Lock-in ends where the standard begins.', features: ['primitives', 'systemic-lifecycle-management'], body: 'Definitions authored once are portable across every conforming implementation \u2014 you can change tools or vendors without re-authoring your governance, and conformance is testable against the published requirements, not assumed from marketing. The unlock compounds with every vendor that adopts the standard.' },
-          { title: 'Built for neutral stewardship.', vision: true, features: [], body: 'The spec is maintained as a public, versioned publication \u2014 ready for foundation governance such as CNCF sandbox incubation \u2014 rather than living as vendor documentation. Standards live longest when no single product owns them.' },
+          { title: 'Built for neutral stewardship.', vision: true, features: [], body: 'The spec is maintained as a public, versioned publication \u2014 ready for consortium governance such as an OASIS Open Technical Committee \u2014 rather than living as vendor documentation. Standards live longest when no single product owns them.' },
         ],
         features: [
           { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.' },
@@ -281,6 +281,7 @@ export const solutions: Solution[] = [
       { title: 'A method, run by agents, as a harness.', products: ['agentic-harness', 'safe-agentic-organization'], emergent: true, body: 'AI runs on intuition — exactly like we do — and methods are how intuition becomes reliable. SAFe, run by agents with a human ★ gate at every layer, is the cognitive harness that makes agentic delivery trustworthy. You don’t wait for a smarter model; you make it implement a method — the difference between agentic transformation and the pilot trap.' },
       { title: 'Local orchestrations, one organization.', products: ['safe-agentic-organization', 'agentic-workspace'], emergent: true, body: 'Each contributor runs the full agentic organization on their own machine; the standard, schema-validated artifacts it produces synchronize through the shared repo and become the context every other local orchestration builds on — organization-scale coherence with no central runtime.' },
       { title: 'Open, local-first, sovereign.', products: ['agentic-harness', 'agentic-workspace'], emergent: true, body: 'Apache-2.0, harness and workspace both running on your machine against your working tree — sensitive context never leaves it, and nothing about how you deliver depends on a vendor’s cloud. Sovereignty isn’t a deployment option; it’s the architecture.' },
+      { title: 'Delivery history becomes governed context.', products: ['agentic-workspace', 'saf-sie-bridge'], emergent: true, body: 'The harness journals every step, but that journal is only ever read by the harness itself. The SAF SIE Bridge is the edge that turns it into context: what an agentic team actually did — synchronized through the Agentic Workspace — becomes evidence-backed contributions on SIE’s Definition Blackboard Manager, the same way the ITIP sourcer turns a code repository into governed definitions.' },
     ],
     products: [
       {
@@ -347,6 +348,21 @@ export const solutions: Solution[] = [
         ],
         docs: [{ href: 'https://docs.poesis.cloud/saf/agentic-workspace/', label: 'Agentic Workspace documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/saf-agentic-workspace', label: 'saf-agentic-workspace' }],
+      },
+      {
+        slug: 'saf-sie-bridge',
+        name: 'SAF SIE Bridge',
+        tagline: 'The client sourcer turning harness-governed agentic-execution history into governed context — the concrete form of SAF’s integration with SIE.',
+        description:
+          'Reads the committed artifacts and session logs the Agentic Workspace holds, produced under the SAFe Agentic Organization’s contracts, and posts what it infers about the executed workflow instances — participation, conformance, deviation — as evidence-backed contributions to the SIE Definition Blackboard Manager. A harness log entry is already a deterministic fact; only the identification drawn from it is ever a contribution.',
+        values: [
+          { title: 'What agents actually did, made governed context.', features: ['harness-history-sourcing'], body: 'The harness journal is otherwise read only by the harness itself. The bridge is what lets that execution history become typed, provenance-backed context other reasoning — human or agent — can build on.' },
+        ],
+        features: [
+          { slug: 'harness-history-sourcing', name: 'Harness history sourcing', blurb: 'Sources committed artifacts and session logs from the Agentic Workspace into confidence-bearing contributions on the Definition Blackboard Manager — in design.' },
+        ],
+        docs: [{ href: 'https://docs.poesis.cloud/saf/saf-sie-bridge/', label: 'SAF SIE Bridge documentation' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/saf-sie-bridge', label: 'saf-sie-bridge' }],
       },
     ],
   },
