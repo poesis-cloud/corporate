@@ -138,6 +138,21 @@ export const roadmaps: ProductRoadmap[] = [
     },
   },
   {
+    solution: 'gsm',
+    product: 'research-lab',
+    current: '1.0.0-beta.1',
+    milestones: [
+      { version: '1.0.0-beta.1', label: 'Research product extracted — generative governance and archetype referential model', shipped: true },
+      { version: '1.0', label: 'MVP/GA — research protocol, published programs, promotion path into GSM Change Proposals', ga: true },
+    ],
+    featureVersions: {
+      'generative-governance': '1.0.0-beta.1',
+      'archetype-referential-model': '1.0.0-beta.1',
+      'systemics-paradigm': '1.0.0-beta.1',
+      'promotion-path': '1.0.0-beta.1',
+    },
+  },
+  {
     solution: 'saf',
     product: 'agentic-harness',
     current: '1.0',

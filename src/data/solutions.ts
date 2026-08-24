@@ -210,6 +210,7 @@ export const solutions: Solution[] = [
       { title: 'What OpenTelemetry is to RUN, GSM is to THINK.', products: ['specifications'], body: 'OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.' },
       { title: 'Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.', products: ['specifications'], body: 'Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype. The result is an explicit, governed world model — declared, not learned.' },
       { title: 'Governance as code, composed with policy as code.', products: ['specifications', 'frameworks'], emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
+      { title: 'The standard stays testable against systemics.', products: ['specifications', 'research-lab'], emergent: true, body: 'Research is a first-class GSM product, not a footnote in the specification. Hypotheses, cases, and open decisions stay non-normative until a Change Proposal is accepted — so the published standard can be questioned without being rewritten in place.' },
       { title: 'Trust the standard, not the vendor.', products: ['specifications', 'frameworks'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
     ],
     products: [
@@ -263,6 +264,25 @@ export const solutions: Solution[] = [
         ],
         docs: [{ href: 'https://docs.poesis.cloud/gsm/frameworks/', label: 'Frameworks documentation' }],
         repos: [{ href: 'https://github.com/poesis-cloud/gsm-frameworks', label: 'gsm-frameworks' }],
+      },
+      {
+        slug: 'research-lab',
+        name: 'Research Lab',
+        tagline: 'Non-normative research — systemics first, GSM under test.',
+        description:
+          'The GSM research product: governed hypotheses, cases, and open decisions about possible future GSM semantics. Systemics is the paradigm. GSM is a candidate systemics model. Research does not publish the standard.',
+        values: [
+          { title: 'The model can be questioned without being rewritten.', features: ['generative-governance', 'archetype-referential-model', 'promotion-path'], body: 'Hypotheses stay non-normative until a GSM Change Proposal is accepted. The specification remains the published contract; the lab is where that contract is tested.' },
+          { title: 'Systemics judges GSM, not the reverse.', features: ['systemics-paradigm', 'generative-governance'], body: 'Purpose, variety, operational closure, recursion, and viability are the tests. A result that cannot state its systemic burden is not ready, whether or not it fits current GSM.' },
+        ],
+        features: [
+          { slug: 'generative-governance', name: 'Generative governance program', blurb: 'Causal model, governance chain, DNA production, cases, and a decision register — numbered records under an explicit protocol.' },
+          { slug: 'archetype-referential-model', name: 'Archetype referential model', blurb: 'Namespaced identity, governed versioning, version-pinned references, static composition, and lifecycle eligibility as one connected contract.' },
+          { slug: 'systemics-paradigm', name: 'Systemics paradigm', blurb: 'Systemics is the paradigm. GSM is a candidate systemics model under test, not the paradigm itself.' },
+          { slug: 'promotion-path', name: 'Promotion path', blurb: 'Accepted research becomes a GSM Change Proposal in gsm-specifications. Landing in the lab never amends the standard.' },
+        ],
+        docs: [{ href: 'https://docs.poesis.cloud/gsm/research-lab/', label: 'Research Lab documentation' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/gsm-research-lab', label: 'gsm-research-lab' }],
       },
     ],
   },
