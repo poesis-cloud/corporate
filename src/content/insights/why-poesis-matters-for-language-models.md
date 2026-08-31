@@ -25,7 +25,7 @@ Poesis extends and combines these ideas around a different center: the **governe
 - which version is currently in effect;
 - how proposed changes become accepted, rejected, superseded, or retired.
 
-The claim is not that no other initiative addresses any of these concerns. The claim is that connecting them through one definitional and governance grammar creates a context layer suited to both enterprise governance and machine intelligence.
+The claim is not that no other initiative addresses any of these concerns. The claim is that connecting them through one generative governance grammar creates a context layer suited to both enterprise governance and machine intelligence.
 
 ## A governed world reduces what the model must infer
 

@@ -62,7 +62,7 @@ export const pains: Pain[] = [
         remedy: 'Continuous appraisal indicators compute measures and findings from the model \u2014 GDPR, NIS2, DORA, ISO as a live dashboard.',
         addressedBy: [
             { solution: 'itip', product: 'web-application', feature: 'it-compliance-evaluation' },
-            { solution: 'itip', product: 'web-application', feature: 'frameworks-management' },
+            { solution: 'itip', product: 'web-application', feature: 'ontology-management' },
         ],
     },
     {
@@ -108,7 +108,7 @@ export const pains: Pain[] = [
         remedy: 'Every definition is typed by a GSM Archetype \u2014 humans and AI agents reason and generate from the same governed account of what your systems are and must do.',
         addressedBy: [
             { solution: 'itip', product: 'web-application', feature: 'definitions-management' },
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },            { solution: 'sie', product: 'definition-manager', feature: 'definitions-tooling-serving' },
+            { solution: 'sie', product: 'definition-manager', feature: 'definitions-management-api' },            { solution: 'sie', product: 'definition-manager', feature: 'mcp' },
         ],
     },
     {
@@ -129,10 +129,10 @@ export const pains: Pain[] = [
         tag: 'Framework composition',
         pain: 'Every framework lives in its own silo — and they collide on your desk.',
         cost: 'TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident.',
-        remedy: 'Frameworks are sourced into one typed catalogue and composed through the governance layer — overlaps and conflicts surface in the composer, not in audits.',
+        remedy: 'Source models are represented in one typed ontology catalogue and composed through the governance layer — overlaps and conflicts surface in the composer, not in audits.',
         addressedBy: [
-            { solution: 'itip', product: 'web-application', feature: 'frameworks-management' },
-            { solution: 'gsm', product: 'frameworks', feature: 'togaf' },
+            { solution: 'itip', product: 'web-application', feature: 'ontology-management' },
+            { solution: 'gsm', product: 'ontology', feature: 'togaf' },
         ],
     },
     {
@@ -179,7 +179,7 @@ export const pains: Pain[] = [
         tag: 'Ontology',
         pain: 'Semantics carried only in prose bind no one.',
         cost: 'What a hypothesis, a budget, a review, or a deadline is must be defined before any process can be held to it.',
-        remedy: 'GSM supplies the explicit ontology and governance grammar \u2014 the definitions obligations are expressed against.',
+        remedy: 'GSM supplies the explicit ontology and generative governance grammar \u2014 the definitions obligations are expressed against.',
         addressedBy: [
             { solution: 'gsm', product: 'specifications', feature: 'primitives' },
             { solution: 'gsm', product: 'specifications', feature: 'dna-grammar' },
@@ -228,7 +228,7 @@ export const pains: Pain[] = [
         remedy: 'Measurement, judgment, and enforcement are distinct primitives, by design \u2014 evaluated and dispatched separately.',
         addressedBy: [
             { solution: 'sie', product: 'operator', feature: 'norms-evaluation-api' },
-            { solution: 'sie', product: 'operator', feature: 'mechanisms-execution-api' },
+            { solution: 'sie', product: 'operator', feature: 'mechanism-execution-foundations' },
         ],
     },
     {

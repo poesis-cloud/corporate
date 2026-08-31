@@ -18,7 +18,7 @@ The recurring problem is not specific to NIS2, DORA, GDPR, or any other framewor
 
 Poesis provides a common grammar for that work. It does not reduce frameworks to one universal checklist. Each model keeps its own taxonomy and meaning, while [GSM](https://docs.poesis.cloud/gsm/) connects its concepts to the same definitional governance loop — the loop set out in [Definition versus description](/insights/definition-versus-description/), where governing intent yields evaluable criteria, criteria constrain operative definitions, realization produces evidence, and evidence adapts the definitions.
 
-This article presents a **reference model**, not a customer deployment. Published content in `gsm-frameworks` currently includes concrete regulatory Directives and Norms for NIS2 and GDPR, alongside TOGAF, the ISO 25000 quality models, SCAP security-identification vocabularies, HTTP semantics, and ITIP sourcing definitions. DORA and several other models are planned or reserved rather than fully sourced. The integrated compliance experience remains in development.
+This article presents a **reference model**, not a customer deployment. Published content in `gsm-ontology` currently includes concrete regulatory Directives and Norms for NIS2 and GDPR, alongside TOGAF, the ISO 25000 quality models, SCAP security-identification vocabularies, HTTP semantics, and ITIP sourcing definitions. DORA and several other models are planned or reserved rather than fully sourced. The integrated compliance experience remains in development.
 
 ## The framework changes; the governance problem does not
 
@@ -36,7 +36,7 @@ Evidence can then be assessed against the definitions and Norms currently in eff
 
 ## One fabric, different model roles
 
-The `gsm-frameworks` catalog contains more than regulations because compliance does not stop at legal text. Obligations must be related to the organization and its operations, expressed through measurable qualities, and connected to identifiable implementations.
+The `gsm-ontology` catalog contains more than regulations because compliance does not stop at legal text. Obligations must be related to the organization and its operations, expressed through measurable qualities, and connected to identifiable implementations.
 
 | Model role | Current catalog examples | Contribution to continuous compliance |
 | --- | --- | --- |
@@ -137,6 +137,6 @@ That boundary is useful. The reusable model belongs here. Framework-specific int
 
 The central shift is simple: stop treating compliance as a report assembled after the fact, and start treating it as a governed relation among obligations, organizational definitions, realized operation, and evidence.
 
-Frameworks will continue to multiply and overlap. A durable compliance architecture cannot be rebuilt around each one. It needs a stable governance grammar that preserves each framework's authority and meaning while composing them over the same organization — and that grammar has to be portable across tools rather than trapped in one, which is the case made in [Standardizing the THINK layer of IT](/insights/standardizing-the-think-layer/).
+Frameworks will continue to multiply and overlap. A durable compliance architecture cannot be rebuilt around each one. It needs a stable generative governance grammar that preserves each framework's authority and meaning while composing them over the same organization — and that grammar has to be portable across tools rather than trapped in one, which is the case made in [Standardizing the THINK layer of IT](/insights/standardizing-the-think-layer/).
 
-That is the general use case for `gsm-frameworks`: source each model once, specialize it without corrupting its semantics, and connect it through GSM to the subjects and evidence it governs. The result is not one more control library. It is a path toward compliance that remains inspectable as both regulation and reality change.
+That is the general use case for `gsm-ontology`: source each model once, specialize it without corrupting its semantics, and connect it through GSM to the subjects and evidence it governs. The result is not one more control library. It is a path toward compliance that remains inspectable as both regulation and reality change.

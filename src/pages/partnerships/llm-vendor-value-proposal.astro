@@ -221,7 +221,7 @@ function adherencePills(ids: string[]) {
                   </button>
                   <button class="vf-fold-btn" type="button" data-fold="f-sie" aria-controls="f-sie" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-sie" hidden>
-                    <div class="vf-comp"><b>sie-definition-manager</b> — hosts GSM, Ascription lifecycle, governance grammar</div>
+                    <div class="vf-comp"><b>sie-definition-manager</b> — hosts GSM, Ascription lifecycle, generative governance grammar</div>
                     <div class="vf-comp"><b>sie-definition-blackboard-manager</b> — contribution registry and Blackboard-seal lifecycle</div>
                     <div class="vf-comp"><b>sie-operator</b> — executes in-effect Mechanisms and validates typed inputs and effects; automatic Norm preflight remains to be built</div>
                   </div>
@@ -235,7 +235,7 @@ function adherencePills(ids: string[]) {
                   <button class="vf-fold-btn" type="button" data-fold="f-itip" aria-controls="f-itip" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-itip" hidden>
                     <div class="vf-comp"><b>itip-web-application</b> — planned human gate for intent, approval, simulation, appraisal, and audit</div>
-                    <div class="vf-comp"><b>gsm-frameworks</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
+                    <div class="vf-comp"><b>gsm-ontology</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
                     <div class="vf-comp"><b>itip-definition-blackboard-*-sourcer</b> — designed to wrap LLMs / agents as KnowledgeSources over code repositories; other source classes require adapters</div>
                   </div>
                 </div>
@@ -643,7 +643,7 @@ function adherencePills(ids: string[]) {
       maturity: '<strong>Current maturity:</strong> implemented foundations. <strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.',
       sub: 'Definition Manager and Operator provide the semantic and execution foundations for serving selected in-effect Definitions, Norms, and explicitly modeled dependencies. A model-facing context and tool facade is not yet implemented. Once built, it can let models inspect types, trace Interactions, retrieve applicable constraints, and submit outputs for explicit evaluation. This changes available evidence and operations; it does not change model weights or prove causal reasoning.',
       schema: [
-        { n: 'gsm-frameworks' },
+        { n: 'gsm-ontology' },
         { n: 'sie-definition-manager', via: 'sourced obligation and domain vocabulary' },
         { n: 'sie-operator', via: 'in-effect Definitions, Norms, modeled Interactions' },
         { n: 'Grounded inference', side: 'llm', via: 'context selection, provenance projection, tool contracts — facade not implemented' },
@@ -756,10 +756,10 @@ function adherencePills(ids: string[]) {
       id: 'reg', loop: true, rail: -9, hex: '#fb923c', from: 'n-org-reg', to: 'n-sie', lane: -66,
       label: 'constraints set on the governed system',
       title: 'Governance loop · Regulation — the organisation bounds what the system may do (Organisation → Poesis)',
-      maturity: '<strong>Current maturity:</strong> the governance grammar, Directive and Norm schemas, and the Ascription lifecycle that places constraints in effect are implemented; framework sourcing produces typed vocabulary. <strong>Remaining work:</strong> automatic Norm preflight in the Operator, and appraisal-driven revision of constraints.',
+      maturity: '<strong>Current maturity:</strong> the generative governance grammar, Directive and Norm schemas, and the Ascription lifecycle that places constraints in effect are implemented; framework sourcing produces typed vocabulary. <strong>Remaining work:</strong> automatic Norm preflight in the Operator, and appraisal-driven revision of constraints.',
       sub: 'Directives and Norms are how the organisation states, explicitly and in a single grammar, what it and its models may do. Framework sourcing turns external obligation — GDPR, NIS2, DORA, AI Act, TOGAF, ISO — into the same typed vocabulary as internal policy, so regulatory constraint and internal intent are not two disconnected registers. Nothing in this flow reaches a model directly: constraints bound the LLM adherences from inside the perimeter.',
       schema: [
-        { n: 'gsm-frameworks' },
+        { n: 'gsm-ontology' },
         { n: 'Regulation', side: 'human', via: 'GDPR, NIS2, DORA, AI Act, TOGAF, ISO vocabulary' },
         { n: 'sie-definition-manager', via: 'Directives and Norms authored' },
         { n: 'Governance', side: 'human', via: 'lifecycle transition proposed' },
@@ -769,7 +769,7 @@ function adherencePills(ids: string[]) {
       feedback: 'Appraisal of outcomes against Norms is what tells the organisation when its own constraints need to change.',
       organisation: ['Regulatory obligation and internal policy expressed in one enforceable grammar rather than in documents no system reads', 'Constraints that bound model behaviour without depending on any model’s cooperation'],
       poesis: ['A single constraint grammar that every adherence in this map is evaluated against', 'Governed vocabulary that widens through framework sourcing without changing the runtime'],
-      comps: 'Implemented in <b>sie-definition-manager</b> with vocabulary sourced through <b>gsm-frameworks</b>; enforcement in <b>sie-operator</b>, where automatic Norm preflight remains to be built.',
+      comps: 'Implemented in <b>sie-definition-manager</b> with vocabulary sourced through <b>gsm-ontology</b>; enforcement in <b>sie-operator</b>, where automatic Norm preflight remains to be built.',
     },
     {
       id: 'dis', loop: true, rail: 0, hex: '#fb923c', from: 'n-org-sup', to: 'n-itip', lane: -6,

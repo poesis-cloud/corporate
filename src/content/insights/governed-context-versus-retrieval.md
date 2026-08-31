@@ -69,7 +69,7 @@ The fair criticism of this position is effort. Indexing documents is cheap and n
 
 Three things make the cost tractable.
 
-**Frameworks are sourced once.** Regulatory and architectural corpora — NIS2, DORA, TOGAF, the ISO 25000 series — are expressed as reusable definitions rather than re-derived per organization. Most enterprises are not inventing their obligations; they are adopting and specializing them. [Continuous regulatory compliance](/insights/continuous-regulatory-compliance/) sets out how those models are sourced without flattening their differences, and how they compose over the same subject.
+**Ontologies are sourced once.** Regulatory and architectural corpora — NIS2, DORA, TOGAF, the ISO 25000 series — are expressed as reusable definitions rather than re-derived per organization. Most enterprises are not inventing their obligations; they are adopting and specializing them. [Continuous regulatory compliance](/insights/continuous-regulatory-compliance/) sets out how those models are sourced without flattening their differences, and how they compose over the same subject.
 
 **Sourcing is collaborative and assisted.** The Definition Blackboard, currently in development, is designed as a path for agentic and human sourcers to propose definitions with a confidence envelope and a provenance envelope attached, which deterministic reduction and governance review then accept or reject. Language models are well suited to proposing candidate definitions from existing documents; they are not suited to deciding unilaterally what becomes authoritative.
 

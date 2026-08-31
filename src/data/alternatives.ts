@@ -111,7 +111,7 @@ export const alternatives: Alternative[] = [
             {
                 dimension: 'Coverage model',
                 them: 'Prebuilt certification frameworks (SOC 2, ISO 27001, …)',
-                poesis: 'A composable catalog of frameworks sourced into GSM — GDPR, NIS2, DORA, ISO — evaluated on the same model',
+                poesis: 'A composable ontology catalogue sourced into GSM — GDPR, NIS2, DORA, ISO — evaluated on the same model',
             },
             {
                 dimension: 'Relation to the estate',

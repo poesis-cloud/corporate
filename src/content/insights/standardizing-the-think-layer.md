@@ -15,7 +15,7 @@ OpenTelemetry ended this fragmentation for **RUN**: telemetry is now portable ac
 
 ## What GSM provides
 
-The Generative System Model is that missing standard. It specifies a small, fixed core of primitives, a three-tempo governance grammar (Directives, Norms, Ascriptions), a normative lifecycle, sandboxed expression profiles, and a canonical JSON interchange — so that governed definitions are **portable** across conforming tools instead of trapped in one.
+The Generative System Model is that missing standard. It specifies a small, fixed core of primitives, a generative governance grammar (Directives, Norms, Ascriptions) stratified by governance tempo, a normative lifecycle, sandboxed expression profiles, and a canonical JSON interchange — so that governed definitions are **portable** across conforming tools instead of trapped in one.
 
 Crucially, GSM **composes** with the cloud-native ecosystem rather than competing with it. Norms express SLOs while OpenTelemetry supplies the evidence; Directives are the authoritative obligation while OPA and Kyverno enforce; supply-chain rules bind to sigstore, SLSA, and in-toto. GSM is the definition; existing projects realize it.
 

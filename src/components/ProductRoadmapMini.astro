@@ -1,0 +1,112 @@
+---
+/**
+ * ProductRoadmapMini — compact line-and-milestones roadmap strip for a
+ * product box (ArchMap homepage architecture map), rendered just above the
+ * Features list. Same data source as ProductRoadmap.astro
+ * (src/data/roadmap.ts, mirror of the canonical strategy/roadmap.md register).
+ */
+import type { ProductRoadmap } from '../data/roadmap.ts';
+
+interface Props {
+  roadmap: ProductRoadmap;
+}
+
+const { roadmap } = Astro.props;
+---
+<div class="arch-roadmap-mini" aria-label={`${roadmap.product} roadmap`}>
+  <span class="arch-roadmap-mini-current">current v{roadmap.current}</span>
+  <ol class="arch-roadmap-mini-track">
+    {roadmap.milestones.map((m) => (
+      <li
+        class={`arch-roadmap-mini-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}
+        title={`v${m.version} — ${m.label}${m.shipped ? ' (shipped)' : ''}`}
+      >
+        <span class="arch-roadmap-mini-dot" aria-hidden="true"></span>
+        <span class="arch-roadmap-mini-version">v{m.version}</span>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .arch-roadmap-mini {
+    margin: 0 0 .65rem;
+  }
+  .arch-roadmap-mini-current {
+    display: inline-block;
+    margin-bottom: .35rem;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    border: 1px solid rgba(45, 212, 191, .3);
+  }
+  .arch-roadmap-mini-track {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .arch-roadmap-mini-track::-webkit-scrollbar {
+    display: none;
+  }
+  .arch-roadmap-mini-step {
+    position: relative;
+    flex: 0 0 auto;
+    min-width: 2.6rem;
+    padding-right: 1rem;
+  }
+  .arch-roadmap-mini-step::before {
+    content: '';
+    position: absolute;
+    top: .3rem;
+    left: .3rem;
+    right: -0.05rem;
+    height: 2px;
+    background: var(--line);
+  }
+  .arch-roadmap-mini-step:last-child {
+    padding-right: 0;
+  }
+  .arch-roadmap-mini-step:last-child::before {
+    display: none;
+  }
+  .arch-roadmap-mini-dot {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: .6rem;
+    height: .6rem;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    background: var(--bg);
+  }
+  .arch-roadmap-mini-step.is-shipped .arch-roadmap-mini-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .arch-roadmap-mini-step.is-ga .arch-roadmap-mini-dot {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(45, 212, 191, .25);
+  }
+  .arch-roadmap-mini-version {
+    display: block;
+    margin-top: .3rem;
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    font-weight: 600;
+    opacity: .55;
+    white-space: nowrap;
+  }
+  .arch-roadmap-mini-step.is-ga .arch-roadmap-mini-version {
+    opacity: .9;
+    color: var(--accent-ink);
+  }
+</style>

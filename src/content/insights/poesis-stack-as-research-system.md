@@ -55,7 +55,7 @@ None of these properties makes a process more intelligent. They make it accounta
 
 The Poesis stack is our attempt to build this layer — not an agent framework, but the governance substrate agent frameworks lack.
 
-[GSM](https://docs.poesis.cloud/gsm/), the specification underneath the stack, supplies the ontology and the governance grammar: definitions with stable identity and versioned, lifecycle-managed content; Directives that open scopes of governing intent; Norms that make selected consequences of that intent evaluable, with explicit temporal tolerance; and a strict separation between the primitives that measure, the primitives that judge, and the primitives that act.
+[GSM](https://docs.poesis.cloud/gsm/), the specification underneath the stack, supplies the ontology and the generative governance grammar: definitions with stable identity and versioned, lifecycle-managed content; Directives that open scopes of governing intent; Norms that make selected consequences of that intent evaluable, with explicit temporal tolerance; and a strict separation between the primitives that measure, the primitives that judge, and the primitives that act.
 
 The [Definition Manager](https://github.com/poesis-cloud/sie-definition-manager) hosts that model and refuses incoherent states — identity cannot mutate, lifecycles cannot skip. The [Operator](https://github.com/poesis-cloud/sie-operator) evaluates typed rules deterministically over it: same definitions, same inputs, same verdict. The Definition Blackboard, in development, admits contributions only with confidence and provenance envelopes attached, over an append-only audit ledger. An observability floor, also in development, is designed so that governance-relevant behavior is never unobserved.
 

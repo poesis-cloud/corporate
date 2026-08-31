@@ -69,7 +69,7 @@ export const solutions: Solution[] = [
       { title: 'Governance that stops drifting.', products: ['web-application', 'definition-blackboard-code-sourcer'], emergent: true, body: 'Architecture wikis, compliance spreadsheets, and review boards drift from reality the moment they are written. ITIP makes the <em>definition</em> the living source of truth — sourced from the real system automatically instead of transcribed by hand, governed continuously, and never reconstructed under audit pressure.' },
       { title: 'A source of truth AI can act on.', products: ['web-application'], emergent: true, body: 'Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.' },
       { title: 'Every profile, every deliverable, one model.', products: ['web-application'], body: 'Architects, developers, ops, and security work the same governed inventory — and compliance dashboards, generated artifacts, and impact simulations all derive from it, so every output agrees with every other and with the people who produce them.' },
-      { title: 'Frameworks stacked, not siloed.', products: ['web-application'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, DORA — attached from the catalogue and composed into one enforceable governance fabric, so regulations and quality models inform every decision instead of living in separate lists.' },
+      { title: 'Ontologies composed, not siloed.', products: ['web-application'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, DORA — attached from the catalogue and composed into one enforceable governance fabric, so regulations and quality models inform every decision instead of living in separate lists.' },
     ],
     products: [
       {
@@ -77,7 +77,7 @@ export const solutions: Solution[] = [
         name: 'Web Application',
         tagline: 'The application every IT profile works in — for defining, governing, regulating, and supervising their IT landscape.',
         description:
-          'The web application and its backend-for-frontend: the governed definition inventory, the framework catalog & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
+          'The web application and its backend-for-frontend: the governed definition inventory, the ontology catalogue & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
         values: [
           { title: 'One place every IT profile works.', features: ['definitions-management', 'rbac-abac'], body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
           { title: 'Compliance observed, not reconstructed.', features: ['it-compliance-evaluation'], body: 'Continuous appraisal indicators are computed from the model across meta-governance and governance zones — your compliance posture is a live dashboard, not a spreadsheet rebuilt before each audit.' },
@@ -90,7 +90,7 @@ export const solutions: Solution[] = [
           { slug: 'it-impact-simulation', name: 'IT impact simulation', blurb: 'Simulate the ripple effect of a change through typed relations before it happens — impact you can trace, not guess.' },
           { slug: 'definitions-truth-sourcing-management', name: 'GSM Definitions truth sourcing management', blurb: 'Manage and review the sourcing pipelines that keep the model anchored to the real, running system.' },
           { slug: 'definitions-management', name: 'GSM Definitions management', blurb: 'Architecture, dependencies, obligations, and constraints live as one governed inventory — a single source of truth.' },
-          { slug: 'frameworks-management', name: 'GSM Frameworks management', blurb: 'Browse, attach, and compose the published catalogue of frameworks sourced into GSM — a coherent governance fabric from day one.' },
+          { slug: 'ontology-management', name: 'GSM Ontology management', blurb: 'Browse, attach, and compose the published catalogue of ontologies sourced into GSM — a coherent governance fabric from day one.' },
           { slug: 'rbac-abac', name: 'RBAC and ABAC', blurb: 'Role- and attribute-based access control — every IT profile works on the same governed inventory, each seeing and touching exactly what their role and attributes allow.' },
         ],
         docs: [{ href: 'https://docs.poesis.cloud/itip/web-application/', label: 'Web Application documentation' }],
@@ -209,9 +209,8 @@ export const solutions: Solution[] = [
     values: [
       { title: 'What OpenTelemetry is to RUN, GSM is to THINK.', products: ['specifications'], body: 'OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.' },
       { title: 'Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.', products: ['specifications'], body: 'Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype. The result is an explicit, governed world model — declared, not learned.' },
-      { title: 'Governance as code, composed with policy as code.', products: ['specifications', 'frameworks'], emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
-      { title: 'The standard stays testable against systemics.', products: ['specifications', 'research-lab'], emergent: true, body: 'Research is a first-class GSM product, not a footnote in the specification. Hypotheses, cases, and open decisions stay non-normative until a Change Proposal is accepted — so the published standard can be questioned without being rewritten in place.' },
-      { title: 'Trust the standard, not the vendor.', products: ['specifications', 'frameworks'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
+      { title: 'Governance as code, composed with policy as code.', products: ['specifications', 'ontology'], emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
+      { title: 'Trust the standard, not the vendor.', products: ['specifications', 'ontology'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
     ],
     products: [
       {
@@ -236,15 +235,15 @@ export const solutions: Solution[] = [
         ],
       },
       {
-        slug: 'frameworks',
-        name: 'Frameworks',
+        slug: 'ontology',
+        name: 'Ontology',
         tagline: 'Domain, standard, and legal vocabularies — sourced into GSM, ready to enforce.',
         description:
-          'The published, versioned catalogue of vocabularies and governance content sourced into GSM-compatible schemas: domain and standard semantics, legal vocabularies, evaluable Directives and Norms, and executable Mechanisms. Surfaced in ITIP through the Framework Catalog & Composer.',
+          'The published, versioned catalogue of vocabularies and governance content sourced into GSM-compatible schemas: domain and standard semantics, legal vocabularies, evaluable Directives and Norms, and executable Mechanisms. Surfaced in ITIP through the Ontology Catalogue & Composer.',
         values: [
           { title: 'Day-one governance, not a blank page.', features: ['togaf', 'iso-25010', 'iso-25012', 'gdpr', 'nis2', 'scap'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
-          { title: 'The authority\u2019s own taxonomy, clause by clause.', features: ['gdpr', 'nis2', 'togaf'], body: 'Each framework is organized by its own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
-          { title: 'Frameworks that compose, not collide.', features: ['http', 'protocol-semantics', 'itip'], body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
+          { title: 'The authority\u2019s own taxonomy, clause by clause.', features: ['gdpr', 'nis2', 'togaf'], body: 'Each ontology package preserves its source model’s own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
+          { title: 'Ontologies that compose, not collide.', features: ['http', 'protocol-semantics', 'itip'], body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
           { title: 'Maintained as the real world changes.', features: ['catalogue-update-stream', 'dora', 'safe', 'itil'], body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
         ],
         features: [
@@ -262,27 +261,8 @@ export const solutions: Solution[] = [
           { slug: 'itil', name: 'ITIL', blurb: 'IT service-management framework sourcing — planned.' },
           { slug: 'catalogue-update-stream', name: 'Catalogue update stream', blurb: 'The catalogue is continuously re-sourced as standards, regulations, and legal texts evolve — you govern against current requirements, not a frozen snapshot.' },
         ],
-        docs: [{ href: 'https://docs.poesis.cloud/gsm/frameworks/', label: 'Frameworks documentation' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/gsm-frameworks', label: 'gsm-frameworks' }],
-      },
-      {
-        slug: 'research-lab',
-        name: 'Research Lab',
-        tagline: 'Non-normative research — systemics first, GSM under test.',
-        description:
-          'The GSM research product: governed hypotheses, cases, and open decisions about possible future GSM semantics. Systemics is the paradigm. GSM is a candidate systemics model. Research does not publish the standard.',
-        values: [
-          { title: 'The model can be questioned without being rewritten.', features: ['generative-governance', 'archetype-referential-model', 'promotion-path'], body: 'Hypotheses stay non-normative until a GSM Change Proposal is accepted. The specification remains the published contract; the lab is where that contract is tested.' },
-          { title: 'Systemics judges GSM, not the reverse.', features: ['systemics-paradigm', 'generative-governance'], body: 'Purpose, variety, operational closure, recursion, and viability are the tests. A result that cannot state its systemic burden is not ready, whether or not it fits current GSM.' },
-        ],
-        features: [
-          { slug: 'generative-governance', name: 'Generative governance program', blurb: 'Causal model, governance chain, DNA production, cases, and a decision register — numbered records under an explicit protocol.' },
-          { slug: 'archetype-referential-model', name: 'Archetype referential model', blurb: 'Namespaced identity, governed versioning, version-pinned references, static composition, and lifecycle eligibility as one connected contract.' },
-          { slug: 'systemics-paradigm', name: 'Systemics paradigm', blurb: 'Systemics is the paradigm. GSM is a candidate systemics model under test, not the paradigm itself.' },
-          { slug: 'promotion-path', name: 'Promotion path', blurb: 'Accepted research becomes a GSM Change Proposal in gsm-specifications. Landing in the lab never amends the standard.' },
-        ],
-        docs: [{ href: 'https://docs.poesis.cloud/gsm/research-lab/', label: 'Research Lab documentation' }],
-        repos: [{ href: 'https://github.com/poesis-cloud/gsm-research-lab', label: 'gsm-research-lab' }],
+        docs: [{ href: 'https://docs.poesis.cloud/gsm/ontology/', label: 'Ontology documentation' }],
+        repos: [{ href: 'https://github.com/poesis-cloud/gsm-ontology', label: 'gsm-ontology' }],
       },
     ],
   },

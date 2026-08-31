@@ -8,6 +8,7 @@
  */
 import { solutions } from '../data/solutions.ts';
 import { roadmapFor, featureStatus } from '../data/roadmap.ts';
+import ProductRoadmapMini from './ProductRoadmapMini.astro';
 
 const stack = solutions.filter((s) => s.slug !== 'saf');
 const framework = solutions.find((s) => s.slug === 'saf')!;
@@ -40,6 +41,7 @@ const framework = solutions.find((s) => s.slug === 'saf')!;
                         {roadmap && <span class="arch-version">v{roadmap.current}</span>}
                       </h4>
                       <p class="arch-product-tagline">{p.tagline}</p>
+                      {roadmap && <ProductRoadmapMini roadmap={roadmap} />}
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
                         <nav class="arch-comps" aria-label={`${p.name} features`}>
@@ -89,6 +91,7 @@ const framework = solutions.find((s) => s.slug === 'saf')!;
                       {roadmap && <span class="arch-version">v{roadmap.current}</span>}
                     </h4>
                     <p class="arch-product-tagline">{p.tagline}</p>
+                    {roadmap && <ProductRoadmapMini roadmap={roadmap} />}
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
