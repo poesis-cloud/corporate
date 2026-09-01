@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && npx pagefind --site dist",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sync-roadmap": "node --experimental-strip-types scripts/export-roadmap.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",

@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { solutions } from '../data/solutions.ts';
+import { poesisPortfolio } from '../data/poesis-portfolio.ts';
 import { services } from '../data/services.ts';
 import { domains } from '../data/domains.ts';
 
@@ -67,7 +67,7 @@ const insights = [
           Solutions <span aria-hidden="true">▾</span>
         </button>
         <ul class="nav-dropdown-menu" role="menu">
-          {solutions.map((s) => (
+          {poesisPortfolio.map((s) => (
             <li class="nav-subgroup" role="none">
               <div class="nav-subgroup-row">
                 <a href={s.href} role="menuitem">{s.fullName}</a>

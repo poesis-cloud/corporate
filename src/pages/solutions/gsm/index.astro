@@ -4,9 +4,9 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import GsmModelDiagram from '../../../components/GsmModelDiagram.astro';
-import { solutions } from '../../../data/solutions.ts';
+import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
-const gsm = solutions.find((s) => s.slug === 'gsm')!;
+const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
 ---
 <BaseLayout
   title="The Generative System Model — the governed world model"

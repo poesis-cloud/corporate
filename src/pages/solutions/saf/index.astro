@@ -4,9 +4,9 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SafFlowDiagram from '../../../components/SafFlowDiagram.astro';
-import { solutions } from '../../../data/solutions.ts';
+import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
-const saf = solutions.find((s) => s.slug === 'saf')!;
+const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
 const [, ...rest] = saf.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);

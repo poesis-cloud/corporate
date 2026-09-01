@@ -4,9 +4,9 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SieLoopDiagram from '../../../components/SieLoopDiagram.astro';
-import { solutions } from '../../../data/solutions.ts';
+import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
-const sie = solutions.find((s) => s.slug === 'sie')!;
+const sie = poesisPortfolio.find((s) => s.slug === 'sie')!;
 const [, ...rest] = sie.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);

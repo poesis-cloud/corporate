@@ -1,19 +1,19 @@
 ---
 /**
  * ProductRoadmap — compact visual version timeline for one product,
- * rendered from src/data/roadmap.ts (mirror of the canonical register).
+ * derived from src/data/poesis-portfolio.ts (each feature's own milestone).
  */
-import { CLAUSE_URL, type ProductRoadmap } from '../data/roadmap.ts';
+import { CLAUSE_URL, type FeatureMilestone } from '../data/poesis-portfolio.ts';
 
 interface Props {
-  roadmap: ProductRoadmap;
+  milestones: FeatureMilestone[];
 }
 
-const { roadmap } = Astro.props;
+const { milestones } = Astro.props;
 ---
 <div class="roadmap">
   <ol class="roadmap-track">
-    {roadmap.milestones.map((m) => (
+    {milestones.map((m) => (
       <li class={`roadmap-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}>
         <span class="roadmap-dot" aria-hidden="true"></span>
         <span class="roadmap-version">v{m.version}{m.shipped && ' ✓'}</span>

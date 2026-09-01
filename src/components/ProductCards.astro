@@ -4,8 +4,8 @@
  * One clickable card per Product (→ product page), with one pill per
  * Feature (→ feature anchor on the product page).
  */
-import type { Solution } from '../data/solutions.ts';
-import { roadmapFor, featureStatus } from '../data/roadmap.ts';
+import type { Solution } from '../data/poesis-portfolio.ts';
+import { featureStatus } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -16,26 +16,23 @@ const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
 ---
 <div class={`grid ${cols}`} style="margin-top:1.5rem">
   {solution.products.map((p) => {
-    const roadmap = roadmapFor(solution.slug, p.slug);
     return (
       <div class="card card--feature card--product card--static">
         <span class="tag tag--muted">Product</span>
-        {roadmap && <span class="tag tag--muted">v{roadmap.current}</span>}
+        <span class="tag tag--muted">v{p.currentVersion}</span>
         <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
         <p>{p.tagline}</p>
         <p class="card-features-label">Features</p>
         <ul class="feature-list">
           {p.features.map((f) => {
-            const status = featureStatus(roadmap, f.slug);
+            const status = featureStatus(f);
             return (
               <li>
                 <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>
                   {f.name}
-                  {status && (
-                    <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                      {status.shipped ? '✓' : `v${status.version}`}
-                    </span>
-                  )}
+                  <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
+                    {status.shipped ? '✓' : `v${status.version}`}
+                  </span>
                 </a>
               </li>
             );

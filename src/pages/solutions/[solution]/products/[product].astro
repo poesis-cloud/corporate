@@ -8,11 +8,10 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
-import { solutions } from '../../../../data/solutions.ts';
-import { roadmapFor, featureStatus } from '../../../../data/roadmap.ts';
+import { poesisPortfolio, productTimeline, featureStatus } from '../../../../data/poesis-portfolio.ts';
 
 export function getStaticPaths() {
-  return solutions.flatMap((solution) =>
+  return poesisPortfolio.flatMap((solution) =>
     solution.products.map((product) => ({
       params: { solution: solution.slug, product: product.slug },
       props: { solution, product },
@@ -21,7 +20,6 @@ export function getStaticPaths() {
 }
 
 const { solution, product } = Astro.props;
-const roadmap = roadmapFor(solution.slug, product.slug);
 ---
 <BaseLayout
   title={`${product.name} — ${solution.fullName}`}
@@ -85,31 +83,21 @@ const roadmap = roadmapFor(solution.slug, product.slug);
       <h2>What {product.name} does.</h2>
       <div class="grid grid-2" style="margin-top:1.5rem">
         {product.features.map((f) => {
-          const status = featureStatus(roadmap, f.slug);
+          const status = featureStatus(f);
           return (
             <div class="card card--feature card--static" id={f.slug}>
               <span class="tag tag--feature-pill">Feature</span>
-              {status && (
-                <span class={`tag tag--version ${status.shipped ? 'tag--value' : 'tag--muted'}`}>
-                  {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
-                </span>
-              )}
+              <span class={`tag tag--version ${status.shipped ? 'tag--value' : 'tag--muted'}`}>
+                {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
+              </span>
               <h3>{f.name}</h3>
               <p>{f.blurb}</p>
             </div>
           );
         })}
       </div>
-      {roadmap ? (
-        <>
-          <p class="eyebrow" style="margin-top:2.5rem">Roadmap</p>
-          <ProductRoadmap roadmap={roadmap} />
-        </>
-      ) : (
-        <p class="text-small" style="margin-top:1rem;opacity:.75">
-          Features ship per the canonical <a href="https://docs.poesis.cloud/milestones/">Milestones &amp; Versions</a> register — ordered intent, not delivery commitments or dates.
-        </p>
-      )}
+      <p class="eyebrow" style="margin-top:2.5rem">Roadmap</p>
+      <ProductRoadmap milestones={productTimeline(product)} />
     </div>
   </section>
 </BaseLayout>

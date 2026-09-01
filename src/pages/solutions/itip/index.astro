@@ -3,9 +3,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
-import { solutions } from '../../../data/solutions.ts';
+import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
-const itip = solutions.find((s) => s.slug === 'itip')!;
+const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
 const [, ...rest] = itip.tagline.split(' — ');
 const lead = rest.join(' — ');
 const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);

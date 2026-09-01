@@ -6,12 +6,11 @@
  * product → /solutions/[solution]/products/[product],
  * feature → /solutions/[solution]/products/[product]#[feature].
  */
-import { solutions } from '../data/solutions.ts';
-import { roadmapFor, featureStatus } from '../data/roadmap.ts';
+import { poesisPortfolio, productTimeline, featureStatus } from '../data/poesis-portfolio.ts';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 
-const stack = solutions.filter((s) => s.slug !== 'saf');
-const framework = solutions.find((s) => s.slug === 'saf')!;
+const stack = poesisPortfolio.filter((s) => s.slug !== 'saf');
+const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 ---
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
@@ -33,28 +32,25 @@ const framework = solutions.find((s) => s.slug === 'saf')!;
                 <summary>Products</summary>
                 <div class="arch-products">
                   {s.products.map((p) => {
-                    const roadmap = roadmapFor(s.slug, p.slug);
                     return (
                     <section class="arch-product">
                       <h4>
                         <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
-                        {roadmap && <span class="arch-version">v{roadmap.current}</span>}
+                        <span class="arch-version">v{p.currentVersion}</span>
                       </h4>
                       <p class="arch-product-tagline">{p.tagline}</p>
-                      {roadmap && <ProductRoadmapMini roadmap={roadmap} />}
+                      <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
                         <nav class="arch-comps" aria-label={`${p.name} features`}>
                           {p.features.map((f) => {
-                            const status = featureStatus(roadmap, f.slug);
+                            const status = featureStatus(f);
                             return (
                               <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>
                                 {f.name}
-                                {status && (
-                                  <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                                    {status.shipped ? '✓' : `v${status.version}`}
-                                  </span>
-                                )}
+                                <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
+                                  {status.shipped ? '✓' : `v${status.version}`}
+                                </span>
                               </a>
                             );
                           })}
@@ -83,28 +79,25 @@ const framework = solutions.find((s) => s.slug === 'saf')!;
               <summary>Products</summary>
               <div class="arch-products">
                 {framework.products.map((p) => {
-                  const roadmap = roadmapFor(framework.slug, p.slug);
                   return (
                   <section class="arch-product">
                     <h4>
                       <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
-                      {roadmap && <span class="arch-version">v{roadmap.current}</span>}
+                      <span class="arch-version">v{p.currentVersion}</span>
                     </h4>
                     <p class="arch-product-tagline">{p.tagline}</p>
-                    {roadmap && <ProductRoadmapMini roadmap={roadmap} />}
+                    <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
                         {p.features.map((f) => {
-                          const status = featureStatus(roadmap, f.slug);
+                          const status = featureStatus(f);
                           return (
                             <a class="arch-comp" href={`${framework.href}/products/${p.slug}#${f.slug}`}>
                               {f.name}
-                              {status && (
-                                <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                                  {status.shipped ? '✓' : `v${status.version}`}
-                                </span>
-                              )}
+                              <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
+                                {status.shipped ? '✓' : `v${status.version}`}
+                              </span>
                             </a>
                           );
                         })}

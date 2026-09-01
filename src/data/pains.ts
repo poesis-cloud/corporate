@@ -10,7 +10,7 @@
  * addresses", linking back to the domain page). All edges are validated at
  * module load — a dangling reference fails the build.
  */
-import { solutions, type Solution, type ProductDef, type Feature } from './solutions.ts';
+import { poesisPortfolio, type Solution, type ProductDef, type Feature } from './poesis-portfolio.ts';
 import { domains } from './domains.ts';
 
 export interface FeatureRef {
@@ -247,7 +247,7 @@ export const pains: Pain[] = [
 
 /** Resolve a feature reference to its full solution/product/feature objects. Throws on dangling refs. */
 export function resolveFeatureRef(ref: FeatureRef): ResolvedFeature {
-    const solution = solutions.find((s) => s.slug === ref.solution);
+    const solution = poesisPortfolio.find((s) => s.slug === ref.solution);
     if (!solution) throw new Error(`pains.ts: unknown solution '${ref.solution}'`);
     const product = solution.products.find((p) => p.slug === ref.product);
     if (!product) throw new Error(`pains.ts: unknown product '${ref.solution}/${ref.product}'`);
@@ -289,7 +289,7 @@ for (const pain of pains) {
 }
 
 // Every feature must be grounded: referenced by >=1 product value or >=1 pain.
-for (const sol of solutions) {
+for (const sol of poesisPortfolio) {
     for (const prod of sol.products) {
         for (const feat of prod.features) {
             const inValue = prod.values.some((v) => v.features.includes(feat.slug));
