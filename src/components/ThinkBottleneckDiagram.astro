@@ -1,53 +1,88 @@
-<div class="think-comparison">
-  <article class="think-lane think-lane--problem" aria-labelledby="ungoverned-flow-title">
-    <header class="think-lane__head">
-      <span class="think-lane__marker">Without Poesis</span>
-      <h3 id="ungoverned-flow-title">AI scales output faster than implicit understanding can be repeatedly clarified.</h3>
-    </header>
-    <ol class="think-flow">
-      <li class="think-node">
-        <span class="think-node__label">LONGSTANDING THINK GAP</span>
-        <strong>Critical intent stays implicit</strong>
-        <span>Policies, architecture, constraints, and ownership remain open to interpretation.</span>
-      </li>
-      <li class="think-connector"><span>the old cost: repeated clarification</span><b aria-hidden="true">→</b></li>
-      <li class="think-node think-node--amplified">
-        <span class="think-node__label">REPEATED ARTICULATION</span>
-        <strong>Implicit understanding does not scale</strong>
-        <span>Teams repeatedly explain, align, review, and correct what the work is meant to achieve.</span>
-      </li>
-      <li class="think-connector"><span>AI accelerates without shared clarity</span><b aria-hidden="true">→</b></li>
-      <li class="think-node think-node--warning">
-        <span class="think-node__label">AI-ACCELERATED BUILD + RUN</span>
-        <strong>Production hits a control ceiling</strong>
-        <span>Output grows faster than people can resolve assumptions, exceptions, drift, and risk.</span>
-      </li>
-    </ol>
-  </article>
+<div class="think-story" aria-label="How the THINK bottleneck changes with AI and Poesis">
+  <div class="think-story__phases">
+    <article class="think-phase" aria-labelledby="think-history-title">
+      <header>
+        <span class="think-phase__number">01 · Historically</span>
+        <h3 id="think-history-title">THINK stayed implicit and human-bound.</h3>
+      </header>
+      <div class="think-phase__flow">
+        <div class="think-capacity think-capacity--narrow">
+          <strong>THINK</strong>
+          <span>Implicit · manual · human-held</span>
+        </div>
+        <span class="think-phase__arrow" aria-hidden="true">→</span>
+        <div class="think-capacity-group">
+          <div class="think-capacity"><strong>BUILD</strong></div>
+          <div class="think-capacity"><strong>RUN</strong></div>
+        </div>
+      </div>
+      <p>BUILD and RUN adapted to the throughput of manual THINK.</p>
+      <ul class="think-phase__details">
+        <li>Purpose, rules, and constraints lived across people, meetings, documents, and tools.</li>
+        <li>Each handoff reconstructed THINK through clarification, coordination, review, and correction.</li>
+      </ul>
+    </article>
 
-  <article class="think-lane think-lane--poesis" aria-labelledby="governed-flow-title">
-    <header class="think-lane__head">
-      <span class="think-lane__marker">With Poesis</span>
-      <h3 id="governed-flow-title">Poesis scales human understanding so production can move.</h3>
-    </header>
-    <ol class="think-flow">
-      <li class="think-node">
-        <span class="think-node__label">INPUTS</span>
-        <strong>Intent + observed reality</strong>
-        <span>People provide purpose; systems and tools contribute evidence.</span>
-      </li>
-      <li class="think-connector"><span>AI helps source and structure</span><b aria-hidden="true">→</b></li>
-      <li class="think-node think-node--governed">
-        <span class="think-node__label">GOVERNED THINK</span>
-        <strong>Shared, governed definitions</strong>
-        <span>Human judgment becomes explicit, reusable, machine-operable, and authoritative.</span>
-      </li>
-      <li class="think-connector"><span>governed decisions become reusable</span><b aria-hidden="true">→</b></li>
-      <li class="think-node">
-        <span class="think-node__label">BUILD + RUN</span>
-        <strong>Production accelerated, control retained</strong>
-        <span>Humans, software, mechanisms, and agents act from the same governed reference.</span>
-      </li>
-    </ol>
-  </article>
+    <article class="think-phase think-phase--warning" aria-labelledby="think-ai-title">
+      <header>
+        <span class="think-phase__number">02 · AI in BUILD + RUN</span>
+        <h3 id="think-ai-title">The old bottleneck becomes unacceptable.</h3>
+      </header>
+      <div class="think-phase__flow">
+        <div class="think-capacity think-capacity--narrow">
+          <strong>THINK</strong>
+          <span>Same capacity</span>
+        </div>
+        <span class="think-phase__arrow" aria-hidden="true">→</span>
+        <div class="think-capacity-group think-capacity-group--expanded">
+          <div class="think-capacity"><strong>AI-ACCELERATED BUILD</strong></div>
+          <div class="think-capacity"><strong>AI-ACCELERATED RUN</strong></div>
+        </div>
+      </div>
+      <p>The old bottleneck resurfaces inside BUILD as human harnessing: prompts, reviews, corrections, and controls consume the expected gain.</p>
+      <ul class="think-phase__details">
+        <li>AI increases the volume and speed of BUILD and RUN without increasing shared THINK.</li>
+        <li>People spend the gain restoring intent, checking assumptions, and containing drift and risk.</li>
+      </ul>
+    </article>
+
+    <article class="think-phase think-phase--poesis" aria-labelledby="think-poesis-title">
+      <header>
+        <span class="think-phase__number">03 · Poesis</span>
+        <h3 id="think-poesis-title">Apply human + AI capacity to THINK first.</h3>
+      </header>
+      <div class="think-phase__flow">
+        <div class="think-capacity think-capacity--governed">
+          <strong>GOVERNED THINK</strong>
+          <span>Explicit · reusable · machine-operable</span>
+        </div>
+        <span class="think-phase__arrow" aria-hidden="true">→</span>
+        <div class="think-capacity-group think-capacity-group--expanded">
+          <div class="think-capacity"><strong>AI-ACCELERATED BUILD</strong></div>
+          <div class="think-capacity"><strong>AI-ACCELERATED RUN</strong></div>
+        </div>
+      </div>
+      <p>People retain authority while AI helps make THINK governed, reusable, and shared by BUILD and RUN.</p>
+      <ul class="think-phase__details">
+        <li>AI sources and structures intent and RUN evidence upstream, where THINK is formed.</li>
+        <li>Human-governed definitions become the shared reference for faster BUILD and RUN.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="think-story__consequences" aria-label="Consequences of governed THINK">
+    <div class="think-consequence-group">
+      <span>Immediate effects</span>
+      <strong>More BUILD + RUN throughput</strong>
+      <strong>Resource economy</strong>
+      <strong>AI governance by design</strong>
+    </div>
+    <b class="think-consequence-arrow" aria-hidden="true">→</b>
+    <div class="think-consequence-group think-consequence-group--horizon">
+      <span>Three views of one model</span>
+      <strong>Executable organizational twin</strong>
+      <strong>Organization as a Service (OaaS)</strong>
+      <strong>Product as a Service (ProdaaS)</strong>
+    </div>
+  </div>
 </div>

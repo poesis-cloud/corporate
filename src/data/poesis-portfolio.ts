@@ -58,6 +58,7 @@ export interface SolutionValue {
 export interface ProductDef {
   slug: string;
   name: string;
+  excerpt: string;
   tagline: string;
   description: string;
   /** Current shipped version line — may predate any catalogued feature (pre-GA work). */
@@ -72,6 +73,7 @@ export interface Solution {
   slug: string;
   name: string;
   fullName: string;
+  excerpt: string;
   tag: string;
   zone: 'THINK' | 'BUILD';
   href: string;
@@ -86,6 +88,7 @@ export const poesisPortfolio: Solution[] = [
     slug: 'itip',
     name: 'ITIP',
     fullName: 'IT Intelligence Platform',
+    excerpt: 'The digital twin and workspace where people understand, govern, and operate the IT organization through one shared model.',
     tag: 'Domain Intelligence Platform',
     zone: 'THINK',
     href: '/solutions/itip',
@@ -102,6 +105,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'web-application',
         name: 'Web Application',
+        excerpt: 'One governed view of the IT landscape for architecture, delivery, operations, security, and compliance.',
         tagline: 'The application every IT profile works in — for defining, governing, regulating, and supervising their IT landscape.',
         description:
           'The web application and its backend-for-frontend: the governed definition inventory, the ontology catalogue & composer, artifact generation, and evaluation dashboards — one place where the IT landscape is defined, governed, and visualized.',
@@ -129,6 +133,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-blackboard-code-sourcer',
         name: 'Definition Blackboard Code Sourcer',
+        excerpt: 'Keeps governed definitions anchored to reality by sourcing evidence from code, APIs, and infrastructure.',
         tagline: 'Automatic truth sourcing — GSM Definitions authored from your real IT artifacts, continuously, instead of by hand.',
         description:
           'The sourcing pipeline that reads real IT artifacts — source code, API contracts, infrastructure — and automatically sources them into definition proposals: deterministic analysis and generative AI identify what your systems are and post it as evidence-backed contributions to the SIE Definition Blackboard Manager. The definitions that would take months of expert effort to author by hand build themselves — and stay anchored to the real system instead of drifting from it.',
@@ -151,6 +156,7 @@ export const poesisPortfolio: Solution[] = [
     slug: 'sie',
     name: 'SIE',
     fullName: 'Systemic Intelligence Engine',
+    excerpt: 'The definition and execution engine that manages governed definitions, evaluates rules, and executes approved mechanisms.',
     tag: 'Engine',
     zone: 'THINK',
     href: '/solutions/sie',
@@ -167,6 +173,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-manager',
         name: 'Definition Manager',
+        excerpt: 'The authoritative API, lifecycle, and store for every governed definition.',
         tagline: 'The authoritative API, lifecycle enforcer, and store of every governed GSM Definition — the heart of the engine.',
         description:
           'The Definition Manager hosts GSM, manages the Ascription lifecycle, and enforces the DNA governance grammar across tenant schemas. It is the authoritative store of every governed definition.',
@@ -190,6 +197,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'operator',
         name: 'Operator',
+        excerpt: 'Evaluates governed rules and executes approved mechanisms against observed state.',
         tagline: 'The GSM Definition runtime — for evaluating and executing GSM Definitions such as Norms and Mechanisms.',
         description:
           'What a language runtime is to code, the Operator is to governed definitions: it runs them exactly as defined — evaluating Norms into verdicts and executing Mechanisms into actions, fresh from the model on every run — the THINK layer acting on your organization\u2019s operations, and on the model itself.',
@@ -214,6 +222,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-blackboard-manager',
         name: 'Definition Blackboard Manager',
+        excerpt: 'Where humans, AI, and tools combine partial evidence into auditable definition proposals.',
         tagline: 'The shared board where humans, AI, and tools think together about what your systems are — partial views composed into definition proposals.',
         description:
           'The classic blackboard architecture, made a service: no single source — human, AI agent, or analysis tool — sees the whole system, so each posts what it knows onto shared panels as qualified, competing contributions. When the board is complete it is frozen, and its composition enters the Definition Manager as draft definitions — the blackboard is where the collective thinking happens; the governed lifecycle is where the deciding happens.',
@@ -237,6 +246,7 @@ export const poesisPortfolio: Solution[] = [
     slug: 'gsm',
     name: 'GSM',
     fullName: 'Generative System Model',
+    excerpt: 'The shared, vendor-neutral definition model for expressing systems, obligations, structures, and governance.',
     tag: 'Standard Model',
     zone: 'THINK',
     href: '/solutions/gsm',
@@ -253,6 +263,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'specifications',
         name: 'Specifications',
+        excerpt: 'The open core: eight primitives, governance grammar, archetyping, and lifecycle.',
         tagline: 'The core spec — eight primitives, DNA grammar, Archetyping, and the systemic lifecycle.',
         description:
           'The GSM specification: eight systemic primitives, the DNA governance grammar, Archetyping as the open type system, and systemic lifecycle management — the published artifact every implementation is measured against.',
@@ -277,6 +288,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'ontology',
         name: 'Ontology',
+        excerpt: 'Ready-to-use domain, standard, and regulatory vocabularies sourced into GSM.',
         tagline: 'Domain, standard, and legal vocabularies — sourced into GSM, ready to enforce.',
         description:
           'The published, versioned catalogue of vocabularies and governance content sourced into GSM-compatible schemas: domain and standard semantics, legal vocabularies, evaluable Directives and Norms, and executable Mechanisms. Surfaced in ITIP through the Ontology Catalogue & Composer.',
@@ -315,6 +327,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'research-lab',
         name: 'Research Lab',
+        excerpt: 'Tests GSM hypotheses against systemics and promotes what survives into formal change proposals.',
         tagline: 'The non-normative research product — the Generative Governance program, promoted into GSM Change Proposals when it graduates.',
         description:
           'Where GSM is questioned before it is standardized: systemics is the paradigm, GSM is the candidate model under test. Research programs interrogate the primitives, the governance chain, and the production of DNA against executed cases — and what survives is promoted into GSM Change Proposals. Nothing here is normative until it graduates.',
@@ -341,6 +354,7 @@ export const poesisPortfolio: Solution[] = [
     slug: 'saf',
     name: 'SAF',
     fullName: 'Systemic Agentic Framework',
+    excerpt: 'Governed agentic work that transforms shared definitions into controlled workflows and artifacts.',
     tag: 'Systemic Agentic Framework',
     zone: 'THINK',
     href: '/solutions/saf',
@@ -358,6 +372,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'agentic-harness',
         name: 'Agentic Harness',
+        excerpt: 'Deterministic controls for probabilistic agents: resolve steps, authorize actions, validate artifacts, and trace outcomes.',
         tagline: 'The agent harness — deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
         description:
           'The workflow step graphs are validated by a deterministic harness — methodology- and host-agnostic, so the same method runs unchanged on any agent host, and work state lives in your own files and git history.',
@@ -384,6 +399,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'safe-agentic-organization',
         name: 'SAFe Agentic Organization',
+        excerpt: 'Runs portfolio, program, and iteration work through specialized agents and explicit human gates.',
         tagline: 'Portfolio → program → iteration — a preset, IT-scaled agile org chart of agents — for operating efficiently on day-to-day strategic, tactical, and technical concerns.',
         description:
           'Three orchestrators — one per SAFe layer — run role agents from a single entry point: the portfolio layer tests the strategic bet, the program layer tests the feature shape, the iteration layer tests the code that ships.',
@@ -406,6 +422,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'agentic-workspace',
         name: 'Agentic Workspace',
+        excerpt: 'A local-first working tree and shared artifact plane for governed agentic delivery.',
         tagline: 'A shared remote workspace storing local agentic workflow artifacts, enabling local personal agents to operate on the required inputs of other local personal agents — for an end-to-end decentralized agentic workflow model.',
         description:
           'The distribution layer: an installer that wires the Agentic Harness, the SAFe Agentic Organization, and your chosen artifacts into a working tree, plus CI/CD pipelines that validate and publish what agents produce.',
@@ -426,6 +443,7 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'saf-sie-bridge',
         name: 'SAF SIE Bridge',
+        excerpt: 'Turns agentic execution history into evidence-backed contributions to governed definitions.',
         tagline: 'The client sourcer turning harness-governed agentic-execution history into governed context — the concrete form of SAF’s integration with SIE.',
         description:
           'Reads the committed artifacts and session logs the Agentic Workspace holds, produced under the SAFe Agentic Organization’s contracts, and posts what it infers about the executed workflow instances — participation, conformance, deviation — as evidence-backed contributions to the SIE Definition Blackboard Manager. A harness log entry is already a deterministic fact; only the identification drawn from it is ever a contribution.',

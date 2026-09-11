@@ -22,23 +22,23 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <div class="arch-stack">
         {stack.map((s, i) => (
           <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
-            <article class="arch-scope arch-scope--standard">
+            <article class="arch-scope arch-scope--standard" aria-labelledby={`arch-solution-${s.slug}`}>
               <div class="arch-scope-meta">
                 <span class="tag">{s.tag} · Solution</span>
               </div>
-              <h3><a href={s.href}>{s.name}</a></h3>
-              <p>{s.tagline}</p>
+              <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
+              <p>{s.excerpt}</p>
               <details class="arch-group" open>
                 <summary>Products</summary>
                 <div class="arch-products">
                   {s.products.map((p) => {
                     return (
-                    <section class="arch-product">
-                      <h4>
+                    <section class="arch-product" aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
+                      <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
                         <span class="arch-version">v{p.currentVersion}</span>
                       </h4>
-                      <p class="arch-product-tagline">{p.tagline}</p>
+                      <p class="arch-product-tagline">{p.excerpt}</p>
                       <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
@@ -69,23 +69,23 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ generated artifacts</span></div>
 
     <aside class="arch-side">
-          <article class="arch-scope arch-scope--framework">
+          <article class="arch-scope arch-scope--framework" aria-labelledby={`arch-solution-${framework.slug}`}>
             <div class="arch-scope-meta">
               <span class="tag tag--accent-3">{framework.tag} · Solution</span>
             </div>
-            <h3><a href={framework.href}>{framework.name}</a></h3>
-            <p>{framework.tagline}</p>
+            <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>
+            <p>{framework.excerpt}</p>
             <details class="arch-group" open>
               <summary>Products</summary>
               <div class="arch-products">
                 {framework.products.map((p) => {
                   return (
-                  <section class="arch-product">
-                    <h4>
+                  <section class="arch-product" aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
+                    <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
                       <span class="arch-version">v{p.currentVersion}</span>
                     </h4>
-                    <p class="arch-product-tagline">{p.tagline}</p>
+                    <p class="arch-product-tagline">{p.excerpt}</p>
                     <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>

@@ -1,24 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import ArchMap from '../components/ArchMap.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
+import OrganizationTwinDiagram from '../components/OrganizationTwinDiagram.astro';
 import { poesisPortfolio } from '../data/poesis-portfolio.ts';
-
-const platformResponsibilities: Record<string, string> = {
-  gsm: 'Defines systems in a shared, machine-readable model.',
-  sie: 'Manages governed definitions and executes what they authorize.',
-  itip: 'Provides the IT organizational twin and the human surface for governing it.',
-  saf: 'Organizes governed agentic work from intent through delivery.',
-};
-
-const platform = poesisPortfolio.map(({ slug, name, fullName, href, products }) => ({
-  slug,
-  name,
-  fullName,
-  href,
-  responsibility: platformResponsibilities[slug],
-  harness: slug === 'saf' ? products.find((product) => product.slug === 'agentic-harness') : undefined,
-}));
 
 const shippedProductSlugs = new Set([
   'agentic-harness',
@@ -32,13 +18,13 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
     .map((product) => ({ ...product, solutionHref: solution.href })),
 );
 ---
-<BaseLayout title="Govern THINK, then scale BUILD and RUN" pageType="Home">
+<BaseLayout title="Resolve THINK before AI accelerates BUILD and RUN" pageType="Home">
   <section class="hero home-hero">
     <div class="container">
-      <p class="eyebrow">The historic control point before execution</p>
-      <h1>Govern THINK, then scale BUILD and RUN.</h1>
+      <p class="eyebrow">The control point before BUILD and RUN</p>
+      <h1>Resolve THINK before AI accelerates BUILD and RUN.</h1>
       <p class="lead">AI can generate more work than ever. The challenge is making sure people and machines understand the intent, rules, and constraints behind the work.</p>
-      <p class="home-hero__promise">Poesis makes that shared understanding explicit, governed, and reusable. It brings AI into THINK alongside people, multiplying the reach of their decisions so BUILD and RUN can move faster without losing control.</p>
+      <p class="home-hero__promise">Poesis uses AI upstream in THINK to form governed, machine-operable definitions, so BUILD and RUN can move faster without outrunning authorization, validation, human disposition, or traceability.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Run a Pilot</a>
         <a class="btn btn-ghost" href="#bottleneck"><Icon name="arrow-right" /> See the bottleneck</a>
@@ -47,12 +33,12 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
     </div>
   </section>
 
-  <section id="bottleneck" class="section section--soft home-problem">
+  <section id="bottleneck" class="section section--soft home-inversion">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">The problem</p>
-        <h2>Human understanding is the bottleneck in the AI era.</h2>
-        <p class="lead">The problem is not people. It is that critical intent and judgment have historically remained implicit, scattered, and difficult to reuse. AI can now produce faster than humans can repeatedly explain, review, and correct that context. The answer is to make human understanding scalable, not remove humans from the loop.</p>
+        <p class="eyebrow">The thesis</p>
+        <h2>THINK was always the bottleneck. AI makes the gap unacceptable — and fixable.</h2>
+        <p class="lead">Historically, organizations performed THINK implicitly, manually, and repeatedly. BUILD and RUN could scale only as fast as people could reconstruct the purpose, rules, and constraints behind them.</p>
       </div>
       <ThinkBottleneckDiagram />
     </div>
@@ -61,26 +47,26 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
   <section id="mechanism" class="section home-mechanism">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">How Poesis works</p>
-        <h2>Govern the definition before scaling the action.</h2>
-        <p class="lead">Poesis brings two sources of truth into one governed account: what people intend and what the operating system reveals.</p>
+        <p class="eyebrow">How Poesis strengthens THINK</p>
+        <h2>Govern THINK so BUILD and RUN can scale.</h2>
+        <p class="lead">Poesis brings two sources into one governed THINK: what people intend and what RUN reveals.</p>
       </div>
       <div class="home-definition-flow">
         <div class="home-definition-inputs">
           <article>
-            <span class="tag">Human intent</span>
+            <span class="tag">Human THINK</span>
             <h3>Purpose and disposition</h3>
             <p>People set direction, obligations, acceptable boundaries, and the decisions that remain human.</p>
           </article>
           <article>
-            <span class="tag">Observed reality</span>
-            <h3>Evidence from running systems</h3>
-            <p>Code, infrastructure, tools, and operational signals contribute what exists and how it behaves.</p>
+            <span class="tag">Observed RUN</span>
+            <h3>Evidence from RUN</h3>
+            <p>Code, infrastructure, tools, and RUN signals contribute what exists and how it behaves.</p>
           </article>
         </div>
         <div class="home-definition-core">
-          <span class="tag tag--value">Governed definition</span>
-          <h3>A shared, machine-operable account</h3>
+          <span class="tag tag--value">Governed THINK</span>
+          <h3>A shared, machine-operable definition</h3>
           <p>AI helps source and structure the model. Provenance, lifecycle, rules, and human gates determine what becomes authoritative.</p>
         </div>
         <div class="home-definition-actors" aria-label="Actors enabled by governed definitions">
@@ -93,42 +79,27 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
   <section id="outcomes" class="section section--ink home-outcomes">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">What changes</p>
-        <h2>Acceleration becomes governable because the reference point stops drifting.</h2>
+        <p class="eyebrow">One governed THINK reference</p>
+        <h2>Accelerate BUILD and RUN without losing control.</h2>
+        <p class="lead">Humans, software, and AI work from the same governed THINK.</p>
       </div>
       <div class="home-outcome-grid">
-        <article><span class="home-step">01</span><h3>Accelerate BUILD</h3><p>Generate against explicit architecture, constraints, and acceptance conditions instead of reconstructing them in every prompt.</p></article>
-        <article><span class="home-step">02</span><h3>Automate RUN</h3><p>Let governed mechanisms and software evaluate state and act within declared authority.</p></article>
-        <article><span class="home-step">03</span><h3>Control change</h3><p>Keep lifecycle, provenance, authorization, validation, and human disposition attached to the definition.</p></article>
-        <article><span class="home-step">04</span><h3>Trace consequence</h3><p>Connect intent to definition, action, evidence, and outcome without reconstructing the chain after the fact.</p></article>
+        <article><span class="home-step">01</span><h3>Scale BUILD</h3><p>BUILD works from explicit architecture, constraints, and acceptance conditions instead of reconstructing THINK in every prompt.</p></article>
+        <article><span class="home-step">02</span><h3>Scale RUN</h3><p>RUN evaluates state and operates within authority declared by governed THINK.</p></article>
+        <article><span class="home-step">03</span><h3>Govern THINK</h3><p>Lifecycle, provenance, authorization, validation, and human disposition remain attached to the definition.</p></article>
+        <article><span class="home-step">04</span><h3>Close the loop</h3><p>Evidence from BUILD and RUN returns to THINK without reconstructing the chain after the fact.</p></article>
       </div>
     </div>
   </section>
 
-  <section id="platform" class="section home-platform">
+  <section id="portfolio" class="section home-platform">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">The Poesis platform</p>
-        <h2>Four responsibilities. One governed THINK → BUILD → RUN loop.</h2>
-        <p class="lead">The products appear only after the mechanism: each owns a distinct responsibility in forming, managing, applying, or operationalizing governed definitions.</p>
+        <h2>Explore the complete solutions and products map.</h2>
+        <p class="lead">Each solution owns a distinct responsibility in the governed THINK → BUILD → RUN loop. Open the product and feature groups to inspect what exists, what is planned, and how the portfolio fits together.</p>
       </div>
-      <div class="home-platform-grid">
-        {platform.map((solution) => (
-          <article class={`home-platform-item home-platform-item--${solution.slug}`}>
-            <span class="tag">{solution.name}</span>
-            <h3>{solution.fullName}</h3>
-            <p>{solution.responsibility}</p>
-            {solution.harness && (
-              <div class="home-platform-child">
-                <span>Within SAF</span>
-                <strong>{solution.harness.name}</strong>
-                <p>{solution.harness.tagline}</p>
-              </div>
-            )}
-            <a class="btn btn-ghost btn-sm" href={solution.href}><Icon name="arrow-right" /> Explore {solution.name}</a>
-          </article>
-        ))}
-      </div>
+      <ArchMap />
     </div>
   </section>
 
@@ -137,13 +108,13 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
       <div class="section-head">
         <p class="eyebrow">Deployment posture</p>
         <h2>Your models. Your systems. Your control boundary.</h2>
-        <p class="lead">Poesis adds a governance and execution layer without requiring a particular model vendor or replacing the enterprise systems that already run the work.</p>
+        <p class="lead">Poesis adds a governed THINK layer without requiring a particular model vendor or replacing existing BUILD and RUN systems.</p>
       </div>
       <div class="home-deployment-grid">
         <article><Icon name="spark" size={22} /><h3>Model-independent</h3><p>Use the models appropriate to each bounded task; governance does not depend on one provider.</p></article>
-        <article><Icon name="shield" size={22} /><h3>Local and sovereign</h3><p>Keep sensitive execution and working state inside environments you control.</p></article>
+        <article><Icon name="shield" size={22} /><h3>Local and sovereign</h3><p>Keep sensitive THINK and RUN state inside environments you control.</p></article>
         <article><Icon name="layers" size={22} /><h3>Cloud where appropriate</h3><p>Deploy services through managed infrastructure while retaining explicit control boundaries.</p></article>
-        <article><Icon name="grid" size={22} /><h3>Built around your estate</h3><p>Bring governed definitions to existing code, cloud, data, IT, and operating processes.</p></article>
+        <article><Icon name="grid" size={22} /><h3>Built around your estate</h3><p>Connect governed THINK to existing BUILD and RUN environments.</p></article>
       </div>
     </div>
   </section>
@@ -152,7 +123,7 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Shipped proof</p>
-        <h2>Three production foundations have reached 1.0.</h2>
+        <h2>Three Poesis foundations have reached 1.0.</h2>
         <p class="lead">No future platform capability is presented as shipped. These are the released foundations available now.</p>
       </div>
       <div class="home-proof-grid">
@@ -173,13 +144,13 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
       <div class="section-head">
         <p class="eyebrow">Start with one real workflow</p>
         <h2>Prove governed acceleration at a useful scale.</h2>
-        <p class="lead">Choose a workflow where ambiguity, review load, or control risk constrains delivery today. Make its definition explicit, then test how people, software, and AI perform against the same governed reference.</p>
+        <p class="lead">Choose a workflow where limited THINK constrains BUILD or RUN today. Make THINK explicit, then test how people, software, and AI perform across the governed loop.</p>
       </div>
       <ol class="home-pilot-steps">
-        <li><span>01</span><strong>Discover</strong><p>Identify the workflow, actors, evidence, constraints, and human decisions.</p></li>
-        <li><span>02</span><strong>Define</strong><p>Source intent and reality into a governed, machine-operable definition.</p></li>
-        <li><span>03</span><strong>Execute</strong><p>Run bounded software, mechanisms, people, and agents against it.</p></li>
-        <li><span>04</span><strong>Evaluate</strong><p>Measure speed, rework, control, and traceability against the starting point.</p></li>
+        <li><span>01</span><strong>Frame THINK</strong><p>Identify purpose, actors, evidence, constraints, and human decisions.</p></li>
+        <li><span>02</span><strong>Govern THINK</strong><p>Source intent and RUN reality into a governed, machine-operable definition.</p></li>
+        <li><span>03</span><strong>Connect BUILD + RUN</strong><p>Let bounded software, mechanisms, people, and agents use the governed definition.</p></li>
+        <li><span>04</span><strong>Evaluate the loop</strong><p>Measure BUILD and RUN speed, rework, control, and traceability against the starting point.</p></li>
       </ol>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-pilot"><Icon name="play" /> Run a Pilot</a>
@@ -190,10 +161,13 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
 
   <section class="section section--ink home-vision">
     <div class="container">
-      <p class="eyebrow">The longer horizon</p>
-      <h2>Define the world in software; generate it.</h2>
-      <p class="lead">When a system carries a governed definition of what it is, what it should do, and what reality reports back, generation can become part of a controlled systemic loop rather than an isolated act of production.</p>
-      <p class="home-vision__line">That is the path toward governed synthetic autopoiesis: not AI acting alone, but humans, software, mechanisms, and agents regenerating systems from explicit definitions under governance.</p>
+      <div class="section-head">
+        <p class="eyebrow">The digital twin vision</p>
+        <h2>Scan the organization. Generate its executable digital twin.</h2>
+        <p class="lead">Poesis sources organizational DNA from human intent and evidence across THINK, BUILD, and RUN, then generates an executable digital twin from which people can govern, generate, and operate the organization.</p>
+      </div>
+      <OrganizationTwinDiagram />
+      <p class="home-vision__line">Executable organizational twin, Organization as a Service, and Product as a Service are three views of the same model: putting governed organizational productive capacity directly in people&rsquo;s hands. At organizational scale, that is the basis of a human-governed autonomous enterprise.</p>
     </div>
   </section>
 </BaseLayout>
