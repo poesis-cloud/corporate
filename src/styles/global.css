@@ -2071,6 +2071,10 @@ a:hover {
     padding-block: 3.5rem 3rem;
   }
 
+  .home-hero {
+    padding-block: 2.5rem 1rem;
+  }
+
   .hero-cta {
     flex-direction: column;
   }
@@ -2079,12 +2083,54 @@ a:hover {
     width: 100%;
   }
 
+  .home-hero .hero-cta {
+    flex-direction: row;
+  }
+
+  .home-hero .hero-cta .btn {
+    width: auto;
+    flex: 1 1 auto;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
   }
 
   .footer-legal {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .home-hero .lead {
+    font-size: 1.05rem;
+  }
+
+  .home-hero__promise {
+    margin-top: .75rem;
+    padding: .75rem 0 .75rem .75rem;
+    font-size: .95rem;
+  }
+
+  .home-hero .hero-cta {
+    flex-wrap: nowrap;
+    gap: .5rem;
+    margin-top: 1rem;
+  }
+
+  .home-hero .hero-cta .btn {
+    min-width: 0;
+    padding-inline: .5rem;
+    font-size: .82rem;
+  }
+
+  .home-hero .hero-note {
+    margin-top: .75rem;
+    font-size: .72rem;
   }
 }
 
