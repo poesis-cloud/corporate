@@ -28,14 +28,14 @@ const {
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
 const isHomepage = Astro.url.pathname === '/';
-const homepageDescription = 'Poesis addresses a longstanding bottleneck by making human intent, rules, and constraints explicit, governed, and reusable, so people, software, and AI can scale BUILD and RUN without losing control.';
+const homepageDescription = 'Poesis is a Human and AI governance platform where THINK establishes governed definitions that form an organizational digital twin and enable the autonomous enterprise.';
 const resolvedDescription = description ?? (isHomepage
   ? homepageDescription
   : 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard defining systems, the SIE engine operating their definitions, and ITIP applying them to IT.');
 const fullTitle = `${title} · Poesis`;
 const ogImage = new URL('/og-default.png', site).href;
 const socialImageAlt = isHomepage
-  ? 'Poesis — governed THINK for faster, controlled BUILD and RUN'
+  ? 'Poesis — the Human and AI governance platform built on an organizational digital twin'
   : 'Poesis — governed synthetic autopoiesis';
 
 const organizationLd = {
