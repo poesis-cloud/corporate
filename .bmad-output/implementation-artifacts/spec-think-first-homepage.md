@@ -14,13 +14,13 @@ context:
 
 ## Intent
 
-**Problem:** The homepage opens with Poesis's philosophical vocabulary and portfolio structure, forcing new visitors to infer the business problem. The historical bottleneck is THINK: organizations cannot build or run reliably when intent, architecture, policy, and constraints remain ambiguous; generative AI worsens this by accelerating probabilistic BUILD without resolving the upstream ambiguity.
+**Problem:** The homepage opens with Poesis's philosophical vocabulary and portfolio structure, forcing new visitors to infer the business problem. The historical bottleneck is THINK: critical intent and judgment remain implicit, so people must repeatedly explain, align, review, and correct downstream work. Generative AI makes that human articulation bottleneck unacceptable by producing faster than implicit understanding can be reconstructed.
 
-**Approach:** Replace the homepage with a problem-first narrative showing the historical THINK bottleneck, how generative AI amplifies it, and how Poesis uses AI upstream to form governed definitions from which BUILD and RUN can be accelerated, automated, controlled, and traced. Express the causal contrast as one compact two-lane comparison rather than repeating the same flow three times. Reveal products only after the mechanism and outcomes are understood.
+**Approach:** Replace the homepage with a problem-first narrative showing the historical THINK bottleneck, how generative AI amplifies it, and how Poesis brings AI into THINK alongside people to make human understanding explicit, governed, reusable, and machine-operable. Express the causal contrast as one compact "Without Poesis / With Poesis" comparison: uncontrolled output reaches a human control ceiling versus governed understanding unblocking BUILD and RUN. Reveal products only after the mechanism and outcomes are understood.
 
 ## Boundaries & Constraints
 
-**Always:** Keep the homepage in English. Preserve the existing Deep Field identity while making sections lighter, quieter, and easier to scan. Show THINK as an enabler of accelerated or automated BUILD/RUN, not as an isolated layer. Represent human intent and observed reality as inputs to governed definitions. Keep product responsibilities accurate and preserve SAF as the parent of Agentic Harness. Use verifiable shipped proof and truthful maturity labels. Make diagrams semantic, responsive, keyboard-independent, and understandable without animation.
+**Always:** Keep the homepage in English. Preserve the existing Deep Field identity while making sections lighter, quieter, and easier to scan. Show THINK as an enabler of accelerated or automated BUILD/RUN, not as an isolated layer. Represent human intent and observed reality as inputs to governed definitions. Keep humans as the governors of what becomes authoritative; scale the reach and reuse of their decisions rather than implying that Poesis replaces them. Keep product responsibilities accurate and preserve SAF as the parent of Agentic Harness. Use verifiable shipped proof and truthful maturity labels. Make diagrams semantic, responsive, keyboard-independent, and understandable without animation.
 
 **Ask First:** Navigation restructuring, new routes, changes to secondary pages, new dependencies, or claims that alter the canonical roadmap.
 
@@ -46,6 +46,7 @@ context:
 
 **Acceptance Criteria:**
 - Given a first-time visitor sees only the hero and following section, when they scan the page, then they can identify the THINK bottleneck, its worsening under generative AI, and Poesis's role without knowing GSM, SIE, ITIP, or SAF.
+- Given a visitor reads the problem and comparison, when they interpret the human role, then they understand that implicit knowledge and repeated articulation are the constraint, while people retain governance authority.
 - Given the comparison at desktop or 320px mobile width, when it renders, then both causal lanes remain ordered, legible, and free of overlap or horizontal scrolling.
 - Given the platform section, when product responsibilities are read, then GSM defines the model, SIE manages and executes definitions, ITIP is the IT organizational twin and human surface, and SAF organizes governed agentic work with Agentic Harness nested beneath it.
 - Given the proof section, when release claims are checked against the roadmap, then only Agentic Harness, Definition Manager, and Definition Blackboard Manager are labeled shipped at 1.0.
@@ -53,7 +54,7 @@ context:
 
 ## Design Notes
 
-The causal story is the visual anchor: historically, ambiguous THINK throttles BUILD and RUN; generative AI widens BUILD throughput but creates a larger review, rework, and governance burden because THINK remains ambiguous. One comparison presents this as two parallel lanes: the amplified bottleneck without governed THINK, then the Poesis path from intent and observed reality through governed definitions to bounded BUILD and RUN. Use HTML/CSS flows with real text rather than SVG decoration so the argument remains accessible and responsive.
+The causal story is the visual anchor: historically, implicit THINK forced people to reconstruct shared understanding for each downstream decision; generative AI widens BUILD throughput until that repeated articulation becomes the control ceiling. One comparison presents two parallel lanes: without Poesis, AI scales output without shared clarity; with Poesis, AI assists people in sourcing and structuring governed definitions whose decisions can be reused by humans, software, mechanisms, and agents. Use HTML/CSS flows with real text rather than SVG decoration so the argument remains accessible and responsive.
 
 ## Verification
 
@@ -64,3 +65,23 @@ The causal story is the visual anchor: historically, ambiguous THINK throttles B
 - Inspect the homepage at 320px, 768px, 1024px, and 1440px for overlap, clipping, hierarchy, and coherent diagram flow.
 - Verify the first two viewport heights communicate problem, amplification, and solution before exposing product taxonomy.
 - Verify all CTA destinations and maturity claims against the existing route map and roadmap.
+
+## Suggested Review Order
+
+**Commercial Thesis**
+
+- Brahim's concise problem statement leads into Poesis's scalable shared-understanding promise.
+  [`index.astro:34`](../../src/pages/index.astro#L34)
+
+- The problem names repeated articulation, not people, as the AI-era bottleneck.
+  [`index.astro:48`](../../src/pages/index.astro#L48)
+
+**Causal Comparison**
+
+- The retained two-lane design contrasts human control ceilings with reusable governed decisions.
+  [`ThinkBottleneckDiagram.astro:1`](../../src/components/ThinkBottleneckDiagram.astro#L1)
+
+**Discovery Metadata**
+
+- Homepage metadata carries the longstanding-problem framing beyond the visible page.
+  [`BaseLayout.astro:29`](../../src/layouts/BaseLayout.astro#L29)
