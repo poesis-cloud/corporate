@@ -1,6 +1,10 @@
+import { poesisPortfolio } from './poesis-portfolio.ts';
+
 export interface SiteNavigationItem {
   href: string;
   label: string;
+  external?: boolean;
+  children?: SiteNavigationItem[];
 }
 
 export interface SiteNavigationSection {
@@ -15,7 +19,7 @@ export interface SiteNavigationGroup {
 
 export const siteNavigation: SiteNavigationGroup[] = [
   {
-    label: 'Solutions',
+    label: 'Platform',
     sections: [
       {
         label: 'By challenge',
@@ -34,27 +38,17 @@ export const siteNavigation: SiteNavigationGroup[] = [
         ],
       },
       {
-        label: 'Technology',
-        items: [
-          { href: '/solutions/saf/products/agentic-harness', label: 'Agentic Harness' },
-          { href: '/solutions/saf', label: 'SAF' },
-          { href: '/solutions/itip', label: 'ITIP' },
-          { href: '/solutions/sie', label: 'SIE' },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Platform',
-    sections: [
-      {
+        label: 'By solutions',
         items: [
           { href: '/#portfolio', label: 'Platform Overview' },
-          { href: '/solutions/gsm', label: 'GSM' },
-          { href: '/solutions/sie', label: 'SIE' },
-          { href: '/solutions/itip', label: 'ITIP' },
-          { href: '/solutions/saf', label: 'SAF' },
-          { href: '/solutions/saf/products/agentic-harness', label: 'Agentic Harness' },
+          ...poesisPortfolio.map((solution) => ({
+            href: solution.href,
+            label: solution.fullName,
+            children: solution.products.map((product) => ({
+              href: `${solution.href}/products/${product.slug}`,
+              label: product.name,
+            })),
+          })),
         ],
       },
     ],
@@ -82,15 +76,25 @@ export const siteNavigation: SiteNavigationGroup[] = [
     ],
   },
   {
+    label: 'Partnerships',
+    sections: [
+      {
+        items: [
+          { href: '/partnerships/llm-vendor-value-proposal', label: 'LLM Vendor Partnership' },
+        ],
+      },
+    ],
+  },
+  {
     label: 'Developers',
     sections: [
       {
         items: [
-          { href: 'https://docs.poesis.cloud/saf/quickstart/', label: 'Quickstart' },
-          { href: 'https://docs.poesis.cloud', label: 'Documentation' },
-          { href: '/solutions/saf/products/agentic-harness', label: 'Agentic Harness' },
-          { href: 'https://docs.poesis.cloud/gsm/', label: 'GSM Overview' },
-          { href: 'https://github.com/poesis-cloud', label: 'GitHub' },
+          { href: 'https://docs.poesis.cloud', label: 'Documentation', external: true },
+          { href: 'https://github.community/', label: 'Community', external: true },
+          { href: 'https://github.com/orgs/poesis-cloud/repositories', label: 'Repositories', external: true },
+          { href: 'https://github.com/orgs/poesis-cloud/projects', label: 'Projects', external: true },
+          { href: 'https://github.com/poesis-cloud', label: 'Organization', external: true },
         ],
       },
     ],
@@ -112,14 +116,8 @@ export const siteNavigation: SiteNavigationGroup[] = [
       {
         items: [
           { href: '/about', label: 'About' },
-          { href: '/partnerships/llm-vendor-value-proposal', label: 'LLM Vendor Partnership' },
           { href: '/contact', label: 'Contact' },
-        ],
-      },
-      {
-        label: 'Community',
-        items: [
-          { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
+          { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn', external: true },
         ],
       },
     ],
@@ -127,12 +125,12 @@ export const siteNavigation: SiteNavigationGroup[] = [
 ];
 
 const footerLabels: Record<string, string[]> = {
-  Solutions: ['Poesis for IT', 'Poesis for Research'],
-  Platform: ['Platform Overview', 'GSM', 'SIE', 'ITIP', 'SAF', 'Agentic Harness'],
+  Platform: ['Platform Overview', 'IT Intelligence Platform', 'Systemic Intelligence Engine', 'Generative System Model', 'Systemic Agentic Framework'],
   Services: ['Poesis Pilot', 'Consulting', 'SaaS', 'On-prem', 'Certification'],
-  Developers: ['Quickstart', 'Documentation', 'GitHub'],
+  Partnerships: ['LLM Vendor Partnership'],
+  Developers: ['Documentation', 'Community', 'Repositories', 'Projects', 'Organization'],
   Insights: ['Articles', 'Research'],
-  Company: ['About', 'LLM Vendor Partnership', 'Contact', 'LinkedIn'],
+  Company: ['About', 'Contact', 'LinkedIn'],
 };
 
 export const footerNavigation = siteNavigation.map((group) => {

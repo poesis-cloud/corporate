@@ -31,8 +31,24 @@ import { siteNavigation } from '../data/site-navigation.ts';
                 {section.label && <span class="nav-menu-section__label">{section.label}</span>}
                 <ul role="group" aria-label={section.label || group.label}>
                   {section.items.map((item) => (
-                    <li role="none">
-                      <a href={item.href} role="menuitem">{item.label}</a>
+                    <li class={item.children ? 'nav-subgroup' : undefined} role="none">
+                      {item.children ? (
+                        <>
+                          <div class="nav-subgroup-row">
+                            <a href={item.href} role="menuitem" target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined}>{item.label}</a>
+                            <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${item.label} products`}>
+                              <span aria-hidden="true">▸</span>
+                            </button>
+                          </div>
+                          <ul class="nav-submenu" role="menu">
+                            {item.children.map((child) => (
+                              <li role="none"><a href={child.href} role="menuitem">{child.label}</a></li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : (
+                        <a href={item.href} role="menuitem" target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined}>{item.label}</a>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -153,6 +169,17 @@ import { siteNavigation } from '../data/site-navigation.ts';
         });
         const isOpen = dropdown.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    document.querySelectorAll('.nav-subgroup-toggle').forEach((toggle) => {
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const group = toggle.closest('.nav-subgroup');
+        if (!group) return;
+        const isOpen = group.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
       });
     });
 

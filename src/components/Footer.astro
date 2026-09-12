@@ -23,7 +23,7 @@ const legal = [
           <h4>{group.label}</h4>
           <ul>
             {group.items.map((item) => (
-              <li><a href={item.href}>{item.label}</a></li>
+              <li><a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined}>{item.label}</a></li>
             ))}
           </ul>
         </div>
