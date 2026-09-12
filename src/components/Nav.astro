@@ -1,18 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { poesisPortfolio } from '../data/poesis-portfolio.ts';
-import { services } from '../data/services.ts';
-import { domains } from '../data/domains.ts';
-
-const community = [
-  { href: 'https://github.com/poesis-cloud', label: 'GitHub repos' },
-  { href: 'https://github.com/orgs/poesis-cloud/discussions', label: 'GitHub discussions' },
-  { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn' },
-];
-
-const insights = [
-  { href: '/insights/research', label: 'Research' },
-];
+import { siteNavigation } from '../data/site-navigation.ts';
 ---
 <header class="site-header">
   <div class="container nav">
@@ -32,118 +20,27 @@ const insights = [
       <span>Menu</span>
     </button>
     <nav class="nav-links" id="primary-navigation" aria-label="Primary">
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Domains <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          {domains.map((d) => (
-            d.subitems ? (
-              <li class="nav-subgroup" role="none">
-                <div class="nav-subgroup-row">
-                  <a href={d.href} role="menuitem">{d.label}</a>
-                  <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${d.name} pages`}>
-                    <span aria-hidden="true">▸</span>
-                  </button>
-                </div>
-                <ul class="nav-submenu" role="menu">
-                  {d.subitems.map((item) => (
+      {siteNavigation.map((group) => (
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+            {group.label} <span aria-hidden="true">▾</span>
+          </button>
+          <ul class="nav-dropdown-menu" role="menu">
+            {group.sections.map((section) => (
+              <li class="nav-menu-section" role="none">
+                {section.label && <span class="nav-menu-section__label">{section.label}</span>}
+                <ul role="group" aria-label={section.label || group.label}>
+                  {section.items.map((item) => (
                     <li role="none">
                       <a href={item.href} role="menuitem">{item.label}</a>
                     </li>
                   ))}
                 </ul>
               </li>
-            ) : (
-              <li role="none">
-                <a href={d.href} role="menuitem">{d.label}</a>
-              </li>
-            )
-          ))}
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Solutions <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          {poesisPortfolio.map((s) => (
-            <li class="nav-subgroup" role="none">
-              <div class="nav-subgroup-row">
-                <a href={s.href} role="menuitem">{s.fullName}</a>
-                <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${s.name} products`}>
-                  <span aria-hidden="true">▸</span>
-                </button>
-              </div>
-              <ul class="nav-submenu" role="menu">
-                {s.products.map((p) => (
-                  <li role="none">
-                    <a href={`${s.href}/products/${p.slug}`} role="menuitem">{p.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Services <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          {services.map((service) => (
-            <li role="none">
-              <a href={service.href} role="menuitem">{service.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Partnerships <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          <li role="none">
-            <a href="/partnerships/llm-vendor-value-proposal" role="menuitem">LLM Vendor Partnership — Value Proposal</a>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Insights <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          {insights.map((item) => (
-            <li role="none">
-              <a href={item.href} role="menuitem">{item.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Docs <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          <li role="none"><a href="https://docs.poesis.cloud" role="menuitem">Poesis documentation</a></li>
-          <li role="none"><a href="https://docs.poesis.cloud/gsm/" role="menuitem">GSM documentation</a></li>
-          <li role="none"><a href="https://docs.poesis.cloud/itip/" role="menuitem">ITIP documentation</a></li>
-          <li role="none"><a href="https://docs.poesis.cloud/sie/" role="menuitem">SIE documentation</a></li>
-          <li role="none"><a href="https://docs.poesis.cloud/saf/" role="menuitem">SAF documentation</a></li>
-        </ul>
-      </div>
-      <div class="nav-dropdown">
-        <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-          Community <span aria-hidden="true">▾</span>
-        </button>
-        <ul class="nav-dropdown-menu" role="menu">
-          {community.map((item) => (
-            <li role="none">
-              <a href={item.href} role="menuitem" target="_blank" rel="noopener">{item.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+            ))}
+          </ul>
+        </div>
+      ))}
       <div class="nav-dropdown nav-dropdown--search">
         <button class="nav-dropdown-trigger nav-dropdown-trigger--icon" aria-haspopup="true" aria-expanded="false" aria-label="Search">
           <Icon name="search" size={18} />
@@ -153,8 +50,7 @@ const insights = [
           <div class="search-box" id="nav-search" role="search"></div>
         </div>
       </div>
-      <a class="btn btn-ghost btn-sm" href="/about">About</a>
-      <a class="btn btn-primary btn-sm" href="/contact">Talk to us</a>
+      <a class="btn btn-primary btn-sm" href="/contact">Run a Pilot</a>
     </nav>
   </div>
 </header>
@@ -257,17 +153,6 @@ const insights = [
         });
         const isOpen = dropdown.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(isOpen));
-      });
-    });
-
-    document.querySelectorAll('.nav-subgroup-toggle').forEach((toggle) => {
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const group = toggle.closest('.nav-subgroup');
-        if (!group) return;
-        const isOpen = group.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', String(isOpen));
       });
     });
 

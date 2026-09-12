@@ -286,6 +286,30 @@ a:hover {
   text-decoration: none;
 }
 
+.nav-menu-section + .nav-menu-section {
+  margin-top: .45rem;
+  padding-top: .55rem;
+  border-top: 1px solid var(--line);
+}
+
+.nav-menu-section__label {
+  display: block;
+  padding: .2rem .75rem .35rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.nav-menu-section ul {
+  display: grid;
+  gap: .1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .nav-dropdown-trigger--icon {
   padding: .4rem;
   border-radius: 8px;
@@ -1949,6 +1973,7 @@ a:hover {
     max-height: calc(100dvh - 64px);
     overflow-y: auto;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
     gap: .25rem;
     margin: 0;
