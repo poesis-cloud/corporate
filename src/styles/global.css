@@ -2292,23 +2292,13 @@ a:hover {
 
 .think-story__consequences {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) auto minmax(0, .8fr);
-  align-items: center;
-  gap: 1rem;
+  gap: .8rem;
   padding: 1.15rem;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
 }
 
-.think-consequence-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .65rem 1rem;
-}
-
-.think-consequence-group span {
-  flex-basis: 100%;
+.think-story__consequences>span {
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: .68rem;
@@ -2316,90 +2306,44 @@ a:hover {
   text-transform: uppercase;
 }
 
-.think-consequence-group strong {
+.think-consequence-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--line);
+}
+
+.think-consequence-list strong {
+  display: grid;
+  min-height: 4.25rem;
+  place-items: center;
+  padding: .85rem 1rem;
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .05em;
+  text-align: center;
   text-transform: uppercase;
 }
 
-.think-consequence-arrow {
-  color: var(--accent);
-  font-size: 1.25rem;
-  font-weight: 400;
-}
-
-.home-definition-flow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, 1.1fr) minmax(0, .8fr);
-  align-items: stretch;
-  gap: 1rem;
-}
-
-.home-definition-inputs {
-  display: grid;
-  gap: 1rem;
-}
-
-.home-definition-inputs article,
-.home-definition-core,
-.home-definition-actors,
 .home-outcome-grid article,
 .home-platform-item,
 .home-deployment-grid article,
-.home-proof-grid article,
+.home-usecase-grid article,
 .home-pilot-steps li {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, .025);
 }
 
-.home-definition-inputs article,
-.home-definition-core {
-  padding: 1.35rem;
-}
-
-.home-definition-inputs h3,
-.home-definition-core h3 {
-  margin-top: .65rem;
-}
-
-.home-definition-inputs p,
-.home-definition-core p {
-  margin-bottom: 0;
-}
-
-.home-definition-core {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-color: rgba(45, 212, 191, .48);
-  background: rgba(45, 212, 191, .055);
-}
-
-.home-definition-actors {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  overflow: hidden;
-  background: var(--line);
-}
-
-.home-definition-actors span {
-  display: grid;
-  min-height: 6.5rem;
-  place-items: center;
-  padding: .8rem;
-  background: var(--bg);
-  color: var(--ink-soft);
-  text-align: center;
-}
-
 .home-outcome-grid,
 .home-platform-grid,
 .home-deployment-grid,
-.home-proof-grid {
+.home-usecase-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2408,13 +2352,13 @@ a:hover {
 .home-outcome-grid article,
 .home-platform-item,
 .home-deployment-grid article,
-.home-proof-grid article {
+.home-usecase-grid article {
   padding: 1.5rem;
 }
 
 .home-outcome-grid h3,
 .home-deployment-grid h3,
-.home-proof-grid h3 {
+.home-usecase-grid h3 {
   margin-top: .65rem;
 }
 
@@ -2470,17 +2414,13 @@ a:hover {
   color: var(--accent);
 }
 
-.home-proof-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.home-proof-grid article {
+.home-usecase-grid article {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.home-proof-grid article p {
+.home-usecase-grid article p {
   flex: 1;
 }
 
@@ -2524,6 +2464,12 @@ a:hover {
   margin: 1.5rem auto 0;
   color: var(--muted);
   text-align: center;
+}
+
+.home-horizon {
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--line-strong);
 }
 
 .twin-vision {
@@ -2661,8 +2607,7 @@ a:hover {
 
 @media (max-width: 960px) {
 
-  .home-hero .container,
-  .home-definition-flow {
+  .home-hero .container {
     grid-template-columns: 1fr;
   }
 
@@ -2698,26 +2643,17 @@ a:hover {
   .home-outcome-grid,
   .home-platform-grid,
   .home-deployment-grid,
-  .home-proof-grid,
+  .home-usecase-grid,
   .home-pilot-steps {
     grid-template-columns: 1fr;
   }
 
-  .think-story__consequences {
+  .think-consequence-list {
     grid-template-columns: 1fr;
-  }
-
-  .think-consequence-arrow {
-    justify-self: center;
-    transform: rotate(90deg);
   }
 
   .twin-vision__return {
     grid-template-columns: 1fr;
-  }
-
-  .home-definition-actors span {
-    min-height: 5rem;
   }
 }
 

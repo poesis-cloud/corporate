@@ -28,7 +28,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
               </div>
               <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
               <p>{s.excerpt}</p>
-              <details class="arch-group" open>
+              <details class="arch-group">
                 <summary>Products</summary>
                 <div class="arch-products">
                   {s.products.map((p) => {
@@ -75,7 +75,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
             </div>
             <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>
             <p>{framework.excerpt}</p>
-            <details class="arch-group" open>
+            <details class="arch-group">
               <summary>Products</summary>
               <div class="arch-products">
                 {framework.products.map((p) => {

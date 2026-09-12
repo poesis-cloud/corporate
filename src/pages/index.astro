@@ -4,32 +4,19 @@ import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import OrganizationTwinDiagram from '../components/OrganizationTwinDiagram.astro';
-import { poesisPortfolio } from '../data/poesis-portfolio.ts';
-
-const shippedProductSlugs = new Set([
-  'agentic-harness',
-  'definition-manager',
-  'definition-blackboard-manager',
-]);
-
-const shippedProducts = poesisPortfolio.flatMap((solution) =>
-  solution.products
-    .filter((product) => shippedProductSlugs.has(product.slug))
-    .map((product) => ({ ...product, solutionHref: solution.href })),
-);
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero">
     <div class="container">
-      <p class="eyebrow">Shared understanding. Human authority.</p>
+      <p class="eyebrow">The definition layer for people and AI.</p>
       <h1>The Organizational Intelligence Platform.</h1>
-      <p class="lead">AI is entering organizations it doesn't understand. Poesis gives people and AI one governed understanding of how your organization actually works.</p>
+      <p class="lead">AI is entering organizations it doesn't understand. Poesis gives people and AI one shared, governable definition of how your organization actually works.</p>
       <p class="home-hero__promise">Human-governed, traceable definitions form a living digital twin of your organization — the foundation for accelerating BUILD and RUN safely.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Run a Pilot</a>
         <a class="btn btn-ghost" href="#digital-twin"><Icon name="arrow-right" /> See how it works</a>
       </div>
-      <p class="hero-note">Available now · AI-assisted · Human-governed · Traceable by construction</p>
+      <p class="hero-note">Typed · Versioned · Machine-operable · Traceable</p>
     </div>
   </section>
 
@@ -45,62 +32,38 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
     </div>
   </section>
 
-  <section id="mechanism" class="section home-mechanism">
+  <section id="use-cases" class="section home-usecases">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">The operating model</p>
-        <h2>Human and AI governance makes shared definitions authoritative.</h2>
-        <p class="lead">Poesis brings human intent, AI-assisted reasoning, and evidence from RUN into one governed definition process. THINK establishes what should guide work; governance determines which definitions are trusted, in effect, and available to humans and machines.</p>
+        <p class="eyebrow">From definition to operation</p>
+        <h2>What becomes possible when the organization can define itself.</h2>
+        <p class="lead">Poesis connects four jobs that fragmented tools treat separately — so the same governed definitions carry from THINK into BUILD and RUN.</p>
       </div>
-      <div class="home-definition-flow">
-        <div class="home-definition-inputs">
-          <article>
-            <span class="tag">Human THINK</span>
-            <h3>Purpose and disposition</h3>
-            <p>People set direction, obligations, acceptable boundaries, and the decisions that remain human.</p>
-          </article>
-          <article>
-            <span class="tag">Observed RUN</span>
-            <h3>Evidence from RUN</h3>
-            <p>Code, infrastructure, tools, and RUN signals contribute what exists and how it behaves.</p>
-          </article>
-        </div>
-        <div class="home-definition-core">
-          <span class="tag tag--value">Governed definitions</span>
-          <h3>The authoritative output of THINK</h3>
-          <p>AI helps source and structure candidate definitions. Provenance, lifecycle, validation, and human disposition determine what becomes authoritative.</p>
-        </div>
-        <div class="home-definition-actors" aria-label="Actors enabled by governed definitions">
-          <span>Humans</span><span>Software</span><span>Mechanisms</span><span>Bounded agents</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="digital-twin" class="section section--ink home-vision">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">How the platform works</p>
-        <h2>The organizational digital twin makes governed definitions operational.</h2>
-        <p class="lead">Poesis composes authoritative definitions sourced from THINK, BUILD, and RUN into a living, executable model. People govern the model; every authorized human or machine actor can use it.</p>
-      </div>
-      <OrganizationTwinDiagram />
-      <p class="home-vision__line">The organizational digital twin is not a static representation. It is the coherent system of governed definitions through which purpose, structures, rules, constraints, decisions, and evidence remain connected as the organization changes.</p>
-    </div>
-  </section>
-
-  <section id="outcomes" class="section section--ink home-outcomes">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">One governed definition system</p>
-        <h2>Accelerate BUILD and RUN without losing control.</h2>
-        <p class="lead">Humans, software, and AI work from the same authoritative definitions established through THINK.</p>
-      </div>
-      <div class="home-outcome-grid">
-        <article><span class="home-step">01</span><h3>Scale BUILD</h3><p>BUILD works from explicit architecture, constraints, and acceptance conditions instead of reconstructing THINK in every prompt.</p></article>
-        <article><span class="home-step">02</span><h3>Scale RUN</h3><p>RUN evaluates state and operates within authority declared by governed THINK.</p></article>
-        <article><span class="home-step">03</span><h3>Govern THINK</h3><p>Lifecycle, provenance, authorization, validation, and human disposition remain attached to the definition.</p></article>
-        <article><span class="home-step">04</span><h3>Close the loop</h3><p>Evidence from BUILD and RUN returns to THINK without reconstructing the chain after the fact.</p></article>
+      <div class="home-usecase-grid">
+        <article>
+          <span class="home-step">01 · Define</span>
+          <h3>Generate a living digital twin of your organization</h3>
+          <p>Source definitions from people, code, contracts, infrastructure, and evidence; govern them into one traceable organizational digital twin.</p>
+          <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
+        </article>
+        <article>
+          <span class="home-step">02 · Build</span>
+          <h3>Build from the organizational digital twin</h3>
+          <p>Use its governed definitions as machine-operable context for people and AI to turn human-owned concerns into delivered systems, with deterministic checks and human gates.</p>
+          <a class="btn btn-ghost btn-sm" href="/solutions/saf"><Icon name="arrow-right" /> Explore SAF</a>
+        </article>
+        <article>
+          <span class="home-step">03 · Run</span>
+          <h3>Operate from active definitions</h3>
+          <p>Put the digital twin into effect through Mechanisms that guide human, software, and agentic action while consequential authority remains with people.</p>
+          <a class="btn btn-ghost btn-sm" href="/solutions/sie"><Icon name="arrow-right" /> Explore SIE</a>
+        </article>
+        <article>
+          <span class="home-step">04 · Evaluate</span>
+          <h3>Evaluate definitions and the realities they govern</h3>
+          <p>Evaluate definitions for validity, coherence, and fitness; evaluate their runtime subjects through Norms for compliance and drift; return the evidence to THINK for human disposition.</p>
+          <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
+        </article>
       </div>
     </div>
   </section>
@@ -132,22 +95,28 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
     </div>
   </section>
 
-  <section id="proof" class="section home-proof">
+  <section id="digital-twin" class="section section--ink home-vision">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Shipped proof</p>
-        <h2>Three Poesis foundations have reached 1.0.</h2>
-        <p class="lead">No future platform capability is presented as shipped. These are the released foundations available now.</p>
+        <p class="eyebrow">The operational foundation</p>
+        <h2>The organizational digital twin makes governed definitions operational.</h2>
+        <p class="lead">Poesis composes authoritative definitions sourced from THINK, BUILD, and RUN into a living, executable model. People govern the model; every authorized human or machine actor can use it.</p>
       </div>
-      <div class="home-proof-grid">
-        {shippedProducts.map((product) => (
-          <article>
-            <span class="tag tag--value">Shipped · v{product.currentVersion}</span>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <a class="btn btn-ghost btn-sm" href={`${product.solutionHref}/products/${product.slug}`}><Icon name="arrow-right" /> Product details</a>
-          </article>
-        ))}
+      <OrganizationTwinDiagram />
+      <p class="home-vision__line">The organizational digital twin is not a static representation. It is the coherent system of governed definitions through which purpose, structures, Norms, constraints, decisions, and evidence remain connected as the organization changes.</p>
+
+      <div id="autonomous-enterprise" class="home-horizon">
+        <div class="section-head">
+          <p class="eyebrow">The middle- to long-term horizon</p>
+        <h2>Toward the human-governed autonomous enterprise.</h2>
+        <p class="lead">As the organizational digital twin expands across domains, more of the enterprise can adapt and operate from the same governed definition. This is the horizon Poesis is building toward, not a claim that the complete autonomous enterprise is available today.</p>
+        </div>
+        <div class="home-outcome-grid">
+          <article><span class="home-step">01</span><h3>Autonomous enterprise</h3><p>An organization that can adapt and act through machine-operable governance while people retain purpose, authority, and final disposition.</p></article>
+          <article><span class="home-step">02</span><h3>Organization as a Service</h3><p>A human-facing way to govern and operate organizational capabilities through the shared executable model.</p></article>
+          <article><span class="home-step">03</span><h3>Product as a Service</h3><p>A human-facing way to generate, govern, and evolve products from the same organizational definition.</p></article>
+          <article><span class="home-step">04</span><h3>Productive capacity in people&rsquo;s hands</h3><p>People direct governed organizational capacity without surrendering control to opaque or unbounded automation.</p></article>
+        </div>
       </div>
     </div>
   </section>
@@ -168,22 +137,6 @@ const shippedProducts = poesisPortfolio.flatMap((solution) =>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-pilot"><Icon name="play" /> Run a Pilot</a>
         <a class="btn btn-ghost" href="/services/consulting"><Icon name="briefcase" /> Explore transformation services</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="autonomous-enterprise" class="section section--ink home-outcomes">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">The middle- to long-term horizon</p>
-        <h2>Toward the human-governed autonomous enterprise.</h2>
-        <p class="lead">As the organizational digital twin expands across domains, more of the enterprise can adapt and operate from the same governed definition. This is the horizon Poesis is building toward, not a claim that the complete autonomous enterprise is available today.</p>
-      </div>
-      <div class="home-outcome-grid">
-        <article><span class="home-step">01</span><h3>Autonomous enterprise</h3><p>An organization that can adapt and act through machine-operable governance while people retain purpose, authority, and final disposition.</p></article>
-        <article><span class="home-step">02</span><h3>Organization as a Service</h3><p>A human-facing way to govern and operate organizational capabilities through the shared executable model.</p></article>
-        <article><span class="home-step">03</span><h3>Product as a Service</h3><p>A human-facing way to generate, govern, and evolve products from the same organizational definition.</p></article>
-        <article><span class="home-step">04</span><h3>Productive capacity in people&rsquo;s hands</h3><p>People direct governed organizational capacity without surrendering control to opaque or unbounded automation.</p></article>
       </div>
     </div>
   </section>
