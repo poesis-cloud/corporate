@@ -3,6 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
+import { poesisPortfolio, solutionValueAnchor } from '../data/poesis-portfolio.ts';
+
+const valueSet = (solutionSlug: string, primary: string) => {
+  const solution = poesisPortfolio.find((candidate) => candidate.slug === solutionSlug);
+  if (!solution) throw new Error(`Unknown solution '${solutionSlug}'`);
+  return { solution, primary };
+};
+
+const defineValues = valueSet('itip', 'A source of truth AI can act on.');
+const buildValues = valueSet('saf', 'Definitions that generate systems.');
+const runValues = valueSet('sie', 'Harnessed operations.');
+const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero">
@@ -43,24 +55,55 @@ import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
           <span class="home-step">01 · Define</span>
           <h3>Generate a living digital twin of your organization</h3>
           <p>Source definitions from people, code, contracts, infrastructure, and evidence; govern them into one traceable organizational digital twin.</p>
+          <div class="home-usecase-values">
+            <span>The values</span>
+            <nav aria-label={`${defineValues.solution.name} values related to Define`}>
+              {defineValues.solution.values.map((value) => (
+                <a class:list={{ 'is-primary': value.title === defineValues.primary }} href={`${defineValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
+              ))}
+            </nav>
+          </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
         </article>
         <article>
           <span class="home-step">02 · Build</span>
           <h3>Build from the organizational digital twin</h3>
           <p>Use its governed definitions as machine-operable context for people and AI to turn human-owned concerns into delivered systems, with deterministic checks and human gates.</p>
+          <div class="home-usecase-values">
+            <span>The values</span>
+            <nav aria-label={`${buildValues.solution.name} values related to Build`}>
+              {buildValues.solution.values.map((value) => (
+                <a class:list={{ 'is-primary': value.title === buildValues.primary }} href={`${buildValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
+              ))}
+            </nav>
+          </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/saf"><Icon name="arrow-right" /> Explore SAF</a>
         </article>
         <article>
           <span class="home-step">03 · Run</span>
           <h3>Operate from active definitions</h3>
           <p>Put the digital twin into effect through Mechanisms that guide human, software, and agentic action while consequential authority remains with people.</p>
+          <div class="home-usecase-values">
+            <span>The values</span>
+            <nav aria-label={`${runValues.solution.name} values related to Run`}>
+              {runValues.solution.values.map((value) => (
+                <a class:list={{ 'is-primary': value.title === runValues.primary }} href={`${runValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
+              ))}
+            </nav>
+          </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/sie"><Icon name="arrow-right" /> Explore SIE</a>
         </article>
         <article>
           <span class="home-step">04 · Evaluate</span>
           <h3>Evaluate definitions and the realities they govern</h3>
           <p>Evaluate definitions for validity, coherence, and fitness; evaluate their runtime subjects through Norms for compliance and drift; return the evidence to THINK for human disposition.</p>
+          <div class="home-usecase-values">
+            <span>The values</span>
+            <nav aria-label={`${evaluateValues.solution.name} values related to Evaluate`}>
+              {evaluateValues.solution.values.map((value) => (
+                <a class:list={{ 'is-primary': value.title === evaluateValues.primary }} href={`${evaluateValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
+              ))}
+          </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
         </article>
       </div>

@@ -464,6 +464,10 @@ export const poesisPortfolio: Solution[] = [
 /** Flat nav list (Solutions menu). */
 export const solutionLinks = poesisPortfolio.map((s) => ({ href: s.href, label: s.fullName }));
 
+export function solutionValueAnchor(title: string): string {
+  return `value-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+}
+
 function versionSortKey(version: string): number[] {
   const [core, pre] = version.split('-', 2);
   const parts = core.split('.').map((p) => (p === 'x' ? Number.POSITIVE_INFINITY : Number(p)));

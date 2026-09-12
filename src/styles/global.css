@@ -788,6 +788,10 @@ a:hover {
   color: var(--accent);
 }
 
+.solution-value-card {
+  scroll-margin-top: 6rem;
+}
+
 
 .card-cover {
   color: inherit;
@@ -2482,6 +2486,53 @@ a:hover {
   flex: 1;
 }
 
+.home-usecase-values {
+  width: 100%;
+  margin: 1.25rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.home-usecase-values>span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.home-usecase-values nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .45rem 1rem;
+  margin-top: .7rem;
+}
+
+.home-usecase-values a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .45rem;
+  align-items: start;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.4;
+}
+
+.home-usecase-values a::before {
+  content: '\2197';
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.home-usecase-values a:is(:hover, :focus-visible),
+.home-usecase-values a.is-primary {
+  color: var(--ink);
+}
+
+.home-usecase-grid article>.btn {
+  margin-top: auto;
+}
+
 .home-pilot-steps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2694,6 +2745,10 @@ a:hover {
   }
 
   .think-consequence-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-usecase-values nav {
     grid-template-columns: 1fr;
   }
 
