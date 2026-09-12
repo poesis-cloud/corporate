@@ -10,16 +10,19 @@ export interface SiteNavigationItem {
 export interface SiteNavigationSection {
   label?: string;
   items: SiteNavigationItem[];
+  layout?: 'solutions';
 }
 
 export interface SiteNavigationGroup {
   label: string;
   sections: SiteNavigationSection[];
+  layout?: 'platform';
 }
 
 export const siteNavigation: SiteNavigationGroup[] = [
   {
     label: 'Platform',
+    layout: 'platform',
     sections: [
       {
         label: 'By challenge',
@@ -39,6 +42,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
       },
       {
         label: 'By solutions',
+        layout: 'solutions',
         items: [
           { href: '/#portfolio', label: 'Platform Overview' },
           ...poesisPortfolio.map((solution) => ({

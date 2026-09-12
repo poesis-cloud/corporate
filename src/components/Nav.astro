@@ -21,13 +21,13 @@ import { siteNavigation } from '../data/site-navigation.ts';
     </button>
     <nav class="nav-links" id="primary-navigation" aria-label="Primary">
       {siteNavigation.map((group) => (
-        <div class="nav-dropdown">
+        <div class:list={['nav-dropdown', { 'nav-dropdown--platform': group.layout === 'platform' }]}>
           <button class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
             {group.label} <span aria-hidden="true">▾</span>
           </button>
           <ul class="nav-dropdown-menu" role="menu">
             {group.sections.map((section) => (
-              <li class="nav-menu-section" role="none">
+              <li class:list={['nav-menu-section', { 'nav-menu-section--solutions': section.layout === 'solutions' }]} role="none">
                 {section.label && <span class="nav-menu-section__label">{section.label}</span>}
                 <ul role="group" aria-label={section.label || group.label}>
                   {section.items.map((item) => (
@@ -36,9 +36,6 @@ import { siteNavigation } from '../data/site-navigation.ts';
                         <>
                           <div class="nav-subgroup-row">
                             <a href={item.href} role="menuitem" target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined}>{item.label}</a>
-                            <button class="nav-subgroup-toggle" type="button" aria-expanded="false" aria-label={`Show ${item.label} products`}>
-                              <span aria-hidden="true">▸</span>
-                            </button>
                           </div>
                           <ul class="nav-submenu" role="menu">
                             {item.children.map((child) => (
@@ -169,17 +166,6 @@ import { siteNavigation } from '../data/site-navigation.ts';
         });
         const isOpen = dropdown.classList.toggle('open');
         trigger.setAttribute('aria-expanded', String(isOpen));
-      });
-    });
-
-    document.querySelectorAll('.nav-subgroup-toggle').forEach((toggle) => {
-      toggle.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const group = toggle.closest('.nav-subgroup');
-        if (!group) return;
-        const isOpen = group.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', String(isOpen));
       });
     });
 

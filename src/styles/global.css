@@ -369,49 +369,16 @@ a:hover {
 }
 
 .nav-subgroup-row {
-  display: flex;
-  align-items: center;
-  gap: .25rem;
+  display: block;
 }
 
 .nav-subgroup-row>a {
-  flex: 1;
-}
-
-.nav-subgroup-toggle {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.7rem;
-  height: 1.7rem;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  color: var(--ink-soft);
-  font: inherit;
-  font-size: .8rem;
-  cursor: pointer;
-}
-
-.nav-subgroup-toggle:hover,
-.nav-subgroup-toggle:focus-visible {
-  background: rgba(45, 212, 191, .1);
   color: var(--ink);
+  font-weight: 600;
 }
 
-.nav-subgroup-toggle span {
-  display: inline-block;
-  transition: transform .15s ease;
-}
-
-.nav-subgroup.open>.nav-subgroup-row .nav-subgroup-toggle span {
-  transform: rotate(90deg);
-}
-
-.nav-submenu {
-  display: none;
+.nav-dropdown--platform .nav-submenu {
+  display: grid;
   flex-direction: column;
   gap: .1rem;
   margin: 0 0 .25rem .9rem;
@@ -420,13 +387,50 @@ a:hover {
   border-left: 1px solid var(--line);
 }
 
-.nav-subgroup.open>.nav-submenu {
-  display: flex;
-}
-
 .nav-submenu a {
   font-size: .88rem;
   padding: .4rem .6rem;
+}
+
+@media (min-width: 1024px) {
+  .nav-dropdown--platform .nav-dropdown-menu {
+    left: 0;
+    width: min(860px, calc(100vw - 2rem));
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    transform: translateX(-20%);
+    grid-template-columns: minmax(190px, 1fr) minmax(150px, .75fr) minmax(410px, 2fr);
+    align-items: start;
+    gap: .75rem;
+  }
+
+  .nav-dropdown--platform:hover .nav-dropdown-menu,
+  .nav-dropdown--platform:focus-within .nav-dropdown-menu,
+  .nav-dropdown--platform.open .nav-dropdown-menu {
+    display: grid;
+  }
+
+  .nav-dropdown--platform .nav-menu-section+.nav-menu-section {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: .75rem;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+
+  .nav-dropdown--platform .nav-dropdown-menu a {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .nav-dropdown--platform .nav-menu-section--solutions>ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: .75rem;
+  }
+
+  .nav-dropdown--platform .nav-menu-section--solutions>ul>li:first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 640px) {
