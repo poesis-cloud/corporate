@@ -2223,17 +2223,23 @@ a:hover {
   background: rgba(45, 212, 191, .055);
 }
 
+.think-phase header {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
 .think-phase__number {
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .12em;
-  line-height: 1.8;
+  line-height: 1.3;
   text-transform: uppercase;
 }
 
 .think-phase h3 {
-  margin: .55rem 0 0;
+  margin: 0;
   font-size: 1.1rem;
   line-height: 1.45;
 }
