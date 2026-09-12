@@ -2224,8 +2224,12 @@ a:hover {
 }
 
 .think-phase h3 {
-  margin: .45rem 0 0;
-  font-size: 1.25rem;
+  margin: .35rem 0 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 
 .think-phase__number {
@@ -2321,10 +2325,12 @@ a:hover {
 
 .think-story__consequences {
   display: grid;
-  gap: .8rem;
-  padding: 1.15rem;
-  border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(45, 212, 191, .38);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(45, 212, 191, .09), rgba(7, 10, 18, .42) 55%);
+  box-shadow: inset 3px 0 0 rgba(45, 212, 191, .7);
 }
 
 .think-story__consequences>span {
@@ -2338,25 +2344,42 @@ a:hover {
 .think-consequence-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--line);
+  gap: .8rem;
+}
+
+.think-consequence-list article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .3rem .75rem;
+  align-content: start;
+  min-height: 8.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(45, 212, 191, .24);
+  border-radius: 6px;
+  background: rgba(7, 10, 18, .66);
+}
+
+.think-consequence__index {
+  grid-row: 1 / span 2;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .7rem;
 }
 
 .think-consequence-list strong {
-  display: grid;
-  min-height: 4.25rem;
-  place-items: center;
-  padding: .85rem 1rem;
-  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: .72rem;
-  letter-spacing: .05em;
-  text-align: center;
+  font-size: .78rem;
+  letter-spacing: .04em;
   text-transform: uppercase;
+}
+
+.think-consequence-list p {
+  grid-column: 2;
+  margin: .25rem 0 0;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.5;
 }
 
 .home-outcome-grid article,
