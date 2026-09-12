@@ -23,7 +23,7 @@ export const authors: Record<string, Author> = {
   'hamza-abidi': {
     name: 'Hamza Abidi',
     title: 'Chief Technology & Engineering Officer',
-    avatar: '/hamza-abidi.jpg',
+    avatar: '/hamza-abidi.png',
     linkedin: 'https://www.linkedin.com/in/abidihamza',
   },
 };
