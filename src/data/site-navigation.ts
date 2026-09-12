@@ -41,7 +41,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
         ],
       },
       {
-        label: 'By solutions',
+        label: 'By solutions & products',
         layout: 'solutions',
         items: [
           { href: '/#portfolio', label: 'Platform Overview' },
