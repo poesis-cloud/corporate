@@ -2223,29 +2223,19 @@ a:hover {
   background: rgba(45, 212, 191, .055);
 }
 
-.think-phase__title {
-  display: grid;
-  gap: .4rem;
-  margin: 0;
+.think-phase__number {
   color: var(--accent);
   font-family: var(--font-mono);
-  line-height: 1.35;
-}
-
-.think-phase__title>span {
-  font-size: 1.02rem;
-  font-weight: 600;
-  letter-spacing: .01em;
-}
-
-.think-phase__title small {
-  color: var(--accent);
-  font-family: inherit;
-  font-size: .68rem;
-  font-weight: 500;
-  letter-spacing: .14em;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  line-height: 1.8;
   text-transform: uppercase;
-  opacity: .75;
+}
+
+.think-phase h3 {
+  margin: .55rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
 }
 
 .think-phase__flow {
@@ -2309,12 +2299,6 @@ a:hover {
 .think-phase__arrow {
   color: var(--accent);
   font-size: 1.25rem;
-}
-
-.think-phase>p {
-  margin: 0 0 .75rem;
-  color: var(--muted);
-  font-size: .9rem;
 }
 
 .think-phase__details {
