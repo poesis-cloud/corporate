@@ -2459,19 +2459,6 @@ a:hover {
   font-size: .92rem;
 }
 
-.home-vision__line {
-  max-width: 78ch;
-  margin: 1.5rem auto 0;
-  color: var(--muted);
-  text-align: center;
-}
-
-.home-horizon {
-  margin-top: 4rem;
-  padding-top: 4rem;
-  border-top: 1px solid var(--line-strong);
-}
-
 .twin-vision {
   display: grid;
   gap: 1rem;
