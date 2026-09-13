@@ -2604,9 +2604,7 @@ a:hover {
 }
 
 .home-outcome-grid article,
-.home-platform-item,
-.home-usecase-grid article,
-.home-pilot-steps li {
+.home-platform-item {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, .025);
@@ -2619,24 +2617,12 @@ a:hover {
   gap: 1rem;
 }
 
-.home-usecase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
 .home-outcome-grid article,
-.home-platform-item,
-.home-usecase-grid article {
+.home-platform-item {
   padding: 1.5rem;
 }
 
-.home-usecase-grid article {
-  scroll-margin-top: 84px;
-}
-
-.home-outcome-grid h3,
-.home-usecase-grid h3 {
+.home-outcome-grid h3 {
   margin-top: .65rem;
 }
 
@@ -2688,21 +2674,9 @@ a:hover {
   font-size: .9rem;
 }
 
-.home-usecase-grid article {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.home-usecase-grid article p {
-  flex: 1;
-}
-
 .home-usecase-proof {
-  flex: 0 0 auto;
-  width: 100%;
-  margin: 1.1rem 0 0;
-  padding-top: .9rem;
+  margin: .9rem 0 0;
+  padding-top: .8rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: .8rem;
@@ -2719,43 +2693,24 @@ a:hover {
   text-transform: uppercase;
 }
 
-.home-pilot .home-usecase-grid {
-  margin-bottom: 2rem;
+.home-pilot-entries li {
+  grid-template-rows: auto auto 1fr auto;
+  scroll-margin-top: 84px;
 }
 
 .home-pilot-steps {
-  display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  margin: 2.25rem 0 2rem;
+  counter-reset: none;
 }
 
 .home-pilot-steps li {
-  padding: 1.25rem;
+  grid-template-rows: auto 1fr;
 }
 
-.home-pilot-steps span,
-.home-pilot-steps strong {
-  display: block;
-}
-
-.home-pilot-steps span {
-  color: var(--accent);
+.home-pilot-steps .think-consequence__icon {
   font-family: var(--font-mono);
   font-size: .72rem;
-}
-
-.home-pilot-steps strong {
-  margin: .4rem 0;
-  color: var(--ink);
-  font-size: 1.05rem;
-}
-
-.home-pilot-steps p {
-  margin: 0;
-  font-size: .92rem;
 }
 
 .twin-vision {
@@ -2920,8 +2875,8 @@ a:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .home-usecase-grid {
-    grid-template-columns: 1fr;
+  .home-pilot-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .twin-vision__flow {
@@ -2941,18 +2896,12 @@ a:hover {
     grid-row: auto;
     margin-top: 1.25rem;
   }
-
-  .home-pilot-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 640px) {
 
   .home-outcome-grid,
-  .home-platform-grid,
-  .home-usecase-grid,
-  .home-pilot-steps {
+  .home-platform-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2962,6 +2911,10 @@ a:hover {
   }
 
   .home-deployment-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-pilot-steps {
     grid-template-columns: 1fr;
   }
 
