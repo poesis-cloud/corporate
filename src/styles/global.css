@@ -2152,23 +2152,6 @@ a:hover {
   margin-top: clamp(2rem, 5vw, 3.5rem);
 }
 
-.hero-sections__head {
-  grid-column: 1 / -1;
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: .9rem;
-}
-
-.hero-sections__head span {
-  display: block;
-  margin-bottom: .35rem;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
 .hero-sections a {
   display: block;
   padding-top: .85rem;
