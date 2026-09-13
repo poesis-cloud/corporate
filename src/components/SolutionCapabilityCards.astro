@@ -1,0 +1,36 @@
+---
+/**
+ * SolutionCapabilityCards — the Capabilities grid shared by all solution pages.
+ * One anchored card per Capability, each naming the product features that
+ * realize it (→ feature anchor on the product page), the way a product page's
+ * value card names the features that deliver it.
+ */
+import { capabilityRealizations, type Solution } from '../data/poesis-portfolio.ts';
+
+interface Props {
+  solution: Solution;
+}
+
+const { solution } = Astro.props;
+---
+<div class="grid grid-2" style="margin-top:1.5rem">
+  {solution.capabilities.map((c) => {
+    const realizations = capabilityRealizations(solution, c);
+    return (
+      <div class="card card--feature card--static" id={c.slug}>
+        <span class="tag tag--feature-pill">Capability</span>
+        <h3>{c.name}</h3>
+        <p>{c.blurb}</p>
+        <p class="pain-addressed">
+          Realized by{' '}
+          {realizations.map((r, i) => (
+            <>
+              {i > 0 && ' · '}
+              <a href={`${solution.href}/products/${r.product.slug}#${r.feature.slug}`}>{r.feature.name}</a>
+            </>
+          ))}
+        </p>
+      </div>
+    );
+  })}
+</div>

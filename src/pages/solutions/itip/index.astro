@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
+import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
 import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
 const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
@@ -61,6 +62,14 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
           <figcaption>Truth sourcing — repositories, registries, and artifact stores continuously sourced into governed definitions.</figcaption>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Capabilities</p>
+      <h2>What ITIP does.</h2>
+      <SolutionCapabilityCards solution={itip} />
     </div>
   </section>
 

@@ -5,6 +5,7 @@
  * Every box is clickable: solution → /solutions/[solution],
  * product → /solutions/[solution]/products/[product],
  * feature → /solutions/[solution]/products/[product]#[feature].
+ * A solution's capabilities link to their anchor on the solution page.
  */
 import { poesisPortfolio, productTimeline, featureStatus } from '../data/poesis-portfolio.ts';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
@@ -30,6 +31,14 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
               </div>
               <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
               <p>{s.excerpt}</p>
+              <details class="arch-group">
+                <summary>Capabilities</summary>
+                <nav class="arch-comps" aria-label={`${s.name} capabilities`}>
+                  {s.capabilities.map((c) => (
+                    <a class="arch-comp" href={`${s.href}#${c.slug}`}>{c.name}</a>
+                  ))}
+                </nav>
+              </details>
               <details class="arch-group">
                 <summary>Products</summary>
                 <div class="arch-products">
@@ -79,6 +88,14 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
             <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>
             <p>{framework.excerpt}</p>
             <details class="arch-group">
+              <summary>Capabilities</summary>
+              <nav class="arch-comps" aria-label={`${framework.name} capabilities`}>
+                {framework.capabilities.map((c) => (
+                  <a class="arch-comp" href={`${framework.href}#${c.slug}`}>{c.name}</a>
+                ))}
+              </nav>
+            </details>
+            <details class="arch-group">
               <summary>Products</summary>
               <div class="arch-products">
                 {framework.products.map((p) => {
@@ -124,6 +141,9 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 </div>
 
 <style>
+  .arch-scope>.arch-group+.arch-group {
+    margin-top: .7rem;
+  }
   .arch-icon {
     display: grid;
     flex: none;
