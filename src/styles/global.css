@@ -2519,11 +2519,6 @@ a:hover {
   line-height: 1.1;
 }
 
-.think-phase__details li strong {
-  color: var(--ink-soft);
-  font-weight: 500;
-}
-
 .think-phase--poesis .think-phase__details li::before {
   content: '\2713';
   color: var(--accent);
