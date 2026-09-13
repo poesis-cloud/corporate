@@ -7,9 +7,6 @@ import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards
 import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
 const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
-const [, ...rest] = itip.tagline.split(' — ');
-const lead = rest.join(' — ');
-const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 ---
 <BaseLayout
   title="The IT Intelligence Platform — the autonomous enterprise and AI governance platform for IT"
@@ -19,17 +16,16 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
   <section class="hero hero--split">
     <div class="container">
       <p class="eyebrow"><a href="/#portfolio">{itip.tag} · Solution</a></p>
-      <h1>The IT Intelligence Platform — the autonomous enterprise and AI governance platform for IT.</h1>
-      <p class="lead">{leadText}</p>
+      <h1>The IT Intelligence Platform — AI governance for the autonomous enterprise.</h1>
+      <p class="lead">The <strong>digital twin of your IT landscape</strong> — one live, typed model every IT profile and every AI agent can act on.</p>
       <div class="hero-promise">
-        <p>ITIP is the <strong>digital twin of your IT landscape</strong> — the landscape itself, systematically digitalized into a live, typed model, continuously fed by truth sourcers reading the real system, so it cannot drift.</p>
-        <p>And what is digitalized becomes <strong>operable</strong>: simulate a change on the twin before committing it, evaluate compliance against it continuously, generate deliverables from it — every IT profile working the same twin.</p>
+        <p><strong>It cannot drift.</strong> Truth sourcers read the real system and keep the twin fed, instead of humans transcribing it into wikis and spreadsheets.</p>
+        <p><strong>It is operable.</strong> Simulate a change before committing it, evaluate compliance continuously, generate deliverables from it.</p>
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://docs.poesis.cloud/itip/"><Icon name="docs" /> Read the docs</a>
-        <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> Browse the repos</a>
-        <span class="btn btn-ghost" aria-disabled="true"><Icon name="azure" /> SaaS demo instance on Azure <span class="tag tag--muted">coming soon</span></span>
-        <span class="btn btn-ghost" aria-disabled="true"><Icon name="store" /> SaaS product on Azure Marketplace <span class="tag tag--muted">coming soon</span></span>
+        <span class="btn btn-primary" aria-disabled="true"><Icon name="azure" /> SaaS Demo Instance <span class="tag tag--muted">coming soon</span></span>
+        <span class="btn btn-ghost" aria-disabled="true"><Icon name="store" /> SaaS on Azure Marketplace <span class="tag tag--muted">coming soon</span></span>
+        <a class="btn btn-ghost" href="https://docs.poesis.cloud/itip/"><Icon name="docs" /> Read the docs</a>
       </div>
       <p class="hero-note"><a href="/insights/digital-twin-of-an-organization/">Why the twin pattern works here →</a></p>
     </div>

@@ -490,6 +490,17 @@ a:hover {
   box-shadow: 0 0 0 1px rgba(45, 212, 191, .25), 0 10px 28px rgba(0, 0, 0, .35);
 }
 
+/* a "coming soon" CTA still carries its rank in the hierarchy, muted */
+.btn[aria-disabled="true"] {
+  cursor: default;
+  opacity: .72;
+  box-shadow: none;
+}
+
+.btn[aria-disabled="true"]:active {
+  transform: none;
+}
+
 .btn-sm {
   padding: .45rem .8rem;
   font-size: .9rem;
