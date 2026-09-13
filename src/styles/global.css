@@ -2630,14 +2630,20 @@ a:hover {
   flex: 1;
 }
 
-.home-usecase-values {
+.home-usecase-proof {
+  flex: 0 0 auto;
   width: 100%;
-  margin: 1.25rem 0 1rem;
-  padding-top: 1rem;
+  margin: 1.1rem 0 0;
+  padding-top: .9rem;
   border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.5;
 }
 
-.home-usecase-values>span {
+.home-usecase-proof span {
+  display: block;
+  margin-bottom: .3rem;
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: .68rem;
@@ -2645,36 +2651,25 @@ a:hover {
   text-transform: uppercase;
 }
 
-.home-usecase-values nav {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .45rem 1rem;
-  margin-top: .7rem;
+.home-usecase-close {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .025);
 }
 
-.home-usecase-values a {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: .45rem;
-  align-items: start;
+.home-usecase-close p {
+  flex: 1 1 26rem;
+  margin: 0;
   color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.4;
-}
-
-.home-usecase-values a::before {
-  content: '\2197';
-  color: var(--accent);
-  font-family: var(--font-mono);
-}
-
-.home-usecase-values a:is(:hover, :focus-visible),
-.home-usecase-values a.is-primary {
-  color: var(--ink);
-}
-
-.home-usecase-grid article>.btn {
-  margin-top: auto;
+  font-size: .92rem;
+  line-height: 1.6;
 }
 
 .home-pilot-steps {
@@ -2909,10 +2904,6 @@ a:hover {
 
   .think-consequence-list,
   .think-therapy__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home-usecase-values nav {
     grid-template-columns: 1fr;
   }
 
