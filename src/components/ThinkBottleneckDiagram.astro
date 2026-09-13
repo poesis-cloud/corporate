@@ -10,18 +10,21 @@ import Icon from './Icon.astro';
       </header>
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
-          <strong>THINK</strong>
+          <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
           <span>Implicit · manual · human-held</span>
+          <span class="think-capacity__definition">Define, evaluate, govern</span>
         </div>
         <span class="think-phase__arrow" aria-hidden="true">→</span>
         <div class="think-capacity-group">
           <div class="think-capacity">
-            <strong>BUILD</strong>
+            <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
             <span>Human</span>
+            <span class="think-capacity__definition">Generate from definitions</span>
           </div>
           <div class="think-capacity">
-            <strong>RUN</strong>
+            <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
             <span>Human</span>
+            <span class="think-capacity__definition">Operate and observe</span>
           </div>
         </div>
       </div>
@@ -42,18 +45,21 @@ import Icon from './Icon.astro';
       </header>
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
-          <strong>THINK</strong>
+          <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
           <span>Implicit · manual · human-held</span>
+          <span class="think-capacity__definition">Define, evaluate, govern</span>
         </div>
         <span class="think-phase__arrow" aria-hidden="true">→</span>
         <div class="think-capacity-group think-capacity-group--expanded">
           <div class="think-capacity">
-            <strong>BUILD</strong>
+            <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
             <span>AI-accelerated</span>
+            <span class="think-capacity__definition">Generate from definitions</span>
           </div>
           <div class="think-capacity">
-            <strong>RUN</strong>
+            <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
             <span>AI-accelerated</span>
+            <span class="think-capacity__definition">Operate and observe</span>
           </div>
         </div>
       </div>
@@ -77,17 +83,20 @@ import Icon from './Icon.astro';
           <div class="think-phase__flow">
             <a class="think-capacity think-capacity--governed think-capacity--link" href="#use-case-think">
               <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-              <span>Define, evaluate, govern</span>
+              <span>Explicit · AI-accelerated · shared</span>
+              <span class="think-capacity__definition">Define, evaluate, govern</span>
             </a>
             <span class="think-phase__arrow" aria-hidden="true">→</span>
             <div class="think-capacity-group think-capacity-group--expanded">
               <a class="think-capacity think-capacity--link" href="#use-case-build">
                 <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-                <span>Generate from definitions</span>
+                <span>AI-accelerated or programmatic</span>
+                <span class="think-capacity__definition">Generate from definitions</span>
               </a>
               <a class="think-capacity think-capacity--link" href="#use-case-run">
                 <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-                <span>Operate and observe</span>
+                <span>AI-accelerated or programmatic</span>
+                <span class="think-capacity__definition">Operate and observe</span>
               </a>
             </div>
           </div>
