@@ -2455,45 +2455,9 @@ a:hover {
   color: var(--accent);
 }
 
-.think-story__consequences {
-  display: grid;
-  grid-template-columns: minmax(14rem, .72fr) minmax(0, 1.8fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: start;
-  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
-  border-top: 1px solid rgba(45, 212, 191, .5);
-  border-bottom: 1px solid var(--line);
-}
-
-.think-consequence__intro {
-  display: grid;
-  gap: .65rem;
-}
-
-.think-consequence__intro>span {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: .68rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.think-consequence__intro h3 {
-  margin: 0;
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  line-height: 1.25;
-}
-
-.think-consequence__intro p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .88rem;
-  line-height: 1.6;
-}
-
 .think-consequence-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.4rem clamp(1rem, 2.2vw, 1.75rem);
   margin: 0;
   padding: 0;
@@ -2875,14 +2839,6 @@ a:hover {
 
   .think-therapy {
     grid-template-columns: 1fr;
-  }
-
-  .think-story__consequences {
-    grid-template-columns: 1fr;
-  }
-
-  .think-consequence__intro {
-    max-width: 60ch;
   }
 
   .think-consequence-list {
