@@ -36,11 +36,46 @@ export interface Feature {
   milestone: FeatureMilestone;
 }
 
+/** The kinds of item the portfolio is made of. */
+export type ItemType = 'solution' | 'affordance' | 'capability' | 'product' | 'feature' | 'value';
+
+/**
+ * One icon per portfolio item type. An icon here names *what kind of thing*
+ * a card is — never which one it is, and never its delivery status.
+ */
+export const typeIcons: Record<ItemType, string> = {
+  solution: 'compass',
+  affordance: 'grid',
+  capability: 'spark',
+  product: 'briefcase',
+  feature: 'list',
+  value: 'check-badge',
+};
+
+/**
+ * How each dependency relation reads on a card. Every relation qualifier in
+ * the site is issued from here, so one edge is never worded two ways.
+ */
+export const relationQualifiers = {
+  platformValueAffordances: (n: number, emergent = false) =>
+    emergent ? 'Emerges from the combination of affordances' : n > 1 ? 'Delivered together by affordances' : 'Delivered by affordance',
+  affordanceCapabilities: (n: number) => (n > 1 ? 'Realized by solution capabilities' : 'Realized by solution capability'),
+  solutionValueCapabilities: (n: number, emergent = false) =>
+    emergent ? 'Emerges from the combination of capabilities' : n > 1 ? 'Delivered together by capabilities' : 'Delivered by capability',
+  capabilityAffordance: () => 'Contributes to platform affordance',
+  capabilityFeatures: (n: number) => (n > 1 ? 'Realized by product features' : 'Realized by product feature'),
+  productFeatures: () => 'Composed of features',
+  productValueFeatures: (n: number, intrinsic = false) =>
+    intrinsic ? 'Intrinsic to the product' : n > 1 ? 'Delivered together by features' : 'Delivered by feature',
+};
+
 export interface Value {
   title: string;
   body: string;
-  /** Feature slugs (this product) that deliver this value. */
-  features: string[];
+  relations: {
+    /** Feature slugs (this product) that deliver this value. */
+    features: string[];
+  };
   /** True for values that are properties of the product, not feature-delivered. */
   vision?: boolean;
 }
@@ -49,55 +84,195 @@ export interface SolutionValue {
   title: string;
   /** May contain inline HTML (em/strong/a). */
   body: string;
-  /** Capability slugs (this solution) that deliver this value. */
-  capabilities: string[];
+  relations: {
+    /** Capability slugs (this solution) that deliver this value. */
+    capabilities: string[];
+  };
   /** True when the value emerges from capabilities combining rather than summing. */
   emergent?: boolean;
 }
 
 /**
- * One icon per portfolio item type. An icon here names *what kind of thing*
- * a card is — never which one it is, and never its delivery status.
+ * An Affordance is what the Poesis platform as a whole makes possible — the
+ * top of the roll-up chain, above any single solution. Like every other item
+ * here it is not an independent claim: each affordance is the roll-up of the
+ * solution capabilities that realize it, and the gates below refuse an
+ * affordance with no capability and a capability claimed by no affordance.
  */
-export const typeIcons = {
-  solution: 'compass',
-  capability: 'spark',
-  product: 'briefcase',
-  feature: 'list',
-  value: 'check-badge',
-} as const;
+export interface Affordance {
+  slug: string;
+  name: string;
+  /** The one-line claim the affordance makes. */
+  title: string;
+  blurb: string;
+  relations: {
+    /** `solution-slug/capability-slug` refs that realize this affordance. */
+    capabilities: string[];
+  };
+}
 
-/**
- * The six Poesis platform capabilities, as stated on the homepage
- * (ThinkBottleneckDiagram). Every solution capability rolls up into one of
- * them, which is also what gives its card its label.
- */
-export const platformCapabilities = {
-  'governed-context': { label: 'Governed organizational context' },
-  'governance-fabric': { label: 'Composed governance fabric' },
-  'governance-lifecycle': { label: 'Governance lifecycle' },
-  'truth-sourcing': { label: 'Automatic truth sourcing' },
-  'norm-evaluation': { label: 'Continuous norm evaluation' },
-  'generative-delivery': { label: 'Generative delivery' },
-} as const;
+export const affordances: Affordance[] = [
+  {
+    slug: 'governed-context',
+    name: 'Governed organizational context',
+    title: 'Context engineered, not retrieved',
+    blurb: 'Subjects, relations and obligations become typed, shared and machine-operable — the organizational context agents, people and tools consume, instead of prompts and retrieval over documents.',
+    relations: {
+      capabilities: [
+        'itip/governed-it-inventory',
+        'itip/model-grounded-it-reasoning',
+        'sie/authoritative-definition-store',
+        'sie/governed-context-for-ai',
+        'gsm/systemic-primitive-vocabulary',
+        'gsm/open-domain-typing',
+        'gsm/protocol-and-domain-semantics-sourcing',
+        'gsm/portable-conformance-testable-definitions',
+      ],
+    },
+  },
+  {
+    slug: 'governance-fabric',
+    name: 'Composed governance fabric',
+    title: 'Frameworks and regulations, composed',
+    blurb: 'TOGAF, the ISO 25000 series, GDPR, NIS2 and more attach from a catalogue and compose into one enforceable obligation set.',
+    relations: {
+      capabilities: ['itip/it-governance-fabric-composition', 'gsm/framework-and-regulation-sourcing'],
+    },
+  },
+  {
+    slug: 'governance-lifecycle',
+    name: 'Governance lifecycle',
+    title: 'AI proposes, humans put into effect',
+    blurb: 'Definitions are sourced and structured upstream, then promoted through an explicit lifecycle — every authoritative change stays attributed and traceable.',
+    relations: {
+      capabilities: [
+        'sie/governance-lifecycle-enforcement',
+        'gsm/governance-grammar-and-lifecycle',
+        'gsm/research-tested-model-evolution',
+        'saf/human-gated-advancement',
+      ],
+    },
+  },
+  {
+    slug: 'truth-sourcing',
+    name: 'Automatic truth sourcing',
+    title: 'Definitions author themselves',
+    blurb: 'AI and deterministic analysis source definitions from code, contracts, infrastructure and evidence — with confidence and provenance — so the model tracks what actually runs.',
+    relations: {
+      capabilities: [
+        'itip/automatic-it-truth-sourcing',
+        'sie/collaborative-definition-sourcing',
+        'saf/delivery-history-as-governed-context',
+      ],
+    },
+  },
+  {
+    slug: 'norm-evaluation',
+    name: 'Continuous norm evaluation',
+    title: 'Definition checked against reality',
+    blurb: 'Norms are evaluated into deterministic verdicts against observed reality, so divergence surfaces the moment it appears.',
+    relations: {
+      capabilities: ['itip/continuous-it-compliance-evaluation', 'sie/deterministic-norm-evaluation'],
+    },
+  },
+  {
+    slug: 'generative-delivery',
+    name: 'Generative delivery',
+    title: 'Definitions that generate systems',
+    blurb: 'Governed definitions become running systems and derived deliverables — through harnessed agentic workflows with deterministic checks and human gates.',
+    relations: {
+      capabilities: [
+        'itip/it-artifact-generation',
+        'sie/governed-mechanism-execution',
+        'saf/deterministic-agentic-execution',
+        'saf/enforced-artifact-contracts',
+        'saf/agentic-safe-operating-model',
+        'saf/local-first-delivery-plane',
+      ],
+    },
+  },
+];
 
-export type PlatformCapability = keyof typeof platformCapabilities;
+/** A value the platform as a whole yields, delivered by its affordances. */
+export interface PlatformValue {
+  slug: string;
+  name: string;
+  title: string;
+  body: string;
+  relations: {
+    /** Affordance slugs that deliver this value. */
+    affordances: string[];
+  };
+  /** True when the value emerges from affordances combining rather than summing. */
+  emergent?: boolean;
+}
+
+export const platformValues: PlatformValue[] = [
+  {
+    slug: 'analysis-power',
+    name: 'Analysis power',
+    title: 'Impact is traced before the decision',
+    body: 'Changes ripple through typed relations, so blast radius, dependencies, and affected obligations are reasoned from the model instead of guessed in a meeting.',
+    relations: { affordances: ['governed-context', 'truth-sourcing'] },
+    emergent: true,
+  },
+  {
+    slug: 'continuous-evaluation',
+    name: 'Continuous evaluation',
+    title: 'The conformance state is known continuously',
+    body: 'Every divergence between the definition and observed reality surfaces the moment it appears — not at audit time, and not after it has propagated.',
+    relations: { affordances: ['norm-evaluation', 'truth-sourcing'] },
+    emergent: true,
+  },
+  {
+    slug: 'governed-authority',
+    name: 'Governed authority',
+    title: 'Nothing enters into effect ungoverned',
+    body: 'Definitions and operations — proposed by AI or by people — take effect only through the explicit lifecycle, so authority stays human, attributed, and never implicit.',
+    relations: { affordances: ['governance-lifecycle'] },
+  },
+  {
+    slug: 'accountable-autonomy',
+    name: 'Accountable autonomy',
+    title: 'Execution can be delegated without losing control',
+    body: 'Agentic and automated action stays bounded by Directives and Norms, so autonomy can grow without accountability being traded away for speed.',
+    relations: { affordances: ['governance-fabric', 'norm-evaluation', 'generative-delivery'] },
+    emergent: true,
+  },
+  {
+    slug: 'resource-economy',
+    name: 'Resource economy',
+    title: 'The same resources deliver more',
+    body: 'Intent stops being rebuilt at every handoff and deliverables derive from the model, releasing the human and compute capacity that drift consumes.',
+    relations: { affordances: ['governed-context', 'generative-delivery'] },
+    emergent: true,
+  },
+  {
+    slug: 'audit-readiness',
+    name: 'Audit readiness',
+    title: 'The history of the model is the audit trail',
+    body: 'Every governed change is a retained, versioned transition carrying its provenance — evidence exists by construction, not reconstructed under audit pressure.',
+    relations: { affordances: ['governance-lifecycle', 'truth-sourcing'] },
+    emergent: true,
+  },
+];
 
 /**
  * A Capability is to a Solution what a Feature is to a Product: what the
  * solution as a whole can do. Capabilities are not authored independently —
  * each one is the roll-up of the product features that realize it, and the
  * gates below refuse both a capability with no realizing feature and a
- * feature that realizes no capability.
+ * feature that realizes no capability. Which affordance a capability
+ * contributes to is declared on the affordance, not here.
  */
 export interface Capability {
   slug: string;
   name: string;
   blurb: string;
-  /** The Poesis platform capability this one contributes to. */
-  platform: PlatformCapability;
-  /** `product-slug/feature-slug` refs (this solution) that realize this capability. */
-  realizedBy: string[];
+  relations: {
+    /** `product-slug/feature-slug` refs (this solution) that realize this capability. */
+    features: string[];
+  };
 }
 
 export interface ProductDef {
@@ -146,18 +321,18 @@ export const poesisPortfolio: Solution[] = [
     description:
       'ITIP is where every IT profile converges — architects, developers, ops, security and compliance — to define, govern, and visualize the IT landscape through a single governed source of truth. The first domain application built on SIE.',
     values: [
-      { title: 'Governance that stops drifting.', capabilities: ['automatic-it-truth-sourcing', 'governed-it-inventory', 'continuous-it-compliance-evaluation'], emergent: true, body: 'Architecture wikis, compliance spreadsheets, and review boards drift from reality the moment they are written. ITIP makes the <em>definition</em> the living source of truth — sourced from the real system automatically instead of transcribed by hand, governed continuously, and never reconstructed under audit pressure.' },
-      { title: 'A source of truth AI can act on.', capabilities: ['governed-it-inventory', 'model-grounded-it-reasoning'], emergent: true, body: 'Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.' },
-      { title: 'Every profile, every deliverable, one model.', capabilities: ['governed-it-inventory', 'continuous-it-compliance-evaluation', 'it-artifact-generation', 'model-grounded-it-reasoning'], body: 'Architects, developers, ops, and security work the same governed inventory — and compliance dashboards, generated artifacts, and impact simulations all derive from it, so every output agrees with every other and with the people who produce them.' },
-      { title: 'Ontologies composed, not siloed.', capabilities: ['it-governance-fabric-composition'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, DORA — attached from the catalogue and composed into one enforceable governance fabric, so regulations and quality models inform every decision instead of living in separate lists.' },
+      { title: 'Governance that stops drifting.', relations: { capabilities: ['automatic-it-truth-sourcing', 'governed-it-inventory', 'continuous-it-compliance-evaluation'] }, emergent: true, body: 'Architecture wikis, compliance spreadsheets, and review boards drift from reality the moment they are written. ITIP makes the <em>definition</em> the living source of truth — sourced from the real system automatically instead of transcribed by hand, governed continuously, and never reconstructed under audit pressure.' },
+      { title: 'A source of truth AI can act on.', relations: { capabilities: ['governed-it-inventory', 'model-grounded-it-reasoning'] }, emergent: true, body: 'Every definition is typed by a GSM Archetype, so its meaning is explicit and machine-readable. Humans and AI agents reason and generate from the same governed account of what your systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.' },
+      { title: 'Every profile, every deliverable, one model.', relations: { capabilities: ['governed-it-inventory', 'continuous-it-compliance-evaluation', 'it-artifact-generation', 'model-grounded-it-reasoning'] }, body: 'Architects, developers, ops, and security work the same governed inventory — and compliance dashboards, generated artifacts, and impact simulations all derive from it, so every output agrees with every other and with the people who produce them.' },
+      { title: 'Ontologies composed, not siloed.', relations: { capabilities: ['it-governance-fabric-composition'] }, body: 'TOGAF, ISO 25000-series, GDPR, NIS2, DORA — attached from the catalogue and composed into one enforceable governance fabric, so regulations and quality models inform every decision instead of living in separate lists.' },
     ],
     capabilities: [
-      { slug: 'governed-it-inventory', name: 'Governed IT definition inventory', blurb: 'The IT landscape held as one typed, access-controlled inventory of governed definitions — architecture, dependencies, obligations, and constraints in a single source of truth every profile works from.', platform: 'governed-context', realizedBy: ['web-application/definitions-management', 'web-application/rbac-abac'] },
-      { slug: 'it-governance-fabric-composition', name: 'IT governance fabric composition', blurb: 'TOGAF, the ISO 25000 series, GDPR, NIS2 and more attached from the catalogue and composed into one enforceable obligation set over the same IT subjects.', platform: 'governance-fabric', realizedBy: ['web-application/ontology-management'] },
-      { slug: 'automatic-it-truth-sourcing', name: 'Automatic IT truth sourcing', blurb: 'Repositories, API contracts, SBOMs, and infrastructure read into evidence-backed definition proposals — with the sourcing pipelines managed and reviewed from the application.', platform: 'truth-sourcing', realizedBy: ['definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos', 'web-application/definitions-truth-sourcing-management'] },
-      { slug: 'continuous-it-compliance-evaluation', name: 'Continuous IT compliance evaluation', blurb: 'Governance indicators — measures and findings — computed continuously from the model, so the compliance posture is observed instead of reconstructed before an audit.', platform: 'norm-evaluation', realizedBy: ['web-application/it-compliance-evaluation'] },
-      { slug: 'model-grounded-it-reasoning', name: 'Model-grounded IT reasoning', blurb: 'Changes simulated and questions answered against the governed model — blast radius traced through typed relations, every answer citing the definitions it derives from.', platform: 'governed-context', realizedBy: ['web-application/it-impact-simulation', 'web-application/it-copilot'] },
-      { slug: 'it-artifact-generation', name: 'IT artifact generation', blurb: 'ADR packs, compliance evidence, architecture baselines, and roadmaps generated from the definitions, each deliverable traceable back to what it derives from.', platform: 'generative-delivery', realizedBy: ['web-application/it-artifact-factory'] },
+      { slug: 'governed-it-inventory', name: 'Governed IT definition inventory', blurb: 'The IT landscape held as one typed, access-controlled inventory of governed definitions — architecture, dependencies, obligations, and constraints in a single source of truth every profile works from.', relations: { features: ['web-application/definitions-management', 'web-application/rbac-abac'] } },
+      { slug: 'it-governance-fabric-composition', name: 'IT governance fabric composition', blurb: 'TOGAF, the ISO 25000 series, GDPR, NIS2 and more attached from the catalogue and composed into one enforceable obligation set over the same IT subjects.', relations: { features: ['web-application/ontology-management'] } },
+      { slug: 'automatic-it-truth-sourcing', name: 'Automatic IT truth sourcing', blurb: 'Repositories, API contracts, SBOMs, and infrastructure read into evidence-backed definition proposals — with the sourcing pipelines managed and reviewed from the application.', relations: { features: ['definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos', 'web-application/definitions-truth-sourcing-management'] } },
+      { slug: 'continuous-it-compliance-evaluation', name: 'Continuous IT compliance evaluation', blurb: 'Governance indicators — measures and findings — computed continuously from the model, so the compliance posture is observed instead of reconstructed before an audit.', relations: { features: ['web-application/it-compliance-evaluation'] } },
+      { slug: 'model-grounded-it-reasoning', name: 'Model-grounded IT reasoning', blurb: 'Changes simulated and questions answered against the governed model — blast radius traced through typed relations, every answer citing the definitions it derives from.', relations: { features: ['web-application/it-impact-simulation', 'web-application/it-copilot'] } },
+      { slug: 'it-artifact-generation', name: 'IT artifact generation', blurb: 'ADR packs, compliance evidence, architecture baselines, and roadmaps generated from the definitions, each deliverable traceable back to what it derives from.', relations: { features: ['web-application/it-artifact-factory'] } },
     ],
     products: [
       {
@@ -171,11 +346,11 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'One workspace every IT profile shares — where compliance is observed, deliverables and impacts are derived, and the model answers the questions.',
         featuresHeadline: 'Manage definitions and ontologies under access control, keep them sourced from the real system, then evaluate, simulate, generate, and ask.',
         values: [
-          { title: 'One place every IT profile works.', features: ['definitions-management', 'rbac-abac'], body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
-          { title: 'Compliance observed, not reconstructed.', features: ['it-compliance-evaluation'], body: 'Continuous appraisal indicators are computed from the model across meta-governance and governance zones — your compliance posture is a live dashboard, not a spreadsheet rebuilt before each audit.' },
-          { title: 'Deliverables fall out of the model.', features: ['it-artifact-factory'], body: 'ADR packs, compliance evidence, architecture baselines, roadmaps — generated from the definitions, each artifact traceable back to the exact definitions it derives from.' },
-          { title: 'See the impact before you commit.', features: ['it-impact-simulation'], body: 'Changes ripple through typed relations, so the blast radius of a decision is simulated from the model — traced, not guessed in a meeting.' },
-          { title: 'Ask the model, not the wiki.', features: ['it-copilot'], body: 'An assistant that answers from the governed definitions, their archetypes, and their obligations — every answer grounded in what the model says your systems are, with the definitions it reasoned from cited back to you.' },
+          { title: 'One place every IT profile works.', relations: { features: ['definitions-management', 'rbac-abac'] }, body: 'Architects author structures and directives, developers consult specifications, ops watch compliance drift, security audits regulatory coverage — all on the same governed definitions, with no translation silos between them.' },
+          { title: 'Compliance observed, not reconstructed.', relations: { features: ['it-compliance-evaluation'] }, body: 'Continuous appraisal indicators are computed from the model across meta-governance and governance zones — your compliance posture is a live dashboard, not a spreadsheet rebuilt before each audit.' },
+          { title: 'Deliverables fall out of the model.', relations: { features: ['it-artifact-factory'] }, body: 'ADR packs, compliance evidence, architecture baselines, roadmaps — generated from the definitions, each artifact traceable back to the exact definitions it derives from.' },
+          { title: 'See the impact before you commit.', relations: { features: ['it-impact-simulation'] }, body: 'Changes ripple through typed relations, so the blast radius of a decision is simulated from the model — traced, not guessed in a meeting.' },
+          { title: 'Ask the model, not the wiki.', relations: { features: ['it-copilot'] }, body: 'An assistant that answers from the governed definitions, their archetypes, and their obligations — every answer grounded in what the model says your systems are, with the definitions it reasoned from cited back to you.' },
         ],
         features: [
           { slug: 'it-artifact-factory', name: 'IT artifact factory', blurb: 'Generate any IT deliverable from the definitions — ADR packs, compliance evidence, architecture baselines, roadmaps — each artifact traceable to its definitions.', milestone: { version: '1.1', label: 'IT artifact factory' } },
@@ -201,10 +376,10 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Definitions that author themselves from what actually runs — explainable claim by claim, and private by construction.',
         featuresHeadline: 'Read repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions, continuously.',
         values: [
-          { title: 'Definitions author themselves.', features: ['automatic-sourcing-from-code-repos'], body: 'Populating a governance model by hand is the cost that kills most initiatives — thousands of definitions, authored by scarce experts, stale on arrival. The sourcer puts generative AI and deterministic analysis to work authoring them from your artifacts automatically; humans review and govern instead of transcribing.' },
-          { title: 'The model reflects what actually runs.', features: ['automatic-sourcing-from-code-repos'], body: 'A bench of knowledge sources — code index, property graph, SBOM, dependency analysis, inference — continuously reads your repositories and sources them into governed GSM definitions, so governance never drifts from implementation.' },
-          { title: 'Every definition is explainable.', features: ['automatic-sourcing-from-code-repos'], body: 'Each identification is posted with a confidence score and a full provenance envelope — which source, which revision, which tools — never as an unexplained fact.' },
-          { title: 'Private by design.', features: ['automatic-sourcing-from-code-repos'], body: 'Deterministic tool outputs stay in-memory inside the sourcer process; only confidence-bearing contributions ever leave it, sealed and audited on the blackboard.' },
+          { title: 'Definitions author themselves.', relations: { features: ['automatic-sourcing-from-code-repos'] }, body: 'Populating a governance model by hand is the cost that kills most initiatives — thousands of definitions, authored by scarce experts, stale on arrival. The sourcer puts generative AI and deterministic analysis to work authoring them from your artifacts automatically; humans review and govern instead of transcribing.' },
+          { title: 'The model reflects what actually runs.', relations: { features: ['automatic-sourcing-from-code-repos'] }, body: 'A bench of knowledge sources — code index, property graph, SBOM, dependency analysis, inference — continuously reads your repositories and sources them into governed GSM definitions, so governance never drifts from implementation.' },
+          { title: 'Every definition is explainable.', relations: { features: ['automatic-sourcing-from-code-repos'] }, body: 'Each identification is posted with a confidence score and a full provenance envelope — which source, which revision, which tools — never as an unexplained fact.' },
+          { title: 'Private by design.', relations: { features: ['automatic-sourcing-from-code-repos'] }, body: 'Deterministic tool outputs stay in-memory inside the sourcer process; only confidence-bearing contributions ever leave it, sealed and audited on the blackboard.' },
         ],
         features: [
           { slug: 'automatic-sourcing-from-code-repos', name: 'GSM Definitions automatic sourcing from code repos', blurb: 'Source repositories, API contracts, SBOMs, and infrastructure into governed GSM definitions — the model reflects what actually runs, continuously.', milestone: { version: '1.0', label: 'MVP/GA — GSM Definitions automatic sourcing from code repos', ga: true } },
@@ -226,18 +401,18 @@ export const poesisPortfolio: Solution[] = [
     description:
       'SIE is the engine that implements and leverages the GSM standard — it stores governed definitions, enforces their lifecycle, and turns them into a governed AI context that every domain application and frameworks above it operates on.',
     values: [
-      { title: 'A governed AI context.', capabilities: ['authoritative-definition-store', 'governed-context-for-ai'], emergent: true, body: 'SIE leverages the definitions as a typed, machine-readable context — each one carrying its Archetype’s meaning — that applications, humans, and agents can reason and generate from directly. It is the governed account generative models rarely have — what a system <em>is</em>, what it <em>must</em> do, and <em>why</em> — <a href="/insights/governed-context-versus-retrieval/">the layer context engineering is still missing</a>.' },
-      { title: 'Harnessed operations.', capabilities: ['governance-lifecycle-enforcement', 'deterministic-norm-evaluation', 'governed-mechanism-execution'], emergent: true, body: 'Operations on that context are harnessed by the definitions themselves: Directives and Norms bound what AI and agentic actions may do, so every operation stays governed, checked, and trustworthy — intuition proposes, the model disposes.' },
-      { title: 'One closed self-sustaining loop.', capabilities: ['authoritative-definition-store', 'governance-lifecycle-enforcement', 'deterministic-norm-evaluation', 'governed-mechanism-execution', 'collaborative-definition-sourcing'], emergent: true, body: 'Define → realize → evaluate → refine: definitions are stored and lifecycle-enforced, executed against observed state, and refreshed from collaborative sourcing — the system continuously regenerates itself against its own definition, and every divergence surfaces immediately, not at audit time.' },
-      { title: 'Reality feeds governance.', capabilities: ['collaborative-definition-sourcing', 'governance-lifecycle-enforcement'], emergent: true, body: 'Collaborative sourcing lets code sourcers, manual authors, and external frameworks contribute evidence-backed identifications — sealed, audited, and promoted into the governed lifecycle, so the model tracks the real system instead of drifting from it.' },
+      { title: 'A governed AI context.', relations: { capabilities: ['authoritative-definition-store', 'governed-context-for-ai'] }, emergent: true, body: 'SIE leverages the definitions as a typed, machine-readable context — each one carrying its Archetype’s meaning — that applications, humans, and agents can reason and generate from directly. It is the governed account generative models rarely have — what a system <em>is</em>, what it <em>must</em> do, and <em>why</em> — <a href="/insights/governed-context-versus-retrieval/">the layer context engineering is still missing</a>.' },
+      { title: 'Harnessed operations.', relations: { capabilities: ['governance-lifecycle-enforcement', 'deterministic-norm-evaluation', 'governed-mechanism-execution'] }, emergent: true, body: 'Operations on that context are harnessed by the definitions themselves: Directives and Norms bound what AI and agentic actions may do, so every operation stays governed, checked, and trustworthy — intuition proposes, the model disposes.' },
+      { title: 'One closed self-sustaining loop.', relations: { capabilities: ['authoritative-definition-store', 'governance-lifecycle-enforcement', 'deterministic-norm-evaluation', 'governed-mechanism-execution', 'collaborative-definition-sourcing'] }, emergent: true, body: 'Define → realize → evaluate → refine: definitions are stored and lifecycle-enforced, executed against observed state, and refreshed from collaborative sourcing — the system continuously regenerates itself against its own definition, and every divergence surfaces immediately, not at audit time.' },
+      { title: 'Reality feeds governance.', relations: { capabilities: ['collaborative-definition-sourcing', 'governance-lifecycle-enforcement'] }, emergent: true, body: 'Collaborative sourcing lets code sourcers, manual authors, and external frameworks contribute evidence-backed identifications — sealed, audited, and promoted into the governed lifecycle, so the model tracks the real system instead of drifting from it.' },
     ],
     capabilities: [
-      { slug: 'authoritative-definition-store', name: 'Authoritative definition store', blurb: 'Every governed definition created, queried, and retained through one RESTful API across isolated tenant schemas — the authoritative interface to the model, machine-operable at scale.', platform: 'governed-context', realizedBy: ['definition-manager/definitions-management-api', 'definition-manager/definitions-retention'] },
-      { slug: 'governance-lifecycle-enforcement', name: 'Governance lifecycle enforcement', blurb: 'Drafting, promotion, activation, deprecation — enforced as validated state machines over definitions and sourcing boards alike, and published as events the rest of the estate reacts to.', platform: 'governance-lifecycle', realizedBy: ['definition-manager/definitions-lifecycle-enforcement', 'definition-manager/lifecycle-events-mediation', 'definition-blackboard-manager/ks-contributions-lifecycle-enforcement'] },
-      { slug: 'collaborative-definition-sourcing', name: 'Collaborative definition sourcing', blurb: 'Humans, AI, and analysis tools post partial, confidence-bearing identifications onto shared panels; the sealed, retained composition enters the governed lifecycle as drafts.', platform: 'truth-sourcing', realizedBy: ['definition-blackboard-manager/ks-contributions-management-api', 'definition-blackboard-manager/ks-contributions-retention'] },
-      { slug: 'deterministic-norm-evaluation', name: 'Deterministic norm evaluation', blurb: 'Norms evaluated against observed state in a sandboxed runtime with no ambient authority — the same definitions and inputs always produce the same, replayable verdict.', platform: 'norm-evaluation', realizedBy: ['operator/norms-evaluation-api'] },
-      { slug: 'governed-mechanism-execution', name: 'Governed mechanism execution', blurb: 'Activated Mechanisms dispatched to real target technologies through effectors — what may execute, and where, is a governed fact in the model rather than configuration on a server.', platform: 'generative-delivery', realizedBy: ['operator/mechanism-execution-foundations', 'operator/mechanism-execution-technos-integrations'] },
-      { slug: 'governed-context-for-ai', name: 'Governed context for AI', blurb: 'The model and its tooling served to AI applications and agents through the Model Context Protocol — typed, current definitions instead of retrieval over stale documents.', platform: 'governed-context', realizedBy: ['definition-manager/mcp'] },
+      { slug: 'authoritative-definition-store', name: 'Authoritative definition store', blurb: 'Every governed definition created, queried, and retained through one RESTful API across isolated tenant schemas — the authoritative interface to the model, machine-operable at scale.', relations: { features: ['definition-manager/definitions-management-api', 'definition-manager/definitions-retention'] } },
+      { slug: 'governance-lifecycle-enforcement', name: 'Governance lifecycle enforcement', blurb: 'Drafting, promotion, activation, deprecation — enforced as validated state machines over definitions and sourcing boards alike, and published as events the rest of the estate reacts to.', relations: { features: ['definition-manager/definitions-lifecycle-enforcement', 'definition-manager/lifecycle-events-mediation', 'definition-blackboard-manager/ks-contributions-lifecycle-enforcement'] } },
+      { slug: 'collaborative-definition-sourcing', name: 'Collaborative definition sourcing', blurb: 'Humans, AI, and analysis tools post partial, confidence-bearing identifications onto shared panels; the sealed, retained composition enters the governed lifecycle as drafts.', relations: { features: ['definition-blackboard-manager/ks-contributions-management-api', 'definition-blackboard-manager/ks-contributions-retention'] } },
+      { slug: 'deterministic-norm-evaluation', name: 'Deterministic norm evaluation', blurb: 'Norms evaluated against observed state in a sandboxed runtime with no ambient authority — the same definitions and inputs always produce the same, replayable verdict.', relations: { features: ['operator/norms-evaluation-api'] } },
+      { slug: 'governed-mechanism-execution', name: 'Governed mechanism execution', blurb: 'Activated Mechanisms dispatched to real target technologies through effectors — what may execute, and where, is a governed fact in the model rather than configuration on a server.', relations: { features: ['operator/mechanism-execution-foundations', 'operator/mechanism-execution-technos-integrations'] } },
+      { slug: 'governed-context-for-ai', name: 'Governed context for AI', blurb: 'The model and its tooling served to AI applications and agents through the Model Context Protocol — typed, current definitions instead of retrieval over stale documents.', relations: { features: ['definition-manager/mcp'] } },
     ],
     products: [
       {
@@ -251,10 +426,10 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'A lifecycle that cannot be corrupted, served as an API, audit-ready by construction, and announcing its own changes.',
         featuresHeadline: 'Create, govern, and retain every definition through one API — broadcast its transitions, and serve the model to AI over MCP.',
         values: [
-          { title: 'Governance you can\u2019t corrupt.', features: ['definitions-lifecycle-enforcement'], body: 'The Ascription lifecycle is a validated state machine with referee preconditions — invalid transitions, malformed grammar, and orphaned references never enter the model.' },
-          { title: 'An API, not a document store.', features: ['definitions-management-api'], body: 'Definitions are served through a RESTful API with live OpenAPI and structured problem responses — machine-operable at scale, across isolated tenant schemas.' },
-          { title: 'Audit-ready by construction.', features: ['definitions-retention'], body: 'Every governed change is a retained, versioned state transition — the history of the model is the audit trail, not a report assembled after the fact.' },
-          { title: 'The model announces its own changes.', features: ['lifecycle-events-mediation'], body: 'Lifecycle transitions are published as events the rest of the estate reacts to — downstream services, sourcers, and agents learn that a definition moved the moment it moves, instead of polling for it.' },
+          { title: 'Governance you can\u2019t corrupt.', relations: { features: ['definitions-lifecycle-enforcement'] }, body: 'The Ascription lifecycle is a validated state machine with referee preconditions — invalid transitions, malformed grammar, and orphaned references never enter the model.' },
+          { title: 'An API, not a document store.', relations: { features: ['definitions-management-api'] }, body: 'Definitions are served through a RESTful API with live OpenAPI and structured problem responses — machine-operable at scale, across isolated tenant schemas.' },
+          { title: 'Audit-ready by construction.', relations: { features: ['definitions-retention'] }, body: 'Every governed change is a retained, versioned state transition — the history of the model is the audit trail, not a report assembled after the fact.' },
+          { title: 'The model announces its own changes.', relations: { features: ['lifecycle-events-mediation'] }, body: 'Lifecycle transitions are published as events the rest of the estate reacts to — downstream services, sourcers, and agents learn that a definition moved the moment it moves, instead of polling for it.' },
         ],
         features: [
           { slug: 'definitions-management-api', name: 'GSM Definitions management RESTful API', blurb: 'A RESTful API to create, read, update, and query every governed GSM definition — the authoritative interface to the model.', milestone: { version: '1.0', label: 'MVP/GA — Definitions management API, lifecycle enforcement, retention', shipped: true, ga: true } },
@@ -277,10 +452,10 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Governance that executes — sandboxed, reproducible, decided by the model alone, and always running the version governance approved.',
         featuresHeadline: 'Evaluate Norms into verdicts and execute Mechanisms into actions, across a widening set of target technologies.',
         values: [
-          { title: 'Governance that executes.', features: ['norms-evaluation-api', 'mechanism-execution-foundations'], body: 'Norms stop being documents someone must remember to check: the Operator evaluates them into deterministic verdicts, and Mechanisms carry the resulting actions — enforcement becomes a control loop that runs, not a review meeting that lags.' },
-          { title: 'Sandboxed, reproducible verdicts.', features: ['norms-evaluation-api', 'mechanism-execution-foundations'], body: 'Rules run in an isolated sandbox with no ambient authority and no side effects — the same definitions and the same inputs always produce the same verdict, so every judgment can be replayed, audited, and trusted.' },
-          { title: 'Only the model decides what runs.', features: ['mechanism-execution-foundations', 'mechanism-execution-technos-integrations'], body: 'Only definitions the lifecycle has activated can execute, and only where the model explicitly wires them to an Operator — execution rights are governed facts in the model, not configuration on a server.' },
-          { title: 'Always the current governed version.', features: ['norms-evaluation-api', 'mechanism-execution-foundations'], body: 'The Operator stores nothing: every run resolves the definition fresh from the Definition Manager and discards its context afterwards — what executes is always the version governance approved, never a stale copy.' },
+          { title: 'Governance that executes.', relations: { features: ['norms-evaluation-api', 'mechanism-execution-foundations'] }, body: 'Norms stop being documents someone must remember to check: the Operator evaluates them into deterministic verdicts, and Mechanisms carry the resulting actions — enforcement becomes a control loop that runs, not a review meeting that lags.' },
+          { title: 'Sandboxed, reproducible verdicts.', relations: { features: ['norms-evaluation-api', 'mechanism-execution-foundations'] }, body: 'Rules run in an isolated sandbox with no ambient authority and no side effects — the same definitions and the same inputs always produce the same verdict, so every judgment can be replayed, audited, and trusted.' },
+          { title: 'Only the model decides what runs.', relations: { features: ['mechanism-execution-foundations', 'mechanism-execution-technos-integrations'] }, body: 'Only definitions the lifecycle has activated can execute, and only where the model explicitly wires them to an Operator — execution rights are governed facts in the model, not configuration on a server.' },
+          { title: 'Always the current governed version.', relations: { features: ['norms-evaluation-api', 'mechanism-execution-foundations'] }, body: 'The Operator stores nothing: every run resolves the definition fresh from the Definition Manager and discards its context afterwards — what executes is always the version governance approved, never a stale copy.' },
         ],
         features: [
           { slug: 'norms-evaluation-api', name: 'GSM Norms evaluation API', blurb: 'An API to evaluate machine-evaluable Norms against observed state in a sandboxed, reproducible rule runtime — governance as a control loop, not a review meeting.', milestone: { version: '1.0', label: 'MVP/GA — GSM Norms evaluation API', ga: true } },
@@ -304,9 +479,9 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Partial views composed into one picture, deliberation kept apart from decision, and a record that always answers “why is this in the model?”.',
         featuresHeadline: 'Post contributions onto shared panels, seal them into a byte-stable composition, and retain every step of how it was sourced.',
         values: [
-          { title: 'The whole picture, from every partial view.', features: ['ks-contributions-management-api'], body: 'A code indexer knows the call graph, a scanner knows the dependencies, an AI infers the intent, an engineer remembers the history — none knows everything. The board is where those partial views meet: competing identifications side by side, each labeled with its confidence and its origin.' },
-          { title: 'Thinking here, deciding there.', features: ['ks-contributions-lifecycle-enforcement'], body: 'The board is a deliberation space, not an approval gate: when sourcing completes it is frozen, and what was composed enters the Definition Manager as drafts — where the governed lifecycle decides. Exploration stays free and reproducible; governance stays strict, in one place.' },
-          { title: 'You can always answer \u201cwhy is this in the model?\u201d', features: ['ks-contributions-retention'], body: 'Every contribution and every freeze is kept as a permanent record — each definition traces back to the board it was composed from: who proposed what, from which source, with what confidence. Sourcing history that cannot be rewritten.' },
+          { title: 'The whole picture, from every partial view.', relations: { features: ['ks-contributions-management-api'] }, body: 'A code indexer knows the call graph, a scanner knows the dependencies, an AI infers the intent, an engineer remembers the history — none knows everything. The board is where those partial views meet: competing identifications side by side, each labeled with its confidence and its origin.' },
+          { title: 'Thinking here, deciding there.', relations: { features: ['ks-contributions-lifecycle-enforcement'] }, body: 'The board is a deliberation space, not an approval gate: when sourcing completes it is frozen, and what was composed enters the Definition Manager as drafts — where the governed lifecycle decides. Exploration stays free and reproducible; governance stays strict, in one place.' },
+          { title: 'You can always answer \u201cwhy is this in the model?\u201d', relations: { features: ['ks-contributions-retention'] }, body: 'Every contribution and every freeze is kept as a permanent record — each definition traces back to the board it was composed from: who proposed what, from which source, with what confidence. Sourcing history that cannot be rewritten.' },
         ],
         features: [
           { slug: 'ks-contributions-management-api', name: 'KS Contributions management RESTful API', blurb: 'A RESTful API for knowledge sources to declare panels and post schema-validated contributions — collaborative sourcing with server-owned structure.', milestone: { version: '1.0', label: 'MVP/GA — contributions API, seal lifecycle, audit ledger', shipped: true, ga: true } },
@@ -330,19 +505,19 @@ export const poesisPortfolio: Solution[] = [
     description:
       'GSM is a vendor-neutral standard for defining and governing software-intensive systems — the THINK layer that the BUILD and RUN layers enforce and measure against. Publicly readable, prepared for neutral stewardship.',
     values: [
-      { title: 'What OpenTelemetry is to RUN, GSM is to THINK.', capabilities: ['systemic-primitive-vocabulary', 'portable-conformance-testable-definitions'], body: 'OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.' },
-      { title: 'Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.', capabilities: ['systemic-primitive-vocabulary', 'open-domain-typing', 'governance-grammar-and-lifecycle'], emergent: true, body: 'Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype. The result is an explicit, governed world model — declared, not learned.' },
-      { title: 'Governance as code, composed with policy as code.', capabilities: ['governance-grammar-and-lifecycle', 'framework-and-regulation-sourcing', 'protocol-and-domain-semantics-sourcing'], emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
-      { title: 'Trust the standard, not the vendor.', capabilities: ['portable-conformance-testable-definitions', 'framework-and-regulation-sourcing', 'research-tested-model-evolution'], body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
+      { title: 'What OpenTelemetry is to RUN, GSM is to THINK.', relations: { capabilities: ['systemic-primitive-vocabulary', 'portable-conformance-testable-definitions'] }, body: 'OTel set one open, vendor-neutral standard for how systems are <em>observed</em>. GSM does the same for how they are <em>defined and governed</em> — so every obligation is portable across tools instead of trapped in proprietary silos. RUN measures reality; THINK defines intent; both reference the same object.' },
+      { title: 'Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.', relations: { capabilities: ['systemic-primitive-vocabulary', 'open-domain-typing', 'governance-grammar-and-lifecycle'] }, emergent: true, body: 'Kubernetes proved infrastructure is best declared and driven to a desired state by control loops. GSM generalizes that exact pattern — schema-typed Archetypes, reconciling Mechanisms, an explicit governance grammar and lifecycle — lifted off containers and onto any governed subject. A CRD <em>is</em> an Archetype. The result is an explicit, governed world model — declared, not learned.' },
+      { title: 'Governance as code, composed with policy as code.', relations: { capabilities: ['governance-grammar-and-lifecycle', 'framework-and-regulation-sourcing', 'protocol-and-domain-semantics-sourcing'] }, emergent: true, body: 'GSM holds the definition; the cloud-native ecosystem realizes it — OPA / Kyverno compile enforcement from Directives and Norms, sigstore / SLSA supply attestation evidence, OpenTelemetry / Prometheus supply the measurements Norms are evaluated against, Argo realizes delivery guardrails.' },
+      { title: 'Trust the standard, not the vendor.', relations: { capabilities: ['portable-conformance-testable-definitions', 'framework-and-regulation-sourcing', 'research-tested-model-evolution'] }, body: 'The spec is prepared for neutral, multi-stakeholder stewardship (the OASIS Open standards track) with conformance defined so independent implementations interoperate, and every sourced framework cites the authority\u2019s clause it derives from — the trust chain runs to the standard and its sources, never through a vendor.' },
     ],
     capabilities: [
-      { slug: 'systemic-primitive-vocabulary', name: 'Systemic primitive vocabulary', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core any system can be composed from, shared by every tool that speaks the standard.', platform: 'governed-context', realizedBy: ['specifications/primitives'] },
-      { slug: 'open-domain-typing', name: 'Open domain typing', blurb: 'Archetyping makes new kinds of subjects definable and governable through typed JSON Schema, so vocabulary, grammar, and semantics travel with the type instead of living in documentation.', platform: 'governed-context', realizedBy: ['specifications/archetyping'] },
-      { slug: 'governance-grammar-and-lifecycle', name: 'Governance grammar and lifecycle', blurb: 'Directives operationalized by Norms and bound by Ascriptions, under a normative lifecycle state machine — how intent becomes an evaluable, governed obligation.', platform: 'governance-lifecycle', realizedBy: ['specifications/dna-grammar', 'specifications/systemic-lifecycle-management', 'specifications/enhanced-directives-norms-model'] },
-      { slug: 'framework-and-regulation-sourcing', name: 'Framework and regulation sourcing', blurb: 'Architecture frameworks, quality models, and regulations sourced into typed schemas clause by clause — attached instead of authored, and re-sourced as the source texts evolve.', platform: 'governance-fabric', realizedBy: ['ontology/togaf', 'ontology/iso-25010', 'ontology/iso-25012', 'ontology/gdpr', 'ontology/nis2', 'ontology/scap', 'ontology/dora', 'ontology/safe', 'ontology/itil', 'ontology/catalogue-update-stream'] },
-      { slug: 'protocol-and-domain-semantics-sourcing', name: 'Protocol and domain semantics sourcing', blurb: 'Interaction protocols, domain vocabularies, and provenance sourced as typed Archetypes — how systems talk, what they are made of, and who asserted it, all machine-readable.', platform: 'governed-context', realizedBy: ['ontology/http', 'ontology/grpc', 'ontology/graphql', 'ontology/kafka', 'ontology/amqp', 'ontology/jdbc', 'ontology/websocket', 'ontology/it', 'ontology/prov'] },
-      { slug: 'portable-conformance-testable-definitions', name: 'Portable, conformance-testable definitions', blurb: 'Definitions authored once run on every conforming implementation, and conformance is testable against published requirements — you change tools without re-authoring your governance.', platform: 'governed-context', realizedBy: ['specifications/primitives', 'specifications/systemic-lifecycle-management'] },
-      { slug: 'research-tested-model-evolution', name: 'Research-tested model evolution', blurb: 'The model is interrogated against systemics and executed cases before it is frozen — hypotheses, open decisions, and a promotion path into GSM Change Proposals, kept strictly out of the normative spec.', platform: 'governance-lifecycle', realizedBy: ['research-lab/causal-model', 'research-lab/governance-chain', 'research-lab/dna-production', 'research-lab/cases', 'research-lab/decision-register', 'research-lab/research-protocol'] },
+      { slug: 'systemic-primitive-vocabulary', name: 'Systemic primitive vocabulary', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core any system can be composed from, shared by every tool that speaks the standard.', relations: { features: ['specifications/primitives'] } },
+      { slug: 'open-domain-typing', name: 'Open domain typing', blurb: 'Archetyping makes new kinds of subjects definable and governable through typed JSON Schema, so vocabulary, grammar, and semantics travel with the type instead of living in documentation.', relations: { features: ['specifications/archetyping'] } },
+      { slug: 'governance-grammar-and-lifecycle', name: 'Governance grammar and lifecycle', blurb: 'Directives operationalized by Norms and bound by Ascriptions, under a normative lifecycle state machine — how intent becomes an evaluable, governed obligation.', relations: { features: ['specifications/dna-grammar', 'specifications/systemic-lifecycle-management', 'specifications/enhanced-directives-norms-model'] } },
+      { slug: 'framework-and-regulation-sourcing', name: 'Framework and regulation sourcing', blurb: 'Architecture frameworks, quality models, and regulations sourced into typed schemas clause by clause — attached instead of authored, and re-sourced as the source texts evolve.', relations: { features: ['ontology/togaf', 'ontology/iso-25010', 'ontology/iso-25012', 'ontology/gdpr', 'ontology/nis2', 'ontology/scap', 'ontology/dora', 'ontology/safe', 'ontology/itil', 'ontology/catalogue-update-stream'] } },
+      { slug: 'protocol-and-domain-semantics-sourcing', name: 'Protocol and domain semantics sourcing', blurb: 'Interaction protocols, domain vocabularies, and provenance sourced as typed Archetypes — how systems talk, what they are made of, and who asserted it, all machine-readable.', relations: { features: ['ontology/http', 'ontology/grpc', 'ontology/graphql', 'ontology/kafka', 'ontology/amqp', 'ontology/jdbc', 'ontology/websocket', 'ontology/it', 'ontology/prov'] } },
+      { slug: 'portable-conformance-testable-definitions', name: 'Portable, conformance-testable definitions', blurb: 'Definitions authored once run on every conforming implementation, and conformance is testable against published requirements — you change tools without re-authoring your governance.', relations: { features: ['specifications/primitives', 'specifications/systemic-lifecycle-management'] } },
+      { slug: 'research-tested-model-evolution', name: 'Research-tested model evolution', blurb: 'The model is interrogated against systemics and executed cases before it is frozen — hypotheses, open decisions, and a promotion path into GSM Change Proposals, kept strictly out of the normative spec.', relations: { features: ['research-lab/causal-model', 'research-lab/governance-chain', 'research-lab/dna-production', 'research-lab/cases', 'research-lab/decision-register', 'research-lab/research-protocol'] } },
     ],
     products: [
       {
@@ -356,10 +531,10 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Interoperability instead of silos, portability instead of lock-in, a governance grammar that keeps deepening — held under neutral stewardship.',
         featuresHeadline: 'Eight systemic primitives, the DNA grammar, Archetyping as the open type system, and one normative lifecycle — deepened as governance cases demand.',
         values: [
-          { title: 'Tools that interoperate, silos that fall.', features: ['primitives', 'archetyping', 'dna-grammar'], body: 'Architecture, compliance, and quality live today in tools that don\u2019t speak to each other \u2014 every integration a bespoke mapping, every team its own silo. The spec\u2019s shared vocabulary and grammar end the mapping: solutions interoperate through the same typed definitions instead of translating each other.' },
-          { title: 'Lock-in ends where the standard begins.', features: ['primitives', 'systemic-lifecycle-management'], body: 'Definitions authored once are portable across every conforming implementation \u2014 you can change tools or vendors without re-authoring your governance, and conformance is testable against the published requirements, not assumed from marketing. The unlock compounds with every vendor that adopts the standard.' },
-          { title: 'The governance grammar keeps deepening.', features: ['enhanced-directives-norms-model'], body: 'Directives and Norms gain richer modeling as real governance cases demand it \u2014 the grammar tracks what governance actually needs, not a frozen v1 shape.' },
-          { title: 'Built for neutral stewardship.', vision: true, features: [], body: 'The spec is maintained as a public, versioned publication \u2014 ready for consortium governance such as an OASIS Open Technical Committee \u2014 rather than living as vendor documentation. Standards live longest when no single product owns them.' },
+          { title: 'Tools that interoperate, silos that fall.', relations: { features: ['primitives', 'archetyping', 'dna-grammar'] }, body: 'Architecture, compliance, and quality live today in tools that don\u2019t speak to each other \u2014 every integration a bespoke mapping, every team its own silo. The spec\u2019s shared vocabulary and grammar end the mapping: solutions interoperate through the same typed definitions instead of translating each other.' },
+          { title: 'Lock-in ends where the standard begins.', relations: { features: ['primitives', 'systemic-lifecycle-management'] }, body: 'Definitions authored once are portable across every conforming implementation \u2014 you can change tools or vendors without re-authoring your governance, and conformance is testable against the published requirements, not assumed from marketing. The unlock compounds with every vendor that adopts the standard.' },
+          { title: 'The governance grammar keeps deepening.', relations: { features: ['enhanced-directives-norms-model'] }, body: 'Directives and Norms gain richer modeling as real governance cases demand it \u2014 the grammar tracks what governance actually needs, not a frozen v1 shape.' },
+          { title: 'Built for neutral stewardship.', vision: true, relations: { features: [] }, body: 'The spec is maintained as a public, versioned publication \u2014 ready for consortium governance such as an OASIS Open Technical Committee \u2014 rather than living as vendor documentation. Standards live longest when no single product owns them.' },
         ],
         features: [
           { slug: 'primitives', name: 'Eight systemic primitives', blurb: 'Structure, Mechanism, Effector, Receptor, Interaction, Archetype, Directive, Norm — a small, fixed core that composes any system.', milestone: { version: '1.0', label: 'Normative content frozen — Systemic Primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)', shipped: true, ga: true } },
@@ -383,11 +558,11 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Day-one governance, faithful to each authority’s own taxonomy, composable rather than colliding, provenance-carrying, and kept current as the texts evolve.',
         featuresHeadline: 'Architecture frameworks, quality models, regulations, protocol semantics, and provenance — sourced as typed schemas and continuously re-sourced.',
         values: [
-          { title: 'Day-one governance, not a blank page.', features: ['togaf', 'iso-25010', 'iso-25012', 'gdpr', 'nis2', 'scap'], body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
-          { title: 'The authority\u2019s own taxonomy, clause by clause.', features: ['gdpr', 'nis2', 'togaf'], body: 'Each ontology package preserves its source model’s own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
-          { title: 'Ontologies that compose, not collide.', features: ['http', 'grpc', 'graphql', 'kafka', 'amqp', 'jdbc', 'websocket', 'it'], body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
-          { title: 'Every claim carries where it came from.', features: ['prov'], body: 'Sourced provenance vocabulary types the attribution of a governed claim — who or what asserted it travels with the definition instead of being reconstructed later.' },
-          { title: 'Maintained as the real world changes.', features: ['catalogue-update-stream', 'dora', 'safe', 'itil'], body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
+          { title: 'Day-one governance, not a blank page.', relations: { features: ['togaf', 'iso-25010', 'iso-25012', 'gdpr', 'nis2', 'scap'] }, body: 'TOGAF, ISO 25000-series, GDPR, NIS2, and more — over a hundred sourced schemas you attach instead of authoring from scratch. The expertise is already in the catalogue.' },
+          { title: 'The authority\u2019s own taxonomy, clause by clause.', relations: { features: ['gdpr', 'nis2', 'togaf'] }, body: 'Each ontology package preserves its source model’s own structure and every sourced Directive and Norm cites the clause it derives from — provenance you can hand to an auditor.' },
+          { title: 'Ontologies that compose, not collide.', relations: { features: ['http', 'grpc', 'graphql', 'kafka', 'amqp', 'jdbc', 'websocket', 'it'] }, body: 'A quality model, an architecture framework, and a regulation govern the same subject without schema conflicts — they compose through the GSM governance layer into one coherent fabric.' },
+          { title: 'Every claim carries where it came from.', relations: { features: ['prov'] }, body: 'Sourced provenance vocabulary types the attribution of a governed claim — who or what asserted it travels with the definition instead of being reconstructed later.' },
+          { title: 'Maintained as the real world changes.', relations: { features: ['catalogue-update-stream', 'dora', 'safe', 'itil'] }, body: 'The catalogue is continuously updated as standards, regulations, and legal texts evolve — the organization using it always governs against current requirements, not a frozen snapshot.' },
         ],
         features: [
           { slug: 'http', name: 'HTTP', blurb: 'HTTP interaction semantics sourced as typed Archetypes — methods, status, caching, content negotiation, machine-readable.', milestone: { version: '1.0', label: 'MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated', ga: true } },
@@ -424,9 +599,9 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'A standard tested before it freezes, kept strictly apart from the spec, with its unresolved questions published under stable names.',
         featuresHeadline: 'A causal model, a governance chain, and DNA production — tested against executed cases, registered as decisions, promoted through a published protocol.',
         values: [
-          { title: 'The standard is tested before it is frozen.', features: ['causal-model', 'governance-chain', 'cases'], body: 'Primitives may be added, split, merged, or withdrawn under research pressure — every claim is checked against executed, discriminating cases rather than asserted. A standard earns its stability; it does not start with it.' },
-          { title: 'Research and specification never blur.', features: ['dna-production', 'decision-register', 'research-protocol'], body: 'Hypotheses live here and only here; the normative model lives in the Specifications. The promotion path into GSM Change Proposals is the only bridge, so nothing exploratory ever leaks into what implementations conform to.' },
-          { title: 'Open questions have stable names.', features: ['decision-register'], body: 'Every unresolved decision carries a stable identifier shared across the dossier — what GSM does not yet settle is published as explicitly as what it does.' },
+          { title: 'The standard is tested before it is frozen.', relations: { features: ['causal-model', 'governance-chain', 'cases'] }, body: 'Primitives may be added, split, merged, or withdrawn under research pressure — every claim is checked against executed, discriminating cases rather than asserted. A standard earns its stability; it does not start with it.' },
+          { title: 'Research and specification never blur.', relations: { features: ['dna-production', 'decision-register', 'research-protocol'] }, body: 'Hypotheses live here and only here; the normative model lives in the Specifications. The promotion path into GSM Change Proposals is the only bridge, so nothing exploratory ever leaks into what implementations conform to.' },
+          { title: 'Open questions have stable names.', relations: { features: ['decision-register'] }, body: 'Every unresolved decision carries a stable identifier shared across the dossier — what GSM does not yet settle is published as explicitly as what it does.' },
         ],
         features: [
           { slug: 'causal-model', name: 'Causal model', blurb: 'Organization, purpose, function, and viability evaluations — the causal account a governed system is read through.', milestone: { version: '1.0.0-beta.1', label: 'Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register', shipped: true } },
@@ -453,19 +628,19 @@ export const poesisPortfolio: Solution[] = [
     description:
       'SAFe-shaped multi-agent orchestration spanning THINK — portfolio, product, and team workflows — down to the BUILD hand-off, where code is generated from governed GSM definitions and deployed; a human ★ gate at every layer closes THINK → BUILD → RUN.',
     values: [
-      { title: 'Definitions that generate systems.', capabilities: ['agentic-safe-operating-model', 'deterministic-agentic-execution', 'enforced-artifact-contracts'], emergent: true, body: 'The framework orchestrates the whole THINK space — portfolio, product, and team workflows — and BUILD is its last orchestration layer: governed GSM definitions become running systems, making GSM’s promise, “definitions that generate systems”, literally true, and closing THINK → BUILD → RUN as one loop. <a href="/insights/spec-driven-development-without-spec-drift/">Spec-driven development, where the spec is governed and cannot drift</a>.' },
-      { title: 'A method, run by agents, as a harness.', capabilities: ['agentic-safe-operating-model', 'deterministic-agentic-execution', 'human-gated-advancement'], emergent: true, body: 'AI runs on intuition — exactly like we do — and methods are how intuition becomes reliable. SAFe, run by agents with a human ★ gate at every layer, is the cognitive harness that makes agentic delivery trustworthy. You don’t wait for a smarter model; you make it implement a method — the difference between agentic transformation and the pilot trap.' },
-      { title: 'Local orchestrations, one organization.', capabilities: ['local-first-delivery-plane', 'enforced-artifact-contracts', 'agentic-safe-operating-model'], emergent: true, body: 'Each contributor runs the full agentic organization on their own machine; the standard, schema-validated artifacts it produces synchronize through the shared repo and become the context every other local orchestration builds on — organization-scale coherence with no central runtime.' },
-      { title: 'Open, local-first, sovereign.', capabilities: ['local-first-delivery-plane', 'deterministic-agentic-execution'], emergent: true, body: 'Apache-2.0, harness and workspace both running on your machine against your working tree — sensitive context never leaves it, and nothing about how you deliver depends on a vendor’s cloud. Sovereignty isn’t a deployment option; it’s the architecture.' },
-      { title: 'Delivery history becomes governed context.', capabilities: ['delivery-history-as-governed-context', 'local-first-delivery-plane'], emergent: true, body: 'The harness journals every step, but that journal is only ever read by the harness itself. Sourcing that delivery history is the edge that turns it into context: what an agentic team actually did — synchronized through the local-first delivery plane — becomes evidence-backed contributions on SIE’s Definition Blackboard, the same way the ITIP sourcer turns a code repository into governed definitions.' },
+      { title: 'Definitions that generate systems.', relations: { capabilities: ['agentic-safe-operating-model', 'deterministic-agentic-execution', 'enforced-artifact-contracts'] }, emergent: true, body: 'The framework orchestrates the whole THINK space — portfolio, product, and team workflows — and BUILD is its last orchestration layer: governed GSM definitions become running systems, making GSM’s promise, “definitions that generate systems”, literally true, and closing THINK → BUILD → RUN as one loop. <a href="/insights/spec-driven-development-without-spec-drift/">Spec-driven development, where the spec is governed and cannot drift</a>.' },
+      { title: 'A method, run by agents, as a harness.', relations: { capabilities: ['agentic-safe-operating-model', 'deterministic-agentic-execution', 'human-gated-advancement'] }, emergent: true, body: 'AI runs on intuition — exactly like we do — and methods are how intuition becomes reliable. SAFe, run by agents with a human ★ gate at every layer, is the cognitive harness that makes agentic delivery trustworthy. You don’t wait for a smarter model; you make it implement a method — the difference between agentic transformation and the pilot trap.' },
+      { title: 'Local orchestrations, one organization.', relations: { capabilities: ['local-first-delivery-plane', 'enforced-artifact-contracts', 'agentic-safe-operating-model'] }, emergent: true, body: 'Each contributor runs the full agentic organization on their own machine; the standard, schema-validated artifacts it produces synchronize through the shared repo and become the context every other local orchestration builds on — organization-scale coherence with no central runtime.' },
+      { title: 'Open, local-first, sovereign.', relations: { capabilities: ['local-first-delivery-plane', 'deterministic-agentic-execution'] }, emergent: true, body: 'Apache-2.0, harness and workspace both running on your machine against your working tree — sensitive context never leaves it, and nothing about how you deliver depends on a vendor’s cloud. Sovereignty isn’t a deployment option; it’s the architecture.' },
+      { title: 'Delivery history becomes governed context.', relations: { capabilities: ['delivery-history-as-governed-context', 'local-first-delivery-plane'] }, emergent: true, body: 'The harness journals every step, but that journal is only ever read by the harness itself. Sourcing that delivery history is the edge that turns it into context: what an agentic team actually did — synchronized through the local-first delivery plane — becomes evidence-backed contributions on SIE’s Definition Blackboard, the same way the ITIP sourcer turns a code repository into governed definitions.' },
     ],
     capabilities: [
-      { slug: 'deterministic-agentic-execution', name: 'Deterministic agentic execution', blurb: 'Workflow and step graphs resolved from plain files, the right skills and instructions injected at the right step, the backing model swappable, every execution journaled — the same method on any agent host.', platform: 'generative-delivery', realizedBy: ['agentic-harness/workflows-steps-resolution', 'agentic-harness/skills-instructions-prompt-injection', 'agentic-harness/llm-resolution', 'agentic-harness/logging'] },
-      { slug: 'enforced-artifact-contracts', name: 'Enforced artifact contracts', blurb: 'Epics, features, stories, and ADRs are typed artifacts validated against their schemas before they land — invalid output is discarded and restored, never committed.', platform: 'generative-delivery', realizedBy: ['agentic-harness/artifact-validation', 'safe-agentic-organization/artifacts'] },
-      { slug: 'agentic-safe-operating-model', name: 'Agentic SAFe operating model', blurb: 'Portfolio, program, and iteration orchestrators dispatching a bench of bounded role agents — each ceremony a governed workflow, run under the organization’s own engineering standards.', platform: 'generative-delivery', realizedBy: ['safe-agentic-organization/agents', 'safe-agentic-organization/workflows', 'safe-agentic-organization/skills', 'safe-agentic-organization/instructions'] },
-      { slug: 'human-gated-advancement', name: 'Human-gated advancement', blurb: 'Pre, invariant, and post conditions gate every step and a human ★ gate closes every layer — agents advance on evidence and sequence, and the decision that matters stays yours.', platform: 'governance-lifecycle', realizedBy: ['agentic-harness/step-authorization', 'safe-agentic-organization/workflows'] },
-      { slug: 'local-first-delivery-plane', name: 'Local-first delivery plane', blurb: 'One installer wires the organization into your working tree, work state lives in your own git history, and the same deterministic checks run again in the pipeline.', platform: 'generative-delivery', realizedBy: ['agentic-workspace/installer', 'agentic-workspace/workspace-data-plane', 'agentic-workspace/cicd-pipelines'] },
-      { slug: 'delivery-history-as-governed-context', name: 'Delivery history as governed context', blurb: 'What agentic teams actually did — participation, conformance, deviation — sourced from committed artifacts and session logs into evidence-backed contributions on the Definition Blackboard.', platform: 'truth-sourcing', realizedBy: ['saf-sie-bridge/harness-history-sourcing'] },
+      { slug: 'deterministic-agentic-execution', name: 'Deterministic agentic execution', blurb: 'Workflow and step graphs resolved from plain files, the right skills and instructions injected at the right step, the backing model swappable, every execution journaled — the same method on any agent host.', relations: { features: ['agentic-harness/workflows-steps-resolution', 'agentic-harness/skills-instructions-prompt-injection', 'agentic-harness/llm-resolution', 'agentic-harness/logging'] } },
+      { slug: 'enforced-artifact-contracts', name: 'Enforced artifact contracts', blurb: 'Epics, features, stories, and ADRs are typed artifacts validated against their schemas before they land — invalid output is discarded and restored, never committed.', relations: { features: ['agentic-harness/artifact-validation', 'safe-agentic-organization/artifacts'] } },
+      { slug: 'agentic-safe-operating-model', name: 'Agentic SAFe operating model', blurb: 'Portfolio, program, and iteration orchestrators dispatching a bench of bounded role agents — each ceremony a governed workflow, run under the organization’s own engineering standards.', relations: { features: ['safe-agentic-organization/agents', 'safe-agentic-organization/workflows', 'safe-agentic-organization/skills', 'safe-agentic-organization/instructions'] } },
+      { slug: 'human-gated-advancement', name: 'Human-gated advancement', blurb: 'Pre, invariant, and post conditions gate every step and a human ★ gate closes every layer — agents advance on evidence and sequence, and the decision that matters stays yours.', relations: { features: ['agentic-harness/step-authorization', 'safe-agentic-organization/workflows'] } },
+      { slug: 'local-first-delivery-plane', name: 'Local-first delivery plane', blurb: 'One installer wires the organization into your working tree, work state lives in your own git history, and the same deterministic checks run again in the pipeline.', relations: { features: ['agentic-workspace/installer', 'agentic-workspace/workspace-data-plane', 'agentic-workspace/cicd-pipelines'] } },
+      { slug: 'delivery-history-as-governed-context', name: 'Delivery history as governed context', blurb: 'What agentic teams actually did — participation, conformance, deviation — sourced from committed artifacts and session logs into evidence-backed contributions on the Definition Blackboard.', relations: { features: ['saf-sie-bridge/harness-history-sourcing'] } },
     ],
     products: [
       {
@@ -479,9 +654,9 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Deterministic rails for probabilistic agents, invalid output that never lands, and one method that runs unchanged on any host.',
         featuresHeadline: 'Resolve workflows and steps, inject the right knowledge, route the model, authorize each step, validate each artifact, journal every run.',
         values: [
-          { title: 'Deterministic rails for probabilistic agents.', features: ['workflows-steps-resolution', 'step-authorization'], body: 'Every step passes precondition, authorization, and postcondition checks grounded in persisted configuration — agents advance through evidence and sequence, not vibes.' },
-          { title: 'Invalid bytes never land.', features: ['artifact-validation'], body: 'Agents stage writes in the working tree; the harness validates artifacts against their schemas before commit — invalid output is discarded and restored, so committed state is always clean.' },
-          { title: 'One method, any host.', features: ['workflows-steps-resolution', 'llm-resolution', 'logging', 'skills-instructions-prompt-injection'], body: 'The harness is a stable CLI over plain files — the same workflows run in your IDE today and a CI runner tomorrow, with no relearning and no lock-in.' },
+          { title: 'Deterministic rails for probabilistic agents.', relations: { features: ['workflows-steps-resolution', 'step-authorization'] }, body: 'Every step passes precondition, authorization, and postcondition checks grounded in persisted configuration — agents advance through evidence and sequence, not vibes.' },
+          { title: 'Invalid bytes never land.', relations: { features: ['artifact-validation'] }, body: 'Agents stage writes in the working tree; the harness validates artifacts against their schemas before commit — invalid output is discarded and restored, so committed state is always clean.' },
+          { title: 'One method, any host.', relations: { features: ['workflows-steps-resolution', 'llm-resolution', 'logging', 'skills-instructions-prompt-injection'] }, body: 'The harness is a stable CLI over plain files — the same workflows run in your IDE today and a CI runner tomorrow, with no relearning and no lock-in.' },
         ],
         features: [
           { slug: 'workflows-steps-resolution', name: 'Workflow & step resolution', blurb: 'Workflow and step graphs are resolved deterministically from plain files — the same method runs unchanged on any agent host.', milestone: { version: '1.0', label: 'MVP/GA — resolution, injection, LLM routing, validation, authorization, logging', shipped: true, ga: true } },
@@ -508,9 +683,9 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'An org chart rather than a swarm, a method agents must implement, and a human decision closing every layer.',
         featuresHeadline: 'Role agents, loadable skills, SAFe ceremonies as governed workflows, enforced engineering instructions, and schema-validated artifacts.',
         values: [
-          { title: 'An org chart, not a swarm.', features: ['agents', 'workflows'], body: 'Portfolio, program, and iteration orchestrators dispatch a bench of specialist role agents — each one small, bounded, and well-specified, which is exactly when probabilistic models are most reliable and cheapest.' },
-          { title: 'A method agents must implement.', features: ['workflows', 'artifacts', 'skills', 'instructions'], body: 'SAFe ceremonies become governed workflows producing typed, schema-validated artifacts — the method is an enforceable contract between human and machine, not a suggestion.' },
-          { title: 'Agents propose, humans dispose.', features: ['workflows'], body: 'Every layer ends at a human ★ gate — agents bring evidence through checks and sequence; the decision that matters stays yours.' },
+          { title: 'An org chart, not a swarm.', relations: { features: ['agents', 'workflows'] }, body: 'Portfolio, program, and iteration orchestrators dispatch a bench of specialist role agents — each one small, bounded, and well-specified, which is exactly when probabilistic models are most reliable and cheapest.' },
+          { title: 'A method agents must implement.', relations: { features: ['workflows', 'artifacts', 'skills', 'instructions'] }, body: 'SAFe ceremonies become governed workflows producing typed, schema-validated artifacts — the method is an enforceable contract between human and machine, not a suggestion.' },
+          { title: 'Agents propose, humans dispose.', relations: { features: ['workflows'] }, body: 'Every layer ends at a human ★ gate — agents bring evidence through checks and sequence; the decision that matters stays yours.' },
         ],
         features: [
           { slug: 'agents', name: 'Agents', blurb: 'Role agents — architect, developer, QA, product, security — dispatched into each SAFe ceremony as stateless subagents.', milestone: { version: '1.0', label: 'MVP/GA — agents, skills, workflows, instructions, artifacts', ga: true } },
@@ -533,9 +708,9 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'Your own files and git history as the state, governed delivery minutes after clone, and the same gates running again in CI.',
         featuresHeadline: 'A git-native workspace data plane, a one-shot installer, and pipelines that re-run the local gates.',
         values: [
-          { title: 'Your files, your history, your state.', features: ['workspace-data-plane'], body: 'Work state lives in plain files under your own git history — the event log is your repository, not a vendor\u2019s cloud. Sensitive context never leaves your machine.' },
-          { title: 'Install once, deliver governed.', features: ['installer'], body: 'One installer wires the harness, agents, skills, and workflows into any working tree — a governed agentic delivery organization, minutes after clone.' },
-          { title: 'The same gates run in CI.', features: ['cicd-pipelines'], body: 'The pipelines validate and publish the artifacts agents produce with the same deterministic checks that run locally — what passed on your machine passes in the pipeline.' },
+          { title: 'Your files, your history, your state.', relations: { features: ['workspace-data-plane'] }, body: 'Work state lives in plain files under your own git history — the event log is your repository, not a vendor\u2019s cloud. Sensitive context never leaves your machine.' },
+          { title: 'Install once, deliver governed.', relations: { features: ['installer'] }, body: 'One installer wires the harness, agents, skills, and workflows into any working tree — a governed agentic delivery organization, minutes after clone.' },
+          { title: 'The same gates run in CI.', relations: { features: ['cicd-pipelines'] }, body: 'The pipelines validate and publish the artifacts agents produce with the same deterministic checks that run locally — what passed on your machine passes in the pipeline.' },
         ],
         features: [
           { slug: 'workspace-data-plane', name: 'Workspace data plane', blurb: 'Committed state is workspace state — one validated write, one commit, attributed to the acting session; your git history is the event log.', milestone: { version: '1.0', label: 'MVP/GA — workspace data plane, installer, CI/CD artifact pipelines', ga: true } },
@@ -556,7 +731,7 @@ export const poesisPortfolio: Solution[] = [
         valuesHeadline: 'The harness journal, turned into governed context anyone else — human or agent — can reason from.',
         featuresHeadline: 'Source committed artifacts and session logs into evidence-backed contributions on the Definition Blackboard Manager.',
         values: [
-          { title: 'What agents actually did, made governed context.', features: ['harness-history-sourcing'], body: 'The harness journal is otherwise read only by the harness itself. The bridge is what lets that execution history become typed, provenance-backed context other reasoning — human or agent — can build on.' },
+          { title: 'What agents actually did, made governed context.', relations: { features: ['harness-history-sourcing'] }, body: 'The harness journal is otherwise read only by the harness itself. The bridge is what lets that execution history become typed, provenance-backed context other reasoning — human or agent — can build on.' },
         ],
         features: [
           { slug: 'harness-history-sourcing', name: 'Harness history sourcing', blurb: 'Sources committed artifacts and session logs from the Agentic Workspace into confidence-bearing contributions on the Definition Blackboard Manager — in design.', milestone: { version: '1.0', label: 'MVP/GA — harness history sourcing into GSM contributions on the Definition Blackboard Manager', ga: true } },
@@ -567,6 +742,17 @@ export const poesisPortfolio: Solution[] = [
     ],
   },
 ];
+
+/**
+ * The Poesis platform in one object: the platform-level items every solution
+ * rolls up into, and the solution tree itself. Every relation between two
+ * portfolio items is declared once, on the dependent item, in its `relations`.
+ */
+export const poesisPlatform = {
+  affordances,
+  values: platformValues,
+  solutions: poesisPortfolio,
+};
 
 /** Flat nav list (Solutions menu). */
 export const solutionLinks = poesisPortfolio.map((s) => ({ href: s.href, label: s.fullName }));
@@ -580,10 +766,32 @@ export function capabilityRealizations(
   solution: Solution,
   capability: Capability
 ): { product: ProductDef; feature: Feature }[] {
-  return capability.realizedBy.map((ref) => {
+  return capability.relations.features.map((ref) => {
     const [productSlug, featureSlug] = ref.split('/');
     const product = solution.products.find((p) => p.slug === productSlug)!;
     return { product, feature: product.features.find((f) => f.slug === featureSlug)! };
+  });
+}
+
+const affordanceByCapability = new Map<string, Affordance>();
+for (const a of affordances) {
+  for (const ref of a.relations.capabilities) {
+    if (affordanceByCapability.has(ref)) throw new Error(`poesis-portfolio.ts: capability '${ref}' is claimed by two affordances`);
+    affordanceByCapability.set(ref, a);
+  }
+}
+
+/** The affordance a solution capability contributes to (the inverse of `affordance.relations.capabilities`). */
+export function capabilityAffordance(solution: Solution, capability: Capability): Affordance {
+  return affordanceByCapability.get(`${solution.slug}/${capability.slug}`)!;
+}
+
+/** Resolve an affordance's `solution/capability` refs into the capabilities that realize it. */
+export function affordanceRealizations(affordance: Affordance): { solution: Solution; capability: Capability }[] {
+  return affordance.relations.capabilities.map((ref) => {
+    const [solutionSlug, capabilitySlug] = ref.split('/');
+    const solution = poesisPortfolio.find((s) => s.slug === solutionSlug)!;
+    return { solution, capability: solution.capabilities.find((c) => c.slug === capabilitySlug)! };
   });
 }
 
@@ -645,19 +853,45 @@ export function productTimeline(product: ProductDef): FeatureMilestone[] {
 for (const sol of poesisPortfolio) {
   const capabilitySlugs = sol.capabilities.map((c) => c.slug);
   for (const sv of sol.values) {
-    if (sv.capabilities.length === 0) throw new Error(`poesis-portfolio.ts: solution value '${sv.title}' (${sol.slug}) references no capability`);
-    for (const cs of sv.capabilities) {
+    if (sv.relations.capabilities.length === 0) throw new Error(`poesis-portfolio.ts: solution value '${sv.title}' (${sol.slug}) references no capability`);
+    for (const cs of sv.relations.capabilities) {
       if (!capabilitySlugs.includes(cs)) throw new Error(`poesis-portfolio.ts: solution value '${sv.title}' (${sol.slug}) references unknown capability '${cs}'`);
     }
   }
   for (const p of sol.products) {
     const featureSlugs = p.features.map((f) => f.slug);
     for (const v of p.values) {
-      if (!v.vision && v.features.length === 0) throw new Error(`poesis-portfolio.ts: value '${v.title}' (${sol.slug}/${p.slug}) is delivered by no feature — formalize the feature or mark it vision`);
-      for (const fs of v.features) {
+      if (!v.vision && v.relations.features.length === 0) throw new Error(`poesis-portfolio.ts: value '${v.title}' (${sol.slug}/${p.slug}) is delivered by no feature — formalize the feature or mark it vision`);
+      for (const fs of v.relations.features) {
         if (!featureSlugs.includes(fs)) throw new Error(`poesis-portfolio.ts: value '${v.title}' (${sol.slug}/${p.slug}) references unknown feature '${fs}'`);
       }
     }
+  }
+}
+
+// ---- Affordance coherence gates (run at module load / build time) ----------
+// An affordance is the platform-level roll-up of solution capabilities, and a
+// platform value is delivered by affordances — same rule as one level down:
+// no claim without something realizing it, nothing realizing without a claim.
+const affordanceSlugs = affordances.map((a) => a.slug);
+for (const a of affordances) {
+  if (a.relations.capabilities.length === 0) throw new Error(`poesis-portfolio.ts: affordance '${a.slug}' is realized by no solution capability`);
+  for (const ref of a.relations.capabilities) {
+    const [solutionSlug, capabilitySlug] = ref.split('/');
+    const solution = poesisPortfolio.find((s) => s.slug === solutionSlug);
+    if (!solution) throw new Error(`poesis-portfolio.ts: affordance '${a.slug}' references unknown solution '${solutionSlug}'`);
+    if (!solution.capabilities.some((c) => c.slug === capabilitySlug)) throw new Error(`poesis-portfolio.ts: affordance '${a.slug}' references unknown capability '${ref}'`);
+  }
+}
+for (const sol of poesisPortfolio) {
+  for (const c of sol.capabilities) {
+    if (!affordanceByCapability.has(`${sol.slug}/${c.slug}`)) throw new Error(`poesis-portfolio.ts: capability '${sol.slug}#${c.slug}' contributes to no platform affordance`);
+  }
+}
+for (const pv of platformValues) {
+  if (pv.relations.affordances.length === 0) throw new Error(`poesis-portfolio.ts: platform value '${pv.slug}' is delivered by no affordance`);
+  for (const ref of pv.relations.affordances) {
+    if (!affordanceSlugs.includes(ref)) throw new Error(`poesis-portfolio.ts: platform value '${pv.slug}' references unknown affordance '${ref}'`);
   }
 }
 
@@ -668,8 +902,8 @@ for (const sol of poesisPortfolio) {
 for (const sol of poesisPortfolio) {
   const realized = new Set<string>();
   for (const c of sol.capabilities) {
-    if (c.realizedBy.length === 0) throw new Error(`poesis-portfolio.ts: capability '${c.slug}' (${sol.slug}) is realized by no feature`);
-    for (const ref of c.realizedBy) {
+    if (c.relations.features.length === 0) throw new Error(`poesis-portfolio.ts: capability '${c.slug}' (${sol.slug}) is realized by no feature`);
+    for (const ref of c.relations.features) {
       const [productSlug, featureSlug] = ref.split('/');
       const product = sol.products.find((p) => p.slug === productSlug);
       if (!product) throw new Error(`poesis-portfolio.ts: capability '${c.slug}' (${sol.slug}) references unknown product '${productSlug}'`);

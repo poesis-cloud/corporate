@@ -7,7 +7,7 @@
  */
 import Icon from './Icon.astro';
 import type { Solution } from '../data/poesis-portfolio.ts';
-import { featureStatus, typeIcons } from '../data/poesis-portfolio.ts';
+import { featureStatus, relationQualifiers, typeIcons } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -28,7 +28,7 @@ const { solution } = Astro.props;
         <strong><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></strong>
         <p>{p.tagline}</p>
         <div class="proof-line">
-          <span>Composed of features</span>
+          <span>{relationQualifiers.productFeatures()}</span>
           <ul class="portfolio-product-features">
             {p.features.map((f, i) => (
               <li class={statuses[i].shipped ? undefined : 'is-planned'}>

@@ -1,36 +1,35 @@
 ---
 /**
  * SolutionCapabilityCards — the Capabilities grid shared by all solution pages,
- * in the same format as the homepage therapy capabilities. Each card is labelled
- * with the Poesis platform capability it rolls up into, and names the product
- * features that realize it (→ feature anchor on the product page), the way a
- * product page's value card names the features that deliver it.
+ * in the same format as the homepage therapy capabilities. Each card names the
+ * product features that realize it (→ feature anchor on the product page), the
+ * way a product page's value card names the features that deliver it, and the
+ * platform affordance it contributes to (→ the homepage affordance card).
  */
 import Icon from './Icon.astro';
-import { capabilityRealizations, capabilityShipped, featureStatus, platformCapabilities, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityAffordance, capabilityRealizations, capabilityShipped, featureStatus, relationQualifiers, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
 }
 
 const { solution } = Astro.props;
-const realizedBy = (count: number) => (count > 1 ? 'Realized by product features' : 'Realized by product feature');
 ---
 <ul class="think-therapy__grid portfolio-capabilities">
   {solution.capabilities.map((c) => {
-    const platform = platformCapabilities[c.platform];
+    const affordance = capabilityAffordance(solution, c);
     const realizations = capabilityRealizations(solution, c);
     const planned = !capabilityShipped(solution, c);
     return (
       <li id={c.slug} class={planned ? 'is-planned' : undefined}>
         <span class="think-capability__head">
           <span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span>
-          <span class="think-capability__step">Capability · {platform.label}{planned && ' · planned'}</span>
+          <span class="think-capability__step">Capability{planned && ' · planned'}</span>
         </span>
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>
         <p class="proof-line">
-          <span>{realizedBy(realizations.length)}</span>
+          <span>{relationQualifiers.capabilityFeatures(realizations.length)}</span>
           {realizations.map((r, i) => (
             <>
               {i > 0 && ' · '}
@@ -40,6 +39,10 @@ const realizedBy = (count: number) => (count > 1 ? 'Realized by product features
               >{r.feature.name}</a>
             </>
           ))}
+        </p>
+        <p class="proof-line">
+          <span>{relationQualifiers.capabilityAffordance()}</span>
+          <a href={`/#affordance-${affordance.slug}`}>{affordance.name}</a>
         </p>
       </li>
     );

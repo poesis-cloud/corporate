@@ -9,7 +9,7 @@
  * down the same page.
  */
 import Icon from './Icon.astro';
-import { capabilityShipped, solutionValueAnchor, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityShipped, relationQualifiers, solutionValueAnchor, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -17,12 +17,6 @@ interface Props {
 
 const { solution } = Astro.props;
 const capability = (slug: string) => solution.capabilities.find((c) => c.slug === slug)!;
-const relation = (v: Solution['values'][number]) =>
-  v.emergent
-    ? 'Emerges from the combination of capabilities'
-    : v.capabilities.length > 1
-      ? 'Delivered together by capabilities'
-      : 'Delivered by capability';
 ---
 <ul class="think-consequence-list portfolio-values">
   {solution.values.map((v) => (
@@ -34,8 +28,8 @@ const relation = (v: Solution['values'][number]) =>
       <strong>{v.title}</strong>
       <p set:html={v.body} />
       <p class="proof-line">
-        <span>{relation(v)}</span>
-        {v.capabilities.map((cs, i) => (
+        <span>{relationQualifiers.solutionValueCapabilities(v.relations.capabilities.length, v.emergent)}</span>
+        {v.relations.capabilities.map((cs, i) => (
           <>
             {i > 0 && ' · '}
             <a class={capabilityShipped(solution, capability(cs)) ? undefined : 'is-planned'} href={`#${cs}`}>{capability(cs).name}</a>

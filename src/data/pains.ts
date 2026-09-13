@@ -292,7 +292,7 @@ for (const pain of pains) {
 for (const sol of poesisPortfolio) {
     for (const prod of sol.products) {
         for (const feat of prod.features) {
-            const inValue = prod.values.some((v) => v.features.includes(feat.slug));
+            const inValue = prod.values.some((v) => v.relations.features.includes(feat.slug));
             const inPain = pains.some((p) =>
                 p.addressedBy.some((r) => r.solution === sol.slug && r.product === prod.slug && r.feature === feat.slug)
             );

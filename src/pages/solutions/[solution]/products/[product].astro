@@ -9,7 +9,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
-import { poesisPortfolio, productTimeline, featureStatus, productShipped, typeIcons } from '../../../../data/poesis-portfolio.ts';
+import { poesisPortfolio, productTimeline, featureStatus, productShipped, relationQualifiers, typeIcons } from '../../../../data/poesis-portfolio.ts';
 
 export function getStaticPaths() {
   return poesisPortfolio.flatMap((solution) =>
@@ -67,10 +67,10 @@ const planned = !productShipped(product);
             </span>
             <strong>{v.title}</strong>
             <p>{v.body}</p>
-            {v.features.length > 0 ? (
+            {v.relations.features.length > 0 ? (
               <p class="proof-line">
-                <span>{v.features.length > 1 ? 'Delivered together by features' : 'Delivered by feature'}</span>
-                {v.features.map((fs, i) => {
+                <span>{relationQualifiers.productValueFeatures(v.relations.features.length)}</span>
+                {v.relations.features.map((fs, i) => {
                   const f = product.features.find((c) => c.slug === fs)!;
                   return (
                     <>
@@ -82,7 +82,7 @@ const planned = !productShipped(product);
               </p>
             ) : (
               <p class="proof-line">
-                <span>Intrinsic to the product</span>
+                <span>{relationQualifiers.productValueFeatures(0, true)}</span>
                 A property of how the product is built — held by no single feature.
               </p>
             )}
