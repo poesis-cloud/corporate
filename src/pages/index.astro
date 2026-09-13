@@ -39,12 +39,28 @@ import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
         <h2>Your models. Your systems. Your control boundary.</h2>
         <p class="lead">Poesis adds a governed THINK layer without requiring a particular model vendor or replacing existing BUILD and RUN systems.</p>
       </div>
-      <div class="home-deployment-grid">
-        <article><Icon name="spark" size={22} /><h3>Model-independent</h3><p>Use the models appropriate to each bounded task; governance does not depend on one provider.</p></article>
-        <article><Icon name="shield" size={22} /><h3>Local and sovereign</h3><p>Keep sensitive THINK and RUN state inside environments you control.</p></article>
-        <article><Icon name="layers" size={22} /><h3>Cloud where appropriate</h3><p>Deploy services through managed infrastructure while retaining explicit control boundaries.</p></article>
-        <article><Icon name="grid" size={22} /><h3>Built around your estate</h3><p>Connect governed THINK to existing BUILD and RUN environments.</p></article>
-      </div>
+      <ul class="think-consequence-list home-deployment-list">
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Model-independent</span></span>
+          <strong>Governance does not depend on one provider</strong>
+          <p>Use the models appropriate to each bounded task &mdash; and change them &mdash; without the governed definition or its guarantees moving with them.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Local and sovereign</span></span>
+          <strong>Sensitive state never leaves your boundary</strong>
+          <p>THINK and RUN state stays inside environments you control, so the organizational definition remains yours by deployment, not by policy alone.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Cloud where appropriate</span></span>
+          <strong>Managed infrastructure without ceding control</strong>
+          <p>Deploy services through managed infrastructure where it makes sense, while the control boundary stays explicit rather than assumed.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="grid" size={16} /></span><span class="think-consequence__step">Built around your estate</span></span>
+          <strong>Nothing has to be replaced first</strong>
+          <p>Governed THINK connects to the BUILD and RUN environments you already operate, so the layer is added rather than swapped in.</p>
+        </li>
+      </ul>
     </div>
   </section>
 

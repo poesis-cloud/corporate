@@ -2582,9 +2582,12 @@ a:hover {
   line-height: 1.55;
 }
 
+.home-deployment-list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .home-outcome-grid article,
 .home-platform-item,
-.home-deployment-grid article,
 .home-usecase-grid article,
 .home-pilot-steps li {
   border: 1px solid var(--line);
@@ -2593,8 +2596,7 @@ a:hover {
 }
 
 .home-outcome-grid,
-.home-platform-grid,
-.home-deployment-grid {
+.home-platform-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2608,7 +2610,6 @@ a:hover {
 
 .home-outcome-grid article,
 .home-platform-item,
-.home-deployment-grid article,
 .home-usecase-grid article {
   padding: 1.5rem;
 }
@@ -2618,7 +2619,6 @@ a:hover {
 }
 
 .home-outcome-grid h3,
-.home-deployment-grid h3,
 .home-usecase-grid h3 {
   margin-top: .65rem;
 }
@@ -2669,10 +2669,6 @@ a:hover {
 .home-platform-child p {
   margin: 0;
   font-size: .9rem;
-}
-
-.home-deployment-grid article .btn-icon {
-  color: var(--accent);
 }
 
 .home-usecase-grid article {
@@ -2903,6 +2899,10 @@ a:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-deployment-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .home-usecase-grid {
     grid-template-columns: 1fr;
   }
@@ -2934,7 +2934,6 @@ a:hover {
 
   .home-outcome-grid,
   .home-platform-grid,
-  .home-deployment-grid,
   .home-usecase-grid,
   .home-pilot-steps {
     grid-template-columns: 1fr;
@@ -2942,6 +2941,10 @@ a:hover {
 
   .think-consequence-list,
   .think-therapy__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-deployment-list {
     grid-template-columns: 1fr;
   }
 
