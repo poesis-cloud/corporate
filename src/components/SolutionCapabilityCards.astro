@@ -7,7 +7,7 @@
  * product page's value card names the features that deliver it.
  */
 import Icon from './Icon.astro';
-import { capabilityRealizations, capabilityShipped, featureStatus, platformCapabilities, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityRealizations, capabilityShipped, featureStatus, platformCapabilities, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -24,8 +24,8 @@ const realizedBy = (count: number) => (count > 1 ? 'Realized by product features
     return (
       <li id={c.slug} class={planned ? 'is-planned' : undefined}>
         <span class="think-capability__head">
-          <span class="think-capability__icon"><Icon name={platform.icon} size={16} /></span>
-          <span class="think-capability__step">{platform.label}{planned && ' · planned'}</span>
+          <span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span>
+          <span class="think-capability__step">Capability · {platform.label}{planned && ' · planned'}</span>
         </span>
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>

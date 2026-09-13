@@ -9,7 +9,7 @@
  * down the same page.
  */
 import Icon from './Icon.astro';
-import { capabilityShipped, solutionValueAnchor, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityShipped, solutionValueAnchor, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -28,8 +28,8 @@ const relation = (v: Solution['values'][number]) =>
   {solution.values.map((v) => (
     <li id={solutionValueAnchor(v.title)}>
       <span class="think-consequence__head">
-        <span class="think-consequence__icon"><Icon name={v.emergent ? 'spark' : 'check-badge'} size={16} /></span>
-        <span class="think-consequence__step">{v.emergent ? 'Emergent value' : 'Value'}</span>
+        <span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span>
+        <span class="think-consequence__step">Value</span>
       </span>
       <strong>{v.title}</strong>
       <p set:html={v.body} />

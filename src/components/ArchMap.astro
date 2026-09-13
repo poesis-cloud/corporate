@@ -7,7 +7,7 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { poesisPortfolio, productTimeline, featureStatus, productShipped, capabilityShipped } from '../data/poesis-portfolio.ts';
+import { poesisPortfolio, productTimeline, featureStatus, productShipped, capabilityShipped, typeIcons } from '../data/poesis-portfolio.ts';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 import Icon from './Icon.astro';
 
@@ -26,7 +26,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
           <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
             <article class="arch-scope arch-scope--standard" aria-labelledby={`arch-solution-${s.slug}`}>
               <div class="arch-scope-meta">
-                <span class="arch-icon"><Icon name={s.icon as any} size={16} /></span>
+                <span class="arch-icon"><Icon name={typeIcons.solution} size={16} /></span>
                 <span class="tag">{s.tag} · Solution</span>
               </div>
               <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
@@ -82,7 +82,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <aside class="arch-side">
           <article class="arch-scope arch-scope--framework" aria-labelledby={`arch-solution-${framework.slug}`}>
             <div class="arch-scope-meta">
-              <span class="arch-icon"><Icon name={framework.icon as any} size={16} /></span>
+              <span class="arch-icon"><Icon name={typeIcons.solution} size={16} /></span>
               <span class="tag tag--accent-3">{framework.tag} · Solution</span>
             </div>
             <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>

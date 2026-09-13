@@ -56,17 +56,29 @@ export interface SolutionValue {
 }
 
 /**
+ * One icon per portfolio item type. An icon here names *what kind of thing*
+ * a card is — never which one it is, and never its delivery status.
+ */
+export const typeIcons = {
+  solution: 'compass',
+  capability: 'spark',
+  product: 'briefcase',
+  feature: 'list',
+  value: 'check-badge',
+} as const;
+
+/**
  * The six Poesis platform capabilities, as stated on the homepage
  * (ThinkBottleneckDiagram). Every solution capability rolls up into one of
- * them, which is also what gives its card its icon and label.
+ * them, which is also what gives its card its label.
  */
 export const platformCapabilities = {
-  'governed-context': { label: 'Governed organizational context', icon: 'grid' },
-  'governance-fabric': { label: 'Composed governance fabric', icon: 'layers' },
-  'governance-lifecycle': { label: 'Governance lifecycle', icon: 'handshake' },
-  'truth-sourcing': { label: 'Automatic truth sourcing', icon: 'repos' },
-  'norm-evaluation': { label: 'Continuous norm evaluation', icon: 'search' },
-  'generative-delivery': { label: 'Generative delivery', icon: 'play' },
+  'governed-context': { label: 'Governed organizational context' },
+  'governance-fabric': { label: 'Composed governance fabric' },
+  'governance-lifecycle': { label: 'Governance lifecycle' },
+  'truth-sourcing': { label: 'Automatic truth sourcing' },
+  'norm-evaluation': { label: 'Continuous norm evaluation' },
+  'generative-delivery': { label: 'Generative delivery' },
 } as const;
 
 export type PlatformCapability = keyof typeof platformCapabilities;
@@ -110,8 +122,6 @@ export interface Solution {
   slug: string;
   name: string;
   fullName: string;
-  /** Icon name from src/components/Icon.astro. */
-  icon: string;
   excerpt: string;
   tag: string;
   zone: 'THINK' | 'BUILD';
@@ -130,7 +140,6 @@ export const poesisPortfolio: Solution[] = [
     fullName: 'IT Intelligence Platform',
     excerpt: 'The digital twin and workspace where people understand, govern, and operate the IT organization through one shared model.',
     tag: 'Domain Intelligence Platform',
-    icon: 'compass',
     zone: 'THINK',
     href: '/solutions/itip',
     tagline: 'The IT Intelligence Platform — for IT organizations to define, govern, regulate, supervise their IT landscape as a single source of truth, and generate automatically any sort of IT artifacts from, simulate various types of impacts, and evaluate IT compliance to any governance and regulation.',
@@ -211,7 +220,6 @@ export const poesisPortfolio: Solution[] = [
     fullName: 'Systemic Intelligence Engine',
     excerpt: 'The definition and execution engine that manages governed definitions, evaluates rules, and executes approved mechanisms.',
     tag: 'Engine',
-    icon: 'spark',
     zone: 'THINK',
     href: '/solutions/sie',
     tagline: 'The Systemic Intelligence Engine — reference implementation of GSM. What Kubernetes is to software infrastructures, the Systemic Intelligence Engine is to the world. Both are declarative reconciliation engines: you define the desired state as typed, versioned, API-managed objects, and the engine continuously evaluates the real world against that definition and acts to close the gap. From virtualized and managed computing resources to virtualized and managed world resources. This is the logical and natural evolution path as we enter the generative AI era. The key to this evolution path is the systemics model: GSM. This evolution enables generative AI to operate a capable and trustworthy synthetic autopoiesis.',
@@ -316,7 +324,6 @@ export const poesisPortfolio: Solution[] = [
     fullName: 'Generative System Model',
     excerpt: 'The shared, vendor-neutral definition model for expressing systems, obligations, structures, and governance.',
     tag: 'Standard Model',
-    icon: 'book-open',
     zone: 'THINK',
     href: '/solutions/gsm',
     tagline: 'The Generative System Model — the vendor-neutral standard for defining systems — being to the world\'s THINK-BUILD-RUN of itself what OpenTelemetry semantic convention is to IT\'s systems observability — grounded in systemics, synthesizing Beer\u2019s cybernetics Viable System Model, von Bertalanffy\u2019s General System Theory, Wiener and Ashby\u2019s cybernetic feedback and requisite variety, and Maturana and Varela\u2019s biological theory of autopoiesis into a single generative definition of systems.',
@@ -440,7 +447,6 @@ export const poesisPortfolio: Solution[] = [
     fullName: 'Systemic Agentic Framework',
     excerpt: 'Governed agentic work that transforms shared definitions into controlled workflows and artifacts.',
     tag: 'Systemic Agentic Framework',
-    icon: 'handshake',
     zone: 'THINK',
     href: '/solutions/saf',
     tagline: 'The Systemic Agentic Framework — for any IT profile to deliver through local agentic orchestrations yielding standard and homogeneous artifacts synchronized on a central shared repo contextualizing other local agentic orchestrations — a safe way — complementing ITIP and integrating with SIE.',

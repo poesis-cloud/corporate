@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { typeIcons } from '../data/poesis-portfolio.ts';
 ---
 <div class="think-story" aria-label="How the THINK bottleneck changes with AI and Poesis">
   <div class="think-story__phases">
@@ -105,32 +106,32 @@ import Icon from './Icon.astro';
           <span class="think-phase__details-label">Capabilities</span>
           <ul class="think-therapy__grid">
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="grid" size={16} /></span><span class="think-capability__step">Governed organizational context</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Governed organizational context</span></span>
               <strong>Context engineered, not retrieved</strong>
               <p>Subjects, relations and obligations become typed, shared and machine-operable — the organizational context agents, people and tools consume, instead of prompts and retrieval over documents.</p>
             </li>
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="layers" size={16} /></span><span class="think-capability__step">Composed governance fabric</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Composed governance fabric</span></span>
               <strong>Frameworks and regulations, composed</strong>
               <p>TOGAF, the ISO 25000 series, GDPR, NIS2 and more attach from a catalogue and compose into one enforceable obligation set.</p>
             </li>
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="handshake" size={16} /></span><span class="think-capability__step">Governance lifecycle</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Governance lifecycle</span></span>
               <strong>AI proposes, humans put into effect</strong>
               <p>Definitions are sourced and structured upstream, then promoted through an explicit lifecycle — every authoritative change stays attributed and traceable.</p>
             </li>
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="repos" size={16} /></span><span class="think-capability__step">Automatic truth sourcing</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Automatic truth sourcing</span></span>
               <strong>Definitions author themselves</strong>
               <p>AI and deterministic analysis source definitions from code, contracts, infrastructure and evidence — with confidence and provenance — so the model tracks what actually runs.</p>
             </li>
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="search" size={16} /></span><span class="think-capability__step">Continuous norm evaluation</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Continuous norm evaluation</span></span>
               <strong>Definition checked against reality</strong>
               <p>Norms are evaluated into deterministic verdicts against observed reality, so divergence surfaces the moment it appears.</p>
             </li>
             <li>
-              <span class="think-capability__head"><span class="think-capability__icon"><Icon name="play" size={16} /></span><span class="think-capability__step">Generative delivery</span></span>
+              <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span><span class="think-capability__step">Generative delivery</span></span>
               <strong>Definitions that generate systems</strong>
               <p>Governed definitions become running systems and derived deliverables — through harnessed agentic workflows with deterministic checks and human gates.</p>
             </li>
@@ -142,32 +143,32 @@ import Icon from './Icon.astro';
         <p class="think-therapy__values-lead"><strong>The organization becomes intelligible</strong> &mdash; to the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
         <ul class="think-consequence-list">
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="compass" size={16} /></span><span class="think-consequence__step">Analysis power</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Analysis power</span></span>
             <strong>Impact is traced before the decision</strong>
             <p>Changes ripple through typed relations, so blast radius, dependencies, and affected obligations are reasoned from the model instead of guessed in a meeting.</p>
           </li>
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Continuous evaluation</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Continuous evaluation</span></span>
             <strong>The conformance state is known continuously</strong>
             <p>Every divergence between the definition and observed reality surfaces the moment it appears &mdash; not at audit time, and not after it has propagated.</p>
           </li>
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="list" size={16} /></span><span class="think-consequence__step">Governed authority</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Governed authority</span></span>
             <strong>Nothing enters into effect ungoverned</strong>
             <p>Definitions and operations &mdash; proposed by AI or by people &mdash; take effect only through the explicit lifecycle, so authority stays human, attributed, and never implicit.</p>
           </li>
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Accountable autonomy</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Accountable autonomy</span></span>
             <strong>Execution can be delegated without losing control</strong>
             <p>Agentic and automated action stays bounded by Directives and Norms, so autonomy can grow without accountability being traded away for speed.</p>
           </li>
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Resource economy</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Resource economy</span></span>
             <strong>The same resources deliver more</strong>
             <p>Intent stops being rebuilt at every handoff and deliverables derive from the model, releasing the human and compute capacity that drift consumes.</p>
           </li>
           <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="book-open" size={16} /></span><span class="think-consequence__step">Audit readiness</span></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">Audit readiness</span></span>
             <strong>The history of the model is the audit trail</strong>
             <p>Every governed change is a retained, versioned transition carrying its provenance &mdash; evidence exists by construction, not reconstructed under audit pressure.</p>
           </li>

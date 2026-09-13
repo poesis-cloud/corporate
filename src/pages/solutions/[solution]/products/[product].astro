@@ -9,7 +9,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
-import { poesisPortfolio, productTimeline, featureStatus, productShipped } from '../../../../data/poesis-portfolio.ts';
+import { poesisPortfolio, productTimeline, featureStatus, productShipped, typeIcons } from '../../../../data/poesis-portfolio.ts';
 
 export function getStaticPaths() {
   return poesisPortfolio.flatMap((solution) =>
@@ -62,8 +62,8 @@ const planned = !productShipped(product);
         {product.values.map((v) => (
           <li>
             <span class="think-consequence__head">
-              <span class="think-consequence__icon"><Icon name={v.vision ? 'compass' : 'check-badge'} size={16} /></span>
-              <span class="think-consequence__step">{v.vision ? 'Vision' : 'Value'}</span>
+              <span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span>
+              <span class="think-consequence__step">Value</span>
             </span>
             <strong>{v.title}</strong>
             <p>{v.body}</p>
@@ -104,9 +104,9 @@ const planned = !productShipped(product);
           return (
             <li id={f.slug} class={status.shipped ? undefined : 'is-planned'}>
               <span class="think-capability__head">
-                <span class="think-capability__icon"><Icon name={status.shipped ? 'check-badge' : 'lightbulb'} size={16} /></span>
+                <span class="think-capability__icon"><Icon name={typeIcons.feature} size={16} /></span>
                 <span class="think-capability__step">
-                  {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
+                  Feature · {status.shipped ? `v${status.version}` : `planned v${status.version}`}
                 </span>
               </span>
               <strong>{f.name}</strong>
