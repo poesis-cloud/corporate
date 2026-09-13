@@ -15,7 +15,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 ---
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
-    <span>poesis portfolio · solutions ⊃ products ⊃ features</span>
+    <span>Poesis Platform Map · solutions ⊃ products ⊃ features</span>
     <span>every box is clickable</span>
   </div>
 
@@ -36,10 +36,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                   {s.products.map((p) => {
                     return (
                     <section class="arch-product" aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
-                      <span class="arch-product-head">
-                        <span class="arch-icon"><Icon name={p.icon as any} size={16} /></span>
-                        <span class="arch-version">current v{p.currentVersion}</span>
-                      </span>
+                      <span class="arch-version">current v{p.currentVersion}</span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
                       </h4>
@@ -87,10 +84,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                 {framework.products.map((p) => {
                   return (
                   <section class="arch-product" aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
-                    <span class="arch-product-head">
-                      <span class="arch-icon"><Icon name={p.icon as any} size={16} /></span>
-                      <span class="arch-version">current v{p.currentVersion}</span>
-                    </span>
+                    <span class="arch-version">current v{p.currentVersion}</span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
                     </h4>
@@ -120,6 +114,13 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
           </article>
         </aside>
   </div>
+
+  <p class="arch-note">
+    <span class="arch-note__label">Version convention</span>
+    Anything below <strong>v1.0</strong> is a pre-release development line, not a
+    shipped product: it is visible here so the roadmap is honest, but it is not
+    available to clients. <strong>v1.0</strong> is the first version you can use.
+  </p>
 </div>
 
 <style>
@@ -136,12 +137,6 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     border-color: rgba(129, 140, 248, .35);
     color: var(--accent-3);
   }
-  .arch-product-head {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    margin-bottom: .5rem;
-  }
   .arch-version,
   .arch-comp-version {
     font-family: var(--font-mono);
@@ -151,6 +146,10 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     text-transform: uppercase;
     color: var(--accent);
     white-space: nowrap;
+  }
+  .arch-version {
+    display: block;
+    margin-bottom: .4rem;
   }
   .arch-comp-version {
     margin-left: 0.45rem;

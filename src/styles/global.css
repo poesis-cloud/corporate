@@ -1563,6 +1563,30 @@ a:hover {
   text-transform: uppercase;
 }
 
+.arch-note {
+  margin: 1rem 0 0;
+  padding-left: .75rem;
+  border-left: 1px solid rgba(248, 170, 74, .42);
+  font-size: .8rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.arch-note__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #f8aa4a;
+}
+
+.arch-note strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
 .arch-scope h3 {
   margin-bottom: .35rem;
 }

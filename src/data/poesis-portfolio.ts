@@ -58,8 +58,6 @@ export interface SolutionValue {
 export interface ProductDef {
   slug: string;
   name: string;
-  /** Icon name from src/components/Icon.astro. */
-  icon: string;
   excerpt: string;
   tagline: string;
   description: string;
@@ -110,7 +108,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'web-application',
         name: 'Web Application',
-        icon: 'grid',
         excerpt: 'One governed view of the IT landscape for architecture, delivery, operations, security, and compliance.',
         tagline: 'The application every IT profile works in — for defining, governing, regulating, and supervising their IT landscape.',
         description:
@@ -139,7 +136,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-blackboard-code-sourcer',
         name: 'Definition Blackboard Code Sourcer',
-        icon: 'repos',
         excerpt: 'Keeps governed definitions anchored to reality by sourcing evidence from code, APIs, and infrastructure.',
         tagline: 'Automatic truth sourcing — GSM Definitions authored from your real IT artifacts, continuously, instead of by hand.',
         description:
@@ -181,7 +177,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-manager',
         name: 'Definition Manager',
-        icon: 'list',
         excerpt: 'The authoritative API, lifecycle, and store for every governed definition.',
         tagline: 'The authoritative API, lifecycle enforcer, and store of every governed GSM Definition — the heart of the engine.',
         description:
@@ -206,7 +201,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'operator',
         name: 'Operator',
-        icon: 'play',
         excerpt: 'Evaluates governed rules and executes approved mechanisms against observed state.',
         tagline: 'The GSM Definition runtime — for evaluating and executing GSM Definitions such as Norms and Mechanisms.',
         description:
@@ -232,7 +226,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'definition-blackboard-manager',
         name: 'Definition Blackboard Manager',
-        icon: 'message',
         excerpt: 'Where humans, AI, and tools combine partial evidence into auditable definition proposals.',
         tagline: 'The shared board where humans, AI, and tools think together about what your systems are — partial views composed into definition proposals.',
         description:
@@ -275,7 +268,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'specifications',
         name: 'Specifications',
-        icon: 'docs',
         excerpt: 'The open core: eight primitives, governance grammar, archetyping, and lifecycle.',
         tagline: 'The core spec — eight primitives, DNA grammar, Archetyping, and the systemic lifecycle.',
         description:
@@ -301,7 +293,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'ontology',
         name: 'Ontology',
-        icon: 'layers',
         excerpt: 'Ready-to-use domain, standard, and regulatory vocabularies sourced into GSM.',
         tagline: 'Domain, standard, and legal vocabularies — sourced into GSM, ready to enforce.',
         description:
@@ -341,7 +332,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'research-lab',
         name: 'Research Lab',
-        icon: 'lightbulb',
         excerpt: 'Tests GSM hypotheses against systemics and promotes what survives into formal change proposals.',
         tagline: 'The non-normative research product — the Generative Governance program, promoted into GSM Change Proposals when it graduates.',
         description:
@@ -388,7 +378,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'agentic-harness',
         name: 'Agentic Harness',
-        icon: 'shield',
         excerpt: 'Deterministic controls for probabilistic agents: resolve steps, authorize actions, validate artifacts, and trace outcomes.',
         tagline: 'The agent harness — deterministic resolutions, validations, and traceability of agentic workflows, keeping probabilistic agents on rails.',
         description:
@@ -416,7 +405,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'safe-agentic-organization',
         name: 'SAFe Agentic Organization',
-        icon: 'briefcase',
         excerpt: 'Runs portfolio, program, and iteration work through specialized agents and explicit human gates.',
         tagline: 'Portfolio → program → iteration — a preset, IT-scaled agile org chart of agents — for operating efficiently on day-to-day strategic, tactical, and technical concerns.',
         description:
@@ -440,7 +428,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'agentic-workspace',
         name: 'Agentic Workspace',
-        icon: 'grid',
         excerpt: 'A local-first working tree and shared artifact plane for governed agentic delivery.',
         tagline: 'A shared remote workspace storing local agentic workflow artifacts, enabling local personal agents to operate on the required inputs of other local personal agents — for an end-to-end decentralized agentic workflow model.',
         description:
@@ -462,7 +449,6 @@ export const poesisPortfolio: Solution[] = [
       {
         slug: 'saf-sie-bridge',
         name: 'SAF SIE Bridge',
-        icon: 'handshake',
         excerpt: 'Turns agentic execution history into evidence-backed contributions to governed definitions.',
         tagline: 'The client sourcer turning harness-governed agentic-execution history into governed context — the concrete form of SAF’s integration with SIE.',
         description:
