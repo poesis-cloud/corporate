@@ -79,24 +79,31 @@ import Icon from './Icon.astro';
     </article>
   </div>
 
-  <div class="think-story__consequences" aria-label="Immediate effects of the Poesis therapy">
-    <span>Immediate therapy effects</span>
-    <div class="think-consequence-list">
-      <article>
-        <span class="think-consequence__head"><Icon name="spark" size={18} /><strong>More BUILD + RUN throughput</strong></span>
-        <p>Intent is no longer re-explained and repaired at every handoff — generation lands aligned the first time.</p>
-        <span class="think-consequence__delta">rework → throughput</span>
-      </article>
-      <article>
-        <span class="think-consequence__head"><Icon name="layers" size={18} /><strong>Resource economy</strong></span>
-        <p>Human, compute, and operational capacity stop burning on drift and correction — the same resources deliver more.</p>
-        <span class="think-consequence__delta">burn → economy</span>
-      </article>
-      <article>
-        <span class="think-consequence__head"><Icon name="shield" size={18} /><strong>AI governance by design</strong></span>
-        <p>Purpose, rules, and constraints bound generation before it runs — governance intrinsic, not patched on after.</p>
-        <span class="think-consequence__delta">afterthought → by design</span>
-      </article>
-    </div>
-  </div>
+  <section class="think-story__consequences" aria-labelledby="therapy-effects-title">
+    <header class="think-consequence__intro">
+      <span>What governed THINK changes</span>
+      <h3 id="therapy-effects-title">Attention moves from repairing drift to producing governed change.</h3>
+      <p>Purpose, rules, and constraints become explicit before execution, giving BUILD and RUN a shared, governed, traceable basis.</p>
+    </header>
+    <ol class="think-consequence-list">
+      <li>
+        <span class="think-consequence__icon"><Icon name="shield" size={19} /></span>
+        <span class="think-consequence__step">01 · Govern</span>
+        <strong>Authoritative definitions govern execution</strong>
+        <p>Once approved by humans, definitions remain shared, reusable, and machine-operable across BUILD and RUN.</p>
+      </li>
+      <li>
+        <span class="think-consequence__icon"><Icon name="layers" size={19} /></span>
+        <span class="think-consequence__step">02 · Conserve</span>
+        <strong>BUILD and RUN reconstruct less intent</strong>
+        <p>Fewer clarification, rework, and corrective-review loops release scarce human and compute capacity.</p>
+      </li>
+      <li>
+        <span class="think-consequence__icon"><Icon name="spark" size={19} /></span>
+        <span class="think-consequence__step">03 · Accelerate</span>
+        <strong>The same resources deliver more</strong>
+        <p>Shorter delivery cycles and less rework increase throughput while keeping execution tied to governed definitions.</p>
+      </li>
+    </ol>
+  </section>
 </div>
