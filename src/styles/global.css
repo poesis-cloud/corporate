@@ -2539,10 +2539,15 @@ a:hover {
 
 .home-outcome-grid,
 .home-platform-grid,
-.home-deployment-grid,
-.home-usecase-grid {
+.home-deployment-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -2863,6 +2868,10 @@ a:hover {
 
   .think-consequence-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-usecase-grid {
+    grid-template-columns: 1fr;
   }
 
   .twin-vision__flow {

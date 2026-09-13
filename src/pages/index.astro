@@ -14,7 +14,6 @@ const valueSet = (solutionSlug: string, primary: string) => {
 const defineValues = valueSet('itip', 'A source of truth AI can act on.');
 const buildValues = valueSet('saf', 'Definitions that generate systems.');
 const runValues = valueSet('sie', 'Harnessed operations.');
-const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero">
@@ -81,13 +80,13 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
       <div class="section-head">
         <p class="eyebrow">The governed loop</p>
         <h2>THINK, BUILD, RUN &mdash; and back to THINK.</h2>
-        <p class="lead">Those effects are what the loop produces &mdash; and keeps producing. Four jobs share one set of governed definitions, and evaluation returns evidence to THINK instead of ending the line.</p>
+        <p class="lead">Those effects are what the loop produces &mdash; and keeps producing. Three jobs share one set of governed definitions; evaluation is THINK applied continuously to THINK, BUILD, and RUN.</p>
       </div>
       <div class="home-usecase-grid">
         <article id="use-case-think">
           <span class="home-step">01 · THINK</span>
           <h3>Generate a living digital twin of your organization</h3>
-          <p>Source definitions from people, code, contracts, infrastructure, and evidence; govern them into one traceable organizational digital twin.</p>
+          <p>Source definitions from people, code, contracts, infrastructure, and evidence; evaluate their validity, coherence, and fitness; govern them into one traceable organizational digital twin.</p>
           <div class="home-usecase-values">
             <span>The values</span>
             <nav aria-label={`${defineValues.solution.name} values related to Define`}>
@@ -101,7 +100,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
         <article id="use-case-build">
           <span class="home-step">02 · BUILD</span>
           <h3>Build from the organizational digital twin</h3>
-          <p>Use its governed definitions as machine-operable context for people and AI to turn human-owned concerns into delivered systems, with deterministic checks and human gates.</p>
+          <p>Use its governed definitions as machine-operable context for people and AI; evaluate generated systems against them through deterministic checks and human gates; return evidence to THINK.</p>
           <div class="home-usecase-values">
             <span>The values</span>
             <nav aria-label={`${buildValues.solution.name} values related to Build`}>
@@ -115,7 +114,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
         <article id="use-case-run">
           <span class="home-step">03 · RUN</span>
           <h3>Operate from active definitions</h3>
-          <p>Put the digital twin into effect through Mechanisms that guide human, software, and agentic action while consequential authority remains with people.</p>
+          <p>Put the digital twin into effect through Mechanisms that guide human, software, and agentic action; evaluate runtime subjects through Norms for compliance and drift; return evidence to THINK.</p>
           <div class="home-usecase-values">
             <span>The values</span>
             <nav aria-label={`${runValues.solution.name} values related to Run`}>
@@ -125,20 +124,6 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
             </nav>
           </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/sie"><Icon name="arrow-right" /> Explore SIE</a>
-        </article>
-        <article>
-          <span class="home-step">04 · EVALUATE &rarr; THINK</span>
-          <h3>Evaluate definitions and the realities they govern</h3>
-          <p>Evaluate definitions for validity, coherence, and fitness; evaluate their runtime subjects through Norms for compliance and drift; return the evidence to THINK for human disposition.</p>
-          <div class="home-usecase-values">
-            <span>The values</span>
-            <nav aria-label={`${evaluateValues.solution.name} values related to Evaluate`}>
-              {evaluateValues.solution.values.map((value) => (
-                <a class:list={{ 'is-primary': value.title === evaluateValues.primary }} href={`${evaluateValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
-              ))}
-            </nav>
-          </div>
-          <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
         </article>
       </div>
     </div>
