@@ -2236,13 +2236,18 @@ a:hover {
 
 .think-therapy {
   display: grid;
-  grid-template-columns: minmax(15rem, .85fr) minmax(0, 2fr);
+  grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.6fr);
   gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
 }
 
+.think-therapy__aside {
+  display: flex;
+  flex-direction: column;
+}
+
 .think-therapy .think-phase__flow {
-  margin: 1.5rem 0 0;
+  margin: 1.5rem 0 1rem;
 }
 
 .think-therapy__body {
@@ -2257,7 +2262,7 @@ a:hover {
 .think-therapy__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem clamp(1rem, 2.2vw, 1.75rem);
+  gap: 1rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2265,11 +2270,38 @@ a:hover {
 
 .think-therapy__grid li {
   display: grid;
-  gap: .3rem;
+  gap: .4rem;
   align-content: start;
   min-width: 0;
-  padding-left: clamp(.85rem, 1.6vw, 1.15rem);
-  border-left: 1px solid rgba(45, 212, 191, .3);
+  padding: .9rem 1rem;
+  border: 1px solid rgba(45, 212, 191, .28);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.think-capability__head {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.think-capability__icon {
+  display: grid;
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  place-items: center;
+  border: 1px solid rgba(45, 212, 191, .35);
+  color: var(--accent);
+}
+
+.think-capability__step {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .think-therapy__grid strong {
@@ -2282,31 +2314,6 @@ a:hover {
   margin: 0;
   color: var(--muted);
   font-size: .8rem;
-  line-height: 1.55;
-}
-
-.think-therapy__cure {
-  display: grid;
-  grid-template-columns: 1rem minmax(0, 1fr);
-  gap: .4rem;
-  color: var(--ink-soft);
-  font-size: .76rem;
-}
-
-.think-therapy__cure::before {
-  content: '\2713';
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.think-therapy__note {
-  margin: 0;
-  padding-top: .35rem;
-  color: var(--muted);
-  font-size: .78rem;
   line-height: 1.55;
 }
 
