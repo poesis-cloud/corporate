@@ -2473,7 +2473,7 @@ a:hover {
 
 .think-consequence-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.4rem clamp(1rem, 2.2vw, 1.75rem);
   margin: 0;
   padding: 0;
