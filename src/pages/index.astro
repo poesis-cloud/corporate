@@ -16,20 +16,18 @@ const itProfiles = profilesForDomain('it');
       <p class="eyebrow">The foundation of the autonomous enterprise</p>
       <h1>The Organizational Intelligence Platform.</h1>
       <p class="lead">AI is entering organizations it doesn't understand. Humans rarely understand them much better. Poesis grounds both in a coherent system that manages <em>definitions</em> of the organization — its DNA — <strong>to efficiently and continuously generate that organization</strong>.</p>
-      <p class="hero-promise">The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating BUILD and RUN adequately</strong>, and <strong>ultimately for the autonomous enterprise to emerge</strong>.</p>
+      <div class="hero-promise">
+        <p>The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating BUILD and RUN adequately</strong>, and <strong>ultimately for the autonomous enterprise to emerge</strong>.</p>
+      </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Run a Pilot</a>
-        <a class="btn btn-ghost" href="/insights/the-autonomous-enterprise/"><Icon name="arrow-right" /> See where it leads</a>
       </div>
       <p class="hero-note">Human-governed definitions that people and AI can act on.</p>
       <nav class="hero-sections" aria-label="On this page">
+        <p class="hero-sections__head"><span>On this page</span>The case, the posture, and the platform behind them &mdash; in the order they are argued.</p>
         <a href="#bottleneck">
           <span>The thesis</span>
-          Drift at machine speed, or align at human speed &mdash; and why THINK is the bottleneck.
-        </a>
-        <a href="#pains">
-          <span>What it replaces</span>
-          The {itPains.length} IT pains sold as separate tools today, traced to the features that address them.
+          Drift at machine speed, or align at human speed &mdash; and the {itPains.length} IT pains the bottleneck leaves behind.
         </a>
         <a href="#deployment">
           <span>Deployment posture</span>
@@ -65,14 +63,9 @@ const itProfiles = profilesForDomain('it');
         <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
       </div>
       <ThinkBottleneckDiagram />
-    </div>
-  </section>
-
-  <section id="pains" class="section home-pains">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What it replaces</p>
-        <h2>{itPains.length} IT pains, one governed model.</h2>
+      <div class="section-head home-pains-head">
+        <p class="eyebrow">Where the pathology surfaces</p>
+        <h3>{itPains.length} IT pains, one governed model.</h3>
         <p class="lead">The THINK pathology surfaces first and hardest in IT, which is why IT is the first domain Poesis addresses. Each of these pains is sold a separate tool today, each tool holding its own copy of the truth. In Poesis they are facets of the same governed definitions &mdash; every pain traceable to the features that address it.</p>
       </div>
       <PainGrid pains={itPains} />
