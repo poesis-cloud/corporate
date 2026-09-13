@@ -2703,11 +2703,22 @@ a:hover {
   line-height: 1.5;
 }
 
-.home-usecase-proof span,
-.proof-line span {
+.home-usecase-proof span {
   display: block;
   margin-bottom: .3rem;
   color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* Accent is reserved for an item's own eyebrow; a relation qualifier stays
+   neutral so it does not read as the head of the next card. */
+.proof-line > span {
+  display: block;
+  margin-bottom: .3rem;
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .1em;
