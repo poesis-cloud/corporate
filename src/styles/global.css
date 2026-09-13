@@ -2706,25 +2706,8 @@ a:hover {
   text-transform: uppercase;
 }
 
-.home-usecase-close {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .025);
-}
-
-.home-usecase-close p {
-  flex: 1 1 26rem;
-  margin: 0;
-  color: var(--muted);
-  font-size: .92rem;
-  line-height: 1.6;
+.home-pilot .home-usecase-grid {
+  margin-bottom: 2rem;
 }
 
 .home-pilot-steps {
