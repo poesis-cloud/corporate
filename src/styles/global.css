@@ -2519,34 +2519,9 @@ a:hover {
   line-height: 1.1;
 }
 
-/* Same card vocabulary as the therapy values, in the pathology register. */
-.think-phase__foot .think-phase__pains {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: .35rem;
-}
-
-.think-phase__pains > li {
-  grid-template-rows: auto auto auto 1fr auto;
-  border-left-color: rgba(248, 113, 113, .28);
-}
-
-.think-phase__pains .think-consequence__icon {
-  border-color: rgba(248, 113, 113, .35);
-  color: #f87171;
-  font-family: var(--font-mono);
-  font-size: .95rem;
-  font-weight: 700;
-}
-
-.think-phase__pains .think-consequence__step {
-  color: #f87171;
-}
-
-.think-pain__remedy {
-  margin: 0;
+.think-phase__details li strong {
   color: var(--ink-soft);
-  font-size: .8rem;
-  line-height: 1.55;
+  font-weight: 500;
 }
 
 .think-phase--poesis .think-phase__details li::before {
@@ -3122,10 +3097,6 @@ a:hover {
 
   .think-consequence-list,
   .think-therapy__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .think-phase__foot .think-phase__pains {
     grid-template-columns: 1fr;
   }
 
