@@ -47,13 +47,13 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
   <section id="use-cases" class="section home-usecases">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">From definition to operation</p>
-        <h2>What becomes possible when the organization can define itself.</h2>
-        <p class="lead">Poesis connects four jobs that fragmented tools treat separately — so the same governed definitions carry from THINK into BUILD and RUN.</p>
+        <p class="eyebrow">The governed loop</p>
+        <h2>THINK, BUILD, RUN &mdash; and back to THINK.</h2>
+        <p class="lead">The same loop, made operational. Four jobs share one set of governed definitions &mdash; and evaluation returns evidence to THINK instead of ending the line.</p>
       </div>
       <div class="home-usecase-grid">
         <article>
-          <span class="home-step">01 · Define</span>
+          <span class="home-step">01 · THINK</span>
           <h3>Generate a living digital twin of your organization</h3>
           <p>Source definitions from people, code, contracts, infrastructure, and evidence; govern them into one traceable organizational digital twin.</p>
           <div class="home-usecase-values">
@@ -67,7 +67,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
           <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
         </article>
         <article>
-          <span class="home-step">02 · Build</span>
+          <span class="home-step">02 · BUILD</span>
           <h3>Build from the organizational digital twin</h3>
           <p>Use its governed definitions as machine-operable context for people and AI to turn human-owned concerns into delivered systems, with deterministic checks and human gates.</p>
           <div class="home-usecase-values">
@@ -81,7 +81,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
           <a class="btn btn-ghost btn-sm" href="/solutions/saf"><Icon name="arrow-right" /> Explore SAF</a>
         </article>
         <article>
-          <span class="home-step">03 · Run</span>
+          <span class="home-step">03 · RUN</span>
           <h3>Operate from active definitions</h3>
           <p>Put the digital twin into effect through Mechanisms that guide human, software, and agentic action while consequential authority remains with people.</p>
           <div class="home-usecase-values">
@@ -95,7 +95,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
           <a class="btn btn-ghost btn-sm" href="/solutions/sie"><Icon name="arrow-right" /> Explore SIE</a>
         </article>
         <article>
-          <span class="home-step">04 · Evaluate</span>
+          <span class="home-step">04 · EVALUATE &rarr; THINK</span>
           <h3>Evaluate definitions and the realities they govern</h3>
           <p>Evaluate definitions for validity, coherence, and fitness; evaluate their runtime subjects through Norms for compliance and drift; return the evidence to THINK for human disposition.</p>
           <div class="home-usecase-values">
@@ -104,6 +104,7 @@ const evaluateValues = valueSet('itip', 'Governance that stops drifting.');
               {evaluateValues.solution.values.map((value) => (
                 <a class:list={{ 'is-primary': value.title === evaluateValues.primary }} href={`${evaluateValues.solution.href}#${solutionValueAnchor(value.title)}`}>{value.title}</a>
               ))}
+            </nav>
           </div>
           <a class="btn btn-ghost btn-sm" href="/solutions/itip"><Icon name="arrow-right" /> Explore ITIP</a>
         </article>
