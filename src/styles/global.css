@@ -2315,13 +2315,30 @@ a:hover {
   display: grid;
   gap: .45rem;
   margin: auto 0 0;
-  padding: .85rem 0 0 1rem;
+  padding: .85rem 0 0;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: .82rem;
+  list-style: none;
 }
 
-.think-phase__details li::marker {
+.think-phase__details li {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: .5rem;
+}
+
+.think-phase__details li::before {
+  content: '\00D7';
+  color: #f87171;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.think-phase--poesis .think-phase__details li::before {
+  content: '\2713';
   color: var(--accent);
 }
 
