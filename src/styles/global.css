@@ -2253,9 +2253,8 @@ a:hover {
 
 .think-phase__flow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.15fr);
-  gap: .6rem;
-  align-items: center;
+  grid-template-rows: auto auto auto;
+  gap: .5rem;
   margin: 1.5rem 0 1rem;
 }
 
@@ -2296,7 +2295,7 @@ a:hover {
 
 .think-capacity-group {
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .think-capacity-group--expanded .think-capacity {
@@ -2310,8 +2309,10 @@ a:hover {
 }
 
 .think-phase__arrow {
+  justify-self: center;
   color: var(--accent);
   font-size: 1.25rem;
+  transform: rotate(90deg);
 }
 
 .think-phase__foot {
