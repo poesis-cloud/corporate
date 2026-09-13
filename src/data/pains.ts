@@ -21,7 +21,9 @@ export interface FeatureRef {
 
 export interface Pain {
     id: string;
-    domainSlug: 'it' | 'research';
+    domainSlug: 'it';
+    /** Which thesis phase the pain surfaces in: the historical THINK pathology, or its GenAI-era form. */
+    phase: 'legacy' | 'genai';
     /** Practice/concern label — mirrors the domain page card tags. */
     tag: string;
     /** The pain, stated in the buyer's words. Card title. */
@@ -44,6 +46,7 @@ export const pains: Pain[] = [
     {
         id: 'it-ea-drift',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Enterprise architecture',
         pain: 'The architecture repository is out of date the day it\u2019s written.',
         cost: 'Hand-maintained models detach from the territory the moment delivery moves on \u2014 and every decision made on them inherits the drift.',
@@ -56,6 +59,7 @@ export const pains: Pain[] = [
     {
         id: 'it-audit-reconstruction',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Compliance automation',
         pain: 'Compliance is reconstructed in spreadsheets before every audit.',
         cost: 'Posture exists only at audit time; between audits, nobody can answer what is actually covered.',
@@ -68,6 +72,7 @@ export const pains: Pain[] = [
     {
         id: 'it-blind-change',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Impact analysis',
         pain: 'Impact analysis is a guess made in a meeting.',
         cost: 'Coupling is discovered in incident reviews, after the change shipped.',
@@ -79,6 +84,7 @@ export const pains: Pain[] = [
     {
         id: 'it-handcrafted-deliverables',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Artifact generation',
         pain: 'Every deliverable is hand-crafted, again and again.',
         cost: 'ADR packs, evidence, baselines, and roadmaps are rebuilt by hand \u2014 and stale against each other by the time they ship.',
@@ -90,6 +96,7 @@ export const pains: Pain[] = [
     {
         id: 'it-truth-drift',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Truth sourcing',
         pain: 'Governance drifts from what actually runs.',
         cost: 'The declared estate and the running estate diverge silently \u2014 until an audit or an incident exposes the gap.',
@@ -102,6 +109,7 @@ export const pains: Pain[] = [
     {
         id: 'it-ai-blindness',
         domainSlug: 'it',
+        phase: 'genai',
         tag: 'AI-ready governance',
         pain: 'AI agents act on stale wikis and tribal knowledge.',
         cost: 'Without a trustworthy machine-readable source of truth, agent autonomy is either blocked or reckless.',
@@ -114,6 +122,7 @@ export const pains: Pain[] = [
     {
         id: 'it-ungoverned-change',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Change governance',
         pain: 'Anything can change anything — there is no approval trail.',
         cost: 'Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable.',
@@ -126,6 +135,7 @@ export const pains: Pain[] = [
     {
         id: 'it-framework-collision',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Framework composition',
         pain: 'Every framework lives in its own silo — and they collide on your desk.',
         cost: 'TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident.',
@@ -138,6 +148,7 @@ export const pains: Pain[] = [
     {
         id: 'it-governance-lockin',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Vendor neutrality',
         pain: 'Your governance model is trapped in a vendor’s proprietary format.',
         cost: 'Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance.',
@@ -150,6 +161,7 @@ export const pains: Pain[] = [
     {
         id: 'it-tool-silos',
         domainSlug: 'it',
+        phase: 'legacy',
         tag: 'Interoperability',
         pain: 'Architecture, compliance, and quality tools don’t speak to each other.',
         cost: 'Each tool keeps its own model of the same IT reality; integrations are bespoke mappings that rot, and knowledge stays siloed per tool and per team.',
@@ -163,6 +175,7 @@ export const pains: Pain[] = [
     {
         id: 'it-ungoverned-agents',
         domainSlug: 'it',
+        phase: 'genai',
         tag: 'Agentic delivery',
         pain: 'AI agents ship work nobody scoped, gated, or can replay.',
         cost: 'Agentic delivery state is trapped in chat sessions; pull requests appear without a mandate; there is no event log and no human authority at the layer where it matters.',
@@ -171,77 +184,6 @@ export const pains: Pain[] = [
             { solution: 'saf', product: 'agentic-harness', feature: 'step-authorization' },
             { solution: 'saf', product: 'agentic-harness', feature: 'artifact-validation' },
             { solution: 'saf', product: 'safe-agentic-organization', feature: 'workflows' },        ],
-    },
-    // ---- Poesis for Research ----------------------------------------------
-    {
-        id: 'rs-no-ontology',
-        domainSlug: 'research',
-        tag: 'Ontology',
-        pain: 'Semantics carried only in prose bind no one.',
-        cost: 'What a hypothesis, a budget, a review, or a deadline is must be defined before any process can be held to it.',
-        remedy: 'GSM supplies the explicit ontology and generative governance grammar \u2014 the definitions obligations are expressed against.',
-        addressedBy: [
-            { solution: 'gsm', product: 'specifications', feature: 'primitives' },
-            { solution: 'gsm', product: 'specifications', feature: 'dna-grammar' },
-        ],
-    },
-    {
-        id: 'rs-lost-identity',
-        domainSlug: 'research',
-        tag: 'Identity & lifecycle',
-        pain: 'Hypotheses are silently abandoned \u2014 retirement leaves no record.',
-        cost: 'Research objects die with the trajectory or the context window that held them.',
-        remedy: 'Research objects persist with attributable, ordered state changes \u2014 what was retired remains a re-openable identity.',
-        addressedBy: [
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-lifecycle-enforcement' },
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-retention' },
-        ],
-    },
-    {
-        id: 'rs-unqualified-claims',
-        domainSlug: 'research',
-        tag: 'Qualified evidence',
-        pain: 'Claims enter the record without provenance or confidence.',
-        cost: 'Every downstream decision inherits unqualified evidence as if it were fact.',
-        remedy: 'An observation enters the institution with its confidence and provenance attached \u2014 qualification makes a claim governable.',
-        addressedBy: [
-            { solution: 'sie', product: 'definition-blackboard-manager', feature: 'ks-contributions-management-api' },
-        ],
-    },
-    {
-        id: 'rs-unevaluable-rules',
-        domainSlug: 'research',
-        tag: 'Evaluable norms',
-        pain: 'Deviation and violation are indistinguishable until someone judges.',
-        cost: 'An hour of idleness violates nothing; chronic neglect of a mandate does \u2014 prose rules cannot tell them apart.',
-        remedy: 'Norms carry temporal tolerance and render the difference as a verdict, not an impression.',
-        addressedBy: [
-            { solution: 'sie', product: 'operator', feature: 'norms-evaluation-api' },
-        ],
-    },
-    {
-        id: 'rs-self-judging',
-        domainSlug: 'research',
-        tag: 'Separation of powers',
-        pain: 'The process measures, judges, and enforces itself.',
-        cost: 'A self-evaluating loop is precisely the ungoverned condition being remedied.',
-        remedy: 'Measurement, judgment, and enforcement are distinct primitives, by design \u2014 evaluated and dispatched separately.',
-        addressedBy: [
-            { solution: 'sie', product: 'operator', feature: 'norms-evaluation-api' },
-            { solution: 'sie', product: 'operator', feature: 'mechanism-execution-foundations' },
-        ],
-    },
-    {
-        id: 'rs-unrecomputable-record',
-        domainSlug: 'research',
-        tag: 'Deterministic record',
-        pain: 'Whether an obligation was met is archaeology over logs.',
-        cost: 'The history of decisions, evidence, and verdicts is scattered across chat scrollback and dashboards.',
-        remedy: 'Verdicts have exactly one answer, computable from the definitions and the record \u2014 the substrate\u2019s own queryable state.',
-        addressedBy: [
-            { solution: 'sie', product: 'definition-manager', feature: 'definitions-retention' },
-            { solution: 'sie', product: 'definition-blackboard-manager', feature: 'ks-contributions-retention' },
-        ],
     },
 ];
 
@@ -258,6 +200,10 @@ export function resolveFeatureRef(ref: FeatureRef): ResolvedFeature {
 
 export const painsForDomain = (domainSlug: Pain['domainSlug']): Pain[] =>
     pains.filter((p) => p.domainSlug === domainSlug);
+
+/** The pains that surface in a given thesis phase, for the THINK bottleneck diagram. */
+export const painsForPhase = (phase: Pain['phase']): Pain[] =>
+    pains.filter((p) => p.phase === phase);
 
 /** Reverse lookup: the pains a given product addresses (via any of its features). */
 export const painsForProduct = (solutionSlug: string, productSlug: string): Pain[] =>

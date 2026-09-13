@@ -2142,24 +2142,22 @@ a:hover {
   margin: 0;
 }
 
-/* The hero says what the page is; this rail says what the page contains. One
-   line per section, so the summary stays a hero element and not a section. */
+/* The hero says what the page is; this rail says what the page contains. Real
+   gaps rather than a 1px seam, so an incomplete last row stays clean. */
 .hero-sections {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
+  gap: 1.25rem clamp(1rem, 2.5vw, 1.75rem);
   margin-top: clamp(2rem, 5vw, 3.5rem);
-  background: var(--line);
 }
 
 .hero-sections a {
   display: block;
-  padding: 1rem clamp(.9rem, 2vw, 1.4rem);
+  padding-top: .85rem;
   border-top: 1px solid var(--line-strong);
-  background: var(--bg-ink);
   color: var(--ink-soft);
-  font-size: .88rem;
+  font-size: .82rem;
   line-height: 1.45;
   text-decoration: none;
   transition: border-color .2s ease, color .2s ease;
@@ -2583,7 +2581,32 @@ a:hover {
 }
 
 .home-deployment-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-integration-list {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-integration-note {
+  margin: 1.6rem 0 0;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.home-persona-cta {
+  margin: .2rem 0 0;
+  font-size: .8rem;
+}
+
+.home-persona-cta a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.home-persona-cta a:hover,
+.home-persona-cta a:focus-visible {
+  text-decoration: underline;
 }
 
 /* ---- solution & product pages (same vocabulary as the homepage) --------- */
@@ -3030,6 +3053,10 @@ a:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-integration-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .home-pilot-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3070,6 +3097,10 @@ a:hover {
   }
 
   .home-deployment-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-integration-list {
     grid-template-columns: 1fr;
   }
 

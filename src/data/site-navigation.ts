@@ -1,4 +1,5 @@
 import { poesisPortfolio } from './poesis-portfolio.ts';
+import { alternatives } from './alternatives.ts';
 
 export interface SiteNavigationItem {
   href: string;
@@ -34,11 +35,11 @@ export const siteNavigation: SiteNavigationGroup[] = [
         ],
       },
       {
-        label: 'By domain',
-        items: [
-          { href: '/it/', label: 'Poesis for IT' },
-          { href: '/research/', label: 'Poesis for Research' },
-        ],
+        label: 'Comparisons',
+        items: alternatives.map((a) => ({
+          href: `/it/alternatives/${a.slug}/`,
+          label: `Compared to ${a.name}`,
+        })),
       },
       {
         label: 'By solutions & products',
@@ -109,7 +110,6 @@ export const siteNavigation: SiteNavigationGroup[] = [
       {
         items: [
           { href: '/insights/research', label: 'Articles' },
-          { href: '/research/', label: 'Research' },
         ],
       },
     ],

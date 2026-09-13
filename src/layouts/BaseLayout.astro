@@ -28,7 +28,7 @@ const {
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
 const isHomepage = Astro.url.pathname === '/';
-const homepageDescription = 'Poesis is the Organizational Intelligence Platform: Human and AI governance turns shared definitions into the foundation of an organizational digital twin.';
+const homepageDescription = 'Poesis is the Organizational Intelligence Platform: human and AI governance turns shared definitions into a living digital twin. The first domain is IT — enterprise architecture, continuous compliance automation, impact analysis, and agentic AI governance on one governed model.';
 const resolvedDescription = description ?? (isHomepage
   ? homepageDescription
   : 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard defining systems, the SIE engine operating their definitions, and ITIP applying them to IT.');

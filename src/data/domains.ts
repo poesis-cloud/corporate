@@ -22,7 +22,7 @@ export interface Domain {
 export const domains: Domain[] = [
   {
     slug: 'it',
-    href: '/it/',
+    href: '/',
     name: 'IT',
     label: 'Poesis for IT',
     tag: 'First domain — shipping',
@@ -30,21 +30,11 @@ export const domains: Domain[] = [
       'Define, govern, and prove your IT landscape — enterprise architecture, continuous compliance, impact simulation — through one governed source of truth, delivered by ITIP.',
     solutions: ['itip', 'sie', 'gsm', 'saf'],
     subitems: [
-      { href: '/it/#works-with', label: 'Integrations — works with your stack' },
+      { href: '/#integration', label: 'Integrations — works with your stack' },
       ...alternatives.map((a) => ({
         href: `/it/alternatives/${a.slug}/`,
         label: `Compared to ${a.name}`,
       })),
     ],
-  },
-  {
-    slug: 'research',
-    href: '/research/',
-    name: 'Research',
-    label: 'Poesis for Research',
-    tag: 'Emerging domain',
-    blurb:
-      'Constitute open-ended and agentic research as a governed institution — hypotheses with identity and lifecycle, evidence with provenance, obligations with owners, verdicts that are deterministic.',
-    solutions: ['sie', 'gsm'],
   },
 ];

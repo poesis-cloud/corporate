@@ -2,7 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
+import PainGrid from '../components/PainGrid.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
+import { painsForDomain } from '../data/pains.ts';
+import { profilesForDomain } from '../data/profiles.ts';
+
+const itPains = painsForDomain('it');
+const itProfiles = profilesForDomain('it');
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero hero--split">
@@ -21,9 +27,21 @@ import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
           <span>The thesis</span>
           Drift at machine speed, or align at human speed &mdash; and why THINK is the bottleneck.
         </a>
+        <a href="#pains">
+          <span>What it replaces</span>
+          The {itPains.length} IT pains sold as separate tools today, traced to the features that address them.
+        </a>
         <a href="#deployment">
           <span>Deployment posture</span>
           Your models, your systems, your control boundary &mdash; the layer is added, not swapped in.
+        </a>
+        <a href="#integration">
+          <span>Target integration</span>
+          The artifacts your stack already produces become the definitions it can consume back.
+        </a>
+        <a href="#personas">
+          <span>Persona targets</span>
+          Architects, developers, ops, security, AI leads &mdash; one governed model, no translation silos.
         </a>
         <a href="#pilot">
           <span>Start with one workflow</span>
@@ -50,7 +68,18 @@ import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
     </div>
   </section>
 
-  <section id="deployment" class="section home-deployment">
+  <section id="pains" class="section home-pains">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">What it replaces</p>
+        <h2>{itPains.length} IT pains, one governed model.</h2>
+        <p class="lead">The THINK pathology surfaces first and hardest in IT, which is why IT is the first domain Poesis addresses. Each of these pains is sold a separate tool today, each tool holding its own copy of the truth. In Poesis they are facets of the same governed definitions &mdash; every pain traceable to the features that address it.</p>
+      </div>
+      <PainGrid pains={itPains} />
+    </div>
+  </section>
+
+  <section id="deployment" class="section section--soft home-deployment">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Deployment posture</p>
@@ -78,6 +107,69 @@ import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
           <strong>Nothing has to be replaced first</strong>
           <p>Governed THINK connects to the BUILD and RUN environments you already operate, so the layer is added rather than swapped in.</p>
         </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Vendor-neutral standard</span></span>
+          <strong>Governance you can inspect, not a black box</strong>
+          <p>Poesis is delivered on GSM &mdash; the vendor-neutral standard for defining systems, as OpenTelemetry is the vendor-neutral standard for observing them. Your governed model is typed and portable rather than trapped in a product format.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="github" size={16} /></span><span class="think-consequence__step">Open and inspectable</span></span>
+          <strong>Trust cannot be proprietary</strong>
+          <p>The GSM standard is published openly, the SAF framework is Apache-2.0, and the engine is source-available on a scheduled path to open &mdash; a stack asked to carry an organization&rsquo;s definitions must be inspectable by the organizations asked to trust it.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="integration" class="section home-integration">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Target integration</p>
+        <h2>The definition layer, not a replacement.</h2>
+        <p class="lead">Poesis does not ask you to rip anything out. The sourcing bench reads the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
+      </div>
+      <ul class="think-consequence-list home-integration-list">
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories</span></span>
+          <strong>What is committed becomes definition</strong>
+          <p>Source code is read continuously &mdash; code index, property graph, and dependency analysis turn what is committed into evidence-backed definition contributions.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="docs" size={16} /></span><span class="think-consequence__step">API contracts</span></span>
+          <strong>The interaction surface of your estate</strong>
+          <p>OpenAPI and service contracts source who talks to whom, through what, under which obligations &mdash; interactions as governed definitions rather than tribal knowledge.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="list" size={16} /></span><span class="think-consequence__step">SBOMs</span></span>
+          <strong>Supply-chain truth, qualified</strong>
+          <p>Software bills of materials anchor supply-chain truth &mdash; every dependency identified with confidence and provenance attached to the claim.</p>
+        </li>
+        <li>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Infrastructure</span></span>
+          <strong>The running shape, not the intended one</strong>
+          <p>Kubernetes and Helm artifacts source what is actually deployed, so RUN reality feeds back into the definition instead of diverging from it silently.</p>
+        </li>
+      </ul>
+      <p class="home-integration-note">Named-tool connectors &mdash; ServiceNow CMDB, Backstage catalogs, EA repositories &mdash; are on the roadmap as knowledge sources feeding the same governed model.</p>
+    </div>
+  </section>
+
+  <section id="personas" class="section section--soft home-personas">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Persona targets</p>
+        <h2>Every IT profile, one governed model.</h2>
+        <p class="lead">Architects author, developers consult, ops watch drift, security proves posture &mdash; all on the same governed definitions, with no translation silos between them. IT is the entry point by design: the business domains the IT organization serves are reached through the model it already governs.</p>
+      </div>
+      <ul class="think-consequence-list home-persona-list">
+        {itProfiles.map((profile) => (
+          <li id={profile.id}>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={profile.icon} size={16} /></span><span class="think-consequence__step">{profile.name}</span></span>
+            <strong>{profile.hook}</strong>
+            <p>{profile.body}</p>
+            <p class="home-persona-cta"><a href={profile.cta.href} data-profile-cta={profile.id}>{profile.cta.label} &rarr;</a></p>
+          </li>
+        ))}
       </ul>
     </div>
   </section>
