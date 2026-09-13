@@ -2248,7 +2248,25 @@ a:hover {
 }
 
 .think-therapy .think-phase__flow {
+  flex: 1;
+  grid-template-rows: 1fr auto 1fr;
   margin: 1.5rem 0 1rem;
+}
+
+.think-therapy .think-capacity {
+  gap: .55rem;
+}
+
+.think-therapy .think-capacity strong {
+  font-size: .95rem;
+}
+
+.think-therapy .think-capacity span {
+  font-size: .8rem;
+}
+
+.think-therapy .think-capacity .think-capacity__definition {
+  font-size: .76rem;
 }
 
 .think-therapy__body {
