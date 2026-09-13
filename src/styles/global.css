@@ -2304,6 +2304,7 @@ a:hover {
 }
 
 .think-capacity--governed {
+  min-height: 3.8rem;
   border-color: rgba(45, 212, 191, .6);
   background: rgba(45, 212, 191, .07);
 }
