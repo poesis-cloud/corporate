@@ -2817,12 +2817,18 @@ a:hover {
   text-transform: uppercase;
 }
 
+/* A reference never outranks the content it hangs off: same weight as the
+   body copy, identifiable as a link only by the rule under it. */
 .proof-line a {
-  color: var(--ink-soft);
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: .2em;
 }
 
 .proof-line a:hover {
   color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 /* ---- "not shipped yet" (amber) ------------------------------------------
