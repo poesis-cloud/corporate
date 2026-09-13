@@ -2651,7 +2651,51 @@ a:hover {
   text-transform: uppercase;
 }
 
-.home-usecase-close {
+.home-loop-diagram {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.home-loop-step {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  max-width: 14rem;
+  padding: 1.5rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .025);
+  color: var(--accent);
+  text-align: center;
+}
+
+.home-loop-step strong {
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  letter-spacing: .08em;
+}
+
+.home-loop-step span {
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+.home-loop-arrow {
+  display: flex;
+  flex: none;
+  align-items: center;
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.home-loop-close {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2664,7 +2708,7 @@ a:hover {
   background: rgba(255, 255, 255, .025);
 }
 
-.home-usecase-close p {
+.home-loop-close p {
   flex: 1 1 26rem;
   margin: 0;
   color: var(--muted);
@@ -2859,6 +2903,19 @@ a:hover {
 
   .think-therapy {
     grid-template-columns: 1fr;
+  }
+
+  .home-loop-diagram {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-loop-step {
+    max-width: none;
+  }
+
+  .home-loop-arrow {
+    transform: rotate(90deg);
   }
 
   .think-consequence-list {
