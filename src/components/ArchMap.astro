@@ -114,19 +114,19 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 </div>
 
 <style>
-  .arch-version {
-    margin-left: 0.45rem;
-    font-size: 0.72rem;
-    font-weight: 600;
-    opacity: 0.55;
-    white-space: nowrap;
-    text-transform: none;
-  }
+  .arch-version,
   .arch-comp-version {
-    margin-left: 0.35rem;
-    font-size: 0.68rem;
-    opacity: 0.55;
+    margin-left: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
     white-space: nowrap;
-    text-transform: none;
+  }
+  .arch-scope--framework .arch-version,
+  .arch-scope--framework .arch-comp-version {
+    color: var(--accent-3);
   }
 </style>

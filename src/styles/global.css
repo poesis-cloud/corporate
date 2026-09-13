@@ -1552,6 +1552,17 @@ a:hover {
   margin-bottom: .7rem;
 }
 
+/* the map speaks in micro-labels, not pills */
+.arch .tag {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: .66rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
 .arch-scope h3 {
   margin-bottom: .35rem;
 }
@@ -1598,9 +1609,9 @@ a:hover {
   font-family: var(--font-mono);
   font-size: .66rem;
   font-weight: 600;
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--accent);
   user-select: none;
   padding: .15rem 0;
   transition: color .15s ease;
@@ -1615,6 +1626,10 @@ a:hover {
   font-size: .7rem;
   color: var(--accent);
   transition: transform .15s ease;
+}
+
+.arch-scope--framework .arch-group>summary {
+  color: var(--accent-3);
 }
 
 .arch-scope--framework .arch-group>summary::before {
@@ -1646,29 +1661,31 @@ a:hover {
 }
 
 .arch-product {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(45, 212, 191, .28);
   border-radius: 6px;
-  padding: .8rem .85rem;
-  background: rgba(255, 255, 255, .02);
+  padding: .9rem 1rem;
+  background: rgba(255, 255, 255, .025);
   min-width: 0;
   transition: border-color .15s ease;
 }
 
+.arch-scope--framework .arch-product {
+  border-color: rgba(129, 140, 248, .28);
+}
+
 .arch-product:hover {
-  border-color: rgba(45, 212, 191, .35);
+  border-color: rgba(45, 212, 191, .5);
 }
 
 .arch-scope--framework .arch-product:hover {
-  border-color: rgba(129, 140, 248, .45);
+  border-color: rgba(129, 140, 248, .5);
 }
 
 .arch-product h4 {
   margin: 0 0 .55rem;
-  font-family: var(--font-mono);
-  font-size: .78rem;
+  font-size: .9rem;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  line-height: 1.35;
 }
 
 .arch-product h4 a {
@@ -1694,62 +1711,47 @@ a:hover {
 
 .arch-product-tagline {
   margin: 0 0 .6rem;
-  font-size: .82rem;
-  line-height: 1.45;
-  color: var(--ink-soft);
+  font-size: .8rem;
+  line-height: 1.55;
+  color: var(--muted);
 }
 
-/* feature chips */
+/* feature list */
 .arch-comps {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: .4rem;
+  gap: .5rem;
   margin-top: auto;
 }
 
 .arch-comp {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  font-family: var(--font-mono);
-  font-size: .74rem;
-  font-weight: 600;
-  letter-spacing: .02em;
-  padding: .3rem .55rem;
-  border-radius: 6px;
-  border: 1px solid var(--line-strong);
-  background: rgba(255, 255, 255, .03);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .8rem;
+  line-height: 1.4;
+  padding: .05rem 0 .05rem .6rem;
+  border-left: 1px solid rgba(45, 212, 191, .25);
   color: var(--ink-soft);
-  transition: border-color .15s ease, background .15s ease, color .15s ease;
+  transition: border-color .15s ease, color .15s ease;
 }
 
-.arch-comp::before {
-  content: "";
-  width: .42rem;
-  height: .42rem;
-  border-radius: 2px;
-  background: var(--accent);
-  opacity: .55;
-  flex: none;
-}
-
-.arch-scope--framework .arch-comp::before {
-  background: var(--accent-3);
+.arch-scope--framework .arch-comp {
+  border-left-color: rgba(129, 140, 248, .25);
 }
 
 .arch-comp:hover,
 .arch-comp:focus-visible {
   text-decoration: none;
-  color: #fff;
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  color: var(--ink);
+  border-left-color: var(--accent);
 }
 
 .arch-scope--framework .arch-comp:hover,
 .arch-scope--framework .arch-comp:focus-visible {
-  border-color: var(--accent-3);
-  background: rgba(129, 140, 248, .12);
+  border-left-color: var(--accent-3);
 }
 
 /* vertical joint between stack layers */

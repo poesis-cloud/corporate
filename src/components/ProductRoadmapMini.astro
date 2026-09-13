@@ -37,16 +37,12 @@ const { product, current, milestones } = Astro.props;
   .arch-roadmap-mini-current {
     display: inline-block;
     margin-bottom: .35rem;
-    padding: .1rem .5rem;
-    border-radius: 999px;
     font-family: var(--font-mono);
-    font-size: .62rem;
-    font-weight: 700;
-    letter-spacing: .04em;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .08em;
     text-transform: uppercase;
-    color: var(--accent-ink);
-    background: var(--accent-soft);
-    border: 1px solid rgba(45, 212, 191, .3);
+    color: var(--accent);
   }
   .arch-roadmap-mini-track {
     list-style: none;
@@ -102,13 +98,13 @@ const { product, current, milestones } = Astro.props;
     display: block;
     margin-top: .3rem;
     font-family: var(--font-mono);
-    font-size: .6rem;
+    font-size: .62rem;
     font-weight: 600;
-    opacity: .55;
+    letter-spacing: .08em;
+    color: var(--muted);
     white-space: nowrap;
   }
   .arch-roadmap-mini-step.is-ga .arch-roadmap-mini-version {
-    opacity: .9;
-    color: var(--accent-ink);
+    color: var(--accent);
   }
 </style>
