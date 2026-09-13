@@ -14,10 +14,12 @@ interface Props {
 }
 
 const { solution } = Astro.props;
+const realizedBy = (count: number) => (count > 1 ? 'Realized by product features' : 'Realized by product feature');
 ---
 <ul class="think-therapy__grid portfolio-capabilities">
   {solution.capabilities.map((c) => {
     const platform = platformCapabilities[c.platform];
+    const realizations = capabilityRealizations(solution, c);
     return (
       <li id={c.slug}>
         <span class="think-capability__head">
@@ -27,8 +29,8 @@ const { solution } = Astro.props;
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>
         <p class="proof-line">
-          <span>Realized by</span>
-          {capabilityRealizations(solution, c).map((r, i) => (
+          <span>{realizedBy(realizations.length)}</span>
+          {realizations.map((r, i) => (
             <>
               {i > 0 && ' · '}
               <a href={`${solution.href}/products/${r.product.slug}#${r.feature.slug}`}>{r.feature.name}</a>

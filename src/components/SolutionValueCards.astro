@@ -1,10 +1,12 @@
 ---
 /**
  * SolutionValueCards — the shared value list for solution pages, in the same
- * format as the homepage therapy values. Each entry links to the product(s)
- * that deliver the value; emergent values name the product interaction they
- * arise from (never a single feature — that mapping lives on the product
- * pages).
+ * format as the homepage therapy values. A value is delivered by solution
+ * capabilities, never by products directly: the relation named in the proof
+ * line is `delivered by capability` when one capability suffices, and
+ * `emerges from capabilities` when the value only exists once several
+ * capabilities combine. Each entry links to the capability anchors further
+ * down the same page.
  */
 import Icon from './Icon.astro';
 import { solutionValueAnchor, type Solution } from '../data/poesis-portfolio.ts';
@@ -14,7 +16,13 @@ interface Props {
 }
 
 const { solution } = Astro.props;
-const productName = (slug: string) => solution.products.find((p) => p.slug === slug)!.name;
+const capabilityName = (slug: string) => solution.capabilities.find((c) => c.slug === slug)!.name;
+const relation = (v: Solution['values'][number]) =>
+  v.emergent
+    ? 'Emerges from the combination of capabilities'
+    : v.capabilities.length > 1
+      ? 'Delivered together by capabilities'
+      : 'Delivered by capability';
 ---
 <ul class="think-consequence-list portfolio-values">
   {solution.values.map((v) => (
@@ -26,11 +34,11 @@ const productName = (slug: string) => solution.products.find((p) => p.slug === s
       <strong>{v.title}</strong>
       <p set:html={v.body} />
       <p class="proof-line">
-        <span>{v.emergent ? 'Emerges from' : 'Delivered by'}</span>
-        {v.products.map((ps, i) => (
+        <span>{relation(v)}</span>
+        {v.capabilities.map((cs, i) => (
           <>
             {i > 0 && ' · '}
-            <a href={`${solution.href}/products/${ps}`}>{productName(ps)}</a>
+            <a href={`#${cs}`}>{capabilityName(cs)}</a>
           </>
         ))}
       </p>

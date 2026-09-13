@@ -55,7 +55,7 @@ const { solution, product } = Astro.props;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
-        <h2>What {product.name} changes for you.</h2>
+        <h2>{product.valuesHeadline}</h2>
       </div>
       <ul class="think-consequence-list portfolio-values">
         {product.values.map((v) => (
@@ -68,7 +68,7 @@ const { solution, product } = Astro.props;
             <p>{v.body}</p>
             {v.features.length > 0 ? (
               <p class="proof-line">
-                <span>Delivered by</span>
+                <span>{v.features.length > 1 ? 'Delivered together by features' : 'Delivered by feature'}</span>
                 {v.features.map((fs, i) => (
                   <>
                     {i > 0 && ' · '}
@@ -78,8 +78,8 @@ const { solution, product } = Astro.props;
               </p>
             ) : (
               <p class="proof-line">
-                <span>Intrinsic</span>
-                A property of the product — how it is built, not a feature.
+                <span>Intrinsic to the product</span>
+                A property of how the product is built — held by no single feature.
               </p>
             )}
           </li>
@@ -92,7 +92,7 @@ const { solution, product } = Astro.props;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Features</p>
-        <h2>What {product.name} does.</h2>
+        <h2>{product.featuresHeadline}</h2>
       </div>
       <ul class="think-therapy__grid portfolio-features">
         {product.features.map((f) => {
