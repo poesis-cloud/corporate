@@ -32,18 +32,12 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Why it matters</p>
-      <h2>The autonomous enterprise begins with a self-maintaining model of IT.</h2>
-      <SolutionValueCards solution={itip} />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">The mental model</p>
-      <h2>The digital twin of your IT landscape, at work.</h2>
-      <p class="lead">ITIP is the digital twin of your IT landscape — the landscape itself, systematically digitalized into a live, typed model, continuously fed by truth sourcers reading the real system, so it cannot drift. And what is digitalized becomes operable: simulate a change on the twin before committing it, evaluate compliance against it continuously, generate deliverables from it — every IT profile working the same twin. <a href="/insights/digital-twin-of-an-organization/">Why the twin pattern works here →</a></p>
-      <p class="lead">The screens below are views over that twin — design previews from the ITIP Web Application, the screens the product is being built against.</p>
+      <div class="section-head">
+        <p class="eyebrow">The mental model</p>
+        <h2>The digital twin of your IT landscape, at work.</h2>
+        <p class="lead">ITIP is the digital twin of your IT landscape — the landscape itself, systematically digitalized into a live, typed model, continuously fed by truth sourcers reading the real system, so it cannot drift. And what is digitalized becomes operable: simulate a change on the twin before committing it, evaluate compliance against it continuously, generate deliverables from it — every IT profile working the same twin. <a href="/insights/digital-twin-of-an-organization/">Why the twin pattern works here →</a></p>
+        <p class="lead">The screens below are views over that twin — design previews from the ITIP Web Application, the screens the product is being built against.</p>
+      </div>
       <div class="preview-grid">
         <figure class="preview-item">
           <img src="/previews/itip-definition-inventory.png" alt="ITIP definition inventory dashboard showing Directives, Norms, Definitions counts, chain completion, lifecycle distribution, and framework contribution" width="1440" height="900" loading="lazy" />
@@ -67,16 +61,30 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Capabilities</p>
-      <h2>What ITIP does.</h2>
+      <div class="section-head">
+        <p class="eyebrow">Values</p>
+        <h2>The autonomous enterprise begins with a self-maintaining model of IT.</h2>
+      </div>
+      <SolutionValueCards solution={itip} />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Capabilities</p>
+        <h2>What ITIP does.</h2>
+      </div>
       <SolutionCapabilityCards solution={itip} />
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Products</p>
-      <h2>Two products closing the AI governance loop for IT.</h2>
+      <div class="section-head">
+        <p class="eyebrow">Products</p>
+        <h2>Two products closing the AI governance loop for IT.</h2>
+      </div>
       <ProductCards solution={itip} />
     </div>
   </section>

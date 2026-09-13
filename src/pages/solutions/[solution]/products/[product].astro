@@ -3,7 +3,8 @@
  * Product sub-page — one page per Product inside each Solution.
  * URL: /solutions/[solution]/products/[product] (e.g. /solutions/sie/products/definition-manager).
  * Structure: hero (solution pill · product name · catchy lead · CTAs) →
- * Why it matters (value cards) → Features (one card per feature, anchored).
+ * Values → Features (one entry per feature, anchored) → Roadmap.
+ * Section rhythm and item formats mirror the homepage.
  */
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
@@ -40,27 +41,32 @@ const { solution, product } = Astro.props;
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Why it matters</p>
-      <h2>What {product.name} changes for you.</h2>
-      {product.description.split('\n\n').map((para) => (
-        <p class="lead">
-          {para.split('\n').map((line, index, lines) => (
-            <>
-              {line}
-              {index < lines.length - 1 && <br />}
-            </>
-          ))}
-        </p>
-      ))}
-      <div class="grid grid-2" style="margin-top:1.5rem">
+      <div class="section-head">
+        <p class="eyebrow">Values</p>
+        <h2>What {product.name} changes for you.</h2>
+        {product.description.split('\n\n').map((para) => (
+          <p class="lead">
+            {para.split('\n').map((line, index, lines) => (
+              <>
+                {line}
+                {index < lines.length - 1 && <br />}
+              </>
+            ))}
+          </p>
+        ))}
+      </div>
+      <ul class="think-consequence-list portfolio-values">
         {product.values.map((v) => (
-          <div class="card card--feature card--static">
-            <span class="tag tag--value">Value</span>
-            <h3>{v.title}</h3>
+          <li>
+            <span class="think-consequence__head">
+              <span class="think-consequence__icon"><Icon name={v.vision ? 'compass' : 'check-badge'} size={16} /></span>
+              <span class="think-consequence__step">{v.vision ? 'Vision' : 'Value'}</span>
+            </span>
+            <strong>{v.title}</strong>
             <p>{v.body}</p>
             {v.features.length > 0 ? (
-              <p class="pain-addressed">
-                Delivered by{' '}
+              <p class="proof-line">
+                <span>Delivered by</span>
                 {v.features.map((fs, i) => (
                   <>
                     {i > 0 && ' · '}
@@ -69,34 +75,49 @@ const { solution, product } = Astro.props;
                 ))}
               </p>
             ) : (
-              <p class="pain-addressed">A property of the product — how it is built, not a feature.</p>
+              <p class="proof-line">
+                <span>Intrinsic</span>
+                A property of the product — how it is built, not a feature.
+              </p>
             )}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Features</p>
-      <h2>What {product.name} does.</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem">
+      <div class="section-head">
+        <p class="eyebrow">Features</p>
+        <h2>What {product.name} does.</h2>
+      </div>
+      <ul class="think-therapy__grid portfolio-features">
         {product.features.map((f) => {
           const status = featureStatus(f);
           return (
-            <div class="card card--feature card--static" id={f.slug}>
-              <span class="tag tag--feature-pill">Feature</span>
-              <span class={`tag tag--version ${status.shipped ? 'tag--value' : 'tag--muted'}`}>
-                {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
+            <li id={f.slug}>
+              <span class="think-capability__head">
+                <span class="think-capability__icon"><Icon name={status.shipped ? 'check-badge' : 'lightbulb'} size={16} /></span>
+                <span class="think-capability__step">
+                  {status.shipped ? `shipped · v${status.version}` : `planned · v${status.version}`}
+                </span>
               </span>
-              <h3>{f.name}</h3>
+              <strong>{f.name}</strong>
               <p>{f.blurb}</p>
-            </div>
+            </li>
           );
         })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Roadmap</p>
+        <h2>Where {product.name} is going.</h2>
       </div>
-      <p class="eyebrow" style="margin-top:2.5rem">Roadmap</p>
       <ProductRoadmap milestones={productTimeline(product)} />
     </div>
   </section>

@@ -788,10 +788,6 @@ a:hover {
   color: var(--accent);
 }
 
-.solution-value-card {
-  scroll-margin-top: 6rem;
-}
-
 
 .card-cover {
   color: inherit;
@@ -2614,6 +2610,36 @@ a:hover {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+/* ---- solution & product pages (same vocabulary as the homepage) --------- */
+.portfolio-values {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.5rem;
+}
+
+.portfolio-values li {
+  grid-template-rows: auto auto 1fr auto;
+  scroll-margin-top: 84px;
+}
+
+.portfolio-capabilities,
+.portfolio-features {
+  margin-top: 1.5rem;
+}
+
+.portfolio-capabilities li,
+.portfolio-features li {
+  align-content: stretch;
+  scroll-margin-top: 84px;
+}
+
+.portfolio-capabilities li {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.portfolio-features li {
+  grid-template-rows: auto auto 1fr;
+}
+
 .home-outcome-grid article,
 .home-platform-item {
   border: 1px solid var(--line);
@@ -2685,7 +2711,8 @@ a:hover {
   font-size: .9rem;
 }
 
-.home-usecase-proof {
+.home-usecase-proof,
+.proof-line {
   margin: .9rem 0 0;
   padding-top: .8rem;
   border-top: 1px solid var(--line);
@@ -2694,7 +2721,8 @@ a:hover {
   line-height: 1.5;
 }
 
-.home-usecase-proof span {
+.home-usecase-proof span,
+.proof-line span {
   display: block;
   margin-bottom: .3rem;
   color: var(--accent);
@@ -2702,6 +2730,14 @@ a:hover {
   font-size: .68rem;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.proof-line a {
+  color: var(--ink-soft);
+}
+
+.proof-line a:hover {
+  color: var(--accent);
 }
 
 .home-pilot-entries li {

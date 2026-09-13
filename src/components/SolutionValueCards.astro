@@ -1,10 +1,12 @@
 ---
 /**
- * SolutionValueCards — the shared value-card grid for solution pages.
- * Each card links to the product(s) that deliver the value; emergent values
- * name the product interaction they arise from (never a single feature —
- * that mapping lives on the product pages).
+ * SolutionValueCards — the shared value list for solution pages, in the same
+ * format as the homepage therapy values. Each entry links to the product(s)
+ * that deliver the value; emergent values name the product interaction they
+ * arise from (never a single feature — that mapping lives on the product
+ * pages).
  */
+import Icon from './Icon.astro';
 import { solutionValueAnchor, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
@@ -14,15 +16,17 @@ interface Props {
 const { solution } = Astro.props;
 const productName = (slug: string) => solution.products.find((p) => p.slug === slug)!.name;
 ---
-<div class="grid grid-2" style="margin-top:1.5rem">
+<ul class="think-consequence-list portfolio-values">
   {solution.values.map((v) => (
-    <div id={solutionValueAnchor(v.title)} class="card card--feature card--static solution-value-card">
-      <span class="tag tag--value">Value</span>
-      {v.emergent && <span class="tag tag--muted">Emergent</span>}
-      <h3>{v.title}</h3>
+    <li id={solutionValueAnchor(v.title)}>
+      <span class="think-consequence__head">
+        <span class="think-consequence__icon"><Icon name={v.emergent ? 'spark' : 'check-badge'} size={16} /></span>
+        <span class="think-consequence__step">{v.emergent ? 'Emergent value' : 'Value'}</span>
+      </span>
+      <strong>{v.title}</strong>
       <p set:html={v.body} />
-      <p class="pain-addressed">
-        {v.emergent ? 'Emerges from' : 'Delivered by'}{' '}
+      <p class="proof-line">
+        <span>{v.emergent ? 'Emerges from' : 'Delivered by'}</span>
         {v.products.map((ps, i) => (
           <>
             {i > 0 && ' · '}
@@ -30,6 +34,6 @@ const productName = (slug: string) => solution.products.find((p) => p.slug === s
           </>
         ))}
       </p>
-    </div>
+    </li>
   ))}
-</div>
+</ul>

@@ -30,34 +30,42 @@ const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
 
   <section class="section section--soft">
     <div class="container">
-      <p class="eyebrow">Why it matters</p>
-      <h2>Governance as code — the definition layer beneath the projects you already run.</h2>
-      <SolutionValueCards solution={gsm} />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="eyebrow">The mental model</p>
-      <h2>The governed world model, simplified.</h2>
-      <p class="lead">Two anchors you already know: GSM is to THINK what OpenTelemetry’s semantic conventions are to RUN — one shared, vendor-neutral model every tool can speak — and an Archetype is to the model what a CRD is to Kubernetes: a typed schema that makes new kinds of subjects definable and governable. Together they make GSM what learned world models cannot be: an <strong>explicit, causal, governed world model</strong> of your organization.</p>
-      <p class="lead">Everything is a governed Definition. Ascriptions version it as governed snapshots; Archetypes — themselves definitions — type it; and the DNA grammar, Directives operationalized by Norms, governs it all under one lifecycle. <a href="/insights/the-governed-world-model/">Why learned world models cannot give you this →</a></p>
+      <div class="section-head">
+        <p class="eyebrow">The mental model</p>
+        <h2>The governed world model, simplified.</h2>
+        <p class="lead">Two anchors you already know: GSM is to THINK what OpenTelemetry’s semantic conventions are to RUN — one shared, vendor-neutral model every tool can speak — and an Archetype is to the model what a CRD is to Kubernetes: a typed schema that makes new kinds of subjects definable and governable. Together they make GSM what learned world models cannot be: an <strong>explicit, causal, governed world model</strong> of your organization.</p>
+        <p class="lead">Everything is a governed Definition. Ascriptions version it as governed snapshots; Archetypes — themselves definitions — type it; and the DNA grammar, Directives operationalized by Norms, governs it all under one lifecycle. <a href="/insights/the-governed-world-model/">Why learned world models cannot give you this →</a></p>
+      </div>
       <GsmModelDiagram />
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Capabilities</p>
-      <h2>What GSM does.</h2>
+      <div class="section-head">
+        <p class="eyebrow">Values</p>
+        <h2>Governance as code — the definition layer beneath the projects you already run.</h2>
+      </div>
+      <SolutionValueCards solution={gsm} />
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Capabilities</p>
+        <h2>What GSM does.</h2>
+      </div>
       <SolutionCapabilityCards solution={gsm} />
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Products</p>
-      <h2>The specification — and the ontologies sourced into it.</h2>
+      <div class="section-head">
+        <p class="eyebrow">Products</p>
+        <h2>The specification — and the ontologies sourced into it.</h2>
+      </div>
       <ProductCards solution={gsm} />
     </div>
   </section>

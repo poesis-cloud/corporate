@@ -1,11 +1,13 @@
 ---
 /**
- * SolutionCapabilityCards — the Capabilities grid shared by all solution pages.
- * One anchored card per Capability, each naming the product features that
- * realize it (→ feature anchor on the product page), the way a product page's
- * value card names the features that deliver it.
+ * SolutionCapabilityCards — the Capabilities grid shared by all solution pages,
+ * in the same format as the homepage therapy capabilities. Each card is labelled
+ * with the Poesis platform capability it rolls up into, and names the product
+ * features that realize it (→ feature anchor on the product page), the way a
+ * product page's value card names the features that deliver it.
  */
-import { capabilityRealizations, type Solution } from '../data/poesis-portfolio.ts';
+import Icon from './Icon.astro';
+import { capabilityRealizations, platformCapabilities, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -13,24 +15,27 @@ interface Props {
 
 const { solution } = Astro.props;
 ---
-<div class="grid grid-2" style="margin-top:1.5rem">
+<ul class="think-therapy__grid portfolio-capabilities">
   {solution.capabilities.map((c) => {
-    const realizations = capabilityRealizations(solution, c);
+    const platform = platformCapabilities[c.platform];
     return (
-      <div class="card card--feature card--static" id={c.slug}>
-        <span class="tag tag--feature-pill">Capability</span>
-        <h3>{c.name}</h3>
+      <li id={c.slug}>
+        <span class="think-capability__head">
+          <span class="think-capability__icon"><Icon name={platform.icon} size={16} /></span>
+          <span class="think-capability__step">{platform.label}</span>
+        </span>
+        <strong>{c.name}</strong>
         <p>{c.blurb}</p>
-        <p class="pain-addressed">
-          Realized by{' '}
-          {realizations.map((r, i) => (
+        <p class="proof-line">
+          <span>Realized by</span>
+          {capabilityRealizations(solution, c).map((r, i) => (
             <>
               {i > 0 && ' · '}
               <a href={`${solution.href}/products/${r.product.slug}#${r.feature.slug}`}>{r.feature.name}</a>
             </>
           ))}
         </p>
-      </div>
+      </li>
     );
   })}
-</div>
+</ul>
