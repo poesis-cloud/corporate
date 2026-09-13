@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
-import PainGrid from '../components/PainGrid.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import { painsForDomain } from '../data/pains.ts';
 import { profilesForDomain } from '../data/profiles.ts';
@@ -63,12 +62,6 @@ const itProfiles = profilesForDomain('it');
         <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
       </div>
       <ThinkBottleneckDiagram />
-      <div class="section-head home-pains-head">
-        <p class="eyebrow">Where the pathology surfaces</p>
-        <h3>{itPains.length} IT pains, one governed model.</h3>
-        <p class="lead">The THINK pathology surfaces first and hardest in IT, which is why IT is the first domain Poesis addresses. Each of these pains is sold a separate tool today, each tool holding its own copy of the truth. In Poesis they are facets of the same governed definitions &mdash; every pain traceable to the features that address it.</p>
-      </div>
-      <PainGrid pains={itPains} />
     </div>
   </section>
 

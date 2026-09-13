@@ -122,7 +122,7 @@ export const pains: Pain[] = [
     {
         id: 'it-ungoverned-change',
         domainSlug: 'it',
-        phase: 'legacy',
+        phase: 'genai',
         tag: 'Change governance',
         pain: 'Anything can change anything — there is no approval trail.',
         cost: 'Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable.',
