@@ -2381,48 +2381,33 @@ a:hover {
 .think-consequence-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+  gap: 1.4rem clamp(1rem, 2.2vw, 1.75rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .think-consequence-list li {
-  position: relative;
   display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  gap: .45rem;
+  grid-template-rows: auto auto 1fr;
+  gap: .4rem;
   min-width: 0;
-  padding: 0 clamp(1rem, 2vw, 1.4rem);
-  border-left: 1px solid rgba(45, 212, 191, .22);
+  padding-left: clamp(.85rem, 1.6vw, 1.15rem);
+  border-left: 1px solid rgba(45, 212, 191, .25);
 }
 
-.think-consequence-list li:first-child {
-  padding-left: 0;
-  border-left: 0;
-}
-
-.think-consequence-list li:last-child {
-  padding-right: 0;
-}
-
-.think-consequence-list li:not(:last-child)::after {
-  content: '\2192';
-  position: absolute;
-  top: .1rem;
-  right: -.45rem;
-  z-index: 1;
-  padding: 0 .2rem;
-  background: var(--bg-soft);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: .8rem;
+.think-consequence__head {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  min-width: 0;
 }
 
 .think-consequence__icon {
   display: grid;
-  width: 2rem;
-  height: 2rem;
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
   place-items: center;
   border: 1px solid rgba(45, 212, 191, .35);
   color: var(--accent);
@@ -2776,6 +2761,10 @@ a:hover {
     max-width: 60ch;
   }
 
+  .think-consequence-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .twin-vision__flow {
     grid-template-columns: 1fr;
   }
@@ -2811,43 +2800,6 @@ a:hover {
 
   .think-consequence-list {
     grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .think-consequence-list li,
-  .think-consequence-list li:first-child,
-  .think-consequence-list li:last-child {
-    grid-template-columns: 2rem minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
-    column-gap: .8rem;
-    padding: 1rem 0 0;
-    border-top: 1px solid rgba(45, 212, 191, .22);
-    border-left: 0;
-  }
-
-  .think-consequence-list li:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  .think-consequence__icon {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-  }
-
-  .think-consequence__step,
-  .think-consequence-list strong,
-  .think-consequence-list p {
-    grid-column: 2;
-  }
-
-  .think-consequence-list li:not(:last-child)::after {
-    content: '\2193';
-    top: auto;
-    right: auto;
-    bottom: -.85rem;
-    left: .65rem;
-    background: var(--bg-soft);
   }
 
   .home-usecase-values nav {
