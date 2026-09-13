@@ -72,30 +72,50 @@ import Icon from './Icon.astro';
         <span class="think-phase__number">03 · Today<br />The Poesis Gene Therapy</span>
         <h3 id="think-poesis-title">Human + AI capacity goes to THINK first — governance decides what becomes authoritative.</h3>
       </header>
-      <div class="think-phase__flow">
-        <div class="think-capacity think-capacity--governed">
-          <strong>THINK</strong>
-          <span>Explicit · AI-assisted · shared</span>
-        </div>
-        <span class="think-phase__arrow" aria-hidden="true">→</span>
-        <div class="think-capacity-group think-capacity-group--expanded">
-          <div class="think-capacity">
-            <strong>BUILD</strong>
-            <span>AI-accelerated or programmatic</span>
+      <div class="think-therapy">
+        <div class="think-phase__flow">
+          <div class="think-capacity think-capacity--governed">
+            <strong>THINK</strong>
+            <span>Explicit · AI-assisted · shared</span>
           </div>
-          <div class="think-capacity">
-            <strong>RUN</strong>
-            <span>AI-accelerated or programmatic</span>
+          <span class="think-phase__arrow" aria-hidden="true">→</span>
+          <div class="think-capacity-group think-capacity-group--expanded">
+            <div class="think-capacity">
+              <strong>BUILD</strong>
+              <span>AI-accelerated or programmatic</span>
+            </div>
+            <div class="think-capacity">
+              <strong>RUN</strong>
+              <span>AI-accelerated or programmatic</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="think-phase__foot">
-        <span class="think-phase__details-label">Values</span>
-        <ul class="think-phase__details">
-          <li>AI sources and structures definitions upstream; humans govern what enters into effect.</li>
-          <li>BUILD and RUN execute against governed definitions — traceable, with divergence surfaced immediately.</li>
-          <li>Execution mode stays a choice: agentic today (SAF), increasingly deterministic and economic as the Operator (SIE) matures toward Organization as a Service.</li>
-        </ul>
+        <div class="think-therapy__body">
+          <span class="think-phase__details-label">The therapy</span>
+          <ul class="think-therapy__grid">
+            <li>
+              <strong>A typed definition model</strong>
+              <p>Subjects, relations and obligations become explicit, shared and machine-readable — BUILD and RUN execute against them, not against interpretations of them.</p>
+              <p class="think-therapy__cure">Cures definition scattered across people, meetings and tools, and THINK rebuilt at every handoff.</p>
+            </li>
+            <li>
+              <strong>A composed governance fabric</strong>
+              <p>TOGAF, the ISO 25000 series, GDPR, NIS2 and more attach from a catalogue and compose into one enforceable obligation set.</p>
+              <p class="think-therapy__cure">Cures reviews, corrections and controls consuming the acceleration gain.</p>
+            </li>
+            <li>
+              <strong>A governance lifecycle</strong>
+              <p>AI sources and structures definitions upstream; humans decide what enters into effect, and every authoritative change stays traceable.</p>
+              <p class="think-therapy__cure">Cures human attention spent as the control plane instead of on the decision.</p>
+            </li>
+            <li>
+              <strong>Continuous norm evaluation</strong>
+              <p>Norms are evaluated into deterministic verdicts against observed reality, so divergence surfaces the moment it appears.</p>
+              <p class="think-therapy__cure">Cures stale THINK artifacts, and drift compounding at machine pace.</p>
+            </li>
+          </ul>
+          <p class="think-therapy__note">Execution mode stays a choice: agentic today (SAF), increasingly deterministic and economic as the Operator (SIE) matures toward Organization as a Service.</p>
+        </div>
       </div>
     </article>
   </div>
@@ -108,24 +128,14 @@ import Icon from './Icon.astro';
     </header>
     <ul class="think-consequence-list">
       <li>
-        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="grid" size={16} /></span><span class="think-consequence__step">Causal context</span></span>
-        <strong>A structured model, not retrieved documents</strong>
-        <p>Subjects, relations, and obligations are typed and machine-readable, so humans and AI reason from what systems <em>are</em>, what they <em>must</em> do, and <em>why</em>.</p>
-      </li>
-      <li>
         <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="compass" size={16} /></span><span class="think-consequence__step">Analysis power</span></span>
-        <strong>Impact traced before the decision</strong>
-        <p>Changes ripple through typed relations, so blast radius, dependencies, and affected obligations are simulated from the model instead of guessed in a meeting.</p>
+        <strong>Impact is traced before the decision</strong>
+        <p>Changes ripple through typed relations, so blast radius, dependencies, and affected obligations are reasoned from the model instead of guessed in a meeting.</p>
       </li>
       <li>
         <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Continuous evaluation</span></span>
-        <strong>Drift reported as it appears</strong>
-        <p>Norms are evaluated into deterministic verdicts against observed reality, so every divergence surfaces the moment it appears — not at audit time.</p>
-      </li>
-      <li>
-        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="book-open" size={16} /></span><span class="think-consequence__step">Composed governance</span></span>
-        <strong>Frameworks and regulations as one fabric</strong>
-        <p>TOGAF, the ISO 25000 series, GDPR, NIS2 and more are attached from a catalogue and composed into a single enforceable fabric instead of separate lists.</p>
+        <strong>The conformance state is known continuously</strong>
+        <p>Every divergence between the definition and observed reality surfaces the moment it appears — not at audit time, and not after it has propagated.</p>
       </li>
       <li>
         <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Resource economy</span></span>
@@ -133,9 +143,9 @@ import Icon from './Icon.astro';
         <p>Intent stops being rebuilt at every handoff and deliverables derive from the model, releasing the human and compute capacity that drift consumes.</p>
       </li>
       <li>
-        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Governance by design</span></span>
-        <strong>AI action stays inside the model</strong>
-        <p>Directives and Norms bound what agentic and automated action may do, and every governed change stays traceable by construction.</p>
+        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Accountable autonomy</span></span>
+        <strong>Execution can be delegated without losing control</strong>
+        <p>Agentic and automated action stays bounded by Directives and Norms, so autonomy can grow without accountability being traded away for speed.</p>
       </li>
     </ul>
   </section>

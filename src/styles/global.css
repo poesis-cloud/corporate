@@ -2205,7 +2205,7 @@ a:hover {
 
 .think-story__phases {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: auto auto auto;
   align-items: stretch;
   gap: 1rem;
@@ -2226,8 +2226,88 @@ a:hover {
 }
 
 .think-phase--poesis {
+  display: flex;
+  flex-direction: column;
+  grid-row: auto;
+  grid-column: 1 / -1;
   border-color: rgba(45, 212, 191, .4);
   background: rgba(45, 212, 191, .055);
+}
+
+.think-therapy {
+  display: grid;
+  grid-template-columns: minmax(15rem, .85fr) minmax(0, 2fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.think-therapy .think-phase__flow {
+  margin: 1.5rem 0 0;
+}
+
+.think-therapy__body {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin-top: 1.5rem;
+  padding-top: .85rem;
+  border-top: 1px solid rgba(45, 212, 191, .3);
+}
+
+.think-therapy__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem clamp(1rem, 2.2vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.think-therapy__grid li {
+  display: grid;
+  gap: .3rem;
+  align-content: start;
+  min-width: 0;
+  padding-left: clamp(.85rem, 1.6vw, 1.15rem);
+  border-left: 1px solid rgba(45, 212, 191, .3);
+}
+
+.think-therapy__grid strong {
+  color: var(--ink);
+  font-size: .9rem;
+  line-height: 1.35;
+}
+
+.think-therapy__grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.55;
+}
+
+.think-therapy__cure {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: .4rem;
+  color: var(--ink-soft);
+  font-size: .76rem;
+}
+
+.think-therapy__cure::before {
+  content: '\2713';
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.think-therapy__note {
+  margin: 0;
+  padding-top: .35rem;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.55;
 }
 
 .think-phase header {
@@ -2406,7 +2486,7 @@ a:hover {
 
 .think-consequence-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem clamp(1rem, 2.2vw, 1.75rem);
   margin: 0;
   padding: 0;
@@ -2786,6 +2866,10 @@ a:hover {
     grid-row: auto;
   }
 
+  .think-therapy {
+    grid-template-columns: 1fr;
+  }
+
   .think-story__consequences {
     grid-template-columns: 1fr;
   }
@@ -2831,7 +2915,8 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
-  .think-consequence-list {
+  .think-consequence-list,
+  .think-therapy__grid {
     grid-template-columns: 1fr;
   }
 
