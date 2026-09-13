@@ -2238,12 +2238,13 @@ a:hover {
   display: grid;
   grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.6fr);
   gap: clamp(1.25rem, 3vw, 2.5rem);
-  align-items: start;
+  align-items: stretch;
 }
 
 .think-therapy__aside {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .think-therapy .think-phase__flow {
@@ -2453,6 +2454,28 @@ a:hover {
 
 .think-phase--poesis .think-phase__details-label {
   color: var(--accent);
+}
+
+.think-therapy__values {
+  gap: .9rem;
+  margin-top: 1.5rem;
+  padding-top: 1.4rem;
+}
+
+.think-therapy__values-lead {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+.think-therapy__values-lead strong {
+  color: var(--ink);
+}
+
+.think-therapy__values .think-consequence-list {
+  margin-top: .5rem;
 }
 
 .think-phase__details {
