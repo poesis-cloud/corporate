@@ -2,7 +2,7 @@
 /**
  * Product sub-page — one page per Product inside each Solution.
  * URL: /solutions/[solution]/products/[product] (e.g. /solutions/sie/products/definition-manager).
- * Structure: hero (solution pill · product name · catchy lead · CTAs) →
+ * Structure: hero (solution pill · product name · catchy lead · description promise · CTAs) →
  * Values → Features (one entry per feature, anchored) → Roadmap.
  * Section rhythm and item formats mirror the homepage.
  */
@@ -27,11 +27,23 @@ const { solution, product } = Astro.props;
   description={`${product.name}, a product of ${solution.fullName} (${solution.name}). ${product.tagline}`}
   pageType="Product"
 >
-  <section class="hero">
+  <section class="hero hero--split">
     <div class="container">
       <p class="eyebrow"><a href={solution.href}>{solution.tag} · Solution</a></p>
       <h1>{product.name} — {solution.fullName}.</h1>
       <p class="lead">{product.tagline}</p>
+      <div class="hero-promise">
+        {product.description.split('\n\n').map((para) => (
+          <p>
+            {para.split('\n').map((line, index, lines) => (
+              <>
+                {line}
+                {index < lines.length - 1 && <br />}
+              </>
+            ))}
+          </p>
+        ))}
+      </div>
       <div class="hero-cta">
         {product.docs?.map((d, i) => <a class={`btn ${i === 0 ? 'btn-primary' : 'btn-ghost'}`} href={d.href}><Icon name="docs" /> {i === 0 ? 'Read the docs' : d.label}</a>)}
         {product.repos?.map((r) => <a class="btn btn-ghost" href={r.href}><Icon name="github" /> Browse the repo</a>)}
@@ -44,16 +56,6 @@ const { solution, product } = Astro.props;
       <div class="section-head">
         <p class="eyebrow">Values</p>
         <h2>What {product.name} changes for you.</h2>
-        {product.description.split('\n\n').map((para) => (
-          <p class="lead">
-            {para.split('\n').map((line, index, lines) => (
-              <>
-                {line}
-                {index < lines.length - 1 && <br />}
-              </>
-            ))}
-          </p>
-        ))}
       </div>
       <ul class="think-consequence-list portfolio-values">
         {product.values.map((v) => (

@@ -4,7 +4,6 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
-import SafFlowDiagram from '../../../components/SafFlowDiagram.astro';
 import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
 
 const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
@@ -17,42 +16,35 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
   description="The first distributed agentic SAFe engine: AI agents run SAFe across portfolio, program, and iteration — open, Apache-2.0, local-first, with a human gate at every layer. Agentic transformation with a method — spec-driven delivery from governed definitions."
   pageType="Solution"
 >
-  <section class="hero">
+  <section class="hero hero--split">
     <div class="container">
       <p class="eyebrow"><a href="/#portfolio">{saf.tag} · Solution</a></p>
       <h1>The Systemic Agentic Framework — the first distributed agentic SAFe engine.</h1>
       <p class="lead">{leadText}</p>
+      <div class="hero-promise">
+        <p>Think of an <strong>org chart, not a swarm</strong>: SAFe’s portfolio → program → iteration hierarchy, staffed by agents. Your strategic, tactical, and technical concerns enter their layer on your own machine.</p>
+        <p>Each layer is orchestrated by agents running governed workflows, closed by a human ★ gate, every step checked by the harness — and the validated artifacts sync out to the central workspace.</p>
+      </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/saf/"><Icon name="docs" /> Read the docs</a>
         <a class="btn btn-ghost" href="https://github.com/poesis-cloud"><Icon name="github" /> Browse the repos</a>
         <a class="btn btn-ghost" href="https://docs.poesis.cloud/saf/quickstart/"><Icon name="play" /> Quickstart</a>
       </div>
+      <p class="hero-note"><a href="/insights/agentic-safe/">Read: agentic SAFe — running the Scaled Agile Framework with AI agents →</a></p>
     </div>
   </section>
 
   <section class="section section--soft">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">The mental model</p>
-        <h2>Three layers, three gates, one merged commit.</h2>
-        <p class="lead">Think of an org chart, not a swarm: SAFe’s portfolio → program → iteration hierarchy, staffed by agents. Your strategic, tactical, and technical concerns enter their layer on your own machine — each layer orchestrated by agents running governed workflows, each closed by a human ★ gate, every step checked by the harness — and the validated artifacts sync out to the central workspace, contextualizing every other orchestration.</p>
-      </div>
-      <SafFlowDiagram />
-    </div>
-  </section>
-
-  <section class="section">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
         <h2>Agentic transformation with a method — and the harness that makes it trustworthy.</h2>
       </div>
       <SolutionValueCards solution={saf} />
-      <p style="margin-top:1.25rem;text-align:center"><a href="/insights/agentic-safe/">Read: agentic SAFe — running the Scaled Agile Framework with AI agents →</a></p>
     </div>
   </section>
 
-  <section class="section section--soft">
+  <section class="section">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Capabilities</p>
@@ -62,7 +54,7 @@ const leadText = lead.charAt(0).toUpperCase() + lead.slice(1);
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--soft">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Products</p>
