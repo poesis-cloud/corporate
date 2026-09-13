@@ -719,10 +719,6 @@ a:hover {
 }
 
 /* ---- clickable product cards + feature pills ---------------------------- */
-.card--product h3 {
-  margin-top: .85rem;
-}
-
 /* ---- comparison tables (tool-class contrast + alternative pages) -------- */
 .compare-wrap {
   overflow-x: auto;
@@ -797,52 +793,6 @@ a:hover {
   content: "";
   position: absolute;
   inset: 0;
-}
-
-.card-features-label {
-  margin: 1.1rem 0 .5rem;
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.feature-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: .3rem;
-  margin: 0;
-  padding: 0;
-}
-
-.feature-list a {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  font-size: .86rem;
-  color: var(--ink-soft);
-  text-decoration: none;
-  transition: color .15s ease;
-}
-
-.feature-list a::before {
-  content: "";
-  width: .4rem;
-  height: .4rem;
-  border-radius: 2px;
-  background: var(--accent);
-  opacity: .6;
-  flex: none;
-}
-
-.feature-list a:hover,
-.feature-list a:focus-visible {
-  color: var(--accent-ink);
 }
 
 /* ---- tags / pills ------------------------------------------------------- */
@@ -2295,7 +2245,7 @@ a:hover {
   list-style: none;
 }
 
-.think-therapy__grid li {
+.think-therapy__grid > li {
   display: grid;
   gap: .4rem;
   align-content: start;
@@ -2616,28 +2566,73 @@ a:hover {
   margin-top: 1.5rem;
 }
 
-.portfolio-values li {
+.portfolio-values > li {
   grid-template-rows: auto auto 1fr auto;
   scroll-margin-top: 84px;
 }
 
 .portfolio-capabilities,
-.portfolio-features {
+.portfolio-features,
+.portfolio-products {
   margin-top: 1.5rem;
 }
 
-.portfolio-capabilities li,
-.portfolio-features li {
+.portfolio-capabilities > li,
+.portfolio-features > li,
+.portfolio-products > li {
   align-content: stretch;
   scroll-margin-top: 84px;
 }
 
-.portfolio-capabilities li {
+.portfolio-capabilities > li {
   grid-template-rows: auto auto 1fr auto;
 }
 
-.portfolio-features li {
+.portfolio-features > li {
   grid-template-rows: auto auto 1fr;
+}
+
+.portfolio-products > li {
+  position: relative;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.portfolio-products strong a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.portfolio-products > li:hover strong a {
+  color: var(--accent);
+}
+
+.portfolio-product-features {
+  display: grid;
+  gap: .7rem;
+  margin: .55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio-product-features li {
+  display: grid;
+  gap: .1rem;
+  padding-left: .8rem;
+  border-left: 1px solid rgba(45, 212, 191, .25);
+}
+
+.portfolio-product-features a {
+  position: relative;
+  z-index: 1;
+  color: var(--ink);
+  font-size: .85rem;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+
+.portfolio-product-features a:hover,
+.portfolio-product-features a:focus-visible {
+  color: var(--accent);
 }
 
 .home-outcome-grid article,

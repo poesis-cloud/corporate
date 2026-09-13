@@ -1,9 +1,11 @@
 ---
 /**
- * ProductCards — the Products section grid shared by all solution pages.
- * One clickable card per Product (→ product page), with one pill per
- * Feature (→ feature anchor on the product page).
+ * ProductCards — the Products section shared by all solution pages, in the
+ * same format as the Capabilities grid. One clickable card per Product
+ * (→ product page), its features listed in the value format, each one linking
+ * to its anchor on the product page.
  */
+import Icon from './Icon.astro';
 import type { Solution } from '../data/poesis-portfolio.ts';
 import { featureStatus } from '../data/poesis-portfolio.ts';
 
@@ -12,42 +14,32 @@ interface Props {
 }
 
 const { solution } = Astro.props;
-const cols = solution.products.length >= 3 ? 'grid-3' : 'grid-2';
 ---
-<div class={`grid ${cols}`} style="margin-top:1.5rem">
+<ul class="think-therapy__grid portfolio-products">
   {solution.products.map((p) => {
+    const statuses = p.features.map(featureStatus);
     return (
-      <div class="card card--feature card--product card--static">
-        <span class="tag tag--muted">Product</span>
-        <span class="tag tag--muted">v{p.currentVersion}</span>
-        <h3><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></h3>
+      <li>
+        <span class="think-capability__head">
+          <span class="think-capability__icon"><Icon name={statuses.some((s) => s.shipped) ? 'check-badge' : 'lightbulb'} size={16} /></span>
+          <span class="think-capability__step">Product · v{p.currentVersion}</span>
+        </span>
+        <strong><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></strong>
         <p>{p.tagline}</p>
-        <p class="card-features-label">Features</p>
-        <ul class="feature-list">
-          {p.features.map((f) => {
-            const status = featureStatus(f);
-            return (
+        <div class="proof-line">
+          <span>Features</span>
+          <ul class="portfolio-product-features">
+            {p.features.map((f, i) => (
               <li>
-                <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>
-                  {f.name}
-                  <span class="feature-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                    {status.shipped ? '✓' : `v${status.version}`}
-                  </span>
-                </a>
+                <span class="think-consequence__step">
+                  {statuses[i].shipped ? `shipped · v${statuses[i].version}` : `planned · v${statuses[i].version}`}
+                </span>
+                <a href={`${solution.href}/products/${p.slug}#${f.slug}`}>{f.name}</a>
               </li>
-            );
-          })}
-        </ul>
-      </div>
+            ))}
+          </ul>
+        </div>
+      </li>
     );
   })}
-</div>
-
-<style>
-  .feature-version {
-    margin-left: 0.4rem;
-    font-size: 0.72rem;
-    opacity: 0.6;
-    white-space: nowrap;
-  }
-</style>
+</ul>
