@@ -1477,16 +1477,9 @@ a:hover {
 .arch {
   margin-top: 1.5rem;
   border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
+  border-radius: 6px;
   padding: 1.25rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, .01)),
-    var(--bg-soft);
-  background-image:
-    linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
-  background-size: 32px 32px;
-  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, .025);
 }
 
 .arch-legend {
@@ -1525,23 +1518,19 @@ a:hover {
 .arch-scope {
   position: relative;
   border: 1px solid var(--line-strong);
-  border-radius: 12px;
+  border-radius: 6px;
   padding: 1.1rem 1.2rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
-  transition: border-color .2s ease, box-shadow .2s ease;
+  background: rgba(255, 255, 255, .025);
+  transition: border-color .2s ease;
   min-width: 0;
 }
 
 .arch-scope:hover {
   border-color: rgba(45, 212, 191, .42);
-  box-shadow: 0 0 0 1px rgba(45, 212, 191, .12), 0 14px 36px rgba(0, 0, 0, .4);
 }
 
 .arch-scope--standard {
   border-color: rgba(45, 212, 191, .35);
-  background:
-    radial-gradient(30rem 10rem at 50% 120%, rgba(45, 212, 191, .1), transparent 70%),
-    linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
 }
 
 .arch-scope--framework {
@@ -1549,14 +1538,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   border-color: rgba(129, 140, 248, .35);
-  background:
-    radial-gradient(20rem 20rem at 110% 50%, rgba(129, 140, 248, .12), transparent 70%),
-    linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
 }
 
 .arch-scope--framework:hover {
   border-color: rgba(129, 140, 248, .55);
-  box-shadow: 0 0 0 1px rgba(129, 140, 248, .15), 0 14px 36px rgba(0, 0, 0, .4);
 }
 
 .arch-scope-meta {
@@ -1662,7 +1647,7 @@ a:hover {
 
 .arch-product {
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: .8rem .85rem;
   background: rgba(255, 255, 255, .02);
   min-width: 0;
@@ -1732,7 +1717,7 @@ a:hover {
   font-weight: 600;
   letter-spacing: .02em;
   padding: .3rem .55rem;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, .03);
   color: var(--ink-soft);
