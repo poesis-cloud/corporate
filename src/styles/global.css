@@ -30,6 +30,9 @@
   /* sky-400  */
   --accent-3: #818cf8;
   /* indigo-400 */
+  --planned: #fbbf24;
+  /* amber-400 — anything not shipped yet */
+  --planned-line: rgba(251, 191, 36, .38);
   --accent-ink: #5eead4;
   /* link teal on dark */
   --accent-soft: rgba(45, 212, 191, .12);
@@ -2706,6 +2709,82 @@ a:hover {
 
 .proof-line a:hover {
   color: var(--accent);
+}
+
+/* ---- "not shipped yet" (amber) ------------------------------------------
+   One marker for everything the portfolio has defined but not yet delivered:
+   features, the products that hold only planned features, the capabilities
+   only planned features realize, and every reference pointing at them. */
+.think-therapy__grid > li.is-planned {
+  border-color: var(--planned-line);
+}
+
+.think-therapy__grid > li.is-planned .think-capability__icon,
+.think-therapy__grid > li.is-planned .think-capability__step {
+  color: var(--planned);
+}
+
+.portfolio-product-features li.is-planned {
+  border-left-color: var(--planned-line);
+}
+
+.portfolio-product-features li.is-planned .think-consequence__step {
+  color: var(--planned);
+}
+
+.proof-line a.is-planned {
+  color: var(--planned);
+  opacity: .85;
+}
+
+.proof-line a.is-planned:hover {
+  color: var(--planned);
+  opacity: 1;
+}
+
+.pill-planned {
+  margin-left: .6rem;
+  padding: .1rem .5rem;
+  border: 1px solid var(--planned-line);
+  border-radius: 999px;
+  color: var(--planned);
+  font-size: .66rem;
+}
+
+.arch-comp.is-planned {
+  border-left-color: var(--planned-line);
+  color: var(--planned);
+}
+
+.arch-comp.is-planned .arch-comp-version {
+  color: var(--planned);
+}
+
+.arch-comp.is-planned:hover,
+.arch-comp.is-planned:focus-visible,
+.arch-scope--framework .arch-comp.is-planned:hover,
+.arch-scope--framework .arch-comp.is-planned:focus-visible {
+  border-left-color: var(--planned);
+  color: var(--planned);
+}
+
+.arch-product.is-planned,
+.arch-scope--framework .arch-product.is-planned {
+  border-color: var(--planned-line);
+}
+
+.arch-product.is-planned:hover,
+.arch-scope--framework .arch-product.is-planned:hover {
+  border-color: var(--planned);
+}
+
+.arch-product.is-planned .arch-version {
+  color: var(--planned);
+}
+
+.arch-legend em.is-planned {
+  color: var(--planned);
+  font-style: normal;
 }
 
 .home-pilot-entries li {

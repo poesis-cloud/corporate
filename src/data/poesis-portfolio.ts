@@ -603,6 +603,16 @@ export function featureStatus(feature: Feature): { version: string; shipped: boo
   return { version: feature.milestone.version, shipped: feature.milestone.shipped === true };
 }
 
+/** A product has shipped once at least one of its features has. */
+export function productShipped(product: ProductDef): boolean {
+  return product.features.some((f) => f.milestone.shipped === true);
+}
+
+/** A capability is real once at least one of the features realizing it has shipped. */
+export function capabilityShipped(solution: Solution, capability: Capability): boolean {
+  return capabilityRealizations(solution, capability).some((r) => r.feature.milestone.shipped === true);
+}
+
 const PRE_GA_LABEL = 'In active development';
 
 /**

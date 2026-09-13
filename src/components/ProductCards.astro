@@ -18,11 +18,12 @@ const { solution } = Astro.props;
 <ul class="think-therapy__grid portfolio-products">
   {solution.products.map((p) => {
     const statuses = p.features.map(featureStatus);
+    const planned = !statuses.some((s) => s.shipped);
     return (
-      <li>
+      <li class={planned ? 'is-planned' : undefined}>
         <span class="think-capability__head">
-          <span class="think-capability__icon"><Icon name={statuses.some((s) => s.shipped) ? 'check-badge' : 'lightbulb'} size={16} /></span>
-          <span class="think-capability__step">Product · v{p.currentVersion}</span>
+          <span class="think-capability__icon"><Icon name={planned ? 'lightbulb' : 'check-badge'} size={16} /></span>
+          <span class="think-capability__step">Product · v{p.currentVersion}{planned && ' · not shipped yet'}</span>
         </span>
         <strong><a class="card-cover" href={`${solution.href}/products/${p.slug}`}>{p.name}</a></strong>
         <p>{p.tagline}</p>
@@ -30,7 +31,7 @@ const { solution } = Astro.props;
           <span>Composed of features</span>
           <ul class="portfolio-product-features">
             {p.features.map((f, i) => (
-              <li>
+              <li class={statuses[i].shipped ? undefined : 'is-planned'}>
                 <span class="think-consequence__step">
                   {statuses[i].shipped ? `shipped · v${statuses[i].version}` : `planned · v${statuses[i].version}`}
                 </span>

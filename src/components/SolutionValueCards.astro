@@ -9,14 +9,14 @@
  * down the same page.
  */
 import Icon from './Icon.astro';
-import { solutionValueAnchor, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityShipped, solutionValueAnchor, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
 }
 
 const { solution } = Astro.props;
-const capabilityName = (slug: string) => solution.capabilities.find((c) => c.slug === slug)!.name;
+const capability = (slug: string) => solution.capabilities.find((c) => c.slug === slug)!;
 const relation = (v: Solution['values'][number]) =>
   v.emergent
     ? 'Emerges from the combination of capabilities'
@@ -38,7 +38,7 @@ const relation = (v: Solution['values'][number]) =>
         {v.capabilities.map((cs, i) => (
           <>
             {i > 0 && ' · '}
-            <a href={`#${cs}`}>{capabilityName(cs)}</a>
+            <a class={capabilityShipped(solution, capability(cs)) ? undefined : 'is-planned'} href={`#${cs}`}>{capability(cs).name}</a>
           </>
         ))}
       </p>

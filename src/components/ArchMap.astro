@@ -7,7 +7,7 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { poesisPortfolio, productTimeline, featureStatus } from '../data/poesis-portfolio.ts';
+import { poesisPortfolio, productTimeline, featureStatus, productShipped, capabilityShipped } from '../data/poesis-portfolio.ts';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 import Icon from './Icon.astro';
 
@@ -17,7 +17,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
     <span>Poesis Platform Map · solutions ⊃ products ⊃ features</span>
-    <span>every box is clickable</span>
+    <span>every box is clickable · <em class="is-planned">amber = not shipped yet</em></span>
   </div>
 
   <div class="arch-grid">
@@ -35,7 +35,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                 <summary>Capabilities</summary>
                 <nav class="arch-comps" aria-label={`${s.name} capabilities`}>
                   {s.capabilities.map((c) => (
-                    <a class="arch-comp" href={`${s.href}#${c.slug}`}>{c.name}</a>
+                    <a class:list={['arch-comp', !capabilityShipped(s, c) && 'is-planned']} href={`${s.href}#${c.slug}`}>{c.name}</a>
                   ))}
                 </nav>
               </details>
@@ -44,7 +44,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                 <div class="arch-products">
                   {s.products.map((p) => {
                     return (
-                    <section class="arch-product" aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
+                    <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
                       <span class="arch-version">current v{p.currentVersion}</span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
@@ -57,7 +57,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                           {p.features.map((f) => {
                             const status = featureStatus(f);
                             return (
-                              <a class="arch-comp" href={`${s.href}/products/${p.slug}#${f.slug}`}>
+                              <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${s.href}/products/${p.slug}#${f.slug}`}>
                                 {f.name}
                                 <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
                                   {status.shipped ? '✓' : `v${status.version}`}
@@ -91,7 +91,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
               <summary>Capabilities</summary>
               <nav class="arch-comps" aria-label={`${framework.name} capabilities`}>
                 {framework.capabilities.map((c) => (
-                  <a class="arch-comp" href={`${framework.href}#${c.slug}`}>{c.name}</a>
+                  <a class:list={['arch-comp', !capabilityShipped(framework, c) && 'is-planned']} href={`${framework.href}#${c.slug}`}>{c.name}</a>
                 ))}
               </nav>
             </details>
@@ -100,7 +100,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
               <div class="arch-products">
                 {framework.products.map((p) => {
                   return (
-                  <section class="arch-product" aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
+                  <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
                     <span class="arch-version">current v{p.currentVersion}</span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
@@ -113,7 +113,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                         {p.features.map((f) => {
                           const status = featureStatus(f);
                           return (
-                            <a class="arch-comp" href={`${framework.href}/products/${p.slug}#${f.slug}`}>
+                            <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${framework.href}/products/${p.slug}#${f.slug}`}>
                               {f.name}
                               <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
                                 {status.shipped ? '✓' : `v${status.version}`}

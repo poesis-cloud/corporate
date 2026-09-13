@@ -9,7 +9,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Icon from '../../../../components/Icon.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
-import { poesisPortfolio, productTimeline, featureStatus } from '../../../../data/poesis-portfolio.ts';
+import { poesisPortfolio, productTimeline, featureStatus, productShipped } from '../../../../data/poesis-portfolio.ts';
 
 export function getStaticPaths() {
   return poesisPortfolio.flatMap((solution) =>
@@ -21,6 +21,7 @@ export function getStaticPaths() {
 }
 
 const { solution, product } = Astro.props;
+const planned = !productShipped(product);
 ---
 <BaseLayout
   title={`${product.name} — ${solution.fullName}`}
@@ -29,7 +30,7 @@ const { solution, product } = Astro.props;
 >
   <section class="hero hero--split">
     <div class="container">
-      <p class="eyebrow"><a href={solution.href}>{solution.tag} · Solution</a></p>
+      <p class="eyebrow"><a href={solution.href}>{solution.tag} · Solution</a>{planned && <span class="pill-planned">Not shipped yet</span>}</p>
       <h1>{product.name} — {solution.fullName}.</h1>
       <p class="lead">{product.tagline}</p>
       <div class="hero-promise">
@@ -69,12 +70,15 @@ const { solution, product } = Astro.props;
             {v.features.length > 0 ? (
               <p class="proof-line">
                 <span>{v.features.length > 1 ? 'Delivered together by features' : 'Delivered by feature'}</span>
-                {v.features.map((fs, i) => (
-                  <>
-                    {i > 0 && ' · '}
-                    <a href={`#${fs}`}>{product.features.find((f) => f.slug === fs)!.name}</a>
-                  </>
-                ))}
+                {v.features.map((fs, i) => {
+                  const f = product.features.find((c) => c.slug === fs)!;
+                  return (
+                    <>
+                      {i > 0 && ' · '}
+                      <a class={featureStatus(f).shipped ? undefined : 'is-planned'} href={`#${fs}`}>{f.name}</a>
+                    </>
+                  );
+                })}
               </p>
             ) : (
               <p class="proof-line">
@@ -98,7 +102,7 @@ const { solution, product } = Astro.props;
         {product.features.map((f) => {
           const status = featureStatus(f);
           return (
-            <li id={f.slug}>
+            <li id={f.slug} class={status.shipped ? undefined : 'is-planned'}>
               <span class="think-capability__head">
                 <span class="think-capability__icon"><Icon name={status.shipped ? 'check-badge' : 'lightbulb'} size={16} /></span>
                 <span class="think-capability__step">

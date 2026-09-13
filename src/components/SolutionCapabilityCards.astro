@@ -7,7 +7,7 @@
  * product page's value card names the features that deliver it.
  */
 import Icon from './Icon.astro';
-import { capabilityRealizations, platformCapabilities, type Solution } from '../data/poesis-portfolio.ts';
+import { capabilityRealizations, capabilityShipped, featureStatus, platformCapabilities, type Solution } from '../data/poesis-portfolio.ts';
 
 interface Props {
   solution: Solution;
@@ -20,11 +20,12 @@ const realizedBy = (count: number) => (count > 1 ? 'Realized by product features
   {solution.capabilities.map((c) => {
     const platform = platformCapabilities[c.platform];
     const realizations = capabilityRealizations(solution, c);
+    const planned = !capabilityShipped(solution, c);
     return (
-      <li id={c.slug}>
+      <li id={c.slug} class={planned ? 'is-planned' : undefined}>
         <span class="think-capability__head">
           <span class="think-capability__icon"><Icon name={platform.icon} size={16} /></span>
-          <span class="think-capability__step">{platform.label}</span>
+          <span class="think-capability__step">{platform.label}{planned && ' · planned'}</span>
         </span>
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>
@@ -33,7 +34,10 @@ const realizedBy = (count: number) => (count > 1 ? 'Realized by product features
           {realizations.map((r, i) => (
             <>
               {i > 0 && ' · '}
-              <a href={`${solution.href}/products/${r.product.slug}#${r.feature.slug}`}>{r.feature.name}</a>
+              <a
+                class={featureStatus(r.feature).shipped ? undefined : 'is-planned'}
+                href={`${solution.href}/products/${r.product.slug}#${r.feature.slug}`}
+              >{r.feature.name}</a>
             </>
           ))}
         </p>
