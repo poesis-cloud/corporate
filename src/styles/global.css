@@ -2396,6 +2396,22 @@ a:hover {
   background: rgba(45, 212, 191, .07);
 }
 
+.think-capacity--link {
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease;
+}
+
+.think-capacity--link:hover,
+.think-capacity--link:focus-visible {
+  border-color: var(--accent);
+  background: rgba(45, 212, 191, .14);
+}
+
+.think-capacity--link:hover strong,
+.think-capacity--link:focus-visible strong {
+  color: var(--accent);
+}
+
 .think-phase__arrow {
   justify-self: center;
   color: var(--accent);
@@ -2535,6 +2551,10 @@ a:hover {
 .home-deployment-grid article,
 .home-usecase-grid article {
   padding: 1.5rem;
+}
+
+.home-usecase-grid article {
+  scroll-margin-top: 84px;
 }
 
 .home-outcome-grid h3,
