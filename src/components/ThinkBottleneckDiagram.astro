@@ -11,20 +11,20 @@ import Icon from './Icon.astro';
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
           <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-          <span>Implicit · manual · human-held</span>
           <span class="think-capacity__definition">Define, evaluate, govern</span>
+          <span class="think-capacity__state think-capacity__state--bad">implicitly, manually, in people&rsquo;s heads</span>
         </div>
         <span class="think-phase__arrow" aria-hidden="true">→</span>
         <div class="think-capacity-group">
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-            <span>Human</span>
             <span class="think-capacity__definition">Generate from definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">held in people&rsquo;s heads &mdash; all human</span>
           </div>
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-            <span>Human</span>
             <span class="think-capacity__definition">Operate and observe</span>
+            <span class="think-capacity__state think-capacity__state--bad">by hand, against nothing explicit</span>
           </div>
         </div>
       </div>
@@ -46,20 +46,20 @@ import Icon from './Icon.astro';
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
           <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-          <span>Implicit · manual · human-held</span>
           <span class="think-capacity__definition">Define, evaluate, govern</span>
+          <span class="think-capacity__state think-capacity__state--bad">implicitly, manually, in people&rsquo;s heads</span>
         </div>
         <span class="think-phase__arrow" aria-hidden="true">→</span>
         <div class="think-capacity-group think-capacity-group--expanded">
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-            <span>AI-accelerated</span>
             <span class="think-capacity__definition">Generate from definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">that stay implicit &mdash; now AI-accelerated</span>
           </div>
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-            <span>AI-accelerated</span>
             <span class="think-capacity__definition">Operate and observe</span>
+            <span class="think-capacity__state think-capacity__state--bad">AI-accelerated, still against nothing explicit</span>
           </div>
         </div>
       </div>
@@ -83,20 +83,20 @@ import Icon from './Icon.astro';
           <div class="think-phase__flow">
             <a class="think-capacity think-capacity--governed think-capacity--link" href="#use-case-think">
               <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-              <span>Explicit · AI-accelerated · shared</span>
               <span class="think-capacity__definition">Define, evaluate, govern</span>
+              <span class="think-capacity__state think-capacity__state--good">explicitly, AI-accelerated, shared</span>
             </a>
             <span class="think-phase__arrow" aria-hidden="true">→</span>
             <div class="think-capacity-group think-capacity-group--expanded">
               <a class="think-capacity think-capacity--link" href="#use-case-build">
                 <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-                <span>AI-accelerated or programmatic</span>
                 <span class="think-capacity__definition">Generate from definitions</span>
+                <span class="think-capacity__state think-capacity__state--good">that are explicit and governed &mdash; by AI or programmatically</span>
               </a>
               <a class="think-capacity think-capacity--link" href="#use-case-run">
                 <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-                <span>AI-accelerated or programmatic</span>
                 <span class="think-capacity__definition">Operate and observe</span>
+                <span class="think-capacity__state think-capacity__state--good">against the definition &mdash; by AI or programmatically</span>
               </a>
             </div>
           </div>

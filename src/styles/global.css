@@ -2265,7 +2265,8 @@ a:hover {
   font-size: .8rem;
 }
 
-.think-therapy .think-capacity .think-capacity__definition {
+.think-therapy .think-capacity .think-capacity__definition,
+.think-therapy .think-capacity .think-capacity__state {
   font-size: .76rem;
 }
 
@@ -2401,10 +2402,26 @@ a:hover {
   font-size: .72rem;
 }
 
-.think-capacity__definition {
-  color: var(--accent);
+.think-capacity .think-capacity__definition {
+  color: var(--ink-soft);
   font-size: .68rem;
   line-height: 1.3;
+}
+
+.think-capacity .think-capacity__state {
+  margin-top: .1rem;
+  padding-top: .4rem;
+  border-top: 1px dashed var(--line-strong);
+  font-size: .68rem;
+  line-height: 1.3;
+}
+
+.think-capacity .think-capacity__state--bad {
+  color: #f87171;
+}
+
+.think-capacity .think-capacity__state--good {
+  color: var(--accent);
 }
 
 .think-capacity--narrow {
