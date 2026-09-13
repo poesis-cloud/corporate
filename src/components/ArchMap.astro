@@ -8,6 +8,7 @@
  */
 import { poesisPortfolio, productTimeline, featureStatus } from '../data/poesis-portfolio.ts';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
+import Icon from './Icon.astro';
 
 const stack = poesisPortfolio.filter((s) => s.slug !== 'saf');
 const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
@@ -24,6 +25,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
           <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
             <article class="arch-scope arch-scope--standard" aria-labelledby={`arch-solution-${s.slug}`}>
               <div class="arch-scope-meta">
+                <span class="arch-icon"><Icon name={s.icon as any} size={16} /></span>
                 <span class="tag">{s.tag} · Solution</span>
               </div>
               <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
@@ -34,12 +36,15 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                   {s.products.map((p) => {
                     return (
                     <section class="arch-product" aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
+                      <span class="arch-product-head">
+                        <span class="arch-icon"><Icon name={p.icon as any} size={16} /></span>
+                        <span class="arch-version">current v{p.currentVersion}</span>
+                      </span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
-                        <span class="arch-version">v{p.currentVersion}</span>
                       </h4>
                       <p class="arch-product-tagline">{p.excerpt}</p>
-                      <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
+                      <ProductRoadmapMini product={p.name} milestones={productTimeline(p)} />
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
                         <nav class="arch-comps" aria-label={`${p.name} features`}>
@@ -71,6 +76,7 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <aside class="arch-side">
           <article class="arch-scope arch-scope--framework" aria-labelledby={`arch-solution-${framework.slug}`}>
             <div class="arch-scope-meta">
+              <span class="arch-icon"><Icon name={framework.icon as any} size={16} /></span>
               <span class="tag tag--accent-3">{framework.tag} · Solution</span>
             </div>
             <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>
@@ -81,12 +87,15 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                 {framework.products.map((p) => {
                   return (
                   <section class="arch-product" aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
+                    <span class="arch-product-head">
+                      <span class="arch-icon"><Icon name={p.icon as any} size={16} /></span>
+                      <span class="arch-version">current v{p.currentVersion}</span>
+                    </span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
-                      <span class="arch-version">v{p.currentVersion}</span>
                     </h4>
                     <p class="arch-product-tagline">{p.excerpt}</p>
-                    <ProductRoadmapMini product={p.name} current={p.currentVersion} milestones={productTimeline(p)} />
+                    <ProductRoadmapMini product={p.name} milestones={productTimeline(p)} />
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
@@ -114,9 +123,27 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 </div>
 
 <style>
+  .arch-icon {
+    display: grid;
+    flex: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    place-items: center;
+    border: 1px solid rgba(45, 212, 191, .35);
+    color: var(--accent);
+  }
+  .arch-scope--framework .arch-icon {
+    border-color: rgba(129, 140, 248, .35);
+    color: var(--accent-3);
+  }
+  .arch-product-head {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .5rem;
+  }
   .arch-version,
   .arch-comp-version {
-    margin-left: 0.45rem;
     font-family: var(--font-mono);
     font-size: 0.66rem;
     font-weight: 600;
@@ -124,6 +151,9 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     text-transform: uppercase;
     color: var(--accent);
     white-space: nowrap;
+  }
+  .arch-comp-version {
+    margin-left: 0.45rem;
   }
   .arch-scope--framework .arch-version,
   .arch-scope--framework .arch-comp-version {

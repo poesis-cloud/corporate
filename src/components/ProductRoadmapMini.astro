@@ -9,14 +9,12 @@ import type { FeatureMilestone } from '../data/poesis-portfolio.ts';
 
 interface Props {
   product: string;
-  current: string;
   milestones: FeatureMilestone[];
 }
 
-const { product, current, milestones } = Astro.props;
+const { product, milestones } = Astro.props;
 ---
 <div class="arch-roadmap-mini" aria-label={`${product} roadmap`}>
-  <span class="arch-roadmap-mini-current">current v{current}</span>
   <ol class="arch-roadmap-mini-track">
     {milestones.map((m) => (
       <li
@@ -33,16 +31,6 @@ const { product, current, milestones } = Astro.props;
 <style>
   .arch-roadmap-mini {
     margin: 0 0 .65rem;
-  }
-  .arch-roadmap-mini-current {
-    display: inline-block;
-    margin-bottom: .35rem;
-    font-family: var(--font-mono);
-    font-size: .66rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--accent);
   }
   .arch-roadmap-mini-track {
     list-style: none;
