@@ -2142,6 +2142,45 @@ a:hover {
   margin: 0;
 }
 
+/* The hero says what the page is; this rail says what the page contains. One
+   line per section, so the summary stays a hero element and not a section. */
+.hero-sections {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  background: var(--line);
+}
+
+.hero-sections a {
+  display: block;
+  padding: 1rem clamp(.9rem, 2vw, 1.4rem);
+  border-top: 1px solid var(--line-strong);
+  background: var(--bg-ink);
+  color: var(--ink-soft);
+  font-size: .88rem;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: border-color .2s ease, color .2s ease;
+}
+
+.hero-sections a:hover,
+.hero-sections a:focus-visible {
+  border-top-color: var(--accent);
+  color: var(--ink);
+}
+
+.hero-sections span {
+  display: block;
+  margin-bottom: .4rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
 .think-story {
   display: grid;
   gap: 1.25rem;
@@ -3012,6 +3051,10 @@ a:hover {
     grid-row: auto;
     margin-top: 1.25rem;
   }
+
+  .hero-sections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -3031,6 +3074,10 @@ a:hover {
   }
 
   .home-pilot-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-sections {
     grid-template-columns: 1fr;
   }
 
