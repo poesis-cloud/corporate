@@ -2863,6 +2863,10 @@ a:hover {
   margin-right: .4em;
 }
 
+.think-consequence__step .planned-mark {
+  margin: 0 0 0 .45em;
+}
+
 .pill-planned {
   margin-left: .6rem;
   padding: .1rem .5rem;
