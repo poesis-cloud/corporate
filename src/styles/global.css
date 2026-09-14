@@ -37,6 +37,9 @@
   /* link teal on dark */
   --accent-soft: rgba(45, 212, 191, .12);
 
+  /* Masked so it inherits the colour of whatever text it marks. */
+  --icon-planned: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.2v5.2l3.4 2'/%3E%3C/svg%3E");
+
   --maxw: 1140px;
   --radius: 16px;
   --shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 14px 40px rgba(0, 0, 0, .45);
@@ -2839,14 +2842,25 @@ a:hover {
 }
 
 /* A reference is a pointer, not a status board: inline links keep the body
-   colour and carry "not shipped yet" as a raised asterisk instead of amber
-   (raised so it cannot be read as the " · " separator between references). */
-.proof-line a.is-planned::after {
-  content: '*';
+   colour and carry "on roadmap" as a clock glyph instead of amber. */
+.proof-line a.is-planned::after,
+.planned-mark {
+  content: '';
   display: inline-block;
-  font-family: var(--font-mono);
-  font-size: .85em;
-  vertical-align: super;
+  width: .85em;
+  height: .85em;
+  vertical-align: -.1em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon-planned) center / contain no-repeat;
+  mask: var(--icon-planned) center / contain no-repeat;
+}
+
+.proof-line a.is-planned::after {
+  margin-left: .35em;
+}
+
+.planned-mark {
+  margin-right: .4em;
 }
 
 .pill-planned {

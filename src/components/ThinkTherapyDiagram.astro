@@ -49,7 +49,7 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
                         {i > 0 && ' · '}
                         <a
                           class={shipped ? undefined : 'is-planned'}
-                          title={shipped ? undefined : 'Not shipped yet'}
+                          title={shipped ? undefined : 'On roadmap'}
                           href={`${r.solution.href}#${r.capability.slug}`}
                         >{r.capability.name}</a>
                       </>
@@ -59,7 +59,7 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
               </li>
             ))}
           </ul>
-          <p class="think-therapy__legend"><span aria-hidden="true">*</span> not shipped yet</p>
+          <p class="think-therapy__legend"><span class="planned-mark" aria-hidden="true"></span>on roadmap</p>
         </div>
       </div>
     </article>
