@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { affordances, platformValues, relationQualifiers, typeIcons } from '../data/poesis-portfolio.ts';
+---
+<ul class="think-consequence-list">
+  {platformValues.map((v) => (
+    <li>
+      <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">{v.name}</span></span>
+      <strong>{v.title}</strong>
+      <p>{v.body}</p>
+      <p class="proof-line">
+        <span>{relationQualifiers.platformValueAffordances(v.relations.affordances.length, v.emergent)}</span>
+        {v.relations.affordances.map((slug, i) => (
+          <>
+            {i > 0 && ' · '}
+            <a href={`#affordance-${slug}`}>{affordances.find((a) => a.slug === slug)!.name}</a>
+          </>
+        ))}
+      </p>
+    </li>
+  ))}
+</ul>

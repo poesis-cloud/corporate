@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import ArchMap from '../components/ArchMap.astro';
+import PlatformValues from '../components/PlatformValues.astro';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
-import { painsForDomain } from '../data/pains.ts';
+import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { profilesForDomain } from '../data/profiles.ts';
 
-const itPains = painsForDomain('it');
 const itProfiles = profilesForDomain('it');
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
@@ -23,44 +23,49 @@ const itProfiles = profilesForDomain('it');
       </div>
       <p class="hero-note">Human-governed definitions that people and AI can act on.</p>
       <nav class="hero-sections" aria-label="On this page">
-        <a href="#bottleneck">
-          <span>The thesis</span>
-          Drift at machine speed, or align at human speed &mdash; and the {itPains.length} IT pains the bottleneck leaves behind.
-        </a>
-        <a href="#deployment">
-          <span>Deployment posture</span>
-          Your models, your systems, your control boundary &mdash; the layer is added, not swapped in.
-        </a>
-        <a href="#integration">
-          <span>Target integration</span>
-          The artifacts your stack already produces become the definitions it can consume back.
-        </a>
-        <a href="#personas">
-          <span>Persona targets</span>
-          Architects, developers, ops, security, AI leads &mdash; one governed model, no translation silos.
-        </a>
-        <a href="#pilot">
-          <span>Start with one workflow</span>
-          Find where it hurts, make THINK explicit, then measure the governed loop.
-        </a>
-        <a href="#portfolio">
-          <span>The Poesis platform</span>
-          The solutions, products and features map &mdash; what exists, what is planned.
-        </a>
+        <a href="#pains"><span>Pain points</span></a>
+        <a href="#capabilities"><span>Capabilities</span></a>
+        <a href="#values"><span>Values</span></a>
+        <a href="#deployment"><span>Deployment posture</span></a>
+        <a href="#integration"><span>Target integration</span></a>
+        <a href="#personas"><span>Persona targets</span></a>
+        <a href="#pilot"><span>Start with one workflow</span></a>
+        <a href="#portfolio"><span>The Poesis platform</span></a>
       </nav>
     </div>
   </section>
 
-  <section id="bottleneck" class="section section--soft home-inversion">
+  <section id="pains" class="section section--soft home-inversion">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">The thesis</p>
+        <p class="eyebrow">Pain points</p>
         <h2>Drift at machine speed, or align at human speed.</h2>
         <p class="lead">This is the central tension of industrial GenAI adoption. GenAI accelerates the production of artifacts, but not the production of definition and governance required to viably deliver these artifacts.</p>
         <p class="lead">The scarce resource is now more than ever the THINK: the AI and human capacity to understand, define, plan, validate, and take responsibility for what has been created.</p>
-        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
       </div>
       <ThinkBottleneckDiagram />
+    </div>
+  </section>
+
+  <section id="capabilities" class="section home-therapy">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Capabilities</p>
+        <h2>Poesis Gene Therapy</h2>
+        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
+      </div>
+      <ThinkTherapyDiagram />
+    </div>
+  </section>
+
+  <section id="values" class="section section--soft home-values">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Values</p>
+        <h2>The organization becomes intelligible.</h2>
+        <p class="lead">To the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
+      </div>
+      <PlatformValues />
     </div>
   </section>
 
