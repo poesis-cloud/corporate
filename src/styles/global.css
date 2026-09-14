@@ -2256,8 +2256,12 @@ a:hover {
   flex-direction: column;
   gap: .75rem;
   margin-top: 1.5rem;
-  padding-top: .85rem;
-  border-top: 1px solid rgba(45, 212, 191, .3);
+}
+
+/* The label titles the panel, so the rule closes it rather than opening it. */
+.think-therapy__body .think-phase__details-label {
+  padding-bottom: .7rem;
+  border-bottom: 1px solid rgba(45, 212, 191, .3);
 }
 
 .think-therapy__grid {
