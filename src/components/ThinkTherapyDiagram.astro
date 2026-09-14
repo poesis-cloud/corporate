@@ -42,19 +42,24 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
                 <p>{a.blurb}</p>
                 <p class="proof-line">
                   <span>{relationQualifiers.affordanceCapabilities(a.relations.capabilities.length)}</span>
-                  {affordanceRealizations(a).map((r, i) => (
-                    <>
-                      {i > 0 && ' · '}
-                      <a
-                        class={capabilityShipped(r.solution, r.capability) ? undefined : 'is-planned'}
-                        href={`${r.solution.href}#${r.capability.slug}`}
-                      >{r.capability.name}</a>
-                    </>
-                  ))}
+                  {affordanceRealizations(a).map((r, i) => {
+                    const shipped = capabilityShipped(r.solution, r.capability);
+                    return (
+                      <>
+                        {i > 0 && ' · '}
+                        <a
+                          class={shipped ? undefined : 'is-planned'}
+                          title={shipped ? undefined : 'Not shipped yet'}
+                          href={`${r.solution.href}#${r.capability.slug}`}
+                        >{r.capability.name}</a>
+                      </>
+                    );
+                  })}
                 </p>
               </li>
             ))}
           </ul>
+          <p class="think-therapy__legend"><span aria-hidden="true">*</span> not shipped yet</p>
         </div>
       </div>
     </article>

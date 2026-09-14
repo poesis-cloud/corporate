@@ -2264,6 +2264,14 @@ a:hover {
   border-bottom: 1px solid rgba(45, 212, 191, .3);
 }
 
+.think-therapy__legend {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+}
+
 .think-therapy__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2830,14 +2838,15 @@ a:hover {
   color: var(--planned);
 }
 
-.proof-line a.is-planned {
-  color: var(--planned);
-  opacity: .85;
-}
-
-.proof-line a.is-planned:hover {
-  color: var(--planned);
-  opacity: 1;
+/* A reference is a pointer, not a status board: inline links keep the body
+   colour and carry "not shipped yet" as a raised asterisk instead of amber
+   (raised so it cannot be read as the " · " separator between references). */
+.proof-line a.is-planned::after {
+  content: '*';
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .85em;
+  vertical-align: super;
 }
 
 .pill-planned {
