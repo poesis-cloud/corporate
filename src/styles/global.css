@@ -2599,6 +2599,23 @@ a:hover {
   line-height: 1.55;
 }
 
+.home-posture + .home-posture {
+  margin-top: clamp(2.4rem, 5vw, 3.4rem);
+  padding-top: clamp(2.4rem, 5vw, 3.4rem);
+  border-top: 1px solid var(--line);
+}
+
+.home-posture h3 {
+  margin: 0 0 .5rem;
+}
+
+.home-posture__lead {
+  max-width: 62ch;
+  margin: 0 0 1.6rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
 .home-deployment-list {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

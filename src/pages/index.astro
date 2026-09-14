@@ -26,8 +26,7 @@ const itProfiles = profilesForDomain('it');
         <a href="#pains"><span>Pain points</span></a>
         <a href="#affordances"><span>Affordances</span></a>
         <a href="#values"><span>Values</span></a>
-        <a href="#deployment"><span>Deployment posture</span></a>
-        <a href="#integration"><span>Integration posture</span></a>
+        <a href="#postures"><span>Deployment &amp; integration postures</span></a>
         <a href="#personas"><span>Persona targets</span></a>
         <a href="#pilot"><span>Start with one workflow</span></a>
         <a href="#portfolio"><span>The Poesis platform</span></a>
@@ -69,14 +68,18 @@ const itProfiles = profilesForDomain('it');
     </div>
   </section>
 
-  <section id="deployment" class="section section--soft home-deployment">
+  <section id="postures" class="section home-postures">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Deployment posture</p>
-        <h2>Your models. Your systems. Your control boundary.</h2>
-        <p class="lead">Poesis adds a governed THINK layer that runs where you decide, on the models you choose, in a format you can take with you.</p>
+        <p class="eyebrow">Deployment &amp; integration postures</p>
+        <h2>Added to your estate, never taken from it.</h2>
+        <p class="lead">Two commitments about where the governed THINK layer sits: what it never takes away from you, and what it attaches to. Both are postures &mdash; how the platform is built, licensed, and designed to behave &mdash; not a connector inventory.</p>
       </div>
-      <ul class="think-consequence-list home-deployment-list">
+
+      <div id="deployment" class="home-posture">
+        <h3>Deployment &mdash; your models, your systems, your control boundary</h3>
+        <p class="home-posture__lead">Poesis adds a governed THINK layer that runs where you decide, on the models you choose, in a format you can take with you.</p>
+        <ul class="think-consequence-list home-deployment-list">
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Model-independent</span></span>
           <strong>Governance does not depend on one provider</strong>
@@ -103,17 +106,12 @@ const itProfiles = profilesForDomain('it');
           <p>The GSM standard is published openly, the SAF framework is Apache-2.0, and the engine is source-available on a scheduled path to open &mdash; a stack asked to carry an organization&rsquo;s definitions must be inspectable by the organizations asked to trust it.</p>
         </li>
       </ul>
-    </div>
-  </section>
-
-  <section id="integration" class="section home-integration">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Integration posture</p>
-        <h2>The definition layer, not a replacement.</h2>
-        <p class="lead">Poesis does not ask you to rip anything out: governed THINK connects to the BUILD and RUN environments you already operate. The sourcing bench targets the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
       </div>
-      <ul class="think-consequence-list home-integration-list">
+
+      <div id="integration" class="home-posture">
+        <h3>Integration &mdash; the definition layer, not a replacement</h3>
+        <p class="home-posture__lead">Poesis does not ask you to rip anything out: governed THINK connects to the BUILD and RUN environments you already operate. The sourcing bench targets the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
+        <ul class="think-consequence-list home-integration-list">
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories<span class="planned-mark" aria-hidden="true"></span></span></span>
           <strong>What is committed becomes definition</strong>
@@ -136,6 +134,7 @@ const itProfiles = profilesForDomain('it');
         </li>
       </ul>
       <p class="home-integration-note"><span class="planned-mark" aria-hidden="true"></span>On roadmap: the sourcing bench is specified and in build, not delivered. Named-tool connectors &mdash; ServiceNow CMDB, Backstage catalogs, EA repositories &mdash; follow as further knowledge sources feeding the same governed model.</p>
+      </div>
     </div>
   </section>
 
