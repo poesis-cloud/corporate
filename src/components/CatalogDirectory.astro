@@ -1,12 +1,16 @@
 ---
 /**
- * The catalog card grid. `meta` states where an entry belongs, `links` states
+ * The catalog directory. A `platform` entry (affordance, capability, feature)
+ * is rendered with the homepage affordance-card pattern; a `usage` entry (use
+ * case, actor, pain, value) with the homepage platform-value pattern. Both
+ * patterns are single sourced in global.css, so an item looks the same
+ * wherever it is shown. `meta` states where an entry belongs, `links` states
  * what it relates to; an entry with no relation says so rather than rendering
  * an empty list.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
 import Icon from './Icon.astro';
-import type { DeliveryState } from '../data/poesis-platform.ts';
+import { plannedClass, type DeliveryState } from '../data/poesis-platform.ts';
 
 export interface DirectoryEntry {
   anchor: string;
@@ -21,36 +25,54 @@ export interface DirectoryEntry {
   empty?: string;
   data?: Record<string, string>;
 }
-interface Props { id: string; eyebrow: string; title: string; entries: DirectoryEntry[] }
-const { id, eyebrow, title, entries } = Astro.props;
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  entries: DirectoryEntry[];
+  /** Which homepage pattern this directory reuses. */
+  variant?: 'platform' | 'usage';
+  /** Step label for entries that carry no eyebrow of their own. */
+  kind?: string;
+  /** Qualifier above the relation list, in the voice of the homepage proof lines. */
+  relation?: string;
+}
+const { id, eyebrow, title, entries, variant = 'usage', kind = eyebrow, relation } = Astro.props;
+const platform = variant === 'platform';
+const list = platform ? 'think-therapy__grid' : 'think-consequence-list';
+const head = platform ? 'think-capability__head' : 'think-consequence__head';
+const mark = platform ? 'think-capability__icon' : 'think-consequence__icon';
+const step = platform ? 'think-capability__step' : 'think-consequence__step';
 ---
 <section id={id} class="section">
   <div class="container">
     <div class="section-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2></div>
-    <ul class="usage-directory">
+    <ul class={`${list} catalog-grid`}>
       {entries.map((entry) => (
-        <li id={entry.anchor} {...entry.data}>
-          {entry.eyebrow && <p class="eyebrow">{entry.eyebrow}</p>}
-          <h3>{entry.icon && <Icon name={entry.icon as 'briefcase'} />}{entry.title}</h3>
-          {entry.status && <DeliveryStatus state={entry.status} />}
-          {entry.hook && <strong>{entry.hook}</strong>}
+        <li id={entry.anchor} class={plannedClass(entry.status)} {...entry.data}>
+          <span class={head}>
+            {entry.icon && <span class={mark}><Icon name={entry.icon as 'briefcase'} size={16} /></span>}
+            <span class={step}>{entry.eyebrow ?? kind}</span>
+            {entry.status && <DeliveryStatus state={entry.status} />}
+          </span>
+          <h3>{entry.title}</h3>
+          {entry.hook && <p class="catalog-hook">{entry.hook}</p>}
           <p>{entry.body}</p>
           {entry.meta?.length ? (
-            <p class="usage-meta">{entry.meta.map((item, index) => <>{index > 0 && ' / '}{item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}</>)}</p>
+            <p class="catalog-meta">{entry.meta.map((item, index) => <>{index > 0 && ' · '}{item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}</>)}</p>
           ) : null}
           {entry.links?.length ? (
-            <ul class="catalog-links">{entry.links.map((link) => <li><a href={link.href}>{link.label} <Icon name="arrow-right" /></a></li>)}</ul>
-          ) : entry.empty ? <p class="usage-meta">{entry.empty}</p> : null}
+            <div class="proof-line">
+              {relation && <span>{relation}</span>}
+              <ul class="catalog-links">{entry.links.map((link) => <li><a href={link.href}>{link.label} <Icon name="arrow-right" /></a></li>)}</ul>
+            </div>
+          ) : entry.empty ? <p class="proof-line"><span>{entry.empty}</span></p> : null}
         </li>
       ))}
     </ul>
   </div>
 </section>
 <style>
-  .usage-directory { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
-  .usage-directory > li { border-top: 1px solid var(--line-strong); padding: 1.5rem 0; min-width: 0; overflow-wrap: anywhere; scroll-margin-top: 7rem; }
-  h3 { font-size: 1.1rem; letter-spacing: 0; line-height: 1.5; display: flex; align-items: baseline; gap: .5rem; }
-  .usage-meta { color: var(--ink-soft); font-size: .85rem; }
-  .catalog-links { list-style: none; padding: 0; margin: .75rem 0 0; display: grid; gap: .35rem; font-size: .9rem; }
-  @media (max-width: 640px) { .usage-directory { grid-template-columns: minmax(0, 1fr); } }
+  .catalog-meta { margin: .1rem 0 0; color: var(--muted); font-size: .75rem; }
+  .catalog-links { font-size: .8rem; }
 </style>

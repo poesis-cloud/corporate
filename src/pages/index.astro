@@ -5,6 +5,7 @@ import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
 import { poesisUsage, useCaseStatus } from '../data/usage.ts';
+import { plannedClass } from '../data/poesis-platform.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { profilesForDomain } from '../data/profiles.ts';
@@ -85,12 +86,13 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       </div>
 
       <h3 class="home-usage-subhead">What they do with it</h3>
-      <ul class="usage-case-list home-usage-cases">
+      <ul class="think-consequence-list catalog-grid usage-case-list home-usage-cases">
         {currentUseCases.map((useCase) => (
-          <li data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')}>
-            <div class="usage-case-head"><h4><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h4><DeliveryStatus state={useCaseStatus(useCase)} /></div>
+          <li class={plannedClass(useCaseStatus(useCase))} data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')}>
+            <span class="think-consequence__head"><span class="think-consequence__step">Use case</span><DeliveryStatus state={useCaseStatus(useCase)} /></span>
+            <h4><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h4>
             <p>{useCase.goal}</p>
-            <p class="usage-meta">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
+            <p class="proof-line"><span>Pursued by</span>{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' · '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
           </li>
         ))}
       </ul>
@@ -270,13 +272,8 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
   .home-usage-chip.is-current { background: var(--ink); border-color: var(--ink); color: var(--bg); }
   .home-usage-hook { margin: 1rem 0 0; font-size: 1.05rem; }
   .home-usage-subhead { margin: 2.5rem 0 0; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .home-usage-cases { padding: 0; margin: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
-  .home-usage-cases > li { min-width: 0; padding: 1.5rem 0; border-top: 1px solid var(--line-strong); overflow-wrap: anywhere; }
+  .home-usage-cases { margin-top: 1.75rem; }
   .home-usage-cases > li[hidden] { display: none; }
-  .home-usage-cases .usage-case-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem; }
-  .home-usage-cases h4 { margin: 0; font-size: 1.15rem; line-height: 1.4; letter-spacing: 0; }
-  .home-usage-cases p { margin: .65rem 0 0; }
-  .home-usage-cases .usage-meta { font-size: .8rem; color: var(--muted); }
   .home-usage-empty { margin: 1.5rem 0 0; color: var(--muted); }
   .home-usage-browse { margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 1.5rem; }
   @media (max-width: 640px) { .home-usage-cases { grid-template-columns: minmax(0, 1fr); } }

@@ -20,5 +20,5 @@ const entries: DirectoryEntry[] = poesisUsage.actorTypes.map((actor) => ({
   lead="Human and system participants named by the use cases. An actor is a role in the work, not a licensed seat or a product persona."
   count={`${entries.length} actor types`}
 >
-  <CatalogDirectory id="actor-types" eyebrow="Actor types" title="Human and system participants" entries={entries} />
+  <CatalogDirectory id="actor-types" eyebrow="Actor types" title="Human and system participants" entries={entries} kind="Actor type" relation="Takes part in" />
 </CatalogLayout>

@@ -25,5 +25,5 @@ const entries: DirectoryEntry[] = usageValues.map((value) => ({
   lead="Benefits sought from the work. A value carries a status only where platform items declare they realize it, so an unclaimed benefit stays visibly unclaimed."
   count={`${entries.length} values`}
 >
-  <CatalogDirectory id="values" eyebrow="Values" title="Benefits sought" entries={entries} />
+  <CatalogDirectory id="values" eyebrow="Values" title="Benefits sought" entries={entries} kind="Value" relation="Realized by" />
 </CatalogLayout>

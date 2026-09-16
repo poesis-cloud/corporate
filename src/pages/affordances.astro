@@ -2,13 +2,15 @@
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
 import { affordanceHref, poesisUsage, usageAffordances } from '../data/usage.ts';
-import { affordanceStatus } from '../data/poesis-platform.ts';
+import { affordanceStatus, typeIcons } from '../data/poesis-platform.ts';
 
+// Same anatomy as the homepage affordance card: the name is the step label and
+// the title is the heading, so an affordance reads identically on both pages.
 const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   anchor: `affordance-${entry.slug}`,
-  eyebrow: 'Platform affordance',
-  title: entry.affordance.name,
-  hook: entry.affordance.title,
+  eyebrow: entry.affordance.name,
+  icon: typeIcons.affordance,
+  title: entry.affordance.title,
   body: entry.affordance.blurb,
   status: affordanceStatus(entry.affordance),
   meta: [{ label: 'Platform overview', href: affordanceHref(entry) }, { label: `${entry.affordance.relations.capabilities.length} supporting capabilities` }],
@@ -23,5 +25,5 @@ const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   lead="What the platform lets people and agents do. Each affordance is delivered only when an accepted route of supporting capabilities is."
   count={`${entries.length} affordances`}
 >
-  <CatalogDirectory id="affordances" eyebrow="Affordances" title="What the platform makes possible" entries={entries} />
+  <CatalogDirectory id="affordances" eyebrow="Affordances" title="What the platform makes possible" entries={entries} variant="platform" relation="Declared use cases" />
 </CatalogLayout>

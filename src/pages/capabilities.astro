@@ -2,11 +2,12 @@
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
 import { capabilityHref, poesisUsage, usageCapabilities } from '../data/usage.ts';
-import { capabilityStatus } from '../data/poesis-platform.ts';
+import { capabilityStatus, typeIcons } from '../data/poesis-platform.ts';
 
 const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
   anchor: `capability-${entry.slug.replace(/\//g, '-')}`,
   eyebrow: entry.solution.fullName,
+  icon: typeIcons.capability,
   title: entry.capability.name,
   body: entry.capability.blurb,
   status: capabilityStatus(entry.solution, entry.capability),
@@ -22,5 +23,5 @@ const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
   lead="What each solution can do, built from product features. A capability carries the status of the features that prove it."
   count={`${entries.length} capabilities`}
 >
-  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} />
+  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} variant="platform" relation="Declared use cases" />
 </CatalogLayout>

@@ -30,9 +30,15 @@
   /* sky-400  */
   --accent-3: #818cf8;
   /* indigo-400 */
-  --planned: #fbbf24;
-  /* amber-400 — anything not shipped yet */
-  --planned-line: rgba(251, 191, 36, .38);
+  --planned: #b59b70;
+  /* muted sand — anything not shipped yet */
+  --planned-line: rgba(181, 155, 112, .32);
+
+  /* Delivery status is an annotation, not an alert: one muted tone per state,
+     close enough in luminance to the body copy to stay inside a sentence. */
+  --status-delivered: #6aab9e;
+  --status-progress: #8399bd;
+  --status-planned: var(--planned);
   --accent-ink: #5eead4;
   /* link teal on dark */
   --accent-soft: rgba(45, 212, 191, .12);
@@ -2601,6 +2607,71 @@ a:hover {
   line-height: 1.55;
 }
 
+/* ---- item cards outside the homepage -----------------------------------
+   Platform items (affordances, capabilities, features) always look like the
+   homepage affordance card; usage items (use cases, actors, pains, values)
+   always look like the homepage platform value. The two patterns are single
+   sourced above, so a directory only adapts the layout, never the look. */
+
+/* A directory entry keeps a real heading for document structure; it must read
+   exactly like the <strong> the homepage uses in the same position. */
+.think-consequence-list :is(h3, h4),
+.think-therapy__grid :is(h3, h4) {
+  margin: 0;
+  color: var(--ink);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.think-consequence-list :is(h3, h4) a,
+.think-therapy__grid :is(h3, h4) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.think-consequence-list :is(h3, h4) a:hover,
+.think-consequence-list :is(h3, h4) a:focus-visible,
+.think-therapy__grid :is(h3, h4) a:hover,
+.think-therapy__grid :is(h3, h4) a:focus-visible {
+  color: var(--accent);
+}
+
+/* A catalog entry carries more relations than a homepage card, so the fixed
+   three-row rhythm is released and the anchor target gets header clearance. */
+.catalog-grid > li {
+  grid-template-rows: none;
+  overflow-wrap: anywhere;
+  scroll-margin-top: 7rem;
+}
+
+.catalog-grid.think-consequence-list {
+  row-gap: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.catalog-grid .catalog-hook {
+  color: var(--ink-soft);
+}
+
+.catalog-grid .proof-line a {
+  overflow-wrap: anywhere;
+}
+
+.catalog-links {
+  display: grid;
+  gap: .3rem;
+  margin: .55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-links a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .35rem;
+}
+
 .home-posture + .home-posture {
   margin-top: clamp(2.4rem, 5vw, 3.4rem);
   padding-top: clamp(2.4rem, 5vw, 3.4rem);
@@ -2855,8 +2926,9 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
-.claim-status--planned, .claim-status--partial { color: var(--planned); }
-.claim-status--delivered { color: var(--accent); }
+.claim-status--planned { color: var(--status-planned); }
+.claim-status--partial { color: var(--status-progress); }
+.claim-status--delivered { color: var(--status-delivered); }
 .claim-anchor { display: block; scroll-margin-top: 84px; }
 .arch-version, .arch-comp-version { white-space: normal; overflow-wrap: anywhere; }
 
