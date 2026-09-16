@@ -5,17 +5,20 @@ import { createHash } from 'node:crypto';
 import { parse } from 'parse5';
 import { services } from '../src/data/services.ts';
 import { siteNavigation, footerNavigation } from '../src/data/site-navigation.ts';
-import { evaluateRequirement, productTimeline, platformSolutions, affordances, validatePortfolio, featureStatus, capabilityShipped, realizations, realizationStatus, realizationRequirements, operationalVerdictStatus, semanticEdges, solutionHref } from '../src/data/poesis-platform.ts';
+import { evaluateRequirement, productTimeline, platformSolutions, affordances, affordanceStatus, validatePortfolio, featureStatus, capabilityShipped, capabilityStatus, realizations, realizationStatus, realizationRequirements, operationalVerdictStatus, semanticEdges, solutionHref } from '../src/data/poesis-platform.ts';
 import { pains, painRelations } from '../src/data/pains.ts';
 import { commitmentStatus, deliveryLabels, productStatus, milestoneStatus } from '../src/data/poesis-platform.ts';
 import { platformValues, solutionValues, productValues, valueAnchor, valueAliases, valueStatus, valueSupports, valueEdges, solutionValueAnchor } from '../src/data/usage.ts';
 
-test('public commitments are implemented or planned, never speculative or partially delivered', () => {
-  assert.deepEqual(deliveryLabels, { planned: 'Planned', partial: 'Planned', delivered: 'Implemented' });
+test('public commitments report implemented, in-progress or planned, never speculative', () => {
+  assert.deepEqual(deliveryLabels, { planned: 'Planned', partial: 'In progress', delivered: 'Implemented' });
   assert.equal(commitmentStatus([]), 'planned');
+  assert.equal(commitmentStatus(['planned', 'planned']), 'planned');
   assert.equal(commitmentStatus(['delivered']), 'delivered');
-  assert.equal(commitmentStatus(['delivered', 'partial']), 'planned');
-  assert.equal(commitmentStatus(['delivered', 'planned']), 'planned');
+  assert.equal(commitmentStatus(['delivered', 'delivered']), 'delivered');
+  assert.equal(commitmentStatus(['partial']), 'partial');
+  assert.equal(commitmentStatus(['delivered', 'partial']), 'partial');
+  assert.equal(commitmentStatus(['delivered', 'planned']), 'partial');
 });
 
 const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
@@ -37,7 +40,7 @@ test('value commitments follow the platform items that reference them, never mil
   }
   for (const solution of platformSolutions) {
     for (const value of solutionValues(solution.slug)) {
-      assert.equal(valueStatus(value.slug), commitmentStatus(solution.capabilities.filter((capability) => capability.values.includes(value.slug)).map((capability) => capability.delivery.state)));
+      assert.equal(valueStatus(value.slug), commitmentStatus(solution.capabilities.filter((capability) => capability.values.includes(value.slug)).map((capability) => capabilityStatus(solution, capability))));
     }
     for (const product of solution.products) {
       for (const value of productValues(solution.slug, product.slug)) {
@@ -54,7 +57,20 @@ test('value commitments follow the platform items that reference them, never mil
     { delivery: { state: 'partial' }, milestone: { version: '2.0', shipped: true } },
   ];
   assert.equal(milestoneStatus({ features: milestoneFeatures }, { version: '1.0' }), 'delivered');
-  assert.equal(milestoneStatus({ features: milestoneFeatures }, { version: '2.0' }), 'planned');
+  assert.equal(milestoneStatus({ features: milestoneFeatures }, { version: '2.0' }), 'partial');
+});
+
+test('a shipped milestone the product already reached cannot be published as planned', () => {
+  // Delivery state is a claim about a milestone the product has reached; it may
+  // never contradict the shipped flag, which is what actually happened.
+  for (const solution of platformSolutions) {
+    for (const product of solution.products) {
+      for (const feature of product.features) {
+        if (!feature.milestone.shipped || product.currentVersion !== feature.milestone.version) continue;
+        assert.equal(feature.delivery.state, 'delivered', `${solution.slug}/${product.slug}/${feature.slug} ships in ${product.currentVersion}`);
+      }
+    }
+  }
 });
 const partnerships = siteNavigation.find((group) => group.label === 'Partnerships').sections.flatMap((section) => section.items);
 const attribute = (node, name) => node.attrs?.find((attr) => attr.name === name)?.value;
@@ -161,7 +177,7 @@ test('shipped flags cannot inflate scope', () => {
   const human = platformSolutions[3].capabilities.find((capability) => capability.slug === 'human-gated-advancement');
   assert.equal(capabilityShipped(platformSolutions[3], human), false);
   const grammar = platformSolutions[2].capabilities.find((capability) => capability.slug === 'governance-grammar-and-lifecycle');
-  assert.equal(capabilityShipped(platformSolutions[2], grammar), true);
+  assert.equal(capabilityStatus(platformSolutions[2], grammar), 'partial');
 });
 
 test('scoped alternatives do not require optional future or hosted routes', () => {
@@ -373,8 +389,9 @@ test('built core routes retain all feature, capability and legacy value anchors'
   for (const value of platformValues) anchor(home, valueAnchor(value));
 });
 
-test('all built values and scoped claims carry accessible binary icons with dependency-specific status', { skip: !process.env.CHECK_BUILT_PORTFOLIO }, () => {
+test('all built values and scoped claims carry accessible status icons with dependency-specific status', { skip: !process.env.CHECK_BUILT_PORTFOLIO }, () => {
   const observed = new Set();
+  const badges = { planned: { modifier: 'is-planned', path: 'M12 6v6l4 2' }, partial: { modifier: 'is-progress', path: 'M12 3v4' }, delivered: { modifier: 'is-implemented', path: 'm9 12 2 2 4-4' } };
   const assertStatus = (node, state) => {
     assert.ok(node, 'status element exists');
     const expected = commitmentStatus([state]);
@@ -383,12 +400,12 @@ test('all built values and scoped claims carry accessible binary icons with depe
     assert.equal(attribute(node, 'title'), label);
     assert.equal(attribute(node, 'aria-label'), label);
     assert.equal(text(node).trim(), label);
-    assert.ok(hasClass(node, expected === 'delivered' ? 'is-implemented' : 'is-planned'));
+    assert.ok(hasClass(node, badges[expected].modifier));
     const icon = elements(node, (item) => item.tagName === 'svg');
     assert.equal(icon.length, 1);
     assert.equal(attribute(icon[0], 'aria-hidden'), 'true');
     assert.equal(attribute(icon[0], 'focusable'), 'false');
-    assert.ok(elements(icon[0], (item) => item.tagName === 'path').some((path) => attribute(path, 'd') === (expected === 'delivered' ? 'm9 12 2 2 4-4' : 'M12 6v6l4 2')));
+    assert.ok(elements(icon[0], (item) => item.tagName === 'path').some((path) => attribute(path, 'd') === badges[expected].path));
     observed.add(expected);
   };
   const firstStatus = (node) => elements(node, (item) => hasClass(item, 'delivery-status'))[0];
@@ -402,7 +419,7 @@ test('all built values and scoped claims carry accessible binary icons with depe
       return;
     }
     assertStatus(firstStatus(item), state);
-    assert.equal(hasClass(item, 'is-planned'), state !== 'delivered', id);
+    assert.equal(hasClass(item, 'is-planned'), commitmentStatus([state]) === 'planned', id);
     if (value) {
       const head = elements(item, (node) => hasClass(node, 'think-consequence__head'))[0];
       assert.ok(text(head).trim().startsWith('Value'), id);
@@ -415,18 +432,18 @@ test('all built values and scoped claims carry accessible binary icons with depe
     const body = elements(document, (node) => node.tagName === 'body')[0];
     assert.doesNotMatch(text(body), /potential (?:value|benefit)|partial scope|available scope|delivered through|contributes-to/i, route);
     for (const node of elements(document, (node) => hasClass(node, 'delivery-status'))) {
-      assert.ok(['planned', 'delivered'].includes(attribute(node, 'data-delivery-status')));
+      assert.ok(['planned', 'partial', 'delivered'].includes(attribute(node, 'data-delivery-status')));
       assertStatus(node, attribute(node, 'data-delivery-status'));
     }
     return document;
   };
   const home = readPage('');
   for (const value of platformValues) assertItem(home, valueAnchor(value), valueStatus(value.slug), true);
-  for (const affordance of affordances) assertItem(home, `affordance-${affordance.slug}`, affordance.delivery.state);
+  for (const affordance of affordances) assertItem(home, `affordance-${affordance.slug}`, affordanceStatus(affordance));
   for (const solution of platformSolutions) {
     const document = readPage(solutionHref(solution));
     for (const value of solutionValues(solution.slug)) assertItem(document, valueAnchor(value), valueStatus(value.slug), true);
-    for (const capability of solution.capabilities) assertItem(document, capability.slug, capability.delivery.state);
+    for (const capability of solution.capabilities) assertItem(document, capability.slug, capabilityStatus(solution, capability));
     for (const product of solution.products) {
       const detail = readPage(`${solutionHref(solution)}/products/${product.slug}`);
       for (const value of productValues(solution.slug, product.slug)) assertItem(detail, valueAnchor(value), valueStatus(value.slug), true);
@@ -439,7 +456,7 @@ test('all built values and scoped claims carry accessible binary icons with depe
     }
   }
   assert.equal(values, 65);
-  assert.deepEqual([...observed].sort(), ['delivered', 'planned']);
+  assert.deepEqual([...observed].sort(), ['delivered', 'partial', 'planned']);
   const partnership = readPage('/partnerships/llm-vendor-value-proposal');
   for (const card of elements(partnership, (node) => hasClass(node, 'value-card'))) assertStatus(firstStatus(card), 'planned');
 });

@@ -4,37 +4,36 @@ import Icon from '../components/Icon.astro';
 import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
-import UsageCases from '../components/UsageCases.astro';
-import { poesisUsage } from '../data/usage.ts';
+import { poesisUsage, useCaseStatus } from '../data/usage.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { profilesForDomain } from '../data/profiles.ts';
 import { services } from '../data/services.ts';
 import { siteNavigation } from '../data/site-navigation.ts';
 
-const itProfiles = profilesForDomain('it');
+/** The homepage shows what the platform already serves; the catalogs hold the full backlog. */
+const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
+const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.some((useCase) => useCase.actorTypes.includes(actor.slug)));
 const partnerships = siteNavigation.find((group) => group.label === 'Partnerships')!.sections.flatMap((section) => section.items);
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero hero--split">
     <div class="container">
-      <p class="eyebrow">Toward the autonomous enterprise</p>
+      <p class="eyebrow">The foundation of the autonomous enterprise</p>
       <h1>The Organizational Intelligence Platform.</h1>
-      <p class="lead">Poesis brings people and AI around shared <em>definitions</em> of the organization: accepted intent, typed relationships and reviewable evidence. Build on available foundations, with reasoning, appraisal and generation workflows on the roadmap.</p>
+      <p class="lead">AI is entering organizations it doesn't understand. Their complexity has always outrun human comprehension and the tools meant to address it. Poesis grounds both in a coherent system that manages <em>definitions</em> of the organization — its DNA — <strong>to efficiently and continuously govern and generate that organization</strong>.</p>
       <div class="hero-promise">
-        <p>Build a governed organizational digital twin, connecting definitions to evidence, human decisions and bounded AI workflows. Start with a defined scope and expand observation coverage and authorized action along the road toward the autonomous enterprise.</p>
+        <p>The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating BUILD and RUN adequately</strong>, and <strong>ultimately for the autonomous enterprise to emerge</strong>.</p>
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Discuss a Pilot</a>
+        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Run a Pilot</a>
       </div>
       <p class="hero-note">Human-governed definitions that people and AI can act on.</p>
       <nav class="hero-sections" aria-label="On this page">
         <a href="#pains"><span>Pain points</span></a>
         <a href="#affordances"><span>Affordances</span></a>
-        <a href="#values"><span>Values</span></a>
-        <a href="#postures"><span>Deployment &amp; integration postures</span></a>
-        <a href="#usage"><span>Use cases</span></a>
-        <a href="#personas"><span>Actor types</span></a>
+        <a href="#usage"><span>Usage</span></a>
+        <a href="#qualities"><span>Platform qualities</span></a>
         <a href="#pilot"><span>Start with one workflow</span></a>
         <a href="#portfolio"><span>The Poesis platform</span></a>
         <a href="#services"><span>Services</span></a>
@@ -60,35 +59,60 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       <div class="section-head">
         <p class="eyebrow">Affordances</p>
         <h2>Poesis Gene Therapy</h2>
-        <p class="lead">Available foundations and planned workflows for shared context, reviewed changes and bounded action. Each affordance states its scope.</p>
+        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
       </div>
       <ThinkTherapyDiagram />
     </div>
   </section>
 
-  <section id="values" class="section section--soft home-values">
+  <section id="usage" class="section section--soft home-usage">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Values</p>
+        <p class="eyebrow">Usage</p>
         <h2>The organization becomes intelligible.</h2>
-        <p class="lead">Put shared definitions to work in decisions, delegated workflows and evidence review. Each value is a company commitment, marked Implemented or Planned for its stated scope.</p>
+        <p class="lead">To the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
       </div>
+
+      <div class="home-usage-filter">
+        <p class="home-usage-filter__label" id="usage-filter-label">Pick who you are</p>
+        <div class="home-usage-chips" role="group" aria-labelledby="usage-filter-label">
+          <button type="button" class="home-usage-chip is-current" data-usage-actor="" aria-pressed="true">Everyone</button>
+          {usageActors.map((actor) => (
+            <button type="button" class="home-usage-chip" data-usage-actor={actor.slug} data-hook={actor.hook} aria-pressed="false">{actor.name}</button>
+          ))}
+        </div>
+        <p class="home-usage-hook" id="usage-actor-hook" hidden></p>
+      </div>
+
+      <h3 class="home-usage-subhead">What they do with it</h3>
+      <ul class="usage-case-list home-usage-cases">
+        {currentUseCases.map((useCase) => (
+          <li data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')}>
+            <div class="usage-case-head"><h4><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h4><DeliveryStatus state={useCaseStatus(useCase)} /></div>
+            <p>{useCase.goal}</p>
+            <p class="usage-meta">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="home-usage-empty" id="usage-empty" hidden>No delivered use case names this actor type yet. <a href="/usage">Browse all use cases &rarr;</a></p>
+
+      <h3 class="home-usage-subhead">What it is worth</h3>
       <PlatformValues />
+
+      <p class="home-usage-browse"><a href="/usage">All use cases &rarr;</a> <a href="/actors">All actor types &rarr;</a> <a href="/values">All values &rarr;</a></p>
     </div>
   </section>
 
-  <div id="usage"><UsageCases cases={poesisUsage.useCases.filter((useCase) => ['read-governance-model', 'reconcile-code-evidence', 'review-scoped-appraisal', 'deliver-reviewed-artifact'].includes(useCase.id))} title="From a concrete need to a reviewed outcome" /></div>
-
-  <section id="postures" class="section home-postures">
+  <section id="qualities" class="section home-postures">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Deployment &amp; integration postures</p>
+        <p class="eyebrow">Platform qualities</p>
         <h2>Added to your estate, never taken from it.</h2>
-        <p class="lead">Two commitments about where the governed THINK layer sits: what it never takes away from you, and what it attaches to. Both are postures &mdash; how the platform is built, licensed, and designed to behave &mdash; not a connector inventory.</p>
+        <p class="lead">Two quality attributes of the governed THINK layer: how portable it stays inside your control boundary, and how it interoperates with what you already run. Both describe how the platform is built, licensed, and designed to behave &mdash; not a connector inventory.</p>
       </div>
 
       <div id="deployment" class="home-posture">
-        <h3>Deployment &mdash; your models, your systems, your control boundary</h3>
+        <h3>Portability &amp; sovereignty &mdash; your models, your systems, your control boundary</h3>
         <p class="home-posture__lead">Local, self-hosted and hosted routes have different acceptance boundaries. Host/model compatibility, migration and hosted availability need separate verification.</p>
         <ul class="think-consequence-list home-deployment-list">
         <li>
@@ -120,7 +144,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       </div>
 
       <div id="integration" class="home-posture">
-        <h3>Integration &mdash; the definition layer, not a replacement</h3>
+        <h3>Interoperability &mdash; the definition layer, not a replacement</h3>
         <p class="home-posture__lead">Poesis does not ask you to rip anything out: governed THINK connects to the BUILD and RUN environments you already operate. The sourcing bench targets the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
         <ul class="think-consequence-list home-integration-list">
         <li>
@@ -149,26 +173,6 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
     </div>
   </section>
 
-  <section id="personas" class="section section--soft home-personas">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Actor types</p>
-        <h2>Human and system actor types, shared definitions.</h2>
-        <p class="lead">Architecture, delivery, operations, security and AI teams ask different questions about shared definitions. These are intended task perspectives, not already available integrated workflows.</p>
-      </div>
-      <ul class="think-consequence-list home-persona-list">
-        {itProfiles.map((profile) => (
-          <li id={profile.slug}>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={profile.icon} size={16} /></span><span class="think-consequence__step">{profile.name}</span></span>
-            <strong>{profile.hook}</strong>
-            <p>{profile.body}</p>
-            <p><a href={`/usage?actor=${profile.slug}#use-cases`}>Related use cases &rarr;</a></p>
-          </li>
-        ))}
-      </ul>
-      <p><a href="/actors">All human and system actor types &rarr;</a></p>
-    </div>
-  </section>
 
   <section id="pilot" class="section section--ink home-pilot">
     <div class="container">
@@ -268,3 +272,49 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-usage-actor]')];
+  const cases = [...document.querySelectorAll<HTMLElement>('.home-usage-cases > [data-usage-case]')];
+  const hook = document.querySelector<HTMLElement>('#usage-actor-hook');
+  const empty = document.querySelector<HTMLElement>('#usage-empty');
+  if (chips.length && cases.length && hook && empty) {
+    const select = (chip: HTMLButtonElement) => {
+      const actor = chip.dataset.usageActor ?? '';
+      let shown = 0;
+      for (const card of cases) {
+        card.hidden = Boolean(actor) && !card.dataset.actors?.split(' ').includes(actor);
+        if (!card.hidden) shown++;
+      }
+      for (const other of chips) {
+        other.classList.toggle('is-current', other === chip);
+        other.setAttribute('aria-pressed', String(other === chip));
+      }
+      hook.textContent = chip.dataset.hook ?? '';
+      hook.hidden = !chip.dataset.hook;
+      empty.hidden = shown > 0;
+    };
+    for (const chip of chips) chip.addEventListener('click', () => select(chip));
+  }
+</script>
+
+<style>
+  .home-usage-filter { margin: 2.5rem 0 1rem; }
+  .home-usage-filter__label { margin: 0 0 .75rem; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .home-usage-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .home-usage-chip { padding: .45rem .9rem; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: .9rem; cursor: pointer; }
+  .home-usage-chip:hover, .home-usage-chip:focus-visible { border-color: var(--accent); }
+  .home-usage-chip.is-current { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .home-usage-hook { margin: 1rem 0 0; font-size: 1.05rem; }
+  .home-usage-subhead { margin: 2.5rem 0 0; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .home-usage-cases { padding: 0; margin: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+  .home-usage-cases > li { min-width: 0; padding: 1.5rem 0; border-top: 1px solid var(--line-strong); overflow-wrap: anywhere; }
+  .home-usage-cases > li[hidden] { display: none; }
+  .home-usage-cases .usage-case-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem; }
+  .home-usage-cases h4 { margin: 0; font-size: 1.15rem; line-height: 1.4; letter-spacing: 0; }
+  .home-usage-cases p { margin: .65rem 0 0; }
+  .home-usage-cases .usage-meta { font-size: .8rem; color: var(--muted); }
+  .home-usage-empty { margin: 1.5rem 0 0; color: var(--muted); }
+  .home-usage-browse { margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  @media (max-width: 640px) { .home-usage-cases { grid-template-columns: minmax(0, 1fr); } }
+</style>

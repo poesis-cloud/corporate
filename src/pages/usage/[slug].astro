@@ -8,6 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DeliveryStatus from '../../components/DeliveryStatus.astro';
 import Icon from '../../components/Icon.astro';
 import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, useCaseStatus, valueHref, valueStatus, valuesForUseCase } from '../../data/usage.ts';
+import { affordanceStatus, capabilityStatus } from '../../data/poesis-platform.ts';
 export function getStaticPaths() { return poesisUsage.useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } })); }
 const { useCase } = Astro.props;
 const features = featuresForUseCase(useCase.slug);
@@ -36,9 +37,9 @@ const state = useCaseStatus(useCase);
         </div>
         <div>
           <h3>Capabilities</h3>
-          <ul class="usage-flat-list">{capabilities.map((entry) => <li data-usage-capability={entry.slug}><a href={capabilityHref(entry)}>{entry.solution.name}: {entry.capability.name}</a> <DeliveryStatus state={entry.capability.delivery.state} /></li>)}</ul>
+          <ul class="usage-flat-list">{capabilities.map((entry) => <li data-usage-capability={entry.slug}><a href={capabilityHref(entry)}>{entry.solution.name}: {entry.capability.name}</a> <DeliveryStatus state={capabilityStatus(entry.solution, entry.capability)} /></li>)}</ul>
           <h3>Affordances</h3>
-          <ul class="usage-flat-list">{affordances.map((entry) => <li data-usage-affordance={entry.slug}><a href={affordanceHref(entry)}>{entry.affordance.name}</a> <DeliveryStatus state={entry.affordance.delivery.state} /></li>)}</ul>
+          <ul class="usage-flat-list">{affordances.map((entry) => <li data-usage-affordance={entry.slug}><a href={affordanceHref(entry)}>{entry.affordance.name}</a> <DeliveryStatus state={affordanceStatus(entry.affordance)} /></li>)}</ul>
         </div>
       </div>}
     </div>

@@ -2,6 +2,7 @@
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
 import { affordanceHref, poesisUsage, usageAffordances } from '../data/usage.ts';
+import { affordanceStatus } from '../data/poesis-platform.ts';
 
 const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   anchor: `affordance-${entry.slug}`,
@@ -9,7 +10,7 @@ const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   title: entry.affordance.name,
   hook: entry.affordance.title,
   body: entry.affordance.blurb,
-  status: entry.affordance.delivery.state,
+  status: affordanceStatus(entry.affordance),
   meta: [{ label: 'Platform overview', href: affordanceHref(entry) }, { label: `${entry.affordance.relations.capabilities.length} supporting capabilities` }],
   links: poesisUsage.useCases.filter((useCase) => entry.affordance.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}` })),
   empty: 'No use case declared.',

@@ -7,7 +7,7 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { platformSolutions, productTimeline, featureStatus, productShipped, capabilityShipped, productStatus, solutionHref, typeIcons } from '../data/poesis-platform.ts';
+import { platformSolutions, productTimeline, featureStatus, capabilityStatus, plannedClass, productStatus, solutionHref, typeIcons } from '../data/poesis-platform.ts';
 import DeliveryStatus from './DeliveryStatus.astro';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 import Icon from './Icon.astro';
@@ -37,7 +37,7 @@ const frameworkHref = solutionHref(framework);
                 <summary>Capabilities</summary>
                 <nav class="arch-comps" aria-label={`${s.name} capabilities`}>
                   {s.capabilities.map((c) => (
-                    <a class:list={['arch-comp', !capabilityShipped(s, c) && 'is-planned']} href={`${solutionHref(s)}#${c.slug}`}>{c.name} <DeliveryStatus state={c.delivery.state} /></a>
+                    <a class:list={['arch-comp', plannedClass(capabilityStatus(s, c))]} href={`${solutionHref(s)}#${c.slug}`}>{c.name} <DeliveryStatus state={capabilityStatus(s, c)} /></a>
                   ))}
                 </nav>
               </details>
@@ -46,7 +46,7 @@ const frameworkHref = solutionHref(framework);
                 <div class="arch-products">
                   {s.products.map((p) => {
                     return (
-                    <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
+                    <section class:list={['arch-product', plannedClass(productStatus(p))]} aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
                       <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${solutionHref(s)}/products/${p.slug}`}>{p.name}</a>
@@ -59,7 +59,7 @@ const frameworkHref = solutionHref(framework);
                           {p.features.map((f) => {
                             const status = featureStatus(f);
                             return (
-                              <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${solutionHref(s)}/products/${p.slug}#${f.slug}`}>
+                              <a class:list={['arch-comp', plannedClass(status.state)]} href={`${solutionHref(s)}/products/${p.slug}#${f.slug}`}>
                                 {f.name}
                                 <span class="arch-comp-version" title={`Historical milestone v${status.version}`}>
                                   <DeliveryStatus state={status.state} />
@@ -93,7 +93,7 @@ const frameworkHref = solutionHref(framework);
               <summary>Capabilities</summary>
               <nav class="arch-comps" aria-label={`${framework.name} capabilities`}>
                 {framework.capabilities.map((c) => (
-                  <a class:list={['arch-comp', !capabilityShipped(framework, c) && 'is-planned']} href={`${frameworkHref}#${c.slug}`}>{c.name} <DeliveryStatus state={c.delivery.state} /></a>
+                  <a class:list={['arch-comp', plannedClass(c.delivery.state)]} href={`${frameworkHref}#${c.slug}`}>{c.name} <DeliveryStatus state={c.delivery.state} /></a>
                 ))}
               </nav>
             </details>
@@ -102,7 +102,7 @@ const frameworkHref = solutionHref(framework);
               <div class="arch-products">
                 {framework.products.map((p) => {
                   return (
-                  <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
+                  <section class:list={['arch-product', plannedClass(productStatus(p))]} aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
                     <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${frameworkHref}/products/${p.slug}`}>{p.name}</a>
@@ -115,7 +115,7 @@ const frameworkHref = solutionHref(framework);
                         {p.features.map((f) => {
                           const status = featureStatus(f);
                           return (
-                            <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${frameworkHref}/products/${p.slug}#${f.slug}`}>
+                            <a class:list={['arch-comp', plannedClass(status.state)]} href={`${frameworkHref}/products/${p.slug}#${f.slug}`}>
                               {f.name}
                               <span class="arch-comp-version" title={`Historical milestone v${status.version}`}>
                                 <DeliveryStatus state={status.state} />

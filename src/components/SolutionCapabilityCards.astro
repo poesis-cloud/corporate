@@ -8,7 +8,7 @@
  */
 import Icon from './Icon.astro';
 import DeliveryStatus from './DeliveryStatus.astro';
-import { capabilityAffordances, capabilityRealizations, featureStatus, relationQualifiers, solutionHref, typeIcons, type Solution } from '../data/poesis-platform.ts';
+import { affordanceStatus, capabilityAffordances, capabilityRealizations, capabilityStatus, plannedClass, relationQualifiers, solutionHref, typeIcons, type Solution } from '../data/poesis-platform.ts';
 
 interface Props {
   solution: Solution;
@@ -21,13 +21,13 @@ const base = solutionHref(solution);
   {solution.capabilities.map((c) => {
     const affordances = capabilityAffordances(solution, c);
     const realizations = capabilityRealizations(solution, c);
-    const planned = c.delivery.state !== 'delivered';
+    const state = capabilityStatus(solution, c);
     return (
-      <li id={c.slug} class={planned ? 'is-planned' : undefined}>
+      <li id={c.slug} class={plannedClass(state)}>
         <span class="think-capability__head">
           <span class="think-capability__icon"><Icon name={typeIcons.capability} size={16} /></span>
           <span class="think-capability__step">Capability</span>
-          <DeliveryStatus state={c.delivery.state} />
+          <DeliveryStatus state={state} />
         </span>
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>
@@ -37,7 +37,7 @@ const base = solutionHref(solution);
             <>
               {i > 0 && ' · '}
               <a
-                class={featureStatus(r.feature).shipped ? undefined : 'is-planned'}
+                class={plannedClass(r.feature.delivery.state)}
                 href={`${base}/products/${r.product.slug}#${r.feature.slug}`}
               >{r.feature.name} <DeliveryStatus state={r.feature.delivery.state} /></a>
             </>
@@ -45,7 +45,7 @@ const base = solutionHref(solution);
         </p>
         <p class="proof-line">
           <span>{relationQualifiers.capabilityAffordance()}</span>
-          {affordances.map((affordance) => <a href={`/#affordance-${affordance.slug}`}>{affordance.name} <DeliveryStatus state={affordance.delivery.state} /></a>)}
+          {affordances.map((affordance) => <a href={`/#affordance-${affordance.slug}`}>{affordance.name} <DeliveryStatus state={affordanceStatus(affordance)} /></a>)}
         </p>
       </li>
     );

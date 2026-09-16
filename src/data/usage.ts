@@ -10,7 +10,7 @@
  * This module is also the only place where platform references are proven to
  * resolve — see `validateUsage`, invoked on import.
  */
-import { platformSolutions, affordances, commitmentStatus, solutionHref, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution } from './poesis-platform.ts';
+import { platformSolutions, affordances, affordanceStatus, capabilityStatus, commitmentStatus, solutionHref, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution } from './poesis-platform.ts';
 import { actorTypes } from './usage-actors.ts';
 import { usagePains, type UsagePain } from './usage-pains.ts';
 import { usageValues, valueAnchor, type Value } from './usage-values.ts';
@@ -120,11 +120,11 @@ export function affordanceHref(entry: UsageAffordance): string { return `/#affor
 export function valueSupports(slug: string): ValueSupport[] {
   return [
     ...usageFeatures.filter((entry) => entry.feature.values.includes(slug)).map((entry) => ({ type: 'feature' as const, slug: entry.slug, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state })),
-    ...usageCapabilities.filter((entry) => entry.capability.values.includes(slug)).map((entry) => ({ type: 'capability' as const, slug: entry.slug, name: entry.capability.name, href: capabilityHref(entry), state: entry.capability.delivery.state })),
-    ...usageAffordances.filter((entry) => entry.affordance.values.includes(slug)).map((entry) => ({ type: 'affordance' as const, slug: entry.slug, name: entry.affordance.name, href: affordanceHref(entry), state: entry.affordance.delivery.state })),
+    ...usageCapabilities.filter((entry) => entry.capability.values.includes(slug)).map((entry) => ({ type: 'capability' as const, slug: entry.slug, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability) })),
+    ...usageAffordances.filter((entry) => entry.affordance.values.includes(slug)).map((entry) => ({ type: 'affordance' as const, slug: entry.slug, name: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance) })),
   ];
 }
-export function valueStatus(slug: string): 'planned' | 'delivered' | undefined {
+export function valueStatus(slug: string): DeliveryState | undefined {
   const supports = valueSupports(slug);
   return supports.length ? commitmentStatus(supports.map((support) => support.state)) : undefined;
 }
@@ -161,11 +161,11 @@ export function painsForUseCase(slug: string): UsagePain[] {
   const references = new Set([...featuresForUseCase(slug).flatMap((entry) => entry.feature.pains), ...capabilitiesForUseCase(slug).flatMap((entry) => entry.capability.pains), ...affordancesForUseCase(slug).flatMap((entry) => entry.affordance.pains)]);
   return usagePains.filter((pain) => references.has(pain.slug) || (pain.occursIn ?? []).includes(slug));
 }
-export function useCaseStatus(useCase: Pick<UseCase, 'slug'>): 'planned' | 'delivered' | undefined {
+export function useCaseStatus(useCase: Pick<UseCase, 'slug'>): DeliveryState | undefined {
   const features = featuresForUseCase(useCase.slug);
   const states = features.length ? features.map((entry) => entry.feature.delivery.state) : [
-    ...capabilitiesForUseCase(useCase.slug).map((entry) => entry.capability.delivery.state),
-    ...affordancesForUseCase(useCase.slug).map((entry) => entry.affordance.delivery.state),
+    ...capabilitiesForUseCase(useCase.slug).map((entry) => capabilityStatus(entry.solution, entry.capability)),
+    ...affordancesForUseCase(useCase.slug).map((entry) => affordanceStatus(entry.affordance)),
   ];
   return states.length ? commitmentStatus(states) : undefined;
 }

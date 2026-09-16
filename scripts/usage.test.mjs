@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { parse } from 'parse5';
-import { poesisPlatform, solutionHref, commitmentStatus } from '../src/data/poesis-platform.ts';
+import { poesisPlatform, solutionHref, commitmentStatus, capabilityStatus, affordanceStatus } from '../src/data/poesis-platform.ts';
 import {
   poesisUsage,
   validateUsage,
@@ -56,8 +56,9 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(poesisUsage.pains.length, 32);
   assert.equal(poesisUsage.actorTypes.length, 26);
   assert.equal(poesisUsage.useCases.length, 68);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 4);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 48);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 10);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 19);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 23);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined).length, 16);
   assert.equal(usageValues.filter((value) => valueStatus(value.slug) === undefined).length, 10);
 });
@@ -176,7 +177,7 @@ test('derivation preserves declared coverage without fabricating support for ind
     );
   }
   assert.equal(valueEdges.length, new Set(valueEdges.map((edge) => edge.id)).size);
-  assert.equal(usageValues.filter((value) => valueStatus(value.slug) === 'delivered').length, 8);
+  assert.equal(usageValues.filter((value) => valueStatus(value.slug) === 'delivered').length, 19);
   for (const value of usageValues) {
     const supports = valueSupports(value.slug);
     assert.equal(valueStatus(value.slug), supports.length ? commitmentStatus(supports.map((support) => support.state)) : undefined);
@@ -187,17 +188,17 @@ test('use case status uses features or explicit higher-level support without ass
   for (const useCase of poesisUsage.useCases) {
     const features = featuresForUseCase(useCase.slug);
     const states = features.length ? features.map((entry) => entry.feature.delivery.state) : [
-      ...capabilitiesForUseCase(useCase.slug).map((entry) => entry.capability.delivery.state),
-      ...affordancesForUseCase(useCase.slug).map((entry) => entry.affordance.delivery.state),
+      ...capabilitiesForUseCase(useCase.slug).map((entry) => capabilityStatus(entry.solution, entry.capability)),
+      ...affordancesForUseCase(useCase.slug).map((entry) => affordanceStatus(entry.affordance)),
     ];
     assert.equal(useCaseStatus(useCase), states.length ? commitmentStatus(states) : undefined);
   }
   assert.equal(useCaseStatus({ slug: 'read-governance-model' }), 'delivered');
-  assert.equal(useCaseStatus({ slug: 'reconcile-code-evidence' }), 'planned');
+  assert.equal(useCaseStatus({ slug: 'reconcile-code-evidence' }), 'partial');
   assert.equal(useCaseStatus({ slug: 'no-such-case' }), undefined);
   assert.deepEqual(featuresForUseCase('qualify-processor-interchange'), []);
-  assert.equal(useCaseStatus({ slug: 'qualify-processor-interchange' }), 'planned');
-  assert.equal(useCaseStatus({ slug: 'agree-domain-typing-contract' }), 'planned');
+  assert.equal(useCaseStatus({ slug: 'qualify-processor-interchange' }), 'partial');
+  assert.equal(useCaseStatus({ slug: 'agree-domain-typing-contract' }), 'partial');
 });
 
 test('mockup and platform tasks reuse scope with only two distinct new features', () => {
@@ -213,10 +214,16 @@ test('mockup and platform tasks reuse scope with only two distinct new features'
     'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions',
     'reconcile-parallel-agent-outputs', 'assess-application-retirement',
   ];
+  // Six of these tasks are already served by shipped milestones the products reached; four are partly served.
+  const served = new Set([
+    'retrieve-decision-basis', 'assess-invalidated-dependencies', 'agree-evidence-preservation',
+    'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions',
+  ]);
+  const partly = new Set(['review-operation-privileges', 'agree-domain-typing-contract', 'qualify-processor-interchange', 'reconcile-parallel-agent-outputs']);
   for (const slug of additions) {
     const useCase = poesisUsage.useCases.find((item) => item.slug === slug);
     assert.ok(useCase, slug);
-    assert.equal(useCaseStatus(useCase), 'planned', slug);
+    assert.equal(useCaseStatus(useCase), served.has(slug) ? 'delivered' : partly.has(slug) ? 'partial' : 'planned', slug);
     assert.ok(capabilitiesForUseCase(slug).length, slug);
     assert.ok(affordancesForUseCase(slug).length, slug);
     assert.ok(painsForUseCase(slug).length, slug);
@@ -332,7 +339,7 @@ const built = (pathname) => {
   return documents.get(path);
 };
 
-test('built usage pages retain identity, binary badges, contextual links and SEO title identity', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+test('built usage pages retain identity, derived badges, contextual links and SEO title identity', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const index = built('/usage');
   const sitemap = readFileSync(new URL('../dist/sitemap-0.xml', import.meta.url), 'utf8');
   assert.equal(elements(index, (node) => attr(node, 'data-usage-case')).length, poesisUsage.useCases.length);
@@ -390,19 +397,25 @@ test('built usage pages retain identity, binary badges, contextual links and SEO
   }
   for (const [page, items, anchor, state] of [
     ['/features', usageFeatures, (entry) => `feature-${entry.slug.replace(/\//g, '-')}`, (entry) => entry.feature.delivery.state],
-    ['/capabilities', usageCapabilities, (entry) => `capability-${entry.slug.replace(/\//g, '-')}`, (entry) => entry.capability.delivery.state],
-    ['/affordances', usageAffordances, (entry) => `affordance-${entry.slug}`, (entry) => entry.affordance.delivery.state],
+    ['/capabilities', usageCapabilities, (entry) => `capability-${entry.slug.replace(/\//g, '-')}`, (entry) => capabilityStatus(entry.solution, entry.capability)],
+    ['/affordances', usageAffordances, (entry) => `affordance-${entry.slug}`, (entry) => affordanceStatus(entry.affordance)],
   ]) {
     const document = built(page);
     for (const entry of items) {
       const item = elements(document, (node) => attr(node, 'id') === anchor(entry));
       assert.equal(item.length, 1, `${page}: ${entry.slug}`);
-      // The published badge is the binary commitment, so a partial state must never surface as delivered.
+      // The published badge is derived from what proves the item, so it can never claim more than its parts.
       assert.equal(attr(elements(item[0], (node) => attr(node, 'data-delivery-status'))[0], 'data-delivery-status'), commitmentStatus([state(entry)]), `${page}: ${entry.slug}`);
     }
   }
   const homepage = built('/');
-  for (const entity of [...profiles, ...pains]) assert.ok(elements(homepage, (node) => attr(node, 'id') === entity.slug).length, `legacy ${entity.slug}`);
+  for (const pain of pains) assert.ok(elements(homepage, (node) => attr(node, 'id') === pain.slug).length, `legacy ${pain.slug}`);
+  const actorsPage = built('/actors');
+  for (const profile of profiles) assert.ok(elements(actorsPage, (node) => attr(node, 'id') === profile.slug).length, `actor ${profile.slug}`);
+  // The homepage keeps actor types as the usage filter rather than a separate section.
+  const chips = elements(homepage, (node) => attr(node, 'data-usage-actor'));
+  assert.ok(chips.length > 1);
+  for (const chip of chips) assert.ok(attr(chip, 'data-usage-actor') === '' || profiles.some((profile) => profile.slug === attr(chip, 'data-usage-actor')));
   for (const solution of poesisPlatform.solutions) {
     assert.ok(elements(built(solutionHref(solution)), (node) => attr(node, 'data-usage-case')).length);
     for (const product of solution.products) {

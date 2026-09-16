@@ -12,7 +12,7 @@ import DeliveryStatus from '../../../../components/DeliveryStatus.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
 import UsageCases from '../../../../components/UsageCases.astro';
 import { useCasesForProduct, useCasesForFeature, productValues, valueAnchor, valueAliases, valueStatus, valueSupports } from '../../../../data/usage.ts';
-import { platformSolutions, productTimeline, featureStatus, productStatus, relationQualifiers, solutionHref, typeIcons } from '../../../../data/poesis-platform.ts';
+import { platformSolutions, productTimeline, featureStatus, plannedClass, productStatus, relationQualifiers, solutionHref, typeIcons } from '../../../../data/poesis-platform.ts';
 
 export function getStaticPaths() {
   return platformSolutions.flatMap((solution) =>
@@ -65,7 +65,7 @@ const state = productStatus(product);
         {productValues(solution.slug, product.slug).map((v) => {
           const supports = valueSupports(v.slug);
           return (
-          <li id={valueAnchor(v)} class={valueStatus(v.slug) !== 'delivered' ? 'is-planned' : undefined}>
+          <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
             {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
             <span class="think-consequence__head">
               <span class="think-consequence__step">Value</span>
@@ -82,7 +82,7 @@ const state = productStatus(product);
                   return (
                     <>
                       {i > 0 && ' · '}
-                      <a class={featureStatus(f).shipped ? undefined : 'is-planned'} href={`#${slug}`}>{f.name} <DeliveryStatus state={f.delivery.state} /></a>
+                      <a class={plannedClass(f.delivery.state)} href={`#${slug}`}>{f.name} <DeliveryStatus state={f.delivery.state} /></a>
                     </>
                   );
                 })}
@@ -110,7 +110,7 @@ const state = productStatus(product);
         {product.features.map((f) => {
           const status = featureStatus(f);
           return (
-            <li id={f.slug} class={status.shipped ? undefined : 'is-planned'}>
+            <li id={f.slug} class={plannedClass(f.delivery.state)}>
               <span class="think-capability__head">
                 <span class="think-capability__icon"><Icon name={typeIcons.feature} size={16} /></span>
                 <span class="think-capability__step">

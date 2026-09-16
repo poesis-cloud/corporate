@@ -8,7 +8,7 @@
 import Icon from './Icon.astro';
 import DeliveryStatus from './DeliveryStatus.astro';
 import type { Solution } from '../data/poesis-platform.ts';
-import { featureStatus, productStatus, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
+import { featureStatus, plannedClass, productStatus, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
 
 interface Props {
   solution: Solution;
@@ -21,9 +21,8 @@ const base = solutionHref(solution);
   {solution.products.map((p) => {
     const statuses = p.features.map(featureStatus);
     const state = productStatus(p);
-    const planned = state !== 'delivered';
     return (
-      <li class={planned ? 'is-planned' : undefined}>
+      <li class={plannedClass(state)}>
         <span class="think-capability__head">
           <span class="think-capability__icon"><Icon name={typeIcons.product} size={16} /></span>
           <span class="think-capability__step">Product · recorded v{p.currentVersion}</span>
@@ -35,7 +34,7 @@ const base = solutionHref(solution);
           <span>{relationQualifiers.productFeatures()}</span>
           <ul class="portfolio-product-features">
             {p.features.map((f, i) => (
-              <li class={statuses[i].shipped ? undefined : 'is-planned'}>
+              <li class={plannedClass(statuses[i].state)}>
                 <span class="think-consequence__step">
                   Feature · milestone v{statuses[i].version}
                 </span>

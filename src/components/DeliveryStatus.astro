@@ -8,14 +8,17 @@ interface Props {
 
 const state = commitmentStatus([Astro.props.state]);
 const label = deliveryLabels[state];
+const variants = { planned: { modifier: 'planned', icon: 'clock' }, partial: { modifier: 'progress', icon: 'spark' }, delivered: { modifier: 'implemented', icon: 'check-badge' } };
+const { modifier, icon } = variants[state];
 ---
-{Astro.props.state !== undefined && <span class={`delivery-status is-${state === 'delivered' ? 'implemented' : 'planned'}`} data-delivery-status={state} title={label} aria-label={label}>
-  <Icon name={state === 'delivered' ? 'check-badge' : 'clock'} size={14} />
+{Astro.props.state !== undefined && <span class={`delivery-status is-${modifier}`} data-delivery-status={state} title={label} aria-label={label}>
+  <Icon name={icon} size={14} />
   <span>{label}</span>
 </span>}
 
 <style>
   .delivery-status { display: inline-flex; flex: none; align-items: center; gap: 0.3em; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 0; text-transform: none; line-height: 1.4; white-space: nowrap; vertical-align: middle; }
   .is-implemented { color: var(--accent, #0f766e); }
+  .is-progress { color: var(--progress, #1d4ed8); }
   .is-planned { color: var(--planned, #a16207); }
 </style>

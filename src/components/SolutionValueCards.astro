@@ -7,7 +7,7 @@
  * capability anchor further down the same page.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
-import { relationQualifiers, type Solution } from '../data/poesis-platform.ts';
+import { plannedClass, relationQualifiers, type Solution } from '../data/poesis-platform.ts';
 import { solutionValues, valueAliases, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
 
 interface Props {
@@ -18,7 +18,7 @@ const { solution } = Astro.props;
 ---
 <ul class="think-consequence-list portfolio-values">
   {solutionValues(solution.slug).map((v) => (
-    <li id={valueAnchor(v)} class={valueStatus(v.slug) !== 'delivered' ? 'is-planned' : undefined}>
+    <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
       {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
       <span class="think-consequence__head">
         <span class="think-consequence__step">Value</span>
@@ -31,7 +31,7 @@ const { solution } = Astro.props;
         {valueSupports(v.slug).map((support, i) => (
           <>
             {i > 0 && ' · '}
-            <a class={support.state === 'delivered' ? undefined : 'is-planned'} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} /></a>
+            <a class={plannedClass(support.state)} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} /></a>
           </>
         ))}
       </p>

@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import DeliveryStatus from './DeliveryStatus.astro';
-import { affordanceRealizations, affordances, capabilityRelationKind, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
+import { affordanceRealizations, affordanceStatus, affordances, capabilityRelationKind, capabilityStatus, plannedClass, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
 ---
 <div class="think-story" aria-label="The Poesis Gene Therapy">
   <div class="think-story__phases">
@@ -37,19 +37,19 @@ import { affordanceRealizations, affordances, capabilityRelationKind, relationQu
           <span class="think-phase__details-label">Affordances</span>
           <ul class="think-therapy__grid">
             {affordances.map((a) => (
-              <li id={`affordance-${a.slug}`} class={a.delivery.state !== 'delivered' ? 'is-planned' : undefined}>
-                <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.affordance} size={16} /></span><span class="think-capability__step">{a.name}</span><DeliveryStatus state={a.delivery.state} /></span>
+              <li id={`affordance-${a.slug}`} class={plannedClass(affordanceStatus(a))}>
+                <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.affordance} size={16} /></span><span class="think-capability__step">{a.name}</span><DeliveryStatus state={affordanceStatus(a)} /></span>
                 <strong>{a.title}</strong>
                 <p>{a.blurb}</p>
                 <p class="proof-line">
                   <span>{relationQualifiers.affordanceCapabilities(a.relations.capabilities.length)}</span>
                   {affordanceRealizations(a).map((r, i) => {
-                    const state = r.capability.delivery.state;
+                    const state = capabilityStatus(r.solution, r.capability);
                     return (
                       <>
                         {i > 0 && ' · '}
                         <a
-                          class={state !== 'delivered' ? 'is-planned' : undefined}
+                          class={plannedClass(state)}
                           title={r.capability.delivery.scope}
                           href={`${solutionHref(r.solution)}#${r.capability.slug}`}
                         >{r.capability.name} ({capabilityRelationKind(r.solution, r.capability).replaceAll('-', ' ')}) <DeliveryStatus state={state} /></a>

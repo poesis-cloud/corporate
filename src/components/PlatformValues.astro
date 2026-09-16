@@ -5,12 +5,12 @@
  * line are derived from the affordances that reference each value.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
-import { relationQualifiers } from '../data/poesis-platform.ts';
+import { plannedClass, relationQualifiers } from '../data/poesis-platform.ts';
 import { platformValues, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
 ---
 <ul class="think-consequence-list">
   {platformValues.map((v) => (
-    <li id={valueAnchor(v)} class={valueStatus(v.slug) !== 'delivered' ? 'is-planned' : undefined}>
+    <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
       <span class="think-consequence__head"><span class="think-consequence__step">Value · {v.originalTitle}</span><DeliveryStatus state={valueStatus(v.slug)} /></span>
       <strong>{v.title}</strong>
       <p>{v.body}</p>
