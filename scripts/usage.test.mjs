@@ -42,6 +42,75 @@ import {
 import { profiles } from '../src/data/profiles.ts';
 import { pains } from '../src/data/pains.ts';
 import { catalogViews, siteNavigation } from '../src/data/site-navigation.ts';
+import { projectPilotCatalog } from '../src/data/pilot-catalog.ts';
+import { emailHandoff, filterCases, normalizeSelection, safePilotJson, selectionFromQuery, selectionQuery, serializeBrief } from '../src/data/pilot.ts';
+
+test('pilot projection preserves canonical needs, relationships and delivery states', () => {
+  const catalog = projectPilotCatalog();
+  assert.equal(catalog.values.length, usageValues.length);
+  assert.equal(catalog.pains.length, poesisUsage.pains.length);
+  for (const pain of catalog.pains) assert.equal(pain.href, `/pains#${pain.slug}`);
+  for (const useCase of catalog.cases) {
+    assert.deepEqual(useCase.values, valuesForUseCase(useCase.slug).map((value) => value.slug));
+    assert.deepEqual(useCase.pains, painsForUseCase(useCase.slug).map((pain) => pain.slug));
+    assert.equal(useCase.state, useCaseStatus(useCase) ?? null);
+    assert.ok(useCase.supports.every((key) => catalog.supports.some((support) => support.key === key)));
+  }
+  for (const value of catalog.values) {
+    assert.deepEqual(value.supports.map((key) => catalog.supports.find((support) => support.key === key).state), valueSupports(value.slug).map((support) => support.state));
+  }
+});
+
+test('pilot query accepts only deduplicated canonical selections, not personal details', () => {
+  const catalog = projectPilotCatalog();
+  const slug = catalog.values[0].slug;
+  const selection = selectionFromQuery(new URLSearchParams(`value=${encodeURIComponent(slug)}&value=${encodeURIComponent(slug)}&case=unknown&scope=private`), catalog);
+  assert.deepEqual(selection, { values: [slug], pains: [], cases: [] });
+  assert.equal(selectionQuery(selection, catalog), `value=${encodeURIComponent(slug)}`);
+  assert.equal(selectionQuery({ values: ['unknown'], pains: [], cases: [] }, catalog), '');
+});
+
+test('pilot suggestions use any explicit need relation, never shared actors', () => {
+  const catalog = projectPilotCatalog();
+  const selection = { values: [catalog.values[0].slug], pains: [catalog.pains[0].slug], cases: [] };
+  const expected = catalog.cases.filter((record) => record.values.includes(selection.values[0]) || record.pains.includes(selection.pains[0]));
+  assert.deepEqual(filterCases(catalog, selection), expected);
+  const unlinked = catalog.values.find((value) => !catalog.cases.some((record) => record.values.includes(value.slug)));
+  assert.ok(unlinked);
+  assert.deepEqual(filterCases(catalog, { values: [unlinked.slug], pains: [], cases: [] }, '', catalog.actors[0].slug), []);
+  assert.deepEqual(filterCases(catalog, selection, 'nonexistent exact phrase'), []);
+  const withActor = expected.find((record) => record.actors.length);
+  assert.ok(withActor);
+  assert.deepEqual(filterCases(catalog, selection, '', withActor.actors[0]), expected.filter((record) => record.actors.includes(withActor.actors[0])));
+  assert.ok(filterCases(catalog, selection, withActor.description).some((record) => record.slug === withActor.slug));
+  assert.deepEqual(selection.cases, []);
+});
+
+test('pilot exports support value-only, pain-only, partial and unsupported scope honestly', () => {
+  const catalog = projectPilotCatalog();
+  const empty = normalizeSelection({}, catalog);
+  assert.match(serializeBrief(catalog, empty), /^No registered/);
+  const unlinked = catalog.values.find((value) => !catalog.cases.some((record) => record.values.includes(value.slug)));
+  const brief = serializeBrief(catalog, { ...empty, values: [unlinked.slug] }, { criteria: '<script>alert("literal")</script>', timing: 'My own window' });
+  assert.match(brief, /Gap: no linked use case/);
+  assert.match(brief, /ITIP \+ SIE SaaS/);
+  assert.match(brief, /<script>alert\("literal"\)<\/script>/);
+  assert.match(brief, /My own window/);
+  assert.match(brief, /commercial terms/);
+  assert.match(serializeBrief(catalog, { ...empty, pains: [catalog.pains[0].slug] }), /value\/pain-led brief remains valid/);
+  const cases = catalog.cases.filter((record) => record.state === 'partial' || record.state === null);
+  const withCases = serializeBrief(catalog, { ...empty, cases: cases.map((record) => record.slug) });
+  assert.match(withCases, /Registered support: In progress/);
+  assert.match(withCases, /No registered support \(not a planned-delivery claim\)/);
+  const lines = withCases.split('\n').filter((line) => line.startsWith('- ') && line.includes(' | '));
+  assert.equal(new Set(lines).size, lines.length);
+  const longEmail = emailHandoff(brief.repeat(10));
+  assert.equal(longEmail.shortened, true);
+  assert.ok(longEmail.href.length < 1800);
+  assert.equal(emailHandoff('A short brief').shortened, false);
+  assert.match(longEmail.href, /^mailto:clement.cazaud@outlook.com/);
+  assert.doesNotMatch(safePilotJson({ ...catalog, actors: [{ slug: 'safe', name: '</script>&\u2028' }] }), /<|>|&|\u2028/);
+});
 
 test('usage is separate from platform and covers its stable identity ledger', () => {
   assert.deepEqual(Object.keys(poesisUsage).sort(), ['actorTypes', 'pains', 'useCases']);
@@ -338,6 +407,55 @@ const built = (pathname) => {
   if (!documents.has(path)) documents.set(path, parse(readFileSync(new URL(`../dist${path}/index.html`, import.meta.url), 'utf8')));
   return documents.get(path);
 };
+
+test('built pilot keeps needs first, canonical links, safe projection and useful fallback', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  const document = built('/pilot');
+  const catalog = projectPilotCatalog();
+  const byId = (id) => elements(document, (node) => attr(node, 'id') === id)[0];
+  assert.ok(byId('pilot-builder'));
+  assert.equal(attr(byId('pilot-builder'), 'hidden'), '');
+  assert.ok(elements(byId('pilot-fallback'), (node) => attr(node, 'href') === '/contact').length);
+  assert.equal(elements(document, (node) => node.tagName === 'h1').length, 1);
+  const headings = elements(document, (node) => node.tagName === 'h2').map(text);
+  assert.ok(headings.indexOf('Values & pain points') < headings.indexOf('Contextual use cases'));
+  assert.deepEqual(JSON.parse(text(byId('pilot-data'))), catalog);
+  assert.doesNotMatch(text(byId('pilot-data')), /<|>/);
+  for (const kind of ['values', 'pains', 'cases']) {
+    const controls = elements(document, (node) => attr(node, 'data-select-kind') === kind);
+    assert.deepEqual(controls.map((node) => attr(node, 'value')), catalog[kind].map((record) => record.slug));
+    for (const control of controls) assert.equal(attr(control, 'type'), 'checkbox');
+  }
+  for (const id of ['pilot-copy', 'pilot-download', 'pilot-email']) assert.equal(attr(byId(id), 'disabled'), '');
+  assert.equal(attr(byId('pilot-brief-text'), 'readonly'), '');
+  assert.equal(attr(byId('pilot-email'), 'data-demo-cta'), 'pilot-email');
+  for (const useCase of catalog.cases) {
+    const card = elements(document, (node) => attr(node, 'data-pilot-case') === useCase.slug)[0];
+    assert.ok(text(card).includes(useCase.name));
+    assert.ok(text(card).includes(useCase.description));
+    assert.equal(attr(elements(card, (node) => attr(node, 'data-pilot-state'))[0], 'data-pilot-state'), useCase.state ?? 'unregistered');
+    for (const key of useCase.supports) {
+      const support = catalog.supports.find((record) => record.key === key);
+      assert.ok(text(card).includes(support.owner));
+      assert.ok(elements(card, (node) => attr(node, 'href') === support.href).length);
+    }
+  }
+  for (const record of [...catalog.values, ...catalog.pains, ...catalog.cases, ...catalog.supports]) {
+    const target = new URL(record.href, 'https://poesis.cloud');
+    const destination = built(target.pathname);
+    if (target.hash) assert.ok(elements(destination, (node) => attr(node, 'id') === decodeURIComponent(target.hash.slice(1))).length, record.href);
+  }
+  const homepage = built('/');
+  for (const identity of ['homepage-hero-pilot', 'homepage-pilot']) {
+    const cta = elements(homepage, (node) => attr(node, 'data-demo-cta') === identity);
+    assert.equal(cta.length, 1);
+    assert.equal(attr(cta[0], 'href'), '/pilot');
+  }
+  const section = elements(homepage, (node) => attr(node, 'id') === 'pilot')[0];
+  assert.match(text(section), /ITIP \+ SIE SaaS/);
+  assert.match(text(section), /success criteria, evidence, timing and constraints/);
+  assert.equal(elements(section, (node) => attr(node, 'data-select-kind')).length, 0);
+  assert.ok(readFileSync(new URL('../dist/sitemap-0.xml', import.meta.url), 'utf8').includes('/pilot/</loc>'));
+});
 
 test('built usage pages retain identity, derived badges, contextual links and SEO title identity', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const index = built('/usage');

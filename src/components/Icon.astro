@@ -13,6 +13,8 @@ export interface Props {
     | 'check-badge'
     | 'clock'
     | 'compass'
+    | 'copy'
+    | 'download'
     | 'docs'
     | 'external'
     | 'github'
@@ -42,6 +44,8 @@ type IconDef =
   | { kind: 'fill'; paths: string[]; fillRule?: 'evenodd' | 'nonzero' };
 
 const icons: Record<string, IconDef> = {
+  copy: { kind: 'stroke', paths: ['M9 9h11v11H9z', 'M5 15H3V3h12v2'] },
+  download: { kind: 'stroke', paths: ['M12 3v12', 'm7 10 5 5 5-5', 'M4 16v5h16v-5'] },
   // —— Brand (filled) ————————————————————————————————————————————————
   azure: {
     kind: 'fill',

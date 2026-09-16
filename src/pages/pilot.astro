@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import DeliveryStatus from '../components/DeliveryStatus.astro';
+import { projectPilotCatalog } from '../data/pilot-catalog.ts';
+import { safePilotJson, tailoringFields } from '../data/pilot.ts';
+const catalog = projectPilotCatalog();
+---
+<BaseLayout title="Your Poesis pilot" description="Frame an ITIP + SIE SaaS evaluation around your desired values, pain points and evidence. Scope and operating readiness remain to agree." pageType="Pilot">
+  <section class="pilot-intro container">
+    <p class="eyebrow">Poesis pilot / ITIP + SIE SaaS</p>
+    <h1>Start with what matters.</h1>
+    <p class="lead">The value you seek. The pain you want to address. A pilot shaped around your scope, your evidence and your definition of success.</p>
+    <p class="pilot-caveat">A guided evaluation on ITIP + SIE SaaS. Together, we agree the scope, access and terms before kickoff.</p>
+    <div id="pilot-fallback">
+      <p>Discuss your desired outcomes, current difficulties, evidence, timing and constraints with Poesis. A workflow shortlist is optional.</p>
+      <div class="hero-cta"><a href="/contact" class="btn btn-primary"><Icon name="mail" /> Discuss a pilot</a><a href="/values" class="btn btn-ghost">Browse values</a><a href="/pains" class="btn btn-ghost">Browse pain points</a></div>
+    </div>
+  </section>
+  <div id="pilot-builder" class="container" hidden>
+    <div class="pilot-topline"><span id="pilot-count" role="status" aria-live="polite">No scope selected</span><a href="#pilot-brief">Review brief <Icon name="arrow-right" size={16} /></a></div>
+    <div class="pilot-workspace">
+      <div class="pilot-editor">
+        <section aria-labelledby="pilot-needs-title" class="pilot-section">
+          <div class="pilot-section-heading"><span class="pilot-step">01</span><div><p class="eyebrow">Purpose</p><h2 id="pilot-needs-title">Values &amp; pain points</h2></div></div>
+          <div class="pilot-needs">
+            {(['values', 'pains'] as const).map((kind) => <fieldset class="pilot-picker">
+              <legend>{kind === 'values' ? 'Desired values' : 'Pain points'}</legend>
+              <label class="pilot-search"><Icon name="search" size={16} /><span class="sr-only">Search {kind === 'values' ? 'values' : 'pain points'}</span><input id={`pilot-${kind}-search`} type="search" placeholder={kind === 'values' ? 'Search values' : 'Search pain points'} autocomplete="off" /></label>
+              <p class="pilot-result" id={`pilot-${kind}-count`} role="status"></p>
+              <div class="pilot-options" tabindex="0" aria-label={kind === 'values' ? 'Available values' : 'Available pain points'}>
+                {catalog[kind].map((need) => <div class="pilot-need" data-need-kind={kind} data-need-slug={need.slug}>
+                  <label><input type="checkbox" data-select-kind={kind} value={need.slug} /><span>{need.name}</span></label>
+                  <p>{need.description}</p>
+                  <a href={need.href}>Catalog entry <Icon name="arrow-right" size={14} /></a>
+                </div>)}
+              </div>
+              <button type="button" class="pilot-text-button" data-clear-search={kind}>Clear search</button>
+            </fieldset>)}
+          </div>
+          <div id="pilot-summary" class="pilot-selected" aria-labelledby="pilot-summary-title">
+            <div class="pilot-summary-heading"><h3 id="pilot-summary-title">Selected scope</h3><button id="pilot-clear-selection" type="button" class="pilot-text-button" disabled>Clear selections</button></div>
+            <p id="pilot-selection-empty">No values, pain points or use cases selected yet.</p>
+            <ul id="pilot-selected-list"></ul>
+            <p id="pilot-gaps" class="pilot-gap" role="status"></p>
+          </div>
+        </section>
+        <section aria-labelledby="pilot-cases-title" class="pilot-section">
+          <div class="pilot-section-heading"><span class="pilot-step">02</span><div><p class="eyebrow">Optional scope</p><h2 id="pilot-cases-title">Contextual use cases</h2></div></div>
+          <div class="pilot-case-filters">
+            <label>Search use cases<input id="pilot-case-search" type="search" autocomplete="off" placeholder="Name or goal" /></label>
+            <label>Actor<select id="pilot-actor"><option value="">All actors</option>{catalog.actors.map((actor) => <option value={actor.slug}>{actor.name}</option>)}</select></label>
+            <button type="button" id="pilot-reset-case-filters" class="pilot-text-button">Clear filters</button>
+          </div>
+          <p id="pilot-case-count" class="pilot-result" role="status"></p>
+          <div class="pilot-case-options" tabindex="0" aria-label="Available use cases">
+            {catalog.cases.map((useCase) => <article class="pilot-case" data-pilot-case={useCase.slug}>
+              <label><input type="checkbox" data-select-kind="cases" value={useCase.slug} /><strong>{useCase.name}</strong></label>
+              <p>{useCase.description}</p>
+              <p class="pilot-match" data-match-reason></p>
+              <div class="pilot-case-meta"><span class="pilot-state" data-pilot-state={useCase.state ?? 'unregistered'}>{useCase.state ? <DeliveryStatus state={useCase.state} /> : 'No registered support'}</span><a href={useCase.href}>Use case <Icon name="arrow-right" size={14} /></a></div>
+              {useCase.supports.length > 0 ? <details><summary>Supporting scope to confirm ({useCase.supports.length})</summary><ul>{useCase.supports.map((key) => {
+                const support = catalog.supports.find((entry) => entry.key === key)!;
+                return <li><a href={support.href}>{support.name}</a><span>{support.owner} / <DeliveryStatus state={support.state} /></span></li>;
+              })}</ul></details> : <p class="pilot-gap">No platform item declares support. This is a gap, not a planned-delivery claim.</p>}
+            </article>)}
+          </div>
+          <p class="pilot-caveat">Supporting items can include other solutions. Catalog status does not confirm their availability within an ITIP + SIE SaaS pilot.</p>
+        </section>
+        <section aria-labelledby="pilot-tailoring-title" class="pilot-section">
+          <div class="pilot-section-heading"><span class="pilot-step">03</span><div><p class="eyebrow">Your evaluation</p><h2 id="pilot-tailoring-title">Define a worthwhile result.</h2></div></div>
+          <p class="pilot-caveat">All details are optional and remain in this page's memory until you leave or reload. Nothing is submitted automatically.</p>
+          <div class="pilot-tailoring">{tailoringFields.map((field) => <label for={`pilot-${field.key}`}>{field.label}<textarea id={`pilot-${field.key}`} data-detail={field.key} rows="3" maxlength="4000" autocomplete="off" placeholder={field.placeholder}></textarea></label>)}</div>
+        </section>
+      </div>
+      <aside class="pilot-brief-column" aria-labelledby="pilot-brief-title">
+        <div id="pilot-brief" class="pilot-brief">
+          <p class="eyebrow">Discussion draft</p><h2 id="pilot-brief-title">Your pilot brief</h2>
+          <p class="pilot-caveat">Not a booking, a provisioned environment or an agreed offer.</p>
+          <label for="pilot-brief-text" class="sr-only">Live pilot discussion brief</label>
+          <textarea id="pilot-brief-text" readonly rows="17" spellcheck="false"></textarea>
+          <div class="pilot-actions"><button type="button" id="pilot-copy" class="btn btn-primary" disabled><Icon name="copy" /> Copy brief</button><button type="button" id="pilot-download" class="btn btn-ghost" disabled><Icon name="download" /> Download .md</button><button type="button" id="pilot-email" class="btn btn-ghost" data-demo-cta="pilot-email" disabled><Icon name="mail" /> Prepare email</button></div>
+          <p id="pilot-action-status" role="status" aria-live="polite">Select a value, pain point or use case to prepare a brief.</p>
+          <p class="pilot-caveat">Still to agree: scope feasibility, hosting, data handling, responsibilities, evidence, timing, commercial terms and exit arrangements.</p>
+          <a href="/contact">Contact Poesis <Icon name="arrow-right" size={16} /></a>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script id="pilot-data" type="application/json" set:html={safePilotJson(catalog)} />
+</BaseLayout>
+<script>
+  import '../scripts/pilot';
+</script>
+<style>
+  .pilot-intro { padding-top: 3rem; padding-bottom: 1.5rem; }
+  .pilot-intro h1 { font-size: 2.75rem; max-width: 24ch; letter-spacing: 0; margin: .65rem 0 1rem; }
+  .pilot-intro .lead { max-width: 65ch; }
+  .pilot-caveat { color: var(--ink-soft); font-size: .88rem; line-height: 1.6; }
+  #pilot-builder { padding-bottom: 4rem; }
+  #pilot-builder[hidden], [hidden] { display: none !important; }
+  .pilot-topline { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; border-block: 1px solid var(--line-strong); padding: .8rem 0; font-size: .88rem; }
+  .pilot-topline a, .pilot-need a, .pilot-case-meta a { display: inline-flex; gap: .35rem; align-items: center; }
+  .pilot-workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(19rem, .55fr); gap: 2rem; }
+  .pilot-editor, .pilot-brief-column, .pilot-picker { min-width: 0; }
+  .pilot-section { padding-block: 2rem; border-bottom: 1px solid var(--line); }
+  .pilot-section-heading { display: flex; gap: .9rem; align-items: center; margin-bottom: 1.3rem; }
+  .pilot-section-heading .eyebrow { margin: 0 0 .4rem; font-size: .7rem; }
+  .pilot-step { color: var(--accent); font: 1rem var(--font-mono); border-bottom: 2px solid var(--accent); padding-bottom: .4rem; }
+  h2 { font-size: 1.5rem; line-height: 1.25; letter-spacing: 0; margin: 0; }
+  h3 { font-size: 1rem; letter-spacing: 0; margin: 0; }
+  .pilot-needs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .pilot-picker { padding: 0; border: 0; margin: 0; }
+  .pilot-picker legend { font-weight: 650; margin-bottom: .7rem; }
+  input[type='search'], select, textarea { width: 100%; min-width: 0; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--bg-soft); color: var(--ink); font: inherit; font-size: .9rem; padding: .7rem; }
+  textarea { resize: vertical; line-height: 1.6; }
+  input[type='checkbox'] { accent-color: var(--accent); flex: 0 0 auto; width: 1.05rem; height: 1.05rem; margin: .2rem 0 0; }
+  .pilot-search { position: relative; display: flex; align-items: center; }
+  .pilot-search :global(svg) { position: absolute; left: .6rem; color: var(--muted); pointer-events: none; }
+  .pilot-search input { padding-left: 2rem; }
+  .pilot-result { color: var(--ink-soft); font-size: .8rem; min-height: 1.5rem; margin: .55rem 0; }
+  .pilot-options { max-height: 24rem; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; border-block: 1px solid var(--line-strong); }
+  .pilot-need { padding: .85rem .5rem; border-bottom: 1px solid var(--line); }
+  .pilot-need:has(input:checked), .pilot-case:has(input:checked) { background: var(--accent-soft); box-shadow: inset 3px 0 var(--accent); }
+  .pilot-need label, .pilot-case label { display: flex; gap: .65rem; cursor: pointer; font-size: .9rem; line-height: 1.5; }
+  .pilot-need p { color: var(--ink-soft); font-size: .8rem; line-height: 1.55; margin: .55rem 0; }
+  .pilot-need a { font-size: .75rem; }
+  .pilot-text-button { background: none; border: 0; color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; font: inherit; font-size: .82rem; cursor: pointer; padding: .6rem .1rem; }
+  button:disabled { opacity: .5; cursor: default; }
+  .pilot-selected { margin-top: 1.5rem; border-block: 1px solid var(--line-strong); padding-block: .65rem; }
+  .pilot-summary-heading { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  #pilot-selection-empty { font-size: .85rem; color: var(--ink-soft); }
+  #pilot-selected-list { list-style: none; margin: 0; padding: 0; max-height: 18rem; overflow-y: auto; }
+  #pilot-selected-list :global(li) { display: flex; align-items: center; justify-content: space-between; gap: .7rem; border-top: 1px solid var(--line); padding: .6rem 0; font-size: .83rem; overflow-wrap: anywhere; }
+  #pilot-selected-list :global(button) { flex-shrink: 0; width: 2.5rem; height: 2.5rem; background: transparent; border: 1px solid var(--line-strong); color: var(--ink); border-radius: 4px; font-size: 1.2rem; cursor: pointer; }
+  .pilot-gap { font-size: .8rem; color: var(--planned); line-height: 1.6; }
+  .pilot-case-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .7rem; }
+  .pilot-case-filters label, .pilot-tailoring label { display: grid; gap: .4rem; font-size: .85rem; }
+  .pilot-case-filters button { justify-self: start; }
+  .pilot-case-options { max-height: 34rem; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; border-block: 1px solid var(--line-strong); }
+  .pilot-case { padding: 1rem .65rem; border-bottom: 1px solid var(--line-strong); }
+  .pilot-case p { font-size: .85rem; color: var(--ink-soft); margin: .6rem 0; }
+  .pilot-case .pilot-match { color: var(--accent-ink); font-size: .78rem; }
+  .pilot-case-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; font-size: .78rem; }
+  .pilot-state { color: var(--planned); }
+  .pilot-state[data-pilot-state='delivered'] { color: var(--accent); }
+  .pilot-state[data-pilot-state='unregistered'] { color: var(--ink-soft); }
+  .pilot-case details { margin-top: .7rem; font-size: .8rem; }
+  summary { cursor: pointer; }
+  .pilot-case details ul { padding-left: 1.2rem; }
+  .pilot-case details li { margin-block: .65rem; }
+  .pilot-case details span { display: block; color: var(--ink-soft); }
+  .pilot-tailoring { display: grid; gap: 1.1rem; }
+  .pilot-brief-column { border-left: 1px solid var(--line-strong); padding-left: 1.5rem; }
+  .pilot-brief { position: sticky; top: 6rem; padding-block: 1.5rem; scroll-margin-top: 6rem; }
+  .pilot-brief .eyebrow { font-size: .7rem; }
+  #pilot-brief-text { font: .78rem/1.6 var(--font-mono); height: 22rem; min-height: 12rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .pilot-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+  .pilot-actions .btn { font-size: .8rem; padding: .65rem .8rem; min-width: 0; white-space: normal; }
+  #pilot-action-status { font-size: .8rem; color: var(--accent-ink); min-height: 3rem; }
+  .pilot-brief > a { font-size: .88rem; }
+  :is(input, textarea, select, button, a, summary, [tabindex]):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .pilot-editor, .pilot-brief, .pilot-intro { overflow-wrap: anywhere; }
+  @media (max-width: 1000px) { .pilot-workspace { grid-template-columns: minmax(0, 1fr); gap: 0; } .pilot-brief-column { border-left: 0; padding-left: 0; } .pilot-brief { position: static; } }
+  @media (max-width: 540px) { .pilot-needs, .pilot-case-filters { grid-template-columns: minmax(0, 1fr); } .pilot-intro { padding-top: 2rem; } .pilot-intro h1 { font-size: 2.1rem; } .pilot-options { max-height: 19rem; } .pilot-case-options { max-height: 29rem; } }
+</style>

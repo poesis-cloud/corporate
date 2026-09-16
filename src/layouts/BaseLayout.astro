@@ -136,7 +136,7 @@ const articleLd = article
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target : null;
         if (!t) return;
-        var demo = t.closest('a[data-demo-cta]');
+        var demo = t.closest('[data-demo-cta]');
         if (demo) {
           gtag('event', 'demo_cta_click', {
             cta_id: demo.getAttribute('data-demo-cta'),
