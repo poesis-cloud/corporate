@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
-import { poesisUsage, useCaseStatus } from '../data/usage.ts';
+import { poesisUsage, usageIcons, useCaseStatus } from '../data/usage.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
@@ -34,7 +34,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
         <a href="#pains"><span>Pain points</span></a>
         <a href="#affordances"><span>Affordances</span></a>
         <a href="#usage"><span>Usage</span></a>
-        <a href="#qualities"><span>Platform qualities</span></a>
+        <a href="#qualities"><span>Qualities</span></a>
         <a href="#pilot"><span>Start with one workflow</span></a>
         <a href="#portfolio"><span>The Poesis platform</span></a>
         <a href="#services"><span>Services</span></a>
@@ -89,7 +89,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       <ul class="think-consequence-list catalog-grid usage-case-list home-usage-cases">
         {currentUseCases.map((useCase) => (
           <li class={plannedClass(useCaseStatus(useCase))} data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')}>
-            <span class="think-consequence__head"><span class="think-consequence__step">Use case</span><DeliveryStatus state={useCaseStatus(useCase)} /></span>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.useCase} size={16} /></span><span class="think-consequence__step">Use case</span><DeliveryStatus state={useCaseStatus(useCase)} /></span>
             <h4><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h4>
             <p>{useCase.goal}</p>
             <p class="proof-line"><span>Pursued by</span>{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' · '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
@@ -108,14 +108,14 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
   <section id="qualities" class="section home-postures">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Platform qualities</p>
+        <p class="eyebrow">Qualities</p>
         <h2>Added to your estate, never taken from it.</h2>
-        <p class="lead">Two quality attributes of the governed THINK layer: how portable it stays inside your control boundary, and how it interoperates with what you already run. Both describe how the platform is built, licensed, and designed to behave &mdash; not a connector inventory.</p>
+        <p class="lead">Two qualities of the governed THINK layer: how portable it stays inside your control boundary, and how it fits what you already run.</p>
       </div>
 
       <div id="deployment" class="home-posture">
-        <h3>Portability &amp; sovereignty &mdash; your models, your systems, your control boundary</h3>
-        <p class="home-posture__lead">Local, self-hosted and hosted routes have different acceptance boundaries. Host/model compatibility, migration and hosted availability need separate verification.</p>
+        <h3>Portability &amp; sovereignty</h3>
+        <p class="home-posture__lead">Local, self-hosted and hosted routes each carry their own acceptance boundary.</p>
         <ul class="think-consequence-list home-deployment-list">
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Model-independent</span></span>
@@ -146,8 +146,8 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       </div>
 
       <div id="integration" class="home-posture">
-        <h3>Interoperability &mdash; the definition layer, not a replacement</h3>
-        <p class="home-posture__lead">Poesis does not ask you to rip anything out: governed THINK connects to the BUILD and RUN environments you already operate. The sourcing bench targets the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
+        <h3>Interoperability</h3>
+        <p class="home-posture__lead">Governed THINK connects to the BUILD and RUN environments you already operate.</p>
         <ul class="think-consequence-list home-integration-list">
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories</span><DeliveryStatus state="planned" /></span>
@@ -170,7 +170,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
           <p>Planned infrastructure sourcing reads declared configuration. Deployed identity, observation time and coverage are needed to describe what runs.</p>
         </li>
       </ul>
-      <p class="home-integration-note"><DeliveryStatus state="planned" /> The sourcing bench is specified and in build. Named-tool connectors &mdash; ServiceNow CMDB, Backstage catalogs, EA repositories &mdash; follow as further knowledge sources feeding the same governed model.</p>
+      <p class="home-integration-note"><DeliveryStatus state="planned" /> The sourcing bench is specified and in build. Named-tool connectors follow as further knowledge sources feeding the same governed model.</p>
       </div>
     </div>
   </section>

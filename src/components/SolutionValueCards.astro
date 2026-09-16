@@ -7,8 +7,9 @@
  * capability anchor further down the same page.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
 import { plannedClass, relationQualifiers, type Solution } from '../data/poesis-platform.ts';
-import { solutionValues, valueAliases, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
+import { solutionValues, usageIcons, valueAliases, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
 
 interface Props {
   solution: Solution;
@@ -21,6 +22,7 @@ const { solution } = Astro.props;
     <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
       {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
       <span class="think-consequence__head">
+        <span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span>
         <span class="think-consequence__step">Value</span>
         <DeliveryStatus state={valueStatus(v.slug)} />
       </span>
@@ -31,7 +33,7 @@ const { solution } = Astro.props;
         {valueSupports(v.slug).map((support, i) => (
           <>
             {i > 0 && ' · '}
-            <a class={plannedClass(support.state)} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} /></a>
+            <a class={plannedClass(support.state)} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} compact /></a>
           </>
         ))}
       </p>

@@ -11,7 +11,8 @@ import Icon from '../../../../components/Icon.astro';
 import DeliveryStatus from '../../../../components/DeliveryStatus.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
 import UsageCases from '../../../../components/UsageCases.astro';
-import { useCasesForProduct, useCasesForFeature, productValues, valueAnchor, valueAliases, valueStatus, valueSupports } from '../../../../data/usage.ts';
+import ItemRelations from '../../../../components/ItemRelations.astro';
+import { useCasesForProduct, productValues, usageIcons, usageRelations, valueAnchor, valueAliases, valueStatus, valueSupports } from '../../../../data/usage.ts';
 import { platformSolutions, productTimeline, featureStatus, plannedClass, productStatus, relationQualifiers, solutionHref, typeIcons } from '../../../../data/poesis-platform.ts';
 
 export function getStaticPaths() {
@@ -68,6 +69,7 @@ const state = productStatus(product);
           <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
             {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
             <span class="think-consequence__head">
+              <span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span>
               <span class="think-consequence__step">Value</span>
               <DeliveryStatus state={valueStatus(v.slug)} />
             </span>
@@ -82,7 +84,7 @@ const state = productStatus(product);
                   return (
                     <>
                       {i > 0 && ' · '}
-                      <a class={plannedClass(f.delivery.state)} href={`#${slug}`}>{f.name} <DeliveryStatus state={f.delivery.state} /></a>
+                      <a class={plannedClass(f.delivery.state)} href={`#${slug}`}>{f.name} <DeliveryStatus state={f.delivery.state} compact /></a>
                     </>
                   );
                 })}
@@ -120,7 +122,7 @@ const state = productStatus(product);
               </span>
               <strong>{f.name}</strong>
               <p>{f.blurb}</p>
-              <p class="proof-line"><span>Used in</span>{useCasesForFeature(`${solution.slug}/${product.slug}/${f.slug}`).map((useCase, index) => <>{index > 0 && ' · '}<a href={`/usage/${useCase.slug}`}>{useCase.name}</a></>)}</p>
+              <ItemRelations groups={usageRelations(f)} />
             </li>
           );
         })}

@@ -1,7 +1,7 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { affordanceHref, poesisUsage, usageAffordances } from '../data/usage.ts';
+import { affordanceHref, usageAffordances, usageRelations } from '../data/usage.ts';
 import { affordanceStatus, typeIcons } from '../data/poesis-platform.ts';
 
 // Same anatomy as the homepage affordance card: the name is the step label and
@@ -14,8 +14,7 @@ const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   body: entry.affordance.blurb,
   status: affordanceStatus(entry.affordance),
   meta: [{ label: 'Platform overview', href: affordanceHref(entry) }, { label: `${entry.affordance.relations.capabilities.length} supporting capabilities` }],
-  links: poesisUsage.useCases.filter((useCase) => entry.affordance.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}` })),
-  empty: 'No use case declared.',
+  relations: usageRelations(entry.affordance),
 }));
 ---
 <CatalogLayout
@@ -25,5 +24,5 @@ const entries: DirectoryEntry[] = usageAffordances.map((entry) => ({
   lead="What the platform lets people and agents do. Each affordance is delivered only when an accepted route of supporting capabilities is."
   count={`${entries.length} affordances`}
 >
-  <CatalogDirectory id="affordances" eyebrow="Affordances" title="What the platform makes possible" entries={entries} variant="platform" relation="Declared use cases" />
+  <CatalogDirectory id="affordances" eyebrow="Affordances" title="What the platform makes possible" entries={entries} variant="platform" />
 </CatalogLayout>

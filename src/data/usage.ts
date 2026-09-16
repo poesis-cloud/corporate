@@ -10,7 +10,7 @@
  * This module is also the only place where platform references are proven to
  * resolve — see `validateUsage`, invoked on import.
  */
-import { platformSolutions, affordances, affordanceStatus, capabilityStatus, commitmentStatus, solutionHref, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution } from './poesis-platform.ts';
+import { platformSolutions, affordances, affordanceStatus, capabilityStatus, commitmentStatus, solutionHref, typeIcons, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution, type UsageRefs } from './poesis-platform.ts';
 import { actorTypes } from './usage-actors.ts';
 import { usagePains, type UsagePain } from './usage-pains.ts';
 import { usageValues, valueAnchor, type Value } from './usage-values.ts';
@@ -179,6 +179,24 @@ export function useCasesForProduct(solutionSlug: string, productSlug: string): U
 export function useCasesForSolution(solutionSlug: string): UseCase[] {
   const references = new Set([...usageFeatures.filter((entry) => entry.solution.slug === solutionSlug).flatMap((entry) => entry.feature.useCases), ...usageCapabilities.filter((entry) => entry.solution.slug === solutionSlug).flatMap((entry) => entry.capability.useCases)]);
   return useCases.filter((useCase) => references.has(useCase.slug));
+}
+
+/** Card icons for usage items, so a use case, pain or value is recognisable wherever it is shown. */
+export const usageIcons = { useCase: 'target', pain: 'alert', value: typeIcons.value };
+
+export interface RelationLink { label: string; href: string; state?: DeliveryState }
+export interface RelationGroup { label: string; links: RelationLink[] }
+
+/**
+ * The usage relatives a platform item declares, in pain → use case → value order.
+ * Empty groups are dropped, so a card never shows a relation it does not have.
+ */
+export function usageRelations(item: UsageRefs): RelationGroup[] {
+  return [
+    { label: 'Pain points', links: usagePains.filter((pain) => item.pains.includes(pain.slug)).map((pain) => ({ label: pain.pain, href: `/pains#${pain.slug}` })) },
+    { label: 'Use cases', links: useCases.filter((useCase) => item.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) })) },
+    { label: 'Values', links: usageValues.filter((value) => item.values.includes(value.slug)).map((value) => ({ label: value.title, href: valueHref(value), state: valueStatus(value.slug) })) },
+  ].filter((group) => group.links.length);
 }
 
 /**

@@ -8,7 +8,9 @@
  */
 import Icon from './Icon.astro';
 import DeliveryStatus from './DeliveryStatus.astro';
+import ItemRelations from './ItemRelations.astro';
 import { affordanceStatus, capabilityAffordances, capabilityRealizations, capabilityStatus, plannedClass, relationQualifiers, solutionHref, typeIcons, type Solution } from '../data/poesis-platform.ts';
+import { usageRelations } from '../data/usage.ts';
 
 interface Props {
   solution: Solution;
@@ -31,6 +33,7 @@ const base = solutionHref(solution);
         </span>
         <strong>{c.name}</strong>
         <p>{c.blurb}</p>
+        <ItemRelations groups={usageRelations(c)} />
         <p class="proof-line">
           <span>{relationQualifiers.capabilityFeatures(realizations.length)}</span>
           {realizations.map((r, i) => (
@@ -39,13 +42,13 @@ const base = solutionHref(solution);
               <a
                 class={plannedClass(r.feature.delivery.state)}
                 href={`${base}/products/${r.product.slug}#${r.feature.slug}`}
-              >{r.feature.name} <DeliveryStatus state={r.feature.delivery.state} /></a>
+              >{r.feature.name} <DeliveryStatus state={r.feature.delivery.state} compact /></a>
             </>
           ))}
         </p>
         <p class="proof-line">
           <span>{relationQualifiers.capabilityAffordance()}</span>
-          {affordances.map((affordance) => <a href={`/#affordance-${affordance.slug}`}>{affordance.name} <DeliveryStatus state={affordanceStatus(affordance)} /></a>)}
+          {affordances.map((affordance) => <a href={`/#affordance-${affordance.slug}`}>{affordance.name} <DeliveryStatus state={affordanceStatus(affordance)} compact /></a>)}
         </p>
       </li>
     );

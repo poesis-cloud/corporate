@@ -1,7 +1,7 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { capabilityHref, poesisUsage, usageCapabilities } from '../data/usage.ts';
+import { capabilityHref, usageCapabilities, usageRelations } from '../data/usage.ts';
 import { capabilityStatus, typeIcons } from '../data/poesis-platform.ts';
 
 const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
@@ -12,8 +12,7 @@ const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
   body: entry.capability.blurb,
   status: capabilityStatus(entry.solution, entry.capability),
   meta: [{ label: 'Solution scope', href: capabilityHref(entry) }, { label: `${entry.capability.relations.features.length} contributing features` }],
-  links: poesisUsage.useCases.filter((useCase) => entry.capability.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}` })),
-  empty: 'No use case declared.',
+  relations: usageRelations(entry.capability),
 }));
 ---
 <CatalogLayout
@@ -23,5 +22,5 @@ const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
   lead="What each solution can do, built from product features. A capability carries the status of the features that prove it."
   count={`${entries.length} capabilities`}
 >
-  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} variant="platform" relation="Declared use cases" />
+  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} variant="platform" />
 </CatalogLayout>

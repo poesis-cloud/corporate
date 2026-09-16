@@ -399,7 +399,8 @@ test('all built values and scoped claims carry accessible status icons with depe
     assert.equal(attribute(node, 'data-delivery-status'), expected);
     assert.equal(attribute(node, 'title'), label);
     assert.equal(attribute(node, 'aria-label'), label);
-    assert.equal(text(node).trim(), label);
+    // A compact badge (inside a relation link) shows the icon alone; the accessible name still carries the label.
+    assert.ok([label, ''].includes(text(node).trim()), `status text is "${label}" or icon-only`);
     assert.ok(hasClass(node, badges[expected].modifier));
     const icon = elements(node, (item) => item.tagName === 'svg');
     assert.equal(icon.length, 1);

@@ -1,0 +1,27 @@
+---
+/**
+ * The usage relatives (pain points, use cases, values) a platform item declares.
+ * Rendered above the platform relations so a card reads outward before inward.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import { plannedClass } from '../data/poesis-platform.ts';
+import type { RelationGroup } from '../data/usage.ts';
+
+interface Props {
+  groups: RelationGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+{groups.map((group) => (
+  <p class="proof-line">
+    <span>{group.label}</span>
+    {group.links.map((link, index) => (
+      <>
+        {index > 0 && ' · '}
+        <a class={plannedClass(link.state)} href={link.href}>{link.label} <DeliveryStatus state={link.state} compact /></a>
+      </>
+    ))}
+  </p>
+))}

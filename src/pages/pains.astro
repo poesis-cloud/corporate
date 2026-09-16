@@ -1,11 +1,12 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { poesisUsage, useCasesForPain } from '../data/usage.ts';
+import { poesisUsage, usageIcons, useCasesForPain } from '../data/usage.ts';
 
 const entries: DirectoryEntry[] = poesisUsage.pains.map((pain) => ({
   anchor: pain.slug,
   eyebrow: pain.tags.join(' · '),
+  icon: usageIcons.pain,
   title: pain.pain,
   body: pain.cost,
   meta: pain.actorTypes.map((slug) => ({ label: poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name, href: `/actors#${slug}` })),

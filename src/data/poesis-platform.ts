@@ -3,7 +3,7 @@ export type DeliveryState = 'planned' | 'partial' | 'delivered';
 export type Requirement = { ref: string } | { all: Requirement[] } | { any: Requirement[] };
 export type RelationKind = 'contributes-to' | 'specifies' | 'informs' | 'consumes' | 'requires' | 'realizes' | 'supports-benefit';
 export type ItemType = 'solution' | 'affordance' | 'capability' | 'product' | 'feature' | 'value';
-export const typeIcons: Record<ItemType, string> = { solution: 'compass', affordance: 'grid', capability: 'spark', product: 'briefcase', feature: 'list', value: 'check-badge' };
+export const typeIcons: Record<ItemType, string> = { solution: 'compass', affordance: 'grid', capability: 'spark', product: 'briefcase', feature: 'list', value: 'lightbulb' };
 export const deliveryLabels: Record<DeliveryState, string> = { planned: 'Planned', partial: 'In progress', delivered: 'Implemented' };
 export function commitmentStatus(states: DeliveryState[]): DeliveryState {
   if (!states.length || states.every((state) => state === 'planned')) return 'planned';

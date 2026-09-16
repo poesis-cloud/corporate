@@ -4,8 +4,11 @@ import { commitmentStatus, deliveryLabels, type DeliveryState } from '../data/po
 
 interface Props {
   state: DeliveryState | undefined;
+  /** Inside a relation link the state annotates the link, so the icon carries it alone. */
+  compact?: boolean;
 }
 
+const { compact = false } = Astro.props;
 const state = commitmentStatus([Astro.props.state]);
 const label = deliveryLabels[state];
 const variants = { planned: { modifier: 'planned', icon: 'clock' }, partial: { modifier: 'progress', icon: 'spark' }, delivered: { modifier: 'implemented', icon: 'check-badge' } };
@@ -13,7 +16,7 @@ const { modifier, icon } = variants[state];
 ---
 {Astro.props.state !== undefined && <span class={`delivery-status is-${modifier}`} data-delivery-status={state} title={label} aria-label={label}>
   <Icon name={icon} size={14} />
-  <span>{label}</span>
+  {!compact && <span>{label}</span>}
 </span>}
 
 <style>

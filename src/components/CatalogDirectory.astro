@@ -4,13 +4,16 @@
  * is rendered with the homepage affordance-card pattern; a `usage` entry (use
  * case, actor, pain, value) with the homepage platform-value pattern. Both
  * patterns are single sourced in global.css, so an item looks the same
- * wherever it is shown. `meta` states where an entry belongs, `links` states
- * what it relates to; an entry with no relation says so rather than rendering
+ * wherever it is shown. `meta` states where an entry belongs, `relations`
+ * states which usage relatives it declares, `links` states what else it
+ * relates to; an entry with no relation says so rather than rendering
  * an empty list.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
 import Icon from './Icon.astro';
+import ItemRelations from './ItemRelations.astro';
 import { plannedClass, type DeliveryState } from '../data/poesis-platform.ts';
+import type { RelationGroup } from '../data/usage.ts';
 
 export interface DirectoryEntry {
   anchor: string;
@@ -21,6 +24,7 @@ export interface DirectoryEntry {
   body: string;
   status?: DeliveryState;
   meta?: { label: string; href?: string }[];
+  relations?: RelationGroup[];
   links?: { label: string; href: string }[];
   empty?: string;
   data?: Record<string, string>;
@@ -61,6 +65,7 @@ const step = platform ? 'think-capability__step' : 'think-consequence__step';
           {entry.meta?.length ? (
             <p class="catalog-meta">{entry.meta.map((item, index) => <>{index > 0 && ' · '}{item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}</>)}</p>
           ) : null}
+          {entry.relations?.length ? <ItemRelations groups={entry.relations} /> : null}
           {entry.links?.length ? (
             <div class="proof-line">
               {relation && <span>{relation}</span>}

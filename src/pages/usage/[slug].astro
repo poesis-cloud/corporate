@@ -7,7 +7,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DeliveryStatus from '../../components/DeliveryStatus.astro';
 import Icon from '../../components/Icon.astro';
-import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, useCaseStatus, valueHref, valueStatus, valuesForUseCase } from '../../data/usage.ts';
+import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, usageIcons, useCaseStatus, valueHref, valueStatus, valuesForUseCase } from '../../data/usage.ts';
 import { affordanceStatus, capabilityStatus, plannedClass } from '../../data/poesis-platform.ts';
 export function getStaticPaths() { return poesisUsage.useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } })); }
 const { useCase } = Astro.props;
@@ -49,7 +49,7 @@ const state = useCaseStatus(useCase);
       <div class="section-head"><p class="eyebrow">Values</p><h2>Values reachable from here</h2></div>
       {values.length === 0 && <p>No values linked through platform coverage.</p>}
       <ul class="think-consequence-list catalog-grid">{values.map((value) => <li class={plannedClass(valueStatus(value.slug))} data-usage-value={value.slug}>
-        <span class="think-consequence__head"><span class="think-consequence__step">Value</span>{valueStatus(value.slug) && <DeliveryStatus state={valueStatus(value.slug)!} />}</span>
+        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span><span class="think-consequence__step">Value</span>{valueStatus(value.slug) && <DeliveryStatus state={valueStatus(value.slug)!} />}</span>
         <h3><a href={valueHref(value)}>{value.title}</a></h3>
         <p>{value.body}</p>
       </li>)}</ul>
@@ -59,7 +59,7 @@ const state = useCaseStatus(useCase);
     <div class="container">
       <div class="section-head"><p class="eyebrow">Pains</p><h2>Pain points</h2></div>
       <ul class="think-consequence-list catalog-grid">{pains.map((pain) => <li data-usage-pain={pain.slug}>
-        <span class="think-consequence__head"><span class="think-consequence__step">Pain</span></span>
+        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.pain} size={16} /></span><span class="think-consequence__step">Pain</span></span>
         <h3><a href={`/pains#${pain.slug}`}>{pain.pain}</a></h3>
         <p>{pain.cost}</p>
       </li>)}</ul>

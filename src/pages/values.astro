@@ -1,11 +1,12 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { usageValues, valueAnchor, valueHref, valueStatus, valueSupports } from '../data/usage.ts';
+import { usageIcons, usageValues, valueAnchor, valueHref, valueStatus, valueSupports } from '../data/usage.ts';
 
 const entries: DirectoryEntry[] = usageValues.map((value) => ({
   anchor: valueAnchor(value),
   data: { 'data-usage-value': value.slug },
+  icon: usageIcons.value,
   title: value.title,
   status: valueStatus(value.slug),
   body: value.body,
