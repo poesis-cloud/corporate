@@ -1,0 +1,36 @@
+---
+import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
+import { painsForUseCase, poesisUsage, useCaseStatus, type UseCase } from '../data/usage.ts';
+interface Props { cases: UseCase[]; title?: string; browse?: boolean }
+const { cases, title = 'Use cases', browse = true } = Astro.props;
+---
+<section class="section usage-section" aria-label={title}>
+  <div class="container">
+    <div class="section-head usage-heading">
+      <div><p class="eyebrow">Usage</p><h2>{title}</h2></div>
+      {browse && <a href="/usage">All use cases <Icon name="arrow-right" /></a>}
+    </div>
+    <ul class="usage-case-list">
+      {cases.map((useCase) => (
+        <li data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')} data-pains={painsForUseCase(useCase.slug).map((pain) => pain.slug).join(' ')}>
+          <div class="usage-case-head"><h3><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h3>{useCaseStatus(useCase) && <DeliveryStatus state={useCaseStatus(useCase)!} />}</div>
+          <p>{useCase.goal}</p>
+          <p class="usage-meta">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .usage-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .usage-heading > a { display: inline-flex; align-items: center; gap: .5rem; }
+  .usage-case-list { padding: 0; margin: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+  .usage-case-list > li { min-width: 0; padding: 1.5rem 0; border-top: 1px solid var(--line-strong); overflow-wrap: anywhere; }
+  .usage-case-list > li[hidden] { display: none; }
+  .usage-case-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem 1rem; }
+  h3 { margin: 0; font-size: 1.15rem; line-height: 1.4; letter-spacing: 0; }
+  p { margin: .65rem 0 0; }
+  .usage-meta { font-size: .8rem; color: var(--muted); }
+  @media (max-width: 640px) { .usage-case-list { grid-template-columns: minmax(0, 1fr); } }
+</style>

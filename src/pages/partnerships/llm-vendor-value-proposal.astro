@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DeliveryStatus from '../../components/DeliveryStatus.astro';
 
 const FLOW_META = {
   A: { hex: '#38bdf8', name: 'Context sourcing' },
@@ -28,7 +29,7 @@ function adherencePills(ids: string[]) {
     <div class="container">
       <p class="eyebrow"><a href="/#partnerships">LLM vendors · Partnership</a></p>
       <h1>LLM Vendor Partnership — Value Proposal</h1>
-      <p class="lead"><strong>Better context beats bigger models.</strong> Frontier models reason against statistical traces of the world — not against an explicit, causal, governed model of the world. That single gap drives both of today's ceilings: the <a href="#partnership-thesis"><strong>capability ceiling</strong> and the <strong>deployment ceiling</strong></a>. Poesis closes both through a systemic model of the world named <i>Generative System Model</i>, implemented by SIE, and surfaced through domain platforms such as ITIP — and model vendors are the natural partners on it.</p>
+      <p class="lead"><strong>Test what explicit context changes.</strong> This partnership proposes comparisons between governed, attributable context and document-retrieval baselines on selected tasks. GSM content, SIE foundations and local SAF controls support that experiment; model-facing integration, operational assurance and measured uplift remain work.</p>
       <div class="reference-disclosure">
         <strong>How to read this proposal.</strong> Present tense describes the Poesis reference design and target operating model which might not yet be fully implemented or operational. Partnership adherences described below may therefore include work to advance Poesis components from their explicitly stated maturity levels.
       </div>
@@ -93,42 +94,49 @@ function adherencePills(ids: string[]) {
       <div class="value-grid">
         <button class="card value-card" data-flow="A" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">A · Structured context sourcing</span>
+          <DeliveryStatus state="planned" />
           <h3>Definitions sourced at scale</h3>
           <p>Partner models are designed to become KnowledgeSources over code repositories and, through additional adapters, other authoritative resources — broadening sourcing while preserving human disposition.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="B" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">B · Augmented inference</span>
+          <DeliveryStatus state="planned" />
           <h3>Governed causal grounding</h3>
-          <p>SIE can expose systematically sourced governed Definitions of the organization through a model-facing context and tool surface, enabling inference against explicit structure (causal, temporal, logical, semantic, evaluable) rather than prose documents alone.</p>
+          <p>A planned model-facing API or MCP route will expose authorized, pinned definitions. Directly authored inputs are valid without sourcing; lineage, selection and answer-quality evaluation remain acceptance gates.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="C" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">C · Governed inference</span>
+          <DeliveryStatus state="planned" />
           <h3>Governed action in regulated estates</h3>
           <p>Models propose; SIE operates governance rules and evaluations deterministically; humans dispose throught domain application. The target result is accountable, traceable action.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="D" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">D · Model specialisation</span>
+          <DeliveryStatus state="planned" />
           <h3>A governed specialisation substrate</h3>
           <p>Governed Definitions and Ascription history could provide typed domain material for controlled adaptation. Corpus construction, source provenance, rights enforcement, training integration, and measured uplift remain research work.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="E" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">E · Model evaluation and assurance</span>
+          <DeliveryStatus state="planned" />
           <h3>Governed evidence of model capability</h3>
           <p>GSM contracts and SIE Mechanisms can turn defined enterprise tasks into reproducible evaluations, revealing model capability, failure boundaries, and regressions without requiring weight adaptation.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="F" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">F · Model qualification and routing</span>
+          <DeliveryStatus state="planned" />
           <h3>The right model for each governed workload</h3>
           <p>A vendor-neutral catalog and routing contract can qualify models against workload needs, cost, and measured outcomes — creating evidence-based placement rather than one-model-fits-all selection.</p>
           <span class="value-link">View flow details</span>
         </button>
         <button class="card value-card" data-flow="G" type="button" aria-pressed="false" aria-controls="vf-detail">
           <span class="tag">G · Agentic delivery</span>
+          <DeliveryStatus state="planned" />
           <h3>A governed agentic delivery proof</h3>
           <p>Partner models power specialist agents under declared workflows; the deterministic harness enforces artifact, authorization, and workflow gates and record comparable delivery evidence.</p>
           <span class="value-link">View flow details</span>
@@ -212,7 +220,7 @@ function adherencePills(ids: string[]) {
             <div class="vf-col">
               <div class="vf-group" id="g-poesis">
                 <div class="vf-gtitle">Poesis stack</div>
-                <div class="vf-gsub">one sovereign instance per organisation — tenant-owned, designed for future federation</div>
+                <div class="vf-gsub">target topology: organization-scoped instances; isolation, egress and recovery require acceptance; federation is future work</div>
 
                 <div class="vf-card" id="n-sie" data-component="SIE — Systemic Intelligence Engine">
                   <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
@@ -235,7 +243,7 @@ function adherencePills(ids: string[]) {
                   <button class="vf-fold-btn" type="button" data-fold="f-itip" aria-controls="f-itip" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-itip" hidden>
                     <div class="vf-comp"><b>itip-web-application</b> — planned human gate for intent, approval, simulation, appraisal, and audit</div>
-                    <div class="vf-comp"><b>gsm-ontology</b> — source GDPR, NIS2, DORA, AI Act, TOGAF, ISO, and other domain vocabulary into GSM Definitions</div>
+                    <div class="vf-comp"><b>gsm-ontology</b> — selected GDPR/NIS2 templates and TOGAF/ISO vocabulary; broader frameworks and operational binding remain planned</div>
                     <div class="vf-comp"><b>itip-definition-blackboard-*-sourcer</b> — designed to wrap LLMs / agents as KnowledgeSources over code repositories; other source classes require adapters</div>
                   </div>
                 </div>
@@ -243,13 +251,13 @@ function adherencePills(ids: string[]) {
                 <div class="vf-card" id="n-saf" data-component="SAFe Agentic Framework">
                   <button class="vf-card-select" type="button" aria-pressed="false" aria-controls="vf-detail">
                     <span class="vf-ctitle">SAFe Agentic Framework</span>
-                    <span class="vf-csub">agentic organisation product delivery through declared workflows today, with a deterministic operational harness specified</span>
+                    <span class="vf-csub">declarative agent content and partial local harness controls on supported hosts</span>
                   </button>
                   <button class="vf-fold-btn" type="button" data-fold="f-saf" aria-controls="f-saf" aria-expanded="false">▸ components</button>
                   <div class="vf-fold" id="f-saf" hidden>
                     <div class="vf-comp"><b>orchestrator-agent</b> — portfolio / program / team</div>
                     <div class="vf-comp"><b>specialist-agent</b> — architecture, dev, QA, security, docs agents</div>
-                    <div class="vf-comp"><b>harness</b> — specified deterministic FSM, artifact, authorization, and gate checks; runtime implementation remains</div>
+                    <div class="vf-comp"><b>harness</b> — resolution, injection, routing, validation, agent authorization and journals exist in source; human authority, transaction and host compatibility need acceptance</div>
                   </div>
                 </div>
               </div>
@@ -324,17 +332,17 @@ function adherencePills(ids: string[]) {
         <div class="maturity-grid">
           <article>
             <span class="maturity-flow">Context sourcing</span>
-            <strong class="maturity-status">Current maturity · Implemented substrate, designed client</strong>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Substrate exists; client integration remains</strong>
             <p><strong>Partnership work:</strong> implement KnowledgeSources, model integration, client reduction, provenance transfer, and Definition Manager registration.</p>
           </article>
           <article>
             <span class="maturity-flow">Governed inference grounding</span>
-            <strong class="maturity-status">Current maturity · Implemented semantic and execution foundations</strong>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Semantic and execution foundations exist</strong>
             <p><strong>Partnership work:</strong> build the model-facing context and tool surface, then measure it against document-retrieval baselines.</p>
           </article>
           <article>
             <span class="maturity-flow">Governed inference deployment</span>
-            <strong class="maturity-status">Current maturity · Implemented execution kernel, designed human gate</strong>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Execution kernel exists; human gate remains</strong>
             <p><strong>Partnership work:</strong> assemble and validate the ITIP human gate, Norm and provenance evaluation, disposition audit, and regulated-estate proof.</p>
           </article>
           <article>
@@ -344,18 +352,18 @@ function adherencePills(ids: string[]) {
           </article>
           <article>
             <span class="maturity-flow">Model evaluation and assurance</span>
-            <strong class="maturity-status">Current maturity · Implemented primitives and integration proof</strong>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Evaluation foundations exist</strong>
             <p><strong>Partnership work:</strong> define model evaluation contracts, datasets, baselines, trace capture, assurance criteria, and a repeatable service surface.</p>
           </article>
           <article>
             <span class="maturity-flow">Model qualification and routing</span>
-            <strong class="maturity-status">Current maturity · Implemented catalog and contracts</strong>
-            <p><strong>Partnership work:</strong> implement routing, host bindings, workload evidence collection, model-version governance, and outcome-based qualification.</p>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Catalog and resolver foundations exist</strong>
+            <p><strong>Partnership work:</strong> qualify existing resolver and supported host bindings; complete workload evidence, model-version governance and outcome-based selection.</p>
           </article>
           <article>
             <span class="maturity-flow">Agentic delivery</span>
-            <strong class="maturity-status">Current maturity · Operational agent definitions, specified harness</strong>
-            <p><strong>Partnership work:</strong> implement the harness runtime, bind partner models, collect controlled execution evidence, and establish repeatable outcome measures.</p>
+            <strong class="maturity-status"><DeliveryStatus state="planned" /> · Agent content and local harness foundations exist</strong>
+            <p><strong>Partnership work:</strong> accept parser/contracts, authenticated decisions, atomic writes and supported host behavior; collect comparable outcome evidence.</p>
           </article>
         </div>
         <div class="maturity-exchange">
@@ -367,6 +375,7 @@ function adherencePills(ids: string[]) {
     </div>
   </section>
 
+  <template id="planned-commitment"><DeliveryStatus state="planned" /></template>
 </BaseLayout>
 
 <style is:global>
@@ -614,6 +623,7 @@ function adherencePills(ids: string[]) {
 </style>
 
 <script>
+  const plannedCommitment = document.getElementById('planned-commitment')?.innerHTML ?? '';
   const FLOWS = [
     {
       id: 'A', hex: '#38bdf8', from: 'n-infer', to: 'n-sie', lane: 32,
@@ -699,7 +709,7 @@ function adherencePills(ids: string[]) {
       label: 'agent bench builds the stack',
       title: 'G — Agentic delivery: LLM agents build Poesis itself (LLM → Poesis)',
       maturity: '<strong>Current maturity:</strong> evolving operational proof. <strong>Partnership work:</strong> adopt partner models, collect controlled execution evidence, and establish repeatable outcome measures.',
-      sub: 'Partner models already power the framework’s orchestrators and specialist agents through declarative agent and workflow definitions. The deterministic harness is specified but its runtime is not implemented. Once operational, its artifact, authorization, precondition, and postcondition gates can produce comparable execution evidence without treating agent output as self-authorizing.',
+      sub: 'Agent/workflow content and local harness controls exist. Supported-host resolution, injection, routing, validation, agent authorization and journals provide partial foundations; parser/contracts, authenticated human decisions and transaction acceptance remain incomplete. Comparative model outcomes require controlled runs.',
       schema: [
         { n: 'Governance', side: 'human' },
         { n: 'orchestrator-agent', via: 'declarative agent and workflow definitions' },
@@ -709,16 +719,16 @@ function adherencePills(ids: string[]) {
         { n: 'Supervision', side: 'human', via: 'gated candidate changes' },
         { n: 'Poesis stack artifacts', side: 'material', via: 'released code, schemas, design-time models, documentation' },
       ],
-      feedback: 'Task success, rework, gate failures, cost, latency, and human intervention are measured per run.',
+      feedback: 'Proposed measurements per run: task success, rework, gate failures, cost, latency and human intervention.',
       partner: ['A living reference for supervised multi-agent engineering using partner models', 'A planned evidence surface for task success, rework, gate failures, cost, latency, and human intervention'],
       poesis: ['Faster delivery where measured outcomes demonstrate an advantage over the baseline workflow', 'Auditable delivery evidence governed by deterministic gates and human approval'],
-      comps: 'Agent definitions, workflows, model catalog, and harness contracts exist in the <b>SAFe Agentic Framework</b>; the deterministic harness runtime and persisted evidence collection remain to be implemented.',
+      comps: 'Content and partial runtime controls exist in the <b>Systemic Agentic Framework</b>. Local artifact delivery is separate from authorized deployment, bridge promotion and hosted operation.',
     },
     {
       id: 'E', hex: '#f59e0b', from: 'n-sie', to: 'n-eval', lane: 28,
       label: 'governed tests → comparable model evidence',
       title: 'E — Model evaluation and assurance (Poesis ↔ LLM)',
-      maturity: '<strong>Current maturity:</strong> schema validation, typed Mechanism execution, lifecycle audit, and an ITIP appraisal integration proof are implemented. <strong>Partnership work:</strong> define model evaluation envelopes, datasets, baselines, assurance criteria, and a repeatable service surface.',
+      maturity: '<strong>Current maturity:</strong> partial schema, execution and history foundations; no complete ITIP appraisal or model-assurance route is established. <strong>Partnership work:</strong> define evaluation envelopes, datasets, baselines, traces and acceptance criteria.',
       sub: 'A vendor submits versioned model outputs and inference configurations against defined enterprise tasks. GSM schemas and SIE Mechanisms can evaluate only properties made explicit by those contracts, producing reproducible findings and traces. This can reveal capability, failure boundaries, and regressions without changing model weights; it does not turn every governance rule into ground truth or establish inference truth beyond the evaluated contract.',
       schema: [
         { n: 'sie-definition-manager' },
@@ -737,12 +747,12 @@ function adherencePills(ids: string[]) {
       id: 'F', hex: '#fb7185', from: 'n-saf', to: 'n-infer', lane: -28,
       label: 'workload demand → qualified model placement',
       title: 'F — Model qualification and workload routing (Poesis → LLM)',
-      maturity: '<strong>Current maturity:</strong> a vendor-neutral model catalog, capability taxonomy, workload declarations, and routing output contracts exist. <strong>Partnership work:</strong> implement the resolver runtime, host bindings, model-version governance, and outcome evidence collection.',
-      sub: 'Governed workloads declare capability demand; a deterministic resolver is specified to score canonical model profiles and break ties by cost. Runtime qualification should then incorporate measured task success, schema adherence, rework, latency, cost, and human intervention. The current catalog is configuration, not proof of model fitness, and the harness that performs routing is not yet implemented.',
+      maturity: `${plannedCommitment} Catalogue, resolver and supported host foundations exist. <strong>Partnership work:</strong> accept binding semantics, version governance and outcome evidence.`,
+      sub: 'Declared demand can drive source-level resolver selection on supported routes. Catalog scores are configuration, not measured model fitness. Qualification needs task success, schema adherence, rework, latency, cost and human-intervention evidence on compatible pins.',
       schema: [
         { n: 'orchestrator-agent' },
         { n: 'harness', todo: true, via: 'workload capability demand declared' },
-        { n: 'Grounded inference', side: 'llm', via: 'resolver scores model profiles, binds host — dispatch not implemented' },
+        { n: 'Grounded inference', side: 'llm', via: `resolver and supported host bindings ${plannedCommitment}` },
         { n: 'harness', todo: true, via: 'task success, schema adherence, rework, latency, cost, intervention' },
         { n: 'Regulation', side: 'human', via: 'qualification record — placement becomes an evidence decision' },
       ],
@@ -750,7 +760,7 @@ function adherencePills(ids: string[]) {
       partner: ['Evidence-based placement on workloads where the partner model demonstrates comparative value', 'Structured feedback about capability gaps, reliability, cost, and intervention demand'],
       poesis: ['Model-neutral routing aligned to workload needs instead of a single-provider default', 'A qualification record that makes model placement an evidence decision rather than a procurement default'],
       shared: ['Controlled model upgrades and substitutions based on declared demand and measured outcomes', 'No structural dependence on a single provider for the customer organisation’s governed workloads'],
-      comps: 'Catalog and contracts exist in the <b>SAFe Agentic Framework</b>; resolver implementation, host adapter bindings, dispatch telemetry, and qualification policy remain to be built.',
+      comps: 'Catalogue, resolver and host foundations exist in the <b>Systemic Agentic Framework</b>; compatible route acceptance and measured qualification remain work.',
     },
     {
       id: 'reg', loop: true, rail: -9, hex: '#fb923c', from: 'n-org-reg', to: 'n-sie', lane: -66,

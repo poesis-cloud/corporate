@@ -2297,6 +2297,7 @@ a:hover {
 
 .think-capability__head {
   display: flex;
+  flex-wrap: wrap;
   gap: .5rem;
   align-items: center;
   min-width: 0;
@@ -2563,6 +2564,7 @@ a:hover {
 
 .think-consequence__head {
   display: flex;
+  flex-wrap: wrap;
   gap: .5rem;
   align-items: center;
   min-width: 0;
@@ -2841,6 +2843,26 @@ a:hover {
    One marker for everything the portfolio has defined but not yet delivered:
    features, the products that hold only planned features, the capabilities
    only planned features realize, and every reference pointing at them. */
+.claim-status {
+  display: inline-block;
+  max-width: 100%;
+  padding: .2rem .5rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: .8rem;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.claim-status--planned, .claim-status--partial { color: var(--planned); }
+.claim-status--delivered { color: var(--accent); }
+.claim-anchor { display: block; scroll-margin-top: 84px; }
+.arch-version, .arch-comp-version { white-space: normal; overflow-wrap: anywhere; }
+
+.think-consequence-list > li.is-planned { border-left-color: var(--planned-line); }
+.think-consequence-list > li.is-planned .think-consequence__step { color: var(--planned); }
+
 .think-therapy__grid > li.is-planned {
   border-color: var(--planned-line);
 }
@@ -2860,7 +2882,7 @@ a:hover {
 
 /* A reference is a pointer, not a status board: inline links keep the body
    colour and carry "on roadmap" as a clock glyph instead of amber. */
-.proof-line a.is-planned::after,
+.proof-line a.is-planned:not(:has(.delivery-status))::after,
 .planned-mark {
   content: '';
   display: inline-block;
@@ -2872,7 +2894,7 @@ a:hover {
   mask: var(--icon-planned) center / contain no-repeat;
 }
 
-.proof-line a.is-planned::after {
+.proof-line a.is-planned:not(:has(.delivery-status))::after {
   margin-left: .35em;
 }
 

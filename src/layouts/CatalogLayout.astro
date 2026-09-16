@@ -1,0 +1,42 @@
+---
+/**
+ * The shared catalog page template. Every catalog view — use cases, actors,
+ * pains, values, affordances, capabilities, features — renders the same shell
+ * so one entity type is never presented as more authoritative than another.
+ */
+import BaseLayout from './BaseLayout.astro';
+import { catalogViews } from '../data/site-navigation.ts';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  lead: string;
+  count: string;
+}
+const { title, description, heading, lead, count } = Astro.props;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<BaseLayout title={title} description={description}>
+  <section class="section catalog-intro">
+    <div class="container">
+      <p class="eyebrow"><a href="/">Poesis</a> / Catalog</p>
+      <h1>{heading}</h1>
+      <nav class="hero-sections" aria-label="Catalog views">
+        {catalogViews.map((view) => <a href={view.href} aria-current={view.href === current ? 'page' : undefined}>{view.label}</a>)}
+      </nav>
+      <p class="catalog-lead">{lead}</p>
+      <slot name="controls" />
+      <p id="catalog-results" class="catalog-count" aria-live="polite">{count}</p>
+    </div>
+  </section>
+  <slot />
+</BaseLayout>
+<style>
+  .catalog-intro { padding-bottom: 0; }
+  h1 { font-size: 2.5rem; line-height: 1.15; letter-spacing: 0; overflow-wrap: anywhere; }
+  .catalog-lead { max-width: 60ch; margin-top: 1.25rem; }
+  .catalog-count { color: var(--ink-soft); font-size: .85rem; }
+  .hero-sections a[aria-current='page'] { color: var(--ink); border-color: currentColor; }
+  @media (max-width: 640px) { h1 { font-size: 2rem; } }
+</style>

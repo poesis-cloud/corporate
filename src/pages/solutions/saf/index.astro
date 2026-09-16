@@ -1,26 +1,28 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UsageCases from '../../../components/UsageCases.astro';
+import { useCasesForSolution } from '../../../data/usage.ts';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
-import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
+import { platformSolutions } from '../../../data/poesis-platform.ts';
 
-const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
+const saf = platformSolutions.find((s) => s.slug === 'saf')!;
 ---
 <BaseLayout
-  title="The Systemic Agentic Framework — the first distributed agentic SAFe engine"
-  description="The first distributed agentic SAFe engine: AI agents run SAFe across portfolio, program, and iteration — open, Apache-2.0, local-first, with a human gate at every layer. Agentic transformation with a method — spec-driven delivery from governed definitions."
+  title="The Systemic Agentic Framework — local agentic SAFe workflows"
+  description={saf.description}
   pageType="Solution"
 >
   <section class="hero hero--split">
     <div class="container">
-      <p class="eyebrow"><a href="/#portfolio">{saf.tag} · Solution</a></p>
-      <h1>The Systemic Agentic Framework — the first distributed agentic SAFe engine.</h1>
-      <p class="lead">SAFe run by AI agents — portfolio to iteration, Apache-2.0 and local-first, with a human ★ gate at every layer.</p>
+      <p class="eyebrow"><a href="/#portfolio">{saf.tags.join(' · ')} · Solution</a></p>
+      <h1>The Systemic Agentic Framework — local agentic SAFe workflows.</h1>
+      <p class="lead">{saf.tagline}</p>
       <div class="hero-promise">
-        <p>An <strong>org chart, not a swarm</strong>: SAFe’s portfolio → program → iteration hierarchy, staffed by agents, running on your own machine.</p>
-        <p>Every step is checked by the harness and closed by a human ★ gate — and the validated artifacts sync out to the shared workspace.</p>
+        <p>{saf.description}</p>
+        <p>Roles and workflows support local work. The three local-tool products use Apache-2.0; the planned SIE bridge has a separate BUSL-1.1 boundary.</p>
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/saf/quickstart/"><Icon name="play" /> Quickstart</a>
@@ -34,7 +36,7 @@ const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
-        <h2>A method agents implement as a harness, run locally and sovereignly by everyone — turning governed definitions into systems, and delivery history back into governed context.</h2>
+        <h2>Reviewable methods and explicit control boundaries.</h2>
       </div>
       <SolutionValueCards solution={saf} />
     </div>
@@ -44,7 +46,7 @@ const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Capabilities</p>
-        <h2>Run SAFe as deterministic agentic workflows under enforced artifact contracts and a human gate at every layer — locally, on your own tree, with the history sourced back into the model.</h2>
+        <h2>Local controls and method content, with planned approval and sourcing integrations.</h2>
       </div>
       <SolutionCapabilityCards solution={saf} />
     </div>
@@ -54,10 +56,11 @@ const saf = poesisPortfolio.find((s) => s.slug === 'saf')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Products</p>
-        <h2>Four products, one governed delivery loop — spec-driven, harnessed, human-gated.</h2>
+        <h2>Four products with distinct local and planned integration scopes.</h2>
       </div>
       <ProductCards solution={saf} />
     </div>
   </section>
 
+  <UsageCases cases={useCasesForSolution('saf')} title="Reviewed agentic delivery use cases" />
 </BaseLayout>

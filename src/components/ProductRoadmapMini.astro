@@ -3,26 +3,29 @@
  * ProductRoadmapMini — compact line-and-milestones roadmap strip for a
  * product box (ArchMap homepage architecture map), rendered just above the
  * Features list. Same data source as ProductRoadmap.astro
- * (src/data/poesis-portfolio.ts — each feature's own milestone).
+ * (src/data/poesis-platform.ts — each feature's own milestone).
  */
-import type { FeatureMilestone } from '../data/poesis-portfolio.ts';
+import { milestoneStatus, type Feature, type FeatureMilestone } from '../data/poesis-platform.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
 
 interface Props {
   product: string;
   milestones: FeatureMilestone[];
+  features: Feature[];
 }
 
-const { product, milestones } = Astro.props;
+const { product, milestones, features } = Astro.props;
 ---
 <div class="arch-roadmap-mini" aria-label={`${product} roadmap`}>
   <ol class="arch-roadmap-mini-track">
     {milestones.map((m) => (
       <li
         class={`arch-roadmap-mini-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}
-        title={`v${m.version} — ${m.label}${m.shipped ? ' (shipped)' : ''}`}
+        title={`${m.shipped ? 'Recorded release' : 'Planned milestone'} v${m.version}: ${m.label}; not current claim acceptance`}
       >
         <span class="arch-roadmap-mini-dot" aria-hidden="true"></span>
         <span class="arch-roadmap-mini-version">v{m.version}</span>
+        <DeliveryStatus state={milestoneStatus({ features }, m)} />
       </li>
     ))}
   </ol>

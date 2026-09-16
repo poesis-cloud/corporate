@@ -4,6 +4,8 @@ export interface ServicePoint {
 }
 
 export interface Service {
+  availability: 'By agreement' | 'Planned';
+  availabilityNote: string;
   slug: string;
   href: string;
   label: string;
@@ -19,6 +21,8 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'consulting',
+    availability: 'By agreement',
+    availabilityNote: 'Inquiry and scoping first; delivery scope, capacity and evidence criteria are agreed per engagement.',
     href: '/services/consulting',
     label: 'Consulting',
     category: 'Transformation',
@@ -57,12 +61,14 @@ export const services: Service[] = [
   },
   {
     slug: 'saas',
+    availability: 'Planned',
+    availabilityNote: 'No provisioned hosted offer is established. Provisioning, isolation, recovery, support and product behavior require acceptance before availability is claimed.',
     href: '/services/saas',
     label: 'SaaS',
     category: 'Managed cloud',
     title: 'Run Poesis as a managed service.',
     summary: 'A managed cloud path for owning the Poesis stack without operating its underlying platform engineering.',
-    lead: 'Use the Poesis stack as a managed capability while retaining authority over the definitions, constraints, and decisions that govern your systems.',
+    lead: 'A planned managed-service route, with explicit product scope and operating responsibilities to be agreed before provisioning.',
     proposition: 'The SaaS service is designed for organizations that want durable access to Poesis capabilities, continuous platform evolution, and a clear operating boundary between their governance and the managed technical substrate.',
     outcomes: [
       {
@@ -95,13 +101,15 @@ export const services: Service[] = [
   },
   {
     slug: 'on-prem-integration-administration',
+    availability: 'By agreement',
+    availabilityNote: 'A scoped integration engagement, not a claim that every product or environment is production-ready.',
     href: '/services/on-prem-integration-administration',
     label: 'On-prem integration & administration',
     category: 'Sovereign deployment',
     title: 'Keep governed AI inside your control boundary.',
     summary: 'Deployment, integration, and administration of Poesis products in regulated, sovereign, and enterprise environments.',
     lead: 'Place the Poesis stack within the infrastructure, security, and operational boundaries your organization is accountable for.',
-    proposition: 'On-premises delivery makes deployment sovereignty an architectural property rather than a marketing claim. We adapt the reference stack to enterprise controls while preserving the separation between governed definitions, execution, and operational administration.',
+    proposition: 'On-premises integration maps components, models, tool egress, telemetry, remotes and backups to explicit controls. Local deployment alone does not establish sovereignty; supported routes and recovery require acceptance.',
     outcomes: [
       {
         title: 'Control-boundary alignment',
@@ -133,6 +141,8 @@ export const services: Service[] = [
   },
   {
     slug: 'certification',
+    availability: 'Planned',
+    availabilityNote: 'A proposed Poesis-owned qualification path, not standards-body accreditation or an already operated certification service.',
     href: '/services/certification',
     label: 'Certification',
     category: 'Capability building',

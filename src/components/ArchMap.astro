@@ -7,35 +7,37 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { poesisPortfolio, productTimeline, featureStatus, productShipped, capabilityShipped, typeIcons } from '../data/poesis-portfolio.ts';
+import { platformSolutions, productTimeline, featureStatus, productShipped, capabilityShipped, productStatus, solutionHref, typeIcons } from '../data/poesis-platform.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 import Icon from './Icon.astro';
 
-const stack = poesisPortfolio.filter((s) => s.slug !== 'saf');
-const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
+const stack = platformSolutions.filter((s) => s.slug !== 'saf');
+const framework = platformSolutions.find((s) => s.slug === 'saf')!;
+const frameworkHref = solutionHref(framework);
 ---
 <div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
     <span>Poesis Platform Map · solutions ⊃ products ⊃ features</span>
-    <span>every box is clickable · <em class="is-planned">amber = not shipped yet</em></span>
+    <span>Scoped claims · historical milestones shown separately</span>
   </div>
 
   <div class="arch-grid">
     <div class="arch-stack">
         {stack.map((s, i) => (
-          <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'built on · powered by' : 'implements'}</span></div>}
+          <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'planned integration' : 'specification contract'}</span></div>}
             <article class="arch-scope arch-scope--standard" aria-labelledby={`arch-solution-${s.slug}`}>
               <div class="arch-scope-meta">
                 <span class="arch-icon"><Icon name={typeIcons.solution} size={16} /></span>
-                <span class="tag">{s.tag} · Solution</span>
+                <span class="tag">{s.tags.join(' · ')} · Solution</span>
               </div>
-              <h3 id={`arch-solution-${s.slug}`}><a href={s.href}>{s.name}</a></h3>
+              <h3 id={`arch-solution-${s.slug}`}><a href={solutionHref(s)}>{s.name}</a></h3>
               <p>{s.excerpt}</p>
               <details class="arch-group">
                 <summary>Capabilities</summary>
                 <nav class="arch-comps" aria-label={`${s.name} capabilities`}>
                   {s.capabilities.map((c) => (
-                    <a class:list={['arch-comp', !capabilityShipped(s, c) && 'is-planned']} href={`${s.href}#${c.slug}`}>{c.name}</a>
+                    <a class:list={['arch-comp', !capabilityShipped(s, c) && 'is-planned']} href={`${solutionHref(s)}#${c.slug}`}>{c.name} <DeliveryStatus state={c.delivery.state} /></a>
                   ))}
                 </nav>
               </details>
@@ -45,22 +47,22 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                   {s.products.map((p) => {
                     return (
                     <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
-                      <span class="arch-version">current v{p.currentVersion}</span>
+                      <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
-                        <a href={`${s.href}/products/${p.slug}`}>{p.name}</a>
+                        <a href={`${solutionHref(s)}/products/${p.slug}`}>{p.name}</a>
                       </h4>
                       <p class="arch-product-tagline">{p.excerpt}</p>
-                      <ProductRoadmapMini product={p.name} milestones={productTimeline(p)} />
+                      <ProductRoadmapMini product={p.name} features={p.features} milestones={productTimeline(p)} />
                       <details class="arch-group arch-group--features">
                         <summary>Features</summary>
                         <nav class="arch-comps" aria-label={`${p.name} features`}>
                           {p.features.map((f) => {
                             const status = featureStatus(f);
                             return (
-                              <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${s.href}/products/${p.slug}#${f.slug}`}>
+                              <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${solutionHref(s)}/products/${p.slug}#${f.slug}`}>
                                 {f.name}
-                                <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                                  {status.shipped ? '✓' : `v${status.version}`}
+                                <span class="arch-comp-version" title={`Historical milestone v${status.version}`}>
+                                  <DeliveryStatus state={status.state} />
                                 </span>
                               </a>
                             );
@@ -77,21 +79,21 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
         ))}
     </div>
 
-    <div class="arch-bridge" aria-hidden="true"><span>definitions ⇄ generated artifacts</span></div>
+    <div class="arch-bridge" aria-hidden="true"><span>planned definition / artifact integration</span></div>
 
     <aside class="arch-side">
           <article class="arch-scope arch-scope--framework" aria-labelledby={`arch-solution-${framework.slug}`}>
             <div class="arch-scope-meta">
               <span class="arch-icon"><Icon name={typeIcons.solution} size={16} /></span>
-              <span class="tag tag--accent-3">{framework.tag} · Solution</span>
+              <span class="tag tag--accent-3">{framework.tags.join(' · ')} · Solution</span>
             </div>
-            <h3 id={`arch-solution-${framework.slug}`}><a href={framework.href}>{framework.name}</a></h3>
+            <h3 id={`arch-solution-${framework.slug}`}><a href={frameworkHref}>{framework.name}</a></h3>
             <p>{framework.excerpt}</p>
             <details class="arch-group">
               <summary>Capabilities</summary>
               <nav class="arch-comps" aria-label={`${framework.name} capabilities`}>
                 {framework.capabilities.map((c) => (
-                  <a class:list={['arch-comp', !capabilityShipped(framework, c) && 'is-planned']} href={`${framework.href}#${c.slug}`}>{c.name}</a>
+                  <a class:list={['arch-comp', !capabilityShipped(framework, c) && 'is-planned']} href={`${frameworkHref}#${c.slug}`}>{c.name} <DeliveryStatus state={c.delivery.state} /></a>
                 ))}
               </nav>
             </details>
@@ -101,22 +103,22 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
                 {framework.products.map((p) => {
                   return (
                   <section class:list={['arch-product', !productShipped(p) && 'is-planned']} aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
-                    <span class="arch-version">current v{p.currentVersion}</span>
+                    <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
-                      <a href={`${framework.href}/products/${p.slug}`}>{p.name}</a>
+                      <a href={`${frameworkHref}/products/${p.slug}`}>{p.name}</a>
                     </h4>
                     <p class="arch-product-tagline">{p.excerpt}</p>
-                    <ProductRoadmapMini product={p.name} milestones={productTimeline(p)} />
+                    <ProductRoadmapMini product={p.name} features={p.features} milestones={productTimeline(p)} />
                     <details class="arch-group arch-group--features">
                       <summary>Features</summary>
                       <nav class="arch-comps" aria-label={`${p.name} features`}>
                         {p.features.map((f) => {
                           const status = featureStatus(f);
                           return (
-                            <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${framework.href}/products/${p.slug}#${f.slug}`}>
+                            <a class:list={['arch-comp', !status.shipped && 'is-planned']} href={`${frameworkHref}/products/${p.slug}#${f.slug}`}>
                               {f.name}
-                              <span class="arch-comp-version" title={status.shipped ? `Shipped in v${status.version}` : `Planned for v${status.version}`}>
-                                {status.shipped ? '✓' : `v${status.version}`}
+                              <span class="arch-comp-version" title={`Historical milestone v${status.version}`}>
+                                <DeliveryStatus state={status.state} />
                               </span>
                             </a>
                           );
@@ -134,9 +136,8 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
 
   <p class="arch-note">
     <span class="arch-note__label">Version convention</span>
-    Anything below <strong>v1.0</strong> is a pre-release development line, not a
-    shipped product: it is visible here so the roadmap is honest, but it is not
-    available to clients. <strong>v1.0</strong> is the first version you can use.
+    Recorded versions preserve release history, not current feature acceptance.
+    <DeliveryStatus state="delivered" /> and <DeliveryStatus state="planned" /> describe the stated scope, not hosted availability or certification.
   </p>
 </div>
 
@@ -162,10 +163,10 @@ const framework = poesisPortfolio.find((s) => s.slug === 'saf')!;
     font-family: var(--font-mono);
     font-size: 0.66rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--accent);
-    white-space: nowrap;
+    white-space: normal;
   }
   .arch-version {
     display: block;

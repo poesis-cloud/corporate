@@ -1,4 +1,4 @@
-import { poesisPortfolio } from './poesis-portfolio.ts';
+import { platformSolutions, solutionHref } from './poesis-platform.ts';
 import { alternatives } from './alternatives.ts';
 
 export interface SiteNavigationItem {
@@ -20,22 +20,28 @@ export interface SiteNavigationGroup {
   layout?: 'platform';
 }
 
+/** The catalog views, in need-before-coverage order. Also the in-page nav of every catalog page. */
+export const catalogViews: SiteNavigationItem[] = [
+  { href: '/usage', label: 'Use Cases' },
+  { href: '/actors', label: 'Actors' },
+  { href: '/pains', label: 'Pain Points' },
+  { href: '/values', label: 'Values' },
+  { href: '/affordances', label: 'Affordances' },
+  { href: '/capabilities', label: 'Capabilities' },
+  { href: '/features', label: 'Features' },
+];
+
 export const siteNavigation: SiteNavigationGroup[] = [
   {
     label: 'Platform',
     layout: 'platform',
     sections: [
       {
-        label: 'By challenge',
-        items: [
-          { href: '/solutions/saf/products/agentic-harness', label: 'Govern AI Agents' },
-          { href: '/solutions/saf', label: 'Govern Agentic Software Delivery' },
-          { href: '/solutions/itip', label: 'Automate IT Governance' },
-          { href: '/solutions/sie', label: 'Build Agent-Ready Enterprise Systems' },
-        ],
+        label: 'By need & coverage',
+        items: catalogViews,
       },
       {
-        label: 'Comparisons',
+        label: 'By comparison',
         items: alternatives.map((a) => ({
           href: `/it/alternatives/${a.slug}/`,
           label: `Compared to ${a.name}`,
@@ -46,11 +52,11 @@ export const siteNavigation: SiteNavigationGroup[] = [
         layout: 'solutions',
         items: [
           { href: '/#portfolio', label: 'Platform Overview' },
-          ...poesisPortfolio.map((solution) => ({
-            href: solution.href,
+          ...platformSolutions.map((solution) => ({
+            href: solutionHref(solution),
             label: solution.fullName,
             children: solution.products.map((product) => ({
-              href: `${solution.href}/products/${product.slug}`,
+              href: `${solutionHref(solution)}/products/${product.slug}`,
               label: product.name,
             })),
           })),
@@ -129,7 +135,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
 ];
 
 const footerLabels: Record<string, string[]> = {
-  Platform: ['Platform Overview', 'IT Intelligence Platform', 'Systemic Intelligence Engine', 'Generative System Model', 'Systemic Agentic Framework'],
+  Platform: ['Platform Overview', 'Use Cases', 'IT Intelligence Platform', 'Systemic Intelligence Engine', 'Generative System Model', 'Systemic Agentic Framework'],
   Services: ['Poesis Pilot', 'Consulting', 'SaaS', 'On-prem', 'Certification'],
   Partnerships: ['LLM Vendor Partnership'],
   Developers: ['Documentation', 'Community', 'Repositories', 'Projects', 'Organization'],

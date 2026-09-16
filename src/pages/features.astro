@@ -1,0 +1,25 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
+import { featureHref, poesisUsage, usageFeatures } from '../data/usage.ts';
+
+const entries: DirectoryEntry[] = usageFeatures.map((entry) => ({
+  anchor: `feature-${entry.slug.replace(/\//g, '-')}`,
+  eyebrow: `${entry.solution.name} / ${entry.product.name}`,
+  title: entry.feature.name,
+  body: entry.feature.blurb,
+  status: entry.feature.delivery.state,
+  meta: [{ label: 'Product scope', href: featureHref(entry) }, { label: `${entry.feature.milestone.shipped ? 'Released' : 'Milestone'} ${entry.feature.milestone.version}` }],
+  links: poesisUsage.useCases.filter((useCase) => entry.feature.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}` })),
+  empty: 'No use case declared.',
+}));
+---
+<CatalogLayout
+  title="Poesis features"
+  description="Every Poesis product feature with its delivery status, milestone and the use cases it declares it serves."
+  heading="Features"
+  lead="The product scope itself. Each feature states whether it is implemented or planned, and which use cases it declares it serves."
+  count={`${entries.length} features`}
+>
+  <CatalogDirectory id="features" eyebrow="Features" title="Product scope" entries={entries} />
+</CatalogLayout>

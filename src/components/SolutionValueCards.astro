@@ -1,38 +1,37 @@
 ---
 /**
  * SolutionValueCards — the shared value list for solution pages, in the same
- * format as the homepage therapy values. A value is delivered by solution
- * capabilities, never by products directly: the relation named in the proof
- * line is `delivered by capability` when one capability suffices, and
- * `emerges from capabilities` when the value only exists once several
- * capabilities combine. Each entry links to the capability anchors further
- * down the same page.
+ * format as the homepage therapy values. A value is realized by solution
+ * capabilities, never by products directly. The capabilities named in the proof
+ * line are the ones that declare the value, and each entry links to its
+ * capability anchor further down the same page.
  */
-import Icon from './Icon.astro';
-import { capabilityShipped, relationQualifiers, solutionValueAnchor, typeIcons, type Solution } from '../data/poesis-portfolio.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
+import { relationQualifiers, type Solution } from '../data/poesis-platform.ts';
+import { solutionValues, valueAliases, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
 
 interface Props {
   solution: Solution;
 }
 
 const { solution } = Astro.props;
-const capability = (slug: string) => solution.capabilities.find((c) => c.slug === slug)!;
 ---
 <ul class="think-consequence-list portfolio-values">
-  {solution.values.map((v) => (
-    <li id={solutionValueAnchor(v.title)}>
+  {solutionValues(solution.slug).map((v) => (
+    <li id={valueAnchor(v)} class={valueStatus(v.slug) !== 'delivered' ? 'is-planned' : undefined}>
+      {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
       <span class="think-consequence__head">
-        <span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span>
         <span class="think-consequence__step">Value</span>
+        <DeliveryStatus state={valueStatus(v.slug)} />
       </span>
       <strong>{v.title}</strong>
       <p set:html={v.body} />
       <p class="proof-line">
-        <span>{relationQualifiers.solutionValueCapabilities(v.relations.capabilities.length, v.emergent)}</span>
-        {v.relations.capabilities.map((cs, i) => (
+        <span>{relationQualifiers.solutionValueCapabilities()}</span>
+        {valueSupports(v.slug).map((support, i) => (
           <>
             {i > 0 && ' · '}
-            <a class={capabilityShipped(solution, capability(cs)) ? undefined : 'is-planned'} href={`#${cs}`}>{capability(cs).name}</a>
+            <a class={support.state === 'delivered' ? undefined : 'is-planned'} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} /></a>
           </>
         ))}
       </p>

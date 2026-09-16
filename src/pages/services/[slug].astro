@@ -19,9 +19,10 @@ const { service } = Astro.props;
 <BaseLayout title={service.title.replace(/\.$/, '')} description={service.summary} pageType="Service">
   <section class="hero service-hero">
     <div class="container">
-      <p class="eyebrow"><a href="/#services">{service.category} · Service</a></p>
+      <p class="eyebrow"><a href="/#services">{service.category} · Service</a><span class="claim-status">{service.availability}</span></p>
       <h1>{service.title}</h1>
       <p class="lead">{service.lead}</p>
+      <p>{service.availabilityNote}</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/contact"><Icon name="message" /> Discuss your context</a>
         <a class="btn btn-ghost" href="/#services"><Icon name="list" /> All services</a>

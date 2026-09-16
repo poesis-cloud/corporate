@@ -1,0 +1,58 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import UsageCases from '../../components/UsageCases.astro';
+import { poesisUsage } from '../../data/usage.ts';
+---
+<CatalogLayout
+  title="Poesis use cases"
+  description="Browse the IT work Poesis is built for, from service ownership and incident impact to definition review, appraisal and delivery."
+  heading="Poesis use cases"
+  lead="Each use case states a goal and the actors who pursue it. A delivery badge appears only where platform items declare they serve it."
+  count={`${poesisUsage.useCases.length} use cases`}
+>
+  <form slot="controls" class="usage-filters" id="usage-filters" role="search">
+    <label>Actor type<select name="actor" id="actor-filter"><option value="">All actor types</option>{poesisUsage.actorTypes.map((actor) => <option value={actor.slug}>{actor.name}</option>)}</select></label>
+    <label>Pain<select name="pain" id="pain-filter"><option value="">All pains</option>{poesisUsage.pains.map((pain) => <option value={pain.slug}>{pain.tags.join(' · ')}</option>)}</select></label>
+    <button type="reset" class="btn btn-ghost">Clear filters</button>
+  </form>
+  <div id="use-cases"><UsageCases cases={poesisUsage.useCases} title="Workflows and outcomes" browse={false} /></div>
+</CatalogLayout>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#usage-filters');
+  const actor = document.querySelector<HTMLSelectElement>('#actor-filter');
+  const pain = document.querySelector<HTMLSelectElement>('#pain-filter');
+  const result = document.querySelector<HTMLElement>('#catalog-results');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-usage-case]')];
+  if (form && actor && pain && result) {
+    const apply = (writeUrl = true) => {
+      let count = 0;
+      for (const card of cards) {
+        card.hidden = Boolean((actor.value && !card.dataset.actors?.split(' ').includes(actor.value)) || (pain.value && !card.dataset.pains?.split(' ').includes(pain.value)));
+        if (!card.hidden) count++;
+      }
+      result.textContent = count ? `${count} use case${count === 1 ? '' : 's'}` : 'No use cases match these actor and pain selections.';
+      if (writeUrl) {
+        const url = new URL(location.href);
+        for (const [key, value] of [['actor', actor.value], ['pain', pain.value]]) value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
+        history.replaceState(null, '', url);
+      }
+    };
+    const restore = () => {
+      const query = new URLSearchParams(location.search);
+      actor.value = query.get('actor') ?? '';
+      pain.value = query.get('pain') ?? '';
+      apply(false);
+    };
+    form.addEventListener('change', () => apply());
+    form.addEventListener('submit', (event) => { event.preventDefault(); apply(); });
+    form.addEventListener('reset', () => { actor.value = ''; pain.value = ''; apply(); });
+    addEventListener('popstate', restore);
+    restore();
+  }
+</script>
+<style>
+  .usage-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 1rem; align-items: end; margin-top: 2rem; }
+  .usage-filters label { min-width: 0; display: grid; gap: .4rem; font-size: .9rem; }
+  select { width: 100%; min-width: 0; min-height: 2.75rem; background: var(--bg-soft); color: var(--ink); border: 1px solid var(--line-strong); border-radius: 4px; padding: .5rem; font: inherit; }
+  @media (max-width: 640px) { .usage-filters { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,78 @@
+---
+/**
+ * Use case detail. The page states the case itself — name, goal, actor types —
+ * and everything else is derived from the platform items that declare they
+ * serve this case. There is no per-case prose to drift from the platform.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DeliveryStatus from '../../components/DeliveryStatus.astro';
+import Icon from '../../components/Icon.astro';
+import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, useCaseStatus, valueHref, valueStatus, valuesForUseCase } from '../../data/usage.ts';
+export function getStaticPaths() { return poesisUsage.useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } })); }
+const { useCase } = Astro.props;
+const features = featuresForUseCase(useCase.slug);
+const capabilities = capabilitiesForUseCase(useCase.slug);
+const affordances = affordancesForUseCase(useCase.slug);
+const values = valuesForUseCase(useCase.slug);
+const pains = painsForUseCase(useCase.slug);
+const state = useCaseStatus(useCase);
+---
+<BaseLayout title={useCase.name} description={useCase.goal}>
+  <section class="section usage-detail-intro">
+    <div class="container">
+      <p class="eyebrow"><a href="/usage">Usage</a> / Use case {state && <DeliveryStatus state={state} />}</p>
+      <h1>{useCase.name}</h1><p class="lead">{useCase.goal}</p>
+      <p class="usage-actors">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/actors#${slug}`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
+      <nav class="hero-sections" aria-label="Use case sections"><a href="#platform">What serves it</a><a href="#values">Values</a><a href="#pains">Pains</a></nav>
+    </div>
+  </section>
+  <section id="platform" class="section section--soft">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Platform</p><h2>What serves this use case</h2></div>
+      {state === undefined ? <p>No platform coverage declared.</p> : <div class="usage-columns">
+        <div>
+          <h3>Features</h3>
+          <ul class="usage-flat-list">{features.map((entry) => <li data-usage-feature={entry.slug}><a href={featureHref(entry)}>{entry.product.name}: {entry.feature.name}</a> <DeliveryStatus state={entry.feature.delivery.state} /></li>)}</ul>
+        </div>
+        <div>
+          <h3>Capabilities</h3>
+          <ul class="usage-flat-list">{capabilities.map((entry) => <li data-usage-capability={entry.slug}><a href={capabilityHref(entry)}>{entry.solution.name}: {entry.capability.name}</a> <DeliveryStatus state={entry.capability.delivery.state} /></li>)}</ul>
+          <h3>Affordances</h3>
+          <ul class="usage-flat-list">{affordances.map((entry) => <li data-usage-affordance={entry.slug}><a href={affordanceHref(entry)}>{entry.affordance.name}</a> <DeliveryStatus state={entry.affordance.delivery.state} /></li>)}</ul>
+        </div>
+      </div>}
+    </div>
+  </section>
+  <section id="values" class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Values</p><h2>Values reachable from here</h2></div>
+      {values.length === 0 && <p>No values linked through platform coverage.</p>}
+      <ul class="usage-value-list">{values.map((value) => <li data-usage-value={value.slug}>
+        <h3><a href={valueHref(value)}>{value.title}</a></h3>{valueStatus(value.slug) && <DeliveryStatus state={valueStatus(value.slug)!} />}<p>{value.body}</p>
+      </li>)}</ul>
+    </div>
+  </section>
+  <section id="pains" class="section section--soft">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Pains</p><h2>Pain points</h2></div>
+      <ul class="usage-value-list">{pains.map((pain) => <li data-usage-pain={pain.slug}>
+        <h3><a href={`/pains#${pain.slug}`}>{pain.pain}</a></h3><p>{pain.cost}</p>
+      </li>)}</ul>
+      <a href="/usage"><Icon name="arrow-right" /> All use cases</a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .usage-detail-intro h1 { max-width: 24ch; font-size: 2.5rem; line-height: 1.2; letter-spacing: 0; overflow-wrap: anywhere; }
+  .usage-actors { font-size: .85rem; color: var(--ink-soft); }
+  .usage-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .usage-columns > div { min-width: 0; }
+  h2 { font-size: 1.55rem; letter-spacing: 0; }
+  h3 { font-size: 1.3rem; letter-spacing: 0; }
+  li { margin-bottom: .85rem; overflow-wrap: anywhere; }
+  .usage-flat-list, .usage-value-list { list-style: none; padding: 0; }
+  .usage-flat-list li { padding-bottom: .6rem; border-bottom: 1px solid var(--line); }
+  .usage-value-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .usage-value-list h3 { margin-top: 0; font-size: 1.1rem; }
+  @media (max-width: 640px) { .usage-columns, .usage-value-list { grid-template-columns: minmax(0, 1fr); } .usage-detail-intro h1 { font-size: 2rem; } }
+</style>

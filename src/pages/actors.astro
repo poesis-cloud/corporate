@@ -1,0 +1,24 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
+import { poesisUsage } from '../data/usage.ts';
+
+const entries: DirectoryEntry[] = poesisUsage.actorTypes.map((actor) => ({
+  anchor: actor.slug,
+  eyebrow: `${actor.kind === 'human' ? 'Human' : 'System'} / ${actor.tags.join(' · ')}`,
+  icon: actor.icon,
+  title: actor.name,
+  hook: actor.hook,
+  body: actor.body,
+  links: [{ label: 'Related use cases', href: `/usage?actor=${actor.slug}#use-cases` }],
+}));
+---
+<CatalogLayout
+  title="Poesis actors"
+  description="The human and system actor types that pursue Poesis use cases, from service and risk owners to assessment runners and delivery agents."
+  heading="Actors"
+  lead="Human and system participants named by the use cases. An actor is a role in the work, not a licensed seat or a product persona."
+  count={`${entries.length} actor types`}
+>
+  <CatalogDirectory id="actor-types" eyebrow="Actor types" title="Human and system participants" entries={entries} />
+</CatalogLayout>

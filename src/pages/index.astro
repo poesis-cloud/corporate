@@ -1,25 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
+import UsageCases from '../components/UsageCases.astro';
+import { poesisUsage } from '../data/usage.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { profilesForDomain } from '../data/profiles.ts';
+import { services } from '../data/services.ts';
+import { siteNavigation } from '../data/site-navigation.ts';
 
 const itProfiles = profilesForDomain('it');
+const partnerships = siteNavigation.find((group) => group.label === 'Partnerships')!.sections.flatMap((section) => section.items);
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero hero--split">
     <div class="container">
-      <p class="eyebrow">The foundation of the autonomous enterprise</p>
+      <p class="eyebrow">Toward the autonomous enterprise</p>
       <h1>The Organizational Intelligence Platform.</h1>
-      <p class="lead">AI is entering organizations it doesn't understand. Humans rarely understand them much better. Poesis grounds both in a coherent system that manages <em>definitions</em> of the organization — its DNA — <strong>to efficiently and continuously generate that organization</strong>.</p>
+      <p class="lead">Poesis brings people and AI around shared <em>definitions</em> of the organization: accepted intent, typed relationships and reviewable evidence. Build on available foundations, with reasoning, appraisal and generation workflows on the roadmap.</p>
       <div class="hero-promise">
-        <p>The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating BUILD and RUN adequately</strong>, and <strong>ultimately for the autonomous enterprise to emerge</strong>.</p>
+        <p>Build a governed organizational digital twin, connecting definitions to evidence, human decisions and bounded AI workflows. Start with a defined scope and expand observation coverage and authorized action along the road toward the autonomous enterprise.</p>
       </div>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Run a Pilot</a>
+        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Discuss a Pilot</a>
       </div>
       <p class="hero-note">Human-governed definitions that people and AI can act on.</p>
       <nav class="hero-sections" aria-label="On this page">
@@ -27,9 +33,12 @@ const itProfiles = profilesForDomain('it');
         <a href="#affordances"><span>Affordances</span></a>
         <a href="#values"><span>Values</span></a>
         <a href="#postures"><span>Deployment &amp; integration postures</span></a>
-        <a href="#personas"><span>Persona targets</span></a>
+        <a href="#usage"><span>Use cases</span></a>
+        <a href="#personas"><span>Actor types</span></a>
         <a href="#pilot"><span>Start with one workflow</span></a>
         <a href="#portfolio"><span>The Poesis platform</span></a>
+        <a href="#services"><span>Services</span></a>
+        <a href="#partnerships"><span>Partnerships</span></a>
       </nav>
     </div>
   </section>
@@ -51,7 +60,7 @@ const itProfiles = profilesForDomain('it');
       <div class="section-head">
         <p class="eyebrow">Affordances</p>
         <h2>Poesis Gene Therapy</h2>
-        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
+        <p class="lead">Available foundations and planned workflows for shared context, reviewed changes and bounded action. Each affordance states its scope.</p>
       </div>
       <ThinkTherapyDiagram />
     </div>
@@ -62,11 +71,13 @@ const itProfiles = profilesForDomain('it');
       <div class="section-head">
         <p class="eyebrow">Values</p>
         <h2>The organization becomes intelligible.</h2>
-        <p class="lead">To the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
+        <p class="lead">Put shared definitions to work in decisions, delegated workflows and evidence review. Each value is a company commitment, marked Implemented or Planned for its stated scope.</p>
       </div>
       <PlatformValues />
     </div>
   </section>
+
+  <div id="usage"><UsageCases cases={poesisUsage.useCases.filter((useCase) => ['read-governance-model', 'reconcile-code-evidence', 'review-scoped-appraisal', 'deliver-reviewed-artifact'].includes(useCase.id))} title="From a concrete need to a reviewed outcome" /></div>
 
   <section id="postures" class="section home-postures">
     <div class="container">
@@ -78,17 +89,17 @@ const itProfiles = profilesForDomain('it');
 
       <div id="deployment" class="home-posture">
         <h3>Deployment &mdash; your models, your systems, your control boundary</h3>
-        <p class="home-posture__lead">Poesis adds a governed THINK layer that runs where you decide, on the models you choose, in a format you can take with you.</p>
+        <p class="home-posture__lead">Local, self-hosted and hosted routes have different acceptance boundaries. Host/model compatibility, migration and hosted availability need separate verification.</p>
         <ul class="think-consequence-list home-deployment-list">
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Model-independent</span></span>
           <strong>Governance does not depend on one provider</strong>
-          <p>Use the models appropriate to each bounded task &mdash; and change them &mdash; without the governed definition or its guarantees moving with them.</p>
+          <p>Model profiles support selection for bounded tasks. Each host mapping and model change needs compatibility and quality checks.</p>
         </li>
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Local and sovereign</span></span>
-          <strong>Sensitive state never leaves your boundary</strong>
-          <p>THINK and RUN state stays inside environments you control, so the organizational definition remains yours by deployment, not by policy alone.</p>
+          <strong>Define the data boundary explicitly</strong>
+          <p>Local execution supports control, but models, tools, telemetry, remotes and backups can transmit data. Egress and retention policies remain necessary.</p>
         </li>
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Cloud where appropriate</span></span>
@@ -98,12 +109,12 @@ const itProfiles = profilesForDomain('it');
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Vendor-neutral standard</span></span>
           <strong>Governance you can inspect, not a black box</strong>
-          <p>Poesis is delivered on GSM &mdash; the vendor-neutral standard for defining systems, as OpenTelemetry is the vendor-neutral standard for observing them. Your governed model is typed and portable rather than trapped in a product format.</p>
+          <p>GSM is a candidate common definition model. Interchange requirements support inspectability; compatible consumers and draft-preserving migration still need acceptance.</p>
         </li>
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="github" size={16} /></span><span class="think-consequence__step">Open and inspectable</span></span>
           <strong>Trust cannot be proprietary</strong>
-          <p>The GSM standard is published openly, the SAF framework is Apache-2.0, and the engine is source-available on a scheduled path to open &mdash; a stack asked to carry an organization&rsquo;s definitions must be inspectable by the organizations asked to trust it.</p>
+          <p>GSM specification content exists in source, with publication pending. SAF local tools use Apache-2.0; SIE and the planned bridge have separate licenses. Inspect each product and its terms.</p>
         </li>
       </ul>
       </div>
@@ -113,27 +124,27 @@ const itProfiles = profilesForDomain('it');
         <p class="home-posture__lead">Poesis does not ask you to rip anything out: governed THINK connects to the BUILD and RUN environments you already operate. The sourcing bench targets the artifacts your stack already produces, and the governed model it builds is a substrate your existing tools can consume.</p>
         <ul class="think-consequence-list home-integration-list">
         <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories<span class="planned-mark" aria-hidden="true"></span></span></span>
-          <strong>What is committed becomes definition</strong>
-          <p>Source code is read continuously &mdash; code index, property graph, and dependency analysis turn what is committed into evidence-backed definition contributions.</p>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories</span><DeliveryStatus state="planned" /></span>
+          <strong>Planned candidates from pinned revisions</strong>
+          <p>Supported analysis is planned to produce reviewable candidates. Acquisition, conflict reduction and governed registration are distinct steps.</p>
         </li>
         <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="docs" size={16} /></span><span class="think-consequence__step">API contracts<span class="planned-mark" aria-hidden="true"></span></span></span>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="docs" size={16} /></span><span class="think-consequence__step">API contracts</span><DeliveryStatus state="planned" /></span>
           <strong>The interaction surface of your estate</strong>
-          <p>OpenAPI and service contracts source who talks to whom, through what, under which obligations &mdash; interactions as governed definitions rather than tribal knowledge.</p>
+          <p>Planned adapters describe declared interaction surfaces with explicit coverage. Contracts alone do not prove actual traffic or applicable obligations.</p>
         </li>
         <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="list" size={16} /></span><span class="think-consequence__step">SBOMs<span class="planned-mark" aria-hidden="true"></span></span></span>
-          <strong>Supply-chain truth, qualified</strong>
-          <p>Software bills of materials anchor supply-chain truth &mdash; every dependency identified with confidence and provenance attached to the claim.</p>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="list" size={16} /></span><span class="think-consequence__step">SBOMs</span><DeliveryStatus state="planned" /></span>
+          <strong>Planned dependency evidence</strong>
+          <p>SBOM analysis identifies declared dependencies in a supported scope. Presence does not prove deployed use, reachability or compliance.</p>
         </li>
         <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Infrastructure<span class="planned-mark" aria-hidden="true"></span></span></span>
-          <strong>The running shape, not the intended one</strong>
-          <p>Kubernetes and Helm artifacts source what is actually deployed, so RUN reality feeds back into the definition instead of diverging from it silently.</p>
+          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Infrastructure</span><DeliveryStatus state="planned" /></span>
+          <strong>Separate intent from observations</strong>
+          <p>Planned infrastructure sourcing reads declared configuration. Deployed identity, observation time and coverage are needed to describe what runs.</p>
         </li>
       </ul>
-      <p class="home-integration-note"><span class="planned-mark" aria-hidden="true"></span>On roadmap: the sourcing bench is specified and in build, not delivered. Named-tool connectors &mdash; ServiceNow CMDB, Backstage catalogs, EA repositories &mdash; follow as further knowledge sources feeding the same governed model.</p>
+      <p class="home-integration-note"><DeliveryStatus state="planned" /> The sourcing bench is specified and in build. Named-tool connectors &mdash; ServiceNow CMDB, Backstage catalogs, EA repositories &mdash; follow as further knowledge sources feeding the same governed model.</p>
       </div>
     </div>
   </section>
@@ -141,20 +152,21 @@ const itProfiles = profilesForDomain('it');
   <section id="personas" class="section section--soft home-personas">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Persona targets</p>
-        <h2>Every IT profile, one governed model.</h2>
-        <p class="lead">Architects author, developers consult, ops watch drift, security proves posture &mdash; all on the same governed definitions, with no translation silos between them. IT is the entry point by design: the business domains the IT organization serves are reached through the model it already governs.</p>
+        <p class="eyebrow">Actor types</p>
+        <h2>Human and system actor types, shared definitions.</h2>
+        <p class="lead">Architecture, delivery, operations, security and AI teams ask different questions about shared definitions. These are intended task perspectives, not already available integrated workflows.</p>
       </div>
       <ul class="think-consequence-list home-persona-list">
         {itProfiles.map((profile) => (
-          <li id={profile.id}>
+          <li id={profile.slug}>
             <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={profile.icon} size={16} /></span><span class="think-consequence__step">{profile.name}</span></span>
             <strong>{profile.hook}</strong>
             <p>{profile.body}</p>
-            <p class="home-persona-cta"><a href={profile.cta.href} data-profile-cta={profile.id}>{profile.cta.label} &rarr;</a></p>
+            <p><a href={`/usage?actor=${profile.slug}#use-cases`}>Related use cases &rarr;</a></p>
           </li>
         ))}
       </ul>
+      <p><a href="/actors">All human and system actor types &rarr;</a></p>
     </div>
   </section>
 
@@ -169,20 +181,20 @@ const itProfiles = profilesForDomain('it');
         <li id="use-case-think">
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="compass" size={16} /></span><span class="think-consequence__step">01 &middot; THINK</span></span>
           <strong>Know what your organization actually is</strong>
-          <p>Your architecture docs, compliance registers, and tribal knowledge drift the moment they are written. Source definitions automatically from people, code, contracts, and infrastructure into one governed digital twin &mdash; evaluated for validity and coherence before anything depends on it.</p>
-          <p class="home-usecase-proof"><span>Backed by</span>Automatic truth sourcing &middot; Governed organizational context</p>
+          <p>Explore directly authored definitions or planned reviewed candidates, with explicit ownership, revision identity and missing evidence.</p>
+          <p class="home-usecase-proof"><span>Candidate pilot scope</span>Shared context and planned sourcing</p>
         </li>
         <li id="use-case-build">
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">02 &middot; BUILD</span></span>
           <strong>Build without rebuilding the intent</strong>
-          <p>Every team, review, and AI agent reconstructs context from scratch &mdash; and reconstruction is where drift enters. Give people and machines the same machine-operable definitions to build from, with deterministic checks and human gates deciding what enters into effect.</p>
-          <p class="home-usecase-proof"><span>Backed by</span>Generative delivery &middot; Governance lifecycle</p>
+          <p>Test a named artifact family on a supported local workflow. Agree pins, substantive review and decision boundaries before evaluating repeatability.</p>
+          <p class="home-usecase-proof"><span>Candidate pilot scope</span>Local controls and reviewed generation</p>
         </li>
         <li id="use-case-run">
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="play" size={16} /></span><span class="think-consequence__step">03 &middot; RUN</span></span>
-          <strong>Operate what you defined &mdash; provably</strong>
-          <p>Operations run on assumptions nobody can verify, and audits reconstruct the past under pressure. Put definitions into effect over human, software, and agentic action &mdash; every divergence surfaces as it appears, with evidence flowing back to THINK.</p>
-          <p class="home-usecase-proof"><span>Backed by</span>Continuous norm evaluation &middot; Composed governance fabric</p>
+          <strong>Define a bounded operational evaluation</strong>
+          <p>Scope observations, Norms, unknown states and authority for a future loop. Measure coverage and delay; continuous detection is not an available general service.</p>
+          <p class="home-usecase-proof"><span>Planned scope</span>Verdicts, observations and authorized response</p>
         </li>
       </ul>
       <ol class="think-consequence-list home-pilot-steps">
@@ -204,7 +216,7 @@ const itProfiles = profilesForDomain('it');
         </li>
       </ol>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-pilot"><Icon name="play" /> Run a Pilot</a>
+        <a class="btn btn-primary" href="/contact" data-demo-cta="homepage-pilot"><Icon name="play" /> Discuss a Pilot</a>
         <a class="btn btn-ghost" href="/services/consulting"><Icon name="briefcase" /> Explore transformation services</a>
       </div>
     </div>
@@ -215,9 +227,44 @@ const itProfiles = profilesForDomain('it');
       <div class="section-head">
         <p class="eyebrow">The Poesis platform</p>
         <h2>Explore the complete solutions and products map.</h2>
-        <p class="lead">No phase belongs to a product: every Poesis solution &mdash; ITIP, SAF, SIE &mdash; operates across the governed THINK &rarr; BUILD &rarr; RUN loop, because they all act on the same governed definitions. Open the product and feature groups to inspect what exists, what is planned, and how the portfolio fits together.</p>
+        <p class="lead">Specification, source content, local controls and planned integrations contribute in different ways. Explore each product for feature scope and historical version metadata.</p>
       </div>
       <ArchMap />
+    </div>
+  </section>
+
+  <section id="services" class="section section--soft" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="services-heading">Services</h2>
+      </div>
+      <ul class="think-consequence-list">
+        {services.map((service) => (
+          <li>
+            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="briefcase" size={16} /></span><span class="think-consequence__step">{service.category}</span></span>
+            <h3><a href={service.href}>{service.label}</a></h3>
+            <span class="claim-status">{service.availability}</span>
+            <p>{service.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="partnerships" class="section" aria-labelledby="partnerships-heading">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="partnerships-heading">Partnerships</h2>
+        <p class="lead">Explore a joint experiment in governed context and model capabilities.</p>
+      </div>
+      <ul class="think-consequence-list">
+        {partnerships.map((partnership) => (
+          <li>
+            <h3><a href={partnership.href}>{partnership.label}</a></h3>
+            <p>Review the proposal, planned scope and evidence to establish together.</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>

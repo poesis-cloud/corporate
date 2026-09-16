@@ -28,10 +28,10 @@ const {
 const site = Astro.site ?? new URL('https://poesis.cloud');
 const canonical = new URL(Astro.url.pathname, site).href;
 const isHomepage = Astro.url.pathname === '/';
-const homepageDescription = 'Poesis is the Organizational Intelligence Platform: human and AI governance turns shared definitions into a living digital twin. The first domain is IT — enterprise architecture, continuous compliance automation, impact analysis, and agentic AI governance on one governed model.';
+const homepageDescription = 'Poesis is an Organizational Intelligence Platform in development: shared definition foundations, local agentic controls and planned IT governance, appraisal and analysis workflows.';
 const resolvedDescription = description ?? (isHomepage
   ? homepageDescription
-  : 'Poesis harnesses generative AI for an age of governed synthetic autopoiesis — with the GSM standard defining systems, the SIE engine operating their definitions, and ITIP applying them to IT.');
+  : 'Poesis develops GSM specification content, SIE definition foundations, local SAF controls and planned ITIP workflows. Availability and integration are stated per scope.');
 const fullTitle = `${title} · Poesis`;
 const ogImage = new URL('/og-default.png', site).href;
 const socialImageAlt = isHomepage
@@ -130,20 +130,12 @@ const articleLd = article
         // host-only vs parent-domain cookies when both sites load the same ID).
         gtag('config', 'G-KZGGY5D9GW', { anonymize_ip: true, cookie_domain: 'poesis.cloud' });
       };
-      // Delegated GA4 events for profile-card CTAs and demo CTAs. The gtag stub
-      // just queues these into dataLayer; they are only actually sent if/when GA4
-      // is loaded after consent.
+      // Delegated GA4 events for demo CTAs. The gtag stub just queues these
+      // into dataLayer; they are only actually sent if/when GA4 is loaded
+      // after consent.
       document.addEventListener('click', function (e) {
         var t = e.target && e.target.closest ? e.target : null;
         if (!t) return;
-        var profile = t.closest('a[data-profile-cta]');
-        if (profile) {
-          gtag('event', 'profile_cta_click', {
-            profile_id: profile.getAttribute('data-profile-cta'),
-            link_url: profile.getAttribute('href'),
-            page_path: location.pathname,
-          });
-        }
         var demo = t.closest('a[data-demo-cta]');
         if (demo) {
           gtag('event', 'demo_cta_click', {

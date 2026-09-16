@@ -1,12 +1,13 @@
 ---
 import Icon from './Icon.astro';
-import { affordanceRealizations, affordances, capabilityShipped, relationQualifiers, typeIcons } from '../data/poesis-portfolio.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
+import { affordanceRealizations, affordances, capabilityRelationKind, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
 ---
 <div class="think-story" aria-label="The Poesis Gene Therapy">
   <div class="think-story__phases">
     <article class="think-phase think-phase--poesis" aria-labelledby="think-poesis-title">
       <header>
-        <span class="think-phase__number">03 · Decided now</span>
+        <span class="think-phase__number">03 · Target operating model</span>
         <h3 id="think-poesis-title">Human + AI capacity goes to THINK first — governance decides what becomes authoritative.</h3>
       </header>
       <div class="think-therapy">
@@ -27,7 +28,7 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
               <a class="think-capacity think-capacity--link" href="#use-case-run">
                 <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
                 <span class="think-capacity__definition">Operate</span>
-                <span class="think-capacity__state think-capacity__state--good">against the definition &mdash; by AI or programmatically</span>
+                <span class="think-capacity__state think-capacity__state--good">planned bounded actions with explicit authority and observations</span>
               </a>
             </div>
           </div>
@@ -36,22 +37,22 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
           <span class="think-phase__details-label">Affordances</span>
           <ul class="think-therapy__grid">
             {affordances.map((a) => (
-              <li id={`affordance-${a.slug}`}>
-                <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.affordance} size={16} /></span><span class="think-capability__step">{a.name}</span></span>
+              <li id={`affordance-${a.slug}`} class={a.delivery.state !== 'delivered' ? 'is-planned' : undefined}>
+                <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.affordance} size={16} /></span><span class="think-capability__step">{a.name}</span><DeliveryStatus state={a.delivery.state} /></span>
                 <strong>{a.title}</strong>
                 <p>{a.blurb}</p>
                 <p class="proof-line">
                   <span>{relationQualifiers.affordanceCapabilities(a.relations.capabilities.length)}</span>
                   {affordanceRealizations(a).map((r, i) => {
-                    const shipped = capabilityShipped(r.solution, r.capability);
+                    const state = r.capability.delivery.state;
                     return (
                       <>
                         {i > 0 && ' · '}
                         <a
-                          class={shipped ? undefined : 'is-planned'}
-                          title={shipped ? undefined : 'On roadmap'}
-                          href={`${r.solution.href}#${r.capability.slug}`}
-                        >{r.capability.name}</a>
+                          class={state !== 'delivered' ? 'is-planned' : undefined}
+                          title={r.capability.delivery.scope}
+                          href={`${solutionHref(r.solution)}#${r.capability.slug}`}
+                        >{r.capability.name} ({capabilityRelationKind(r.solution, r.capability).replaceAll('-', ' ')}) <DeliveryStatus state={state} /></a>
                       </>
                     );
                   })}
@@ -59,7 +60,7 @@ import { affordanceRealizations, affordances, capabilityShipped, relationQualifi
               </li>
             ))}
           </ul>
-          <p class="think-therapy__legend"><span class="planned-mark" aria-hidden="true"></span>on roadmap</p>
+          <p class="think-therapy__legend"><DeliveryStatus state="delivered" /> for the stated scope; <DeliveryStatus state="planned" /> for company commitments still being implemented.</p>
         </div>
       </div>
     </article>

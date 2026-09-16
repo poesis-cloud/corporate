@@ -1,19 +1,25 @@
 ---
-import Icon from './Icon.astro';
-import { affordances, platformValues, relationQualifiers, typeIcons } from '../data/poesis-portfolio.ts';
+/**
+ * PlatformValues — the platform value list. Values are declared on the usage
+ * side and realized by affordances, so both the delivery state and the proof
+ * line are derived from the affordances that reference each value.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import { relationQualifiers } from '../data/poesis-platform.ts';
+import { platformValues, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
 ---
 <ul class="think-consequence-list">
   {platformValues.map((v) => (
-    <li>
-      <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={typeIcons.value} size={16} /></span><span class="think-consequence__step">{v.name}</span></span>
+    <li id={valueAnchor(v)} class={valueStatus(v.slug) !== 'delivered' ? 'is-planned' : undefined}>
+      <span class="think-consequence__head"><span class="think-consequence__step">Value · {v.originalTitle}</span><DeliveryStatus state={valueStatus(v.slug)} /></span>
       <strong>{v.title}</strong>
       <p>{v.body}</p>
       <p class="proof-line">
-        <span>{relationQualifiers.platformValueAffordances(v.relations.affordances.length, v.emergent)}</span>
-        {v.relations.affordances.map((slug, i) => (
+        <span>{relationQualifiers.platformValueAffordances()}</span>
+        {valueSupports(v.slug).map((support, i) => (
           <>
             {i > 0 && ' · '}
-            <a href={`#affordance-${slug}`}>{affordances.find((a) => a.slug === slug)!.name}</a>
+            <a href={support.href}>{support.name} <DeliveryStatus state={support.state} /></a>
           </>
         ))}
       </p>

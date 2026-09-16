@@ -41,48 +41,48 @@ export const alternatives: Alternative[] = [
         keyword: 'LeanIX alternative',
         title: 'LeanIX Alternative — IT Governance Platform',
         description:
-            'Considering a LeanIX alternative? Compare the EA-repository approach with Poesis: definitions sourced from what actually runs, continuously evaluated against obligations.',
-        h1: 'A LeanIX alternative where the repository cannot drift',
+            'Considering a LeanIX alternative? Compare your EA requirements with Poesis definition foundations and planned sourcing, appraisal and analysis.',
+        h1: 'LeanIX Alternative — IT Governance Platform',
         lead:
-            'EA management tools like LeanIX gave enterprise architecture a shared repository and a common language. Poesis for IT starts from a different premise: the architecture model should be a governed definition of the estate — sourced from the systems that actually run, and continuously evaluated against the obligations that bind them.',
+            'Evaluate an established EA offering against your requirements and the bounded Poesis roadmap. ITIP inventory, sourcing, appraisal and simulation are planned; inspectable foundations are not an operated replacement.',
         strengths:
             'The EA-repository category — of which LeanIX is a leading example — excels at giving architects a curated inventory, portfolio reports, and a shared vocabulary for application landscapes. If your need is an architect-maintained catalog with strong reporting, the category serves it well.',
         differenceIntro:
-            'The difference is not feature count — it is what the model *is*. A repository describes the landscape as architects record it; a governed definition is typed, sourced from reality, and evaluated continuously.',
+            'Poesis explores explicit typed intent and evidence-linked definitions. The comparison dimensions below are evaluation questions, not verified limitations of any current vendor edition.',
         themLabel: 'EA repository approach',
         rows: [
             {
                 dimension: 'Source of truth',
                 them: 'Inventory recorded and maintained by architects (surveys, imports, curation)',
-                poesis: 'Definitions continuously sourced from code, API contracts, SBOMs, and infrastructure — with confidence and provenance',
+                poesis: 'Planned direct authoring or reviewed repository sourcing; code and configuration are not deployed observations',
             },
             {
                 dimension: 'Drift',
-                them: 'Detected when someone notices the map no longer matches the territory',
-                poesis: 'Observed the moment it appears — declared definitions are reconciled against the running system',
+                them: 'Verify discovery, freshness and reconciliation coverage for the selected edition and integrations',
+                poesis: 'Planned correspondence checks need deployment identity, freshness, observation coverage and unknown-state handling',
             },
             {
                 dimension: 'Obligations',
                 them: 'Standards and policies referenced as documents alongside the model',
-                poesis: 'Directives and Norms are governed definitions — machine-evaluable, with verdicts computed from the model',
+                poesis: 'Selected vocabulary exists; binding and complete supplied-instance Norm verdicts remain planned',
             },
             {
                 dimension: 'Impact of change',
                 them: 'Read from diagrams and dependency views',
-                poesis: 'Simulated through typed relations — blast radius traced before you commit',
+                poesis: 'Planned bounded impact analysis; reachability is not causal simulation',
             },
             {
                 dimension: 'AI-readiness',
-                them: 'Reports and exports for human consumption',
-                poesis: 'Every definition typed by a GSM Archetype — a governed context humans and AI agents act on',
+                them: 'Verify current APIs, context interfaces and authorization contracts',
+                poesis: 'Typed definition foundations; authorized read-only context and copilot integration remain planned',
             },
         ],
         whenThem:
             'If you want a curated, architect-owned application portfolio with mature reporting and a large ecosystem, the established EA category is a safe choice.',
         whenPoesis:
-            'If you need the model to stay true to what actually runs, obligations to be evaluated continuously rather than audited annually, and a source of truth AI agents can act on — that is what Poesis for IT is built for.',
+            'Consider a bounded pilot when explicit intent, provenance and typed context are the hypothesis to test, with capacity to integrate planned workflows and measure results.',
         integrationNote:
-            'For many estates this is not either/or: an EA repository is a curated account of intent, and intent is an input. Poesis can treat it as a knowledge source — checked continuously against what the code, contracts, and infrastructure say is actually true.',
+            'An EA repository could be a curated input. A connector, identity mapping, authorization and review contract would need implementation; no live integration is asserted.',
     },
     {
         slug: 'vanta',
@@ -93,46 +93,46 @@ export const alternatives: Alternative[] = [
         keyword: 'Vanta alternative',
         title: 'Vanta Alternative — Continuous Compliance From the Model',
         description:
-            'Considering a Vanta alternative? Compare checklist-based compliance automation with Poesis: posture computed continuously from a governed model of your estate — GDPR, NIS2, DORA, ISO.',
-        h1: 'A Vanta alternative where compliance is computed, not checked',
+            'Considering a Vanta alternative? Evaluate compliance requirements against Poesis selected obligation content and planned evidence-linked appraisal.',
+        h1: 'Vanta Alternative — Continuous Compliance From the Model',
         lead:
-            'Compliance automation tools like Vanta made audit preparation dramatically less painful by automating evidence collection against control checklists. Poesis for IT goes one layer deeper: your regulatory posture is computed continuously from a governed definition of the estate itself.',
+            'Continuous compliance is a Poesis target, not an available legal assurance. Selected content exists; applicability, evidence collection, appraisal and scheduling need integration and acceptance.',
         strengths:
             'The compliance-automation category — of which Vanta is a leading example — excels at streamlining certification audits: integrations that collect evidence, prebuilt control frameworks, and auditor workflows. For getting to a SOC 2 or ISO 27001 attestation fast, the category serves that intent well.',
         differenceIntro:
-            'The difference is the object being checked. Checklist automation verifies that declared controls have evidence; Poesis evaluates whether the system, as defined and observed, satisfies its obligations.',
+            'Compare obligation applicability, evidence lineage and unknown-state handling. Vendor capabilities require current, edition-specific verification; Poesis source content alone does not establish those workflows.',
         themLabel: 'Compliance-automation approach',
         rows: [
             {
                 dimension: 'Unit of compliance',
                 them: 'A control on a checklist, with evidence attached',
-                poesis: 'A Norm bound to governed definitions — machine-evaluable, with deterministic verdicts',
+                poesis: 'Planned supported Norm evaluation of identified inputs; no legal conclusion beyond the evaluated contract',
             },
             {
                 dimension: 'Coverage model',
                 them: 'Prebuilt certification frameworks (SOC 2, ISO 27001, …)',
-                poesis: 'A composable ontology catalogue sourced into GSM — GDPR, NIS2, DORA, ISO — evaluated on the same model',
+                poesis: 'Selected GDPR/NIS2 templates and ISO quality vocabulary; DORA and integrated appraisal remain planned',
             },
             {
                 dimension: 'Relation to the estate',
                 them: 'Integrations sample evidence from tools',
-                poesis: 'The estate itself is defined and sourced — findings trace to the exact definitions and revisions they derive from',
+                poesis: 'Planned provenance-linked findings; observed state must be joined to definitions explicitly',
             },
             {
                 dimension: 'Between audits',
                 them: 'Monitors control status for the next attestation',
-                poesis: 'Appraisal indicators computed continuously — posture is a live dashboard, not an audit artifact',
+                poesis: 'Planned continuous appraisal with coverage, delay and unavailable evidence visible',
             },
             {
                 dimension: 'Beyond compliance',
                 them: 'Purpose-built for certification',
-                poesis: 'The same governed model drives architecture, impact simulation, artifact generation, and AI-agent context',
+                poesis: 'Shared definitions are intended to support planned architecture, analysis, generation and AI context routes',
             },
         ],
         whenThem:
             'If your goal is a fast, well-supported path to a specific attestation, the compliance-automation category is purpose-built for it.',
         whenPoesis:
-            'If compliance is one facet of governing your estate — and you want posture computed from the same governed model that drives architecture and AI enablement — that is Poesis for IT.',
+            'Consider a scoped research or integration pilot when evidence-linked definitions are the target; do not substitute planned appraisal for an operated assurance workflow.',
     },
     {
         slug: 'backstage',
@@ -144,34 +144,34 @@ export const alternatives: Alternative[] = [
         title: 'Backstage Alternative — Governed Definitions, Not Just a Catalog',
         description:
             'Considering a Backstage alternative — or a governance layer above it? Compare the developer-portal catalog with Poesis: typed, governed definitions with lifecycle, obligations, and verdicts.',
-        h1: 'A Backstage alternative: definitions that govern, beyond the catalog',
+        h1: 'Backstage Alternative — Governed Definitions, Not Just a Catalog',
         lead:
-            'Internal developer portals like Backstage gave platform teams a service catalog and a home for golden paths. Poesis for IT addresses the layer a catalog does not: what services are *obliged* to be — typed definitions with lifecycle, ownership, and machine-evaluable obligations.',
+            'Poesis explores explicit definitions and obligation contracts alongside developer portals. Definition controls are partial; sourcing, complete verdicts and portal integrations remain planned.',
         strengths:
             'The developer-portal category — of which Backstage is the reference open-source example — excels at developer experience: a searchable service catalog, scaffolding templates, and plugin-based tooling integration. As a developer home page, the category serves that intent well.',
         differenceIntro:
-            'The difference is descriptive versus definitional. A catalog entry describes a service for humans browsing it; a governed definition types it, binds obligations to it, and is evaluated against how the service actually behaves. The two can coexist — a catalog is a natural sourcing input.',
+            'Compare the contracts required by your portal and governance tasks. Plugins and local extensions vary; this is not evidence that Backstage cannot support a particular governance requirement.',
         themLabel: 'Developer-portal approach',
         rows: [
             {
                 dimension: 'Catalog entry',
                 them: 'Metadata registered per service, maintained by teams',
-                poesis: 'Typed definitions sourced from code, contracts, SBOMs, and infrastructure — evidence-backed, confidence-scored',
+                poesis: 'Planned typed authoring and reviewed sourcing with scoped evidence and uncertainty',
             },
             {
                 dimension: 'Governance',
                 them: 'Conventions and scorecards layered on top',
-                poesis: 'Directives and Norms are first-class governed definitions with lifecycle and deterministic verdicts',
+                poesis: 'Directive/Norm vocabulary and partial lifecycle controls; complete verdict and authority integration remains planned',
             },
             {
                 dimension: 'Audience',
                 them: 'Developers navigating the platform',
-                poesis: 'Every IT profile — architects, ops, security, compliance — and AI agents, on one governed model',
+                poesis: 'Intended shared context for selected IT and AI tasks; end-to-end workflows need acceptance',
             },
             {
                 dimension: 'Compliance',
-                them: 'Out of scope',
-                poesis: 'Continuous appraisal against GDPR, NIS2, DORA, ISO — computed from the same model',
+                them: 'Verify installed plugins, integrations and evidence contracts',
+                poesis: 'Planned appraisal against selected applicable obligations, not automatic regulatory compliance',
             },
             {
                 dimension: 'Coexistence',
@@ -182,9 +182,9 @@ export const alternatives: Alternative[] = [
         whenThem:
             'If you need a developer home page — catalog, templates, docs — the developer-portal category is the right tool, and it can feed Poesis.',
         whenPoesis:
-            'If you need the governance layer — obligations with owners, posture computed continuously, definitions AI agents can act on — that is Poesis for IT, alongside or above your portal.',
+            'Consider Poesis for a bounded definition-governance pilot; treat continuous appraisal and authorized AI context as planned integrations.',
         integrationNote:
-            'Backstage is less an alternative than a neighbor: the catalog teams already maintain is a natural knowledge source for the governed model, and golden paths can consume governed definitions. Keep the portal — Poesis governs what it describes.',
+            'A portal catalogue could supply candidate context, and templates could consume accepted definitions. Connectors, pinning and authority boundaries must be implemented and tested first.',
     },
     {
         slug: 'servicenow',
@@ -195,14 +195,14 @@ export const alternatives: Alternative[] = [
         keyword: 'ServiceNow CMDB alternative',
         title: 'ServiceNow CMDB Alternative — Governed Definitions, Not Configuration Items',
         description:
-            'Looking at ServiceNow CMDB alternatives for configuration truth and governance? Compare CI records with Poesis: typed, governed definitions sourced from what actually runs.',
-        h1: 'A CMDB alternative where the record is a governed definition',
+            'Looking at ServiceNow CMDB alternatives? Compare your record and evidence requirements with Poesis definition foundations and planned integration routes.',
+        h1: 'ServiceNow CMDB Alternative — Governed Definitions, Not Configuration Items',
         lead:
-            'ITSM platforms like ServiceNow run the operational workflows of IT — incidents, changes, requests — around a CMDB of configuration items. Poesis for IT addresses what the CI record cannot carry: a typed, governed definition of the estate with obligations, lifecycle, and machine-evaluable verdicts.',
+            'Poesis explores typed definitions and explicit obligations beside ITSM workflows. It is not an operated replacement for incident, change or configuration management; integrations and complete verdicts remain planned.',
         strengths:
             'The ITSM category — of which ServiceNow is the leading example — excels at operational workflow at enterprise scale: incident, change, and request management with a CMDB at the center and a vast integration ecosystem. For running IT operations processes, the category is the established choice.',
         differenceIntro:
-            'The difference is what the central record *is*. A configuration item describes an asset for workflow routing; a governed definition types the asset, binds its obligations, and is continuously evaluated against how the estate actually runs. The two can coexist — workflows can consume the governed model.',
+            'Evaluate record identity, provenance, obligation binding and workflow authority. Current ServiceNow editions and integrations require independent verification; no categorical limitation is inferred from a product label.',
         themLabel: 'ITSM / CMDB approach',
         rows: [
             {
@@ -212,35 +212,35 @@ export const alternatives: Alternative[] = [
             },
             {
                 dimension: 'How truth arrives',
-                them: 'Discovery scans and manual registration — famously prone to staleness',
-                poesis: 'Continuous sourcing from code, API contracts, SBOMs, and infrastructure — confidence-scored, provenance-backed',
+                them: 'Verify discovery and registration freshness for your configured sources',
+                poesis: 'Planned reviewed sourcing; source state and deployed observations remain distinct',
             },
             {
                 dimension: 'Obligations',
                 them: 'Policies encoded in workflow rules and approval chains',
-                poesis: 'Directives and Norms as governed definitions — machine-evaluable, with deterministic verdicts',
+                poesis: 'Selected obligation vocabulary; binding and complete supported verdicts remain planned',
             },
             {
                 dimension: 'Change',
                 them: 'CAB workflows and approval gates',
-                poesis: 'Impact simulated through typed relations before the change is committed',
+                poesis: 'Planned bounded impact analysis with explicit assumptions and validation',
             },
             {
                 dimension: 'Compliance',
                 them: 'GRC modules reporting on declared controls',
-                poesis: 'Posture computed continuously from the governed model — GDPR, NIS2, DORA, ISO',
+                poesis: 'Planned evidence-linked appraisal; vocabulary availability does not establish legal coverage',
             },
             {
                 dimension: 'Coexistence',
                 them: '—',
-                poesis: 'ITSM workflows can operate on — and stay consistent with — the governed model',
+                poesis: 'A potential integration route requiring tested identity, authority and synchronization contracts',
             },
         ],
         whenThem:
             'If you need enterprise-scale operational workflows — incidents, changes, requests — the ITSM category is purpose-built for it.',
         whenPoesis:
-            'If the question is what your estate is and what it must comply with — answered continuously, from reality, in a form AI agents can act on — that is Poesis for IT, beside your ITSM.',
+            'Consider a bounded pilot for explicit intent and evidence-linked context beside existing ITSM, with planned features and integration effort included in the decision.',
         integrationNote:
-            'In practice Poesis completes an ITSM estate rather than competing with it: the governed model gives workflows a definition layer to operate on, and a CMDB is a natural knowledge source to reconcile against reality. Keep the workflows — Poesis governs what they act on.',
+            'A CMDB could be a curated source and workflows could consume accepted definitions. That coexistence is a design option, not a delivered consistency guarantee.',
     },
 ];

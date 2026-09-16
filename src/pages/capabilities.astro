@@ -1,0 +1,25 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
+import { capabilityHref, poesisUsage, usageCapabilities } from '../data/usage.ts';
+
+const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
+  anchor: `capability-${entry.slug.replace(/\//g, '-')}`,
+  eyebrow: entry.solution.fullName,
+  title: entry.capability.name,
+  body: entry.capability.blurb,
+  status: entry.capability.delivery.state,
+  meta: [{ label: 'Solution scope', href: capabilityHref(entry) }, { label: `${entry.capability.relations.features.length} contributing features` }],
+  links: poesisUsage.useCases.filter((useCase) => entry.capability.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}` })),
+  empty: 'No use case declared.',
+}));
+---
+<CatalogLayout
+  title="Poesis capabilities"
+  description="The solution capabilities behind Poesis affordances, each with its contributing features and the use cases it serves."
+  heading="Capabilities"
+  lead="What each solution can do, built from product features. A capability carries the status of the features that prove it."
+  count={`${entries.length} capabilities`}
+>
+  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} />
+</CatalogLayout>

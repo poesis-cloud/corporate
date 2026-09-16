@@ -1,26 +1,28 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UsageCases from '../../../components/UsageCases.astro';
+import { useCasesForSolution } from '../../../data/usage.ts';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
-import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
+import { platformSolutions } from '../../../data/poesis-platform.ts';
 
-const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
+const itip = platformSolutions.find((s) => s.slug === 'itip')!;
 ---
 <BaseLayout
-  title="The IT Intelligence Platform — the autonomous enterprise and AI governance platform for IT"
-  description="ITIP — the autonomous enterprise and AI governance platform for IT: the digital twin of your IT landscape. Define, govern, regulate, and supervise IT as a single source of truth, generate IT artifacts, simulate impacts, and evaluate compliance."
+  title="The IT Intelligence Platform — AI governance for IT"
+  description={itip.description}
   pageType="Solution"
 >
   <section class="hero hero--split">
     <div class="container">
-      <p class="eyebrow"><a href="/#portfolio">{itip.tag} · Solution</a></p>
-      <h1>The IT Intelligence Platform — AI governance for the autonomous enterprise.</h1>
-      <p class="lead">The <strong>digital twin of your IT landscape</strong> — one live, typed model every IT profile and every AI agent can act on.</p>
+      <p class="eyebrow"><a href="/#portfolio">{itip.tags.join(' · ')} · Solution</a></p>
+      <h1>The IT Intelligence Platform — AI governance for IT.</h1>
+      <p class="lead">{itip.tagline}</p>
       <div class="hero-promise">
-        <p><strong>It cannot drift.</strong> Truth sourcers read the real system and keep the twin fed, instead of humans transcribing it into wikis and spreadsheets.</p>
-        <p><strong>It is operable.</strong> Simulate a change before committing it, evaluate compliance continuously, generate deliverables from it.</p>
+        <p>{itip.description}</p>
+        <p>The digital-twin ambition distinguishes accepted intent, inspected source revisions and fresh deployed observations.</p>
       </div>
       <div class="hero-cta">
         <span class="btn btn-primary" aria-disabled="true"><Icon name="azure" /> SaaS Demo Instance <span class="tag tag--muted">coming soon</span></span>
@@ -35,7 +37,7 @@ const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
-        <h2>One governed model that stops drifting, that AI can act on, that every IT profile shares — composed from the frameworks you already answer to.</h2>
+        <h2>Shared definitions and reviewable evidence for IT decisions.</h2>
       </div>
       <SolutionValueCards solution={itip} />
     </div>
@@ -45,7 +47,7 @@ const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Capabilities</p>
-        <h2>Hold the IT landscape as one governed inventory, compose the frameworks over it, source it from the real system — then evaluate, reason, and generate from it.</h2>
+        <h2>Planned inventory, composition, sourcing, appraisal, reasoning and generation.</h2>
       </div>
       <SolutionCapabilityCards solution={itip} />
     </div>
@@ -55,10 +57,11 @@ const itip = poesisPortfolio.find((s) => s.slug === 'itip')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Products</p>
-        <h2>Two products closing the AI governance loop for IT.</h2>
+        <h2>Two products for the IT governance workflow.</h2>
       </div>
       <ProductCards solution={itip} />
     </div>
   </section>
 
+  <UsageCases cases={useCasesForSolution('itip')} title="IT decision and review use cases" />
 </BaseLayout>

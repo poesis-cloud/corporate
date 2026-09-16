@@ -11,6 +11,7 @@ export interface Props {
     | 'book-open'
     | 'briefcase'
     | 'check-badge'
+    | 'clock'
     | 'compass'
     | 'docs'
     | 'external'
@@ -87,6 +88,10 @@ const icons: Record<string, IconDef> = {
       'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
       'm9 12 2 2 4-4',
     ],
+  },
+  clock: {
+    kind: 'stroke',
+    paths: ['M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z', 'M12 6v6l4 2'],
   },
   compass: {
     kind: 'stroke',

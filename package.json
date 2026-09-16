@@ -8,7 +8,10 @@
     "dev": "astro dev",
     "build": "astro build && npx pagefind --site dist",
     "preview": "astro preview",
-    "sync-roadmap": "node --experimental-strip-types scripts/export-roadmap.mjs"
+    "sync-roadmap": "node --experimental-strip-types scripts/export-roadmap.mjs",
+    "test:portfolio": "node --experimental-strip-types --test scripts/portfolio-claims.test.mjs",
+    "test:portfolio:workspace": "CHECK_WORKSPACE_PORTFOLIO=1 npm run test:portfolio",
+    "test:usage": "node --experimental-strip-types --test scripts/usage.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.0",

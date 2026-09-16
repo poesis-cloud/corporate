@@ -1,26 +1,28 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UsageCases from '../../../components/UsageCases.astro';
+import { useCasesForSolution } from '../../../data/usage.ts';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
-import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
+import { platformSolutions } from '../../../data/poesis-platform.ts';
 
-const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
+const gsm = platformSolutions.find((s) => s.slug === 'gsm')!;
 ---
 <BaseLayout
   title="The Generative System Model — the governed world model"
-  description="The Generative System Model (GSM) — the vendor-neutral standard for defining systems: governance as code, an explicit and governed world model of your organization, grounded in systemics, developed as a candidate open standard."
+  description={gsm.description}
   pageType="Solution"
 >
   <section class="hero hero--split">
     <div class="container">
-      <p class="eyebrow"><a href="/#portfolio">{gsm.tag} · Solution</a></p>
+      <p class="eyebrow"><a href="/#portfolio">{gsm.tags.join(' · ')} · Solution</a></p>
       <h1>The Generative System Model — the governed world model.</h1>
-      <p class="lead">The vendor-neutral standard for defining systems — governance as code, not governance as prose, grounded in systemics.</p>
+      <p class="lead">{gsm.tagline}</p>
       <div class="hero-promise">
-        <p>GSM is to THINK what <strong>OpenTelemetry’s semantic conventions</strong> are to RUN — one shared model every tool can speak — and an Archetype is to that model what a <strong>CRD is to Kubernetes</strong>.</p>
-        <p>Together they make GSM what learned world models cannot be: an <strong>explicit, causal, governed world model</strong>.</p>
+        <p>{gsm.description}</p>
+        <p>OpenTelemetry conventions and Kubernetes CRDs are useful analogies for shared semantics and typing, not interoperability proof or identity with Archetypes.</p>
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://docs.poesis.cloud/gsm/"><Icon name="docs" /> Read the docs</a>
@@ -33,7 +35,7 @@ const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
-        <h2>The OpenTelemetry of THINK and the Kubernetes pattern lifted off containers — governance as code, composed with policy as code, trusted through a standard rather than a vendor.</h2>
+        <h2>Shared definition semantics, inspectable sources and interoperability.</h2>
       </div>
       <SolutionValueCards solution={gsm} />
     </div>
@@ -43,7 +45,7 @@ const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Capabilities</p>
-        <h2>A fixed primitive core opened by typing, governed by one grammar and lifecycle — with frameworks, regulations, and protocol semantics sourced into it, portable across implementations and research-tested before it freezes.</h2>
+        <h2>Specification content, selected vocabularies and research with distinct scopes.</h2>
       </div>
       <SolutionCapabilityCards solution={gsm} />
     </div>
@@ -53,10 +55,11 @@ const gsm = poesisPortfolio.find((s) => s.slug === 'gsm')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Products</p>
-        <h2>The specification — and the ontologies sourced into it.</h2>
+        <h2>Specifications, Ontology and Research Lab.</h2>
       </div>
       <ProductCards solution={gsm} />
     </div>
   </section>
 
+  <UsageCases cases={useCasesForSolution('gsm')} title="Modeling, evidence and integration use cases" />
 </BaseLayout>

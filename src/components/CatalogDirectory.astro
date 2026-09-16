@@ -1,0 +1,56 @@
+---
+/**
+ * The catalog card grid. `meta` states where an entry belongs, `links` states
+ * what it relates to; an entry with no relation says so rather than rendering
+ * an empty list.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
+import type { DeliveryState } from '../data/poesis-platform.ts';
+
+export interface DirectoryEntry {
+  anchor: string;
+  eyebrow?: string;
+  icon?: string;
+  title: string;
+  hook?: string;
+  body: string;
+  status?: DeliveryState;
+  meta?: { label: string; href?: string }[];
+  links?: { label: string; href: string }[];
+  empty?: string;
+  data?: Record<string, string>;
+}
+interface Props { id: string; eyebrow: string; title: string; entries: DirectoryEntry[] }
+const { id, eyebrow, title, entries } = Astro.props;
+---
+<section id={id} class="section">
+  <div class="container">
+    <div class="section-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2></div>
+    <ul class="usage-directory">
+      {entries.map((entry) => (
+        <li id={entry.anchor} {...entry.data}>
+          {entry.eyebrow && <p class="eyebrow">{entry.eyebrow}</p>}
+          <h3>{entry.icon && <Icon name={entry.icon as 'briefcase'} />}{entry.title}</h3>
+          {entry.status && <DeliveryStatus state={entry.status} />}
+          {entry.hook && <strong>{entry.hook}</strong>}
+          <p>{entry.body}</p>
+          {entry.meta?.length ? (
+            <p class="usage-meta">{entry.meta.map((item, index) => <>{index > 0 && ' / '}{item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}</>)}</p>
+          ) : null}
+          {entry.links?.length ? (
+            <ul class="catalog-links">{entry.links.map((link) => <li><a href={link.href}>{link.label} <Icon name="arrow-right" /></a></li>)}</ul>
+          ) : entry.empty ? <p class="usage-meta">{entry.empty}</p> : null}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .usage-directory { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+  .usage-directory > li { border-top: 1px solid var(--line-strong); padding: 1.5rem 0; min-width: 0; overflow-wrap: anywhere; scroll-margin-top: 7rem; }
+  h3 { font-size: 1.1rem; letter-spacing: 0; line-height: 1.5; display: flex; align-items: baseline; gap: .5rem; }
+  .usage-meta { color: var(--ink-soft); font-size: .85rem; }
+  .catalog-links { list-style: none; padding: 0; margin: .75rem 0 0; display: grid; gap: .35rem; font-size: .9rem; }
+  @media (max-width: 640px) { .usage-directory { grid-template-columns: minmax(0, 1fr); } }
+</style>

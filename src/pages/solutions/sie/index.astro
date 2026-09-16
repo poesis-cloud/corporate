@@ -1,26 +1,28 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UsageCases from '../../../components/UsageCases.astro';
+import { useCasesForSolution } from '../../../data/usage.ts';
 import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
-import { poesisPortfolio } from '../../../data/poesis-portfolio.ts';
+import { platformSolutions } from '../../../data/poesis-platform.ts';
 
-const sie = poesisPortfolio.find((s) => s.slug === 'sie')!;
+const sie = platformSolutions.find((s) => s.slug === 'sie')!;
 ---
 <BaseLayout
   title="The Systemic Intelligence Engine — the governed AI context"
-  description="SIE — the Systemic Intelligence Engine: the reference implementation of GSM. A governed AI context — the layer context engineering is missing — with definitions management APIs, lifecycle enforcement, the Operator runtime, and the Definition Blackboard Manager."
+  description={sie.description}
   pageType="Solution"
 >
   <section class="hero hero--split">
     <div class="container">
-      <p class="eyebrow"><a href="/#portfolio">{sie.tag} · Solution</a></p>
+      <p class="eyebrow"><a href="/#portfolio">{sie.tags.join(' · ')} · Solution</a></p>
       <h1>The Systemic Intelligence Engine — the governed AI context.</h1>
-      <p class="lead">The reference implementation of GSM — typed, versioned, API-managed definitions that applications, humans, and agents can reason and act on.</p>
+      <p class="lead">{sie.tagline}</p>
       <div class="hero-promise">
-        <p>Think <strong>Kubernetes, generalized</strong>: you declare desired state as typed definitions, and the engine continuously evaluates reality against them and acts to close the gap.</p>
-        <p>Kubernetes runs that loop on infrastructure. SIE runs it on anything you can define.</p>
+        <p>{sie.description}</p>
+        <p>Declarative infrastructure is an analogy, not evidence of universal reconciliation. Local API use does not require hosting.</p>
       </div>
       <div class="hero-cta">
         <span class="btn btn-primary" aria-disabled="true"><Icon name="azure" /> PaaS Demo Instance <span class="tag tag--muted">coming soon</span></span>
@@ -35,7 +37,7 @@ const sie = poesisPortfolio.find((s) => s.slug === 'sie')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Values</p>
-        <h2>A governed context AI can act on, operations harnessed by it, and one closed loop that keeps it true to reality.</h2>
+        <h2>Attributable context, bounded operations and feedback loops.</h2>
       </div>
       <SolutionValueCards solution={sie} />
     </div>
@@ -45,7 +47,7 @@ const sie = poesisPortfolio.find((s) => s.slug === 'sie')!;
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Capabilities</p>
-        <h2>Store and lifecycle-enforce every definition, source it collaboratively, evaluate Norms and execute Mechanisms from it — and serve it to AI.</h2>
+        <h2>Definition and execution foundations alongside planned evaluation and access routes.</h2>
       </div>
       <SolutionCapabilityCards solution={sie} />
     </div>
@@ -61,4 +63,5 @@ const sie = poesisPortfolio.find((s) => s.slug === 'sie')!;
     </div>
   </section>
 
+  <UsageCases cases={useCasesForSolution('sie')} title="Definition, appraisal and execution use cases" />
 </BaseLayout>

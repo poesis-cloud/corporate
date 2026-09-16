@@ -1,28 +1,31 @@
 ---
 /**
  * ProductRoadmap — compact visual version timeline for one product,
- * derived from src/data/poesis-portfolio.ts (each feature's own milestone).
+ * derived from src/data/poesis-platform.ts (each feature's own milestone).
  */
-import { CLAUSE_URL, type FeatureMilestone } from '../data/poesis-portfolio.ts';
+import { CLAUSE_URL, milestoneStatus, type Feature, type FeatureMilestone } from '../data/poesis-platform.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
 
 interface Props {
   milestones: FeatureMilestone[];
+  features: Feature[];
 }
 
-const { milestones } = Astro.props;
+const { milestones, features } = Astro.props;
 ---
 <div class="roadmap">
   <ol class="roadmap-track">
     {milestones.map((m) => (
       <li class={`roadmap-step${m.shipped ? ' is-shipped' : ''}${m.ga ? ' is-ga' : ''}`}>
         <span class="roadmap-dot" aria-hidden="true"></span>
-        <span class="roadmap-version">v{m.version}{m.shipped && ' ✓'}</span>
-        <span class="roadmap-label">{m.label}</span>
+        <span class="roadmap-version">v{m.version}</span>
+        <DeliveryStatus state={milestoneStatus({ features }, m)} />
+        <span class="roadmap-label">{m.shipped ? 'Recorded release' : 'Planned milestone'}: {m.label}</span>
       </li>
     ))}
   </ol>
   <p class="text-small roadmap-clause">
-    Ordered intent, not delivery commitments or dates — per the canonical
+    Implemented and Planned qualify the features in each milestone. Recorded releases and planned milestones preserve history, not delivery dates or hosted availability. See the
     <a href={CLAUSE_URL}>Milestones &amp; Versions</a> register.
   </p>
 </div>
