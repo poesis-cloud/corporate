@@ -28,20 +28,6 @@
             "web-application/rbac-abac",
             "web-application/identity-provider-synchronization",
             "web-application/governance-review-sessions"
-          ],
-          "useCases": [
-            "author-reviewed-definition",
-            "inspect-change-impact",
-            "ask-cited-it-question",
-            "generate-decision-pack",
-            "review-operation-privileges",
-            "restore-identity-synchronization",
-            "conduct-governance-session",
-            "resolve-blocked-change",
-            "reuse-review-lens",
-            "inspect-subject-perspectives",
-            "agree-domain-typing-contract",
-            "propose-appraisal-remediation"
           ]
         },
         {
@@ -52,15 +38,6 @@
           "kind": "implementation",
           "features": [
             "web-application/ontology-management"
-          ],
-          "useCases": [
-            "upgrade-governance-packages",
-            "review-scoped-appraisal",
-            "review-recurring-service-appraisal",
-            "reuse-governance-selection",
-            "resolve-competing-obligations",
-            "inspect-vocabulary-coverage",
-            "bind-obligations-to-scope"
           ]
         },
         {
@@ -72,12 +49,6 @@
           "features": [
             "definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos",
             "web-application/definitions-truth-sourcing-management"
-          ],
-          "useCases": [
-            "reconcile-code-evidence",
-            "configure-collection-boundaries",
-            "recover-incomplete-collection",
-            "review-evidence-refresh"
           ]
         },
         {
@@ -88,11 +59,6 @@
           "kind": "implementation",
           "features": [
             "web-application/it-compliance-evaluation"
-          ],
-          "useCases": [
-            "review-scoped-appraisal",
-            "review-recurring-service-appraisal",
-            "propose-appraisal-remediation"
           ]
         },
         {
@@ -104,11 +70,6 @@
           "features": [
             "web-application/it-impact-simulation",
             "web-application/it-copilot"
-          ],
-          "useCases": [
-            "inspect-change-impact",
-            "ask-cited-it-question",
-            "assess-application-retirement"
           ]
         },
         {
@@ -119,14 +80,6 @@
           "kind": "implementation",
           "features": [
             "web-application/it-artifact-factory"
-          ],
-          "useCases": [
-            "generate-decision-pack",
-            "maintain-artifact-bindings",
-            "preview-artifact-bindings",
-            "constrain-generated-narrative",
-            "operate-recurring-reports",
-            "investigate-artifact-failure"
           ]
         }
       ],
@@ -154,15 +107,7 @@
               "milestone": {
                 "version": "1.1",
                 "label": "IT artifact factory"
-              },
-              "useCases": [
-                "generate-decision-pack",
-                "maintain-artifact-bindings",
-                "preview-artifact-bindings",
-                "constrain-generated-narrative",
-                "operate-recurring-reports",
-                "investigate-artifact-failure"
-              ]
+              }
             },
             {
               "slug": "it-compliance-evaluation",
@@ -173,12 +118,7 @@
               "milestone": {
                 "version": "1.3",
                 "label": "IT compliance evaluation"
-              },
-              "useCases": [
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal",
-                "propose-appraisal-remediation"
-              ]
+              }
             },
             {
               "slug": "it-copilot",
@@ -189,10 +129,7 @@
               "milestone": {
                 "version": "1.4",
                 "label": "IT Copilot"
-              },
-              "useCases": [
-                "ask-cited-it-question"
-              ]
+              }
             },
             {
               "slug": "it-impact-simulation",
@@ -203,11 +140,7 @@
               "milestone": {
                 "version": "1.5",
                 "label": "IT impact simulation"
-              },
-              "useCases": [
-                "inspect-change-impact",
-                "assess-application-retirement"
-              ]
+              }
             },
             {
               "slug": "definitions-truth-sourcing-management",
@@ -218,13 +151,7 @@
               "milestone": {
                 "version": "1.2",
                 "label": "Truth sourcing management"
-              },
-              "useCases": [
-                "reconcile-code-evidence",
-                "configure-collection-boundaries",
-                "recover-incomplete-collection",
-                "review-evidence-refresh"
-              ]
+              }
             },
             {
               "slug": "definitions-management",
@@ -237,17 +164,7 @@
                 "label": "MVP/GA — GSM Definitions & Ontology management, RBAC/ABAC, hardened",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "author-reviewed-definition",
-                "inspect-change-impact",
-                "generate-decision-pack",
-                "resolve-blocked-change",
-                "reuse-review-lens",
-                "inspect-subject-perspectives",
-                "agree-domain-typing-contract",
-                "propose-appraisal-remediation"
-              ]
+              }
             },
             {
               "slug": "ontology-management",
@@ -260,16 +177,7 @@
                 "label": "MVP/GA — GSM Definitions & Ontology management, RBAC/ABAC, hardened",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "upgrade-governance-packages",
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal",
-                "reuse-governance-selection",
-                "resolve-competing-obligations",
-                "inspect-vocabulary-coverage",
-                "bind-obligations-to-scope"
-              ]
+              }
             },
             {
               "slug": "rbac-abac",
@@ -282,14 +190,7 @@
                 "label": "MVP/GA — GSM Definitions & Ontology management, RBAC/ABAC, hardened",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "author-reviewed-definition",
-                "inspect-change-impact",
-                "ask-cited-it-question",
-                "generate-decision-pack",
-                "review-operation-privileges"
-              ]
+              }
             },
             {
               "slug": "identity-provider-synchronization",
@@ -300,10 +201,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Identity synchronization and governance review sessions (unordered)"
-              },
-              "useCases": [
-                "restore-identity-synchronization"
-              ]
+              }
             },
             {
               "slug": "governance-review-sessions",
@@ -314,10 +212,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Identity synchronization and governance review sessions (unordered)"
-              },
-              "useCases": [
-                "conduct-governance-session"
-              ]
+              }
             }
           ]
         },
@@ -341,10 +236,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — GSM Definitions automatic sourcing from code repos",
                 "ga": true
-              },
-              "useCases": [
-                "reconcile-code-evidence"
-              ]
+              }
             }
           ]
         }
@@ -375,15 +267,6 @@
           "features": [
             "definition-manager/definitions-management-api",
             "definition-manager/definitions-retention"
-          ],
-          "useCases": [
-            "author-reviewed-definition",
-            "reconcile-code-evidence",
-            "consume-authorized-context",
-            "react-to-definition-change",
-            "reuse-delivery-evidence",
-            "retrieve-decision-basis",
-            "agree-evidence-preservation"
           ]
         },
         {
@@ -399,13 +282,6 @@
           ],
           "optional": [
             "definition-manager/lifecycle-events-mediation"
-          ],
-          "useCases": [
-            "author-reviewed-definition",
-            "reconcile-code-evidence",
-            "react-to-definition-change",
-            "reuse-delivery-evidence",
-            "assess-invalidated-dependencies"
           ]
         },
         {
@@ -417,10 +293,6 @@
           "features": [
             "definition-blackboard-manager/ks-contributions-management-api",
             "definition-blackboard-manager/ks-contributions-retention"
-          ],
-          "useCases": [
-            "reconcile-code-evidence",
-            "reuse-delivery-evidence"
           ]
         },
         {
@@ -431,12 +303,6 @@
           "kind": "implementation",
           "features": [
             "operator/norms-evaluation-api"
-          ],
-          "useCases": [
-            "review-scoped-appraisal",
-            "review-recurring-service-appraisal",
-            "execute-bounded-response",
-            "qualify-rule-revision"
           ]
         },
         {
@@ -451,9 +317,6 @@
           ],
           "optional": [
             "operator/mechanism-execution-technos-integrations"
-          ],
-          "useCases": [
-            "execute-bounded-response"
           ]
         },
         {
@@ -468,10 +331,6 @@
           ],
           "optional": [
             "definition-manager/mcp"
-          ],
-          "useCases": [
-            "consume-authorized-context",
-            "ask-cited-it-question"
           ]
         }
       ],
@@ -501,15 +360,7 @@
                 "label": "MVP/GA — Definitions management API, lifecycle enforcement, retention",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "author-reviewed-definition",
-                "reconcile-code-evidence",
-                "consume-authorized-context",
-                "react-to-definition-change",
-                "ask-cited-it-question",
-                "reuse-delivery-evidence"
-              ]
+              }
             },
             {
               "slug": "definitions-lifecycle-enforcement",
@@ -522,12 +373,7 @@
                 "label": "MVP/GA — Definitions management API, lifecycle enforcement, retention",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "author-reviewed-definition",
-                "reconcile-code-evidence",
-                "assess-invalidated-dependencies"
-              ]
+              }
             },
             {
               "slug": "definitions-retention",
@@ -540,14 +386,7 @@
                 "label": "MVP/GA — Definitions management API, lifecycle enforcement, retention",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "author-reviewed-definition",
-                "consume-authorized-context",
-                "react-to-definition-change",
-                "retrieve-decision-basis",
-                "agree-evidence-preservation"
-              ]
+              }
             },
             {
               "slug": "lifecycle-events-mediation",
@@ -558,10 +397,7 @@
               "milestone": {
                 "version": "1.1",
                 "label": "GSM Definitions lifecycle events mediation"
-              },
-              "useCases": [
-                "react-to-definition-change"
-              ]
+              }
             },
             {
               "slug": "mcp",
@@ -572,10 +408,7 @@
               "milestone": {
                 "version": "1.2",
                 "label": "MCP"
-              },
-              "useCases": [
-                "consume-authorized-context"
-              ]
+              }
             }
           ]
         },
@@ -599,13 +432,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — GSM Norms evaluation API",
                 "ga": true
-              },
-              "useCases": [
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal",
-                "execute-bounded-response",
-                "qualify-rule-revision"
-              ]
+              }
             },
             {
               "slug": "mechanism-execution-foundations",
@@ -616,10 +443,7 @@
               "milestone": {
                 "version": "1.1",
                 "label": "GSM Mechanism execution foundations"
-              },
-              "useCases": [
-                "execute-bounded-response"
-              ]
+              }
             },
             {
               "slug": "mechanism-execution-technos-integrations",
@@ -630,10 +454,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "GSM Mechanism execution technos integrations (ongoing, unordered)"
-              },
-              "useCases": [
-                "execute-bounded-response"
-              ]
+              }
             }
           ]
         },
@@ -658,11 +479,7 @@
                 "label": "MVP/GA — contributions API, seal lifecycle, audit ledger",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "reconcile-code-evidence",
-                "reuse-delivery-evidence"
-              ]
+              }
             },
             {
               "slug": "ks-contributions-lifecycle-enforcement",
@@ -675,11 +492,7 @@
                 "label": "MVP/GA — contributions API, seal lifecycle, audit ledger",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "reconcile-code-evidence",
-                "reuse-delivery-evidence"
-              ]
+              }
             },
             {
               "slug": "ks-contributions-retention",
@@ -692,11 +505,7 @@
                 "label": "MVP/GA — contributions API, seal lifecycle, audit ledger",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "reconcile-code-evidence",
-                "reuse-delivery-evidence"
-              ]
+              }
             }
           ]
         }
@@ -726,9 +535,6 @@
           "kind": "specification",
           "features": [
             "specifications/primitives"
-          ],
-          "useCases": [
-            "read-governance-model"
           ]
         },
         {
@@ -739,10 +545,6 @@
           "kind": "specification",
           "features": [
             "specifications/archetyping"
-          ],
-          "useCases": [
-            "read-governance-model",
-            "agree-domain-typing-contract"
           ]
         },
         {
@@ -758,10 +560,6 @@
           ],
           "optional": [
             "specifications/enhanced-directives-norms-model"
-          ],
-          "useCases": [
-            "read-governance-model",
-            "incorporate-accepted-grammar-extension"
           ]
         },
         {
@@ -787,12 +585,6 @@
             "ontology/safe",
             "ontology/itil",
             "ontology/catalogue-update-stream"
-          ],
-          "useCases": [
-            "review-sourced-obligations",
-            "upgrade-governance-packages",
-            "review-scoped-appraisal",
-            "review-recurring-service-appraisal"
           ]
         },
         {
@@ -819,11 +611,6 @@
             "ontology/amqp",
             "ontology/jdbc",
             "ontology/websocket"
-          ],
-          "useCases": [
-            "describe-service-contract",
-            "describe-mixed-protocol-boundaries",
-            "describe-payment-settlement-boundaries"
           ]
         },
         {
@@ -835,10 +622,6 @@
           "features": [
             "specifications/primitives",
             "specifications/systemic-lifecycle-management"
-          ],
-          "useCases": [
-            "read-governance-model",
-            "qualify-processor-interchange"
           ]
         },
         {
@@ -854,11 +637,6 @@
             "research-lab/cases",
             "research-lab/decision-register",
             "research-lab/research-protocol"
-          ],
-          "useCases": [
-            "review-model-evidence",
-            "propose-grammar-extension",
-            "incorporate-accepted-grammar-extension"
           ]
         }
       ],
@@ -885,10 +663,7 @@
                 "label": "Normative content frozen — Systemic Primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "read-governance-model"
-              ]
+              }
             },
             {
               "slug": "dna-grammar",
@@ -901,10 +676,7 @@
                 "label": "Normative content frozen — Systemic Primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "read-governance-model"
-              ]
+              }
             },
             {
               "slug": "archetyping",
@@ -917,11 +689,7 @@
                 "label": "Normative content frozen — Systemic Primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "read-governance-model",
-                "agree-domain-typing-contract"
-              ]
+              }
             },
             {
               "slug": "systemic-lifecycle-management",
@@ -934,10 +702,7 @@
                 "label": "Normative content frozen — Systemic Primitives, DNA grammar, Archetyping, lifecycle (publication of the document set pending)",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "read-governance-model"
-              ]
+              }
             },
             {
               "slug": "enhanced-directives-norms-model",
@@ -948,10 +713,7 @@
               "milestone": {
                 "version": "1.1",
                 "label": "Enhanced Directives and Norms model"
-              },
-              "useCases": [
-                "incorporate-accepted-grammar-extension"
-              ]
+              }
             }
           ]
         },
@@ -975,10 +737,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "describe-service-contract"
-              ]
+              }
             },
             {
               "slug": "togaf",
@@ -990,10 +749,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "review-sourced-obligations"
-              ]
+              }
             },
             {
               "slug": "it",
@@ -1005,10 +761,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "describe-service-contract"
-              ]
+              }
             },
             {
               "slug": "iso-25010",
@@ -1020,12 +773,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "review-sourced-obligations",
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal"
-              ]
+              }
             },
             {
               "slug": "iso-25012",
@@ -1037,12 +785,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "review-sourced-obligations",
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal"
-              ]
+              }
             },
             {
               "slug": "prov",
@@ -1054,10 +797,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — HTTP, TOGAF, IT, ISO 25010, ISO 25012, and PROV complete & validated",
                 "ga": true
-              },
-              "useCases": [
-                "describe-service-contract"
-              ]
+              }
             },
             {
               "slug": "grpc",
@@ -1068,10 +808,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-mixed-protocol-boundaries"
-              ]
+              }
             },
             {
               "slug": "graphql",
@@ -1082,10 +819,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-mixed-protocol-boundaries"
-              ]
+              }
             },
             {
               "slug": "kafka",
@@ -1096,10 +830,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-payment-settlement-boundaries"
-              ]
+              }
             },
             {
               "slug": "amqp",
@@ -1110,10 +841,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-payment-settlement-boundaries"
-              ]
+              }
             },
             {
               "slug": "jdbc",
@@ -1124,10 +852,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-payment-settlement-boundaries"
-              ]
+              }
             },
             {
               "slug": "websocket",
@@ -1138,10 +863,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "describe-mixed-protocol-boundaries"
-              ]
+              }
             },
             {
               "slug": "gdpr",
@@ -1152,12 +874,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "review-sourced-obligations",
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal"
-              ]
+              }
             },
             {
               "slug": "nis2",
@@ -1168,12 +885,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "review-sourced-obligations",
-                "review-scoped-appraisal",
-                "review-recurring-service-appraisal"
-              ]
+              }
             },
             {
               "slug": "scap",
@@ -1184,10 +896,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "review-sourced-obligations"
-              ]
+              }
             },
             {
               "slug": "dora",
@@ -1198,10 +907,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "upgrade-governance-packages"
-              ]
+              }
             },
             {
               "slug": "safe",
@@ -1212,10 +918,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "upgrade-governance-packages"
-              ]
+              }
             },
             {
               "slug": "itil",
@@ -1226,10 +929,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "upgrade-governance-packages"
-              ]
+              }
             },
             {
               "slug": "catalogue-update-stream",
@@ -1240,10 +940,7 @@
               "milestone": {
                 "version": "1.x",
                 "label": "Remaining protocols (gRPC, GraphQL, Kafka, AMQP, JDBC, WebSocket) · GDPR · NIS2 · SCAP · DORA · SAFe · ITIL (unordered)"
-              },
-              "useCases": [
-                "upgrade-governance-packages"
-              ]
+              }
             }
           ]
         },
@@ -1267,10 +964,7 @@
                 "version": "1.0.0-beta.1",
                 "label": "Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register",
                 "shipped": true
-              },
-              "useCases": [
-                "review-model-evidence"
-              ]
+              }
             },
             {
               "slug": "governance-chain",
@@ -1282,10 +976,7 @@
                 "version": "1.0.0-beta.1",
                 "label": "Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register",
                 "shipped": true
-              },
-              "useCases": [
-                "review-model-evidence"
-              ]
+              }
             },
             {
               "slug": "dna-production",
@@ -1297,10 +988,7 @@
                 "version": "1.0.0-beta.1",
                 "label": "Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register",
                 "shipped": true
-              },
-              "useCases": [
-                "review-model-evidence"
-              ]
+              }
             },
             {
               "slug": "cases",
@@ -1312,10 +1000,7 @@
                 "version": "1.0.0-beta.1",
                 "label": "Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register",
                 "shipped": true
-              },
-              "useCases": [
-                "propose-grammar-extension"
-              ]
+              }
             },
             {
               "slug": "decision-register",
@@ -1327,12 +1012,7 @@
                 "version": "1.0.0-beta.1",
                 "label": "Generative Governance program extracted — causal model, governance chain, DNA production, cases, decision register",
                 "shipped": true
-              },
-              "useCases": [
-                "review-model-evidence",
-                "propose-grammar-extension",
-                "incorporate-accepted-grammar-extension"
-              ]
+              }
             },
             {
               "slug": "research-protocol",
@@ -1344,10 +1024,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — research protocol, published programs, promotion path into GSM Change Proposals",
                 "ga": true
-              },
-              "useCases": [
-                "propose-grammar-extension"
-              ]
+              }
             }
           ]
         }
@@ -1380,12 +1057,6 @@
             "agentic-harness/skills-instructions-prompt-injection",
             "agentic-harness/llm-resolution",
             "agentic-harness/logging"
-          ],
-          "useCases": [
-            "deliver-reviewed-artifact",
-            "reuse-delivery-evidence",
-            "qualify-model-routing",
-            "qualify-host-instructions"
           ]
         },
         {
@@ -1397,10 +1068,6 @@
           "features": [
             "agentic-harness/artifact-validation",
             "safe-agentic-organization/artifacts"
-          ],
-          "useCases": [
-            "deliver-reviewed-artifact",
-            "install-and-publish-workspace"
           ]
         },
         {
@@ -1414,9 +1081,6 @@
             "safe-agentic-organization/workflows",
             "safe-agentic-organization/skills",
             "safe-agentic-organization/instructions"
-          ],
-          "useCases": [
-            "deliver-reviewed-artifact"
           ]
         },
         {
@@ -1428,10 +1092,6 @@
           "features": [
             "agentic-harness/step-authorization",
             "safe-agentic-organization/workflows"
-          ],
-          "useCases": [
-            "deliver-reviewed-artifact",
-            "approve-agent-mandate"
           ]
         },
         {
@@ -1448,12 +1108,6 @@
           "optional": [
             "agentic-workspace/installer",
             "agentic-workspace/cicd-pipelines"
-          ],
-          "useCases": [
-            "deliver-reviewed-artifact",
-            "install-and-publish-workspace",
-            "reuse-delivery-evidence",
-            "reconcile-parallel-agent-outputs"
           ]
         },
         {
@@ -1464,9 +1118,6 @@
           "kind": "implementation",
           "features": [
             "saf-sie-bridge/harness-history-sourcing"
-          ],
-          "useCases": [
-            "reuse-delivery-evidence"
           ]
         }
       ],
@@ -1496,10 +1147,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact"
-              ]
+              }
             },
             {
               "slug": "skills-instructions-prompt-injection",
@@ -1512,11 +1160,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "qualify-host-instructions"
-              ]
+              }
             },
             {
               "slug": "llm-resolution",
@@ -1529,11 +1173,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "qualify-model-routing"
-              ]
+              }
             },
             {
               "slug": "artifact-validation",
@@ -1546,11 +1186,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "install-and-publish-workspace"
-              ]
+              }
             },
             {
               "slug": "step-authorization",
@@ -1563,11 +1199,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "approve-agent-mandate"
-              ]
+              }
             },
             {
               "slug": "logging",
@@ -1580,11 +1212,7 @@
                 "label": "MVP/GA — resolution, injection, LLM routing, validation, authorization, logging",
                 "shipped": true,
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "reuse-delivery-evidence"
-              ]
+              }
             }
           ]
         },
@@ -1608,10 +1236,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — agents, skills, workflows, instructions, artifacts",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact"
-              ]
+              }
             },
             {
               "slug": "skills",
@@ -1623,10 +1248,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — agents, skills, workflows, instructions, artifacts",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact"
-              ]
+              }
             },
             {
               "slug": "workflows",
@@ -1638,10 +1260,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — agents, skills, workflows, instructions, artifacts",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact"
-              ]
+              }
             },
             {
               "slug": "instructions",
@@ -1653,10 +1272,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — agents, skills, workflows, instructions, artifacts",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact"
-              ]
+              }
             },
             {
               "slug": "artifacts",
@@ -1668,11 +1284,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — agents, skills, workflows, instructions, artifacts",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "install-and-publish-workspace"
-              ]
+              }
             }
           ]
         },
@@ -1696,13 +1308,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — workspace data plane, installer, CI/CD artifact pipelines",
                 "ga": true
-              },
-              "useCases": [
-                "deliver-reviewed-artifact",
-                "install-and-publish-workspace",
-                "reuse-delivery-evidence",
-                "reconcile-parallel-agent-outputs"
-              ]
+              }
             },
             {
               "slug": "installer",
@@ -1714,10 +1320,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — workspace data plane, installer, CI/CD artifact pipelines",
                 "ga": true
-              },
-              "useCases": [
-                "install-and-publish-workspace"
-              ]
+              }
             },
             {
               "slug": "cicd-pipelines",
@@ -1729,10 +1332,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — workspace data plane, installer, CI/CD artifact pipelines",
                 "ga": true
-              },
-              "useCases": [
-                "install-and-publish-workspace"
-              ]
+              }
             }
           ]
         },
@@ -1756,10 +1356,7 @@
                 "version": "1.0",
                 "label": "MVP/GA — harness history sourcing into GSM contributions on the Definition Blackboard Manager",
                 "ga": true
-              },
-              "useCases": [
-                "reuse-delivery-evidence"
-              ]
+              }
             }
           ]
         }
@@ -2163,31 +1760,6 @@
         "gsm/open-domain-typing",
         "gsm/protocol-and-domain-semantics-sourcing",
         "gsm/portable-conformance-testable-definitions"
-      ],
-      "useCases": [
-        "read-governance-model",
-        "describe-service-contract",
-        "describe-mixed-protocol-boundaries",
-        "describe-payment-settlement-boundaries",
-        "author-reviewed-definition",
-        "reconcile-code-evidence",
-        "consume-authorized-context",
-        "react-to-definition-change",
-        "inspect-change-impact",
-        "ask-cited-it-question",
-        "generate-decision-pack",
-        "reuse-delivery-evidence",
-        "review-operation-privileges",
-        "restore-identity-synchronization",
-        "conduct-governance-session",
-        "resolve-blocked-change",
-        "retrieve-decision-basis",
-        "reuse-review-lens",
-        "inspect-subject-perspectives",
-        "agree-evidence-preservation",
-        "agree-domain-typing-contract",
-        "qualify-processor-interchange",
-        "assess-application-retirement"
       ]
     },
     {
@@ -2200,16 +1772,6 @@
       "capabilities": [
         "itip/it-governance-fabric-composition",
         "gsm/framework-and-regulation-sourcing"
-      ],
-      "useCases": [
-        "review-sourced-obligations",
-        "upgrade-governance-packages",
-        "review-scoped-appraisal",
-        "review-recurring-service-appraisal",
-        "reuse-governance-selection",
-        "resolve-competing-obligations",
-        "inspect-vocabulary-coverage",
-        "bind-obligations-to-scope"
       ]
     },
     {
@@ -2224,19 +1786,6 @@
         "gsm/governance-grammar-and-lifecycle",
         "gsm/research-tested-model-evolution",
         "saf/human-gated-advancement"
-      ],
-      "useCases": [
-        "read-governance-model",
-        "review-model-evidence",
-        "propose-grammar-extension",
-        "incorporate-accepted-grammar-extension",
-        "author-reviewed-definition",
-        "reconcile-code-evidence",
-        "react-to-definition-change",
-        "deliver-reviewed-artifact",
-        "reuse-delivery-evidence",
-        "assess-invalidated-dependencies",
-        "approve-agent-mandate"
       ]
     },
     {
@@ -2250,13 +1799,6 @@
         "itip/automatic-it-truth-sourcing",
         "sie/collaborative-definition-sourcing",
         "saf/delivery-history-as-governed-context"
-      ],
-      "useCases": [
-        "reconcile-code-evidence",
-        "reuse-delivery-evidence",
-        "configure-collection-boundaries",
-        "recover-incomplete-collection",
-        "review-evidence-refresh"
       ]
     },
     {
@@ -2269,13 +1811,6 @@
       "capabilities": [
         "itip/continuous-it-compliance-evaluation",
         "sie/deterministic-norm-evaluation"
-      ],
-      "useCases": [
-        "review-scoped-appraisal",
-        "review-recurring-service-appraisal",
-        "execute-bounded-response",
-        "propose-appraisal-remediation",
-        "qualify-rule-revision"
       ]
     },
     {
@@ -2292,21 +1827,6 @@
         "saf/enforced-artifact-contracts",
         "saf/agentic-safe-operating-model",
         "saf/local-first-delivery-plane"
-      ],
-      "useCases": [
-        "generate-decision-pack",
-        "execute-bounded-response",
-        "deliver-reviewed-artifact",
-        "install-and-publish-workspace",
-        "reuse-delivery-evidence",
-        "maintain-artifact-bindings",
-        "preview-artifact-bindings",
-        "constrain-generated-narrative",
-        "operate-recurring-reports",
-        "investigate-artifact-failure",
-        "qualify-model-routing",
-        "qualify-host-instructions",
-        "reconcile-parallel-agent-outputs"
       ]
     }
   ],

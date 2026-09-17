@@ -2,84 +2,333 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://poesis.cloud/schemas/poesis-usage.schema.json",
   "title": "Poesis usage catalog",
-  "description": "The usage side of the model: domains, actor types, independent pains, homepage pain groups, use cases and composite values. The usage side never declares what supports it.",
+  "description": "The usage side of the model: domains, actor types, independent pains, homepage pain groups, use cases and composite values. Supported use cases own exactly one direct platform reference list.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["domains", "actorTypes", "pains", "painGroups", "useCases", "values"],
+  "required": [
+    "domains",
+    "actorTypes",
+    "pains",
+    "painGroups",
+    "useCases",
+    "values"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
-    "domains": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/domain" } },
-    "actorTypes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/actorType" } },
-    "pains": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/pain" } },
-    "painGroups": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/painGroup" } },
-    "useCases": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/useCase" } },
-    "values": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/value" } }
+    "$schema": {
+      "type": "string"
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/domain"
+      }
+    },
+    "actorTypes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/actorType"
+      }
+    },
+    "pains": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/pain"
+      }
+    },
+    "painGroups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/painGroup"
+      }
+    },
+    "useCases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/useCase"
+      }
+    },
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/value"
+      }
+    }
   },
   "$defs": {
-    "slug": { "type": "string", "minLength": 1 },
-    "slugList": { "type": "array", "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
-    "nonEmptySlugList": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
-    "text": { "type": "string", "minLength": 1 },
+    "slug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slugList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/slug"
+      },
+      "uniqueItems": true
+    },
+    "nonEmptySlugList": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/slug"
+      },
+      "uniqueItems": true
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
     "domain": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["slug", "name", "label", "tags", "blurb"],
+      "required": [
+        "slug",
+        "name",
+        "label",
+        "tags",
+        "blurb"
+      ],
       "properties": {
-        "slug": { "$ref": "#/$defs/slug" },
-        "name": { "$ref": "#/$defs/text" },
-        "label": { "$ref": "#/$defs/text" },
-        "tags": { "type": "array", "items": { "$ref": "#/$defs/text" } },
-        "blurb": { "$ref": "#/$defs/text" }
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "blurb": {
+          "$ref": "#/$defs/text"
+        }
       }
     },
     "actorType": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["slug", "kind", "domainSlug", "name", "tags", "icon", "hook", "body"],
+      "required": [
+        "slug",
+        "kind",
+        "domainSlug",
+        "name",
+        "tags",
+        "icon",
+        "hook",
+        "body"
+      ],
       "properties": {
-        "slug": { "$ref": "#/$defs/slug" },
-        "kind": { "enum": ["human", "system"] },
-        "domainSlug": { "$ref": "#/$defs/slug" },
-        "name": { "$ref": "#/$defs/text" },
-        "tags": { "type": "array", "items": { "$ref": "#/$defs/text" } },
-        "icon": { "$ref": "#/$defs/text" },
-        "hook": { "$ref": "#/$defs/text" },
-        "body": { "$ref": "#/$defs/text" }
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "kind": {
+          "enum": [
+            "human",
+            "system"
+          ]
+        },
+        "domainSlug": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "icon": {
+          "$ref": "#/$defs/text"
+        },
+        "hook": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        }
       }
     },
     "pain": {
       "type": "object",
       "description": "An independent pain. A pain owns no graph references; use cases name the pains they address.",
       "additionalProperties": false,
-      "required": ["slug", "tags", "pain", "cost"],
+      "required": [
+        "slug",
+        "tags",
+        "pain",
+        "cost"
+      ],
       "properties": {
-        "slug": { "$ref": "#/$defs/slug" },
-        "tags": { "type": "array", "items": { "$ref": "#/$defs/text" } },
-        "pain": { "$ref": "#/$defs/text" },
-        "cost": { "$ref": "#/$defs/text" }
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "pain": {
+          "$ref": "#/$defs/text"
+        },
+        "cost": {
+          "$ref": "#/$defs/text"
+        }
       }
     },
     "painGroup": {
       "type": "object",
       "description": "An editorial grouping of pains used by the homepage lead boxes.",
       "additionalProperties": false,
-      "required": ["slug", "lead", "pains"],
+      "required": [
+        "slug",
+        "lead",
+        "pains"
+      ],
       "properties": {
-        "slug": { "$ref": "#/$defs/slug" },
-        "lead": { "$ref": "#/$defs/text" },
-        "pains": { "$ref": "#/$defs/nonEmptySlugList" }
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "lead": {
+          "$ref": "#/$defs/text"
+        },
+        "pains": {
+          "$ref": "#/$defs/nonEmptySlugList"
+        }
       }
     },
     "useCase": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["slug", "name", "goal", "actorTypes", "addressedPains", "values"],
+      "required": [
+        "slug",
+        "name",
+        "goal",
+        "actorTypes",
+        "addressedPains",
+        "values"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "features"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "capabilities"
+                ]
+              },
+              {
+                "required": [
+                  "affordances"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "capabilities"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "features"
+                ]
+              },
+              {
+                "required": [
+                  "affordances"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "affordances"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "features"
+                ]
+              },
+              {
+                "required": [
+                  "capabilities"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "features"
+                ]
+              },
+              {
+                "required": [
+                  "capabilities"
+                ]
+              },
+              {
+                "required": [
+                  "affordances"
+                ]
+              }
+            ]
+          }
+        }
+      ],
       "properties": {
-        "slug": { "$ref": "#/$defs/slug" },
-        "name": { "$ref": "#/$defs/text" },
-        "goal": { "$ref": "#/$defs/text" },
-        "actorTypes": { "$ref": "#/$defs/nonEmptySlugList" },
-        "addressedPains": { "$ref": "#/$defs/slugList" },
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "goal": {
+          "$ref": "#/$defs/text"
+        },
+        "actorTypes": {
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
+        "addressedPains": {
+          "$ref": "#/$defs/slugList"
+        },
+        "features": {
+          "description": "Direct feature support references, each `<solution>/<product>/<feature>`.",
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
+        "capabilities": {
+          "description": "Direct capability support references, each `<solution>/<capability>`.",
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
+        "affordances": {
+          "description": "Direct affordance support references.",
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
         "values": {
           "description": "Values this use case realizes.",
           "$ref": "#/$defs/slugList"
@@ -90,12 +339,26 @@
       "type": "object",
       "description": "An independent desired benefit. A value owns no graph references; use cases name the values they realize.",
       "additionalProperties": false,
-      "required": ["slug", "originalTitle", "title", "body"],
+      "required": [
+        "slug",
+        "originalTitle",
+        "title",
+        "body"
+      ],
       "properties": {
-        "slug": { "type": "string", "pattern": "^value:" },
-        "originalTitle": { "$ref": "#/$defs/text" },
-        "title": { "$ref": "#/$defs/text" },
-        "body": { "$ref": "#/$defs/text" }
+        "slug": {
+          "type": "string",
+          "pattern": "^value:"
+        },
+        "originalTitle": {
+          "$ref": "#/$defs/text"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "body": {
+          "$ref": "#/$defs/text"
+        }
       }
     }
   }

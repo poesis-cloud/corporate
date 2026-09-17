@@ -83,11 +83,10 @@ const usageActorGroups = [
         <p class="lead">To the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
       </div>
 
-      <h3 class="home-usage-subhead">Who is it for</h3>
+      <h3 class="home-usage-subhead" id="usage-actor-heading">Who is it for</h3>
       <div class="home-usage-filter">
         <div class="field home-usage-field">
-          <label for="usage-actor">Actor type</label>
-          <select id="usage-actor">
+          <select id="usage-actor" aria-labelledby="usage-actor-heading">
             <option value="">Everyone</option>
             {usageActorGroups.map((group) => (
               <optgroup label={group.label}>

@@ -63,7 +63,7 @@ test('a shipped milestone the product already reached cannot be published as pla
 const partnerships = siteNavigation.find((group) => group.label === 'Partnerships').sections.flatMap((section) => section.items);
 const attribute = (node, name) => node.attrs?.find((attr) => attr.name === name)?.value;
 const text = (node) => node.nodeName === '#text' ? node.value : (node.childNodes ?? []).map(text).join('');
-const elements = (node, predicate) => [ ...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap((child) => elements(child, predicate)) ];
+const elements = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap((child) => elements(child, predicate))];
 const hasClass = (node, name) => attribute(node, 'class')?.split(/\s+/).includes(name) ?? false;
 
 test('service and partnership navigation retains the matching detail destinations', () => {
@@ -189,12 +189,10 @@ test('validators reject malformed, duplicate and contradictory graphs; cross-cut
   graph = fresh(); graph[0].capabilities[0].delivery.state = 'delivered';
   assert.throws(() => validatePortfolio(graph), /Contradictory/);
   assert.throws(() => evaluateRequirement({ all: [], any: [] }, {}), /Ambiguous/);
-  graph = fresh(); graph[0].products[0].features[0].useCases.push(graph[0].products[0].features[0].useCases[0]);
-  assert.throws(() => validatePortfolio(graph), /Duplicate/);
+  graph = fresh(); graph[0].products[0].features[0].useCases = ['read-governance-model'];
+  assert.throws(() => validatePortfolio(graph), /Independent usage references/);
   graph = fresh(); graph[0].products[0].features[0].values = [];
   assert.throws(() => validatePortfolio(graph), /Independent usage references/);
-  graph = fresh(); graph[0].products[0].features[0].useCases.push('');
-  assert.throws(() => validatePortfolio(graph), /Invalid useCases reference/);
   graph = fresh(); graph[0].tags = [];
   assert.throws(() => validatePortfolio(graph), /Invalid solution tags/);
   graph = fresh(); graph[0].products[0].currentVersion = 'tomorrow';

@@ -14,20 +14,27 @@ const { groups } = Astro.props;
 ---
 
 {groups.length > 0 && (
-  <p class="proof-line proof-line--merged">
-    {groups.map((group, groupIndex) => (
-      <>
-        {groupIndex > 0 && ' · '}
-        <span class="proof-line__qualifier">
-          {group.qualifier}{group.label && !(group.links.length === 1 && group.links[0].label === group.label) ? ` ${group.label}` : ''}:
-        </span>{' '}
-        {group.links.map((link, index) => (
-          <>
-            {index > 0 && ' · '}
-            <a class={plannedClass(link.state)} href={link.href}>{link.label} <DeliveryStatus state={link.state} compact /></a>
-          </>
-        ))}
-      </>
+  <div class="proof-line relation-previews">
+    {groups.map((group) => (
+      <details class="relation-preview">
+        <summary>
+          <span>{`${group.qualifier} ${group.label}`}</span>
+          <span class="relation-preview__count">({group.previews.length})</span>
+        </summary>
+        <div class="relation-preview__body">
+          <ul class="relation-preview__items">
+            {group.previews.map((preview) => (
+              <li>
+                <a class={plannedClass(preview.state)} href={preview.href}>
+                  <span>{preview.label}</span>
+                  <DeliveryStatus state={preview.state} compact />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a class="relation-preview__all" href={group.href}>View all {group.label}</a>
+        </div>
+      </details>
     ))}
-  </p>
+  </div>
 )}

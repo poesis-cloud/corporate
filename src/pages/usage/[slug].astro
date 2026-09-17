@@ -15,6 +15,7 @@ const { useCase } = Astro.props;
 const features = featuresForUseCase(useCase.slug);
 const capabilities = capabilitiesForUseCase(useCase.slug);
 const affordances = affordancesForUseCase(useCase.slug);
+const supportKind = features.length ? 'features' : capabilities.length ? 'capabilities' : affordances.length ? 'affordances' : undefined;
 const values = valuesForUseCase(useCase.slug);
 const pains = painsForUseCase(useCase.slug);
 const state = useCaseStatus(useCase);
@@ -31,17 +32,15 @@ const state = useCaseStatus(useCase);
   <section id="platform" class="section section--soft">
     <div class="container">
       <div class="section-head"><p class="eyebrow">Platform</p><h2>What serves this use case</h2></div>
-      {state === undefined ? <p>No platform coverage declared.</p> : <div class="usage-columns">
-        <div>
-          <h3>Features</h3>
-          <ul class="usage-flat-list">{features.map((entry) => <li data-usage-feature={entry.slug}><a href={featureHref(entry)}>{entry.product.name}: {entry.feature.name}</a> <DeliveryStatus state={entry.feature.delivery.state} /></li>)}</ul>
-        </div>
-        <div>
-          <h3>Capabilities</h3>
-          <ul class="usage-flat-list">{capabilities.map((entry) => <li data-usage-capability={entry.slug}><a href={capabilityHref(entry)}>{entry.solution.name}: {entry.capability.name}</a> <DeliveryStatus state={capabilityStatus(entry.solution, entry.capability)} /></li>)}</ul>
-          <h3>Affordances</h3>
-          <ul class="usage-flat-list">{affordances.map((entry) => <li data-usage-affordance={entry.slug}><a href={affordanceHref(entry)}>{entry.affordance.name}</a> <DeliveryStatus state={affordanceStatus(entry.affordance)} /></li>)}</ul>
-        </div>
+      {state === undefined ? <p>No platform coverage declared.</p> : supportKind === 'features' ? <div>
+        <h3>Features</h3>
+        <ul class="usage-flat-list">{features.map((entry) => <li data-usage-feature={entry.slug}><a href={featureHref(entry)}>{entry.product.name}: {entry.feature.name}</a> <DeliveryStatus state={entry.feature.delivery.state} /></li>)}</ul>
+      </div> : supportKind === 'capabilities' ? <div>
+        <h3>Capabilities</h3>
+        <ul class="usage-flat-list">{capabilities.map((entry) => <li data-usage-capability={entry.slug}><a href={capabilityHref(entry)}>{entry.solution.name}: {entry.capability.name}</a> <DeliveryStatus state={capabilityStatus(entry.solution, entry.capability)} /></li>)}</ul>
+      </div> : <div>
+        <h3>Affordances</h3>
+        <ul class="usage-flat-list">{affordances.map((entry) => <li data-usage-affordance={entry.slug}><a href={affordanceHref(entry)}>{entry.affordance.name}</a> <DeliveryStatus state={affordanceStatus(entry.affordance)} /></li>)}</ul>
       </div>}
     </div>
   </section>
@@ -64,12 +63,10 @@ const state = useCaseStatus(useCase);
 <style>
   .usage-detail-intro h1 { max-width: 24ch; font-size: 2.5rem; line-height: 1.2; letter-spacing: 0; overflow-wrap: anywhere; }
   .usage-actors { font-size: .85rem; color: var(--ink-soft); }
-  .usage-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-  .usage-columns > div { min-width: 0; }
   h2 { font-size: 1.55rem; letter-spacing: 0; }
-  .usage-columns h3 { font-size: 1.3rem; letter-spacing: 0; }
+  h3 { font-size: 1.3rem; letter-spacing: 0; }
   .usage-flat-list li { margin-bottom: .85rem; overflow-wrap: anywhere; }
   .usage-flat-list { list-style: none; padding: 0; }
   .usage-flat-list li { padding-bottom: .6rem; border-bottom: 1px solid var(--line); }
-  @media (max-width: 640px) { .usage-columns { grid-template-columns: minmax(0, 1fr); } .usage-detail-intro h1 { font-size: 2rem; } }
+  @media (max-width: 640px) { .usage-detail-intro h1 { font-size: 2rem; } }
 </style>

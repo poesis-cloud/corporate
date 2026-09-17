@@ -1,6 +1,6 @@
-import { platformQualityRefs, platformSolutions, type UsageRefs } from './poesis-platform.ts';
-import { qualityCategories, qualitiesPublishedBy } from './qualities.ts';
-import { usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, type RelationGroup, type UseCase } from './usage.ts';
+import { affordanceStatus, capabilityStatus, platformQualityRefs, platformSolutions, productStatus, solutionHref, solutionStatus } from './poesis-platform.ts';
+import { qualityCategories, qualitiesPublishedBy, qualityHref } from './qualities.ts';
+import { affordanceHref, capabilityHref, featureHref, usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCaseStatus, useCasesForItem, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, valueHref, valueStatus, type RelationGroup, type RelationPreview, type UseCase, type UsageItem } from './usage.ts';
 import { homepagePainGroups } from './pains.ts';
 import { catalogTypes, catalogHref, type CatalogType, type CatalogSnapshot, type CatalogSource } from './catalog-query.ts';
 
@@ -21,7 +21,7 @@ const casesForActor = (slug: string) => useCases.filter((useCase) => useCase.act
 
 /** Platform items that explicitly name at least one of these use cases. */
 function platformSupport(references: string[]): Pick<CatalogSource['targets'], 'features' | 'capabilities' | 'affordances'> {
-  const serves = (item: { useCases: string[] }) => item.useCases.some((slug) => references.includes(slug));
+  const serves = (item: UsageItem) => useCasesForItem(item).some((useCase) => references.includes(useCase.slug));
   return {
     features: usageFeatures.filter((entry) => serves(entry.feature)).map((entry) => entry.slug),
     capabilities: usageCapabilities.filter((entry) => serves(entry.capability)).map((entry) => entry.slug),
@@ -54,8 +54,9 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
     },
   };
   for (const entry of platform) {
-    snapshot.records[entry.type].push({ slug: entry.slug, actors: caseActors(entry.item.useCases), pains: casePains(entry.item.useCases) });
-    const related = usageTargets(entry.item.useCases);
+    const references = caseSlugs(useCasesForItem(entry.item));
+    snapshot.records[entry.type].push({ slug: entry.slug, actors: caseActors(references), pains: casePains(references) });
+    const related = usageTargets(references);
     if (entry.type === 'capabilities') {
       const capability = usageCapabilities.find((candidate) => candidate.slug === entry.slug)!;
       related.features = capability.capability.relations.features.map((reference) => `${capability.solution.slug}/${reference}`);
@@ -135,22 +136,66 @@ function sourceType(source: string): RelationSourceType {
   return type as RelationSourceType;
 }
 
+function relationPreview(type: CatalogType, slug: string): RelationPreview {
+  if (type === 'actors') {
+    const actor = poesisUsage.actorTypes.find((candidate) => candidate.slug === slug);
+    if (actor) return { label: actor.name, href: `/catalog/actors#${actor.slug}` };
+  }
+  if (type === 'pains') {
+    const pain = poesisUsage.pains.find((candidate) => candidate.slug === slug);
+    if (pain) return { label: pain.pain, href: `/catalog/pains#${pain.slug}` };
+  }
+  if (type === 'usage') {
+    const useCase = useCases.find((candidate) => candidate.slug === slug);
+    if (useCase) return { label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) };
+  }
+  if (type === 'values') {
+    const value = usageValues.find((candidate) => candidate.slug === slug);
+    if (value) return { label: value.title, href: valueHref(value), state: valueStatus(value.slug) };
+  }
+  if (type === 'features') {
+    const entry = usageFeatures.find((candidate) => candidate.slug === slug);
+    if (entry) return { label: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state };
+  }
+  if (type === 'capabilities') {
+    const entry = usageCapabilities.find((candidate) => candidate.slug === slug);
+    if (entry) return { label: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability) };
+  }
+  if (type === 'affordances') {
+    const entry = usageAffordances.find((candidate) => candidate.slug === slug);
+    if (entry) return { label: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance) };
+  }
+  if (type === 'qualities') {
+    const quality = catalogQualities.find((candidate) => candidate.slug === slug);
+    if (quality) return { label: quality.name, href: qualityHref(quality), state: quality.state };
+  }
+  if (type === 'solutions') {
+    const solution = platformSolutions.find((candidate) => candidate.slug === slug);
+    if (solution) return { label: solution.fullName, href: solutionHref(solution), state: solutionStatus(solution) };
+  }
+  if (type === 'products') {
+    const entry = platformProducts.find((candidate) => candidate.slug === slug);
+    if (entry) return { label: entry.product.name, href: `${solutionHref(entry.solution)}/products/${entry.product.slug}`, state: productStatus(entry.product) };
+  }
+  throw new Error(`Unknown ${type} relationship target: ${slug}`);
+}
+
 /** Qualified links to direct relatives only, in the contract's display order. */
 export function catalogRelations(source: string): RelationGroup[] {
   const resolved = catalogSnapshot.sources[source];
   if (!resolved) throw new Error(`Unknown catalog relationship source: ${source}`);
-  return relationRules[sourceType(source)].flatMap((rule) => {
-    const related = rule.targets.filter((target) => resolved.targets[target].length);
-    if (!related.length) return [];
-    return [{
-      label: related.length === 1 ? labels[related[0]] : '',
+  return relationRules[sourceType(source)].flatMap((rule) => rule.targets.flatMap((target) => {
+    const slugs = resolved.targets[target];
+    return slugs.length ? [{
+      label: labels[target],
       qualifier: rule.qualifier,
-      links: related.map((target) => ({ label: labels[target], href: catalogHref(target, source) })),
-    }];
-  });
+      href: catalogHref(target, source),
+      previews: slugs.map((slug) => relationPreview(target, slug)),
+    }] : [];
+  }));
 }
 
-export function platformRelations(item: UsageRefs): RelationGroup[] {
+export function platformRelations(item: UsageItem): RelationGroup[] {
   const entry = platform.find((entry) => entry.item === item);
   if (!entry) throw new Error('Unknown platform relationship source');
   return catalogRelations(entry.source);

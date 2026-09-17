@@ -215,9 +215,6 @@
         },
         "milestone": {
           "$ref": "#/$defs/milestone"
-        },
-        "useCases": {
-          "$ref": "#/$defs/slugList"
         }
       }
     },
@@ -253,9 +250,6 @@
           "$ref": "#/$defs/nonEmptySlugList"
         },
         "optional": {
-          "$ref": "#/$defs/slugList"
-        },
-        "useCases": {
           "$ref": "#/$defs/slugList"
         }
       }
@@ -457,8 +451,7 @@
         "blurb",
         "state",
         "scope",
-        "capabilities",
-        "useCases"
+        "capabilities"
       ],
       "properties": {
         "slug": {
@@ -481,9 +474,6 @@
         },
         "capabilities": {
           "description": "Contributing capability references, each `<solution>/<capability>`.",
-          "$ref": "#/$defs/nonEmptySlugList"
-        },
-        "useCases": {
           "$ref": "#/$defs/nonEmptySlugList"
         }
       }

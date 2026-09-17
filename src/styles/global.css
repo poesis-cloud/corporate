@@ -2907,21 +2907,23 @@ a:hover {
   text-transform: uppercase;
 }
 
-/* Merged relation groups (affordance/capability/feature cards, catalog entries):
-   one footer line per item instead of one bordered block per relation type. */
-.proof-line--merged>span {
+/* Each relation group starts on its own line for scanability on dense cards. */
+.proof-line--stacked .proof-line__group {
+  display: block;
+  margin-top: .25rem;
+}
+
+.proof-line--stacked .proof-line__group:first-child {
+  margin-top: 0;
+}
+
+.proof-line--stacked .proof-line__qualifier {
   display: inline;
-  margin-bottom: 0;
-  margin-right: .35em;
+  margin: 0 .35em 0 0;
 }
 
-.proof-line--merged>span::after {
-  content: ':';
-}
-
-/* Keep each link's arrow icon on the same line as its label so merged
-   groups read as one flowing line instead of one link per row. */
-.proof-line--merged a {
+/* Keep each link's arrow icon on the same line as its label. */
+.proof-line--stacked a {
   display: inline-flex;
   align-items: center;
   gap: .25em;
@@ -2939,6 +2941,99 @@ a:hover {
 .proof-line a:hover {
   color: var(--accent);
   text-decoration-color: currentColor;
+}
+
+.relation-previews {
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.relation-preview {
+  min-width: 0;
+}
+
+.relation-preview>summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .6rem;
+  min-width: 0;
+  padding: .2rem 0;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  line-height: 1.45;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.relation-preview>summary::-webkit-details-marker {
+  display: none;
+}
+
+.relation-preview>summary::before {
+  content: "▸";
+  flex: 0 0 auto;
+  color: var(--accent);
+  transition: transform .15s ease;
+}
+
+.relation-preview[open]>summary::before {
+  transform: rotate(90deg);
+}
+
+.relation-preview>summary:hover,
+.relation-preview>summary:focus-visible {
+  color: var(--ink);
+}
+
+.relation-preview>summary>span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.relation-preview__count {
+  flex: 0 0 auto;
+  color: var(--ink-soft);
+}
+
+.relation-preview__body {
+  min-width: 0;
+  padding: .35rem 0 .15rem .85rem;
+}
+
+.relation-preview__items {
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.relation-preview__items a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem;
+  min-width: 0;
+  padding-left: .6rem;
+  border-left: 1px solid rgba(45, 212, 191, .25);
+}
+
+.relation-preview__items a>span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.relation-preview__all {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: .55rem;
+  overflow-wrap: anywhere;
 }
 
 /* ---- "not shipped yet" (amber) ------------------------------------------
@@ -3267,6 +3362,18 @@ a:hover {
     grid-column: 1;
     grid-row: auto;
     margin-top: 1.25rem;
+  }
+
+  .home-hero .hero-promise {
+    grid-row: 5;
+  }
+
+  .home-hero .hero-cta {
+    grid-row: 6;
+  }
+
+  .home-hero .hero-note {
+    grid-row: 7;
   }
 
   .hero-sections {

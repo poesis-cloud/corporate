@@ -18,6 +18,7 @@ import {
   useCasesForPain,
   useCasesForValue,
   useCasesForFeature,
+  useCasesForItem,
   useCasesForProduct,
   useCasesForSolution,
   usageValues,
@@ -61,7 +62,10 @@ test('pilot projection preserves canonical needs, relationships and delivery sta
     assert.ok(useCase.supports.every((key) => catalog.supports.some((support) => support.key === key)));
   }
   for (const value of catalog.values) {
-    assert.deepEqual(value.supports.map((key) => catalog.supports.find((support) => support.key === key).state), valueSupports(value.slug).map((support) => support.state));
+    assert.deepEqual(
+      value.supports.map((key) => catalog.supports.find((support) => support.key === key).state).slice().sort(),
+      valueSupports(value.slug).map((support) => support.state).slice().sort(),
+    );
   }
 });
 
@@ -122,7 +126,7 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(poesisPlatform.solutions.length, 4);
   assert.doesNotThrow(() => validateUsage());
   const coverage = usageCoverage();
-  assert.deepEqual(coverage, { features: 67, capabilities: 25, affordances: 6 });
+  assert.deepEqual(coverage, { features: 67, capabilities: 1, affordances: 0 });
   assert.equal(usageFeatures.length, 67);
   assert.equal(usageCapabilities.length, 25);
   assert.equal(usageAffordances.length, 6);
@@ -130,8 +134,8 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(poesisUsage.pains.length, 32);
   assert.equal(poesisUsage.actorTypes.length, 26);
   assert.equal(poesisUsage.useCases.length, 68);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 10);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 19);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 11);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 18);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 23);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined).length, 16);
   assert.equal(valueStatus('value:service-accountability'), undefined);
@@ -150,8 +154,7 @@ test('every identity is a unique, stable slug', () => {
   for (const value of usageValues) assert.match(value.slug, /^value:/);
 });
 
-test('platform items own the references and every reference resolves', () => {
-  const caseSlugs = new Set(poesisUsage.useCases.map((useCase) => useCase.slug));
+test('use cases own exclusive support references and every inverse reference resolves', () => {
   const painSlugs = new Set(poesisUsage.pains.map((pain) => pain.slug));
   const valueSlugs = new Set(usageValues.map((value) => value.slug));
   const items = [
@@ -162,13 +165,21 @@ test('platform items own the references and every reference resolves', () => {
   for (const item of items) {
     assert.equal('values' in item, false);
     assert.equal('pains' in item, false);
+    assert.equal('useCases' in item, false);
     for (const value of valuesForItem(item)) assert.ok(valueSlugs.has(value.slug));
     for (const pain of painsForItem(item)) assert.ok(painSlugs.has(pain.slug));
-    for (const slug of item.useCases) assert.ok(caseSlugs.has(slug), `${item.slug}: ${slug}`);
+    for (const useCase of useCasesForItem(item)) assert.ok(poesisUsage.useCases.includes(useCase), `${item.slug}: ${useCase.slug}`);
   }
   for (const value of usageValues) assert.deepEqual(Object.keys(value).sort(), ['body', 'originalTitle', 'slug', 'title']);
   for (const pain of poesisUsage.pains) assert.deepEqual(Object.keys(pain).sort(), ['cost', 'pain', 'slug', 'tags']);
-  for (const useCase of poesisUsage.useCases) assert.deepEqual(Object.keys(useCase).sort(), ['actorTypes', 'addressedPains', 'goal', 'name', 'slug', 'values']);
+  for (const useCase of poesisUsage.useCases) {
+    const supportKeys = ['features', 'capabilities', 'affordances'].filter((key) => (useCase[key] ?? []).length);
+    assert.ok(supportKeys.length <= 1, useCase.slug);
+    assert.deepEqual(
+      Object.keys(useCase).sort(),
+      supportKeys.length ? ['actorTypes', 'addressedPains', supportKeys[0], 'goal', 'name', 'slug', 'values'].sort() : ['actorTypes', 'addressedPains', 'goal', 'name', 'slug', 'values'],
+    );
+  }
 });
 
 test('value ownership preserves placement while support follows constituent use cases', () => {
@@ -223,7 +234,7 @@ test('validation rejects dangling references but accepts independent usage recor
   assert.equal(valueHref(independentValue), `/catalog/values#${valueAnchor(independentValue)}`);
   const danglingCase = structuredClone(poesisUsage);
   danglingCase.useCases = danglingCase.useCases.filter((useCase) => useCase.slug !== 'read-governance-model');
-  assert.throws(() => validateUsage(danglingCase), /Unknown|Unreachable/);
+  assert.doesNotThrow(() => validateUsage(danglingCase));
 });
 
 test('derivation preserves declared coverage without fabricating support for independent needs', () => {
@@ -239,11 +250,11 @@ test('derivation preserves declared coverage without fabricating support for ind
     for (const pain of painsForUseCase(useCase.slug)) assert.ok(poesisUsage.pains.includes(pain));
     assert.deepEqual(
       capabilitiesForUseCase(useCase.slug).map((entry) => entry.slug),
-      usageCapabilities.filter((entry) => entry.capability.useCases.includes(useCase.slug)).map((entry) => entry.slug),
+      useCase.capabilities ?? [],
     );
     assert.deepEqual(
       affordancesForUseCase(useCase.slug).map((entry) => entry.slug),
-      usageAffordances.filter((entry) => entry.affordance.useCases.includes(useCase.slug)).map((entry) => entry.slug),
+      useCase.affordances ?? [],
     );
   }
   assert.equal(valueEdges.length, new Set(valueEdges.map((edge) => edge.id)).size);
@@ -255,20 +266,22 @@ test('derivation preserves declared coverage without fabricating support for ind
   }
 });
 
-test('use case status uses features or explicit higher-level support without assuming implementation', () => {
+test('use case status follows each case direct support level without inferred ancestry', () => {
   for (const useCase of poesisUsage.useCases) {
-    const features = featuresForUseCase(useCase.slug);
-    const states = features.length ? features.map((entry) => entry.feature.delivery.state) : [
-      ...capabilitiesForUseCase(useCase.slug).map((entry) => capabilityStatus(entry.solution, entry.capability)),
-      ...affordancesForUseCase(useCase.slug).map((entry) => affordanceStatus(entry.affordance)),
-    ];
+    const states = (useCase.features ?? []).length
+      ? featuresForUseCase(useCase.slug).map((entry) => entry.feature.delivery.state)
+      : (useCase.capabilities ?? []).length
+        ? capabilitiesForUseCase(useCase.slug).map((entry) => capabilityStatus(entry.solution, entry.capability))
+        : (useCase.affordances ?? []).length
+          ? affordancesForUseCase(useCase.slug).map((entry) => affordanceStatus(entry.affordance))
+          : [];
     assert.equal(useCaseStatus(useCase), states.length ? commitmentStatus(states) : undefined);
   }
   assert.equal(useCaseStatus({ slug: 'read-governance-model' }), 'delivered');
   assert.equal(useCaseStatus({ slug: 'reconcile-code-evidence' }), 'partial');
   assert.equal(useCaseStatus({ slug: 'no-such-case' }), undefined);
   assert.deepEqual(featuresForUseCase('qualify-processor-interchange'), []);
-  assert.equal(useCaseStatus({ slug: 'qualify-processor-interchange' }), 'partial');
+  assert.equal(useCaseStatus({ slug: 'qualify-processor-interchange' }), 'delivered');
   assert.equal(useCaseStatus({ slug: 'agree-domain-typing-contract' }), 'partial');
 });
 
@@ -288,20 +301,20 @@ test('mockup and platform tasks reuse scope with only two distinct new features'
   // Six of these tasks are already served by shipped milestones the products reached; four are partly served.
   const served = new Set([
     'retrieve-decision-basis', 'assess-invalidated-dependencies', 'agree-evidence-preservation',
-    'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions',
+    'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions', 'qualify-processor-interchange',
   ]);
-  const partly = new Set(['review-operation-privileges', 'agree-domain-typing-contract', 'qualify-processor-interchange', 'reconcile-parallel-agent-outputs']);
+  const partly = new Set(['review-operation-privileges', 'agree-domain-typing-contract', 'reconcile-parallel-agent-outputs']);
   for (const slug of additions) {
     const useCase = poesisUsage.useCases.find((item) => item.slug === slug);
     assert.ok(useCase, slug);
     assert.equal(useCaseStatus(useCase), served.has(slug) ? 'delivered' : partly.has(slug) ? 'partial' : 'planned', slug);
-    assert.ok(capabilitiesForUseCase(slug).length, slug);
-    assert.ok(affordancesForUseCase(slug).length, slug);
+    const levels = [featuresForUseCase(slug), capabilitiesForUseCase(slug), affordancesForUseCase(slug)].filter((entries) => entries.length);
+    assert.equal(levels.length, 1, slug);
+    if ((useCase.features ?? []).length) assert.ok(featuresForUseCase(slug).length, slug);
+    if ((useCase.capabilities ?? []).length) assert.ok(capabilitiesForUseCase(slug).length, slug);
+    if ((useCase.affordances ?? []).length) assert.ok(affordancesForUseCase(slug).length, slug);
     assert.ok(painsForUseCase(slug).length, slug);
     assert.ok(valuesForUseCase(slug).length, slug);
-    for (const affordance of affordancesForUseCase(slug)) {
-      assert.ok(capabilitiesForUseCase(slug).some((entry) => affordance.affordance.relations.capabilities.includes(entry.slug)), slug);
-    }
   }
   for (const slug of ['identity-provider-synchronization', 'governance-review-sessions']) {
     const entry = usageFeatures.find((item) => item.slug === `itip/web-application/${slug}`);
@@ -335,8 +348,10 @@ test('lookups stay consistent with the declarations that produced them', () => {
   }
   assert.deepEqual(useCasesForPain('manual-decision-handoff').map((useCase) => useCase.slug), ['retrieve-decision-basis', 'transfer-service-ownership', 'handover-operational-evidence', 'reuse-delivery-evidence']);
   for (const entry of usageFeatures) {
-    assert.deepEqual(useCasesForFeature(entry.slug).map((useCase) => useCase.slug), poesisUsage.useCases.filter((useCase) => entry.feature.useCases.includes(useCase.slug)).map((useCase) => useCase.slug));
+    assert.deepEqual(useCasesForFeature(entry.slug).map((useCase) => useCase.slug), poesisUsage.useCases.filter((useCase) => (useCase.features ?? []).includes(entry.slug)).map((useCase) => useCase.slug));
+    assert.deepEqual(useCasesForItem(entry.feature), useCasesForFeature(entry.slug));
   }
+  assert.throws(() => useCasesForItem(structuredClone(usageFeatures[0].feature)), /Unknown platform relationship source/);
   assert.deepEqual(useCasesForFeature('no/such/feature'), []);
   for (const solution of poesisPlatform.solutions) {
     const fromProducts = new Set(solution.products.flatMap((product) => useCasesForProduct(solution.slug, product.slug).map((useCase) => useCase.slug)));
@@ -380,6 +395,15 @@ test('use cases validate owned value and pain references while independent recor
     graph.useCases[0].addressedPains = references;
     assert.throws(() => validateUsage(graph), /Unknown addressed pain|Duplicate addressed pain/);
   }
+  const supported = poesisUsage.useCases.find((useCase) => useCase.features?.length);
+  for (const [references, expected] of [[[], /Empty features support/], [['unknown'], /Unknown features support/], [[supported.features[0], supported.features[0]], /Duplicate features support/]]) {
+    const graph = structuredClone(poesisUsage);
+    graph.useCases.find((useCase) => useCase.slug === supported.slug).features = references;
+    assert.throws(() => validateUsage(graph), expected);
+  }
+  const mixed = structuredClone(poesisUsage);
+  mixed.useCases.find((useCase) => useCase.slug === supported.slug).capabilities = [usageCapabilities[0].slug];
+  assert.throws(() => validateUsage(mixed), /Mixed support levels/);
   const graph = structuredClone(poesisUsage);
   graph.pains.push({ slug: 'independent-test-pain', pain: 'An independent pain', cost: 'Unaddressed cost', tags: ['Test'] });
   assert.doesNotThrow(() => validateUsage(graph));
@@ -437,20 +461,23 @@ test('catalog navigation exposes only qualified direct relations in the declared
     const allowed = new Set(rules.flatMap((rule) => rule.targets));
     assert.deepEqual(catalogTypes.filter((target) => record.targets[target].length && !allowed.has(target)), [], `${source}: indirect target`);
     const groups = catalogRelations(source);
-    const expected = rules.flatMap((rule) => {
-      const related = rule.targets.filter((target) => record.targets[target].length);
-      return related.length ? [{ qualifier: rule.qualifier, targets: related }] : [];
-    });
-    assert.deepEqual(groups.map((group) => ({ qualifier: group.qualifier, targets: group.links.map((link) => new URL(link.href, 'https://poesis.cloud').pathname.split('/').at(-1)) })), expected, source);
-    for (const group of groups) for (const link of group.links) {
-      const url = new URL(link.href, 'https://poesis.cloud');
+    const expected = rules.flatMap((rule) => rule.targets.filter((target) => record.targets[target].length).map((target) => ({ qualifier: rule.qualifier, target })));
+    assert.deepEqual(groups.map((group) => ({ qualifier: group.qualifier, target: new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1) })), expected, source);
+    for (const group of groups) {
+      const url = new URL(group.href, 'https://poesis.cloud');
       const target = url.pathname.split('/').at(-1);
       assert.equal(url.searchParams.get('source'), source);
-      assert.equal(link.href, catalogHref(target, source));
-      assert.ok(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.length);
+      assert.equal(group.href, catalogHref(target, source));
+      assert.equal(group.previews.length, record.targets[target].length);
+      assert.deepEqual(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.slice().sort(), record.targets[target].slice().sort());
     }
   }
-  assert.deepEqual(catalogRelations('affordance:norm-evaluation').flatMap((group) => group.links.map((link) => new URL(link.href, 'https://poesis.cloud').pathname.split('/').at(-1))), ['pains', 'values', 'usage', 'actors', 'capabilities']);
+  assert.deepEqual(catalogRelations('affordance:norm-evaluation').map((group) => new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)), ['capabilities']);
+  const actorRelations = catalogRelations('actor:it-architect');
+  for (const group of actorRelations) {
+    assert.deepEqual(group.previews.map((preview) => preview.label).length, catalogSnapshot.sources['actor:it-architect'].targets[new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)].length);
+    assert.ok(group.previews.every((preview) => !preview.href.includes('?source=')));
+  }
   const source = 'capability:itip/automatic-it-truth-sourcing';
   assert.equal(catalogHref('values', source), '/catalog/values?source=capability%3Aitip%2Fautomatic-it-truth-sourcing');
   const capability = usageCapabilities.find((entry) => `capability:${entry.slug}` === source);
@@ -459,7 +486,7 @@ test('catalog navigation exposes only qualified direct relations in the declared
 });
 
 test('catalog filters intersect source actor and pain, reject unknowns, and restore from URLs', () => {
-  const source = 'capability:itip/automatic-it-truth-sourcing';
+  const source = 'feature:itip/web-application/definitions-truth-sourcing-management';
   const query = new URLSearchParams({ source, actor: 'it-platform', pain: 'it-acquisition-blind-spots' });
   const expected = ['configure-collection-boundaries', 'recover-incomplete-collection', 'review-evidence-refresh'];
   assert.deepEqual(filterCatalog(catalogSnapshot, 'usage', query).slugs, expected);
@@ -561,17 +588,30 @@ test('built catalogs publish matching filter payloads and compact platform foote
   for (const [type, entries, itemKey] of [['features', usageFeatures, 'feature'], ['capabilities', usageCapabilities, 'capability'], ['affordances', usageAffordances, 'affordance']]) {
     for (const entry of entries) {
       const source = `${itemKey}:${entry.slug}`;
-      const expected = platformRelations(entry[itemKey]).flatMap((group) => group.links.map((link) => link.href));
+      const expected = platformRelations(entry[itemKey]);
       const catalogCard = elements(built(`/catalog/${type}`), (node) => attr(node, 'data-catalog-slug') === entry.slug)[0];
       const ownerPath = itemKey === 'affordance' ? '/' : itemKey === 'feature' ? `${solutionHref(entry.solution)}/products/${entry.product.slug}` : solutionHref(entry.solution);
       const ownerAnchor = itemKey === 'affordance' ? `affordance-${entry.slug}` : entry[itemKey].slug;
       const ownerCard = elements(built(ownerPath), (node) => attr(node, 'id') === ownerAnchor)[0];
       for (const card of [catalogCard, ownerCard]) {
         assert.ok(card, source);
-        const footer = elements(card, (node) => attr(node, 'class')?.split(' ').includes('proof-line'));
-        const links = footer.flatMap((line) => elements(line, (node) => node.tagName === 'a').map((node) => attr(node, 'href')));
-        assert.deepEqual(links, expected, source);
-        assert.ok(links.every((href) => new URL(href, 'https://poesis.cloud').searchParams.get('source') === source));
+        const footer = elements(card, (node) => attr(node, 'class')?.split(' ').includes('relation-previews'))[0];
+        assert.ok(footer, source);
+        const disclosures = elements(footer, (node) => node.tagName === 'details');
+        assert.equal(disclosures.length, expected.length, `${source}: one disclosure per relation type`);
+        assert.ok(disclosures.every((details) => attr(details, 'open') === undefined), `${source}: closed by default`);
+        for (const [index, details] of disclosures.entries()) {
+          const summaries = elements(details, (node) => node.tagName === 'summary');
+          assert.equal(summaries.length, 1, `${source}: native summary`);
+          assert.equal(elements(summaries[0], (node) => node.tagName === 'a' || node.tagName === 'button').length, 0, `${source}: summary has no controls`);
+          assert.match(text(summaries[0]), new RegExp(`${expected[index].qualifier} ${expected[index].label}\\(${expected[index].previews.length}\\)`));
+          const itemLinks = elements(details, (node) => node.tagName === 'a' && attr(node, 'class') !== 'relation-preview__all');
+          assert.deepEqual(itemLinks.map((node) => attr(node, 'href')), expected[index].previews.map((preview) => preview.href), `${source}: canonical preview links`);
+          assert.ok(itemLinks.every((node) => attr(node, 'class')?.includes('is-planned') || attr(node, 'class') === undefined), `${source}: status classes remain optional`);
+          const all = elements(details, (node) => node.tagName === 'a' && attr(node, 'class') === 'relation-preview__all');
+          assert.deepEqual(all.map((node) => attr(node, 'href')), [expected[index].href], `${source}: filtered view all`);
+          assert.ok(attr(elements(details, (node) => attr(node, 'class') === 'relation-preview__items')[0], 'class'), `${source}: wrapping hook`);
+        }
       }
     }
   }
@@ -635,7 +675,8 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.equal(attr(card, 'data-pains'), painsForUseCase(useCase.slug).map((pain) => pain.slug).join(' '));
     assert.equal(attr(card, 'data-actors'), useCase.actorTypes.join(' '));
     assert.ok(elements(card, (node) => attr(node, 'href') === `/usage/${useCase.slug}`).length);
-    const badges = elements(card, (node) => attr(node, 'data-delivery-status'));
+    const head = elements(card, (node) => attr(node, 'class')?.includes('think-consequence__head'))[0];
+    const badges = elements(head, (node) => attr(node, 'data-delivery-status'));
     assert.equal(badges.length, useCaseStatus(useCase) === undefined ? 0 : 1);
     if (badges.length) assert.equal(attr(badges[0], 'data-delivery-status'), useCaseStatus(useCase));
     assert.ok(sitemap.includes(`/usage/${useCase.slug}/</loc>`), `sitemap ${useCase.slug}`);
@@ -705,6 +746,13 @@ test('built usage pages retain identity, derived badges, contextual links and SE
   const actorsPage = built('/catalog/actors');
   for (const profile of profiles) assert.ok(elements(actorsPage, (node) => attr(node, 'id') === profile.slug).length, `actor ${profile.slug}`);
   // The homepage keeps actor types as the usage filter rather than a separate section.
+  const usageHeading = elements(homepage, (node) => node.tagName === 'h3' && attr(node, 'id') === 'usage-actor-heading')[0];
+  assert.equal(text(usageHeading), 'Who is it for');
+  const usageSelect = elements(homepage, (node) => node.tagName === 'select' && attr(node, 'id') === 'usage-actor')[0];
+  assert.equal(attr(usageSelect, 'aria-labelledby'), 'usage-actor-heading');
+  assert.equal(elements(homepage, (node) => node.tagName === 'label' && attr(node, 'for') === 'usage-actor').length, 0);
+  const styles = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+  assert.match(styles, /@media \(max-width: 960px\)[\s\S]*?\.home-hero \.hero-promise\s*\{\s*grid-row: 5;[\s\S]*?\.home-hero \.hero-cta\s*\{\s*grid-row: 6;/);
   const options = elements(homepage, (node) => node.tagName === 'option' && attr(node, 'value') !== undefined);
   assert.equal(options.length, poesisUsage.actorTypes.length + 1);
   for (const option of options) assert.ok(attr(option, 'value') === '' || poesisUsage.actorTypes.some((actor) => actor.slug === attr(option, 'value')));

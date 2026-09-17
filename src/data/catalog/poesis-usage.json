@@ -693,6 +693,9 @@
       "values": [
         "value:inspectable-acquisition-coverage",
         "value:itip/definition-blackboard-code-sourcer/04"
+      ],
+      "features": [
+        "itip/web-application/definitions-truth-sourcing-management"
       ]
     },
     {
@@ -707,6 +710,9 @@
       ],
       "values": [
         "value:inspectable-acquisition-coverage"
+      ],
+      "features": [
+        "itip/web-application/definitions-truth-sourcing-management"
       ]
     },
     {
@@ -724,6 +730,9 @@
       "values": [
         "value:inspectable-acquisition-coverage",
         "value:itip/definition-blackboard-code-sourcer/02"
+      ],
+      "features": [
+        "itip/web-application/definitions-truth-sourcing-management"
       ]
     },
     {
@@ -742,6 +751,9 @@
         "value:itip/web-application/01",
         "value:sie/02",
         "value:sie/operator/03"
+      ],
+      "features": [
+        "itip/web-application/rbac-abac"
       ]
     },
     {
@@ -757,6 +769,9 @@
       ],
       "values": [
         "value:least-privilege-collaboration"
+      ],
+      "features": [
+        "itip/web-application/identity-provider-synchronization"
       ]
     },
     {
@@ -773,6 +788,9 @@
       ],
       "values": [
         "value:coherent-review-sessions"
+      ],
+      "features": [
+        "itip/web-application/governance-review-sessions"
       ]
     },
     {
@@ -788,6 +806,9 @@
       ],
       "values": [
         "value:actionable-governance-findings"
+      ],
+      "features": [
+        "itip/web-application/definitions-management"
       ]
     },
     {
@@ -808,6 +829,9 @@
         "value:platform/audit-readiness",
         "value:sie/definition-manager/03",
         "value:sie/definition-blackboard-manager/03"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-retention"
       ]
     },
     {
@@ -823,6 +847,9 @@
       ],
       "values": [
         "value:repeatable-review-boundaries"
+      ],
+      "features": [
+        "itip/web-application/definitions-management"
       ]
     },
     {
@@ -840,6 +867,9 @@
       ],
       "values": [
         "value:repeatable-review-boundaries"
+      ],
+      "features": [
+        "itip/web-application/definitions-management"
       ]
     },
     {
@@ -856,6 +886,9 @@
       "values": [
         "value:itip/04",
         "value:gsm/ontology/03"
+      ],
+      "features": [
+        "itip/web-application/ontology-management"
       ]
     },
     {
@@ -873,6 +906,9 @@
       "values": [
         "value:itip/04",
         "value:gsm/ontology/03"
+      ],
+      "features": [
+        "itip/web-application/ontology-management"
       ]
     },
     {
@@ -889,6 +925,9 @@
       "values": [
         "value:explicit-obligation-applicability",
         "value:gsm/ontology/02"
+      ],
+      "features": [
+        "itip/web-application/ontology-management"
       ]
     },
     {
@@ -905,6 +944,9 @@
       ],
       "values": [
         "value:itip/web-application/03"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -920,6 +962,9 @@
       ],
       "values": [
         "value:inspectable-artifact-completion"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -935,6 +980,9 @@
       ],
       "values": [
         "value:inspectable-artifact-completion"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -951,6 +999,9 @@
       ],
       "values": [
         "value:inspectable-artifact-completion"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -966,6 +1017,9 @@
       ],
       "values": [
         "value:inspectable-artifact-completion"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -982,6 +1036,10 @@
       ],
       "values": [
         "value:actionable-governance-findings"
+      ],
+      "features": [
+        "itip/web-application/it-compliance-evaluation",
+        "itip/web-application/definitions-management"
       ]
     },
     {
@@ -999,6 +1057,9 @@
         "value:explicit-obligation-applicability",
         "value:itip/04",
         "value:gsm/ontology/01"
+      ],
+      "features": [
+        "itip/web-application/ontology-management"
       ]
     },
     {
@@ -1014,6 +1075,9 @@
       ],
       "values": [
         "value:sie/definition-manager/01"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-lifecycle-enforcement"
       ]
     },
     {
@@ -1033,6 +1097,9 @@
         "value:platform/audit-readiness",
         "value:itip/definition-blackboard-code-sourcer/04",
         "value:sie/definition-manager/03"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-retention"
       ]
     },
     {
@@ -1050,6 +1117,9 @@
       "values": [
         "value:known-rule-revision-effects",
         "value:sie/operator/02"
+      ],
+      "features": [
+        "sie/operator/norms-evaluation-api"
       ]
     },
     {
@@ -1068,6 +1138,10 @@
         "value:gsm/01",
         "value:gsm/02",
         "value:gsm/specifications/01"
+      ],
+      "features": [
+        "itip/web-application/definitions-management",
+        "gsm/specifications/archetyping"
       ]
     },
     {
@@ -1088,6 +1162,9 @@
         "value:gsm/03",
         "value:gsm/specifications/01",
         "value:gsm/specifications/02"
+      ],
+      "capabilities": [
+        "gsm/portable-conformance-testable-definitions"
       ]
     },
     {
@@ -1109,6 +1186,9 @@
         "value:saf/agentic-harness/01",
         "value:saf/safe-agentic-organization/01",
         "value:saf/safe-agentic-organization/03"
+      ],
+      "features": [
+        "saf/agentic-harness/step-authorization"
       ]
     },
     {
@@ -1127,6 +1207,9 @@
         "value:itip/definition-blackboard-code-sourcer/04",
         "value:saf/04",
         "value:saf/agentic-workspace/01"
+      ],
+      "features": [
+        "saf/agentic-harness/llm-resolution"
       ]
     },
     {
@@ -1143,6 +1226,9 @@
       "values": [
         "value:qualified-runtime-selection",
         "value:saf/agentic-harness/03"
+      ],
+      "features": [
+        "saf/agentic-harness/skills-instructions-prompt-injection"
       ]
     },
     {
@@ -1158,6 +1244,9 @@
       ],
       "values": [
         "value:saf/03"
+      ],
+      "features": [
+        "saf/agentic-workspace/workspace-data-plane"
       ]
     },
     {
@@ -1174,6 +1263,9 @@
       ],
       "values": [
         "value:itip/web-application/04"
+      ],
+      "features": [
+        "itip/web-application/it-impact-simulation"
       ]
     },
     {
@@ -1451,6 +1543,12 @@
         "value:gsm/01",
         "value:gsm/02",
         "value:gsm/03"
+      ],
+      "features": [
+        "gsm/specifications/primitives",
+        "gsm/specifications/dna-grammar",
+        "gsm/specifications/archetyping",
+        "gsm/specifications/systemic-lifecycle-management"
       ]
     },
     {
@@ -1466,6 +1564,11 @@
       ],
       "values": [
         "value:gsm/ontology/04"
+      ],
+      "features": [
+        "gsm/ontology/http",
+        "gsm/ontology/it",
+        "gsm/ontology/prov"
       ]
     },
     {
@@ -1479,7 +1582,12 @@
       "addressedPains": [
         "it-tool-silos"
       ],
-      "values": []
+      "values": [],
+      "features": [
+        "gsm/ontology/grpc",
+        "gsm/ontology/graphql",
+        "gsm/ontology/websocket"
+      ]
     },
     {
       "slug": "describe-payment-settlement-boundaries",
@@ -1492,7 +1600,12 @@
       "addressedPains": [
         "it-tool-silos"
       ],
-      "values": []
+      "values": [],
+      "features": [
+        "gsm/ontology/kafka",
+        "gsm/ontology/amqp",
+        "gsm/ontology/jdbc"
+      ]
     },
     {
       "slug": "review-sourced-obligations",
@@ -1512,6 +1625,14 @@
         "value:gsm/04",
         "value:gsm/ontology/01",
         "value:gsm/ontology/02"
+      ],
+      "features": [
+        "gsm/ontology/togaf",
+        "gsm/ontology/iso-25010",
+        "gsm/ontology/iso-25012",
+        "gsm/ontology/gdpr",
+        "gsm/ontology/nis2",
+        "gsm/ontology/scap"
       ]
     },
     {
@@ -1529,6 +1650,13 @@
       ],
       "values": [
         "value:gsm/ontology/05"
+      ],
+      "features": [
+        "itip/web-application/ontology-management",
+        "gsm/ontology/dora",
+        "gsm/ontology/safe",
+        "gsm/ontology/itil",
+        "gsm/ontology/catalogue-update-stream"
       ]
     },
     {
@@ -1548,6 +1676,12 @@
         "value:gsm/research-lab/01",
         "value:gsm/research-lab/02",
         "value:gsm/research-lab/03"
+      ],
+      "features": [
+        "gsm/research-lab/causal-model",
+        "gsm/research-lab/governance-chain",
+        "gsm/research-lab/dna-production",
+        "gsm/research-lab/decision-register"
       ]
     },
     {
@@ -1565,6 +1699,11 @@
         "value:gsm/specifications/03",
         "value:gsm/specifications/04",
         "value:gsm/research-lab/01"
+      ],
+      "features": [
+        "gsm/research-lab/cases",
+        "gsm/research-lab/decision-register",
+        "gsm/research-lab/research-protocol"
       ]
     },
     {
@@ -1581,6 +1720,10 @@
       "values": [
         "value:gsm/specifications/03",
         "value:gsm/research-lab/02"
+      ],
+      "features": [
+        "gsm/specifications/enhanced-directives-norms-model",
+        "gsm/research-lab/decision-register"
       ]
     },
     {
@@ -1604,6 +1747,13 @@
         "value:sie/04",
         "value:sie/definition-manager/01",
         "value:sie/definition-blackboard-manager/02"
+      ],
+      "features": [
+        "itip/web-application/definitions-management",
+        "itip/web-application/rbac-abac",
+        "sie/definition-manager/definitions-management-api",
+        "sie/definition-manager/definitions-lifecycle-enforcement",
+        "sie/definition-manager/definitions-retention"
       ]
     },
     {
@@ -1629,6 +1779,15 @@
         "value:sie/definition-blackboard-manager/01",
         "value:sie/definition-blackboard-manager/02",
         "value:sie/definition-blackboard-manager/03"
+      ],
+      "features": [
+        "itip/web-application/definitions-truth-sourcing-management",
+        "itip/definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos",
+        "sie/definition-manager/definitions-management-api",
+        "sie/definition-manager/definitions-lifecycle-enforcement",
+        "sie/definition-blackboard-manager/ks-contributions-management-api",
+        "sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement",
+        "sie/definition-blackboard-manager/ks-contributions-retention"
       ]
     },
     {
@@ -1645,6 +1804,11 @@
       "values": [
         "value:sie/01",
         "value:sie/definition-manager/02"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-management-api",
+        "sie/definition-manager/definitions-retention",
+        "sie/definition-manager/mcp"
       ]
     },
     {
@@ -1661,6 +1825,11 @@
       "values": [
         "value:sie/03",
         "value:sie/definition-manager/04"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-management-api",
+        "sie/definition-manager/definitions-retention",
+        "sie/definition-manager/lifecycle-events-mediation"
       ]
     },
     {
@@ -1682,6 +1851,15 @@
         "value:itip/web-application/02",
         "value:sie/operator/02",
         "value:sie/operator/04"
+      ],
+      "features": [
+        "itip/web-application/it-compliance-evaluation",
+        "itip/web-application/ontology-management",
+        "sie/operator/norms-evaluation-api",
+        "gsm/ontology/iso-25010",
+        "gsm/ontology/iso-25012",
+        "gsm/ontology/gdpr",
+        "gsm/ontology/nis2"
       ]
     },
     {
@@ -1702,6 +1880,15 @@
         "value:itip/01",
         "value:itip/web-application/02",
         "value:sie/03"
+      ],
+      "features": [
+        "itip/web-application/it-compliance-evaluation",
+        "itip/web-application/ontology-management",
+        "sie/operator/norms-evaluation-api",
+        "gsm/ontology/iso-25010",
+        "gsm/ontology/iso-25012",
+        "gsm/ontology/gdpr",
+        "gsm/ontology/nis2"
       ]
     },
     {
@@ -1720,6 +1907,11 @@
         "value:platform/analysis-power",
         "value:itip/03",
         "value:itip/web-application/04"
+      ],
+      "features": [
+        "itip/web-application/it-impact-simulation",
+        "itip/web-application/definitions-management",
+        "itip/web-application/rbac-abac"
       ]
     },
     {
@@ -1737,6 +1929,11 @@
         "value:platform/analysis-power",
         "value:itip/02",
         "value:itip/web-application/05"
+      ],
+      "features": [
+        "itip/web-application/it-copilot",
+        "itip/web-application/rbac-abac",
+        "sie/definition-manager/definitions-management-api"
       ]
     },
     {
@@ -1754,6 +1951,11 @@
         "value:platform/resource-economy",
         "value:itip/03",
         "value:itip/web-application/03"
+      ],
+      "features": [
+        "itip/web-application/it-artifact-factory",
+        "itip/web-application/definitions-management",
+        "itip/web-application/rbac-abac"
       ]
     },
     {
@@ -1775,6 +1977,11 @@
         "value:sie/operator/01",
         "value:sie/operator/03",
         "value:sie/operator/04"
+      ],
+      "features": [
+        "sie/operator/norms-evaluation-api",
+        "sie/operator/mechanism-execution-foundations",
+        "sie/operator/mechanism-execution-technos-integrations"
       ]
     },
     {
@@ -1799,6 +2006,20 @@
         "value:saf/safe-agentic-organization/01",
         "value:saf/safe-agentic-organization/02",
         "value:saf/safe-agentic-organization/03"
+      ],
+      "features": [
+        "saf/agentic-harness/workflows-steps-resolution",
+        "saf/agentic-harness/skills-instructions-prompt-injection",
+        "saf/agentic-harness/llm-resolution",
+        "saf/agentic-harness/artifact-validation",
+        "saf/agentic-harness/step-authorization",
+        "saf/agentic-harness/logging",
+        "saf/safe-agentic-organization/agents",
+        "saf/safe-agentic-organization/skills",
+        "saf/safe-agentic-organization/workflows",
+        "saf/safe-agentic-organization/instructions",
+        "saf/safe-agentic-organization/artifacts",
+        "saf/agentic-workspace/workspace-data-plane"
       ]
     },
     {
@@ -1817,6 +2038,13 @@
         "value:saf/agentic-workspace/01",
         "value:saf/agentic-workspace/02",
         "value:saf/agentic-workspace/03"
+      ],
+      "features": [
+        "saf/agentic-harness/artifact-validation",
+        "saf/safe-agentic-organization/artifacts",
+        "saf/agentic-workspace/workspace-data-plane",
+        "saf/agentic-workspace/installer",
+        "saf/agentic-workspace/cicd-pipelines"
       ]
     },
     {
@@ -1836,6 +2064,15 @@
         "value:saf/01",
         "value:saf/05",
         "value:saf/saf-sie-bridge/01"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-management-api",
+        "sie/definition-blackboard-manager/ks-contributions-management-api",
+        "sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement",
+        "sie/definition-blackboard-manager/ks-contributions-retention",
+        "saf/agentic-harness/logging",
+        "saf/agentic-workspace/workspace-data-plane",
+        "saf/saf-sie-bridge/harness-history-sourcing"
       ]
     }
   ],

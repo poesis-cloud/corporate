@@ -23,18 +23,9 @@ export const relationQualifiers = {
 };
 export interface FeatureMilestone { version: string; label: string; shipped?: boolean; ga?: boolean }
 export interface Delivery { state: DeliveryState; scope: string; kind: 'implementation' | 'specification' | 'content' | 'research' }
-/**
- * Usage edges owned by every platform item.
- *
- * The platform states what it supports; values, pains and use cases never state
- * what supports them. This module deliberately imports nothing from the usage
- * side, so these stay plain slugs and `validateUsage` in usage.ts is what proves
- * they resolve.
- */
-export interface UsageRefs { useCases: string[] }
-export interface Feature extends UsageRefs { slug: string; name: string; blurb: string; delivery: Delivery; milestone: FeatureMilestone }
-export interface Capability extends UsageRefs { slug: string; name: string; blurb: string; delivery: Delivery; relations: { features: string[] }; optional: string[] }
-export interface Affordance extends UsageRefs { slug: string; name: string; title: string; blurb: string; delivery: Delivery; relations: { capabilities: string[] } }
+export interface Feature { slug: string; name: string; blurb: string; delivery: Delivery; milestone: FeatureMilestone }
+export interface Capability { slug: string; name: string; blurb: string; delivery: Delivery; relations: { features: string[] }; optional: string[] }
+export interface Affordance { slug: string; name: string; title: string; blurb: string; delivery: Delivery; relations: { capabilities: string[] } }
 export interface Product {
   slug: string; name: string; excerpt: string; tagline: string; description: string; currentVersion: string;
   valuesHeadline: string; featuresHeadline: string; features: Feature[]; qualities: string[];
@@ -52,15 +43,14 @@ export function milestoneStatus(product: Pick<Product, 'features'>, milestone: F
 }
 
 function delivery(state: DeliveryState, scope: string, kind: Delivery['kind'] = 'implementation'): Delivery { return { state, scope, kind }; }
-function usage(refs: Partial<UsageRefs> = {}): UsageRefs { return { useCases: refs.useCases ?? [] }; }
-function feature(slug: string, name: string, blurb: string, state: DeliveryState, milestone: FeatureMilestone, refs: Partial<UsageRefs> = {}, kind: Delivery['kind'] = 'implementation'): Feature {
-  return { slug, name, blurb, delivery: delivery(state, blurb, kind), milestone, ...usage(refs) };
+function feature(slug: string, name: string, blurb: string, state: DeliveryState, milestone: FeatureMilestone, kind: Delivery['kind'] = 'implementation'): Feature {
+  return { slug, name, blurb, delivery: delivery(state, blurb, kind), milestone };
 }
-function capability(slug: string, name: string, blurb: string, state: DeliveryState, features: string[], refs: Partial<UsageRefs> = {}, kind: Delivery['kind'] = 'implementation', optional: string[] = []): Capability {
-  return { slug, name, blurb, delivery: delivery(state, blurb, kind), relations: { features }, optional, ...usage(refs) };
+function capability(slug: string, name: string, blurb: string, state: DeliveryState, features: string[], kind: Delivery['kind'] = 'implementation', optional: string[] = []): Capability {
+  return { slug, name, blurb, delivery: delivery(state, blurb, kind), relations: { features }, optional };
 }
-function affordance(slug: string, name: string, title: string, blurb: string, state: DeliveryState, scope: string, capabilities: string[], refs: Partial<UsageRefs> = {}): Affordance {
-  return { slug, name, title, blurb, delivery: delivery(state, scope), relations: { capabilities }, ...usage(refs) };
+function affordance(slug: string, name: string, title: string, blurb: string, state: DeliveryState, scope: string, capabilities: string[]): Affordance {
+  return { slug, name, title, blurb, delivery: delivery(state, scope), relations: { capabilities } };
 }
 function product(owner: string, slug: string, name: string, currentVersion: string, tagline: string, description: string, features: Feature[], repos: string[] = [], qualities: string[] = []): Product {
   const relatedDocs = slug === 'operator'
@@ -75,11 +65,11 @@ function product(owner: string, slug: string, name: string, currentVersion: stri
     repos: repos.map((repo) => ({ href: `https://github.com/poesis-cloud/${repo}`, label: repo }))
   };
 }
-interface AuthoredFeature { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; milestone: FeatureMilestone; useCases?: string[] }
-interface AuthoredCapability { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; features: string[]; optional?: string[]; useCases?: string[] }
+interface AuthoredFeature { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; milestone: FeatureMilestone }
+interface AuthoredCapability { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; features: string[]; optional?: string[] }
 interface AuthoredProduct { slug: string; name: string; currentVersion: string; tagline: string; description: string; repos?: string[]; qualities?: string[]; features: AuthoredFeature[] }
 interface AuthoredSolution { slug: string; name: string; fullName: string; tags: string[]; excerpt: string; tagline: string; description: string; qualities?: string[]; capabilities: AuthoredCapability[]; products: AuthoredProduct[] }
-interface AuthoredAffordance { slug: string; name: string; title: string; blurb: string; state: DeliveryState; scope: string; capabilities: string[]; useCases: string[] }
+interface AuthoredAffordance { slug: string; name: string; title: string; blurb: string; state: DeliveryState; scope: string; capabilities: string[] }
 interface AuthoredPlatform {
   solutions: AuthoredSolution[]; affordances: AuthoredAffordance[]; platformQualities: string[];
   realizationRequirements: Record<string, DeliveryState | Requirement>; realizations: Realization[];
@@ -92,12 +82,12 @@ const authored = catalog as unknown as AuthoredPlatform;
 export const platformSolutions: Solution[] = authored.solutions.map((entry) => ({
   slug: entry.slug, name: entry.name, fullName: entry.fullName, tags: entry.tags,
   excerpt: entry.excerpt, tagline: entry.tagline, description: entry.description, qualities: entry.qualities ?? [],
-  capabilities: entry.capabilities.map((item) => capability(item.slug, item.name, item.blurb, item.state, item.features, { useCases: item.useCases }, item.kind, item.optional ?? [])),
+  capabilities: entry.capabilities.map((item) => capability(item.slug, item.name, item.blurb, item.state, item.features, item.kind, item.optional ?? [])),
   products: entry.products.map((item) => product(entry.slug, item.slug, item.name, item.currentVersion, item.tagline, item.description,
-    item.features.map((candidate) => feature(candidate.slug, candidate.name, candidate.blurb, candidate.state, candidate.milestone, { useCases: candidate.useCases }, candidate.kind)), item.repos ?? [], item.qualities ?? [])),
+    item.features.map((candidate) => feature(candidate.slug, candidate.name, candidate.blurb, candidate.state, candidate.milestone, candidate.kind)), item.repos ?? [], item.qualities ?? [])),
 }));
 export const platformQualityRefs: string[] = authored.platformQualities;
-export const affordances: Affordance[] = authored.affordances.map((item) => affordance(item.slug, item.name, item.title, item.blurb, item.state, item.scope, item.capabilities, { useCases: item.useCases }));
+export const affordances: Affordance[] = authored.affordances.map((item) => affordance(item.slug, item.name, item.title, item.blurb, item.state, item.scope, item.capabilities));
 export const poesisPlatform = { affordances, solutions: platformSolutions };
 export const solutionLinks = platformSolutions.map((solution) => ({ href: solutionHref(solution), label: solution.fullName }));
 /** How a subject (`platform`, `<solution>`, `<solution>/<product>`) is named and reached. */
@@ -179,14 +169,8 @@ function unique(values: string[], label: string): void { if (new Set(values).siz
 function validateDelivery(claim: Delivery): void {
   if (!claim || typeof claim !== 'object' || !['scope', 'state', 'kind'].every((key) => Object.hasOwn(claim, key)) || typeof claim.scope !== 'string' || !claim.scope.trim() || typeof claim.state !== 'string' || !Object.hasOwn(deliveryLabels, claim.state) || !['implementation', 'specification', 'content', 'research'].includes(claim.kind)) throw new Error('Invalid delivery claim');
 }
-function validateUsageRefs(item: UsageRefs, label: string): void {
-  if ('values' in item || 'pains' in item) throw new Error(`Independent usage references on ${label}`);
-  for (const key of ['useCases'] as const) {
-    const references = item[key];
-    if (!Array.isArray(references)) throw new Error(`Invalid ${key} references on ${label}`);
-    unique(references, `${label} ${key} reference`);
-    for (const reference of references) if (typeof reference !== 'string' || !reference.trim()) throw new Error(`Invalid ${key} reference on ${label}`);
-  }
+function validateNoUsageRefs(item: object, label: string): void {
+  for (const key of ['useCases', 'values', 'pains']) if (key in item) throw new Error(`Independent usage references on ${label}`);
 }
 export function validatePortfolio(solutions = platformSolutions, platformAffordances = affordances): void {
   const identities: string[] = [];
@@ -202,7 +186,7 @@ export function validatePortfolio(solutions = platformSolutions, platformAfforda
       for (const feature of product.features) {
         add('feature', `${solution.slug}/${product.slug}/${feature.slug}`); featureRefs.add(`${product.slug}/${feature.slug}`);
         validateDelivery(feature.delivery);
-        validateUsageRefs(feature, `feature ${solution.slug}/${product.slug}/${feature.slug}`);
+        validateNoUsageRefs(feature, `feature ${solution.slug}/${product.slug}/${feature.slug}`);
         if (!/^\d+\.(?:\d+|x)(?:\.\d+)?(?:-[a-z0-9.]+)?$/.test(feature.milestone.version) || !feature.milestone.label.trim()) throw new Error('Invalid milestone');
         if (!feature.blurb || feature.delivery.scope !== feature.blurb || !Object.hasOwn(deliveryLabels, feature.delivery.state)) throw new Error('Invalid feature claim');
         const encoded = JSON.stringify(feature.milestone); if (versions.has(feature.milestone.version) && versions.get(feature.milestone.version) !== encoded) throw new Error('Inconsistent milestone'); versions.set(feature.milestone.version, encoded);
@@ -210,7 +194,7 @@ export function validatePortfolio(solutions = platformSolutions, platformAfforda
     }
     for (const capability of solution.capabilities) {
       validateDelivery(capability.delivery);
-      validateUsageRefs(capability, `capability ${solution.slug}/${capability.slug}`);
+      validateNoUsageRefs(capability, `capability ${solution.slug}/${capability.slug}`);
       unique(capability.optional, 'optional feature');
       const contractId = capabilityRealizationContracts[`${solution.slug}/${capability.slug}`];
       if (contractId && capability.delivery.state === 'delivered' && realizationStatus(realizations.find((realization) => realization.slug === contractId)!) !== 'delivered') throw new Error('Unaccepted capability realization');
@@ -222,7 +206,7 @@ export function validatePortfolio(solutions = platformSolutions, platformAfforda
     }
     for (const reference of featureRefs) if (!solution.capabilities.some((capability) => capability.relations.features.includes(reference))) throw new Error(`Orphan feature: ${solution.slug}/${reference}`);
   }
-  for (const affordance of platformAffordances) { validateDelivery(affordance.delivery); validateUsageRefs(affordance, `affordance ${affordance.slug}`); add('affordance', affordance.slug); if (!affordance.relations.capabilities.length) throw new Error('Unsupported affordance'); if (!affordance.useCases.length) throw new Error('Unused affordance'); unique(affordance.relations.capabilities, 'capability edge'); for (const reference of affordance.relations.capabilities) { const [solutionSlug, slug] = exactRef(reference, 2); if (!solutions.find((solution) => solution.slug === solutionSlug)?.capabilities.some((capability) => capability.slug === slug)) throw new Error(`Unknown affordance capability: ${reference}`); } }
+  for (const affordance of platformAffordances) { validateDelivery(affordance.delivery); validateNoUsageRefs(affordance, `affordance ${affordance.slug}`); add('affordance', affordance.slug); if (!affordance.relations.capabilities.length) throw new Error('Unsupported affordance'); unique(affordance.relations.capabilities, 'capability edge'); for (const reference of affordance.relations.capabilities) { const [solutionSlug, slug] = exactRef(reference, 2); if (!solutions.find((solution) => solution.slug === solutionSlug)?.capabilities.some((capability) => capability.slug === slug)) throw new Error(`Unknown affordance capability: ${reference}`); } }
   const capabilityStates = Object.fromEntries(solutions.flatMap((solution) => solution.capabilities.map((capability) => [`${solution.slug}/${capability.slug}`, capability.delivery.state])));
   for (const affordance of platformAffordances) {
     if (affordance.delivery.state !== 'delivered') continue;

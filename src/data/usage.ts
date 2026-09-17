@@ -1,14 +1,14 @@
 /**
  * usage.ts — the usage side of the model.
  *
- * Platform items reference only use cases. Cases own their actors, addressed
- * pains and realized values. Support is projected through those explicit links,
+ * Cases own their direct platform type, actors, addressed pains and realized
+ * values. Platform support is projected inversely through those explicit links,
  * with missing constituent support retained in composite delivery status.
  *
  * This module is also the only place where platform references are proven to
  * resolve — see `validateUsage`, invoked on import.
  */
-import { platformSolutions, affordances, affordanceStatus, capabilityStatus, commitmentStatus, solutionHref, typeIcons, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution, type UsageRefs } from './poesis-platform.ts';
+import { platformSolutions, affordances, affordanceStatus, capabilityStatus, commitmentStatus, solutionHref, typeIcons, type Affordance, type Capability, type DeliveryState, type Feature, type Product, type SemanticEdge, type Solution } from './poesis-platform.ts';
 import { actorTypes } from './usage-actors.ts';
 import { usagePains, type UsagePain } from './usage-pains.ts';
 import { usageValues, valueAnchor, type Value } from './usage-values.ts';
@@ -24,6 +24,9 @@ export interface UseCase {
   goal: string;
   actorTypes: string[];
   addressedPains: string[];
+  features?: string[];
+  capabilities?: string[];
+  affordances?: string[];
   values: string[];
 }
 export interface UsageGraph { actorTypes: typeof actorTypes; pains: UsagePain[]; useCases: UseCase[] }
@@ -41,6 +44,25 @@ export const usageFeatures: UsageFeature[] = platformSolutions.flatMap((solution
 /** Every capability, flattened under its `<solution>/<capability>` identity. */
 export const usageCapabilities: UsageCapability[] = platformSolutions.flatMap((solution) => solution.capabilities.map((capability) => ({ slug: `${solution.slug}/${capability.slug}`, solution, capability })));
 export const usageAffordances: UsageAffordance[] = affordances.map((affordance) => ({ slug: affordance.slug, affordance }));
+const usageFeatureBySlug = new Map(usageFeatures.map((entry) => [entry.slug, entry]));
+const usageCapabilityBySlug = new Map(usageCapabilities.map((entry) => [entry.slug, entry]));
+const usageAffordanceBySlug = new Map(usageAffordances.map((entry) => [entry.slug, entry]));
+
+function supportReferences(useCase: Pick<UseCase, 'features' | 'capabilities' | 'affordances'>): { kind: 'feature' | 'capability' | 'affordance' | undefined; refs: string[] } {
+  const levels: Array<{ kind: 'feature' | 'capability' | 'affordance'; refs: string[] | undefined }> = [
+    { kind: 'feature', refs: useCase.features },
+    { kind: 'capability', refs: useCase.capabilities },
+    { kind: 'affordance', refs: useCase.affordances },
+  ];
+  const active = levels.filter((level) => (level.refs ?? []).length);
+  if (active.length === 0) return { kind: undefined, refs: [] };
+  if (active.length > 1) throw new Error(`Mixed support levels on use case: ${(useCase as Pick<UseCase, 'slug'>).slug ?? '<unknown>'}`);
+  return { kind: active[0].kind, refs: [...active[0].refs!] };
+}
+
+function useCaseBySlug(slug: string): UseCase | undefined {
+  return useCases.find((useCase) => useCase.slug === slug);
+}
 
 export interface ValueSupport { type: 'feature' | 'capability' | 'affordance'; slug: string; name: string; href: string; state: DeliveryState }
 
@@ -55,12 +77,29 @@ export function useCasesForValue(slug: string): UseCase[] {
 
 /** Platform items supporting any constituent case, deduplicated in type order. */
 export function valueSupports(slug: string): ValueSupport[] {
-  const references = useCasesForValue(slug).map((useCase) => useCase.slug);
-  return [
-    ...usageFeatures.filter((entry) => entry.feature.useCases.some((reference) => references.includes(reference))).map((entry) => ({ type: 'feature' as const, slug: entry.slug, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state })),
-    ...usageCapabilities.filter((entry) => entry.capability.useCases.some((reference) => references.includes(reference))).map((entry) => ({ type: 'capability' as const, slug: entry.slug, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability) })),
-    ...usageAffordances.filter((entry) => entry.affordance.useCases.some((reference) => references.includes(reference))).map((entry) => ({ type: 'affordance' as const, slug: entry.slug, name: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance) })),
-  ];
+  const supports: ValueSupport[] = [];
+  const seen = new Set<string>();
+  for (const useCase of useCasesForValue(slug)) {
+    for (const entry of featuresForUseCase(useCase.slug)) {
+      const key = `feature:${entry.slug}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      supports.push({ type: 'feature', slug: entry.slug, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state });
+    }
+    for (const entry of capabilitiesForUseCase(useCase.slug)) {
+      const key = `capability:${entry.slug}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      supports.push({ type: 'capability', slug: entry.slug, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability) });
+    }
+    for (const entry of affordancesForUseCase(useCase.slug)) {
+      const key = `affordance:${entry.slug}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      supports.push({ type: 'affordance', slug: entry.slug, name: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance) });
+    }
+  }
+  return supports;
 }
 export function valueCoverage(slug: string) {
   return useCasesForValue(slug).map((useCase) => ({ useCase, state: useCaseStatus(useCase) }));
@@ -86,9 +125,26 @@ export function solutionValues(solutionSlug: string): Value[] { return usageValu
 export function productValues(solutionSlug: string, productSlug: string): Value[] { return usageValues.filter((value) => { const parts = valueOwner(value.slug); return parts.length === 3 && parts[0] === solutionSlug && parts[1] === productSlug; }); }
 export function valueBySlug(slug: string): Value | undefined { return usageValues.find((value) => value.slug === slug); }
 
-export function featuresForUseCase(slug: string): UsageFeature[] { return usageFeatures.filter((entry) => entry.feature.useCases.includes(slug)); }
-export function capabilitiesForUseCase(slug: string): UsageCapability[] { return usageCapabilities.filter((entry) => entry.capability.useCases.includes(slug)); }
-export function affordancesForUseCase(slug: string): UsageAffordance[] { return usageAffordances.filter((entry) => entry.affordance.useCases.includes(slug)); }
+export function featuresForUseCase(slug: string): UsageFeature[] {
+  return (useCaseBySlug(slug)?.features ?? []).map((reference) => usageFeatureBySlug.get(reference)).filter(Boolean) as UsageFeature[];
+}
+export function capabilitiesForUseCase(slug: string): UsageCapability[] {
+  return (useCaseBySlug(slug)?.capabilities ?? []).map((reference) => usageCapabilityBySlug.get(reference)).filter(Boolean) as UsageCapability[];
+}
+export function affordancesForUseCase(slug: string): UsageAffordance[] {
+  return (useCaseBySlug(slug)?.affordances ?? []).map((reference) => usageAffordanceBySlug.get(reference)).filter(Boolean) as UsageAffordance[];
+}
+export type UsageItem = Feature | Capability | Affordance;
+/** Direct inverse of the one platform level authored by each use case. */
+export function useCasesForItem(item: UsageItem): UseCase[] {
+  const feature = usageFeatures.find((entry) => entry.feature === item);
+  if (feature) return useCases.filter((useCase) => (useCase.features ?? []).includes(feature.slug));
+  const capability = usageCapabilities.find((entry) => entry.capability === item);
+  if (capability) return useCases.filter((useCase) => (useCase.capabilities ?? []).includes(capability.slug));
+  const affordance = usageAffordances.find((entry) => entry.affordance === item);
+  if (affordance) return useCases.filter((useCase) => (useCase.affordances ?? []).includes(affordance.slug));
+  throw new Error(`Unknown platform relationship source: ${item.slug}`);
+}
 /** Values explicitly composing this use case, independently of platform support. */
 export function valuesForUseCase(slug: string): Value[] {
   const references = new Set(useCases.find((useCase) => useCase.slug === slug)?.values ?? []);
@@ -102,49 +158,48 @@ export function painsForUseCase(slug: string): UsagePain[] {
   return usagePains.filter((pain) => references.has(pain.slug));
 }
 export function useCaseStatus(useCase: Pick<UseCase, 'slug'>): DeliveryState | undefined {
-  const features = featuresForUseCase(useCase.slug);
-  const states = features.length ? features.map((entry) => entry.feature.delivery.state) : [
-    ...capabilitiesForUseCase(useCase.slug).map((entry) => capabilityStatus(entry.solution, entry.capability)),
-    ...affordancesForUseCase(useCase.slug).map((entry) => affordanceStatus(entry.affordance)),
-  ];
+  const resolved = useCaseBySlug(useCase.slug);
+  if (!resolved) return undefined;
+  const support = supportReferences(resolved);
+  const states = support.kind === 'feature'
+    ? support.refs.map((reference) => usageFeatureBySlug.get(reference)?.feature.delivery.state).filter(Boolean) as DeliveryState[]
+    : support.kind === 'capability'
+      ? support.refs.map((reference) => usageCapabilityBySlug.get(reference)).filter(Boolean).map((entry) => capabilityStatus(entry!.solution, entry!.capability))
+      : support.kind === 'affordance'
+        ? support.refs.map((reference) => usageAffordanceBySlug.get(reference)?.affordance).filter(Boolean).map((entry) => affordanceStatus(entry!))
+        : [];
   return states.length ? commitmentStatus(states) : undefined;
 }
 
 export function useCasesForPain(painSlug: string): UseCase[] { return useCases.filter((useCase) => painsForUseCase(useCase.slug).some((pain) => pain.slug === painSlug)); }
-export function useCasesForFeature(reference: string): UseCase[] { const entry = usageFeatures.find((candidate) => candidate.slug === reference); return entry ? useCases.filter((useCase) => entry.feature.useCases.includes(useCase.slug)) : []; }
+export function useCasesForFeature(reference: string): UseCase[] {
+  return usageFeatureBySlug.has(reference) ? useCases.filter((useCase) => (useCase.features ?? []).includes(reference)) : [];
+}
 export function useCasesForProduct(solutionSlug: string, productSlug: string): UseCase[] {
-  const references = new Set(usageFeatures.filter((entry) => entry.solution.slug === solutionSlug && entry.product.slug === productSlug).flatMap((entry) => entry.feature.useCases));
-  return useCases.filter((useCase) => references.has(useCase.slug));
+  const prefix = `${solutionSlug}/${productSlug}/`;
+  return useCases.filter((useCase) => (useCase.features ?? []).some((reference) => reference.startsWith(prefix)));
 }
 export function useCasesForSolution(solutionSlug: string): UseCase[] {
-  const references = new Set([...usageFeatures.filter((entry) => entry.solution.slug === solutionSlug).flatMap((entry) => entry.feature.useCases), ...usageCapabilities.filter((entry) => entry.solution.slug === solutionSlug).flatMap((entry) => entry.capability.useCases)]);
-  return useCases.filter((useCase) => references.has(useCase.slug));
+  const featurePrefix = `${solutionSlug}/`;
+  return useCases.filter((useCase) =>
+    (useCase.features ?? []).some((reference) => reference.startsWith(featurePrefix))
+    || (useCase.capabilities ?? []).some((reference) => reference.startsWith(featurePrefix))
+    || (useCase.affordances ?? []).some((reference) => usageAffordanceBySlug.get(reference)?.affordance.relations.capabilities.some((capability) => capability.startsWith(featurePrefix))),
+  );
 }
 
 /** Card icons for usage items, so a use case, pain or value is recognisable wherever it is shown. */
 export const usageIcons = { useCase: 'target', pain: 'alert', value: typeIcons.value };
 
-export interface RelationLink { label: string; href: string; state?: DeliveryState }
-export interface RelationGroup { label: string; qualifier: string; links: RelationLink[] }
+export interface RelationPreview { label: string; href: string; state?: DeliveryState }
+export interface RelationGroup { label: string; qualifier: string; href: string; previews: RelationPreview[] }
 
-/**
- * The usage relatives a platform item declares, in pain → use case → value order.
- * Empty groups are dropped, so a card never shows a relation it does not have.
- */
-export function usageRelations(item: UsageRefs): RelationGroup[] {
-  return [
-    { label: 'Pain points', qualifier: 'Addresses', links: painsForItem(item).map((pain) => ({ label: pain.pain, href: `/catalog/pains#${pain.slug}` })) },
-    { label: 'Values', qualifier: 'Supports', links: valuesForItem(item).map((value) => ({ label: value.title, href: valueHref(value), state: valueStatus(value.slug) })) },
-    { label: 'Use cases', qualifier: 'Serves', links: useCases.filter((useCase) => item.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) })) },
-  ].filter((group) => group.links.length);
-}
-
-export function painsForItem(item: UsageRefs): UsagePain[] {
-  const references = new Set(item.useCases.flatMap((slug) => painsForUseCase(slug).map((pain) => pain.slug)));
+export function painsForItem(item: UsageItem): UsagePain[] {
+  const references = new Set(useCasesForItem(item).flatMap((useCase) => useCase.addressedPains));
   return usagePains.filter((pain) => references.has(pain.slug));
 }
-export function valuesForItem(item: UsageRefs): Value[] {
-  const references = new Set(useCases.filter((useCase) => item.useCases.includes(useCase.slug)).flatMap((useCase) => useCase.values));
+export function valuesForItem(item: UsageItem): Value[] {
+  const references = new Set(useCasesForItem(item).flatMap((useCase) => useCase.values));
   return usageValues.filter((value) => references.has(value.slug));
 }
 
@@ -157,9 +212,9 @@ export const valueEdges: SemanticEdge[] = usageValues.flatMap((value) => valueSu
 /** How much of the platform is reachable from at least one use case. */
 export function usageCoverage(): { features: number; capabilities: number; affordances: number } {
   return {
-    features: usageFeatures.filter((entry) => entry.feature.useCases.length).length,
-    capabilities: usageCapabilities.filter((entry) => entry.capability.useCases.length).length,
-    affordances: usageAffordances.filter((entry) => entry.affordance.useCases.length).length,
+    features: usageFeatures.filter((entry) => useCasesForItem(entry.feature).length).length,
+    capabilities: usageCapabilities.filter((entry) => useCasesForItem(entry.capability).length).length,
+    affordances: usageAffordances.filter((entry) => useCasesForItem(entry.affordance).length).length,
   };
 }
 
@@ -171,7 +226,6 @@ export function validateUsage(graph: UsageGraph = poesisUsage, values: Value[] =
   unique(graph.pains.map((pain) => pain.slug), 'pain');
   unique(values.map((value) => value.slug), 'value');
 
-  const caseSlugs = new Set(graph.useCases.map((useCase) => useCase.slug));
   const actorSlugs = new Set(graph.actorTypes.map((actor) => actor.slug));
   const painSlugs = new Set(graph.pains.map((pain) => pain.slug));
   const valueSlugs = new Set(values.map((value) => value.slug));
@@ -184,6 +238,19 @@ export function validateUsage(graph: UsageGraph = poesisUsage, values: Value[] =
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(useCase.slug)) throw new Error(`Invalid use case slug: ${useCase.slug}`);
     if (!useCase.name.trim() || !useCase.goal.trim()) throw new Error(`Incomplete use case: ${useCase.slug}`);
     if (!useCase.actorTypes.length) throw new Error(`Unattributed use case: ${useCase.slug}`);
+    const refs = [
+      ['features', useCase.features],
+      ['capabilities', useCase.capabilities],
+      ['affordances', useCase.affordances],
+    ] as const;
+    const declared = refs.filter(([, references]) => references !== undefined);
+    for (const [label, references] of declared) {
+      if (!references?.length) throw new Error(`Empty ${label} support on ${useCase.slug}`);
+      unique(references, `${label} support on ${useCase.slug}`);
+      const known = label === 'features' ? usageFeatureBySlug : label === 'capabilities' ? usageCapabilityBySlug : usageAffordanceBySlug;
+      for (const reference of references) if (!known.has(reference)) throw new Error(`Unknown ${label} support: ${reference}`);
+    }
+    if (declared.length > 1) throw new Error(`Mixed support levels on use case: ${useCase.slug}`);
     unique(useCase.actorTypes, `use case actor on ${useCase.slug}`);
     unique(useCase.addressedPains, `addressed pain on ${useCase.slug}`);
     unique(useCase.values, `realized value on ${useCase.slug}`);
@@ -191,15 +258,6 @@ export function validateUsage(graph: UsageGraph = poesisUsage, values: Value[] =
     for (const reference of useCase.values) if (!valueSlugs.has(reference)) throw new Error(`Unknown realized value: ${reference}`);
     for (const actor of useCase.actorTypes) if (!actorSlugs.has(actor)) throw new Error(`Unknown actor type: ${actor}`);
   }
-
-  const check = (label: string, item: UsageRefs) => {
-    if ('values' in item || 'pains' in item) throw new Error(`Independent usage references on ${label}`);
-    unique(item.useCases, `use case on ${label}`);
-    for (const reference of item.useCases) if (!caseSlugs.has(reference)) throw new Error(`Unknown use case reference on ${label}: ${reference}`);
-  };
-  for (const entry of usageFeatures) check(`feature ${entry.slug}`, entry.feature);
-  for (const entry of usageCapabilities) check(`capability ${entry.slug}`, entry.capability);
-  for (const entry of usageAffordances) check(`affordance ${entry.slug}`, entry.affordance);
 
   unique(valueEdges.map((edge) => edge.id), 'value edge');
 }
