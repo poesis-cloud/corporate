@@ -5,9 +5,8 @@ import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
 import CatalogCard from '../components/CatalogCard.astro';
-import QualityList from '../components/QualityList.astro';
 import { poesisUsage, useCaseStatus } from '../data/usage.ts';
-import { useCaseCard } from '../data/catalog-card.ts';
+import { qualityCard, serviceCard, useCaseCard } from '../data/catalog-card.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
 import { qualityCategories, qualitiesPublishedBy, categoryAnchor } from '../data/qualities.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
@@ -19,8 +18,9 @@ import { services } from '../data/services.ts';
 const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
 /** Only the qualities the platform itself bears; solution and product qualities live on their own pages. */
 const platformPostures = qualityCategories
-  .map((category) => ({ category, qualities: qualitiesPublishedBy(category.slug, 'platform') }))
-  .filter((posture) => posture.qualities.length);
+  .map((category) => ({ category, cards: qualitiesPublishedBy(category.slug, 'platform').map(qualityCard) }))
+  .filter((posture) => posture.cards.length);
+const serviceCards = services.map(serviceCard);
 const usageActorGroups = [
   { label: 'People', actors: actorTypes.filter((actor) => actor.kind === 'human') },
   { label: 'Systems', actors: actorTypes.filter((actor) => actor.kind === 'system') },
@@ -123,11 +123,13 @@ const usageActorGroups = [
         <p class="lead">What the governed THINK layer claims about itself: how portable it stays inside your control boundary, and how it fits what you already run. Solutions and products state their own qualities on their own pages.</p>
       </div>
 
-      {platformPostures.map(({ category, qualities }) => (
+      {platformPostures.map(({ category, cards }) => (
         <div id={categoryAnchor(category)} class="home-posture">
           <h3>{category.name}</h3>
           <p class="home-posture__lead">{category.lead}</p>
-          <QualityList qualities={qualities} listClass="home-posture__list" />
+          <ul class="think-therapy__grid catalog-grid home-posture__list">
+            {cards.map((card) => <CatalogCard card={card} as="h4" variant="platform" />)}
+          </ul>
           {category.note && (
             <p class="home-posture__note">{category.noteState && <DeliveryStatus state={category.noteState} />} {category.note}</p>
           )}
@@ -144,17 +146,11 @@ const usageActorGroups = [
   <section id="services" class="section section--soft" aria-labelledby="services-heading">
     <div class="container">
       <div class="section-head">
+        <p class="eyebrow">Services</p>
         <h2 id="services-heading">Services</h2>
       </div>
-      <ul class="think-consequence-list">
-        {services.map((service) => (
-          <li>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="briefcase" size={16} /></span><span class="think-consequence__step">{service.category}</span></span>
-            <h3><a href={service.href}>{service.label}</a></h3>
-            <span class="claim-status">{service.availability}</span>
-            <p>{service.summary}</p>
-          </li>
-        ))}
+      <ul class="think-therapy__grid catalog-grid">
+        {serviceCards.map((card) => <CatalogCard card={card} variant="platform" />)}
       </ul>
     </div>
   </section>
