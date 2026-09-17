@@ -2020,154 +2020,309 @@
       "slug": "inspect-code-revision-candidates",
       "name": "Extract definition candidates from a code revision",
       "goal": "Analyze a pinned repository revision and inspect candidate subjects, relationships, provenance and uncertainty before any client promotes a draft. Inspected source is not evidence of deployed behavior.",
-      "actorTypes": ["integration-client", "it-architect"],
-      "addressedPains": ["it-ea-drift", "it-acquisition-blind-spots"],
-      "values": ["value:inspectable-acquisition-coverage", "value:itip/definition-blackboard-code-sourcer/01"],
-      "features": ["itip/definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos"]
+      "actorTypes": [
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-ea-drift",
+        "it-acquisition-blind-spots"
+      ],
+      "values": [
+        "value:inspectable-acquisition-coverage",
+        "value:itip/definition-blackboard-code-sourcer/01"
+      ],
+      "features": [
+        "itip/definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos"
+      ]
     },
     {
       "slug": "manage-definition-through-api",
       "name": "Read and revise definitions through the API",
       "goal": "Create, query and revise typed definitions through the REST contract, inspecting validation, revision and access responses without treating a successful draft write as approval.",
-      "actorTypes": ["integration-client", "it-platform"],
-      "addressedPains": ["it-tool-silos", "it-ungoverned-change"],
-      "values": ["value:sie/definition-manager/01"],
-      "features": ["sie/definition-manager/definitions-management-api"]
+      "actorTypes": [
+        "integration-client",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-tool-silos",
+        "it-ungoverned-change"
+      ],
+      "values": [
+        "value:sie/definition-manager/01"
+      ],
+      "features": [
+        "sie/definition-manager/definitions-management-api"
+      ]
     },
     {
       "slug": "qualify-execution-adapter",
       "name": "Qualify an execution adapter for an integration",
       "goal": "Check a selected adapter's transport, authority and failure contract against a named integration, distinguishing supported operations from planned adapter coverage.",
-      "actorTypes": ["integration-client", "it-platform"],
-      "addressedPains": ["it-tool-silos", "it-ungoverned-change"],
-      "values": ["value:sie/02"],
-      "features": ["sie/operator/mechanism-execution-technos-integrations"]
+      "actorTypes": [
+        "integration-client",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-tool-silos",
+        "it-ungoverned-change"
+      ],
+      "values": [
+        "value:sie/02"
+      ],
+      "features": [
+        "sie/operator/mechanism-execution-technos-integrations"
+      ]
     },
     {
       "slug": "post-panel-contribution",
       "name": "Submit a contribution to a declared panel",
       "goal": "Post a candidate to a declared panel and inspect schema, identity, confidence-envelope and rejection responses under the client/server contract. Acceptance into collection is not definition approval.",
-      "actorTypes": ["integration-client"],
-      "addressedPains": ["it-truth-drift"],
-      "values": ["value:sie/definition-blackboard-manager/01"],
-      "features": ["sie/definition-blackboard-manager/ks-contributions-management-api"]
+      "actorTypes": [
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-truth-drift"
+      ],
+      "values": [
+        "value:sie/definition-blackboard-manager/01"
+      ],
+      "features": [
+        "sie/definition-blackboard-manager/ks-contributions-management-api"
+      ]
     },
     {
       "slug": "close-contribution-collection",
       "name": "Close a contribution collection for review",
       "goal": "Request sealing or abandonment of a contribution collection and inspect concurrent-intake outcomes and snapshot readiness. Closing collection does not approve or activate a definition.",
-      "actorTypes": ["integration-client", "it-platform"],
-      "addressedPains": ["it-truth-drift"],
-      "values": ["value:sie/definition-blackboard-manager/02"],
-      "features": ["sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement"]
+      "actorTypes": [
+        "integration-client",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-truth-drift"
+      ],
+      "values": [
+        "value:sie/definition-blackboard-manager/02"
+      ],
+      "features": [
+        "sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement"
+      ]
     },
     {
       "slug": "inspect-retained-contribution",
       "name": "Inspect retained contribution evidence",
       "goal": "Retrieve stored candidates and their captured evidence to inspect provenance and conflicting assertions, making missing audit, integrity or promoted-draft links explicit.",
-      "actorTypes": ["it-architect", "integration-client"],
-      "addressedPains": ["it-audit-reconstruction"],
-      "values": ["value:sie/definition-blackboard-manager/03"],
-      "features": ["sie/definition-blackboard-manager/ks-contributions-retention"]
+      "actorTypes": [
+        "it-architect",
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-audit-reconstruction"
+      ],
+      "values": [
+        "value:sie/definition-blackboard-manager/03"
+      ],
+      "features": [
+        "sie/definition-blackboard-manager/ks-contributions-retention"
+      ]
     },
     {
       "slug": "resolve-eligible-workflow-step",
       "name": "Resolve the next eligible workflow step",
       "goal": "Resolve eligible steps from workflow configuration and recorded outcomes on a supported adapter; leave dispatch to the host rather than treating resolution as execution.",
-      "actorTypes": ["delivery-agent", "it-platform"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/agentic-harness/01"],
-      "features": ["saf/agentic-harness/workflows-steps-resolution"]
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/agentic-harness/01"
+      ],
+      "features": [
+        "saf/agentic-harness/workflows-steps-resolution"
+      ]
     },
     {
       "slug": "validate-mediated-write",
       "name": "Validate a mediated artifact write",
       "goal": "Check a proposed write set against a matched schema and inspect structured-data or Markdown-metadata violations before writing. Passing validation does not establish prose quality or acceptance.",
-      "actorTypes": ["delivery-agent", "it-platform"],
-      "addressedPains": ["it-unverified-generated-output"],
-      "values": ["value:saf/agentic-harness/02"],
-      "features": ["saf/agentic-harness/artifact-validation"]
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:saf/agentic-harness/02"
+      ],
+      "features": [
+        "saf/agentic-harness/artifact-validation"
+      ]
     },
     {
       "slug": "inspect-harness-invocations",
       "name": "Inspect a captured harness invocation sequence",
       "goal": "Read correlated session-journal records to reconstruct captured harness invocations and their outcomes, distinguishing absent records from evidence that no action occurred.",
-      "actorTypes": ["it-platform", "delivery-agent"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/02"],
-      "features": ["saf/agentic-harness/logging"]
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/02"
+      ],
+      "features": [
+        "saf/agentic-harness/logging"
+      ]
     },
     {
       "slug": "assign-delivery-role",
       "name": "Assign a delivery responsibility from the role catalog",
       "goal": "Select portfolio, program, team and specialist roles for a delivery responsibility and make their boundaries explicit without treating a role definition as an authenticated authority grant.",
-      "actorTypes": ["it-head-of-ai", "delivery-agent"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/safe-agentic-organization/01"],
-      "features": ["saf/safe-agentic-organization/agents"]
+      "actorTypes": [
+        "it-head-of-ai",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/safe-agentic-organization/01"
+      ],
+      "features": [
+        "saf/safe-agentic-organization/agents"
+      ]
     },
     {
       "slug": "select-delivery-playbook",
       "name": "Select a practice playbook for a delivery task",
       "goal": "Choose a domain or practice playbook for a named task and inspect its applicability and required evidence; reusable guidance does not prove agent adherence.",
-      "actorTypes": ["delivery-agent", "it-platform"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/safe-agentic-organization/02"],
-      "features": ["saf/safe-agentic-organization/skills"]
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/safe-agentic-organization/02"
+      ],
+      "features": [
+        "saf/safe-agentic-organization/skills"
+      ]
     },
     {
       "slug": "define-delivery-ceremony",
       "name": "Define a delivery ceremony and its handoffs",
       "goal": "Specify the sequence of roles, context and artifacts for a ceremony, identifying human-decision checkpoints separately from the planned implementation that authenticates them.",
-      "actorTypes": ["it-head-of-ai", "delivery-agent"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/safe-agentic-organization/03"],
-      "features": ["saf/safe-agentic-organization/workflows"]
+      "actorTypes": [
+        "it-head-of-ai",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/safe-agentic-organization/03"
+      ],
+      "features": [
+        "saf/safe-agentic-organization/workflows"
+      ]
     },
     {
       "slug": "select-role-instructions",
       "name": "Select versioned instructions for an engineering role",
       "goal": "Identify the versioned instructions governing a role's engineering work and distinguish advisory guidance from requirements enforced by separate executable gates.",
-      "actorTypes": ["delivery-agent", "it-platform"],
-      "addressedPains": ["it-ungoverned-agents"],
-      "values": ["value:saf/safe-agentic-organization/02"],
-      "features": ["saf/safe-agentic-organization/instructions"]
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/safe-agentic-organization/02"
+      ],
+      "features": [
+        "saf/safe-agentic-organization/instructions"
+      ]
     },
     {
       "slug": "define-deliverable-contract",
       "name": "Define a deliverable schema and template",
       "goal": "Select a schema and Markdown template for a named deliverable and inspect required metadata, content and references before using them as a write contract.",
-      "actorTypes": ["delivery-agent", "it-platform"],
-      "addressedPains": ["it-unverified-generated-output"],
-      "values": ["value:saf/agentic-workspace/02"],
-      "features": ["saf/safe-agentic-organization/artifacts"]
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:saf/agentic-workspace/02"
+      ],
+      "features": [
+        "saf/safe-agentic-organization/artifacts"
+      ]
     },
     {
       "slug": "install-pinned-workspace",
       "name": "Install a pinned agentic workspace",
       "goal": "Set up a selected harness, organization and host combination while preserving existing work, checking version compatibility separately from the manual setup route.",
-      "actorTypes": ["it-platform"],
-      "addressedPains": ["it-unqualified-agent-runtime"],
-      "values": ["value:saf/agentic-workspace/01"],
-      "features": ["saf/agentic-workspace/installer"]
+      "actorTypes": [
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unqualified-agent-runtime"
+      ],
+      "values": [
+        "value:saf/agentic-workspace/01"
+      ],
+      "features": [
+        "saf/agentic-workspace/installer"
+      ]
     },
     {
       "slug": "publish-checked-artifacts",
       "name": "Publish artifacts through configured CI checks",
       "goal": "Run pinned artifact contracts and environment-specific checks through a configured publication pipeline, inspecting failures before publication; publication is not production deployment acceptance.",
-      "actorTypes": ["it-platform", "delivery-agent"],
-      "addressedPains": ["it-unverified-generated-output"],
-      "values": ["value:saf/agentic-workspace/03"],
-      "features": ["saf/agentic-workspace/cicd-pipelines"]
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:saf/agentic-workspace/03"
+      ],
+      "features": [
+        "saf/agentic-workspace/cicd-pipelines"
+      ]
     },
     {
       "slug": "extract-delivery-history-candidates",
       "name": "Extract definition candidates from delivery history",
       "goal": "Derive typed Blackboard candidates from supplied pinned artifacts and journals, inspecting provenance and uncertainty before the separate client-owned draft-promotion step.",
-      "actorTypes": ["integration-client", "it-architect"],
-      "addressedPains": ["it-handcrafted-deliverables"],
-      "values": ["value:saf/saf-sie-bridge/01"],
-      "features": ["saf/saf-sie-bridge/harness-history-sourcing"]
+      "actorTypes": [
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables"
+      ],
+      "values": [
+        "value:saf/saf-sie-bridge/01"
+      ],
+      "features": [
+        "saf/saf-sie-bridge/harness-history-sourcing"
+      ]
     },
     {
       "slug": "maintain-governed-it-inventory",
