@@ -69,7 +69,7 @@ function valueOwner(slug: string): string[] { return slug.replace(/^value:/, '')
 /** Where this value is rendered: the platform page, a solution page or a product page. */
 export function valueHref(value: Pick<Value, 'slug'>): string {
   const [owner, ...rest] = valueOwner(value.slug);
-  if (!rest.length) return `/values#${valueAnchor(value)}`;
+  if (!rest.length) return `/catalog/values#${valueAnchor(value)}`;
   if (owner === 'platform') return `/#${valueAnchor(value)}`;
   const base = solutionHref({ slug: owner });
   return rest.length === 2 ? `${base}/products/${rest[0]}#${valueAnchor(value)}` : `${base}#${valueAnchor(value)}`;
@@ -126,7 +126,7 @@ export interface RelationGroup { label: string; links: RelationLink[] }
  */
 export function usageRelations(item: UsageRefs): RelationGroup[] {
   return [
-    { label: 'Pain points', links: painsForItem(item).map((pain) => ({ label: pain.pain, href: `/pains#${pain.slug}` })) },
+    { label: 'Pain points', links: painsForItem(item).map((pain) => ({ label: pain.pain, href: `/catalog/pains#${pain.slug}` })) },
     { label: 'Use cases', links: useCases.filter((useCase) => item.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) })) },
     { label: 'Values', links: valuesForItem(item).map((value) => ({ label: value.title, href: valueHref(value), state: valueStatus(value.slug) })) },
   ].filter((group) => group.links.length);

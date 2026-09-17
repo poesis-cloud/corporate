@@ -4,8 +4,12 @@ export interface CatalogRecord { slug: string; actors: string[]; pains: string[]
 export interface CatalogSource { label: string; targets: Record<CatalogType, string[]> }
 export interface CatalogSnapshot { sources: Record<string, CatalogSource>; records: Record<CatalogType, CatalogRecord[]>; actors: string[]; pains: string[] }
 
+export function catalogPath(type: CatalogType): string {
+  return `/catalog/${type}`;
+}
+
 export function catalogHref(type: CatalogType, source: string): string {
-  return `/${type}?${new URLSearchParams({ source })}`;
+  return `${catalogPath(type)}?${new URLSearchParams({ source })}`;
 }
 
 export function filterCatalog(snapshot: CatalogSnapshot, type: CatalogType, query: URLSearchParams) {

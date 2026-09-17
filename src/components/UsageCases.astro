@@ -14,7 +14,7 @@ const cards = cases.map((useCase) => {
   <div class="container">
     <div class="section-head usage-heading">
       <div><p class="eyebrow">Usage</p><h2>{title}</h2></div>
-      {browse && <a href="/usage">All use cases <Icon name="arrow-right" /></a>}
+      {browse && <a href="/catalog/usage">All use cases <Icon name="arrow-right" /></a>}
     </div>
     <ul class="think-consequence-list catalog-grid usage-case-list">
       {cards.map((card) => <CatalogCard card={card} />)}

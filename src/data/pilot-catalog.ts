@@ -11,7 +11,7 @@ export function projectPilotCatalog(): PilotCatalog {
   ];
   return {
     values: usageValues.map((value) => ({ slug: value.slug, name: value.title, description: value.body, href: valueHref(value), supports: entries.filter((entry) => entry.values.includes(value.slug)).map((entry) => entry.key) })),
-    pains: poesisUsage.pains.map((pain) => ({ slug: pain.slug, name: pain.pain, description: pain.cost, href: `/pains#${pain.slug}`, supports: entries.filter((entry) => entry.pains.includes(pain.slug)).map((entry) => entry.key) })),
+    pains: poesisUsage.pains.map((pain) => ({ slug: pain.slug, name: pain.pain, description: pain.cost, href: `/catalog/pains#${pain.slug}`, supports: entries.filter((entry) => entry.pains.includes(pain.slug)).map((entry) => entry.key) })),
     cases: poesisUsage.useCases.map((useCase) => ({
       slug: useCase.slug, name: useCase.name, description: useCase.goal, href: `/usage/${useCase.slug}`, actors: useCase.actorTypes,
       values: valuesForUseCase(useCase.slug).map((value) => value.slug), pains: painsForUseCase(useCase.slug).map((pain) => pain.slug),

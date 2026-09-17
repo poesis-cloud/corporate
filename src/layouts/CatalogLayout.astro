@@ -18,7 +18,7 @@ interface Props {
 }
 const { title, description, heading, lead, count } = Astro.props;
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
-const catalogType = current.slice(1) as CatalogType;
+const catalogType = current.split('/').at(-1) as CatalogType;
 const filterable = catalogTypes.includes(catalogType);
 ---
 <BaseLayout title={title} description={description}>

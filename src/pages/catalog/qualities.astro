@@ -1,8 +1,8 @@
 ---
-import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory from '../components/CatalogDirectory.astro';
-import { qualityCategories, qualities, qualitiesPublishedBy, categoryAnchor } from '../data/qualities.ts';
-import { qualityCard } from '../data/catalog-card.ts';
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../../components/CatalogDirectory.astro';
+import { qualityCategories, qualities, qualitiesPublishedBy, categoryAnchor } from '../../data/qualities.ts';
+import { qualityCard } from '../../data/catalog-card.ts';
 
 const groups = qualityCategories.map((category) => ({
   category,

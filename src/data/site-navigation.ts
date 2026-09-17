@@ -22,25 +22,25 @@ export interface SiteNavigationGroup {
 
 /** What someone arrives with: the demand side of the catalog. */
 export const needViews: SiteNavigationItem[] = [
-  { href: '/usage', label: 'Use Cases' },
-  { href: '/actors', label: 'Actors' },
-  { href: '/pains', label: 'Pain Points' },
-  { href: '/values', label: 'Values' },
+  { href: '/catalog/usage', label: 'Use Cases' },
+  { href: '/catalog/actors', label: 'Actors' },
+  { href: '/catalog/pains', label: 'Pain Points' },
+  { href: '/catalog/values', label: 'Values' },
 ];
 
 /** What answers it: the supply side, from the broadest promise down to the shipped unit. */
 export const coverageViews: SiteNavigationItem[] = [
-  { href: '/affordances', label: 'Affordances' },
-  { href: '/capabilities', label: 'Capabilities' },
-  { href: '/features', label: 'Features' },
-  { href: '/qualities', label: 'Qualities' },
+  { href: '/catalog/affordances', label: 'Affordances' },
+  { href: '/catalog/capabilities', label: 'Capabilities' },
+  { href: '/catalog/features', label: 'Features' },
+  { href: '/catalog/qualities', label: 'Qualities' },
 ];
 
 /** What is packaged and sold. */
 export const portfolioViews: SiteNavigationItem[] = [
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/products', label: 'Products' },
-  { href: '/services', label: 'Services' },
+  { href: '/catalog/solutions', label: 'Solutions' },
+  { href: '/catalog/products', label: 'Products' },
+  { href: '/catalog/services', label: 'Services' },
 ];
 
 /** Every catalog view, and the in-page nav of every catalog page. */

@@ -22,9 +22,9 @@ const state = useCaseStatus(useCase);
 <BaseLayout title={useCase.name} description={useCase.goal}>
   <section class="section usage-detail-intro">
     <div class="container">
-      <p class="eyebrow"><a href="/usage">Usage</a> / Use case {state && <DeliveryStatus state={state} />}</p>
+      <p class="eyebrow"><a href="/catalog/usage">Usage</a> / Use case {state && <DeliveryStatus state={state} />}</p>
       <h1>{useCase.name}</h1><p class="lead">{useCase.goal}</p>
-      <p class="usage-actors">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/actors#${slug}`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
+      <p class="usage-actors">{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' / '}<a href={`/catalog/actors#${slug}`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
       <nav class="hero-sections" aria-label="Use case sections"><a href="#platform">What serves it</a><a href="#values">Values</a><a href="#pains">Pains</a></nav>
     </div>
   </section>
@@ -57,7 +57,7 @@ const state = useCaseStatus(useCase);
       <div class="section-head"><p class="eyebrow">Pains</p><h2>Pain points</h2></div>
       {pains.length === 0 && <p>No addressed pain recorded.</p>}
       <ul class="think-consequence-list catalog-grid">{pains.map((pain) => <CatalogCard card={painCard(pain)} />)}</ul>
-      <a href="/usage"><Icon name="arrow-right" /> All use cases</a>
+      <a href="/catalog/usage"><Icon name="arrow-right" /> All use cases</a>
     </div>
   </section>
 </BaseLayout>

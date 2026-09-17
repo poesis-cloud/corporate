@@ -103,7 +103,7 @@ const usageActorGroups = [
       <ul class="think-consequence-list catalog-grid usage-case-list home-usage-cases">
         {currentUseCases.map((useCase) => <CatalogCard card={useCaseCard(useCase)} as="h4" />)}
       </ul>
-      <p class="home-usage-empty" id="usage-empty" hidden>No delivered use case names this actor type yet. <a href="/usage">Browse all use cases &rarr;</a></p>
+      <p class="home-usage-empty" id="usage-empty" hidden>No delivered use case names this actor type yet. <a href="/catalog/usage">Browse all use cases &rarr;</a></p>
 
       <h3 class="home-usage-subhead">What it is worth</h3>
       <PlatformValues />
@@ -135,7 +135,7 @@ const usageActorGroups = [
       ))}
 
       <div class="hero-cta">
-        <a class="btn btn-ghost" href="/qualities"><Icon name="check-badge" /> All qualities</a>
+        <a class="btn btn-ghost" href="/catalog/qualities"><Icon name="check-badge" /> All qualities</a>
       </div>
     </div>
   </section>

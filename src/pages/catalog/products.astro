@@ -1,8 +1,8 @@
 ---
-import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory from '../components/CatalogDirectory.astro';
-import { platformSolutions } from '../data/poesis-platform.ts';
-import { productCard } from '../data/catalog-card.ts';
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../../components/CatalogDirectory.astro';
+import { platformSolutions } from '../../data/poesis-platform.ts';
+import { productCard } from '../../data/catalog-card.ts';
 
 const cards = platformSolutions.flatMap((solution) => solution.products.map((product) => productCard({ solution, product })));
 ---

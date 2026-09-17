@@ -36,9 +36,11 @@ contexts are explicit, with separate prerequisites and complete-route acceptance
 content activities are Implemented; integration workflows remain Planned. The original five human
 profiles and 11 pain anchors survive through compatibility adapters.
 
-The `/usage` index has actor/pain filters and directories; detail pages show workflows, composition,
-acceptance, values and pains. Existing homepage, solution, product and feature views link the same
-records. See the [usage decision](../strategy/usage-model.md) and [SEO register](../strategy/seo.md).
+The `/catalog` index separates platform, usage and services. Each item-type inventory lives at
+`/catalog/<item-type>`; `/catalog/usage` has actor/pain filters, while `/usage/<slug>` detail pages
+show workflows, composition, acceptance, values and pains. Existing homepage, solution, product
+and feature views link the same records. See the [usage decision](../strategy/usage-model.md) and
+[SEO register](../strategy/seo.md).
 
 ```bash
 npm run test:usage

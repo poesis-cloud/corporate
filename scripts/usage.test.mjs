@@ -43,7 +43,7 @@ import {
 import { profiles } from '../src/data/profiles.ts';
 import { pains, homepagePainGroups } from '../src/data/pains.ts';
 import { catalogSnapshot, platformRelations } from '../src/data/catalog.ts';
-import { catalogTypes, catalogHref, filterCatalog } from '../src/data/catalog-query.ts';
+import { catalogTypes, catalogPath, catalogHref, filterCatalog } from '../src/data/catalog-query.ts';
 import { catalogViews, siteNavigation } from '../src/data/site-navigation.ts';
 import { projectPilotCatalog } from '../src/data/pilot-catalog.ts';
 import { emailHandoff, filterCases, normalizeSelection, safePilotJson, selectionFromQuery, selectionQuery, serializeBrief } from '../src/data/pilot.ts';
@@ -52,7 +52,7 @@ test('pilot projection preserves canonical needs, relationships and delivery sta
   const catalog = projectPilotCatalog();
   assert.equal(catalog.values.length, usageValues.length);
   assert.equal(catalog.pains.length, poesisUsage.pains.length);
-  for (const pain of catalog.pains) assert.equal(pain.href, `/pains#${pain.slug}`);
+  for (const pain of catalog.pains) assert.equal(pain.href, `/catalog/pains#${pain.slug}`);
   for (const useCase of catalog.cases) {
     assert.deepEqual(useCase.values, valuesForUseCase(useCase.slug).map((value) => value.slug));
     assert.deepEqual(useCase.pains, painsForUseCase(useCase.slug).map((pain) => pain.slug));
@@ -214,7 +214,7 @@ test('validation rejects dangling references but accepts independent usage recor
   const independentValue = { slug: 'value:unmapped-test-benefit', originalTitle: 'Service accountability', title: 'Service accountability', body: 'Clear responsibility for service commitments.', useCases: ['orphan-case'] };
   assert.doesNotThrow(() => validateUsage(unreachable, [...usageValues, independentValue]));
   assert.equal(valueStatus(independentValue.slug), undefined);
-  assert.equal(valueHref(independentValue), `/values#${valueAnchor(independentValue)}`);
+  assert.equal(valueHref(independentValue), `/catalog/values#${valueAnchor(independentValue)}`);
   const danglingCase = structuredClone(poesisUsage);
   danglingCase.useCases = danglingCase.useCases.filter((useCase) => useCase.slug !== 'read-governance-model');
   assert.throws(() => validateUsage(danglingCase), /Unknown|Unreachable/);
@@ -406,14 +406,14 @@ test('catalog navigation uses one canonical link per nonempty relationship type'
         assert.equal(group.links.length, 1);
         const url = new URL(group.links[0].href, 'https://poesis.cloud');
         assert.equal(url.searchParams.get('source'), source);
-        const target = url.pathname.slice(1);
+        const target = url.pathname.split('/').at(-1);
         assert.equal(group.links[0].href, catalogHref(target, source));
         assert.ok(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.length);
       }
     }
   }
   const source = 'capability:itip/automatic-it-truth-sourcing';
-  assert.equal(catalogHref('values', source), '/values?source=capability%3Aitip%2Fautomatic-it-truth-sourcing');
+  assert.equal(catalogHref('values', source), '/catalog/values?source=capability%3Aitip%2Fautomatic-it-truth-sourcing');
   const capability = usageCapabilities.find((entry) => `capability:${entry.slug}` === source);
   assert.deepEqual(catalogSnapshot.sources[source].targets.features, usageFeatures.filter((entry) => entry.solution.slug === capability.solution.slug && capability.capability.relations.features.includes(`${entry.product.slug}/${entry.feature.slug}`)).map((entry) => entry.slug));
   for (const feature of catalogSnapshot.sources[source].targets.features) assert.ok(catalogSnapshot.sources[`feature:${feature}`].targets.capabilities.includes(capability.slug));
@@ -462,7 +462,11 @@ test('anchors and hrefs keep the published shape', () => {
 });
 
 test('every catalog entity type is browsable from one navigation section', () => {
-  assert.deepEqual(catalogViews.map((view) => view.href), ['/usage', '/actors', '/pains', '/values', '/affordances', '/capabilities', '/features', '/qualities', '/solutions', '/products', '/services']);
+  assert.deepEqual(catalogViews.map((view) => view.href), ['/catalog/usage', '/catalog/actors', '/catalog/pains', '/catalog/values', '/catalog/affordances', '/catalog/capabilities', '/catalog/features', '/catalog/qualities', '/catalog/solutions', '/catalog/products', '/catalog/services']);
+  for (const type of catalogTypes) {
+    assert.equal(catalogPath(type), `/catalog/${type}`);
+    assert.equal(new URL(catalogHref(type, 'test:source'), 'https://poesis.cloud').pathname, `/catalog/${type}`);
+  }
   const platform = siteNavigation.find((group) => group.label === 'Platform');
   const [portfolio, needs, coverage, comparisons] = platform.sections;
   // What is packaged comes first; demand and supply follow, comparison last.
@@ -500,8 +504,15 @@ const built = (pathname) => {
 };
 
 test('built catalogs publish matching filter payloads and compact platform footers on every surface', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  const index = built('/catalog');
+  for (const id of ['platform', 'usage', 'services']) {
+    assert.equal(elements(index, (node) => node.tagName === 'section' && attr(node, 'id') === id).length, 1, id);
+  }
+  for (const view of catalogViews) {
+    assert.ok(elements(index, (node) => node.tagName === 'a' && attr(node, 'href') === view.href).length, view.href);
+  }
   for (const type of catalogTypes) {
-    const document = built(`/${type}`);
+    const document = built(`/catalog/${type}`);
     const payload = elements(document, (node) => attr(node, 'id') === 'catalog-filter-data')[0];
     assert.deepEqual(JSON.parse(text(payload)), { type, snapshot: JSON.parse(JSON.stringify(catalogSnapshot)) });
     assert.equal(elements(document, (node) => attr(node, 'id') === 'catalog-active-source').length, 1);
@@ -512,7 +523,7 @@ test('built catalogs publish matching filter payloads and compact platform foote
     for (const entry of entries) {
       const source = `${itemKey}:${entry.slug}`;
       const expected = platformRelations(entry[itemKey]).flatMap((group) => group.links.map((link) => link.href));
-      const catalogCard = elements(built(`/${type}`), (node) => attr(node, 'data-catalog-slug') === entry.slug)[0];
+      const catalogCard = elements(built(`/catalog/${type}`), (node) => attr(node, 'data-catalog-slug') === entry.slug)[0];
       const ownerPath = itemKey === 'affordance' ? '/' : itemKey === 'feature' ? `${solutionHref(entry.solution)}/products/${entry.product.slug}` : solutionHref(entry.solution);
       const ownerAnchor = itemKey === 'affordance' ? `affordance-${entry.slug}` : entry[itemKey].slug;
       const ownerCard = elements(built(ownerPath), (node) => attr(node, 'id') === ownerAnchor)[0];
@@ -577,7 +588,7 @@ test('built pilot keeps needs first, canonical links, safe projection and useful
 });
 
 test('built usage pages retain identity, derived badges, contextual links and SEO title identity', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
-  const index = built('/usage');
+  const index = built('/catalog/usage');
   const sitemap = readFileSync(new URL('../dist/sitemap-0.xml', import.meta.url), 'utf8');
   assert.equal(elements(index, (node) => attr(node, 'data-usage-case')).length, poesisUsage.useCases.length);
   for (const useCase of poesisUsage.useCases) {
@@ -590,10 +601,10 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     if (badges.length) assert.equal(attr(badges[0], 'data-delivery-status'), useCaseStatus(useCase));
     assert.ok(sitemap.includes(`/usage/${useCase.slug}/</loc>`), `sitemap ${useCase.slug}`);
   }
-  for (const entity of [...poesisUsage.actorTypes]) assert.equal(elements(built('/actors'), (node) => attr(node, 'id') === entity.slug).length, 1, entity.slug);
-  for (const entity of poesisUsage.pains) assert.equal(elements(built('/pains'), (node) => attr(node, 'id') === entity.slug).length, 1, entity.slug);
+  for (const entity of [...poesisUsage.actorTypes]) assert.equal(elements(built('/catalog/actors'), (node) => attr(node, 'id') === entity.slug).length, 1, entity.slug);
+  for (const entity of poesisUsage.pains) assert.equal(elements(built('/catalog/pains'), (node) => attr(node, 'id') === entity.slug).length, 1, entity.slug);
   for (const value of usageValues) {
-    const item = elements(built('/values'), (node) => attr(node, 'id') === valueAnchor(value));
+    const item = elements(built('/catalog/values'), (node) => attr(node, 'id') === valueAnchor(value));
     assert.equal(item.length, 1, value.slug);
     const head = elements(item[0], (node) => attr(node, 'class')?.includes('think-consequence__head'))[0];
     const badges = elements(head, (node) => attr(node, 'data-delivery-status'));
@@ -633,9 +644,9 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     }
   }
   for (const [page, items, anchor, state] of [
-    ['/features', usageFeatures, (entry) => `feature-${entry.slug.replace(/\//g, '-')}`, (entry) => entry.feature.delivery.state],
-    ['/capabilities', usageCapabilities, (entry) => `capability-${entry.slug.replace(/\//g, '-')}`, (entry) => capabilityStatus(entry.solution, entry.capability)],
-    ['/affordances', usageAffordances, (entry) => `affordance-${entry.slug}`, (entry) => affordanceStatus(entry.affordance)],
+    ['/catalog/features', usageFeatures, (entry) => `feature-${entry.slug.replace(/\//g, '-')}`, (entry) => entry.feature.delivery.state],
+    ['/catalog/capabilities', usageCapabilities, (entry) => `capability-${entry.slug.replace(/\//g, '-')}`, (entry) => capabilityStatus(entry.solution, entry.capability)],
+    ['/catalog/affordances', usageAffordances, (entry) => `affordance-${entry.slug}`, (entry) => affordanceStatus(entry.affordance)],
   ]) {
     const document = built(page);
     for (const entry of items) {
@@ -652,7 +663,7 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.equal(links.length, 1);
     assert.equal(text(links[0]), group.lead);
   }
-  const actorsPage = built('/actors');
+  const actorsPage = built('/catalog/actors');
   for (const profile of profiles) assert.ok(elements(actorsPage, (node) => attr(node, 'id') === profile.slug).length, `actor ${profile.slug}`);
   // The homepage keeps actor types as the usage filter rather than a separate section.
   const options = elements(homepage, (node) => node.tagName === 'option' && attr(node, 'value') !== undefined);

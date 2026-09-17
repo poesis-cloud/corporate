@@ -1,8 +1,8 @@
 ---
-import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory from '../components/CatalogDirectory.astro';
-import { usageCapabilities } from '../data/usage.ts';
-import { capabilityCard } from '../data/catalog-card.ts';
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../../components/CatalogDirectory.astro';
+import { usageCapabilities } from '../../data/usage.ts';
+import { capabilityCard } from '../../data/catalog-card.ts';
 
 const cards = usageCapabilities.map(capabilityCard);
 ---
