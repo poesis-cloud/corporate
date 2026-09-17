@@ -209,6 +209,7 @@ export function validatePortfolio(solutions = platformSolutions, platformAfforda
     for (const reference of featureRefs) if (!solution.capabilities.some((capability) => capability.relations.features.includes(reference))) throw new Error(`Orphan feature: ${solution.slug}/${reference}`);
   }
   for (const affordance of platformAffordances) { validateDelivery(affordance.delivery); validateNoUsageRefs(affordance, `affordance ${affordance.slug}`); add('affordance', affordance.slug); if (!affordance.relations.capabilities.length) throw new Error('Unsupported affordance'); unique(affordance.relations.capabilities, 'capability edge'); for (const reference of affordance.relations.capabilities) { const [solutionSlug, slug] = exactRef(reference, 2); if (!solutions.find((solution) => solution.slug === solutionSlug)?.capabilities.some((capability) => capability.slug === slug)) throw new Error(`Unknown affordance capability: ${reference}`); } }
+  for (const solution of solutions) for (const capability of solution.capabilities) if (!platformAffordances.some((affordance) => affordance.relations.capabilities.includes(`${solution.slug}/${capability.slug}`))) throw new Error(`Orphan capability: ${solution.slug}/${capability.slug}`);
   const capabilityStates = Object.fromEntries(solutions.flatMap((solution) => solution.capabilities.map((capability) => [`${solution.slug}/${capability.slug}`, capability.delivery.state])));
   for (const affordance of platformAffordances) {
     if (affordance.delivery.state !== 'delivered') continue;

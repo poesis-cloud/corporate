@@ -235,7 +235,7 @@ test('validation rejects dangling references but accepts independent usage recor
   assert.equal(valueHref(independentValue), `/catalog/values#${valueAnchor(independentValue)}`);
   const danglingCase = structuredClone(poesisUsage);
   danglingCase.useCases = danglingCase.useCases.filter((useCase) => useCase.slug !== 'read-governance-model');
-  assert.doesNotThrow(() => validateUsage(danglingCase));
+  assert.throws(() => validateUsage(danglingCase), /Unserved feature: gsm\/specifications\/primitives/);
 });
 
 test('derivation preserves declared coverage without fabricating support for independent needs', () => {
@@ -405,6 +405,13 @@ test('use cases validate owned value and pain references while independent recor
   const mixed = structuredClone(poesisUsage);
   mixed.useCases.find((useCase) => useCase.slug === supported.slug).capabilities = [usageCapabilities[0].slug];
   assert.throws(() => validateUsage(mixed), /Mixed support levels/);
+  // A level is constituted by synthesising the level below, so it must carry a use case of its own.
+  for (const [level, key, slug] of [['feature', 'features', supported.features[0]], ['capability', 'capabilities', usageCapabilities[0].slug], ['affordance', 'affordances', usageAffordances[0].slug]]) {
+    const stripped = structuredClone(poesisUsage);
+    for (const useCase of stripped.useCases) if (useCase[key]?.includes(slug)) useCase[key] = useCase[key].filter((reference) => reference !== slug);
+    for (const useCase of stripped.useCases) if (useCase[key] && !useCase[key].length) delete useCase[key];
+    assert.throws(() => validateUsage(stripped), new RegExp(`Unserved ${level}`));
+  }
   const graph = structuredClone(poesisUsage);
   graph.pains.push({ slug: 'independent-test-pain', pain: 'An independent pain', cost: 'Unaddressed cost', tags: ['Test'] });
   assert.doesNotThrow(() => validateUsage(graph));

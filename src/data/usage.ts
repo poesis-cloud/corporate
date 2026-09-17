@@ -211,7 +211,7 @@ export function valuesForItem(item: UsageItem): Value[] {
  */
 export const valueEdges: SemanticEdge[] = usageValues.flatMap((value) => valueSupports(value.slug).map((support) => ({ id: `${support.type}:${support.slug}->${value.slug}`, source: `${support.type}:${support.slug}`, target: value.slug, kind: 'supports-benefit' as const, scope: value.body })));
 
-/** How much of the platform is reachable from at least one use case. */
+/** How much of the platform is reachable from at least one use case. Every level is required to be covered, so this reports the invariant rather than discovering it. */
 export function usageCoverage(): { features: number; capabilities: number; affordances: number } {
   return {
     features: usageFeatures.filter((entry) => useCasesForItem(entry.feature).length).length,
@@ -259,6 +259,13 @@ export function validateUsage(graph: UsageGraph = poesisUsage, values: Value[] =
     for (const reference of useCase.addressedPains) if (!painSlugs.has(reference)) throw new Error(`Unknown addressed pain: ${reference}`);
     for (const reference of useCase.values) if (!valueSlugs.has(reference)) throw new Error(`Unknown realized value: ${reference}`);
     for (const actor of useCase.actorTypes) if (!actorSlugs.has(actor)) throw new Error(`Unknown actor type: ${actor}`);
+  }
+
+  // A level is constituted by synthesising the level below, and its use cases are synthesised the same way,
+  // so a level with no use case of its own is a missing record rather than a reason to borrow one from below.
+  for (const [label, entries, key] of [['feature', usageFeatures, 'features'], ['capability', usageCapabilities, 'capabilities'], ['affordance', usageAffordances, 'affordances']] as const) {
+    const served = new Set(graph.useCases.flatMap((useCase) => useCase[key] ?? []));
+    for (const entry of entries) if (!served.has(entry.slug)) throw new Error(`Unserved ${label}: ${entry.slug}`);
   }
 
   unique(valueEdges.map((edge) => edge.id), 'value edge');
