@@ -454,7 +454,7 @@ test('catalog navigation exposes only qualified direct relations in the declared
     pain: [{ qualifier: 'Addressed by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Experienced by', targets: ['actors'] }, { qualifier: 'Addressed through', targets: ['usage'] }],
     usage: [{ qualifier: 'Supported by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Realizes', targets: ['values'] }, { qualifier: 'Performed by', targets: ['actors'] }],
     value: [{ qualifier: 'Supported by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Realized through', targets: ['usage'] }],
-    quality: [],
+    quality: [{ qualifier: 'Borne by', targets: ['solutions', 'products'] }],
   });
   for (const [source, record] of Object.entries(catalogSnapshot.sources).filter(([source]) => !source.startsWith('homepage:'))) {
     const type = source === 'platform' ? 'platform' : source.split(':')[0];
@@ -473,7 +473,8 @@ test('catalog navigation exposes only qualified direct relations in the declared
       assert.deepEqual(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.slice().sort(), record.targets[target].slice().sort());
     }
   }
-  assert.deepEqual(catalogRelations('affordance:norm-evaluation').map((group) => new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)), ['capabilities']);
+  // An affordance reaches the use cases its capabilities' features serve, so it keeps the full contract.
+  assert.deepEqual(catalogRelations('affordance:norm-evaluation').map((group) => new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)), ['pains', 'values', 'usage', 'actors', 'capabilities']);
   const actorRelations = catalogRelations('actor:it-architect');
   for (const group of actorRelations) {
     assert.deepEqual(group.previews.map((preview) => preview.label).length, catalogSnapshot.sources['actor:it-architect'].targets[new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)].length);

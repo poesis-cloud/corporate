@@ -2833,7 +2833,9 @@ a:hover {
   list-style: none;
 }
 
-.think-consequence-list li {
+/* Direct children only: a card's indent rail must not reach the nested lists
+   its relation disclosures render. */
+.think-consequence-list>li {
   display: grid;
   grid-template-rows: auto auto 1fr;
   gap: .4rem;
@@ -2868,13 +2870,13 @@ a:hover {
   text-transform: uppercase;
 }
 
-.think-consequence-list strong {
+.think-consequence-list>li>strong {
   color: var(--ink);
   font-size: .9rem;
   line-height: 1.35;
 }
 
-.think-consequence-list p {
+.think-consequence-list>li>p {
   margin: 0;
   color: var(--muted);
   font-size: .8rem;
@@ -2939,8 +2941,7 @@ a:hover {
   list-style: none;
 }
 
-.catalog-tags li,
-.think-consequence-list .catalog-tags li {
+.catalog-tags li {
   display: inline-flex;
   width: auto;
   padding: .16rem .45rem;

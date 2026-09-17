@@ -32,7 +32,7 @@ const { groups } = Astro.props;
               </li>
             ))}
           </ul>
-          <a class="relation-preview__all" href={group.href}>View all {group.label}</a>
+          {group.href && <a class="relation-preview__all" href={group.href}>View all {group.label}</a>}
         </div>
       </details>
     ))}

@@ -1,6 +1,6 @@
-import { affordanceStatus, capabilityStatus, platformQualityRefs, platformSolutions, productStatus, solutionHref, solutionStatus } from './poesis-platform.ts';
-import { qualityCategories, qualitiesPublishedBy, qualityHref } from './qualities.ts';
-import { affordanceHref, capabilityHref, featureHref, usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCaseStatus, useCasesForItem, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, valueHref, valueStatus, type RelationGroup, type RelationPreview, type UseCase, type UsageItem } from './usage.ts';
+import { affordanceStatus, capabilityStatus, PLATFORM_TYPE_LABEL, platformQualityRefs, platformSolutions, productStatus, solutionHref, solutionStatus } from './poesis-platform.ts';
+import { qualityCategories, qualitiesPublishedBy, qualityHref, qualitySubject, type Quality } from './qualities.ts';
+import { affordanceHref, capabilityHref, featureHref, usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCaseStatus, useCasesForItem, useCasesInReach, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, valueHref, valueStatus, type RelationGroup, type RelationPreview, type UseCase, type UsageItem } from './usage.ts';
 import { homepagePainGroups } from './pains.ts';
 import { catalogTypes, catalogHref, type CatalogType, type CatalogSnapshot, type CatalogSource } from './catalog-query.ts';
 
@@ -54,7 +54,7 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
     },
   };
   for (const entry of platform) {
-    const references = caseSlugs(useCasesForItem(entry.item));
+    const references = caseSlugs(useCasesInReach(entry.item));
     snapshot.records[entry.type].push({ slug: entry.slug, actors: caseActors(references), pains: casePains(references) });
     const related = usageTargets(references);
     if (entry.type === 'capabilities') {
@@ -64,7 +64,7 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
     if (entry.type === 'affordances') related.capabilities = entry.item.relations.capabilities;
     snapshot.sources[entry.source] = { label: `${entry.type === 'features' ? 'Feature' : entry.type === 'capabilities' ? 'Capability' : 'Affordance'}: ${entry.name}`, targets: related };
   }
-  snapshot.sources.platform = { label: 'Platform: Poesis', targets: targets({ affordances: usageAffordances.map((entry) => entry.slug), qualities: platformQualityRefs, solutions: platformSolutions.map((solution) => solution.slug) }) };
+  snapshot.sources.platform = { label: `${PLATFORM_TYPE_LABEL}: Poesis`, targets: targets({ affordances: usageAffordances.map((entry) => entry.slug), qualities: platformQualityRefs, solutions: platformSolutions.map((solution) => solution.slug) }) };
   for (const actor of poesisUsage.actorTypes) {
     const references = caseSlugs(casesForActor(actor.slug));
     snapshot.sources[`actor:${actor.slug}`] = { label: `Actor type: ${actor.name}`, targets: targets({ ...platformSupport(references), pains: casePains(references), usage: references }) };
@@ -85,6 +85,10 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
   }
   for (const entry of platformProducts) {
     snapshot.sources[`product:${entry.slug}`] = { label: `Product: ${entry.product.name}`, targets: targets({ features: entry.product.features.map((feature) => `${entry.slug}/${feature.slug}`), qualities: entry.product.qualities }) };
+  }
+  for (const quality of catalogQualities) {
+    const owner = qualitySubject(quality);
+    snapshot.sources[`quality:${quality.slug}`] = { label: `Quality: ${quality.name}`, targets: targets(owner.scope === 'solution' ? { solutions: [owner.ref] } : owner.scope === 'product' ? { products: [owner.ref] } : {}) };
   }
   for (const group of homepagePainGroups) snapshot.sources[`homepage:${group.slug}`] = { label: group.lead, targets: { ...targets(), pains: [...group.pains] } };
   return snapshot;
@@ -127,7 +131,7 @@ export const relationRules: Record<RelationSourceType, RelationRule[]> = {
   pain: [platformAlternatives('Addressed by'), { qualifier: 'Experienced by', targets: ['actors'] }, { qualifier: 'Addressed through', targets: ['usage'] }],
   usage: [platformAlternatives('Supported by'), { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Realizes', targets: ['values'] }, { qualifier: 'Performed by', targets: ['actors'] }],
   value: [platformAlternatives('Supported by'), { qualifier: 'Realized through', targets: ['usage'] }],
-  quality: [],
+  quality: [{ qualifier: 'Borne by', targets: ['solutions', 'products'] }],
 };
 
 function sourceType(source: string): RelationSourceType {
@@ -199,4 +203,12 @@ export function platformRelations(item: UsageItem): RelationGroup[] {
   const entry = platform.find((entry) => entry.item === item);
   if (!entry) throw new Error('Unknown platform relationship source');
   return catalogRelations(entry.source);
+}
+
+/** The platform bears qualities directly, and it is not a catalog type of its own. */
+export function qualityRelations(quality: Pick<Quality, 'slug'>): RelationGroup[] {
+  const owner = qualitySubject(quality);
+  return owner.scope === 'platform'
+    ? [{ label: PLATFORM_TYPE_LABEL, qualifier: 'Borne by', previews: [{ label: 'Poesis', href: owner.href }] }]
+    : catalogRelations(`quality:${quality.slug}`);
 }

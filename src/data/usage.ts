@@ -145,6 +145,31 @@ export function useCasesForItem(item: UsageItem): UseCase[] {
   if (affordance) return useCases.filter((useCase) => (useCase.affordances ?? []).includes(affordance.slug));
   throw new Error(`Unknown platform relationship source: ${item.slug}`);
 }
+
+/**
+ * A use case declares support at one level only, so a capability or affordance
+ * is almost never named directly. Its reach is therefore what realizes it: a
+ * capability reaches what its features serve, an affordance what its
+ * capabilities reach. Without this an affordance reads as serving nothing.
+ */
+export function useCasesInReach(item: UsageItem): UseCase[] {
+  const reached = new Set(useCasesForItem(item).map((useCase) => useCase.slug));
+  const capability = usageCapabilities.find((entry) => entry.capability === item);
+  if (capability) {
+    for (const reference of capability.capability.relations.features) {
+      const feature = usageFeatureBySlug.get(`${capability.solution.slug}/${reference}`);
+      if (feature) for (const useCase of useCasesForItem(feature.feature)) reached.add(useCase.slug);
+    }
+  }
+  const affordance = usageAffordances.find((entry) => entry.affordance === item);
+  if (affordance) {
+    for (const reference of affordance.affordance.relations.capabilities) {
+      const entry = usageCapabilityBySlug.get(reference);
+      if (entry) for (const useCase of useCasesInReach(entry.capability)) reached.add(useCase.slug);
+    }
+  }
+  return useCases.filter((useCase) => reached.has(useCase.slug));
+}
 /** Values explicitly composing this use case, independently of platform support. */
 export function valuesForUseCase(slug: string): Value[] {
   const references = new Set(useCases.find((useCase) => useCase.slug === slug)?.values ?? []);
@@ -192,7 +217,8 @@ export function useCasesForSolution(solutionSlug: string): UseCase[] {
 export const usageIcons = { useCase: 'target', pain: 'alert', value: typeIcons.value };
 
 export interface RelationPreview { label: string; href: string; state?: DeliveryState }
-export interface RelationGroup { label: string; qualifier: string; href: string; previews: RelationPreview[] }
+/** `href` is the filtered catalog view; a group with no view of its own omits it. */
+export interface RelationGroup { label: string; qualifier: string; href?: string; previews: RelationPreview[] }
 
 export function painsForItem(item: UsageItem): UsagePain[] {
   const references = new Set(useCasesForItem(item).flatMap((useCase) => useCase.addressedPains));

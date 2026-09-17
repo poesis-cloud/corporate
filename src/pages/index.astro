@@ -8,7 +8,7 @@ import CatalogCard from '../components/CatalogCard.astro';
 import { poesisUsage, useCaseStatus } from '../data/usage.ts';
 import { qualityCard, serviceCard, useCaseCard } from '../data/catalog-card.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
-import { qualityCategories, qualitiesPublishedBy, categoryAnchor } from '../data/qualities.ts';
+import { qualityCategories, qualitiesPublishedBy } from '../data/qualities.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { actorTypes } from '../data/usage-actors.ts';
@@ -17,9 +17,10 @@ import { services } from '../data/services.ts';
 /** The homepage shows what the platform already serves; the catalogs hold the full backlog. */
 const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
 /** Only the qualities the platform itself bears; solution and product qualities live on their own pages. */
-const platformPostures = qualityCategories
-  .map((category) => ({ category, cards: qualitiesPublishedBy(category.slug, 'platform').map(qualityCard) }))
-  .filter((posture) => posture.cards.length);
+const platformQualityCards = qualityCategories
+  .flatMap((category) => qualitiesPublishedBy(category.slug, 'platform'))
+  .map(qualityCard);
+const platformQualityNotes = qualityCategories.filter((category) => category.note && qualitiesPublishedBy(category.slug, 'platform').length);
 const serviceCards = services.map(serviceCard);
 const usageActorGroups = [
   { label: 'People', actors: actorTypes.filter((actor) => actor.kind === 'human') },
@@ -121,18 +122,14 @@ const usageActorGroups = [
         <p class="lead">What the governed THINK layer claims about itself: how portable it stays inside your control boundary, and how it fits what you already run. Solutions and products state their own qualities on their own pages.</p>
       </div>
 
-      {platformPostures.map(({ category, cards }) => (
-        <div id={categoryAnchor(category)} class="home-posture">
-          <h3>{category.name}</h3>
-          <p class="home-posture__lead">{category.lead}</p>
-          <ul class="think-therapy__grid catalog-grid home-posture__list">
-            {cards.map((card) => <CatalogCard card={card} as="h4" variant="platform" />)}
-          </ul>
-          {category.note && (
-            <p class="home-posture__note">{category.noteState && <DeliveryStatus state={category.noteState} />} {category.note}</p>
-          )}
-        </div>
-      ))}
+      <div class="home-posture">
+        <ul class="think-therapy__grid catalog-grid home-posture__list">
+          {platformQualityCards.map((card) => <CatalogCard card={card} as="h3" variant="platform" />)}
+        </ul>
+        {platformQualityNotes.map((category) => (
+          <p class="home-posture__note">{category.noteState && <DeliveryStatus state={category.noteState} />} {category.note}</p>
+        ))}
+      </div>
 
       <div class="hero-cta">
         <a class="btn btn-ghost" href="/catalog/qualities"><Icon name="check-badge" /> All qualities</a>

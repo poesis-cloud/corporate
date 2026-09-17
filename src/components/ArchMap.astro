@@ -7,7 +7,7 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { platformSolutions, productTimeline, featureStatus, capabilityStatus, plannedClass, solutionHref, typeIcons, affordances, affordanceStatus } from '../data/poesis-platform.ts';
+import { platformSolutions, productTimeline, featureStatus, capabilityStatus, plannedClass, solutionHref, typeIcons, affordances, affordanceStatus, PLATFORM_TYPE_LABEL } from '../data/poesis-platform.ts';
 import { solutionQualities, productQualities, platformQualities, qualityHref } from '../data/qualities.ts';
 import DeliveryStatus from './DeliveryStatus.astro';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
@@ -27,7 +27,7 @@ const frameworkHref = solutionHref(framework);
     <article class="arch-scope arch-scope--platform" aria-labelledby="arch-platform-heading">
       <div class="arch-scope-meta">
         <span class="arch-icon"><Icon name="layers" size={16} /></span>
-        <span class="tag tag--accent-2">Platform</span>
+        <span class="tag tag--accent-2">{PLATFORM_TYPE_LABEL}</span>
       </div>
       <h3 id="arch-platform-heading"><a href="/">Poesis</a></h3>
       <p>The cross-solution capstone: affordances realized by contributing capabilities across every solution, and the qualities the platform bears as a whole.</p>

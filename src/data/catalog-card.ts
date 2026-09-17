@@ -15,9 +15,9 @@
  * is their identity, and the type label is what tells the reader so.
  */
 import { commitmentStatus, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
-import { catalogRelations, platformRelations } from './catalog.ts';
+import { catalogRelations, platformRelations, qualityRelations } from './catalog.ts';
 import {
-  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, usageCapabilities, usageFeatures, useCasesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
+  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, useCasesInReach, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
   type RelationGroup, type UsageAffordance, type UsageCapability, type UsageFeature, type UseCase, type Value,
 } from './usage.ts';
 import { qualityAnchor, qualityCategoryNames, qualityHref, type Quality } from './qualities.ts';
@@ -81,33 +81,6 @@ function rankThemes(tags: string[]): string[] {
 
 function useCaseTags(entries: UseCase[]): string[] {
   return entries.flatMap((entry) => painsForUseCase(entry.slug).flatMap((pain) => pain.tags));
-}
-
-function featureTags(entry: UsageFeature): string[] {
-  return useCaseTags(useCasesForItem(entry.feature));
-}
-
-// Capabilities and affordances are seldom cited by a use case directly, so they
-// inherit the themes of the level they are realized by.
-function capabilityTags(entry: UsageCapability): string[] {
-  return [
-    ...useCaseTags(useCasesForItem(entry.capability)),
-    // Capabilities cite features as `product/feature`; usage slugs are solution-scoped.
-    ...entry.capability.relations.features.flatMap((reference) => {
-      const feature = usageFeatures.find((candidate) => candidate.slug === `${entry.solution.slug}/${reference}`);
-      return feature ? featureTags(feature) : [];
-    }),
-  ];
-}
-
-function affordanceTags(entry: UsageAffordance): string[] {
-  return [
-    ...useCaseTags(useCasesForItem(entry.affordance)),
-    ...entry.affordance.relations.capabilities.flatMap((reference) => {
-      const capability = usageCapabilities.find((candidate) => candidate.slug === reference);
-      return capability ? capabilityTags(capability) : [];
-    }),
-  ];
 }
 
 export function actorCard(actor: ActorType): CatalogCard {
@@ -180,7 +153,7 @@ export function affordanceCard(entry: UsageAffordance): CatalogCard {
     hook: entry.affordance.title,
     body: entry.affordance.blurb,
     status: affordanceStatus(entry.affordance),
-    tags: rankThemes(affordanceTags(entry)),
+    tags: rankThemes(useCaseTags(useCasesInReach(entry.affordance))),
     relations: platformRelations(entry.affordance),
   };
 }
@@ -194,7 +167,7 @@ export function capabilityCard(entry: UsageCapability): CatalogCard {
     heading: entry.capability.name,
     body: entry.capability.blurb,
     status: capabilityStatus(entry.solution, entry.capability),
-    tags: rankThemes(capabilityTags(entry)),
+    tags: rankThemes(useCaseTags(useCasesInReach(entry.capability))),
     relations: platformRelations(entry.capability),
   };
 }
@@ -209,7 +182,7 @@ export function featureCard(entry: UsageFeature): CatalogCard {
     heading: entry.feature.name,
     body: entry.feature.blurb,
     status: delivery.state,
-    tags: rankThemes(featureTags(entry)),
+    tags: rankThemes(useCaseTags(useCasesInReach(entry.feature))),
     relations: platformRelations(entry.feature),
   };
 }
@@ -258,6 +231,7 @@ export function qualityCard(quality: Quality): CatalogCard {
     body: quality.body,
     status: quality.state ?? 'delivered',
     tags: rankThemes(qualityCategoryNames(quality)),
+    relations: qualityRelations(quality),
   };
 }
 

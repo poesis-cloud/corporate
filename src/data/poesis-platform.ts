@@ -90,9 +90,11 @@ export const platformQualityRefs: string[] = authored.platformQualities;
 export const affordances: Affordance[] = authored.affordances.map((item) => affordance(item.slug, item.name, item.title, item.blurb, item.state, item.scope, item.capabilities));
 export const poesisPlatform = { affordances, solutions: platformSolutions };
 export const solutionLinks = platformSolutions.map((solution) => ({ href: solutionHref(solution), label: solution.fullName }));
+/** What the platform is, as a catalog item type. Poesis is its name, not its type. */
+export const PLATFORM_TYPE_LABEL = 'Organization Intelligence Platform';
 /** How a subject (`platform`, `<solution>`, `<solution>/<product>`) is named and reached. */
 export function subjectLabel(subject: string): string | undefined {
-  if (subject === 'platform') return 'Platform';
+  if (subject === 'platform') return PLATFORM_TYPE_LABEL;
   const [owner, ...rest] = subject.split('/');
   const solution = platformSolutions.find((candidate) => candidate.slug === owner);
   if (!solution || rest.length > 1) return undefined;
