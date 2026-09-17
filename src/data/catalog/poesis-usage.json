@@ -2074,6 +2074,658 @@
         "saf/agentic-workspace/workspace-data-plane",
         "saf/saf-sie-bridge/harness-history-sourcing"
       ]
+    },
+    {
+      "slug": "maintain-governed-it-inventory",
+      "name": "Maintain a governed IT definition inventory",
+      "goal": "Keep typed IT definitions, their review lenses, authorizations and decision sessions coherent so every review works from the same attributable inventory.",
+      "actorTypes": [
+        "it-architect",
+        "it-service-owner",
+        "it-ciso"
+      ],
+      "addressedPains": [
+        "it-fragmented-review-context",
+        "it-tool-silos"
+      ],
+      "values": [
+        "value:repeatable-review-boundaries",
+        "value:platform/governed-authority",
+        "value:itip/01",
+        "value:coherent-review-sessions"
+      ],
+      "capabilities": [
+        "itip/governed-it-inventory"
+      ]
+    },
+    {
+      "slug": "compose-it-governance-fabric",
+      "name": "Compose an IT governance fabric for an adopting scope",
+      "goal": "Select governance packages, bind them to an adopting scope and review their overlaps as one composition, without treating composition as evaluation or enforcement.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "it-risk-owner"
+      ],
+      "addressedPains": [
+        "it-framework-collision",
+        "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:itip/04",
+        "value:explicit-obligation-applicability",
+        "value:gsm/ontology/03"
+      ],
+      "capabilities": [
+        "itip/it-governance-fabric-composition"
+      ]
+    },
+    {
+      "slug": "source-it-definitions-from-evidence",
+      "name": "Source IT definitions from inspected evidence",
+      "goal": "Run revision-pinned acquisition, review its coverage limits and register the resulting candidates as drafts, keeping source revision distinct from deployed reality.",
+      "actorTypes": [
+        "it-platform",
+        "it-architect",
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-ea-drift",
+        "it-acquisition-blind-spots"
+      ],
+      "values": [
+        "value:itip/02",
+        "value:inspectable-acquisition-coverage",
+        "value:sie/definition-blackboard-manager/01"
+      ],
+      "capabilities": [
+        "itip/automatic-it-truth-sourcing"
+      ]
+    },
+    {
+      "slug": "run-it-compliance-appraisal",
+      "name": "Run a scoped IT compliance appraisal",
+      "goal": "Produce versioned measures and findings with explicit applicability, input identity, freshness and unknown states, then carry uncovered obligations into owned corrective proposals.",
+      "actorTypes": [
+        "it-ciso",
+        "it-risk-owner",
+        "assessment-runner"
+      ],
+      "addressedPains": [
+        "it-unactionable-governance-findings",
+        "it-audit-reconstruction"
+      ],
+      "values": [
+        "value:actionable-governance-findings",
+        "value:platform/continuous-evaluation",
+        "value:platform/audit-readiness"
+      ],
+      "capabilities": [
+        "itip/continuous-it-compliance-evaluation"
+      ]
+    },
+    {
+      "slug": "answer-it-question-from-model",
+      "name": "Answer an IT question from the governed model",
+      "goal": "Trace dependencies and obtain cited read-only answers over authorized definitions, keeping confirmed relations, possible exposure and missing evidence distinct.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-blind-change",
+        "it-ai-blindness"
+      ],
+      "values": [
+        "value:platform/analysis-power",
+        "value:itip/03",
+        "value:itip/web-application/05"
+      ],
+      "capabilities": [
+        "itip/model-grounded-it-reasoning"
+      ]
+    },
+    {
+      "slug": "produce-it-document-family",
+      "name": "Produce a named IT document family from pinned definitions",
+      "goal": "Bind templates to pinned definitions, review missing inputs and citations, and operate recurring production so generated artifacts stay inspectable.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-architect",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:itip/web-application/03",
+        "value:inspectable-artifact-completion",
+        "value:platform/resource-economy"
+      ],
+      "capabilities": [
+        "itip/it-artifact-generation"
+      ]
+    },
+    {
+      "slug": "hold-authoritative-definitions",
+      "name": "Hold definitions as the authoritative, revision-bound source",
+      "goal": "Keep committed definitions, their change events and their retained evidence available to authorized readers as one attributable, tenant-scoped source of accepted intent.",
+      "actorTypes": [
+        "it-platform",
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-ea-drift",
+        "it-audit-reconstruction"
+      ],
+      "values": [
+        "value:platform/governed-authority",
+        "value:sie/01",
+        "value:sie/definition-manager/01"
+      ],
+      "capabilities": [
+        "sie/authoritative-definition-store"
+      ]
+    },
+    {
+      "slug": "enforce-definition-lifecycle",
+      "name": "Enforce definition lifecycle boundaries",
+      "goal": "Control transitions between draft, review and accepted states, and determine which dependent definitions require renewed review when a referenced foundation is invalidated.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-stale-dependent-eligibility",
+        "it-ungoverned-change"
+      ],
+      "values": [
+        "value:sie/definition-manager/01",
+        "value:sie/definition-manager/04",
+        "value:platform/governed-authority"
+      ],
+      "capabilities": [
+        "sie/governance-lifecycle-enforcement"
+      ]
+    },
+    {
+      "slug": "collect-contributions-on-blackboard",
+      "name": "Collect competing contributions on a shared blackboard",
+      "goal": "Accept scored contributions from independent sources into declared panels, retain their provenance, and seal the board before any draft is promoted.",
+      "actorTypes": [
+        "integration-client",
+        "it-platform",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-truth-drift",
+        "manual-decision-handoff"
+      ],
+      "values": [
+        "value:sie/definition-blackboard-manager/01",
+        "value:sie/definition-blackboard-manager/02",
+        "value:sie/definition-blackboard-manager/03"
+      ],
+      "capabilities": [
+        "sie/collaborative-definition-sourcing"
+      ]
+    },
+    {
+      "slug": "obtain-reproducible-verdict",
+      "name": "Obtain a reproducible verdict for supplied inputs",
+      "goal": "Evaluate pinned instances against pinned rules so the same inputs give the same verdict, with missing evidence returned as an explicit unknown rather than a pass.",
+      "actorTypes": [
+        "assessment-runner",
+        "it-platform",
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-unexamined-rule-regressions",
+        "it-truth-drift"
+      ],
+      "values": [
+        "value:known-rule-revision-effects",
+        "value:sie/operator/02",
+        "value:sie/operator/04"
+      ],
+      "capabilities": [
+        "sie/deterministic-norm-evaluation"
+      ]
+    },
+    {
+      "slug": "run-mechanism-in-bounds",
+      "name": "Run a Mechanism inside declared bounds",
+      "goal": "Execute a named authorized operation within a declared sandbox, caller authority and budget, and retain a receipt sufficient to decide whether recovery is needed.",
+      "actorTypes": [
+        "it-platform",
+        "integration-client",
+        "assessment-runner"
+      ],
+      "addressedPains": [
+        "it-ungoverned-change"
+      ],
+      "values": [
+        "value:platform/accountable-autonomy",
+        "value:sie/02",
+        "value:sie/operator/01"
+      ],
+      "capabilities": [
+        "sie/governed-mechanism-execution"
+      ]
+    },
+    {
+      "slug": "serve-authorized-context-to-model",
+      "name": "Serve authorized definition context to a model",
+      "goal": "Give a model or agent a policy-filtered, pinned context snapshot without granting it authority to change the systems it reads about.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "integration-client",
+        "it-ciso"
+      ],
+      "addressedPains": [
+        "it-ai-blindness",
+        "it-ungoverned-change"
+      ],
+      "values": [
+        "value:sie/definition-manager/02",
+        "value:platform/analysis-power",
+        "value:platform/governed-authority"
+      ],
+      "capabilities": [
+        "sie/governed-context-for-ai"
+      ]
+    },
+    {
+      "slug": "type-concern-with-primitives",
+      "name": "Type a governance concern with the systemic primitives",
+      "goal": "Place a concern on the eight specified subject types and expose where the fixed core does not fit the situation being modeled.",
+      "actorTypes": [
+        "specification-reader",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/01",
+        "value:gsm/02"
+      ],
+      "capabilities": [
+        "gsm/systemic-primitive-vocabulary"
+      ]
+    },
+    {
+      "slug": "define-domain-archetype",
+      "name": "Define a domain vocabulary as an Archetype",
+      "goal": "Express a domain's vocabulary, constraints and exact references as an Archetype under GSM, keeping the subject types fixed while the domain stays open.",
+      "actorTypes": [
+        "specification-reader",
+        "it-data-steward",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/02",
+        "value:gsm/03",
+        "value:gsm/specifications/01"
+      ],
+      "capabilities": [
+        "gsm/open-domain-typing"
+      ]
+    },
+    {
+      "slug": "express-obligation-in-grammar",
+      "name": "Express an obligation in the governance grammar",
+      "goal": "State a Directive, its Norms and the resulting Ascription so review and activation boundaries are explicit rather than implied by prose.",
+      "actorTypes": [
+        "specification-reader",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/01",
+        "value:gsm/03",
+        "value:gsm/specifications/03"
+      ],
+      "capabilities": [
+        "gsm/governance-grammar-and-lifecycle"
+      ]
+    },
+    {
+      "slug": "adopt-sourced-framework",
+      "name": "Adopt a sourced framework or regulation",
+      "goal": "Take selected framework and regulatory vocabulary with its cited clauses into a review, and keep unbound templates distinct from obligations bound to an adopting scope.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "it-framework-collision",
+        "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:gsm/04",
+        "value:gsm/ontology/01",
+        "value:gsm/ontology/02"
+      ],
+      "capabilities": [
+        "gsm/framework-and-regulation-sourcing"
+      ]
+    },
+    {
+      "slug": "describe-interaction-with-sourced-vocabulary",
+      "name": "Describe an interaction with sourced protocol vocabulary",
+      "goal": "Type a service, its protocol boundaries and the attribution of each assertion using selected protocol and domain vocabulary, without mistaking a schema for an adapter.",
+      "actorTypes": [
+        "specification-reader",
+        "it-architect",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/ontology/04",
+        "value:gsm/03"
+      ],
+      "capabilities": [
+        "gsm/protocol-and-domain-semantics-sourcing"
+      ]
+    },
+    {
+      "slug": "take-modeling-limit-to-decision",
+      "name": "Take a modeling limit through research to a decision",
+      "goal": "Record a hypothesis and its case evidence, discriminate it against alternatives, and carry the outcome into a compatibility-aware Change Proposal rather than a silent model change.",
+      "actorTypes": [
+        "research-reviewer",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "model-assumption-gap"
+      ],
+      "values": [
+        "value:gsm/research-lab/01",
+        "value:gsm/research-lab/02",
+        "value:gsm/specifications/04"
+      ],
+      "capabilities": [
+        "gsm/research-tested-model-evolution"
+      ]
+    },
+    {
+      "slug": "run-workflow-with-deterministic-controls",
+      "name": "Run an agentic workflow with deterministic controls",
+      "goal": "Resolve a workflow locally against pinned instructions and declared checks, and retain a journal that distinguishes deterministic control from probabilistic generation.",
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents",
+        "it-unqualified-agent-runtime"
+      ],
+      "values": [
+        "value:saf/02",
+        "value:saf/agentic-harness/01",
+        "value:qualified-runtime-selection"
+      ],
+      "capabilities": [
+        "saf/deterministic-agentic-execution"
+      ]
+    },
+    {
+      "slug": "check-artifact-against-contract",
+      "name": "Check a produced artifact against its contract",
+      "goal": "Validate mediated writes against a declared schema before acceptance, keeping unmediated writes and arbitrary prose outside the contracted surface.",
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:saf/agentic-harness/02",
+        "value:saf/agentic-workspace/02",
+        "value:platform/accountable-autonomy"
+      ],
+      "capabilities": [
+        "saf/enforced-artifact-contracts"
+      ]
+    },
+    {
+      "slug": "adopt-agentic-safe-operating-model",
+      "name": "Adopt the agentic SAFe operating model",
+      "goal": "Take roles, workflows and practices into a delivery organization and identify which harness, template and host combinations must be accepted for coherent execution.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "delivery-agent",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/safe-agentic-organization/01",
+        "value:saf/safe-agentic-organization/02",
+        "value:saf/safe-agentic-organization/03"
+      ],
+      "capabilities": [
+        "saf/agentic-safe-operating-model"
+      ]
+    },
+    {
+      "slug": "gate-advancement-on-human-decision",
+      "name": "Gate an advancement on an authenticated human decision",
+      "goal": "Require an attributable, revision-bound human decision before work advances, treating sequencing and agent grants as supporting controls rather than identity proof.",
+      "actorTypes": [
+        "it-exception-approver",
+        "it-head-of-ai",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents",
+        "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:saf/04",
+        "value:platform/accountable-autonomy",
+        "value:saf/safe-agentic-organization/03"
+      ],
+      "capabilities": [
+        "saf/human-gated-advancement"
+      ]
+    },
+    {
+      "slug": "deliver-from-local-first-plane",
+      "name": "Deliver from a local-first, reproducible plane",
+      "goal": "Reproduce a pinned local delivery environment with Git artifact conventions and separate journals, and carry the same declared checks into controlled publication.",
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-conflicting-agent-artifacts",
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/agentic-workspace/01",
+        "value:saf/agentic-workspace/03",
+        "value:saf/03"
+      ],
+      "capabilities": [
+        "saf/local-first-delivery-plane"
+      ]
+    },
+    {
+      "slug": "turn-delivery-history-into-candidates",
+      "name": "Turn delivery history into definition candidates",
+      "goal": "Infer inspectable candidates from pinned artifacts and journals, keeping contributions distinct from accepted definitions and from delivered systems.",
+      "actorTypes": [
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "manual-decision-handoff"
+      ],
+      "values": [
+        "value:saf/05",
+        "value:saf/saf-sie-bridge/01",
+        "value:platform/resource-economy"
+      ],
+      "capabilities": [
+        "saf/delivery-history-as-governed-context"
+      ]
+    },
+    {
+      "slug": "work-from-shared-definitions",
+      "name": "Work from shared, typed definitions",
+      "goal": "Let people and authorized tools act on the same versioned accepted intent, whether it was authored directly or sourced under review.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "it-head-of-ai",
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-fragmented-review-context",
+        "it-tool-silos",
+        "it-ai-blindness"
+      ],
+      "values": [
+        "value:platform/governed-authority",
+        "value:itip/01",
+        "value:sie/01",
+        "value:gsm/01"
+      ],
+      "affordances": [
+        "governed-context"
+      ]
+    },
+    {
+      "slug": "review-selected-obligations-together",
+      "name": "Review selected obligations together",
+      "goal": "Bring selected frameworks, regulations and internal obligations into one scoped composition where overlaps and gaps can be reviewed before adoption.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "it-risk-owner"
+      ],
+      "addressedPains": [
+        "it-framework-collision",
+        "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:itip/04",
+        "value:explicit-obligation-applicability",
+        "value:gsm/04"
+      ],
+      "affordances": [
+        "governance-fabric"
+      ]
+    },
+    {
+      "slug": "make-activation-boundaries-explicit",
+      "name": "Make review and activation boundaries explicit",
+      "goal": "Move a definition from proposal to accepted intent through explicit, attributable transitions, keeping research promotion, sealing and activation as separate processes.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "it-exception-approver",
+        "research-reviewer"
+      ],
+      "addressedPains": [
+        "it-ungoverned-change",
+        "it-stale-dependent-eligibility"
+      ],
+      "values": [
+        "value:sie/definition-manager/01",
+        "value:platform/governed-authority",
+        "value:saf/04"
+      ],
+      "affordances": [
+        "governance-lifecycle"
+      ]
+    },
+    {
+      "slug": "review-candidates-from-sources",
+      "name": "Review candidates from selected sources",
+      "goal": "Turn inspected repositories, contracts and delivery history into scored, provenance-carrying candidates for review, keeping confidence distinct from truth.",
+      "actorTypes": [
+        "it-platform",
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-truth-drift",
+        "it-acquisition-blind-spots",
+        "it-ea-drift"
+      ],
+      "values": [
+        "value:itip/02",
+        "value:inspectable-acquisition-coverage",
+        "value:sie/definition-blackboard-manager/02"
+      ],
+      "affordances": [
+        "truth-sourcing"
+      ]
+    },
+    {
+      "slug": "evaluate-inputs-against-norms",
+      "name": "Evaluate identified inputs against supported Norms",
+      "goal": "Obtain reproducible verdicts, measures and findings over identified inputs, with applicability, freshness and unknown states carried into the result.",
+      "actorTypes": [
+        "it-ciso",
+        "assessment-runner",
+        "it-risk-owner"
+      ],
+      "addressedPains": [
+        "it-unactionable-governance-findings",
+        "it-audit-reconstruction"
+      ],
+      "values": [
+        "value:platform/continuous-evaluation",
+        "value:actionable-governance-findings",
+        "value:sie/operator/02"
+      ],
+      "affordances": [
+        "norm-evaluation"
+      ]
+    },
+    {
+      "slug": "generate-artifacts-through-workflows",
+      "name": "Generate artifacts through declared workflows",
+      "goal": "Produce documents, code and responses through bounded, journaled workflows whose inputs are pinned and whose outputs are checked before acceptance.",
+      "actorTypes": [
+        "delivery-agent",
+        "it-knowledge-owner",
+        "it-head-of-ai",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "it-unverified-generated-output",
+        "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:platform/accountable-autonomy",
+        "value:inspectable-artifact-completion",
+        "value:saf/02"
+      ],
+      "affordances": [
+        "generative-delivery"
+      ]
     }
   ],
   "values": [

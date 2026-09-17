@@ -127,17 +127,17 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(poesisPlatform.solutions.length, 4);
   assert.doesNotThrow(() => validateUsage());
   const coverage = usageCoverage();
-  assert.deepEqual(coverage, { features: 67, capabilities: 1, affordances: 0 });
+  assert.deepEqual(coverage, { features: 67, capabilities: 25, affordances: 6 });
   assert.equal(usageFeatures.length, 67);
   assert.equal(usageCapabilities.length, 25);
   assert.equal(usageAffordances.length, 6);
   assert.equal(usageValues.length, 84);
   assert.equal(poesisUsage.pains.length, 32);
   assert.equal(poesisUsage.actorTypes.length, 26);
-  assert.equal(poesisUsage.useCases.length, 68);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 11);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 18);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 23);
+  assert.equal(poesisUsage.useCases.length, 98);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 16);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 35);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 31);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined).length, 16);
   assert.equal(valueStatus('value:service-accountability'), undefined);
 });
@@ -347,7 +347,7 @@ test('lookups stay consistent with the declarations that produced them', () => {
   for (const pain of poesisUsage.pains) {
     assert.deepEqual(useCasesForPain(pain.slug), poesisUsage.useCases.filter((useCase) => painsForUseCase(useCase.slug).includes(pain)));
   }
-  assert.deepEqual(useCasesForPain('manual-decision-handoff').map((useCase) => useCase.slug), ['retrieve-decision-basis', 'transfer-service-ownership', 'handover-operational-evidence', 'reuse-delivery-evidence']);
+  assert.deepEqual(useCasesForPain('manual-decision-handoff').map((useCase) => useCase.slug), ['retrieve-decision-basis', 'transfer-service-ownership', 'handover-operational-evidence', 'reuse-delivery-evidence', 'collect-contributions-on-blackboard', 'turn-delivery-history-into-candidates']);
   for (const entry of usageFeatures) {
     assert.deepEqual(useCasesForFeature(entry.slug).map((useCase) => useCase.slug), poesisUsage.useCases.filter((useCase) => (useCase.features ?? []).includes(entry.slug)).map((useCase) => useCase.slug));
     assert.deepEqual(useCasesForItem(entry.feature), useCasesForFeature(entry.slug));
@@ -473,7 +473,7 @@ test('catalog navigation exposes only qualified direct relations in the declared
       assert.deepEqual(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.slice().sort(), record.targets[target].slice().sort());
     }
   }
-  // An affordance reaches the use cases its capabilities' features serve, so it keeps the full contract.
+  // Every affordance declares its own use case, so it carries the full contract without borrowing from lower levels.
   assert.deepEqual(catalogRelations('affordance:norm-evaluation').map((group) => new URL(group.href, 'https://poesis.cloud').pathname.split('/').at(-1)), ['pains', 'values', 'usage', 'actors', 'capabilities']);
   const actorRelations = catalogRelations('actor:it-architect');
   for (const group of actorRelations) {

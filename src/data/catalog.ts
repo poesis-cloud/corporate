@@ -1,6 +1,6 @@
 import { affordanceStatus, capabilityStatus, PLATFORM_TYPE_LABEL, platformQualityRefs, platformSolutions, productStatus, solutionHref, solutionStatus } from './poesis-platform.ts';
 import { qualityCategories, qualitiesPublishedBy, qualityHref, qualitySubject, type Quality } from './qualities.ts';
-import { affordanceHref, capabilityHref, featureHref, usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCaseStatus, useCasesForItem, useCasesInReach, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, valueHref, valueStatus, type RelationGroup, type RelationPreview, type UseCase, type UsageItem } from './usage.ts';
+import { affordanceHref, capabilityHref, featureHref, usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, useCaseStatus, useCasesForItem, useCasesForPain, useCasesForValue, useCasesForProduct, useCasesForSolution, valueHref, valueStatus, type RelationGroup, type RelationPreview, type UseCase, type UsageItem } from './usage.ts';
 import { homepagePainGroups } from './pains.ts';
 import { catalogTypes, catalogHref, type CatalogType, type CatalogSnapshot, type CatalogSource } from './catalog-query.ts';
 
@@ -54,7 +54,7 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
     },
   };
   for (const entry of platform) {
-    const references = caseSlugs(useCasesInReach(entry.item));
+    const references = caseSlugs(useCasesForItem(entry.item));
     snapshot.records[entry.type].push({ slug: entry.slug, actors: caseActors(references), pains: casePains(references) });
     const related = usageTargets(references);
     if (entry.type === 'capabilities') {

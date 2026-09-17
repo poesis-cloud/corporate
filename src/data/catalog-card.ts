@@ -17,7 +17,7 @@
 import { commitmentStatus, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
 import { catalogRelations, platformRelations, qualityRelations } from './catalog.ts';
 import {
-  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, useCasesInReach, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
+  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, useCasesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
   type RelationGroup, type UsageAffordance, type UsageCapability, type UsageFeature, type UseCase, type Value,
 } from './usage.ts';
 import { qualityAnchor, qualityCategoryNames, qualityHref, type Quality } from './qualities.ts';
@@ -153,7 +153,7 @@ export function affordanceCard(entry: UsageAffordance): CatalogCard {
     hook: entry.affordance.title,
     body: entry.affordance.blurb,
     status: affordanceStatus(entry.affordance),
-    tags: rankThemes(useCaseTags(useCasesInReach(entry.affordance))),
+    tags: rankThemes(useCaseTags(useCasesForItem(entry.affordance))),
     relations: platformRelations(entry.affordance),
   };
 }
@@ -167,7 +167,7 @@ export function capabilityCard(entry: UsageCapability): CatalogCard {
     heading: entry.capability.name,
     body: entry.capability.blurb,
     status: capabilityStatus(entry.solution, entry.capability),
-    tags: rankThemes(useCaseTags(useCasesInReach(entry.capability))),
+    tags: rankThemes(useCaseTags(useCasesForItem(entry.capability))),
     relations: platformRelations(entry.capability),
   };
 }
@@ -182,7 +182,7 @@ export function featureCard(entry: UsageFeature): CatalogCard {
     heading: entry.feature.name,
     body: entry.feature.blurb,
     status: delivery.state,
-    tags: rankThemes(useCaseTags(useCasesInReach(entry.feature))),
+    tags: rankThemes(useCaseTags(useCasesForItem(entry.feature))),
     relations: platformRelations(entry.feature),
   };
 }

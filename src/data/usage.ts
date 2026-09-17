@@ -146,30 +146,6 @@ export function useCasesForItem(item: UsageItem): UseCase[] {
   throw new Error(`Unknown platform relationship source: ${item.slug}`);
 }
 
-/**
- * A use case declares support at one level only, so a capability or affordance
- * is almost never named directly. Its reach is therefore what realizes it: a
- * capability reaches what its features serve, an affordance what its
- * capabilities reach. Without this an affordance reads as serving nothing.
- */
-export function useCasesInReach(item: UsageItem): UseCase[] {
-  const reached = new Set(useCasesForItem(item).map((useCase) => useCase.slug));
-  const capability = usageCapabilities.find((entry) => entry.capability === item);
-  if (capability) {
-    for (const reference of capability.capability.relations.features) {
-      const feature = usageFeatureBySlug.get(`${capability.solution.slug}/${reference}`);
-      if (feature) for (const useCase of useCasesForItem(feature.feature)) reached.add(useCase.slug);
-    }
-  }
-  const affordance = usageAffordances.find((entry) => entry.affordance === item);
-  if (affordance) {
-    for (const reference of affordance.affordance.relations.capabilities) {
-      const entry = usageCapabilityBySlug.get(reference);
-      if (entry) for (const useCase of useCasesInReach(entry.capability)) reached.add(useCase.slug);
-    }
-  }
-  return useCases.filter((useCase) => reached.has(useCase.slug));
-}
 /** Values explicitly composing this use case, independently of platform support. */
 export function valuesForUseCase(slug: string): Value[] {
   const references = new Set(useCases.find((useCase) => useCase.slug === slug)?.values ?? []);
