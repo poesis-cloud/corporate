@@ -24,7 +24,7 @@ const filterable = catalogTypes.includes(catalogType);
 <BaseLayout title={title} description={description}>
   <section class="section catalog-intro">
     <div class="container">
-      <p class="eyebrow"><a href="/">Poesis</a> / Catalog</p>
+      <p class="eyebrow"><a href="/">Poesis</a> / <a href="/catalog">Catalog</a></p>
       <h1>{heading}</h1>
       <nav class="hero-sections" aria-label="Catalog views">
         {catalogViews.map((view) => <a href={view.href} aria-current={view.href === current ? 'page' : undefined}>{view.label}</a>)}

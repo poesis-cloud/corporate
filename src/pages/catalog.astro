@@ -1,0 +1,141 @@
+---
+/**
+ * The catalog index. Every entity type the site publishes, grouped the way the
+ * Platform menu groups them: what is packaged, what is needed, what covers it.
+ */
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import Icon from '../components/Icon.astro';
+import { cardTypeIcons, cardTypeLabels, type CatalogItemType } from '../data/catalog-card.ts';
+import { platformSolutions } from '../data/poesis-platform.ts';
+import { poesisUsage, useCases, usageValues, usageAffordances, usageCapabilities, usageFeatures } from '../data/usage.ts';
+import { qualities } from '../data/qualities.ts';
+import { services } from '../data/services.ts';
+
+interface CatalogEntry {
+  type: CatalogItemType;
+  href: string;
+  label: string;
+  count: number;
+  claim: string;
+  body: string;
+}
+
+const productCount = platformSolutions.reduce((total, solution) => total + solution.products.length, 0);
+
+const groups: { id: string; eyebrow: string; title: string; lead: string; entries: CatalogEntry[] }[] = [
+  {
+    id: 'portfolio',
+    eyebrow: 'By solution & product',
+    title: 'What is packaged',
+    lead: 'The scopes Poesis commits to, the units that ship inside them, and how either reaches an organization.',
+    entries: [
+      {
+        type: 'solution', href: '/solutions', label: 'Solutions', count: platformSolutions.length,
+        claim: 'The committed scopes',
+        body: 'Four solutions divide the platform. Each carries the status of the capabilities it commits to.',
+      },
+      {
+        type: 'product', href: '/products', label: 'Products', count: productCount,
+        claim: 'The units that ship',
+        body: 'Each product records a version and carries the status of its own features, not of the solution around it.',
+      },
+      {
+        type: 'service', href: '/services', label: 'Services', count: services.length,
+        claim: 'How delivery happens',
+        body: 'Consulting, managed cloud, sovereign deployment and capability building, each with its availability stated.',
+      },
+    ],
+  },
+  {
+    id: 'need',
+    eyebrow: 'By need',
+    title: 'What is asked for',
+    lead: 'The demand side. Start from who is asking, what is going wrong, what they are trying to do, or what it would be worth.',
+    entries: [
+      {
+        type: 'usage', href: '/usage', label: 'Use cases', count: useCases.length,
+        claim: 'What someone is trying to do',
+        body: 'Each use case names the actor types it serves, the pains it addresses and the features that prove it.',
+      },
+      {
+        type: 'actor', href: '/actors', label: 'Actor types', count: poesisUsage.actorTypes.length,
+        claim: 'Who is asking',
+        body: 'The roles the catalog is written for. Every other view can be filtered down to one of them.',
+      },
+      {
+        type: 'pain', href: '/pains', label: 'Pain points', count: poesisUsage.pains.length,
+        claim: 'What is going wrong today',
+        body: 'Stated without the remedy attached, so a pain can be recognised before any Poesis answer is considered.',
+      },
+      {
+        type: 'value', href: '/values', label: 'Values', count: usageValues.length,
+        claim: 'What it would be worth',
+        body: 'The benefit sought, held separate from the delivery status of whatever would produce it.',
+      },
+    ],
+  },
+  {
+    id: 'coverage',
+    eyebrow: 'By coverage',
+    title: 'What answers it',
+    lead: 'The supply side, from the broadest promise down to the shipped unit — and what the result claims about its own behavior.',
+    entries: [
+      {
+        type: 'affordance', href: '/affordances', label: 'Affordances', count: usageAffordances.length,
+        claim: 'What the platform makes possible',
+        body: 'The broadest promise. An affordance is only as delivered as the capabilities beneath it.',
+      },
+      {
+        type: 'capability', href: '/capabilities', label: 'Capabilities', count: usageCapabilities.length,
+        claim: 'What each solution can do',
+        body: 'Built from product features, and carrying the status of the features that prove it.',
+      },
+      {
+        type: 'feature', href: '/features', label: 'Features', count: usageFeatures.length,
+        claim: 'What is actually built',
+        body: 'The unit where delivery status is first established. Everything above inherits from here.',
+      },
+      {
+        type: 'quality', href: '/qualities', label: 'Qualities', count: qualities.length,
+        claim: 'How the result behaves',
+        body: 'Borne by the platform, a solution or a product. Each states one claim and the boundary that claim excludes.',
+      },
+    ],
+  },
+];
+
+const total = groups.reduce((sum, group) => sum + group.entries.length, 0);
+---
+<CatalogLayout
+  title="Poesis catalog"
+  description="Every entity type Poesis publishes: solutions, products and services; actors, pains, use cases and values; affordances, capabilities, features and qualities."
+  heading="Catalog"
+  lead="One shell for every entity type, so none is presented as more authoritative than another. Delivery status is established at the feature and stated upward; nothing is claimed as shipped because it was planned."
+  count={`${total} views`}
+>
+  {groups.map((group) => (
+    <section id={group.id} class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{group.eyebrow}</p>
+          <h2>{group.title}</h2>
+          <p class="lead">{group.lead}</p>
+        </div>
+        <ul class="think-consequence-list catalog-grid">
+          {group.entries.map((entry) => (
+            <li>
+              <span class="think-consequence__head">
+                <span class="think-consequence__icon"><Icon name={cardTypeIcons[entry.type]} size={16} /></span>
+                <span class="think-consequence__step">{cardTypeLabels[entry.type]}</span>
+              </span>
+              <h3><a href={entry.href}>{entry.label}</a></h3>
+              <strong>{entry.claim}</strong>
+              <p>{entry.body}</p>
+              <p class="catalog-meta">{entry.count} {entry.count === 1 ? 'entry' : 'entries'}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+</CatalogLayout>

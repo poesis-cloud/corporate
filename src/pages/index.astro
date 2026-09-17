@@ -5,9 +5,11 @@ import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
 import CatalogCard from '../components/CatalogCard.astro';
+import QualityList from '../components/QualityList.astro';
 import { poesisUsage, useCaseStatus } from '../data/usage.ts';
 import { useCaseCard } from '../data/catalog-card.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
+import { qualityCategories, qualitiesPublishedBy, categoryAnchor } from '../data/qualities.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { actorTypes } from '../data/usage-actors.ts';
@@ -15,6 +17,10 @@ import { services } from '../data/services.ts';
 
 /** The homepage shows what the platform already serves; the catalogs hold the full backlog. */
 const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
+/** Only the qualities the platform itself bears; solution and product qualities live on their own pages. */
+const platformPostures = qualityCategories
+  .map((category) => ({ category, qualities: qualitiesPublishedBy(category.slug, 'platform') }))
+  .filter((posture) => posture.qualities.length);
 const usageActorGroups = [
   { label: 'People', actors: actorTypes.filter((actor) => actor.kind === 'human') },
   { label: 'Systems', actors: actorTypes.filter((actor) => actor.kind === 'system') },
@@ -104,7 +110,7 @@ const usageActorGroups = [
 
       <div class="hero-cta home-usage-cta">
         <a class="btn btn-primary" href="/pilot" data-demo-cta="homepage-usage-pilot"><Icon name="play" /> Shape your Pilot</a>
-        <a class="btn btn-ghost" href="/usage"><Icon name="grid" /> Discover the catalog</a>
+        <a class="btn btn-ghost" href="/catalog"><Icon name="grid" /> Discover the catalog</a>
       </div>
     </div>
   </section>
@@ -114,67 +120,22 @@ const usageActorGroups = [
       <div class="section-head">
         <p class="eyebrow">Qualities</p>
         <h2>Added to your estate, never taken from it.</h2>
-        <p class="lead">Two qualities of the governed THINK layer: how portable it stays inside your control boundary, and how it fits what you already run.</p>
+        <p class="lead">What the governed THINK layer claims about itself: how portable it stays inside your control boundary, and how it fits what you already run. Solutions and products state their own qualities on their own pages.</p>
       </div>
 
-      <div id="deployment" class="home-posture">
-        <h3>Portability &amp; sovereignty</h3>
-        <p class="home-posture__lead">Local, self-hosted and hosted routes each carry their own acceptance boundary.</p>
-        <ul class="think-consequence-list home-deployment-list">
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="spark" size={16} /></span><span class="think-consequence__step">Model-independent</span></span>
-          <strong>Governance does not depend on one provider</strong>
-          <p>Model profiles support selection for bounded tasks. Each host mapping and model change needs compatibility and quality checks.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="shield" size={16} /></span><span class="think-consequence__step">Local and sovereign</span></span>
-          <strong>Define the data boundary explicitly</strong>
-          <p>Local execution supports control, but models, tools, telemetry, remotes and backups can transmit data. Egress and retention policies remain necessary.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Cloud where appropriate</span></span>
-          <strong>Managed infrastructure without ceding control</strong>
-          <p>Deploy services through managed infrastructure where it makes sense, while the control boundary stays explicit rather than assumed.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Vendor-neutral standard</span></span>
-          <strong>Governance you can inspect, not a black box</strong>
-          <p>GSM is a candidate common Definition model. Interchange requirements support inspectability; compatible consumers and draft-preserving migration still need acceptance.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="github" size={16} /></span><span class="think-consequence__step">Open and inspectable</span></span>
-          <strong>Trust cannot be proprietary</strong>
-          <p>GSM specification content exists in source, with publication pending. SAF local tools use Apache-2.0; SIE and the planned bridge have separate licenses. Inspect each product and its terms.</p>
-        </li>
-      </ul>
-      </div>
+      {platformPostures.map(({ category, qualities }) => (
+        <div id={categoryAnchor(category)} class="home-posture">
+          <h3>{category.name}</h3>
+          <p class="home-posture__lead">{category.lead}</p>
+          <QualityList qualities={qualities} listClass="home-posture__list" />
+          {category.note && (
+            <p class="home-posture__note">{category.noteState && <DeliveryStatus state={category.noteState} />} {category.note}</p>
+          )}
+        </div>
+      ))}
 
-      <div id="integration" class="home-posture">
-        <h3>Interoperability</h3>
-        <p class="home-posture__lead">Governed THINK connects to the BUILD and RUN environments you already operate.</p>
-        <ul class="think-consequence-list home-integration-list">
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="repos" size={16} /></span><span class="think-consequence__step">Git repositories</span><DeliveryStatus state="planned" /></span>
-          <strong>Planned candidates from pinned revisions</strong>
-          <p>Supported analysis is planned to produce reviewable candidates. Acquisition, conflict reduction and governed registration are distinct steps.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="docs" size={16} /></span><span class="think-consequence__step">API contracts</span><DeliveryStatus state="planned" /></span>
-          <strong>The interaction surface of your estate</strong>
-          <p>Planned adapters describe declared interaction surfaces with explicit coverage. Contracts alone do not prove actual traffic or applicable obligations.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="list" size={16} /></span><span class="think-consequence__step">SBOMs</span><DeliveryStatus state="planned" /></span>
-          <strong>Planned dependency evidence</strong>
-          <p>SBOM analysis identifies declared dependencies in a supported scope. Presence does not prove deployed use, reachability or compliance.</p>
-        </li>
-        <li>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="layers" size={16} /></span><span class="think-consequence__step">Infrastructure</span><DeliveryStatus state="planned" /></span>
-          <strong>Separate intent from observations</strong>
-          <p>Planned infrastructure sourcing reads declared configuration. Deployed identity, observation time and coverage are needed to describe what runs.</p>
-        </li>
-      </ul>
-      <p class="home-integration-note"><DeliveryStatus state="planned" /> The sourcing bench is specified and in build. Named-tool connectors follow as further knowledge sources feeding the same governed model.</p>
+      <div class="hero-cta">
+        <a class="btn btn-ghost" href="/qualities"><Icon name="check-badge" /> All qualities</a>
       </div>
     </div>
   </section>

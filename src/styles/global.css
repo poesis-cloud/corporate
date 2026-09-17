@@ -407,11 +407,11 @@ a:hover {
 @media (min-width: 1024px) {
   .nav-dropdown--platform .nav-dropdown-menu {
     left: 0;
-    width: min(860px, calc(100vw - 2rem));
+    width: min(1040px, calc(100vw - 2rem));
     max-height: calc(100vh - 5rem);
     overflow-y: auto;
-    transform: translateX(-20%);
-    grid-template-columns: minmax(190px, 1fr) minmax(150px, .75fr) minmax(410px, 2fr);
+    transform: translateX(-30%);
+    grid-template-columns: minmax(380px, 2fr) minmax(150px, .9fr) minmax(150px, .9fr) minmax(150px, .75fr);
     align-items: start;
     gap: .75rem;
   }
@@ -2704,15 +2704,11 @@ a:hover {
   line-height: 1.6;
 }
 
-.home-deployment-list {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.home-posture__list {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
-.home-integration-list {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.home-integration-note {
+.home-posture__note {
   margin: 1.6rem 0 0;
   color: var(--muted);
   font-size: .82rem;
@@ -3251,14 +3247,6 @@ a:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .home-deployment-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .home-integration-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .home-pilot-steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3295,14 +3283,6 @@ a:hover {
 
   .think-consequence-list,
   .think-therapy__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home-deployment-list {
-    grid-template-columns: 1fr;
-  }
-
-  .home-integration-list {
     grid-template-columns: 1fr;
   }
 

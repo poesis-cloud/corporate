@@ -1,0 +1,17 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../../components/CatalogDirectory.astro';
+import { services } from '../../data/services.ts';
+import { serviceCard } from '../../data/catalog-card.ts';
+
+const cards = services.map(serviceCard);
+---
+<CatalogLayout
+  title="Poesis services"
+  description="How Poesis is delivered: consulting, managed cloud, sovereign deployment and capability building, each with its availability stated."
+  heading="Services"
+  lead="How the platform reaches an organization. Availability is stated per service; a planned service is scoped by agreement rather than ordered from a catalog."
+  count={`${cards.length} services`}
+>
+  <CatalogDirectory id="services" eyebrow="Services" title="How Poesis is delivered" cards={cards} variant="platform" />
+</CatalogLayout>

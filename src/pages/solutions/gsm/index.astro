@@ -6,6 +6,8 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
+import QualityList from '../../../components/QualityList.astro';
+import { solutionQualities } from '../../../data/qualities.ts';
 import { platformSolutions } from '../../../data/poesis-platform.ts';
 
 const gsm = platformSolutions.find((s) => s.slug === 'gsm')!;
@@ -58,6 +60,16 @@ const gsm = platformSolutions.find((s) => s.slug === 'gsm')!;
         <h2>Specifications, Ontology and Research Lab.</h2>
       </div>
       <ProductCards solution={gsm} />
+    </div>
+  </section>
+
+  <section id="qualities" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Qualities</p>
+        <h2>What the model owes the sources it was built from.</h2>
+      </div>
+      <QualityList qualities={solutionQualities('gsm')} />
     </div>
   </section>
 

@@ -20,16 +20,31 @@ export interface SiteNavigationGroup {
   layout?: 'platform';
 }
 
-/** The catalog views, in need-before-coverage order. Also the in-page nav of every catalog page. */
-export const catalogViews: SiteNavigationItem[] = [
+/** What someone arrives with: the demand side of the catalog. */
+export const needViews: SiteNavigationItem[] = [
   { href: '/usage', label: 'Use Cases' },
   { href: '/actors', label: 'Actors' },
   { href: '/pains', label: 'Pain Points' },
   { href: '/values', label: 'Values' },
+];
+
+/** What answers it: the supply side, from the broadest promise down to the shipped unit. */
+export const coverageViews: SiteNavigationItem[] = [
   { href: '/affordances', label: 'Affordances' },
   { href: '/capabilities', label: 'Capabilities' },
   { href: '/features', label: 'Features' },
+  { href: '/qualities', label: 'Qualities' },
 ];
+
+/** What is packaged and sold. */
+export const portfolioViews: SiteNavigationItem[] = [
+  { href: '/solutions', label: 'Solutions' },
+  { href: '/products', label: 'Products' },
+  { href: '/services', label: 'Services' },
+];
+
+/** Every catalog view, and the in-page nav of every catalog page. */
+export const catalogViews: SiteNavigationItem[] = [...needViews, ...coverageViews, ...portfolioViews];
 
 export const siteNavigation: SiteNavigationGroup[] = [
   {
@@ -37,18 +52,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
     layout: 'platform',
     sections: [
       {
-        label: 'By need & coverage',
-        items: catalogViews,
-      },
-      {
-        label: 'By comparison',
-        items: alternatives.map((a) => ({
-          href: `/it/alternatives/${a.slug}/`,
-          label: `Compared to ${a.name}`,
-        })),
-      },
-      {
-        label: 'By solutions & products',
+        label: 'By solution & product',
         layout: 'solutions',
         items: [
           { href: '/#portfolio', label: 'Platform Overview' },
@@ -61,6 +65,21 @@ export const siteNavigation: SiteNavigationGroup[] = [
             })),
           })),
         ],
+      },
+      {
+        label: 'By need',
+        items: needViews,
+      },
+      {
+        label: 'By coverage',
+        items: [...coverageViews, ...portfolioViews],
+      },
+      {
+        label: 'By comparison',
+        items: alternatives.map((a) => ({
+          href: `/it/alternatives/${a.slug}/`,
+          label: `Compared to ${a.name}`,
+        })),
       },
     ],
   },
@@ -125,6 +144,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
     sections: [
       {
         items: [
+          { href: '/catalog', label: 'Catalog' },
           { href: '/about', label: 'About' },
           { href: '/contact', label: 'Contact' },
           { href: 'https://www.linkedin.com/company/poesis-cloud', label: 'LinkedIn', external: true },
@@ -140,7 +160,7 @@ const footerLabels: Record<string, string[]> = {
   Partnerships: ['LLM Vendor Partnership'],
   Developers: ['Documentation', 'Community', 'Repositories', 'Projects', 'Organization'],
   Insights: ['Articles', 'Research'],
-  Company: ['About', 'Contact', 'LinkedIn'],
+  Company: ['Catalog', 'About', 'Contact', 'LinkedIn'],
 };
 
 export const footerNavigation = siteNavigation.map((group) => {

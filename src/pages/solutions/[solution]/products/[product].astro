@@ -12,8 +12,10 @@ import DeliveryStatus from '../../../../components/DeliveryStatus.astro';
 import ProductRoadmap from '../../../../components/ProductRoadmap.astro';
 import UsageCases from '../../../../components/UsageCases.astro';
 import CatalogCard from '../../../../components/CatalogCard.astro';
+import QualityList from '../../../../components/QualityList.astro';
 import { useCasesForProduct, productValues, usageFeatures } from '../../../../data/usage.ts';
 import { featureCard, valueCard } from '../../../../data/catalog-card.ts';
+import { productQualities } from '../../../../data/qualities.ts';
 import { platformSolutions, productTimeline, plannedClass, productStatus, solutionHref } from '../../../../data/poesis-platform.ts';
 
 export function getStaticPaths() {
@@ -27,6 +29,7 @@ export function getStaticPaths() {
 
 const { solution, product } = Astro.props;
 const state = productStatus(product);
+const qualities = productQualities(solution.slug, product.slug);
 const productFeatureCards = usageFeatures
   .filter((entry) => entry.solution.slug === solution.slug && entry.product.slug === product.slug)
   // On its owning product page a feature anchors under its own slug; the
@@ -96,6 +99,17 @@ const productFeatureCards = usageFeatures
       <ProductRoadmap features={product.features} milestones={productTimeline(product)} />
     </div>
   </section>
+  {qualities.length > 0 && (
+    <section id="qualities" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Qualities</p>
+          <h2>What {product.name} claims about how it behaves.</h2>
+        </div>
+        <QualityList qualities={qualities} />
+      </div>
+    </section>
+  )}
   <UsageCases cases={useCasesForProduct(solution.slug, product.slug)} title={`Use cases involving ${product.name}`} />
 </BaseLayout>
 

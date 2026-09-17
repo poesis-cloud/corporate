@@ -6,6 +6,8 @@ import Icon from '../../../components/Icon.astro';
 import ProductCards from '../../../components/ProductCards.astro';
 import SolutionValueCards from '../../../components/SolutionValueCards.astro';
 import SolutionCapabilityCards from '../../../components/SolutionCapabilityCards.astro';
+import QualityList from '../../../components/QualityList.astro';
+import { solutionQualities } from '../../../data/qualities.ts';
 import { platformSolutions } from '../../../data/poesis-platform.ts';
 
 const saf = platformSolutions.find((s) => s.slug === 'saf')!;
@@ -59,6 +61,16 @@ const saf = platformSolutions.find((s) => s.slug === 'saf')!;
         <h2>Four products with distinct local and planned integration scopes.</h2>
       </div>
       <ProductCards solution={saf} />
+    </div>
+  </section>
+
+  <section id="qualities" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Qualities</p>
+        <h2>What runs locally, and what waits for a human.</h2>
+      </div>
+      <QualityList qualities={solutionQualities('saf')} />
     </div>
   </section>
 

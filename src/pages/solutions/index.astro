@@ -1,0 +1,17 @@
+---
+import CatalogLayout from '../../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../../components/CatalogDirectory.astro';
+import { platformSolutions } from '../../data/poesis-platform.ts';
+import { solutionCard } from '../../data/catalog-card.ts';
+
+const cards = platformSolutions.map(solutionCard);
+---
+<CatalogLayout
+  title="Poesis solutions"
+  description="The four Poesis solutions, each with the capabilities it commits to, the products that realize them and the use cases they serve."
+  heading="Solutions"
+  lead="How the platform is divided into committed scopes. A solution carries the status of the capabilities it commits to, not of the ambition behind them."
+  count={`${cards.length} solutions`}
+>
+  <CatalogDirectory id="solutions" eyebrow="Solutions" title="What the platform commits to" cards={cards} variant="platform" />
+</CatalogLayout>

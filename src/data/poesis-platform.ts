@@ -37,12 +37,12 @@ export interface Capability extends UsageRefs { slug: string; name: string; blur
 export interface Affordance extends UsageRefs { slug: string; name: string; title: string; blurb: string; delivery: Delivery; relations: { capabilities: string[] } }
 export interface Product {
   slug: string; name: string; excerpt: string; tagline: string; description: string; currentVersion: string;
-  valuesHeadline: string; featuresHeadline: string; features: Feature[];
+  valuesHeadline: string; featuresHeadline: string; features: Feature[]; qualities: string[];
   docs?: { href: string; label: string }[]; repos?: { href: string; label: string }[];
 }
 export interface Solution {
   slug: string; name: string; fullName: string; excerpt: string; tags: string[];
-  tagline: string; description: string; capabilities: Capability[]; products: Product[];
+  tagline: string; description: string; capabilities: Capability[]; products: Product[]; qualities: string[];
 }
 
 /** The canonical solution route. Solutions no longer store a href to drift from. */
@@ -62,24 +62,26 @@ function capability(slug: string, name: string, blurb: string, state: DeliverySt
 function affordance(slug: string, name: string, title: string, blurb: string, state: DeliveryState, scope: string, capabilities: string[], refs: Partial<UsageRefs> = {}): Affordance {
   return { slug, name, title, blurb, delivery: delivery(state, scope), relations: { capabilities }, ...usage(refs) };
 }
-function product(owner: string, slug: string, name: string, currentVersion: string, tagline: string, description: string, features: Feature[], repos: string[] = []): Product {
+function product(owner: string, slug: string, name: string, currentVersion: string, tagline: string, description: string, features: Feature[], repos: string[] = [], qualities: string[] = []): Product {
   const relatedDocs = slug === 'operator'
     ? [{ href: '/insights/agentic-ai-governance-that-executes/', label: 'Agentic AI governance that executes' }]
     : slug === 'agentic-harness'
       ? [{ href: '/insights/what-is-an-agentic-harness/', label: 'What is an agentic harness?' }]
       : [];
-  return { slug, name, currentVersion, excerpt: tagline, tagline, description, features,
+  return {
+    slug, name, currentVersion, excerpt: tagline, tagline, description, features, qualities,
     valuesHeadline: 'Value delivered by the product', featuresHeadline: 'Implemented and planned features',
     docs: [{ href: `https://docs.poesis.cloud/${owner}/${slug === 'specifications' ? '' : `${slug}/`}`, label: `${slug === 'specifications' ? 'GSM' : name} documentation` }, ...relatedDocs],
-    repos: repos.map((repo) => ({ href: `https://github.com/poesis-cloud/${repo}`, label: repo })) };
+    repos: repos.map((repo) => ({ href: `https://github.com/poesis-cloud/${repo}`, label: repo }))
+  };
 }
 interface AuthoredFeature { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; milestone: FeatureMilestone; useCases?: string[] }
 interface AuthoredCapability { slug: string; name: string; blurb: string; state: DeliveryState; kind: Delivery['kind']; features: string[]; optional?: string[]; useCases?: string[] }
-interface AuthoredProduct { slug: string; name: string; currentVersion: string; tagline: string; description: string; repos?: string[]; features: AuthoredFeature[] }
-interface AuthoredSolution { slug: string; name: string; fullName: string; tags: string[]; excerpt: string; tagline: string; description: string; capabilities: AuthoredCapability[]; products: AuthoredProduct[] }
+interface AuthoredProduct { slug: string; name: string; currentVersion: string; tagline: string; description: string; repos?: string[]; qualities?: string[]; features: AuthoredFeature[] }
+interface AuthoredSolution { slug: string; name: string; fullName: string; tags: string[]; excerpt: string; tagline: string; description: string; qualities?: string[]; capabilities: AuthoredCapability[]; products: AuthoredProduct[] }
 interface AuthoredAffordance { slug: string; name: string; title: string; blurb: string; state: DeliveryState; scope: string; capabilities: string[]; useCases: string[] }
 interface AuthoredPlatform {
-  solutions: AuthoredSolution[]; affordances: AuthoredAffordance[];
+  solutions: AuthoredSolution[]; affordances: AuthoredAffordance[]; platformQualities: string[];
   realizationRequirements: Record<string, DeliveryState | Requirement>; realizations: Realization[];
   capabilityRealizationContracts: Record<string, string>;
   affordanceRealizationContracts: Record<string, { scope: string; requires: Requirement }>;
@@ -89,14 +91,30 @@ const authored = catalog as unknown as AuthoredPlatform;
 
 export const platformSolutions: Solution[] = authored.solutions.map((entry) => ({
   slug: entry.slug, name: entry.name, fullName: entry.fullName, tags: entry.tags,
-  excerpt: entry.excerpt, tagline: entry.tagline, description: entry.description,
+  excerpt: entry.excerpt, tagline: entry.tagline, description: entry.description, qualities: entry.qualities ?? [],
   capabilities: entry.capabilities.map((item) => capability(item.slug, item.name, item.blurb, item.state, item.features, { useCases: item.useCases }, item.kind, item.optional ?? [])),
   products: entry.products.map((item) => product(entry.slug, item.slug, item.name, item.currentVersion, item.tagline, item.description,
-    item.features.map((candidate) => feature(candidate.slug, candidate.name, candidate.blurb, candidate.state, candidate.milestone, { useCases: candidate.useCases }, candidate.kind)), item.repos ?? [])),
+    item.features.map((candidate) => feature(candidate.slug, candidate.name, candidate.blurb, candidate.state, candidate.milestone, { useCases: candidate.useCases }, candidate.kind)), item.repos ?? [], item.qualities ?? [])),
 }));
+export const platformQualityRefs: string[] = authored.platformQualities;
 export const affordances: Affordance[] = authored.affordances.map((item) => affordance(item.slug, item.name, item.title, item.blurb, item.state, item.scope, item.capabilities, { useCases: item.useCases }));
 export const poesisPlatform = { affordances, solutions: platformSolutions };
 export const solutionLinks = platformSolutions.map((solution) => ({ href: solutionHref(solution), label: solution.fullName }));
+/** How a subject (`platform`, `<solution>`, `<solution>/<product>`) is named and reached. */
+export function subjectLabel(subject: string): string | undefined {
+  if (subject === 'platform') return 'Platform';
+  const [owner, ...rest] = subject.split('/');
+  const solution = platformSolutions.find((candidate) => candidate.slug === owner);
+  if (!solution || rest.length > 1) return undefined;
+  if (!rest.length) return solution.name;
+  const product = solution.products.find((candidate) => candidate.slug === rest[0]);
+  return product ? `${solution.name} · ${product.name}` : undefined;
+}
+export function subjectHref(subject: string): string {
+  if (subject === 'platform') return '/';
+  const [owner, ...rest] = subject.split('/');
+  return rest.length ? `/solutions/${owner}/products/${rest[0]}` : `/solutions/${owner}`;
+}
 export function capabilityRealizations(solution: Solution, capability: Capability): { product: Product; feature: Feature }[] {
   return capability.relations.features.map((reference) => { const [productSlug, featureSlug] = exactRef(reference, 2); const product = solution.products.find((candidate) => candidate.slug === productSlug); const feature = product?.features.find((candidate) => candidate.slug === featureSlug); if (!product || !feature) throw new Error(`Unknown feature: ${reference}`); return { product, feature }; });
 }
@@ -115,6 +133,10 @@ export function capabilityStatus(solution: Solution, capability: Capability): De
 /** An affordance is only as implemented as the capabilities contributing to it. */
 export function affordanceStatus(affordance: Affordance): DeliveryState {
   return commitmentStatus(affordanceRealizations(affordance).map((realization) => capabilityStatus(realization.solution, realization.capability)));
+}
+/** A solution is only as implemented as the capabilities it commits to. */
+export function solutionStatus(solution: Solution): DeliveryState {
+  return commitmentStatus(solution.capabilities.map((capability) => capabilityStatus(solution, capability)));
 }
 export function capabilityShipped(solution: Solution, capability: Capability): boolean { return capabilityStatus(solution, capability) === 'delivered'; }
 export function productTimeline(product: Product): FeatureMilestone[] {

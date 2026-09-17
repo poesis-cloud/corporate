@@ -1,0 +1,33 @@
+---
+/**
+ * QualityList — the only place a quality is rendered on the page that bears it.
+ *
+ * The anatomy never varies: the quality's own icon and name in the head, its
+ * delivery state when it has one, the claim, and the boundary the claim
+ * excludes. The subject decides which qualities to pass; a quality never
+ * decides where it appears.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
+import { qualityAnchor, type Quality } from '../data/qualities.ts';
+
+interface Props {
+  qualities: Quality[];
+  /** Extra list class, so a host section keeps its own spacing. */
+  listClass?: string;
+}
+const { qualities, listClass } = Astro.props;
+---
+<ul class:list={['think-consequence-list', listClass]}>
+  {qualities.map((quality) => (
+    <li id={qualityAnchor(quality)}>
+      <span class="think-consequence__head">
+        <span class="think-consequence__icon"><Icon name={quality.icon} size={16} /></span>
+        <span class="think-consequence__step">{quality.name}</span>
+        {quality.state && <DeliveryStatus state={quality.state} />}
+      </span>
+      <strong>{quality.claim}</strong>
+      <p>{quality.body}</p>
+    </li>
+  ))}
+</ul>

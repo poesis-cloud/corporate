@@ -1,5 +1,5 @@
-import { semanticEdges, type UsageRefs } from './poesis-platform.ts';
-import { usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, painsForItem, valuesForItem, useCasesForPain, type RelationGroup } from './usage.ts';
+import { semanticEdges, platformSolutions, type UsageRefs } from './poesis-platform.ts';
+import { usageFeatures, usageCapabilities, usageAffordances, useCases, usageValues, poesisUsage, painsForItem, valuesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, type RelationGroup } from './usage.ts';
 import { homepagePainGroups } from './pains.ts';
 import { catalogTypes, catalogHref, type CatalogType, type CatalogSnapshot, type CatalogSource } from './catalog-query.ts';
 
@@ -8,7 +8,9 @@ const platform = [
   ...usageCapabilities.map((entry) => ({ source: `capability:${entry.slug}`, slug: entry.slug, name: entry.capability.name, type: 'capabilities' as const, item: entry.capability })),
   ...usageAffordances.map((entry) => ({ source: `affordance:${entry.slug}`, slug: entry.slug, name: entry.affordance.name, type: 'affordances' as const, item: entry.affordance })),
 ];
-const targets = (): CatalogSource['targets'] => ({ actors: [], pains: [], usage: [], values: [], features: [], capabilities: [], affordances: [] });
+/** Every product, flattened under its `<solution>/<product>` identity. */
+const platformProducts = platformSolutions.flatMap((solution) => solution.products.map((product) => ({ slug: `${solution.slug}/${product.slug}`, solution, product })));
+const targets = (): CatalogSource['targets'] => ({ actors: [], pains: [], usage: [], values: [], features: [], capabilities: [], affordances: [], solutions: [], products: [] });
 const caseActors = (references: string[]) => [...new Set(useCases.filter((item) => references.includes(item.slug)).flatMap((item) => item.actorTypes))];
 const casePains = (references: string[]) => painsForItem({ useCases: references }).map((pain) => pain.slug);
 const actorPains = (slug: string) => poesisUsage.pains.filter((pain) => pain.actorTypes.includes(slug)).map((pain) => pain.slug);
@@ -16,14 +18,19 @@ const actorPains = (slug: string) => poesisUsage.pains.filter((pain) => pain.act
 /** Everything reachable from a set of use cases, in every catalog direction. */
 function fromUseCases(references: string[]): CatalogSource['targets'] {
   const declares = (item: UsageRefs) => item.useCases.some((slug) => references.includes(slug));
+  const features = usageFeatures.filter((entry) => declares(entry.feature));
+  const capabilities = usageCapabilities.filter((entry) => declares(entry.capability));
   return {
     actors: caseActors(references),
     pains: casePains(references),
     usage: [...references],
     values: valuesForItem({ useCases: references }).map((value) => value.slug),
-    features: usageFeatures.filter((entry) => declares(entry.feature)).map((entry) => entry.slug),
-    capabilities: usageCapabilities.filter((entry) => declares(entry.capability)).map((entry) => entry.slug),
+    features: features.map((entry) => entry.slug),
+    capabilities: capabilities.map((entry) => entry.slug),
     affordances: usageAffordances.filter((entry) => declares(entry.affordance)).map((entry) => entry.slug),
+    // A solution or product is reached through the features and capabilities it owns.
+    solutions: [...new Set([...features, ...capabilities].map((entry) => entry.solution.slug))],
+    products: [...new Set(features.map((entry) => `${entry.solution.slug}/${entry.product.slug}`))],
   };
 }
 
@@ -35,6 +42,8 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
       usage: useCases.map((item) => ({ slug: item.slug, actors: item.actorTypes, pains: item.addressedPains })),
       pains: poesisUsage.pains.map((pain) => ({ slug: pain.slug, actors: pain.actorTypes, pains: [pain.slug] })),
       values: usageValues.map((value) => ({ slug: value.slug, actors: caseActors(value.useCases), pains: casePains(value.useCases) })),
+      solutions: platformSolutions.map((solution) => { const references = useCasesForSolution(solution.slug).map((useCase) => useCase.slug); return { slug: solution.slug, actors: caseActors(references), pains: casePains(references) }; }),
+      products: platformProducts.map((entry) => { const references = useCasesForProduct(entry.solution.slug, entry.product.slug).map((useCase) => useCase.slug); return { slug: entry.slug, actors: caseActors(references), pains: casePains(references) }; }),
       features: [], capabilities: [], affordances: [],
     },
   };
@@ -65,12 +74,20 @@ export function buildCatalogSnapshot(): CatalogSnapshot {
   for (const value of usageValues) {
     snapshot.sources[`value:${value.slug}`] = { label: `Value: ${value.title}`, targets: { ...fromUseCases(value.useCases), values: [] } };
   }
+  for (const solution of platformSolutions) {
+    const related = fromUseCases(useCasesForSolution(solution.slug).map((useCase) => useCase.slug));
+    snapshot.sources[`solution:${solution.slug}`] = { label: `Solution: ${solution.name}`, targets: { ...related, solutions: [] } };
+  }
+  for (const entry of platformProducts) {
+    const related = fromUseCases(useCasesForProduct(entry.solution.slug, entry.product.slug).map((useCase) => useCase.slug));
+    snapshot.sources[`product:${entry.slug}`] = { label: `Product: ${entry.product.name}`, targets: { ...related, products: [] } };
+  }
   for (const group of homepagePainGroups) snapshot.sources[`homepage:${group.slug}`] = { label: group.lead, targets: { ...targets(), pains: [...group.pains] } };
   return snapshot;
 }
 
 export const catalogSnapshot = buildCatalogSnapshot();
-const labels: Record<CatalogType, string> = { actors: 'Actor types', pains: 'Pain points', usage: 'Use cases', values: 'Values', features: 'Features', capabilities: 'Capabilities', affordances: 'Affordances' };
+const labels: Record<CatalogType, string> = { actors: 'Actor types', pains: 'Pain points', usage: 'Use cases', values: 'Values', features: 'Features', capabilities: 'Capabilities', affordances: 'Affordances', solutions: 'Solutions', products: 'Products' };
 
 /** One source-scoped link per catalog type this source actually reaches. */
 export function catalogRelations(source: string): RelationGroup[] {

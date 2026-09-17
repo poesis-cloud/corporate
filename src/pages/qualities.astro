@@ -1,0 +1,22 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { qualityCategories, qualities, qualitiesPublishedBy, categoryAnchor } from '../data/qualities.ts';
+import { qualityCard } from '../data/catalog-card.ts';
+
+const groups = qualityCategories.map((category) => ({
+  category,
+  cards: qualitiesPublishedBy(category.slug).map(qualityCard),
+}));
+---
+<CatalogLayout
+  title="Poesis qualities"
+  description="What the platform, each solution and each product claim about how they behave, with the boundary each claim excludes."
+  heading="Qualities"
+  lead="Attributes of what bears them: the platform, a solution or a product. Each states one claim and the boundary that claim excludes. Capabilities and features carry delivery; qualities carry behavior."
+  count={`${qualities.length} qualities across ${qualityCategories.length} categories`}
+>
+  {groups.map(({ category, cards }) => (
+    <CatalogDirectory id={categoryAnchor(category)} eyebrow={category.name} title={category.lead} cards={cards} variant="platform" />
+  ))}
+</CatalogLayout>

@@ -11,6 +11,11 @@
       "excerpt": "A planned IT workspace for shared definitions, evidence review, scoped appraisal and generation.",
       "tagline": "The IT Intelligence Platform: a shared, governed account of the IT landscape, with planned analysis, appraisal, sourcing and generation.",
       "description": "An authenticated shell and account foundations exist. Domain workflows, scoped policy enforcement and integrated SIE access remain planned; hosted availability is not established.",
+      "qualities": [
+        "accepted-intent",
+        "inspected-revision",
+        "observed-deployment"
+      ],
       "capabilities": [
         {
           "slug": "governed-it-inventory",
@@ -132,6 +137,10 @@
           "currentVersion": "0.1",
           "tagline": "Bring IT definitions, evidence and decisions into one shared workspace.",
           "description": "The authenticated application shell is available. Planned workflows connect inventory authoring, ontology composition, scoped appraisal, impact analysis and cited copilot answers through the BFF and SIE, with tenant/object access controls.",
+          "qualities": [
+            "authenticated-by-default",
+            "role-and-attribute-access"
+          ],
           "repos": [
             "itip-web-frontend"
           ],
@@ -351,6 +360,11 @@
       "excerpt": "Definition, lifecycle, execution and intake foundations, with scoped integration work remaining.",
       "tagline": "The Systemic Intelligence Engine: a GSM reference implementation for governed definitions and bounded execution.",
       "description": "Retained definitions, transition controls, execution source and contribution intake exist. A regulator additionally needs identified observations, accepted evaluation, authorized action and feedback.",
+      "qualities": [
+        "pure-verdicts",
+        "bounded-execution",
+        "explicit-unknowns"
+      ],
       "capabilities": [
         {
           "slug": "authoritative-definition-store",
@@ -468,6 +482,10 @@
           "currentVersion": "1.0",
           "tagline": "Keep system definitions versioned, accessible and governed through change.",
           "description": "REST APIs, retained snapshots and transition controls provide the current implementation scope. Tenant/object authorization, current graded validation and revision-bound decisions are being completed; committed change notifications and MCP access are planned.",
+          "qualities": [
+            "tenant-scoped-storage",
+            "revision-bound-decisions"
+          ],
           "repos": [
             "sie-definition-manager"
           ],
@@ -694,6 +712,11 @@
       "excerpt": "Candidate definition semantics, selected sourced vocabulary and non-normative research.",
       "tagline": "The Generative System Model: a candidate common language for system definitions and governance.",
       "description": "Specification content, selected packages and research records exist. Content availability differs from publication, neutral stewardship, processor conformance and operational integration.",
+      "qualities": [
+        "model-native-taxonomy",
+        "cited-provenance",
+        "stable-identity"
+      ],
       "capabilities": [
         {
           "slug": "systemic-primitive-vocabulary",
@@ -846,6 +869,10 @@
           "currentVersion": "1.0",
           "tagline": "Define systems and governance with a shared, extensible language.",
           "description": "GSM 1.0 source content specifies eight primitives, Archetypes, DNA grammar and the Ascription lifecycle. Document-set publication is pending. Processor conformance and neutral stewardship are separate adoption steps; OASIS candidacy is not endorsement.",
+          "qualities": [
+            "named-profiles",
+            "testable-requirements"
+          ],
           "features": [
             {
               "slug": "primitives",
@@ -1336,6 +1363,11 @@
       "excerpt": "Local control foundations, SAFe-shaped method content and planned distribution and sourcing integrations.",
       "tagline": "The Systemic Agentic Framework: local agentic workflows, explicit artifact contracts and planned evidence-backed SIE integration.",
       "description": "Deterministic decisions support probabilistic agents on declared hosts. Artifact quality, authenticated human gates and effect safety need acceptance; documents are not automatically tested or deployed systems.",
+      "qualities": [
+        "local-first-execution",
+        "human-gated-advancement",
+        "contracted-artifacts"
+      ],
       "capabilities": [
         {
           "slug": "deterministic-agentic-execution",
@@ -1445,6 +1477,10 @@
           "currentVersion": "1.0",
           "tagline": "Give local agentic work explicit steps, artifact checks and traceable decisions.",
           "description": "On supported host adapters, the harness resolves workflow steps and model profiles, supplies instructions, checks mediated writes and records invocations. Checks cover declared schemas and Markdown metadata. Authenticated human approval is planned; atomic writes and cross-host compatibility remain integration boundaries.",
+          "qualities": [
+            "qualified-model-routes",
+            "disclosure-limits"
+          ],
           "repos": [
             "saf-agentic-harness"
           ],
@@ -1728,6 +1764,386 @@
           ]
         }
       ]
+    }
+  ],
+  "qualityCategories": [
+    {
+      "slug": "portability-sovereignty",
+      "anchor": "deployment",
+      "name": "Portability & sovereignty",
+      "lead": "Local, self-hosted and hosted routes each carry their own acceptance boundary."
+    },
+    {
+      "slug": "interoperability",
+      "anchor": "integration",
+      "name": "Interoperability",
+      "lead": "Governed THINK connects to the BUILD and RUN environments you already operate.",
+      "note": "The sourcing bench is specified and in build. Named-tool connectors follow as further knowledge sources feeding the same governed model.",
+      "noteState": "planned"
+    },
+    {
+      "slug": "governability",
+      "name": "Governability",
+      "lead": "Who decided what, on which revision, and what the decision does not assert."
+    },
+    {
+      "slug": "determinism",
+      "name": "Determinism",
+      "lead": "Reproducible outcomes from pinned inputs, so probabilistic work never becomes the authority."
+    },
+    {
+      "slug": "isolation",
+      "name": "Isolation",
+      "lead": "Every read, write and disclosure resolves inside a declared boundary."
+    },
+    {
+      "slug": "openness",
+      "name": "Openness",
+      "lead": "Definitions, provenance and terms can be inspected rather than taken on trust."
+    }
+  ],
+  "platformQualities": [
+    "model-independence",
+    "local-execution",
+    "managed-infrastructure",
+    "vendor-neutral-standard",
+    "open-source-terms",
+    "repository-sourcing",
+    "api-contract-sourcing",
+    "sbom-sourcing",
+    "infrastructure-sourcing"
+  ],
+  "qualities": [
+    {
+      "slug": "model-independence",
+      "name": "Model independence",
+      "categories": [
+        "portability-sovereignty",
+        "interoperability"
+      ],
+      "icon": "spark",
+      "claim": "Governance does not depend on one provider",
+      "body": "Model profiles support selection for bounded tasks. Each host mapping and model change needs compatibility and quality checks."
+    },
+    {
+      "slug": "local-execution",
+      "name": "Local and sovereign execution",
+      "categories": [
+        "portability-sovereignty",
+        "isolation"
+      ],
+      "icon": "shield",
+      "claim": "Define the data boundary explicitly",
+      "body": "Local execution supports control, but models, tools, telemetry, remotes and backups can transmit data. Egress and retention policies remain necessary."
+    },
+    {
+      "slug": "managed-infrastructure",
+      "name": "Cloud where appropriate",
+      "categories": [
+        "portability-sovereignty"
+      ],
+      "icon": "layers",
+      "claim": "Managed infrastructure without ceding control",
+      "body": "Deploy services through managed infrastructure where it makes sense, while the control boundary stays explicit rather than assumed."
+    },
+    {
+      "slug": "vendor-neutral-standard",
+      "name": "Vendor-neutral standard",
+      "categories": [
+        "portability-sovereignty",
+        "openness"
+      ],
+      "icon": "check-badge",
+      "claim": "Governance you can inspect, not a black box",
+      "body": "GSM is a candidate common Definition model. Interchange requirements support inspectability; compatible consumers and draft-preserving migration still need acceptance."
+    },
+    {
+      "slug": "open-source-terms",
+      "name": "Open and inspectable",
+      "categories": [
+        "portability-sovereignty",
+        "openness"
+      ],
+      "icon": "github",
+      "claim": "Trust cannot be proprietary",
+      "body": "GSM specification content exists in source, with publication pending. SAF local tools use Apache-2.0; SIE and the planned bridge have separate licenses. Inspect each product and its terms."
+    },
+    {
+      "slug": "repository-sourcing",
+      "name": "Git repositories",
+      "categories": [
+        "interoperability"
+      ],
+      "icon": "repos",
+      "state": "planned",
+      "claim": "Planned candidates from pinned revisions",
+      "body": "Supported analysis is planned to produce reviewable candidates. Acquisition, conflict reduction and governed registration are distinct steps."
+    },
+    {
+      "slug": "api-contract-sourcing",
+      "name": "API contracts",
+      "categories": [
+        "interoperability"
+      ],
+      "icon": "docs",
+      "state": "planned",
+      "claim": "The interaction surface of your estate",
+      "body": "Planned adapters describe declared interaction surfaces with explicit coverage. Contracts alone do not prove actual traffic or applicable obligations."
+    },
+    {
+      "slug": "sbom-sourcing",
+      "name": "SBOMs",
+      "categories": [
+        "interoperability"
+      ],
+      "icon": "list",
+      "state": "planned",
+      "claim": "Planned dependency evidence",
+      "body": "SBOM analysis identifies declared dependencies in a supported scope. Presence does not prove deployed use, reachability or compliance."
+    },
+    {
+      "slug": "infrastructure-sourcing",
+      "name": "Infrastructure",
+      "categories": [
+        "interoperability",
+        "governability"
+      ],
+      "icon": "layers",
+      "state": "planned",
+      "claim": "Separate intent from observations",
+      "body": "Planned infrastructure sourcing reads declared configuration. Deployed identity, observation time and coverage are needed to describe what runs."
+    },
+    {
+      "slug": "accepted-intent",
+      "name": "Accepted intent",
+      "categories": [
+        "governability"
+      ],
+      "icon": "check-badge",
+      "state": "planned",
+      "claim": "What the organization has agreed",
+      "body": "Reviewed definitions carry the authority of an accepted decision. Acceptance records intent; it does not assert that the estate already matches it."
+    },
+    {
+      "slug": "inspected-revision",
+      "name": "Inspected revision",
+      "categories": [
+        "governability",
+        "interoperability"
+      ],
+      "icon": "repos",
+      "state": "planned",
+      "claim": "What a pinned source says",
+      "body": "Sourced candidates stay bound to the revision they were read from. A source revision is not deployed reality and is reconciled before registration."
+    },
+    {
+      "slug": "observed-deployment",
+      "name": "Observed deployment",
+      "categories": [
+        "governability"
+      ],
+      "icon": "search",
+      "state": "planned",
+      "claim": "What was seen running, and when",
+      "body": "Deployed observations need an identity, an observation time and a stated coverage. Absent observations are reported as unknown rather than compliant."
+    },
+    {
+      "slug": "pure-verdicts",
+      "name": "Pure verdicts",
+      "categories": [
+        "determinism"
+      ],
+      "icon": "bolt",
+      "state": "partial",
+      "claim": "The same inputs give the same verdict",
+      "body": "Norm evaluation is scoped and side-effect free. Rule and input versions are part of the verdict; continuous operation additionally needs observations and scheduling."
+    },
+    {
+      "slug": "bounded-execution",
+      "name": "Bounded execution",
+      "categories": [
+        "determinism",
+        "isolation"
+      ],
+      "icon": "shield",
+      "state": "partial",
+      "claim": "Mechanisms run inside a declared sandbox",
+      "body": "Mechanism execution is confined to a declared protocol surface. Effect safety and authorized action remain acceptance boundaries."
+    },
+    {
+      "slug": "explicit-unknowns",
+      "name": "Explicit unknowns",
+      "categories": [
+        "determinism",
+        "governability"
+      ],
+      "icon": "list",
+      "state": "planned",
+      "claim": "Missing evidence is a result, not a pass",
+      "body": "Applicability, freshness and unknown states are first-class outcomes. An unevaluated obligation is never reported as satisfied."
+    },
+    {
+      "slug": "model-native-taxonomy",
+      "name": "Model-native taxonomy",
+      "categories": [
+        "openness",
+        "interoperability"
+      ],
+      "icon": "grid",
+      "state": "partial",
+      "claim": "Each framework keeps its own structure",
+      "body": "TOGAF, ISO 25000, GDPR, NIS2 and protocol vocabularies are sourced under their own taxonomies. Composition happens through Directives, not schema cross-references."
+    },
+    {
+      "slug": "cited-provenance",
+      "name": "Cited provenance",
+      "categories": [
+        "openness",
+        "governability"
+      ],
+      "icon": "docs",
+      "state": "partial",
+      "claim": "Every sourced statement names its clause",
+      "body": "Sourced Directives and Norms cite the section they derive from. Citation supports review; it does not establish legal completeness."
+    },
+    {
+      "slug": "stable-identity",
+      "name": "Stable identity",
+      "categories": [
+        "openness",
+        "interoperability"
+      ],
+      "icon": "check-badge",
+      "state": "partial",
+      "claim": "Published identifiers are not rewritten",
+      "body": "Archetype identifiers are logical and versioned. Content exists in source; publication, neutral stewardship and processor conformance are separate steps."
+    },
+    {
+      "slug": "local-first-execution",
+      "name": "Runs where you work",
+      "categories": [
+        "portability-sovereignty"
+      ],
+      "icon": "github",
+      "state": "partial",
+      "claim": "No delivery-plane tenancy to adopt",
+      "body": "The harness and workspace operate on local checkouts under Apache-2.0. Hosts and model routes are declared rather than assumed."
+    },
+    {
+      "slug": "human-gated-advancement",
+      "name": "Human-gated advancement",
+      "categories": [
+        "governability"
+      ],
+      "icon": "users",
+      "state": "planned",
+      "claim": "Agents propose; people advance",
+      "body": "Workflow advancement passes through explicit gates. Authenticated gates and effect safety need acceptance before autonomous progression is claimed."
+    },
+    {
+      "slug": "contracted-artifacts",
+      "name": "Contracted artifacts",
+      "categories": [
+        "determinism",
+        "governability"
+      ],
+      "icon": "list",
+      "state": "partial",
+      "claim": "Written artifacts are checked against a schema",
+      "body": "Mediated writes are validated against matched schemas. Scope is structured data and Markdown metadata; prose quality has a separate boundary."
+    },
+    {
+      "slug": "tenant-scoped-storage",
+      "name": "Tenant-scoped storage",
+      "categories": [
+        "isolation"
+      ],
+      "icon": "shield",
+      "state": "partial",
+      "claim": "Definitions never leave their tenant schema",
+      "body": "Retained snapshots and queries resolve within a tenant boundary. Tenant/object authorization across the full API surface is being completed."
+    },
+    {
+      "slug": "revision-bound-decisions",
+      "name": "Revision-bound decisions",
+      "categories": [
+        "governability",
+        "determinism"
+      ],
+      "icon": "check-badge",
+      "state": "partial",
+      "claim": "A decision names the revision it was made on",
+      "body": "Transition controls bind a decision to the revision it reviewed, so a stale write is refused rather than silently applied."
+    },
+    {
+      "slug": "authenticated-by-default",
+      "name": "Authenticated by default",
+      "categories": [
+        "isolation"
+      ],
+      "icon": "shield",
+      "state": "partial",
+      "claim": "Only declared endpoints are public",
+      "body": "The authenticated shell exists; health and info endpoints are the declared exceptions. Permissive local behavior stays profile-gated."
+    },
+    {
+      "slug": "role-and-attribute-access",
+      "name": "Role and attribute access",
+      "categories": [
+        "isolation",
+        "governability"
+      ],
+      "icon": "users",
+      "state": "planned",
+      "claim": "Role and attribute both bound the request",
+      "body": "Planned enforcement combines role grants with object attributes. External identity synchronization is a separate, recoverable concern."
+    },
+    {
+      "slug": "named-profiles",
+      "name": "Named conformance profiles",
+      "categories": [
+        "interoperability",
+        "openness"
+      ],
+      "icon": "docs",
+      "state": "partial",
+      "claim": "Conformance is stated against a profile",
+      "body": "Definition interchange is scoped to a declared profile. A processor conforms to profiles it names, not to the model as a whole."
+    },
+    {
+      "slug": "testable-requirements",
+      "name": "Testable requirements",
+      "categories": [
+        "interoperability",
+        "determinism"
+      ],
+      "icon": "check-badge",
+      "state": "planned",
+      "claim": "Requirements are meant to be executed",
+      "body": "Interchange requirements are written to be testable. A conformance suite and compatible consumers still need acceptance."
+    },
+    {
+      "slug": "qualified-model-routes",
+      "name": "Qualified model routes",
+      "categories": [
+        "determinism",
+        "portability-sovereignty"
+      ],
+      "icon": "spark",
+      "state": "partial",
+      "claim": "Ranking alone does not establish suitability",
+      "body": "Model profiles are selected by task capability and configured cost ranking. Routes are qualified using retained workload-specific quality, cost and disclosure evidence."
+    },
+    {
+      "slug": "disclosure-limits",
+      "name": "Disclosure limits",
+      "categories": [
+        "isolation"
+      ],
+      "icon": "docs",
+      "state": "planned",
+      "claim": "What a route may be told is bounded",
+      "body": "Instruction delivery and disclosure limits are evaluated per workload. A host change is a change of behavior, not a configuration detail."
     }
   ],
   "affordances": [

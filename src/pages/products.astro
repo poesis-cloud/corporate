@@ -1,0 +1,17 @@
+---
+import CatalogLayout from '../layouts/CatalogLayout.astro';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { platformSolutions } from '../data/poesis-platform.ts';
+import { productCard } from '../data/catalog-card.ts';
+
+const cards = platformSolutions.flatMap((solution) => solution.products.map((product) => productCard({ solution, product })));
+---
+<CatalogLayout
+  title="Poesis products"
+  description="Every Poesis product, with its recorded version, delivery status and the use cases its features serve."
+  heading="Products"
+  lead="The units that ship. A product carries the status of its own features, so a recorded version is a statement about code rather than about a roadmap."
+  count={`${cards.length} products`}
+>
+  <CatalogDirectory id="products" eyebrow="Products" title="What ships" cards={cards} variant="platform" />
+</CatalogLayout>

@@ -462,12 +462,18 @@ test('anchors and hrefs keep the published shape', () => {
 });
 
 test('every catalog entity type is browsable from one navigation section', () => {
-  assert.deepEqual(catalogViews.map((view) => view.href), ['/usage', '/actors', '/pains', '/values', '/affordances', '/capabilities', '/features']);
+  assert.deepEqual(catalogViews.map((view) => view.href), ['/usage', '/actors', '/pains', '/values', '/affordances', '/capabilities', '/features', '/qualities', '/solutions', '/products', '/services']);
   const platform = siteNavigation.find((group) => group.label === 'Platform');
-  const [needs, comparisons] = platform.sections;
-  assert.equal(needs.label, 'By need & coverage');
+  const [portfolio, needs, coverage, comparisons] = platform.sections;
+  // What is packaged comes first; demand and supply follow, comparison last.
+  assert.equal(portfolio.label, 'By solution & product');
+  assert.equal(needs.label, 'By need');
+  assert.equal(coverage.label, 'By coverage');
   assert.equal(comparisons.label, 'By comparison');
-  assert.deepEqual(needs.items, catalogViews);
+  // Need and coverage are disjoint, and together they publish every catalog view.
+  assert.deepEqual([...needs.items, ...coverage.items], catalogViews);
+  const company = siteNavigation.find((group) => group.label === 'Company');
+  assert.ok(company.sections.flatMap((section) => section.items).some((item) => item.href === '/catalog'));
   // The solution shortcuts are reachable once, from the solutions section only.
   const destinations = platform.sections.flatMap((section) => section.items.flatMap((item) => [item.href, ...(item.children ?? []).map((child) => child.href)]));
   assert.equal(destinations.filter((href) => href.startsWith('/solutions')).length, new Set(destinations.filter((href) => href.startsWith('/solutions'))).size);

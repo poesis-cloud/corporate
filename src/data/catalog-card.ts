@@ -14,27 +14,33 @@
  * Pains and values carry no name in the data — only a statement. The statement
  * is their identity, and the type label is what tells the reader so.
  */
-import { platformSolutions, type DeliveryState } from './poesis-platform.ts';
+import { subjectLabel, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
 import { catalogRelations, platformRelations } from './catalog.ts';
 import {
   affordanceHref, capabilityHref, featureHref, useCaseStatus, valueAnchor, valueAliases, valueCoverage, valueHref, valueStatus,
   type RelationGroup, type UsageAffordance, type UsageCapability, type UsageFeature, type UseCase, type Value,
 } from './usage.ts';
-import { capabilityStatus, affordanceStatus } from './poesis-platform.ts';
+import { qualityAnchor, qualityCategoryNames, qualityHref, qualityScopeLabel, type Quality } from './qualities.ts';
+import { type Service } from './services.ts';
 import type { ActorType } from './usage-actors.ts';
 import type { UsagePain } from './usage-pains.ts';
 
-export type CatalogItemType = 'actor' | 'pain' | 'usage' | 'value' | 'affordance' | 'capability' | 'feature';
+export type CatalogItemType =
+  | 'actor' | 'pain' | 'usage' | 'value'
+  | 'affordance' | 'capability' | 'feature'
+  | 'solution' | 'product' | 'quality' | 'service';
 
 export const cardTypeLabels = {
   actor: 'Actor type', pain: 'Pain point', usage: 'Use case', value: 'Value',
   affordance: 'Affordance', capability: 'Capability', feature: 'Feature',
+  solution: 'Solution', product: 'Product', quality: 'Quality', service: 'Service',
 } as const satisfies Record<CatalogItemType, string>;
 
 /** One icon per type: a card icon says what kind of thing this is, never which one. */
 export const cardTypeIcons = {
   actor: 'users', pain: 'alert', usage: 'target', value: 'trending-up',
   affordance: 'grid', capability: 'bolt', feature: 'list',
+  solution: 'compass', product: 'briefcase', quality: 'check-badge', service: 'handshake',
 } as const satisfies Record<CatalogItemType, string>;
 
 export interface CatalogCard {
@@ -102,13 +108,7 @@ export function useCaseCard(useCase: UseCase): CatalogCard {
 
 /** Where the value is published: the platform, a solution, or one of its products. */
 function valueCategory(value: Value): string | undefined {
-  const [owner, ...rest] = value.slug.replace(/^value:/, '').split('/');
-  if (!rest.length) return undefined;
-  if (owner === 'platform') return 'Platform';
-  const solution = platformSolutions.find((candidate) => candidate.slug === owner);
-  if (!solution) return undefined;
-  const product = rest.length === 2 ? solution.products.find((candidate) => candidate.slug === rest[0]) : undefined;
-  return product ? `${solution.name} · ${product.name}` : solution.name;
+  return subjectLabel(value.slug.replace(/^value:/, '').split('/').slice(0, -1).join('/'));
 }
 
 export function valueCard(value: Value): CatalogCard {
@@ -176,5 +176,69 @@ export function featureCard(entry: UsageFeature): CatalogCard {
     status: delivery.state,
     meta: `${milestone.shipped ? 'Released' : 'Milestone'} ${milestone.version}`,
     relations: platformRelations(entry.feature),
+  };
+}
+
+export function solutionCard(solution: Solution): CatalogCard {
+  return {
+    type: 'solution',
+    category: solution.tags.join(' · '),
+    anchor: `solution-${solution.slug}`,
+    slug: solution.slug,
+    href: solutionHref(solution),
+    heading: solution.fullName,
+    hook: solution.tagline,
+    body: solution.description,
+    status: solutionStatus(solution),
+    meta: `${solution.capabilities.length} capabilities · ${solution.products.length} products`,
+    relations: catalogRelations(`solution:${solution.slug}`),
+  };
+}
+
+export function productCard(entry: { solution: Solution; product: Product }): CatalogCard {
+  const { solution, product } = entry;
+  return {
+    type: 'product',
+    category: solution.name,
+    anchor: `product-${solution.slug}-${product.slug}`,
+    slug: `${solution.slug}/${product.slug}`,
+    href: `${solutionHref(solution)}/products/${product.slug}`,
+    heading: product.name,
+    hook: product.tagline,
+    body: product.description,
+    status: productStatus(product),
+    meta: `Recorded version ${product.currentVersion} · ${product.features.length} features`,
+    relations: catalogRelations(`product:${solution.slug}/${product.slug}`),
+  };
+}
+
+// A quality is atomic and states no use cases, so it carries a claim rather than
+// relations, and its categories are the grouping it is listed under.
+export function qualityCard(quality: Quality): CatalogCard {
+  return {
+    type: 'quality',
+    category: qualityScopeLabel(quality),
+    anchor: qualityAnchor(quality),
+    slug: quality.slug,
+    href: qualityHref(quality),
+    heading: quality.name,
+    hook: quality.claim,
+    body: quality.body,
+    status: quality.state,
+    meta: qualityCategoryNames(quality).join(' · '),
+  };
+}
+
+export function serviceCard(service: Service): CatalogCard {
+  return {
+    type: 'service',
+    category: service.category,
+    anchor: `service-${service.slug}`,
+    slug: service.slug,
+    href: service.href,
+    heading: service.label,
+    hook: service.title,
+    body: service.summary,
+    meta: `${service.availability} — ${service.availabilityNote}`,
   };
 }
