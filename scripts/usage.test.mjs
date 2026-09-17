@@ -618,7 +618,7 @@ test('built catalogs publish matching filter payloads and compact platform foote
   }
 });
 
-test('built catalog cards keep only type and status in their heads and move metadata to tags', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+test('built catalog cards keep only type and status in their heads and expose thematic tags', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const views = [
     ['actors', 'actor'], ['pains', 'pain'], ['usage', 'usage'], ['values', 'value'],
     ['features', 'feature'], ['capabilities', 'capability'], ['affordances', 'affordance'],
@@ -637,13 +637,23 @@ test('built catalog cards keep only type and status in their heads and move meta
       assert.equal(text(step).trim(), cardTypeLabels[type], `${route}: head contains type only`);
       assert.equal(elements(head, (node) => attr(node, 'class')?.split(' ').includes('delivery-status')).length, 1, `${route}: one status`);
       const tags = elements(card, (node) => attr(node, 'class') === 'catalog-tags')[0];
-      assert.ok(tags, `${route}: metadata tags`);
-      assert.ok(elements(tags, (node) => node.tagName === 'li').length, `${route}: nonempty metadata tags`);
+      assert.ok(tags, `${route}: thematic tags`);
+      const tagLabels = elements(tags, (node) => node.tagName === 'li').map(text).map((label) => label.trim());
+      assert.ok(tagLabels.length, `${route}: nonempty metadata tags`);
+      assert.ok(tagLabels.every((label) => !/^\d+(?:\/\d+)?\s+(?:actor types?|pains?|values?|constituent use cases?|features?|capabilities|products|qualities|with platform support)/i.test(label)), `${route}: no relationship counts in tags`);
+      assert.ok(tagLabels.every((label) => !/^(?:Current v|Cross-solution|Feature-level support|Capability-level support|Affordance-level support|Support unregistered|By agreement|Planned$|implementation$|specification$|content$)/i.test(label)), `${route}: tags are thematic`);
       const directTags = card.childNodes.indexOf(tags);
       const footer = card.childNodes.find((node) => attr(node, 'class')?.split(' ').includes('relation-previews'));
       if (footer) assert.ok(directTags < card.childNodes.indexOf(footer), `${route}: tags precede relation footer`);
     }
   }
+});
+
+test('built catalog index does not repeat its current breadcrumb segment', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  const index = built('/catalog');
+  const breadcrumb = elements(index, (node) => attr(node, 'class')?.split(' ').includes('eyebrow') && elements(node, (child) => attr(child, 'aria-current') === 'page').length)[0];
+  assert.equal(text(breadcrumb).replace(/\s+/g, ' ').trim(), 'Poesis / Catalog');
+  assert.equal(elements(breadcrumb, (node) => node.tagName === 'a' && attr(node, 'href') === '/catalog').length, 0);
 });
 
 test('built catalog index presents shared platform architecture and complete direct usage map', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
@@ -769,7 +779,6 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.equal(badges.length, 1, value.slug);
     assert.equal(attr(badges[0], 'data-delivery-status'), valueStatus(value.slug) ?? 'planned');
     if (valueStatus(value.slug) === undefined) {
-      assert.match(text(item[0]), /No platform support/);
       assert.equal(elements(item[0], (node) => attr(node, 'href')?.startsWith('/solutions')).length, 0);
     }
   }

@@ -20,11 +20,12 @@ const { title, description, heading, lead, count } = Astro.props;
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const catalogType = current.split('/').at(-1) as CatalogType;
 const filterable = catalogTypes.includes(catalogType);
+const isCatalogIndex = current === '/catalog';
 ---
 <BaseLayout title={title} description={description}>
   <section class="section catalog-intro">
     <div class="container">
-      <p class="eyebrow"><a href="/">Poesis</a> / <a href="/catalog">Catalog</a> / <span aria-current="page">{heading}</span></p>
+      <p class="eyebrow"><a href="/">Poesis</a> / {isCatalogIndex ? <span aria-current="page">Catalog</span> : <><a href="/catalog">Catalog</a> / <span aria-current="page">{heading}</span></>}</p>
       <h1>{heading}</h1>
       <nav class="hero-sections" aria-label="Catalog views">
         {catalogViews.map((view) => <a href={view.href} aria-current={view.href === current ? 'page' : undefined}>{view.label}</a>)}

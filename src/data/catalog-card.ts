@@ -8,19 +8,19 @@
  *   heading                the item's own identity, linked to its canonical page
  *   hook                   an optional qualifier, never the identity
  *   body                   the elaboration
- *   tags                   ownership, grouping, version, and count metadata
+ *   tags                   concise themes, never relation summaries or state
  *   relations              one source-scoped link per catalog type it reaches
  *
  * Pains and values carry no name in the data — only a statement. The statement
  * is their identity, and the type label is what tells the reader so.
  */
-import { commitmentStatus, subjectLabel, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
+import { commitmentStatus, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
 import { catalogRelations, platformRelations } from './catalog.ts';
 import {
-  affordanceHref, capabilityHref, featureHref, useCaseStatus, useCases, useCasesForPain, valueAnchor, valueAliases, valueCoverage, valueHref, valueStatus,
+  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, useCasesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
   type RelationGroup, type UsageAffordance, type UsageCapability, type UsageFeature, type UseCase, type Value,
 } from './usage.ts';
-import { qualityAnchor, qualityCategoryNames, qualityHref, qualityScopeLabel, type Quality } from './qualities.ts';
+import { qualityAnchor, qualityCategoryNames, qualityHref, type Quality } from './qualities.ts';
 import { type Service } from './services.ts';
 import type { ActorType } from './usage-actors.ts';
 import type { UsagePain } from './usage-pains.ts';
@@ -67,11 +67,13 @@ function aggregateUseCaseStatus(entries: UseCase[]): DeliveryState {
   return commitmentStatus(entries.map((entry) => useCaseStatus(entry) ?? 'planned'));
 }
 
-function useCaseSupportTag(useCase: UseCase): string {
-  if (useCase.features?.length) return `${useCase.features.length} feature${useCase.features.length === 1 ? '' : 's'}`;
-  if (useCase.capabilities?.length) return `${useCase.capabilities.length} capabilit${useCase.capabilities.length === 1 ? 'y' : 'ies'}`;
-  if (useCase.affordances?.length) return `${useCase.affordances.length} affordance${useCase.affordances.length === 1 ? '' : 's'}`;
-  return 'No platform support';
+function thematicTags(tags: string[], fallback: string[] = ['IT']): string[] {
+  const themes = [...new Set(tags.filter(Boolean))];
+  return (themes.length ? themes : fallback).slice(0, 4);
+}
+
+function useCaseThemes(entries: UseCase[]): string[] {
+  return thematicTags(entries.flatMap((entry) => painsForUseCase(entry.slug).flatMap((pain) => pain.tags)));
 }
 
 export function actorCard(actor: ActorType): CatalogCard {
@@ -83,7 +85,7 @@ export function actorCard(actor: ActorType): CatalogCard {
     hook: actor.hook,
     body: actor.body,
     status: aggregateUseCaseStatus(useCases.filter((useCase) => useCase.actorTypes.includes(actor.slug))),
-    tags: [actor.kind === 'human' ? 'Human' : 'System', ...actor.tags],
+    tags: thematicTags(actor.tags),
     relations: catalogRelations(`actor:${actor.slug}`),
   };
 }
@@ -96,7 +98,7 @@ export function painCard(pain: UsagePain): CatalogCard {
     heading: pain.pain,
     body: pain.cost,
     status: aggregateUseCaseStatus(useCasesForPain(pain.slug)),
-    tags: pain.tags,
+    tags: thematicTags(pain.tags),
     relations: catalogRelations(`pain:${pain.slug}`),
     data: { 'data-usage-pain': pain.slug },
   };
@@ -111,25 +113,13 @@ export function useCaseCard(useCase: UseCase): CatalogCard {
     heading: useCase.name,
     body: useCase.goal,
     status: useCaseStatus(useCase) ?? 'planned',
-    tags: [
-      `${useCase.actorTypes.length} actor type${useCase.actorTypes.length === 1 ? '' : 's'}`,
-      `${useCase.addressedPains.length} pain${useCase.addressedPains.length === 1 ? '' : 's'}`,
-      `${useCase.values.length} value${useCase.values.length === 1 ? '' : 's'}`,
-      useCaseSupportTag(useCase),
-    ],
+    tags: useCaseThemes([useCase]),
     relations: catalogRelations(`usage:${useCase.slug}`),
     data: { 'data-usage-case': useCase.slug, 'data-actors': useCase.actorTypes.join(' ') },
   };
 }
 
-/** Where the value is published: the platform, a solution, or one of its products. */
-function valueOwnerLabel(value: Value): string {
-  return subjectLabel(value.slug.replace(/^value:/, '').split('/').slice(0, -1).join('/')) ?? 'Independent';
-}
-
 export function valueCard(value: Value): CatalogCard {
-  const coverage = valueCoverage(value.slug);
-  const supported = coverage.filter((entry) => entry.state).length;
   return {
     type: 'value',
     anchor: valueAnchor(value),
@@ -140,11 +130,7 @@ export function valueCard(value: Value): CatalogCard {
     body: value.body,
     bodyHtml: true,
     status: valueStatus(value.slug) ?? 'planned',
-    tags: [
-      valueOwnerLabel(value),
-      `${coverage.length} constituent use case${coverage.length === 1 ? '' : 's'}`,
-      supported ? `${supported}/${coverage.length} with platform support` : 'No platform support',
-    ],
+    tags: useCaseThemes(useCasesForValue(value.slug)),
     relations: catalogRelations(`value:${value.slug}`),
     data: { 'data-usage-value': value.slug },
   };
@@ -160,7 +146,7 @@ export function affordanceCard(entry: UsageAffordance): CatalogCard {
     hook: entry.affordance.title,
     body: entry.affordance.blurb,
     status: affordanceStatus(entry.affordance),
-    tags: ['Cross-solution', `${entry.affordance.relations.capabilities.length} contributing capabilities`],
+    tags: useCaseThemes(useCasesForItem(entry.affordance)),
     relations: platformRelations(entry.affordance),
   };
 }
@@ -174,13 +160,13 @@ export function capabilityCard(entry: UsageCapability): CatalogCard {
     heading: entry.capability.name,
     body: entry.capability.blurb,
     status: capabilityStatus(entry.solution, entry.capability),
-    tags: [entry.solution.name, `${entry.capability.relations.features.length} supporting features`, entry.capability.delivery.kind],
+    tags: useCaseThemes(useCasesForItem(entry.capability)),
     relations: platformRelations(entry.capability),
   };
 }
 
 export function featureCard(entry: UsageFeature): CatalogCard {
-  const { milestone, delivery } = entry.feature;
+  const { delivery } = entry.feature;
   return {
     type: 'feature',
     anchor: `feature-${entry.slug.replace(/\//g, '-')}`,
@@ -189,7 +175,7 @@ export function featureCard(entry: UsageFeature): CatalogCard {
     heading: entry.feature.name,
     body: entry.feature.blurb,
     status: delivery.state,
-    tags: [entry.solution.name, entry.product.name, `${milestone.shipped ? 'Released' : 'Milestone'} ${milestone.version}`, delivery.kind],
+    tags: useCaseThemes(useCasesForItem(entry.feature)),
     relations: platformRelations(entry.feature),
   };
 }
@@ -204,7 +190,7 @@ export function solutionCard(solution: Solution): CatalogCard {
     hook: solution.tagline,
     body: solution.description,
     status: solutionStatus(solution),
-    tags: [...solution.tags, `${solution.capabilities.length} capabilities`, `${solution.products.length} products`, `${solution.qualities.length} qualities`],
+    tags: useCaseThemes(useCasesForSolution(solution.slug)),
     relations: catalogRelations(`solution:${solution.slug}`),
   };
 }
@@ -220,7 +206,7 @@ export function productCard(entry: { solution: Solution; product: Product }): Ca
     hook: product.tagline,
     body: product.description,
     status: productStatus(product),
-    tags: [solution.name, `Current v${product.currentVersion}`, `${product.features.length} features`, `${product.qualities.length} qualities`],
+    tags: useCaseThemes(useCasesForProduct(solution.slug, product.slug)),
     relations: catalogRelations(`product:${solution.slug}/${product.slug}`),
   };
 }
@@ -237,7 +223,7 @@ export function qualityCard(quality: Quality): CatalogCard {
     hook: quality.claim,
     body: quality.body,
     status: quality.state ?? 'delivered',
-    tags: [qualityScopeLabel(quality), ...qualityCategoryNames(quality)],
+    tags: thematicTags(qualityCategoryNames(quality)),
   };
 }
 
@@ -251,6 +237,6 @@ export function serviceCard(service: Service): CatalogCard {
     hook: service.title,
     body: service.summary,
     status: service.availability === 'Planned' ? 'planned' : 'delivered',
-    tags: [service.category, service.availability, service.availabilityNote],
+    tags: thematicTags([service.category]),
   };
 }
