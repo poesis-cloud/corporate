@@ -20,7 +20,7 @@
         {
           "slug": "governed-it-inventory",
           "name": "Governed IT definition inventory",
-          "blurb": "Browser/BFF authoring, reusable review lenses, related decision sessions and authorized tenant/object access to typed definitions, with external identity synchronization.",
+          "blurb": "Maintain a shared IT inventory whose typed definitions, review decisions and access responsibilities stay connected across framework views. Browser authoring, tenant/object policy and identity synchronization remain planned beyond the existing authentication foundations.",
           "state": "planned",
           "kind": "implementation",
           "features": [
@@ -33,17 +33,19 @@
         {
           "slug": "it-governance-fabric-composition",
           "name": "IT governance fabric composition",
-          "blurb": "Package selection, scope binding and overlap review; composition is distinct from evaluation and enforcement.",
+          "blurb": "Compose selected frameworks and internal obligations against a shared IT inventory, review overlaps and gaps, and retain revision-bound adoption decisions. Composition does not itself evaluate or enforce compliance.",
           "state": "planned",
           "kind": "implementation",
           "features": [
-            "web-application/ontology-management"
+            "web-application/ontology-management",
+            "web-application/definitions-management",
+            "web-application/governance-review-sessions"
           ]
         },
         {
           "slug": "automatic-it-truth-sourcing",
           "name": "Evidence-backed IT definition sourcing",
-          "blurb": "Revision-pinned candidates, review and client-owned draft registration. Source revision is not deployed reality.",
+          "blurb": "Reconcile evidence-backed candidates from selected code revisions into reviewable IT definition drafts, with collection coverage, source age and recoverable runs visible throughout. Analysis and client-owned draft registration are planned; inspected source is not deployed reality.",
           "state": "planned",
           "kind": "implementation",
           "features": [
@@ -54,17 +56,19 @@
         {
           "slug": "continuous-it-compliance-evaluation",
           "name": "Scoped IT compliance evaluation",
-          "blurb": "Measures/findings with input identity, applicability, freshness and unknown states; continuous operation additionally needs observations and scheduling.",
+          "blurb": "Appraise scoped IT definitions, carry versioned findings into accountable corrective reviews, and reappraise revised proposals. Preserve applicability and unknown states; continuous live-system assurance additionally requires observations and scheduling.",
           "state": "planned",
           "kind": "implementation",
           "features": [
-            "web-application/it-compliance-evaluation"
+            "web-application/it-compliance-evaluation",
+            "web-application/definitions-management",
+            "web-application/governance-review-sessions"
           ]
         },
         {
           "slug": "model-grounded-it-reasoning",
-          "name": "Model-grounded IT reasoning",
-          "blurb": "Dependency analysis and cited read-only answers. Causal simulation needs separately validated scenario dynamics.",
+          "name": "IT dependency analysis and decision support",
+          "blurb": "Assess proposed IT changes by combining dependency and obligation paths with cited, read-only answers over authorized definitions. Planned analysis exposes missing boundaries and insufficient evidence; causal simulation additionally needs validated scenario dynamics and explicit uncertainty.",
           "state": "planned",
           "kind": "implementation",
           "features": [
@@ -75,11 +79,13 @@
         {
           "slug": "it-artifact-generation",
           "name": "IT artifact generation",
-          "blurb": "Named document families from pinned definitions/templates, with review and missing-input reporting.",
+          "blurb": "Turn a selected IT baseline into consistent architecture and evidence document families, then review outputs against the definitions and decisions they cite. Recurring production retains pinned inputs and exposes incomplete jobs; generation is not substantive acceptance.",
           "state": "planned",
           "kind": "implementation",
           "features": [
-            "web-application/it-artifact-factory"
+            "web-application/it-artifact-factory",
+            "web-application/definitions-management",
+            "web-application/governance-review-sessions"
           ]
         }
       ],
@@ -261,7 +267,7 @@
         {
           "slug": "authoritative-definition-store",
           "name": "Authoritative definition store",
-          "blurb": "Snapshot and API source exists; current grammar alignment, coherent pins and tenant/object authorization remain acceptance boundaries.",
+          "blurb": "Provide a common record of system definitions by combining stable identities, retained snapshots and API access to current and historical versions. Existing storage and APIs need acceptance for current grammar alignment, coherent pins, tenant/object authorization and verified retention policies.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -272,7 +278,7 @@
         {
           "slug": "governance-lifecycle-enforcement",
           "name": "Governance lifecycle controls",
-          "blurb": "Transition controls and separate board sealing exist; identity-bound approval and current graded validation need acceptance. Notifications are a planned extension.",
+          "blurb": "Control the progression from closed evidence collection to reviewed and activated definition revisions, keeping board sealing separate from approval. Existing transition controls need acceptance for identity-bound decisions, graded validation and concurrent intake integrity; committed-change notifications are a planned extension.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -287,7 +293,7 @@
         {
           "slug": "collaborative-definition-sourcing",
           "name": "Collaborative contribution intake",
-          "blurb": "Generic panels and retention exist. Client inference, reduction and authorized draft promotion are separate integrations.",
+          "blurb": "Give collaborating sources a shared intake and retained evidence history so clients can compare contributions and revisit the basis for candidate selection. Panels and storage exist; end-to-end validation, complete auditing, client reconciliation and authorized draft promotion remain integration boundaries.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -298,17 +304,18 @@
         {
           "slug": "deterministic-norm-evaluation",
           "name": "Scoped Norm verdict evaluation",
-          "blurb": "Complete pure verdicts over pinned rules and supplied instances; runtime observations are required only for operational-correspondence claims.",
+          "blurb": "Combine access to versioned governed definitions with pure applicability and assertion evaluation over pinned rules and supplied instances. Planned verdicts preserve non-evaluable states and support comparison of proposed rules without dispatching effects; coherent input selection needs acceptance, and running-system claims additionally require observations.",
           "state": "planned",
           "kind": "implementation",
           "features": [
-            "operator/norms-evaluation-api"
+            "operator/norms-evaluation-api",
+            "definition-manager/definitions-management-api"
           ]
         },
         {
           "slug": "governed-mechanism-execution",
           "name": "Bounded Mechanism execution",
-          "blurb": "Execution source and selected adapters exist; frames, caller authority, budgets and failure receipts need acceptance. Wider adapters are optional.",
+          "blurb": "Translate eligible Mechanism definitions into effects through selected technology adapters under explicit execution and transport contracts. Existing execution and adapters need acceptance for atomic frames, caller authority, budgets, cancellation and partial or unknown outcome receipts; wider adapters are optional.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -322,7 +329,7 @@
         {
           "slug": "governed-context-for-ai",
           "name": "Governed context for AI",
-          "blurb": "API foundations support future authorized selection. MCP and evaluated tool/answer boundaries remain planned; direct authoring does not require sourcing.",
+          "blurb": "Supply AI clients with a shared, versioned definition context through direct APIs and planned MCP access, combining policy-filtered selection with bounded operations. API foundations exist; authorized selection and evaluated tool/answer boundaries still need acceptance. Direct authoring does not require sourcing.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -530,27 +537,30 @@
         {
           "slug": "systemic-primitive-vocabulary",
           "name": "Systemic primitive vocabulary",
-          "blurb": "Eight specified GSM subject types; a fixed core, not proof of universal adequacy.",
+          "blurb": "Describe structure, behavior, interactions and governance through eight common subject types whose domain vocabulary and constraints are expressed by Archetypes. This supplies a typed basis for scoped system modeling, not proof that the fixed core is universally adequate.",
           "state": "delivered",
           "kind": "specification",
           "features": [
-            "specifications/primitives"
+            "specifications/primitives",
+            "specifications/archetyping"
           ]
         },
         {
           "slug": "open-domain-typing",
           "name": "Open domain typing",
-          "blurb": "Archetypes express vocabulary, constraints and exact references under GSM; subject types remain fixed.",
+          "blurb": "Extend domain vocabulary and constraints with governed Archetypes grounded in the fixed GSM subject types, while the Ascription lifecycle gives changes versioned review and activation semantics. Extension does not add subject types; processors must implement the specified typing and lifecycle rules.",
           "state": "delivered",
           "kind": "specification",
           "features": [
-            "specifications/archetyping"
+            "specifications/archetyping",
+            "specifications/primitives",
+            "specifications/systemic-lifecycle-management"
           ]
         },
         {
           "slug": "governance-grammar-and-lifecycle",
           "name": "Governance grammar and lifecycle",
-          "blurb": "Current DNA and Ascription lifecycle content is available in source; publication is pending. Future grammar extensions do not block this content route.",
+          "blurb": "Connect governance scope and evaluable constraints to immutable snapshots that progress through review, activation, suspension and retirement. Current DNA grammar and lifecycle content exist in source, with publication pending; enforcement belongs to processors, and future grammar extensions require accepted Change Proposals.",
           "state": "delivered",
           "kind": "specification",
           "features": [
@@ -565,7 +575,7 @@
         {
           "slug": "framework-and-regulation-sourcing",
           "name": "Selected framework and regulation sourcing",
-          "blurb": "Selected vocabulary and unbound legal templates exist; adopter binding, full coverage, future frameworks and updates remain separate.",
+          "blurb": "Bring selected architecture, quality, security and regulatory concerns into a common governance vocabulary with reviewable source mappings and reusable templates. Existing content is selectively scoped and legal templates remain unbound; adopter interpretation, full coverage, future frameworks and update delivery are separate responsibilities.",
           "state": "delivered",
           "kind": "content",
           "features": [
@@ -590,7 +600,7 @@
         {
           "slug": "protocol-and-domain-semantics-sourcing",
           "name": "Selected protocol and domain vocabulary",
-          "blurb": "Selected HTTP, IT and attribution content exists. Other protocols are planned; schemas are not adapters or automatic provenance.",
+          "blurb": "Describe IT subjects, their protocol interactions and evidence attribution using reusable domain and protocol vocabulary. Selected HTTP, IT and PROV content exists, while other protocols are planned; these schemas neither dispatch interactions nor populate or verify provenance automatically.",
           "state": "delivered",
           "kind": "content",
           "features": [
@@ -616,18 +626,20 @@
         {
           "slug": "portable-conformance-testable-definitions",
           "name": "Profile-scoped definition interchange",
-          "blurb": "Conformance requirements exist. Independent compatibility and nonconformant DRAFT preservation remain gates before complete-migration claims; qualification compares exports and imports against an explicit profile, with evidence supplied by each processor.",
+          "blurb": "Specify definition interchange that preserves subject types, Archetype constraints, governance relationships and lifecycle meaning across an explicit conformance profile. Qualification compares processor exports and imports; independent compatibility evidence and preservation of nonconformant DRAFTs remain gates before complete-migration claims.",
           "state": "partial",
           "kind": "specification",
           "features": [
             "specifications/primitives",
-            "specifications/systemic-lifecycle-management"
+            "specifications/systemic-lifecycle-management",
+            "specifications/archetyping",
+            "specifications/dna-grammar"
           ]
         },
         {
           "slug": "research-tested-model-evolution",
           "name": "Research-informed model evolution",
-          "blurb": "Hypotheses, case records and decisions inform evolution. Executed discrimination and accepted Change Proposals differ from record availability.",
+          "blurb": "Connect hypotheses about system behavior and governance to case evidence, recorded decisions and proposed model revisions. Research records support scrutiny, not accepted semantics: conceptual cases differ from executed experiments, and normative evolution requires discriminating evidence and accepted Change Proposals.",
           "state": "partial",
           "kind": "research",
           "features": [
@@ -1049,7 +1061,7 @@
         {
           "slug": "deterministic-agentic-execution",
           "name": "Deterministic workflow controls",
-          "blurb": "Local resolution and journals exist for supported bindings; host delivery remains scoped and generated content probabilistic.",
+          "blurb": "Coordinate eligible workflow steps, task-specific model routes and resolved guidance against recorded outcomes, making local orchestration decisions traceable. Resolution and journals exist on supported adapters; hosts dispatch work, guidance does not prove adherence, and generated content remains probabilistic.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -1062,7 +1074,7 @@
         {
           "slug": "enforced-artifact-contracts",
           "name": "Scoped artifact contract checks",
-          "blurb": "Mediated schema checks exist; contract resolution and parser compatibility limit integration. Arbitrary prose and unmediated writes are not covered.",
+          "blurb": "Turn shared artifact schemas and templates into checks on mediated write sets so delivery outputs can be validated against declared contracts. Structured-data and Markdown-metadata checks exist; contract resolution, parsing and atomicity remain integration boundaries, while substantive prose quality and unmediated writes are outside their coverage.",
           "state": "partial",
           "kind": "implementation",
           "features": [
@@ -1073,7 +1085,7 @@
         {
           "slug": "agentic-safe-operating-model",
           "name": "Agentic SAFe operating model",
-          "blurb": "Role, workflow and practice content exists; coherent execution needs accepted harness/template/host combinations.",
+          "blurb": "Organize agentic delivery responsibilities and ceremonies through a shared catalogue of roles, workflow sequences, practice playbooks and versioned instructions. Role and guidance content exists; workflow alignment and behavioral quality remain under integration, and execution needs accepted harness, template and host combinations.",
           "state": "partial",
           "kind": "content",
           "features": [
@@ -1086,24 +1098,29 @@
         {
           "slug": "human-gated-advancement",
           "name": "Human-gated advancement",
-          "blurb": "Authenticated revision-bound decisions; sequencing and agent grants are supporting controls, not human identity proof.",
+          "blurb": "Make workflow advancement depend on review decisions bound to exact revisions and scope, supported by eligible-step resolution, agent write grants and recorded outcomes. Authenticated human approval is planned; existing sequencing, grants and journals do not prove human identity or acceptance.",
           "state": "planned",
           "kind": "implementation",
           "features": [
             "agentic-harness/step-authorization",
-            "safe-agentic-organization/workflows"
+            "safe-agentic-organization/workflows",
+            "agentic-harness/workflows-steps-resolution",
+            "agentic-harness/logging"
           ]
         },
         {
           "slug": "local-first-delivery-plane",
           "name": "Local-first delivery plane",
-          "blurb": "Git artifact conventions and separate journals exist. Manual setup is independent of planned installer, CI and hosted offerings.",
+          "blurb": "Maintain a local delivery baseline by combining Git-backed artifacts, separate execution journals and contract checks when agent outputs are reconciled. Manual setup is available; collaboration, contract integration and transaction behavior remain incomplete. Installer and CI/publication pipelines are planned optional extensions, independent of hosted offerings.",
           "state": "partial",
           "kind": "implementation",
           "features": [
             "agentic-workspace/installer",
             "agentic-workspace/workspace-data-plane",
-            "agentic-workspace/cicd-pipelines"
+            "agentic-workspace/cicd-pipelines",
+            "agentic-harness/logging",
+            "agentic-harness/artifact-validation",
+            "safe-agentic-organization/artifacts"
           ],
           "optional": [
             "agentic-workspace/installer",
@@ -1113,11 +1130,13 @@
         {
           "slug": "delivery-history-as-governed-context",
           "name": "Delivery evidence sourcing",
-          "blurb": "Artifact/journal inference into candidates; contributions are not accepted definitions or delivered systems.",
+          "blurb": "Combine versioned workspace artifacts with captured execution journals to derive reviewable definition candidates carrying provenance and uncertainty. Bridge inference and draft promotion are planned; evidence covers captured work only, and contributions establish neither accepted definitions nor tested or deployed systems.",
           "state": "planned",
           "kind": "implementation",
           "features": [
-            "saf-sie-bridge/harness-history-sourcing"
+            "saf-sie-bridge/harness-history-sourcing",
+            "agentic-workspace/workspace-data-plane",
+            "agentic-harness/logging"
           ]
         }
       ],
@@ -1748,7 +1767,7 @@
       "slug": "governed-context",
       "name": "Governed organizational context",
       "title": "Work from shared, typed definitions",
-      "blurb": "People and authorized tools can use versioned accepted intent. Direct authoring and reviewed sourcing are alternatives; authorized selection and answer quality need acceptance.",
+      "blurb": "Establish a common semantic basis for decisions across authors and tools by connecting typed IT inventory, retained definition versions, shared vocabulary and cited dependency analysis. Direct authoring and reviewed sourcing are alternative inputs; integrated authorized selection, interchange and answer quality need acceptance, and accepted intent is not observed live state.",
       "state": "partial",
       "scope": "Definition and specification foundations; integrated authorized use remains incomplete.",
       "capabilities": [
@@ -1766,7 +1785,7 @@
       "slug": "governance-fabric",
       "name": "Scoped governance composition",
       "title": "Review selected obligations together",
-      "blurb": "Selected content supports planned binding and overlap review, not automatic conflict freedom, legal completeness or enforcement.",
+      "blurb": "Bring obligations from selected frameworks and internal policies into a shared scope so adopters can review applicability, overlaps and gaps against the same IT subjects. Sourced vocabulary and templates support planned composition and accountable interpretation; selection establishes neither conflict freedom, legal completeness nor compliance enforcement.",
       "state": "partial",
       "scope": "Content exists; integrated composition and enforcement are planned.",
       "capabilities": [
@@ -1778,7 +1797,7 @@
       "slug": "governance-lifecycle",
       "name": "Governance lifecycle",
       "title": "Make review and activation boundaries explicit",
-      "blurb": "Transition controls exist; attributable revision-bound decisions need identity and policy. Research promotion, sealing and activation are different processes.",
+      "blurb": "Connect proposals to accountable review and activation through governance grammar, lifecycle controls and human decision gates. Transition controls exist, while authenticated revision-bound decisions need identity and policy integration; sealing closes collection rather than approving definitions, and research affects model revision only through separately accepted Change Proposals.",
       "state": "partial",
       "scope": "Transition controls exist; authenticated decisions remain incomplete.",
       "capabilities": [
@@ -1792,7 +1811,7 @@
       "slug": "truth-sourcing",
       "name": "Evidence-backed definition sourcing",
       "title": "Review candidates from selected sources",
-      "blurb": "Pipelines supply inspectable candidates. Confidence is not truth; governed draft registration is a separate step.",
+      "blurb": "Build a reviewable account of IT and delivery work by comparing and reconciling code-derived and delivery-derived evidence as retained candidates with provenance. End-to-end acquisition, review and draft registration are planned; confidence is not truth, source history is not deployed reality, and draft promotion remains separate from acceptance.",
       "state": "planned",
       "scope": "Acquisition and end-to-end review/promotion are planned.",
       "capabilities": [
@@ -1805,7 +1824,7 @@
       "slug": "norm-evaluation",
       "name": "Scoped Norm evaluation",
       "title": "Evaluate identified inputs against supported Norms",
-      "blurb": "Pure verdicts use pinned instances and rules. Operational correspondence additionally needs deployed identity, freshness and coverage; continuous appraisal needs scheduling.",
+      "blurb": "Produce decision-ready compliance appraisal by combining pure verdicts over pinned rules and inputs with scoped IT measures, findings and corrective review. Planned evaluation preserves unknown and not-applicable states; running-system claims additionally need deployed identity, fresh observations and coverage, continuous appraisal needs scheduling, and results are not compliance certification.",
       "state": "planned",
       "scope": "Complete pure verdicts and continuous appraisal are planned.",
       "capabilities": [
@@ -1817,7 +1836,7 @@
       "slug": "generative-delivery",
       "name": "Bounded generative delivery",
       "title": "Generate artifacts through declared workflows",
-      "blurb": "Local controls support bounded artifact work. Reviewed documents, tested code, authorized deployment and feedback are separate scopes; hosting is optional.",
+      "blurb": "Produce grounded artifacts from selected definitions through bounded workflow orchestration, declared operations, artifact contracts and accountable review, retaining outputs and execution evidence in a local delivery baseline. Local controls exist; integrated generation, effect safety and authenticated human gates need acceptance. Reviewed documents do not establish tested code, authorized deployment or operational feedback; hosting is optional.",
       "state": "partial",
       "scope": "Local controls exist; integrated generation/effects need acceptance.",
       "capabilities": [
@@ -1826,7 +1845,8 @@
         "saf/deterministic-agentic-execution",
         "saf/enforced-artifact-contracts",
         "saf/agentic-safe-operating-model",
-        "saf/local-first-delivery-plane"
+        "saf/local-first-delivery-plane",
+        "saf/human-gated-advancement"
       ]
     }
   ],

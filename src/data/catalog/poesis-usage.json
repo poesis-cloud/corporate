@@ -1037,9 +1037,8 @@
       "values": [
         "value:actionable-governance-findings"
       ],
-      "features": [
-        "itip/web-application/it-compliance-evaluation",
-        "itip/web-application/definitions-management"
+      "capabilities": [
+        "itip/continuous-it-compliance-evaluation"
       ]
     },
     {
@@ -1140,7 +1139,6 @@
         "value:gsm/specifications/01"
       ],
       "features": [
-        "itip/web-application/definitions-management",
         "gsm/specifications/archetyping"
       ]
     },
@@ -1170,7 +1168,7 @@
     {
       "slug": "approve-agent-mandate",
       "name": "Approve an agent resource and action mandate",
-      "goal": "Authorize only the resources and actions required by a bounded assignment, with explicit expiry, review boundaries and prohibited effects.",
+      "goal": "Review resource/action grants against a bounded assignment and its expiry, then check those grants and the target baseline before mediated work. Mandate review is planned; grant checking alone is not authenticated human approval.",
       "actorTypes": [
         "it-head-of-ai",
         "it-exception-approver",
@@ -1531,7 +1529,7 @@
     {
       "slug": "read-governance-model",
       "name": "Read and model a governance decision",
-      "goal": "Produce a reviewable model sketch with explicit types, obligations and lifecycle boundaries.",
+      "goal": "Interpret the primitive, typing, governance-grammar and lifecycle clauses relevant to a proposed decision, identifying permitted representations and constraints without claiming that a processor enforces them.",
       "actorTypes": [
         "specification-reader",
         "it-architect"
@@ -1554,7 +1552,7 @@
     {
       "slug": "describe-service-contract",
       "name": "Describe a service contract and its attribution",
-      "goal": "Draft a typed HTTP service description that identifies the IT subject and the source of each assertion.",
+      "goal": "Select sourced HTTP, IT-domain and provenance concepts for a service description, checking the meaning and attribution of each assertion. Vocabulary does not implement the service or prove its behavior.",
       "actorTypes": [
         "specification-reader",
         "it-architect"
@@ -1574,7 +1572,7 @@
     {
       "slug": "describe-mixed-protocol-boundaries",
       "name": "Describe payment request and notification boundaries",
-      "goal": "Review how payment submission, request failure and later status notifications differ at the customer boundary.",
+      "goal": "Use sourced gRPC, GraphQL and WebSocket concepts to describe request, response and notification boundaries in a payment example. Application payment rules and delivery guarantees require separate definitions and evidence.",
       "actorTypes": [
         "specification-reader",
         "it-platform"
@@ -1592,7 +1590,7 @@
     {
       "slug": "describe-payment-settlement-boundaries",
       "name": "Describe payment settlement and recovery boundaries",
-      "goal": "Review the handoff from a committed payment instruction to a recoverable settlement job.",
+      "goal": "Use sourced JDBC, Kafka and AMQP concepts to describe transaction and messaging boundaries in a settlement example, exposing the recovery assumptions that vocabulary alone cannot establish.",
       "actorTypes": [
         "specification-reader",
         "it-platform"
@@ -1638,7 +1636,7 @@
     {
       "slug": "upgrade-governance-packages",
       "name": "Review a governance package upgrade",
-      "goal": "Adopt changed financial resilience, delivery and service-management requirements without silently changing accepted obligations.",
+      "goal": "Compare revised financial-resilience, delivery and service-management source content with the selected package versions and identify obligations needing renewed adopter review. A source update does not itself change accepted obligations.",
       "actorTypes": [
         "it-ciso",
         "it-architect",
@@ -1652,7 +1650,6 @@
         "value:gsm/ontology/05"
       ],
       "features": [
-        "itip/web-application/ontology-management",
         "gsm/ontology/dora",
         "gsm/ontology/safe",
         "gsm/ontology/itil",
@@ -1722,8 +1719,7 @@
         "value:gsm/research-lab/02"
       ],
       "features": [
-        "gsm/specifications/enhanced-directives-norms-model",
-        "gsm/research-lab/decision-register"
+        "gsm/specifications/enhanced-directives-norms-model"
       ]
     },
     {
@@ -1748,12 +1744,8 @@
         "value:sie/definition-manager/01",
         "value:sie/definition-blackboard-manager/02"
       ],
-      "features": [
-        "itip/web-application/definitions-management",
-        "itip/web-application/rbac-abac",
-        "sie/definition-manager/definitions-management-api",
-        "sie/definition-manager/definitions-lifecycle-enforcement",
-        "sie/definition-manager/definitions-retention"
+      "capabilities": [
+        "itip/governed-it-inventory"
       ]
     },
     {
@@ -1780,14 +1772,8 @@
         "value:sie/definition-blackboard-manager/02",
         "value:sie/definition-blackboard-manager/03"
       ],
-      "features": [
-        "itip/web-application/definitions-truth-sourcing-management",
-        "itip/definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos",
-        "sie/definition-manager/definitions-management-api",
-        "sie/definition-manager/definitions-lifecycle-enforcement",
-        "sie/definition-blackboard-manager/ks-contributions-management-api",
-        "sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement",
-        "sie/definition-blackboard-manager/ks-contributions-retention"
+      "affordances": [
+        "truth-sourcing"
       ]
     },
     {
@@ -1806,8 +1792,6 @@
         "value:sie/definition-manager/02"
       ],
       "features": [
-        "sie/definition-manager/definitions-management-api",
-        "sie/definition-manager/definitions-retention",
         "sie/definition-manager/mcp"
       ]
     },
@@ -1827,8 +1811,6 @@
         "value:sie/definition-manager/04"
       ],
       "features": [
-        "sie/definition-manager/definitions-management-api",
-        "sie/definition-manager/definitions-retention",
         "sie/definition-manager/lifecycle-events-mediation"
       ]
     },
@@ -1853,19 +1835,13 @@
         "value:sie/operator/04"
       ],
       "features": [
-        "itip/web-application/it-compliance-evaluation",
-        "itip/web-application/ontology-management",
-        "sie/operator/norms-evaluation-api",
-        "gsm/ontology/iso-25010",
-        "gsm/ontology/iso-25012",
-        "gsm/ontology/gdpr",
-        "gsm/ontology/nis2"
+        "itip/web-application/it-compliance-evaluation"
       ]
     },
     {
       "slug": "review-recurring-service-appraisal",
       "name": "Review recurring patient-portal appraisal",
-      "goal": "Review successive operational findings for a named portal deployment with visible observation coverage and freshness.",
+      "goal": "Compare successive portal appraisal results, review corrective proposals and decide what needs reappraisal. Operational conclusions require supplied deployment observations with explicit coverage and freshness; recurring scheduling is a separate prerequisite.",
       "actorTypes": [
         "it-ciso",
         "it-platform",
@@ -1881,14 +1857,8 @@
         "value:itip/web-application/02",
         "value:sie/03"
       ],
-      "features": [
-        "itip/web-application/it-compliance-evaluation",
-        "itip/web-application/ontology-management",
-        "sie/operator/norms-evaluation-api",
-        "gsm/ontology/iso-25010",
-        "gsm/ontology/iso-25012",
-        "gsm/ontology/gdpr",
-        "gsm/ontology/nis2"
+      "capabilities": [
+        "itip/continuous-it-compliance-evaluation"
       ]
     },
     {
@@ -1909,9 +1879,7 @@
         "value:itip/web-application/04"
       ],
       "features": [
-        "itip/web-application/it-impact-simulation",
-        "itip/web-application/definitions-management",
-        "itip/web-application/rbac-abac"
+        "itip/web-application/it-impact-simulation"
       ]
     },
     {
@@ -1931,9 +1899,7 @@
         "value:itip/web-application/05"
       ],
       "features": [
-        "itip/web-application/it-copilot",
-        "itip/web-application/rbac-abac",
-        "sie/definition-manager/definitions-management-api"
+        "itip/web-application/it-copilot"
       ]
     },
     {
@@ -1953,9 +1919,7 @@
         "value:itip/web-application/03"
       ],
       "features": [
-        "itip/web-application/it-artifact-factory",
-        "itip/web-application/definitions-management",
-        "itip/web-application/rbac-abac"
+        "itip/web-application/it-artifact-factory"
       ]
     },
     {
@@ -1979,9 +1943,7 @@
         "value:sie/operator/04"
       ],
       "features": [
-        "sie/operator/norms-evaluation-api",
-        "sie/operator/mechanism-execution-foundations",
-        "sie/operator/mechanism-execution-technos-integrations"
+        "sie/operator/mechanism-execution-foundations"
       ]
     },
     {
@@ -2007,19 +1969,8 @@
         "value:saf/safe-agentic-organization/02",
         "value:saf/safe-agentic-organization/03"
       ],
-      "features": [
-        "saf/agentic-harness/workflows-steps-resolution",
-        "saf/agentic-harness/skills-instructions-prompt-injection",
-        "saf/agentic-harness/llm-resolution",
-        "saf/agentic-harness/artifact-validation",
-        "saf/agentic-harness/step-authorization",
-        "saf/agentic-harness/logging",
-        "saf/safe-agentic-organization/agents",
-        "saf/safe-agentic-organization/skills",
-        "saf/safe-agentic-organization/workflows",
-        "saf/safe-agentic-organization/instructions",
-        "saf/safe-agentic-organization/artifacts",
-        "saf/agentic-workspace/workspace-data-plane"
+      "affordances": [
+        "generative-delivery"
       ]
     },
     {
@@ -2039,12 +1990,8 @@
         "value:saf/agentic-workspace/02",
         "value:saf/agentic-workspace/03"
       ],
-      "features": [
-        "saf/agentic-harness/artifact-validation",
-        "saf/safe-agentic-organization/artifacts",
-        "saf/agentic-workspace/workspace-data-plane",
-        "saf/agentic-workspace/installer",
-        "saf/agentic-workspace/cicd-pipelines"
+      "capabilities": [
+        "saf/local-first-delivery-plane"
       ]
     },
     {
@@ -2065,15 +2012,162 @@
         "value:saf/05",
         "value:saf/saf-sie-bridge/01"
       ],
-      "features": [
-        "sie/definition-manager/definitions-management-api",
-        "sie/definition-blackboard-manager/ks-contributions-management-api",
-        "sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement",
-        "sie/definition-blackboard-manager/ks-contributions-retention",
-        "saf/agentic-harness/logging",
-        "saf/agentic-workspace/workspace-data-plane",
-        "saf/saf-sie-bridge/harness-history-sourcing"
+      "capabilities": [
+        "saf/delivery-history-as-governed-context"
       ]
+    },
+    {
+      "slug": "inspect-code-revision-candidates",
+      "name": "Extract definition candidates from a code revision",
+      "goal": "Analyze a pinned repository revision and inspect candidate subjects, relationships, provenance and uncertainty before any client promotes a draft. Inspected source is not evidence of deployed behavior.",
+      "actorTypes": ["integration-client", "it-architect"],
+      "addressedPains": ["it-ea-drift", "it-acquisition-blind-spots"],
+      "values": ["value:inspectable-acquisition-coverage", "value:itip/definition-blackboard-code-sourcer/01"],
+      "features": ["itip/definition-blackboard-code-sourcer/automatic-sourcing-from-code-repos"]
+    },
+    {
+      "slug": "manage-definition-through-api",
+      "name": "Read and revise definitions through the API",
+      "goal": "Create, query and revise typed definitions through the REST contract, inspecting validation, revision and access responses without treating a successful draft write as approval.",
+      "actorTypes": ["integration-client", "it-platform"],
+      "addressedPains": ["it-tool-silos", "it-ungoverned-change"],
+      "values": ["value:sie/definition-manager/01"],
+      "features": ["sie/definition-manager/definitions-management-api"]
+    },
+    {
+      "slug": "qualify-execution-adapter",
+      "name": "Qualify an execution adapter for an integration",
+      "goal": "Check a selected adapter's transport, authority and failure contract against a named integration, distinguishing supported operations from planned adapter coverage.",
+      "actorTypes": ["integration-client", "it-platform"],
+      "addressedPains": ["it-tool-silos", "it-ungoverned-change"],
+      "values": ["value:sie/02"],
+      "features": ["sie/operator/mechanism-execution-technos-integrations"]
+    },
+    {
+      "slug": "post-panel-contribution",
+      "name": "Submit a contribution to a declared panel",
+      "goal": "Post a candidate to a declared panel and inspect schema, identity, confidence-envelope and rejection responses under the client/server contract. Acceptance into collection is not definition approval.",
+      "actorTypes": ["integration-client"],
+      "addressedPains": ["it-truth-drift"],
+      "values": ["value:sie/definition-blackboard-manager/01"],
+      "features": ["sie/definition-blackboard-manager/ks-contributions-management-api"]
+    },
+    {
+      "slug": "close-contribution-collection",
+      "name": "Close a contribution collection for review",
+      "goal": "Request sealing or abandonment of a contribution collection and inspect concurrent-intake outcomes and snapshot readiness. Closing collection does not approve or activate a definition.",
+      "actorTypes": ["integration-client", "it-platform"],
+      "addressedPains": ["it-truth-drift"],
+      "values": ["value:sie/definition-blackboard-manager/02"],
+      "features": ["sie/definition-blackboard-manager/ks-contributions-lifecycle-enforcement"]
+    },
+    {
+      "slug": "inspect-retained-contribution",
+      "name": "Inspect retained contribution evidence",
+      "goal": "Retrieve stored candidates and their captured evidence to inspect provenance and conflicting assertions, making missing audit, integrity or promoted-draft links explicit.",
+      "actorTypes": ["it-architect", "integration-client"],
+      "addressedPains": ["it-audit-reconstruction"],
+      "values": ["value:sie/definition-blackboard-manager/03"],
+      "features": ["sie/definition-blackboard-manager/ks-contributions-retention"]
+    },
+    {
+      "slug": "resolve-eligible-workflow-step",
+      "name": "Resolve the next eligible workflow step",
+      "goal": "Resolve eligible steps from workflow configuration and recorded outcomes on a supported adapter; leave dispatch to the host rather than treating resolution as execution.",
+      "actorTypes": ["delivery-agent", "it-platform"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/agentic-harness/01"],
+      "features": ["saf/agentic-harness/workflows-steps-resolution"]
+    },
+    {
+      "slug": "validate-mediated-write",
+      "name": "Validate a mediated artifact write",
+      "goal": "Check a proposed write set against a matched schema and inspect structured-data or Markdown-metadata violations before writing. Passing validation does not establish prose quality or acceptance.",
+      "actorTypes": ["delivery-agent", "it-platform"],
+      "addressedPains": ["it-unverified-generated-output"],
+      "values": ["value:saf/agentic-harness/02"],
+      "features": ["saf/agentic-harness/artifact-validation"]
+    },
+    {
+      "slug": "inspect-harness-invocations",
+      "name": "Inspect a captured harness invocation sequence",
+      "goal": "Read correlated session-journal records to reconstruct captured harness invocations and their outcomes, distinguishing absent records from evidence that no action occurred.",
+      "actorTypes": ["it-platform", "delivery-agent"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/02"],
+      "features": ["saf/agentic-harness/logging"]
+    },
+    {
+      "slug": "assign-delivery-role",
+      "name": "Assign a delivery responsibility from the role catalog",
+      "goal": "Select portfolio, program, team and specialist roles for a delivery responsibility and make their boundaries explicit without treating a role definition as an authenticated authority grant.",
+      "actorTypes": ["it-head-of-ai", "delivery-agent"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/safe-agentic-organization/01"],
+      "features": ["saf/safe-agentic-organization/agents"]
+    },
+    {
+      "slug": "select-delivery-playbook",
+      "name": "Select a practice playbook for a delivery task",
+      "goal": "Choose a domain or practice playbook for a named task and inspect its applicability and required evidence; reusable guidance does not prove agent adherence.",
+      "actorTypes": ["delivery-agent", "it-platform"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/safe-agentic-organization/02"],
+      "features": ["saf/safe-agentic-organization/skills"]
+    },
+    {
+      "slug": "define-delivery-ceremony",
+      "name": "Define a delivery ceremony and its handoffs",
+      "goal": "Specify the sequence of roles, context and artifacts for a ceremony, identifying human-decision checkpoints separately from the planned implementation that authenticates them.",
+      "actorTypes": ["it-head-of-ai", "delivery-agent"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/safe-agentic-organization/03"],
+      "features": ["saf/safe-agentic-organization/workflows"]
+    },
+    {
+      "slug": "select-role-instructions",
+      "name": "Select versioned instructions for an engineering role",
+      "goal": "Identify the versioned instructions governing a role's engineering work and distinguish advisory guidance from requirements enforced by separate executable gates.",
+      "actorTypes": ["delivery-agent", "it-platform"],
+      "addressedPains": ["it-ungoverned-agents"],
+      "values": ["value:saf/safe-agentic-organization/02"],
+      "features": ["saf/safe-agentic-organization/instructions"]
+    },
+    {
+      "slug": "define-deliverable-contract",
+      "name": "Define a deliverable schema and template",
+      "goal": "Select a schema and Markdown template for a named deliverable and inspect required metadata, content and references before using them as a write contract.",
+      "actorTypes": ["delivery-agent", "it-platform"],
+      "addressedPains": ["it-unverified-generated-output"],
+      "values": ["value:saf/agentic-workspace/02"],
+      "features": ["saf/safe-agentic-organization/artifacts"]
+    },
+    {
+      "slug": "install-pinned-workspace",
+      "name": "Install a pinned agentic workspace",
+      "goal": "Set up a selected harness, organization and host combination while preserving existing work, checking version compatibility separately from the manual setup route.",
+      "actorTypes": ["it-platform"],
+      "addressedPains": ["it-unqualified-agent-runtime"],
+      "values": ["value:saf/agentic-workspace/01"],
+      "features": ["saf/agentic-workspace/installer"]
+    },
+    {
+      "slug": "publish-checked-artifacts",
+      "name": "Publish artifacts through configured CI checks",
+      "goal": "Run pinned artifact contracts and environment-specific checks through a configured publication pipeline, inspecting failures before publication; publication is not production deployment acceptance.",
+      "actorTypes": ["it-platform", "delivery-agent"],
+      "addressedPains": ["it-unverified-generated-output"],
+      "values": ["value:saf/agentic-workspace/03"],
+      "features": ["saf/agentic-workspace/cicd-pipelines"]
+    },
+    {
+      "slug": "extract-delivery-history-candidates",
+      "name": "Extract definition candidates from delivery history",
+      "goal": "Derive typed Blackboard candidates from supplied pinned artifacts and journals, inspecting provenance and uncertainty before the separate client-owned draft-promotion step.",
+      "actorTypes": ["integration-client", "it-architect"],
+      "addressedPains": ["it-handcrafted-deliverables"],
+      "values": ["value:saf/saf-sie-bridge/01"],
+      "features": ["saf/saf-sie-bridge/harness-history-sourcing"]
     },
     {
       "slug": "maintain-governed-it-inventory",
@@ -2101,7 +2195,7 @@
     {
       "slug": "compose-it-governance-fabric",
       "name": "Compose an IT governance fabric for an adopting scope",
-      "goal": "Select governance packages, bind them to an adopting scope and review their overlaps as one composition, without treating composition as evaluation or enforcement.",
+      "goal": "Apply a pinned package selection to a shared subject inventory, inspect overlaps and uncovered concerns through review lenses, and retain adoption decisions against exact revisions. Composition is distinct from evaluation and enforcement.",
       "actorTypes": [
         "it-architect",
         "it-ciso",
@@ -2145,7 +2239,7 @@
     {
       "slug": "run-it-compliance-appraisal",
       "name": "Run a scoped IT compliance appraisal",
-      "goal": "Produce versioned measures and findings with explicit applicability, input identity, freshness and unknown states, then carry uncovered obligations into owned corrective proposals.",
+      "goal": "Appraise selected definition revisions, review findings and unknown states with accountable owners, carry corrective proposals through a decision session and reappraise the revised scope. Supplied observations are needed for live-system conclusions.",
       "actorTypes": [
         "it-ciso",
         "it-risk-owner",
@@ -2167,7 +2261,7 @@
     {
       "slug": "answer-it-question-from-model",
       "name": "Answer an IT question from the governed model",
-      "goal": "Trace dependencies and obtain cited read-only answers over authorized definitions, keeping confirmed relations, possible exposure and missing evidence distinct.",
+      "goal": "Assess a proposed IT change by combining dependency and obligation paths with cited read-only answers over the same authorized definitions. Compare affected parties and unresolved evidence before choosing an option; graph traversal is not causal simulation.",
       "actorTypes": [
         "it-architect",
         "it-cto",
@@ -2189,7 +2283,7 @@
     {
       "slug": "produce-it-document-family",
       "name": "Produce a named IT document family from pinned definitions",
-      "goal": "Bind templates to pinned definitions, review missing inputs and citations, and operate recurring production so generated artifacts stay inspectable.",
+      "goal": "Select an IT baseline and its recorded decisions, bind a versioned document family to those inputs, and review generated packs together for consistency and missing evidence. Recurring jobs preserve the same inspection and acceptance boundaries.",
       "actorTypes": [
         "it-knowledge-owner",
         "it-architect",
@@ -2211,7 +2305,7 @@
     {
       "slug": "hold-authoritative-definitions",
       "name": "Hold definitions as the authoritative, revision-bound source",
-      "goal": "Keep committed definitions, their change events and their retained evidence available to authorized readers as one attributable, tenant-scoped source of accepted intent.",
+      "goal": "Maintain typed definitions through the API and retrieve their stable identities, current revisions and retained history as one governed source. Apply tenant/object access and retention boundaries; a stored draft is not accepted intent.",
       "actorTypes": [
         "it-platform",
         "integration-client",
@@ -2233,7 +2327,7 @@
     {
       "slug": "enforce-definition-lifecycle",
       "name": "Enforce definition lifecycle boundaries",
-      "goal": "Control transitions between draft, review and accepted states, and determine which dependent definitions require renewed review when a referenced foundation is invalidated.",
+      "goal": "Distinguish collection closure from definition approval, validate revision-bound lifecycle changes and inspect dependent eligibility after foundation invalidation. Where the notification route is available, inform authorized consumers without conflating event delivery with approval.",
       "actorTypes": [
         "it-architect",
         "it-ciso",
@@ -2255,7 +2349,7 @@
     {
       "slug": "collect-contributions-on-blackboard",
       "name": "Collect competing contributions on a shared blackboard",
-      "goal": "Accept scored contributions from independent sources into declared panels, retain their provenance, and seal the board before any draft is promoted.",
+      "goal": "Collect independent candidates under declared panel contracts and revisit their retained provenance to compare conflicting assertions. Contribution acceptance and evidence retention do not themselves seal a board or promote an approved definition.",
       "actorTypes": [
         "integration-client",
         "it-platform",
@@ -2277,7 +2371,7 @@
     {
       "slug": "obtain-reproducible-verdict",
       "name": "Obtain a reproducible verdict for supplied inputs",
-      "goal": "Evaluate pinned instances against pinned rules so the same inputs give the same verdict, with missing evidence returned as an explicit unknown rather than a pass.",
+      "goal": "Select coherent definition revisions through the API, supply pinned inputs and Norms to evaluation, and compare verdicts across rule revisions with explicit applicability and unknown states. Repeatability applies to identical evaluation inputs, not changing live systems.",
       "actorTypes": [
         "assessment-runner",
         "it-platform",
@@ -2299,7 +2393,7 @@
     {
       "slug": "run-mechanism-in-bounds",
       "name": "Run a Mechanism inside declared bounds",
-      "goal": "Execute a named authorized operation within a declared sandbox, caller authority and budget, and retain a receipt sufficient to decide whether recovery is needed.",
+      "goal": "Resolve an eligible operation and its supported adapter, apply declared authority and execution limits, then interpret the receipt against that adapter's failure contract before deciding on recovery. Wider adapters and complete execution controls require their own acceptance.",
       "actorTypes": [
         "it-platform",
         "integration-client",
@@ -2320,7 +2414,7 @@
     {
       "slug": "serve-authorized-context-to-model",
       "name": "Serve authorized definition context to a model",
-      "goal": "Give a model or agent a policy-filtered, pinned context snapshot without granting it authority to change the systems it reads about.",
+      "goal": "Provide coherent, policy-filtered definition context through a qualified API or MCP route so model requests retain revision and access boundaries. Context access alone neither grants effect authority nor validates generated answers.",
       "actorTypes": [
         "it-head-of-ai",
         "integration-client",
@@ -2342,7 +2436,7 @@
     {
       "slug": "type-concern-with-primitives",
       "name": "Type a governance concern with the systemic primitives",
-      "goal": "Place a concern on the eight specified subject types and expose where the fixed core does not fit the situation being modeled.",
+      "goal": "Represent a scoped governance concern using the fixed primitive roles and domain Archetypes together, exposing relationships and concerns the chosen representation cannot express. A valid representation does not establish universal model adequacy.",
       "actorTypes": [
         "specification-reader",
         "it-architect"
@@ -2361,7 +2455,7 @@
     {
       "slug": "define-domain-archetype",
       "name": "Define a domain vocabulary as an Archetype",
-      "goal": "Express a domain's vocabulary, constraints and exact references as an Archetype under GSM, keeping the subject types fixed while the domain stays open.",
+      "goal": "Define domain vocabulary over the fixed subject types, identify its versioned dependencies and specify how typed definitions pass through correction, review and lifecycle change. Processors implement the specified controls.",
       "actorTypes": [
         "specification-reader",
         "it-data-steward",
@@ -2382,7 +2476,7 @@
     {
       "slug": "express-obligation-in-grammar",
       "name": "Express an obligation in the governance grammar",
-      "goal": "State a Directive, its Norms and the resulting Ascription so review and activation boundaries are explicit rather than implied by prose.",
+      "goal": "Express governing intent as a Directive and evaluable Norms, and specify the review and activation boundaries of their Ascriptions. Grammar and lifecycle meaning remain distinct from runtime enforcement.",
       "actorTypes": [
         "specification-reader",
         "it-architect"
@@ -2402,7 +2496,7 @@
     {
       "slug": "adopt-sourced-framework",
       "name": "Adopt a sourced framework or regulation",
-      "goal": "Take selected framework and regulatory vocabulary with its cited clauses into a review, and keep unbound templates distinct from obligations bound to an adopting scope.",
+      "goal": "Relate selected architecture, quality and regulatory concepts to a common adopting concern, retaining clause provenance and unresolved interpretation or binding decisions. Source-content reuse does not certify legal completeness or compliance.",
       "actorTypes": [
         "it-ciso",
         "it-architect",
@@ -2444,7 +2538,7 @@
     {
       "slug": "take-modeling-limit-to-decision",
       "name": "Take a modeling limit through research to a decision",
-      "goal": "Record a hypothesis and its case evidence, discriminate it against alternatives, and carry the outcome into a compatibility-aware Change Proposal rather than a silent model change.",
+      "goal": "Trace a modeling limit through hypotheses, cases and recorded decisions, identify missing discriminating evidence and prepare a compatibility-aware Change Proposal where warranted. A research record is not an accepted model change or proof that an experiment ran.",
       "actorTypes": [
         "research-reviewer",
         "specification-reader"
@@ -2464,7 +2558,7 @@
     {
       "slug": "run-workflow-with-deterministic-controls",
       "name": "Run an agentic workflow with deterministic controls",
-      "goal": "Resolve a workflow locally against pinned instructions and declared checks, and retain a journal that distinguishes deterministic control from probabilistic generation.",
+      "goal": "Resolve eligible work, supply configured guidance, select a model route and correlate captured invocations for a supported local execution. Host dispatch and probabilistic generation remain distinct from deterministic workflow controls.",
       "actorTypes": [
         "delivery-agent",
         "it-platform",
@@ -2486,7 +2580,7 @@
     {
       "slug": "check-artifact-against-contract",
       "name": "Check a produced artifact against its contract",
-      "goal": "Validate mediated writes against a declared schema before acceptance, keeping unmediated writes and arbitrary prose outside the contracted surface.",
+      "goal": "Choose the deliverable's schema and template, resolve the applicable contract and inspect violations in a mediated write set before writing. Structured validation and metadata checks do not replace substantive review or acceptance.",
       "actorTypes": [
         "delivery-agent",
         "it-platform"
@@ -2506,7 +2600,7 @@
     {
       "slug": "adopt-agentic-safe-operating-model",
       "name": "Adopt the agentic SAFe operating model",
-      "goal": "Take roles, workflows and practices into a delivery organization and identify which harness, template and host combinations must be accepted for coherent execution.",
+      "goal": "Assign responsibilities from the role catalog, connect their ceremonies and handoffs, and select the practices and instructions each role needs. Qualify the harness, template and host combination separately from adopting the operating model.",
       "actorTypes": [
         "it-head-of-ai",
         "delivery-agent",
@@ -2527,7 +2621,7 @@
     {
       "slug": "gate-advancement-on-human-decision",
       "name": "Gate an advancement on an authenticated human decision",
-      "goal": "Require an attributable, revision-bound human decision before work advances, treating sequencing and agent grants as supporting controls rather than identity proof.",
+      "goal": "Bind an advancement decision to the exact artifact revision and human authority, constrain the resulting work through grants and sequencing, and retain the decision trail. This gate remains planned; existing grants and journals do not authenticate approvers.",
       "actorTypes": [
         "it-exception-approver",
         "it-head-of-ai",
@@ -2549,7 +2643,7 @@
     {
       "slug": "deliver-from-local-first-plane",
       "name": "Deliver from a local-first, reproducible plane",
-      "goal": "Reproduce a pinned local delivery environment with Git artifact conventions and separate journals, and carry the same declared checks into controlled publication.",
+      "goal": "Produce and reconcile Git-managed artifacts using versioned deliverable contracts and captured journals, retaining evidence for review. Reproducible installation and CI publication use separately qualified routes alongside manual local setup.",
       "actorTypes": [
         "it-platform",
         "delivery-agent"
@@ -2570,7 +2664,7 @@
     {
       "slug": "turn-delivery-history-into-candidates",
       "name": "Turn delivery history into definition candidates",
-      "goal": "Infer inspectable candidates from pinned artifacts and journals, keeping contributions distinct from accepted definitions and from delivered systems.",
+      "goal": "Correlate pinned artifact revisions with captured invocation history and derive typed candidates whose provenance, uncertainty and source limitations remain inspectable. Candidate contributions are neither accepted definitions nor evidence of deployed systems.",
       "actorTypes": [
         "integration-client",
         "it-architect"
@@ -2591,7 +2685,7 @@
     {
       "slug": "work-from-shared-definitions",
       "name": "Work from shared, typed definitions",
-      "goal": "Let people and authorized tools act on the same versioned accepted intent, whether it was authored directly or sourced under review.",
+      "goal": "Align an architect's dependency review and an AI-assisted enquiry on the same typed, versioned definition basis, tracing scope, access and interpretation differences before making a decision. A shared representation does not prove live-state correspondence or answer quality.",
       "actorTypes": [
         "it-architect",
         "it-ciso",
@@ -2616,7 +2710,7 @@
     {
       "slug": "review-selected-obligations-together",
       "name": "Review selected obligations together",
-      "goal": "Bring selected frameworks, regulations and internal obligations into one scoped composition where overlaps and gaps can be reviewed before adoption.",
+      "goal": "Bring source-linked frameworks, regulations and internal obligations into the same scoped review, compare overlaps and uncovered concerns, and retain accountable adoption decisions without claiming automatic conflict resolution or legal completeness.",
       "actorTypes": [
         "it-ciso",
         "it-architect",
@@ -2638,7 +2732,7 @@
     {
       "slug": "make-activation-boundaries-explicit",
       "name": "Make review and activation boundaries explicit",
-      "goal": "Move a definition from proposal to accepted intent through explicit, attributable transitions, keeping research promotion, sealing and activation as separate processes.",
+      "goal": "Carry a proposed governance change through explicit grammar, revision-bound review and authorized lifecycle transitions, including human decision boundaries. A research-driven model revision follows its own acceptance process; collection sealing is not activation.",
       "actorTypes": [
         "it-architect",
         "it-ciso",
@@ -2661,7 +2755,7 @@
     {
       "slug": "review-candidates-from-sources",
       "name": "Review candidates from selected sources",
-      "goal": "Turn inspected repositories, contracts and delivery history into scored, provenance-carrying candidates for review, keeping confidence distinct from truth.",
+      "goal": "Compare code-derived and delivery-derived candidates against their pinned source evidence, retain competing contributions and acquisition gaps, and select what may proceed to draft review. Confidence does not settle truth or establish deployed reality.",
       "actorTypes": [
         "it-platform",
         "integration-client",
@@ -2684,7 +2778,7 @@
     {
       "slug": "evaluate-inputs-against-norms",
       "name": "Evaluate identified inputs against supported Norms",
-      "goal": "Obtain reproducible verdicts, measures and findings over identified inputs, with applicability, freshness and unknown states carried into the result.",
+      "goal": "Combine reproducible Norm verdicts with scoped IT measures and findings to identify accountable corrective work and judge a subsequent appraisal. Preserve rule/input identity, applicability and unknown states; operational conclusions require observation evidence.",
       "actorTypes": [
         "it-ciso",
         "assessment-runner",
@@ -2706,7 +2800,7 @@
     {
       "slug": "generate-artifacts-through-workflows",
       "name": "Generate artifacts through declared workflows",
-      "goal": "Produce documents, code and responses through bounded, journaled workflows whose inputs are pinned and whose outputs are checked before acceptance.",
+      "goal": "Produce a grounded document or software artifact through assigned roles, bounded workflow execution and explicit deliverable contracts, then obtain the required revision-bound review before advancement. Technical checks, substantive acceptance and authorized deployment remain separate decisions.",
       "actorTypes": [
         "delivery-agent",
         "it-knowledge-owner",

@@ -304,7 +304,7 @@ test('features need capability support while many-to-many and research informing
   const supporters = graph[2].capabilities.filter((capability) => capability.relations.features.includes(reference));
   assert.ok(supporters.length > 1);
   supporters[0].relations.features = supporters[0].relations.features.filter((feature) => feature !== reference);
-  supporters[0].relations.features.push('specifications/archetyping');
+  assert.ok(supporters[0].relations.features.length);
   assert.doesNotThrow(() => validatePortfolio(graph));
   for (const capability of graph[2].capabilities) capability.relations.features = capability.relations.features.filter((feature) => feature !== reference);
   assert.throws(() => validatePortfolio(graph), /Orphan feature: gsm\/specifications\/primitives/);

@@ -134,12 +134,40 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(usageValues.length, 84);
   assert.equal(poesisUsage.pains.length, 32);
   assert.equal(poesisUsage.actorTypes.length, 26);
-  assert.equal(poesisUsage.useCases.length, 98);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 16);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 35);
-  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 31);
+  assert.equal(poesisUsage.useCases.length, 115);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered').length, 26);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 33);
+  assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 40);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined).length, 16);
   assert.equal(valueStatus('value:service-accountability'), undefined);
+});
+
+test('constitutive compositions retain distinct function and whole-level use cases', () => {
+  for (const entry of usageCapabilities) assert.ok(entry.capability.relations.features.length >= 2, entry.slug);
+  for (const entry of usageAffordances) assert.ok(entry.affordance.relations.capabilities.length >= 2, entry.slug);
+  for (const [key, entries, member] of [
+    ['features', usageFeatures, 'feature'],
+    ['capabilities', usageCapabilities, 'capability'],
+    ['affordances', usageAffordances, 'affordance'],
+  ]) {
+    for (const entry of entries) {
+      const declared = poesisUsage.useCases.filter((useCase) => useCase[key]?.includes(entry.slug));
+      assert.ok(declared.length, entry.slug);
+      assert.deepEqual(useCasesForItem(entry[member]), declared, entry.slug);
+    }
+  }
+  for (const [slug, key, reference] of [
+    ['review-scoped-appraisal', 'features', 'itip/web-application/it-compliance-evaluation'],
+    ['validate-mediated-write', 'features', 'saf/agentic-harness/artifact-validation'],
+    ['propose-appraisal-remediation', 'capabilities', 'itip/continuous-it-compliance-evaluation'],
+    ['reuse-delivery-evidence', 'capabilities', 'saf/delivery-history-as-governed-context'],
+    ['reconcile-code-evidence', 'affordances', 'truth-sourcing'],
+    ['deliver-reviewed-artifact', 'affordances', 'generative-delivery'],
+  ]) {
+    const useCase = poesisUsage.useCases.find((item) => item.slug === slug);
+    assert.deepEqual(useCase[key], [reference], slug);
+    assert.equal(['features', 'capabilities', 'affordances'].filter((level) => useCase[level]).length, 1, slug);
+  }
 });
 
 test('every identity is a unique, stable slug', () => {
@@ -283,7 +311,7 @@ test('use case status follows each case direct support level without inferred an
   assert.equal(useCaseStatus({ slug: 'no-such-case' }), undefined);
   assert.deepEqual(featuresForUseCase('qualify-processor-interchange'), []);
   assert.equal(useCaseStatus({ slug: 'qualify-processor-interchange' }), 'delivered');
-  assert.equal(useCaseStatus({ slug: 'agree-domain-typing-contract' }), 'partial');
+  assert.equal(useCaseStatus({ slug: 'agree-domain-typing-contract' }), 'delivered');
 });
 
 test('mockup and platform tasks reuse scope with only two distinct new features', () => {
@@ -299,12 +327,12 @@ test('mockup and platform tasks reuse scope with only two distinct new features'
     'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions',
     'reconcile-parallel-agent-outputs', 'assess-application-retirement',
   ];
-  // Six of these tasks are already served by shipped milestones the products reached; four are partly served.
   const served = new Set([
     'retrieve-decision-basis', 'assess-invalidated-dependencies', 'agree-evidence-preservation',
     'approve-agent-mandate', 'qualify-model-routing', 'qualify-host-instructions', 'qualify-processor-interchange',
+    'agree-domain-typing-contract',
   ]);
-  const partly = new Set(['review-operation-privileges', 'agree-domain-typing-contract', 'reconcile-parallel-agent-outputs']);
+  const partly = new Set(['review-operation-privileges', 'reconcile-parallel-agent-outputs']);
   for (const slug of additions) {
     const useCase = poesisUsage.useCases.find((item) => item.slug === slug);
     assert.ok(useCase, slug);
