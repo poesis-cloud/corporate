@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://poesis.cloud/schemas/poesis-platform.schema.json",
+  "title": "Poesis platform catalog",
+  "description": "The platform side of the model: solutions with their capabilities and products, cross-solution affordances, and the realization contracts. Only the platform side declares references into the usage side, and only to use cases.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["solutions", "affordances", "realizationRequirements", "realizations", "capabilityRealizationContracts", "affordanceRealizationContracts"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "solutions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/solution" } },
+    "affordances": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/affordance" } },
+    "realizationRequirements": {
+      "type": "object",
+      "additionalProperties": { "oneOf": [{ "$ref": "#/$defs/deliveryState" }, { "$ref": "#/$defs/requirement" }] }
+    },
+    "realizations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/realization" } },
+    "capabilityRealizationContracts": {
+      "type": "object",
+      "description": "Capability identity (`<solution>/<capability>`) to realization slug.",
+      "additionalProperties": { "$ref": "#/$defs/slug" }
+    },
+    "affordanceRealizationContracts": {
+      "type": "object",
+      "description": "Affordance slug to its operational scope and requirement expression.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scope", "requires"],
+        "properties": {
+          "scope": { "$ref": "#/$defs/text" },
+          "requires": { "$ref": "#/$defs/requirement" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "slug": { "type": "string", "minLength": 1 },
+    "slugList": { "type": "array", "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
+    "nonEmptySlugList": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
+    "text": { "type": "string", "minLength": 1 },
+    "deliveryState": { "enum": ["planned", "partial", "delivered"] },
+    "deliveryKind": { "enum": ["implementation", "specification", "content", "research"] },
+    "requirement": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "$ref": "#/$defs/slug" },
+        "all": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/requirement" } },
+        "any": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/requirement" } }
+      }
+    },
+    "milestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "label"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^\\d+\\.(\\d+|x)(\\.\\d+)?(-[a-z0-9.]+)?$" },
+        "label": { "$ref": "#/$defs/text" },
+        "shipped": { "type": "boolean" },
+        "ga": { "type": "boolean" }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "blurb", "state", "kind", "milestone"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "name": { "$ref": "#/$defs/text" },
+        "blurb": { "$ref": "#/$defs/text" },
+        "state": { "$ref": "#/$defs/deliveryState" },
+        "kind": { "$ref": "#/$defs/deliveryKind" },
+        "milestone": { "$ref": "#/$defs/milestone" },
+        "useCases": { "$ref": "#/$defs/slugList" }
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "blurb", "state", "kind", "features"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "name": { "$ref": "#/$defs/text" },
+        "blurb": { "$ref": "#/$defs/text" },
+        "state": { "$ref": "#/$defs/deliveryState" },
+        "kind": { "$ref": "#/$defs/deliveryKind" },
+        "features": {
+          "description": "Supporting feature references, each `<product>/<feature>` within the owning solution.",
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
+        "optional": { "$ref": "#/$defs/slugList" },
+        "useCases": { "$ref": "#/$defs/slugList" }
+      }
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "currentVersion", "tagline", "description", "features"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "name": { "$ref": "#/$defs/text" },
+        "currentVersion": { "type": "string", "pattern": "^\\d+\\.\\d+(\\.\\d+)?(-[a-z0-9.]+)?$" },
+        "tagline": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "repos": {
+          "description": "Bare repository names; hrefs are derived at load time.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/slug" },
+          "uniqueItems": true
+        },
+        "features": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/feature" } }
+      }
+    },
+    "solution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "fullName", "tags", "excerpt", "tagline", "description", "capabilities", "products"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "name": { "$ref": "#/$defs/text" },
+        "fullName": { "$ref": "#/$defs/text" },
+        "tags": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+        "excerpt": { "$ref": "#/$defs/text" },
+        "tagline": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "capabilities": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/capability" } },
+        "products": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/product" } }
+      }
+    },
+    "affordance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "name", "title", "blurb", "state", "scope", "capabilities", "useCases"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "name": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" },
+        "blurb": { "$ref": "#/$defs/text" },
+        "state": { "$ref": "#/$defs/deliveryState" },
+        "scope": { "$ref": "#/$defs/text" },
+        "capabilities": {
+          "description": "Contributing capability references, each `<solution>/<capability>`.",
+          "$ref": "#/$defs/nonEmptySlugList"
+        },
+        "useCases": { "$ref": "#/$defs/nonEmptySlugList" }
+      }
+    },
+    "realization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "scope", "mode", "requires", "optional", "acceptance"],
+      "properties": {
+        "slug": { "$ref": "#/$defs/slug" },
+        "scope": { "$ref": "#/$defs/text" },
+        "mode": { "enum": ["local", "api", "hosted", "content"] },
+        "requires": { "$ref": "#/$defs/requirement" },
+        "optional": { "$ref": "#/$defs/slugList" },
+        "acceptance": { "$ref": "#/$defs/deliveryState" }
+      }
+    }
+  }
+}

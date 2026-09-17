@@ -1,26 +1,17 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { capabilityHref, usageCapabilities, usageRelations } from '../data/usage.ts';
-import { capabilityStatus, typeIcons } from '../data/poesis-platform.ts';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { usageCapabilities } from '../data/usage.ts';
+import { capabilityCard } from '../data/catalog-card.ts';
 
-const entries: DirectoryEntry[] = usageCapabilities.map((entry) => ({
-  anchor: `capability-${entry.slug.replace(/\//g, '-')}`,
-  eyebrow: entry.solution.fullName,
-  icon: typeIcons.capability,
-  title: entry.capability.name,
-  body: entry.capability.blurb,
-  status: capabilityStatus(entry.solution, entry.capability),
-  meta: [{ label: 'Solution scope', href: capabilityHref(entry) }, { label: `${entry.capability.relations.features.length} contributing features` }],
-  relations: usageRelations(entry.capability),
-}));
+const cards = usageCapabilities.map(capabilityCard);
 ---
 <CatalogLayout
   title="Poesis capabilities"
   description="The solution capabilities behind Poesis affordances, each with its contributing features and the use cases it serves."
   heading="Capabilities"
   lead="What each solution can do, built from product features. A capability carries the status of the features that prove it."
-  count={`${entries.length} capabilities`}
+  count={`${cards.length} capabilities`}
 >
-  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" entries={entries} variant="platform" />
+  <CatalogDirectory id="capabilities" eyebrow="Capabilities" title="What each solution can do" cards={cards} variant="platform" />
 </CatalogLayout>

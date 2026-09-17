@@ -1,0 +1,37 @@
+---
+/**
+ * CatalogCard — the only place a catalog item is rendered.
+ *
+ * The anatomy never varies: type (then category) in the head, the item's own
+ * identity as the heading, an optional hook, the body, and the relation type
+ * links in the footer. `variant` selects the surrounding skin only — the boxed
+ * grid card or the left-ruled list card — never the anatomy.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
+import ItemRelations from './ItemRelations.astro';
+import { plannedClass } from '../data/poesis-platform.ts';
+import { cardTypeIcons, cardTypeLabels, type CatalogCard } from '../data/catalog-card.ts';
+
+interface Props {
+  card: CatalogCard;
+  /** Heading level, so a card fits the document structure of its host page. */
+  as?: 'h3' | 'h4';
+  variant?: 'platform' | 'usage';
+}
+const { card, as: Heading = 'h3', variant = 'usage' } = Astro.props;
+const block = variant === 'platform' ? 'think-capability' : 'think-consequence';
+---
+<li id={card.anchor} data-catalog-slug={card.slug ?? card.anchor} class={plannedClass(card.status)} {...card.data}>
+  {card.aliases?.filter((alias) => alias !== card.anchor).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
+  <span class={`${block}__head`}>
+    <span class={`${block}__icon`}><Icon name={cardTypeIcons[card.type]} size={16} /></span>
+    <span class={`${block}__step`}>{cardTypeLabels[card.type]}{card.category ? ` · ${card.category}` : ''}</span>
+    {card.status && <DeliveryStatus state={card.status} />}
+  </span>
+  <Heading>{card.href ? <a href={card.href}>{card.heading}</a> : card.heading}</Heading>
+  {card.hook && <p class="catalog-hook">{card.hook}</p>}
+  {card.bodyHtml ? <p set:html={card.body} /> : <p>{card.body}</p>}
+  {card.meta && <p class="catalog-meta">{card.meta}</p>}
+  {card.relations?.length ? <ItemRelations groups={card.relations} /> : null}
+</li>

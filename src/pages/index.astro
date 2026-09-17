@@ -4,41 +4,41 @@ import Icon from '../components/Icon.astro';
 import DeliveryStatus from '../components/DeliveryStatus.astro';
 import ArchMap from '../components/ArchMap.astro';
 import PlatformValues from '../components/PlatformValues.astro';
-import { poesisUsage, usageIcons, useCaseStatus } from '../data/usage.ts';
+import CatalogCard from '../components/CatalogCard.astro';
+import { poesisUsage, useCaseStatus } from '../data/usage.ts';
+import { useCaseCard } from '../data/catalog-card.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
 import { profilesForDomain } from '../data/profiles.ts';
 import { services } from '../data/services.ts';
-import { siteNavigation } from '../data/site-navigation.ts';
 
 /** The homepage shows what the platform already serves; the catalogs hold the full backlog. */
 const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
 const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.some((useCase) => useCase.actorTypes.includes(actor.slug)));
-const partnerships = siteNavigation.find((group) => group.label === 'Partnerships')!.sections.flatMap((section) => section.items);
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero hero--split">
     <div class="container">
       <p class="eyebrow">The foundation of the autonomous enterprise</p>
       <h1>The Organizational Intelligence Platform.</h1>
-      <p class="lead">AI is entering organizations it doesn't understand. Their complexity has always outrun human comprehension and the tools meant to address it. Poesis grounds both in a coherent system that manages <em>definitions</em> of the organization — its DNA — <strong>to efficiently and continuously govern and generate that organization</strong>.</p>
+      <p class="lead">AI is entering sociotechnical organizations it doesn't understand. Humans have always scrambled in the same way. No technology has ever supplied a satisfactory capability to understand, define and realize the organization coherently end-to-end.</p>
+      <p class="lead">Poesis grounds humans and AI in a coherent end-to-end system that manages Definitions of any sociotechnical organization — its DNA — <strong>to efficiently and continuously define, govern and generate that organization</strong>.</p>
       <div class="hero-promise">
-        <p>The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating BUILD and RUN adequately</strong>, and <strong>ultimately for the autonomous enterprise to emerge</strong>.</p>
+        <p>The DNA of the organization constitutes a living digital twin — the foundation for <strong>accelerating THINK, BUILD and RUN adequately</strong>, <strong>ultimately leading to the autonomous enterprise</strong>.</p>
       </div>
       <div class="hero-cta">
         <a class="btn btn-primary" href="/pilot" data-demo-cta="homepage-hero-pilot"><Icon name="play" /> Shape a Pilot</a>
       </div>
-      <p class="hero-note">Human-governed definitions that people and AI can act on.</p>
+      <p class="hero-note">Human-governed Definitions that people and AI can act on.</p>
       <nav class="hero-sections" aria-label="On this page">
         <a href="#pains"><span>Pain points</span></a>
         <a href="#affordances"><span>Affordances</span></a>
         <a href="#usage"><span>Usage</span></a>
         <a href="#qualities"><span>Qualities</span></a>
-        <a href="#pilot"><span>Start with one workflow</span></a>
-        <a href="#portfolio"><span>The Poesis platform</span></a>
         <a href="#services"><span>Services</span></a>
-        <a href="#partnerships"><span>Partnerships</span></a>
+        <a href="#portfolio"><span>Platform</span></a>
+        <a href="#pilot"><span>Pilot</span></a>
       </nav>
     </div>
   </section>
@@ -48,8 +48,8 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
       <div class="section-head">
         <p class="eyebrow">Pain points</p>
         <h2>Drift at machine speed, or align at human speed.</h2>
-        <p class="lead">This is the central tension of industrial GenAI adoption. GenAI accelerates the production of artifacts, but not the production of definition and governance required to viably deliver these artifacts.</p>
-        <p class="lead">The scarce resource is now more than ever the THINK: the AI and human capacity to understand, define, plan, validate, and take responsibility for what has been created.</p>
+        <p class="lead">This is the central tension of industrial GenAI adoption. GenAI accelerates the production of artifacts, but not the production of Definition and governance required to viably deliver these artifacts.</p>
+        <p class="lead">The scarce resource is now more than ever the THINK: the AI and human capacity to define and govern these Definitions for BUILD to generate from and RUN to maintain from.</p>
       </div>
       <ThinkBottleneckDiagram />
     </div>
@@ -59,7 +59,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Affordances</p>
-        <h2>Poesis Gene Therapy</h2>
+        <h2>The Poesis Gene Therapy</h2>
         <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
       </div>
       <ThinkTherapyDiagram />
@@ -87,14 +87,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
 
       <h3 class="home-usage-subhead">What they do with it</h3>
       <ul class="think-consequence-list catalog-grid usage-case-list home-usage-cases">
-        {currentUseCases.map((useCase) => (
-          <li class={plannedClass(useCaseStatus(useCase))} data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')}>
-            <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.useCase} size={16} /></span><span class="think-consequence__step">Use case</span><DeliveryStatus state={useCaseStatus(useCase)} /></span>
-            <h4><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h4>
-            <p>{useCase.goal}</p>
-            <p class="proof-line"><span>Pursued by</span>{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' · '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
-          </li>
-        ))}
+        {currentUseCases.map((useCase) => <CatalogCard card={useCaseCard(useCase)} as="h4" />)}
       </ul>
       <p class="home-usage-empty" id="usage-empty" hidden>No delivered use case names this actor type yet. <a href="/usage">Browse all use cases &rarr;</a></p>
 
@@ -135,7 +128,7 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="check-badge" size={16} /></span><span class="think-consequence__step">Vendor-neutral standard</span></span>
           <strong>Governance you can inspect, not a black box</strong>
-          <p>GSM is a candidate common definition model. Interchange requirements support inspectability; compatible consumers and draft-preserving migration still need acceptance.</p>
+          <p>GSM is a candidate common Definition model. Interchange requirements support inspectability; compatible consumers and draft-preserving migration still need acceptance.</p>
         </li>
         <li>
           <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name="github" size={16} /></span><span class="think-consequence__step">Open and inspectable</span></span>
@@ -176,32 +169,6 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
   </section>
 
 
-  <section id="pilot" class="section section--ink home-pilot">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Your Poesis pilot</p>
-        <h2>Start with the value you seek. Or the pain you feel.</h2>
-        <p class="lead">Shape an ITIP + SIE SaaS evaluation around what matters to you. Start with desired values or pain points, add relevant use cases, and define your scope, success criteria, evidence, timing and constraints.</p>
-        <p>A discussion brief, not a fixed package. Registered support and gaps stay visible; selected scope, operating readiness and terms are confirmed together before kickoff.</p>
-      </div>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="/pilot" data-demo-cta="homepage-pilot"><Icon name="play" /> Shape your Pilot</a>
-        <a class="btn btn-ghost" href="/services/consulting"><Icon name="briefcase" /> Explore transformation services</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="portfolio" class="section home-platform">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">The Poesis platform</p>
-        <h2>Explore the complete solutions and products map.</h2>
-        <p class="lead">Specification, source content, local controls and planned integrations contribute in different ways. Explore each product for feature scope and historical version metadata.</p>
-      </div>
-      <ArchMap />
-    </div>
-  </section>
-
   <section id="services" class="section section--soft" aria-labelledby="services-heading">
     <div class="container">
       <div class="section-head">
@@ -220,20 +187,29 @@ const partnerships = siteNavigation.find((group) => group.label === 'Partnership
     </div>
   </section>
 
-  <section id="partnerships" class="section" aria-labelledby="partnerships-heading">
+  <section id="portfolio" class="section home-platform">
     <div class="container">
       <div class="section-head">
-        <h2 id="partnerships-heading">Partnerships</h2>
-        <p class="lead">Explore a joint experiment in governed context and model capabilities.</p>
+        <p class="eyebrow">Platform</p>
+        <h2>Explore the complete solutions and products map.</h2>
+        <p class="lead">Specification, source content, local controls and planned integrations contribute in different ways. Explore each product for feature scope and historical version metadata.</p>
       </div>
-      <ul class="think-consequence-list">
-        {partnerships.map((partnership) => (
-          <li>
-            <h3><a href={partnership.href}>{partnership.label}</a></h3>
-            <p>Review the proposal, planned scope and evidence to establish together.</p>
-          </li>
-        ))}
-      </ul>
+      <ArchMap />
+    </div>
+  </section>
+
+  <section id="pilot" class="section section--ink home-pilot">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Pilot</p>
+        <h2>Start with the value you seek. Or the pain you feel.</h2>
+        <p class="lead">Shape an ITIP + SIE SaaS evaluation around what matters to you. Start with desired values or pain points, add relevant use cases, and define your scope, success criteria, evidence, timing and constraints.</p>
+        <p>A discussion brief, not a fixed package. Registered support and gaps stay visible; selected scope, operating readiness and terms are confirmed together before kickoff.</p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/pilot" data-demo-cta="homepage-pilot"><Icon name="play" /> Shape your Pilot</a>
+        <a class="btn btn-ghost" href="/services/consulting"><Icon name="briefcase" /> Explore transformation services</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

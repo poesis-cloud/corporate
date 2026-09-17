@@ -1,83 +1,30 @@
 ---
 /**
- * The catalog directory. A `platform` entry (affordance, capability, feature)
- * is rendered with the homepage affordance-card pattern; a `usage` entry (use
- * case, actor, pain, value) with the homepage platform-value pattern. Both
- * patterns are single sourced in global.css, so an item looks the same
- * wherever it is shown. `meta` states where an entry belongs, `relations`
- * states which usage relatives it declares, `links` states what else it
- * relates to; an entry with no relation says so rather than rendering
- * an empty list.
+ * The catalog directory. It lays a catalog page out and delegates every entry
+ * to CatalogCard, so a directory adapts the layout and never the card.
  */
-import DeliveryStatus from './DeliveryStatus.astro';
-import Icon from './Icon.astro';
-import ItemRelations from './ItemRelations.astro';
-import { plannedClass, type DeliveryState } from '../data/poesis-platform.ts';
-import type { RelationGroup } from '../data/usage.ts';
+import CatalogCard from './CatalogCard.astro';
+import type { CatalogCard as CatalogCardModel } from '../data/catalog-card.ts';
 
-export interface DirectoryEntry {
-  anchor: string;
-  eyebrow?: string;
-  icon?: string;
-  title: string;
-  hook?: string;
-  body: string;
-  status?: DeliveryState;
-  meta?: { label: string; href?: string }[];
-  relations?: RelationGroup[];
-  links?: { label: string; href: string }[];
-  empty?: string;
-  data?: Record<string, string>;
-}
 interface Props {
   id: string;
   eyebrow: string;
   title: string;
-  entries: DirectoryEntry[];
-  /** Which homepage pattern this directory reuses. */
+  cards: CatalogCardModel[];
+  /** Which card skin this directory reuses: the boxed grid or the left-ruled list. */
   variant?: 'platform' | 'usage';
-  /** Step label for entries that carry no eyebrow of their own. */
-  kind?: string;
-  /** Qualifier above the relation list, in the voice of the homepage proof lines. */
-  relation?: string;
 }
-const { id, eyebrow, title, entries, variant = 'usage', kind = eyebrow, relation } = Astro.props;
-const platform = variant === 'platform';
-const list = platform ? 'think-therapy__grid' : 'think-consequence-list';
-const head = platform ? 'think-capability__head' : 'think-consequence__head';
-const mark = platform ? 'think-capability__icon' : 'think-consequence__icon';
-const step = platform ? 'think-capability__step' : 'think-consequence__step';
+const { id, eyebrow, title, cards, variant = 'usage' } = Astro.props;
+const list = variant === 'platform' ? 'think-therapy__grid' : 'think-consequence-list';
 ---
 <section id={id} class="section">
   <div class="container">
     <div class="section-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2></div>
     <ul class={`${list} catalog-grid`}>
-      {entries.map((entry) => (
-        <li id={entry.anchor} class={plannedClass(entry.status)} {...entry.data}>
-          <span class={head}>
-            {entry.icon && <span class={mark}><Icon name={entry.icon as 'briefcase'} size={16} /></span>}
-            <span class={step}>{entry.eyebrow ?? kind}</span>
-            {entry.status && <DeliveryStatus state={entry.status} />}
-          </span>
-          <h3>{entry.title}</h3>
-          {entry.hook && <p class="catalog-hook">{entry.hook}</p>}
-          <p>{entry.body}</p>
-          {entry.meta?.length ? (
-            <p class="catalog-meta">{entry.meta.map((item, index) => <>{index > 0 && ' · '}{item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}</>)}</p>
-          ) : null}
-          {entry.relations?.length ? <ItemRelations groups={entry.relations} /> : null}
-          {entry.links?.length ? (
-            <div class="proof-line">
-              {relation && <span>{relation}</span>}
-              <ul class="catalog-links">{entry.links.map((link) => <li><a href={link.href}>{link.label} <Icon name="arrow-right" /></a></li>)}</ul>
-            </div>
-          ) : entry.empty ? <p class="proof-line"><span>{entry.empty}</span></p> : null}
-        </li>
-      ))}
+      {cards.map((card) => <CatalogCard card={card} variant={variant} />)}
     </ul>
   </div>
 </section>
 <style>
-  .catalog-meta { margin: .1rem 0 0; color: var(--muted); font-size: .75rem; }
-  .catalog-links { font-size: .8rem; }
+  .catalog-grid > li[hidden] { display: none; }
 </style>

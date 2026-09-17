@@ -6,6 +6,8 @@
  */
 import BaseLayout from './BaseLayout.astro';
 import { catalogViews } from '../data/site-navigation.ts';
+import { catalogSnapshot } from '../data/catalog.ts';
+import { catalogTypes, type CatalogType } from '../data/catalog-query.ts';
 
 interface Props {
   title: string;
@@ -16,6 +18,8 @@ interface Props {
 }
 const { title, description, heading, lead, count } = Astro.props;
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const catalogType = current.slice(1) as CatalogType;
+const filterable = catalogTypes.includes(catalogType);
 ---
 <BaseLayout title={title} description={description}>
   <section class="section catalog-intro">
@@ -27,16 +31,70 @@ const current = Astro.url.pathname.replace(/\/$/, '') || '/';
       </nav>
       <p class="catalog-lead">{lead}</p>
       <slot name="controls" />
+      {filterable && <div class="catalog-filter-context">
+        <p id="catalog-active-source" hidden></p>
+        <p id="catalog-active-filters" hidden></p>
+        <button type="button" id="catalog-clear" class="btn btn-ghost" hidden>Clear filters</button>
+      </div>}
       <p id="catalog-results" class="catalog-count" aria-live="polite">{count}</p>
     </div>
   </section>
   <slot />
+  {filterable && <script id="catalog-filter-data" type="application/json" set:html={JSON.stringify({ type: catalogType, snapshot: catalogSnapshot }).replace(/</g, '\\u003c')} />}
 </BaseLayout>
+<script>
+  import { filterCatalog, type CatalogSnapshot, type CatalogType } from '../data/catalog-query.ts';
+  const data = document.querySelector('#catalog-filter-data');
+  if (data) {
+    const { type, snapshot } = JSON.parse(data.textContent ?? '{}') as { type: CatalogType; snapshot: CatalogSnapshot };
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-catalog-slug]')];
+    const result = document.querySelector<HTMLElement>('#catalog-results')!;
+    const source = document.querySelector<HTMLElement>('#catalog-active-source')!;
+    const filters = document.querySelector<HTMLElement>('#catalog-active-filters')!;
+    const clear = document.querySelector<HTMLButtonElement>('#catalog-clear')!;
+    const form = document.querySelector<HTMLFormElement>('#usage-filters');
+    const restore = () => {
+      const query = new URLSearchParams(location.search);
+      const selection = filterCatalog(snapshot, type, query);
+      const matches = new Set(selection.slugs);
+      for (const card of cards) card.hidden = !matches.has(card.dataset.catalogSlug!);
+      source.hidden = selection.sourceLabel === null;
+      source.textContent = selection.sourceLabel === null ? '' : `Source: ${selection.sourceLabel}`;
+      const selections = ['actor', 'pain'].filter((key) => query.has(key)).map((key) => `${key === 'actor' ? 'Actor' : 'Pain'}: ${query.get(key)}`);
+      filters.hidden = !selections.length;
+      filters.textContent = selections.join(' · ');
+      clear.hidden = !selection.active;
+      result.textContent = `${selection.slugs.length} of ${snapshot.records[type].length} ${type === 'usage' ? 'use cases' : type}${selection.invalid ? ' — Unknown or invalid filter; no matches.' : selection.slugs.length ? '' : ' — No matches.'}`;
+      for (const key of ['actor', 'pain']) {
+        const control = form?.elements.namedItem(key);
+        if (control instanceof HTMLSelectElement) control.value = query.get(key) ?? '';
+      }
+    };
+    const navigate = (url: URL) => { if (url.href !== location.href) history.pushState(null, '', url); restore(); };
+    const reset = () => { const url = new URL(location.href); for (const key of ['source', 'actor', 'pain']) url.searchParams.delete(key); navigate(url); };
+    const apply = () => {
+      const url = new URL(location.href);
+      for (const key of ['actor', 'pain']) {
+        const control = form?.elements.namedItem(key);
+        if (control instanceof HTMLSelectElement) control.value ? url.searchParams.set(key, control.value) : url.searchParams.delete(key);
+      }
+      navigate(url);
+    };
+    clear.addEventListener('click', reset);
+    form?.addEventListener('change', apply);
+    form?.addEventListener('submit', (event) => { event.preventDefault(); apply(); });
+    form?.addEventListener('reset', (event) => { event.preventDefault(); reset(); });
+    addEventListener('popstate', restore);
+    restore();
+  }
+</script>
 <style>
   .catalog-intro { padding-bottom: 0; }
   h1 { font-size: 2.5rem; line-height: 1.15; letter-spacing: 0; overflow-wrap: anywhere; }
   .catalog-lead { max-width: 60ch; margin-top: 1.25rem; }
   .catalog-count { color: var(--ink-soft); font-size: .85rem; }
+  .catalog-filter-context { margin-top: 1rem; overflow-wrap: anywhere; }
+  .catalog-filter-context [hidden] { display: none; }
   .hero-sections a[aria-current='page'] { color: var(--ink); border-color: currentColor; }
   @media (max-width: 640px) { h1 { font-size: 2rem; } }
 </style>

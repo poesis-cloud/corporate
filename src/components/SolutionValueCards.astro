@@ -1,15 +1,12 @@
 ---
 /**
  * SolutionValueCards — the shared value list for solution pages, in the same
- * format as the homepage therapy values. A value is realized by solution
- * capabilities, never by products directly. The capabilities named in the proof
- * line are the ones that declare the value, and each entry links to its
- * capability anchor further down the same page.
+ * card as every other catalog item.
  */
-import DeliveryStatus from './DeliveryStatus.astro';
-import Icon from './Icon.astro';
-import { plannedClass, relationQualifiers, type Solution } from '../data/poesis-platform.ts';
-import { solutionValues, usageIcons, valueAliases, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
+import CatalogCard from './CatalogCard.astro';
+import type { Solution } from '../data/poesis-platform.ts';
+import { solutionValues } from '../data/usage.ts';
+import { valueCard } from '../data/catalog-card.ts';
 
 interface Props {
   solution: Solution;
@@ -17,26 +14,6 @@ interface Props {
 
 const { solution } = Astro.props;
 ---
-<ul class="think-consequence-list portfolio-values">
-  {solutionValues(solution.slug).map((v) => (
-    <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
-      {valueAliases(v).map((alias) => <span id={alias} class="claim-anchor" aria-hidden="true" />)}
-      <span class="think-consequence__head">
-        <span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span>
-        <span class="think-consequence__step">Value</span>
-        <DeliveryStatus state={valueStatus(v.slug)} />
-      </span>
-      <strong>{v.title}</strong>
-      <p set:html={v.body} />
-      <p class="proof-line">
-        <span>{relationQualifiers.solutionValueCapabilities()}</span>
-        {valueSupports(v.slug).map((support, i) => (
-          <>
-            {i > 0 && ' · '}
-            <a class={plannedClass(support.state)} href={`#${support.slug.split('/')[1]}`}>{support.name} <DeliveryStatus state={support.state} compact /></a>
-          </>
-        ))}
-      </p>
-    </li>
-  ))}
+<ul class="think-consequence-list catalog-grid portfolio-values">
+  {solutionValues(solution.slug).map((value) => <CatalogCard card={valueCard(value)} />)}
 </ul>

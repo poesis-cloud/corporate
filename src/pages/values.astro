@@ -1,30 +1,17 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { usageIcons, usageValues, valueAnchor, valueHref, valueStatus, valueSupports } from '../data/usage.ts';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { usageValues } from '../data/usage.ts';
+import { valueCard } from '../data/catalog-card.ts';
 
-const entries: DirectoryEntry[] = usageValues.map((value) => ({
-  anchor: valueAnchor(value),
-  data: { 'data-usage-value': value.slug },
-  icon: usageIcons.value,
-  title: value.title,
-  status: valueStatus(value.slug),
-  body: value.body,
-  // Scoped values are rendered by their owning page; usage-owned values link to each supporting item.
-  links: valueSupports(value.slug).length
-    ? value.slug.includes('/')
-      ? [{ label: 'Platform coverage', href: valueHref(value) }]
-      : valueSupports(value.slug).map((support) => ({ label: support.name, href: support.href }))
-    : [],
-  empty: 'No platform coverage declared.',
-}));
+const cards = usageValues.map(valueCard);
 ---
 <CatalogLayout
   title="Poesis values"
-  description="The benefits Poesis platform items claim to realize, each carrying only the delivery status its supporting items already justify."
+  description="Benefits composed from explicit use cases, with constituent platform coverage and missing support visible."
   heading="Values"
-  lead="Benefits sought from the work. A value carries a status only where platform items declare they realize it, so an unclaimed benefit stays visibly unclaimed."
-  count={`${entries.length} values`}
+  lead="Benefits sought from the work, composed from explicit use cases. Coverage remains incomplete when a constituent case lacks platform support."
+  count={`${cards.length} values`}
 >
-  <CatalogDirectory id="values" eyebrow="Values" title="Benefits sought" entries={entries} kind="Value" relation="Realized by" />
+  <CatalogDirectory id="values" eyebrow="Values" title="Benefits sought" cards={cards} />
 </CatalogLayout>

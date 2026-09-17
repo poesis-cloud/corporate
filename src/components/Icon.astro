@@ -9,6 +9,7 @@ export interface Props {
     | 'alert'
     | 'arrow-right'
     | 'azure'
+    | 'bolt'
     | 'book-open'
     | 'briefcase'
     | 'check-badge'
@@ -35,7 +36,9 @@ export interface Props {
     | 'spark'
     | 'store'
     | 'target'
-    | 'user-plus';
+    | 'trending-up'
+    | 'user-plus'
+    | 'users';
   size?: number;
 }
 
@@ -252,6 +255,26 @@ const icons: Record<string, IconDef> = {
       'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
       'M19 8v6',
       'M22 11h-6',
+    ],
+  },
+  users: {
+    kind: 'stroke',
+    paths: [
+      'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',
+      'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+      'M22 21v-2a4 4 0 0 0-3-3.87',
+      'M16 3.13a4 4 0 0 1 0 7.75',
+    ],
+  },
+  bolt: {
+    kind: 'stroke',
+    paths: ['M13 2 4 14h7l-1 8 9-12h-7l1-8z'],
+  },
+  'trending-up': {
+    kind: 'stroke',
+    paths: [
+      'm3 17 6-6 4 4 8-8',
+      'M15 7h6v6',
     ],
   },
 };

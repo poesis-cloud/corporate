@@ -1,12 +1,13 @@
 import { affordanceStatus, capabilityStatus, deliveryLabels } from './poesis-platform.ts';
 import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, usageAffordances, usageCapabilities, usageFeatures, usageValues, useCaseStatus, valueHref, valuesForUseCase } from './usage.ts';
 import type { PilotCatalog } from './pilot.ts';
+import { painsForItem, valuesForItem } from './usage.ts';
 
 export function projectPilotCatalog(): PilotCatalog {
   const entries = [
-    ...usageFeatures.map((entry) => ({ key: `feature:${entry.slug}`, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state, owner: entry.solution.name, values: entry.feature.values, pains: entry.feature.pains })),
-    ...usageCapabilities.map((entry) => ({ key: `capability:${entry.slug}`, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability), owner: entry.solution.name, values: entry.capability.values, pains: entry.capability.pains })),
-    ...usageAffordances.map((entry) => ({ key: `affordance:${entry.slug}`, name: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance), owner: 'Cross-solution affordance', values: entry.affordance.values, pains: entry.affordance.pains })),
+    ...usageFeatures.map((entry) => ({ key: `feature:${entry.slug}`, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state, owner: entry.solution.name, values: valuesForItem(entry.feature).map((value) => value.slug), pains: painsForItem(entry.feature).map((pain) => pain.slug) })),
+    ...usageCapabilities.map((entry) => ({ key: `capability:${entry.slug}`, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability), owner: entry.solution.name, values: valuesForItem(entry.capability).map((value) => value.slug), pains: painsForItem(entry.capability).map((pain) => pain.slug) })),
+    ...usageAffordances.map((entry) => ({ key: `affordance:${entry.slug}`, name: entry.affordance.name, href: affordanceHref(entry), state: affordanceStatus(entry.affordance), owner: 'Cross-solution affordance', values: valuesForItem(entry.affordance).map((value) => value.slug), pains: painsForItem(entry.affordance).map((pain) => pain.slug) })),
   ];
   return {
     values: usageValues.map((value) => ({ slug: value.slug, name: value.title, description: value.body, href: valueHref(value), supports: entries.filter((entry) => entry.values.includes(value.slug)).map((entry) => entry.key) })),

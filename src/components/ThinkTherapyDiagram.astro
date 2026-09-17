@@ -1,69 +1,46 @@
 ---
 import Icon from './Icon.astro';
 import DeliveryStatus from './DeliveryStatus.astro';
-import ItemRelations from './ItemRelations.astro';
-import { affordanceRealizations, affordanceStatus, affordances, capabilityRelationKind, capabilityStatus, plannedClass, relationQualifiers, solutionHref, typeIcons } from '../data/poesis-platform.ts';
-import { usageRelations } from '../data/usage.ts';
+import CatalogCard from './CatalogCard.astro';
+import { usageAffordances } from '../data/usage.ts';
+import { affordanceCard } from '../data/catalog-card.ts';
 ---
 <div class="think-story" aria-label="The Poesis Gene Therapy">
   <div class="think-story__phases">
     <article class="think-phase think-phase--poesis" aria-labelledby="think-poesis-title">
       <header>
-        <span class="think-phase__number">03 · Target operating model</span>
-        <h3 id="think-poesis-title">Human + AI capacity goes to THINK first — governance decides what becomes authoritative.</h3>
+        <span class="think-phase__number">03 · Decided now — The Poesis Gene Therapy of THINK</span>
+        <h3 id="think-poesis-title">Human + AI capacity goes to THINK first — so BUILD and RUN go as efficient and compliant as generative software allows.</h3>
       </header>
       <div class="think-therapy">
         <div class="think-therapy__aside">
           <div class="think-phase__flow">
             <a class="think-capacity think-capacity--governed think-capacity--link" href="#use-case-think">
               <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-              <span class="think-capacity__definition">Define, evaluate, govern</span>
+              <span class="think-capacity__definition">Define, govern Definitions</span>
               <span class="think-capacity__state think-capacity__state--good">explicitly, AI-accelerated, shared</span>
             </a>
-            <span class="think-phase__arrow" aria-hidden="true">→</span>
+            <span class="think-phase__arrow" aria-hidden="true">↔</span>
             <div class="think-capacity-group think-capacity-group--expanded">
               <a class="think-capacity think-capacity--link" href="#use-case-build">
                 <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-                <span class="think-capacity__definition">Generate from definitions</span>
-                <span class="think-capacity__state think-capacity__state--good">that are explicit and governed &mdash; by AI or programmatically</span>
+                <span class="think-capacity__definition">Generate from Definitions</span>
+                <span class="think-capacity__state think-capacity__state--good">automatic</span>
               </a>
               <a class="think-capacity think-capacity--link" href="#use-case-run">
                 <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-                <span class="think-capacity__definition">Operate</span>
-                <span class="think-capacity__state think-capacity__state--good">planned bounded actions with explicit authority and observations</span>
+                <span class="think-capacity__definition">Maintain from Definitions</span>
+                <span class="think-capacity__state think-capacity__state--good">automatic</span>
               </a>
             </div>
           </div>
         </div>
         <div class="think-therapy__body">
           <span class="think-phase__details-label">Affordances</span>
-          <ul class="think-therapy__grid">
-            {affordances.map((a) => (
-              <li id={`affordance-${a.slug}`} class={plannedClass(affordanceStatus(a))}>
-                <span class="think-capability__head"><span class="think-capability__icon"><Icon name={typeIcons.affordance} size={16} /></span><span class="think-capability__step">{a.name}</span><DeliveryStatus state={affordanceStatus(a)} /></span>
-                <strong>{a.title}</strong>
-                <p>{a.blurb}</p>
-                <ItemRelations groups={usageRelations(a)} />
-                <p class="proof-line">
-                  <span>{relationQualifiers.affordanceCapabilities(a.relations.capabilities.length)}</span>
-                  {affordanceRealizations(a).map((r, i) => {
-                    const state = capabilityStatus(r.solution, r.capability);
-                    return (
-                      <>
-                        {i > 0 && ' · '}
-                        <a
-                          class={plannedClass(state)}
-                          title={r.capability.delivery.scope}
-                          href={`${solutionHref(r.solution)}#${r.capability.slug}`}
-                        >{r.capability.name} ({capabilityRelationKind(r.solution, r.capability).replaceAll('-', ' ')}) <DeliveryStatus state={state} compact /></a>
-                      </>
-                    );
-                  })}
-                </p>
-              </li>
-            ))}
+          <ul class="think-therapy__grid catalog-grid">
+            {usageAffordances.map((entry) => <CatalogCard card={affordanceCard(entry)} variant="platform" />)}
           </ul>
-          <p class="think-therapy__legend"><DeliveryStatus state="delivered" /> for the stated scope; <DeliveryStatus state="partial" /> where only part of it is; <DeliveryStatus state="planned" /> for company commitments still being implemented.</p>
+          <p class="think-therapy__legend"><DeliveryStatus state="delivered" /> for the stated scope; <DeliveryStatus state="partial" /> where only part of it is; <DeliveryStatus state="planned" /> for Poesis commitments still being implemented.</p>
         </div>
       </div>
     </article>

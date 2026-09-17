@@ -1,13 +1,14 @@
 ---
 /**
  * Use case detail. The page states the case itself — name, goal, actor types —
- * and everything else is derived from the platform items that declare they
- * serve this case. There is no per-case prose to drift from the platform.
+ * with explicit addressed pains, composing values and derived platform support.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DeliveryStatus from '../../components/DeliveryStatus.astro';
 import Icon from '../../components/Icon.astro';
-import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, usageIcons, useCaseStatus, valueHref, valueStatus, valuesForUseCase } from '../../data/usage.ts';
+import CatalogCard from '../../components/CatalogCard.astro';
+import { affordanceHref, affordancesForUseCase, capabilitiesForUseCase, capabilityHref, featureHref, featuresForUseCase, painsForUseCase, poesisUsage, useCaseStatus, valuesForUseCase } from '../../data/usage.ts';
+import { painCard, valueCard } from '../../data/catalog-card.ts';
 import { affordanceStatus, capabilityStatus, plannedClass } from '../../data/poesis-platform.ts';
 export function getStaticPaths() { return poesisUsage.useCases.map((useCase) => ({ params: { slug: useCase.slug }, props: { useCase } })); }
 const { useCase } = Astro.props;
@@ -46,23 +47,16 @@ const state = useCaseStatus(useCase);
   </section>
   <section id="values" class="section">
     <div class="container">
-      <div class="section-head"><p class="eyebrow">Values</p><h2>Values reachable from here</h2></div>
-      {values.length === 0 && <p>No values linked through platform coverage.</p>}
-      <ul class="think-consequence-list catalog-grid">{values.map((value) => <li class={plannedClass(valueStatus(value.slug))} data-usage-value={value.slug}>
-        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span><span class="think-consequence__step">Value</span>{valueStatus(value.slug) && <DeliveryStatus state={valueStatus(value.slug)!} />}</span>
-        <h3><a href={valueHref(value)}>{value.title}</a></h3>
-        <p>{value.body}</p>
-      </li>)}</ul>
+      <div class="section-head"><p class="eyebrow">Values</p><h2>Values composed with this use case</h2></div>
+      {values.length === 0 && <p>No value composition recorded.</p>}
+      <ul class="think-consequence-list catalog-grid">{values.map((value) => <CatalogCard card={valueCard(value)} />)}</ul>
     </div>
   </section>
   <section id="pains" class="section section--soft">
     <div class="container">
       <div class="section-head"><p class="eyebrow">Pains</p><h2>Pain points</h2></div>
-      <ul class="think-consequence-list catalog-grid">{pains.map((pain) => <li data-usage-pain={pain.slug}>
-        <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.pain} size={16} /></span><span class="think-consequence__step">Pain</span></span>
-        <h3><a href={`/pains#${pain.slug}`}>{pain.pain}</a></h3>
-        <p>{pain.cost}</p>
-      </li>)}</ul>
+      {pains.length === 0 && <p>No addressed pain recorded.</p>}
+      <ul class="think-consequence-list catalog-grid">{pains.map((pain) => <CatalogCard card={painCard(pain)} />)}</ul>
       <a href="/usage"><Icon name="arrow-right" /> All use cases</a>
     </div>
   </section>

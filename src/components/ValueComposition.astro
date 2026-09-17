@@ -1,0 +1,13 @@
+---
+import { valueCoverage } from '../data/usage.ts';
+import DeliveryStatus from './DeliveryStatus.astro';
+interface Props { slug: string }
+const coverage = valueCoverage(Astro.props.slug);
+const supported = coverage.filter((entry) => entry.state).length;
+---
+<div class="proof-line">
+  <span>Composed use cases · {supported} of {coverage.length} with platform support</span>
+  <ul>
+    {coverage.map(({ useCase, state }) => <li><a href={`/usage/${useCase.slug}`}>{useCase.name}</a> {state ? <DeliveryStatus state={state} compact /> : <span>No platform support declared</span>}</li>)}
+  </ul>
+</div>

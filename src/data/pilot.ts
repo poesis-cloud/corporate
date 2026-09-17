@@ -88,6 +88,11 @@ export function serializeBrief(catalog: PilotCatalog, input: PilotSelection, det
     if (!records.length) lines.push('None selected.');
     for (const record of records) {
       lines.push(`- ${record.name}`, `  ${record.description}`, `  ${absolute(record.href)}`);
+      if (heading === 'Desired values') {
+        for (const useCase of catalog.cases.filter((useCase) => useCase.values.includes(record.slug))) {
+          lines.push(`  Constituent: ${useCase.name} | ${useCase.stateLabel ?? 'No registered support (not a planned-delivery claim)'}`);
+        }
+      }
       if (!catalog.cases.some((useCase) => (heading === 'Desired values' ? useCase.values : useCase.pains).includes(record.slug))) {
         lines.push('  Gap: no linked use case is registered for this need.');
       }

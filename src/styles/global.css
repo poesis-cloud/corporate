@@ -298,7 +298,7 @@ a:hover {
   text-decoration: none;
 }
 
-.nav-menu-section + .nav-menu-section {
+.nav-menu-section+.nav-menu-section {
   margin-top: .45rem;
   padding-top: .55rem;
   border-top: 1px solid var(--line);
@@ -2147,6 +2147,12 @@ a:hover {
   font-size: 1.05rem;
 }
 
+/* The rail is centred against the left column, so its span tracks how many rows
+   that column actually occupies: heading, both leads, the CTA and the note. */
+.home-hero .hero-promise {
+  grid-row: 2 / span 5;
+}
+
 .hero-promise p {
   margin: 0;
 }
@@ -2290,7 +2296,7 @@ a:hover {
   list-style: none;
 }
 
-.think-therapy__grid > li {
+.think-therapy__grid>li {
   display: grid;
   gap: .4rem;
   align-content: start;
@@ -2640,7 +2646,7 @@ a:hover {
 
 /* A catalog entry carries more relations than a homepage card, so the fixed
    three-row rhythm is released and the anchor target gets header clearance. */
-.catalog-grid > li {
+.catalog-grid>li {
   grid-template-rows: none;
   overflow-wrap: anywhere;
   scroll-margin-top: 7rem;
@@ -2650,8 +2656,17 @@ a:hover {
   row-gap: clamp(1.6rem, 3vw, 2.2rem);
 }
 
-.catalog-grid .catalog-hook {
+/* The hook qualifies the identity above it; the meta states a count or a
+   milestone. Neither is the body, so neither reads like it. */
+.catalog-hook {
+  margin: 0;
   color: var(--ink-soft);
+}
+
+.catalog-meta {
+  margin: .1rem 0 0;
+  color: var(--muted);
+  font-size: .75rem;
 }
 
 .catalog-grid .proof-line a {
@@ -2672,7 +2687,7 @@ a:hover {
   gap: .35rem;
 }
 
-.home-posture + .home-posture {
+.home-posture+.home-posture {
   margin-top: clamp(2.4rem, 5vw, 3.4rem);
   padding-top: clamp(2.4rem, 5vw, 3.4rem);
   border-top: 1px solid var(--line);
@@ -2724,7 +2739,7 @@ a:hover {
   margin-top: 1.5rem;
 }
 
-.portfolio-values > li {
+.portfolio-values>li {
   grid-template-rows: auto auto 1fr auto;
   scroll-margin-top: 84px;
 }
@@ -2735,22 +2750,22 @@ a:hover {
   margin-top: 1.5rem;
 }
 
-.portfolio-capabilities > li,
-.portfolio-features > li,
-.portfolio-products > li {
+.portfolio-capabilities>li,
+.portfolio-features>li,
+.portfolio-products>li {
   align-content: stretch;
   scroll-margin-top: 84px;
 }
 
-.portfolio-capabilities > li {
+.portfolio-capabilities>li {
   grid-template-rows: auto auto 1fr auto;
 }
 
-.portfolio-features > li {
+.portfolio-features>li {
   grid-template-rows: auto auto 1fr;
 }
 
-.portfolio-products > li {
+.portfolio-products>li {
   position: relative;
   grid-template-rows: auto auto 1fr auto;
 }
@@ -2760,7 +2775,7 @@ a:hover {
   text-decoration: none;
 }
 
-.portfolio-products > li:hover strong a {
+.portfolio-products>li:hover strong a {
   color: var(--accent);
 }
 
@@ -2886,7 +2901,7 @@ a:hover {
 
 /* Accent is reserved for an item's own eyebrow; a relation qualifier stays
    neutral so it does not read as the head of the next card. */
-.proof-line > span {
+.proof-line>span {
   display: block;
   margin-bottom: .3rem;
   color: var(--muted);
@@ -2894,6 +2909,26 @@ a:hover {
   font-size: .68rem;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+/* Merged relation groups (affordance/capability/feature cards, catalog entries):
+   one footer line per item instead of one bordered block per relation type. */
+.proof-line--merged>span {
+  display: inline;
+  margin-bottom: 0;
+  margin-right: .35em;
+}
+
+.proof-line--merged>span::after {
+  content: ':';
+}
+
+/* Keep each link's arrow icon on the same line as its label so merged
+   groups read as one flowing line instead of one link per row. */
+.proof-line--merged a {
+  display: inline-flex;
+  align-items: center;
+  gap: .25em;
 }
 
 /* A reference never outranks the content it hangs off: same weight as the
@@ -2926,21 +2961,43 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
-.claim-status--planned { color: var(--status-planned); }
-.claim-status--partial { color: var(--status-progress); }
-.claim-status--delivered { color: var(--status-delivered); }
-.claim-anchor { display: block; scroll-margin-top: 84px; }
-.arch-version, .arch-comp-version { white-space: normal; overflow-wrap: anywhere; }
+.claim-status--planned {
+  color: var(--status-planned);
+}
 
-.think-consequence-list > li.is-planned { border-left-color: var(--planned-line); }
-.think-consequence-list > li.is-planned .think-consequence__step { color: var(--planned); }
+.claim-status--partial {
+  color: var(--status-progress);
+}
 
-.think-therapy__grid > li.is-planned {
+.claim-status--delivered {
+  color: var(--status-delivered);
+}
+
+.claim-anchor {
+  display: block;
+  scroll-margin-top: 84px;
+}
+
+.arch-version,
+.arch-comp-version {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.think-consequence-list>li.is-planned {
+  border-left-color: var(--planned-line);
+}
+
+.think-consequence-list>li.is-planned .think-consequence__step {
+  color: var(--planned);
+}
+
+.think-therapy__grid>li.is-planned {
   border-color: var(--planned-line);
 }
 
-.think-therapy__grid > li.is-planned .think-capability__icon,
-.think-therapy__grid > li.is-planned .think-capability__step {
+.think-therapy__grid>li.is-planned .think-capability__icon,
+.think-therapy__grid>li.is-planned .think-capability__step {
   color: var(--planned);
 }
 

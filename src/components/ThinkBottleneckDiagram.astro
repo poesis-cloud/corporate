@@ -1,63 +1,10 @@
 ---
 import Icon from './Icon.astro';
-import { painsForPhase } from '../data/pains.ts';
-import type { Pain } from '../data/pains.ts';
+import { homepagePainGroups } from '../data/pains.ts';
+import { catalogHref } from '../data/catalog-query.ts';
 
-const legacyPains = painsForPhase('legacy');
-const genaiPains = painsForPhase('genai');
-
-/** A phase pain point, with the IT pains that are the same pathology at domain zoom. */
-interface PainPoint {
-    lead: string;
-    pains: Pain[];
-}
-
-function group(phasePains: Pain[], groups: { lead: string; pains: string[] }[]): PainPoint[] {
-    const byId = new Map(phasePains.map((p) => [p.slug, p]));
-    const resolved = groups.map((g) => ({
-        lead: g.lead,
-        pains: g.pains.map((id) => {
-            const pain = byId.get(id);
-            if (!pain) throw new Error(`ThinkBottleneckDiagram: unknown or wrong-phase pain "${id}".`);
-            return pain;
-        }),
-    }));
-    const folded = new Set(resolved.flatMap((g) => g.pains.map((p) => p.slug)));
-    for (const p of phasePains) {
-        if (!folded.has(p.slug)) throw new Error(`ThinkBottleneckDiagram: pain "${p.slug}" is folded under no pain point.`);
-    }
-    return resolved;
-}
-
-const legacyPoints = group(legacyPains, [
-    {
-        lead: 'Purpose, rules, and constraints scattered across people, meetings, documents, and tools.',
-        pains: ['it-blind-change', 'it-framework-collision', 'it-tool-silos', 'it-governance-lockin', 'it-access-assignment-drift', 'it-fragmented-review-context', 'it-assumed-governance-coverage', 'it-unjustified-evidence-retention'],
-    },
-    {
-        lead: 'Every handoff reconstructed THINK — and lost a little of it each time.',
-        pains: ['it-audit-reconstruction', 'it-handcrafted-deliverables', 'it-unactionable-governance-findings'],
-    },
-    {
-        lead: 'THINK artifacts went stale as BUILD and RUN changed — definition and reality drifted apart.',
-        pains: ['it-ea-drift', 'it-truth-drift', 'it-acquisition-blind-spots', 'it-stale-dependent-eligibility', 'it-unexamined-rule-regressions'],
-    },
-]);
-
-const genaiPoints = group(genaiPains, [
-    {
-        lead: 'Keep the speed: every artifact drifts further from intent, compounding at machine pace.',
-        pains: ['it-ai-blindness'],
-    },
-    {
-        lead: 'Restore alignment at every handoff: prompts, reviews, corrections, and controls consume the acceleration gain.',
-        pains: ['it-unverified-generated-output', 'it-unqualified-agent-runtime', 'it-conflicting-agent-artifacts'],
-    },
-    {
-        lead: 'Human attention becomes the control plane — understanding, validation, coordination, and accountability remain scarce.',
-        pains: ['it-ungoverned-change', 'it-ungoverned-agents'],
-    },
-]);
+const legacyPoints = homepagePainGroups.slice(0, 3);
+const genaiPoints = homepagePainGroups.slice(3);
 ---
 <div class="think-story" aria-label="How the THINK bottleneck changes with AI">
   <div class="think-story__phases">
@@ -69,20 +16,20 @@ const genaiPoints = group(genaiPains, [
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
           <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-          <span class="think-capacity__definition">Define, evaluate, govern</span>
+          <span class="think-capacity__definition">Define, govern Definitions</span>
           <span class="think-capacity__state think-capacity__state--bad">implicitly, manually, in people&rsquo;s heads</span>
         </div>
-        <span class="think-phase__arrow" aria-hidden="true">→</span>
+        <span class="think-phase__arrow" aria-hidden="true">↔</span>
         <div class="think-capacity-group">
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-            <span class="think-capacity__definition">Generate from definitions</span>
-            <span class="think-capacity__state think-capacity__state--bad">held in people&rsquo;s heads &mdash; all human</span>
+            <span class="think-capacity__definition">Generate from Definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">mostly manual</span>
           </div>
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-            <span class="think-capacity__definition">Operate</span>
-            <span class="think-capacity__state think-capacity__state--bad">by hand, against nothing explicit</span>
+            <span class="think-capacity__definition">Maintain from Definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">mostly manual</span>
           </div>
         </div>
       </div>
@@ -91,12 +38,7 @@ const genaiPoints = group(genaiPains, [
         <ul class="think-phase__details">
           {legacyPoints.map((point) => (
             <li>
-              <span>{point.lead}</span>
-              {point.pains.length > 0 && (
-                <ul class="think-phase__subpains">
-                  {point.pains.map((p) => <li id={p.slug}><span>{p.pain}</span></li>)}
-                </ul>
-              )}
+              <a href={catalogHref('pains', `homepage:${point.slug}`)}>{point.lead}</a>
             </li>
           ))}
         </ul>
@@ -105,26 +47,26 @@ const genaiPoints = group(genaiPains, [
 
     <article class="think-phase think-phase--warning" aria-labelledby="think-ai-title">
       <header>
-        <span class="think-phase__number">02 · Today — Gen AI on pathological THINK</span>
-        <h3 id="think-ai-title">AI generates probabilistically against implicit definitions — lose speed, or lose alignment.</h3>
+        <span class="think-phase__number">02 · Today &mdash; The THINK pathology and GenAI</span>
+        <h3 id="think-ai-title">THINK still lives in people&rsquo;s heads and prose &mdash; GenAI BUILD and RUN move at its speed or drift even faster.</h3>
       </header>
       <div class="think-phase__flow">
         <div class="think-capacity think-capacity--narrow">
           <span class="think-capacity__head"><Icon name="compass" size={16} /><strong>THINK</strong></span>
-          <span class="think-capacity__definition">Define, evaluate, govern</span>
+          <span class="think-capacity__definition">Define, govern Definitions</span>
           <span class="think-capacity__state think-capacity__state--bad">implicitly, manually, in people&rsquo;s heads</span>
         </div>
-        <span class="think-phase__arrow" aria-hidden="true">→</span>
+        <span class="think-phase__arrow" aria-hidden="true">↔</span>
         <div class="think-capacity-group think-capacity-group--expanded">
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="layers" size={16} /><strong>BUILD</strong></span>
-            <span class="think-capacity__definition">Generate from definitions</span>
-            <span class="think-capacity__state think-capacity__state--bad">that stay implicit &mdash; now AI-accelerated</span>
+            <span class="think-capacity__definition">Generate from Definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">AI-assisted</span>
           </div>
           <div class="think-capacity">
             <span class="think-capacity__head"><Icon name="play" size={16} /><strong>RUN</strong></span>
-            <span class="think-capacity__definition">Operate</span>
-            <span class="think-capacity__state think-capacity__state--bad">AI-accelerated, still against nothing explicit</span>
+            <span class="think-capacity__definition">Maintain from Definitions</span>
+            <span class="think-capacity__state think-capacity__state--bad">AI-assisted</span>
           </div>
         </div>
       </div>
@@ -133,12 +75,7 @@ const genaiPoints = group(genaiPains, [
         <ul class="think-phase__details">
           {genaiPoints.map((point) => (
             <li>
-              <span>{point.lead}</span>
-              {point.pains.length > 0 && (
-                <ul class="think-phase__subpains">
-                  {point.pains.map((p) => <li id={p.slug}><span>{p.pain}</span></li>)}
-                </ul>
-              )}
+              <a href={catalogHref('pains', `homepage:${point.slug}`)}>{point.lead}</a>
             </li>
           ))}
         </ul>

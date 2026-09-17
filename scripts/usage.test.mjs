@@ -1,11 +1,9 @@
 /**
  * Usage-model tests.
  *
- * The model is inverted: platform items (features, capabilities, affordances)
- * declare the values, pains and use cases they serve, and everything a use case
- * shows is derived from those declarations. These tests prove the inventory is
- * complete, the references resolve, the ownership rules hold, and the built
- * pages keep the public identities.
+ * Platform items serve use cases; values compose cases and cases address
+ * independent pains. These tests cover graph ownership, conservative coverage,
+ * static catalog navigation and preservation of public identities.
  */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
@@ -38,9 +36,14 @@ import {
   affordancesForUseCase,
   valuesForUseCase,
   painsForUseCase,
+  valueCoverage,
+  painsForItem,
+  valuesForItem,
 } from '../src/data/usage.ts';
 import { profiles } from '../src/data/profiles.ts';
-import { pains } from '../src/data/pains.ts';
+import { pains, homepagePainGroups } from '../src/data/pains.ts';
+import { catalogSnapshot, platformRelations } from '../src/data/catalog.ts';
+import { catalogTypes, catalogHref, filterCatalog } from '../src/data/catalog-query.ts';
 import { catalogViews, siteNavigation } from '../src/data/site-navigation.ts';
 import { projectPilotCatalog } from '../src/data/pilot-catalog.ts';
 import { emailHandoff, filterCases, normalizeSelection, safePilotJson, selectionFromQuery, selectionQuery, serializeBrief } from '../src/data/pilot.ts';
@@ -75,9 +78,9 @@ test('pilot suggestions use any explicit need relation, never shared actors', ()
   const selection = { values: [catalog.values[0].slug], pains: [catalog.pains[0].slug], cases: [] };
   const expected = catalog.cases.filter((record) => record.values.includes(selection.values[0]) || record.pains.includes(selection.pains[0]));
   assert.deepEqual(filterCases(catalog, selection), expected);
-  const unlinked = catalog.values.find((value) => !catalog.cases.some((record) => record.values.includes(value.slug)));
-  assert.ok(unlinked);
-  assert.deepEqual(filterCases(catalog, { values: [unlinked.slug], pains: [], cases: [] }, '', catalog.actors[0].slug), []);
+  const unsupported = catalog.values.find((value) => value.slug === 'value:service-accountability');
+  assert.ok(unsupported);
+  assert.deepEqual(filterCases(catalog, { values: [unsupported.slug], pains: [], cases: [] }).map((record) => record.slug), ['accept-service-baseline', 'transfer-service-ownership']);
   assert.deepEqual(filterCases(catalog, selection, 'nonexistent exact phrase'), []);
   const withActor = expected.find((record) => record.actors.length);
   assert.ok(withActor);
@@ -90,9 +93,10 @@ test('pilot exports support value-only, pain-only, partial and unsupported scope
   const catalog = projectPilotCatalog();
   const empty = normalizeSelection({}, catalog);
   assert.match(serializeBrief(catalog, empty), /^No registered/);
-  const unlinked = catalog.values.find((value) => !catalog.cases.some((record) => record.values.includes(value.slug)));
-  const brief = serializeBrief(catalog, { ...empty, values: [unlinked.slug] }, { criteria: '<script>alert("literal")</script>', timing: 'My own window' });
-  assert.match(brief, /Gap: no linked use case/);
+  const unsupported = catalog.values.find((value) => value.slug === 'value:service-accountability');
+  const brief = serializeBrief(catalog, { ...empty, values: [unsupported.slug] }, { criteria: '<script>alert("literal")</script>', timing: 'My own window' });
+  assert.match(brief, /Constituent: Accept a service responsibility baseline \| No registered support/);
+  assert.match(brief, /Gap: no registered platform support/);
   assert.match(brief, /ITIP \+ SIE SaaS/);
   assert.match(brief, /<script>alert\("literal"\)<\/script>/);
   assert.match(brief, /My own window/);
@@ -100,7 +104,7 @@ test('pilot exports support value-only, pain-only, partial and unsupported scope
   assert.match(serializeBrief(catalog, { ...empty, pains: [catalog.pains[0].slug] }), /value\/pain-led brief remains valid/);
   const cases = catalog.cases.filter((record) => record.state === 'partial' || record.state === null);
   const withCases = serializeBrief(catalog, { ...empty, cases: cases.map((record) => record.slug) });
-  assert.match(withCases, /Registered support: In progress/);
+  assert.match(withCases, /Registered support: Partial/);
   assert.match(withCases, /No registered support \(not a planned-delivery claim\)/);
   const lines = withCases.split('\n').filter((line) => line.startsWith('- ') && line.includes(' | '));
   assert.equal(new Set(lines).size, lines.length);
@@ -129,7 +133,7 @@ test('usage is separate from platform and covers its stable identity ledger', ()
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'partial').length, 19);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'planned').length, 23);
   assert.equal(poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined).length, 16);
-  assert.equal(usageValues.filter((value) => valueStatus(value.slug) === undefined).length, 10);
+  assert.equal(valueStatus('value:service-accountability'), undefined);
 });
 
 test('every identity is a unique, stable slug', () => {
@@ -155,36 +159,28 @@ test('platform items own the references and every reference resolves', () => {
     ...usageAffordances.map((entry) => entry.affordance),
   ];
   for (const item of items) {
-    for (const slug of item.values) assert.ok(valueSlugs.has(slug), `${item.slug}: ${slug}`);
-    for (const slug of item.pains) assert.ok(painSlugs.has(slug), `${item.slug}: ${slug}`);
+    assert.equal('values' in item, false);
+    assert.equal('pains' in item, false);
+    for (const value of valuesForItem(item)) assert.ok(valueSlugs.has(value.slug));
+    for (const pain of painsForItem(item)) assert.ok(painSlugs.has(pain.slug));
     for (const slug of item.useCases) assert.ok(caseSlugs.has(slug), `${item.slug}: ${slug}`);
   }
-  // Values carry no relation arrays of their own any more.
-  for (const value of usageValues) assert.deepEqual(Object.keys(value).sort(), ['body', 'originalTitle', 'slug', 'title']);
-  // The use case states itself and nothing else.
-  for (const useCase of poesisUsage.useCases) assert.deepEqual(Object.keys(useCase).sort(), ['actorTypes', 'goal', 'name', 'slug']);
+  for (const value of usageValues) assert.deepEqual(Object.keys(value).sort(), ['body', 'originalTitle', 'slug', 'title', 'useCases']);
+  for (const useCase of poesisUsage.useCases) assert.deepEqual(Object.keys(useCase).sort(), ['actorTypes', 'addressedPains', 'goal', 'name', 'slug']);
 });
 
-test('value ownership follows the item that references it', () => {
+test('value ownership preserves placement while support follows constituent use cases', () => {
   assert.equal(platformValues.length, 6);
   assert.equal(usageValues.filter((value) => valueOwnerDepth(value.slug) === 2).length, 17);
   assert.equal(usageValues.filter((value) => valueOwnerDepth(value.slug) === 3).length, 42);
-  for (const value of platformValues) {
-    for (const support of valueSupports(value.slug)) assert.equal(support.type, 'affordance');
-  }
+  assert.ok(valueSupports(platformValues[0].slug).some((support) => support.type === 'feature'));
   for (const solution of poesisPlatform.solutions) {
     for (const value of solutionValues(solution.slug)) {
-      for (const support of valueSupports(value.slug)) {
-        assert.equal(support.type, 'capability');
-        assert.equal(support.slug.split('/')[0], solution.slug);
-      }
+      assert.ok(valueHref(value).startsWith(`/solutions/${solution.slug}#`));
     }
     for (const product of solution.products) {
       for (const value of productValues(solution.slug, product.slug)) {
-        for (const support of valueSupports(value.slug)) {
-          assert.equal(support.type, 'feature');
-          assert.deepEqual(support.slug.split('/').slice(0, 2), [solution.slug, product.slug]);
-        }
+        assert.ok(valueHref(value).startsWith(`/solutions/${solution.slug}/products/${product.slug}#`));
       }
     }
   }
@@ -212,10 +208,10 @@ test('validation rejects dangling references but accepts independent usage recor
   dangling.pains[0].actorTypes = ['unknown'];
   assert.throws(() => validateUsage(dangling), /Unknown/);
   const unreachable = structuredClone(poesisUsage);
-  unreachable.useCases.push({ slug: 'orphan-case', name: 'Orphan case', goal: 'No platform item serves it.', actorTypes: ['it-architect'] });
+  unreachable.useCases.push({ slug: 'orphan-case', name: 'Orphan case', goal: 'No platform item serves it.', actorTypes: ['it-architect'], addressedPains: [] });
   assert.doesNotThrow(() => validateUsage(unreachable));
   assert.equal(useCaseStatus(unreachable.useCases.at(-1)), undefined);
-  const independentValue = { slug: 'value:unmapped-test-benefit', originalTitle: 'Service accountability', title: 'Service accountability', body: 'Clear responsibility for service commitments.' };
+  const independentValue = { slug: 'value:unmapped-test-benefit', originalTitle: 'Service accountability', title: 'Service accountability', body: 'Clear responsibility for service commitments.', useCases: ['orphan-case'] };
   assert.doesNotThrow(() => validateUsage(unreachable, [...usageValues, independentValue]));
   assert.equal(valueStatus(independentValue.slug), undefined);
   assert.equal(valueHref(independentValue), `/values#${valueAnchor(independentValue)}`);
@@ -228,11 +224,10 @@ test('derivation preserves declared coverage without fabricating support for ind
   for (const useCase of poesisUsage.useCases) {
     if (useCaseStatus(useCase) === undefined) {
       assert.deepEqual(featuresForUseCase(useCase.slug), []);
-      assert.deepEqual(valuesForUseCase(useCase.slug), []);
+      assert.ok(valuesForUseCase(useCase.slug).every((value) => value.useCases.includes(useCase.slug)));
       assert.ok(painsForUseCase(useCase.slug).length, useCase.slug);
     } else {
       assert.ok(featuresForUseCase(useCase.slug).length || capabilitiesForUseCase(useCase.slug).length || affordancesForUseCase(useCase.slug).length, useCase.slug);
-      assert.ok(valuesForUseCase(useCase.slug).length, useCase.slug);
     }
     for (const value of valuesForUseCase(useCase.slug)) assert.ok(usageValues.includes(value));
     for (const pain of painsForUseCase(useCase.slug)) assert.ok(poesisUsage.pains.includes(pain));
@@ -246,10 +241,10 @@ test('derivation preserves declared coverage without fabricating support for ind
     );
   }
   assert.equal(valueEdges.length, new Set(valueEdges.map((edge) => edge.id)).size);
-  assert.equal(usageValues.filter((value) => valueStatus(value.slug) === 'delivered').length, 19);
   for (const value of usageValues) {
-    const supports = valueSupports(value.slug);
-    assert.equal(valueStatus(value.slug), supports.length ? commitmentStatus(supports.map((support) => support.state)) : undefined);
+    const states = valueCoverage(value.slug).map((entry) => entry.state);
+    assert.equal(valueStatus(value.slug), states.some(Boolean) ? commitmentStatus(states.map((state) => state ?? 'planned')) : undefined);
+    if (valueStatus(value.slug) === 'delivered') assert.ok(states.every((state) => state === 'delivered'));
   }
 });
 
@@ -319,7 +314,7 @@ test('incident response reaches business processes and owners without claiming c
   assert.match(incident.goal, /confirmed disruption, possible exposure and missing evidence/);
   assert.equal(useCaseStatus(incident), undefined);
   assert.deepEqual(painsForUseCase(incident.slug).map((pain) => pain.slug), ['it-incident-business-impact-blindness']);
-  assert.deepEqual(valuesForUseCase(incident.slug), []);
+  assert.deepEqual(valuesForUseCase(incident.slug).map((value) => value.slug), ['value:business-informed-incident-response']);
   assert.equal(valueStatus('value:business-informed-incident-response'), undefined);
   for (const actor of poesisUsage.actorTypes) {
     assert.equal(actor.domainSlug, 'it');
@@ -331,7 +326,7 @@ test('lookups stay consistent with the declarations that produced them', () => {
   for (const pain of poesisUsage.pains) {
     assert.deepEqual(useCasesForPain(pain.slug), poesisUsage.useCases.filter((useCase) => painsForUseCase(useCase.slug).includes(pain)));
   }
-  assert.deepEqual(useCasesForPain('manual-decision-handoff').map((useCase) => useCase.slug), ['transfer-service-ownership', 'handover-operational-evidence']);
+  assert.deepEqual(useCasesForPain('manual-decision-handoff').map((useCase) => useCase.slug), ['retrieve-decision-basis', 'transfer-service-ownership', 'handover-operational-evidence', 'reuse-delivery-evidence']);
   for (const entry of usageFeatures) {
     assert.deepEqual(useCasesForFeature(entry.slug).map((useCase) => useCase.slug), poesisUsage.useCases.filter((useCase) => entry.feature.useCases.includes(useCase.slug)).map((useCase) => useCase.slug));
   }
@@ -354,16 +349,106 @@ test('legacy adapters retain canonical content and identity without an alternate
   for (const pain of pains) {
     const canonical = poesisUsage.pains.find((candidate) => candidate.slug === pain.slug);
     assert.ok(canonical);
-    for (const key of ['pain', 'cost', 'phase']) assert.equal(pain[key], canonical[key]);
+    for (const key of ['pain', 'cost']) assert.equal(pain[key], canonical[key]);
+    assert.equal('phase' in pain, false);
+    assert.equal('phase' in canonical, false);
     assert.deepEqual(pain.tags, canonical.tags);
     assert.equal('addressedBy' in canonical, false);
     assert.equal('remedy' in canonical, false);
     assert.equal('domainSlug' in canonical, false);
-    assert.ok(pain.addressedBy.length);
+    assert.deepEqual(pain.addressedBy.map((ref) => `${ref.solution}/${ref.product}/${ref.feature}`), usageFeatures.filter((entry) => painsForItem(entry.feature).some((candidate) => candidate.slug === pain.slug)).map((entry) => entry.slug));
   }
-  // Both phases of the homepage bottleneck diagram still resolve.
-  assert.ok(pains.some((pain) => pain.phase === 'legacy'));
-  assert.ok(pains.some((pain) => pain.phase === 'genai'));
+  assert.equal(pains.length, poesisUsage.pains.length);
+  assert.ok(pains.some((pain) => !pain.addressedBy.length));
+});
+
+test('composition validates nonempty known unique members and remediation never follows occurrence', () => {
+  for (const references of [[], ['unknown'], ['read-governance-model', 'read-governance-model']]) {
+    const values = structuredClone(usageValues);
+    values[0].useCases = references;
+    assert.throws(() => validateUsage(poesisUsage, values), /Empty value composition|Unknown constituent|Duplicate constituent/);
+  }
+  for (const references of [['unknown'], ['it-tool-silos', 'it-tool-silos']]) {
+    const graph = structuredClone(poesisUsage);
+    graph.useCases[0].addressedPains = references;
+    assert.throws(() => validateUsage(graph), /Unknown addressed pain|Duplicate addressed pain/);
+  }
+  const pain = poesisUsage.pains.find((pain) => pain.slug === 'it-assumed-governance-coverage');
+  assert.ok(pain.occursIn.includes('reuse-governance-selection'));
+  assert.ok(!painsForUseCase('reuse-governance-selection').includes(pain));
+  const graph = structuredClone(poesisUsage);
+  graph.pains.push({ slug: 'independent-test-pain', pain: 'An independent pain', cost: 'Unaddressed cost', actorTypes: ['it-platform'], tags: ['Test'] });
+  assert.doesNotThrow(() => validateUsage(graph));
+});
+
+test('composite status cannot hide missing constituent support behind delivered members', () => {
+  const value = { slug: 'value:test-composite', originalTitle: 'Test composition', title: 'Test composition', body: 'Test coverage', useCases: ['read-governance-model', 'accept-service-baseline'] };
+  usageValues.push(value);
+  try {
+    assert.equal(useCaseStatus({ slug: value.useCases[0] }), 'delivered');
+    assert.equal(useCaseStatus({ slug: value.useCases[1] }), undefined);
+    assert.equal(valueStatus(value.slug), 'partial');
+    value.useCases = ['accept-service-baseline'];
+    assert.equal(valueStatus(value.slug), undefined);
+    value.useCases = ['read-governance-model'];
+    assert.equal(valueStatus(value.slug), 'delivered');
+  } finally { usageValues.pop(); }
+});
+
+test('catalog navigation uses one canonical link per nonempty relationship type', () => {
+  for (const [type, entries, itemKey] of [['feature', usageFeatures, 'feature'], ['capability', usageCapabilities, 'capability'], ['affordance', usageAffordances, 'affordance']]) {
+    for (const entry of entries) {
+      const source = `${type}:${entry.slug}`;
+      const groups = platformRelations(entry[itemKey]);
+      assert.equal(groups.length, catalogTypes.filter((target) => catalogSnapshot.sources[source].targets[target].length).length);
+      assert.equal(groups.length, new Set(groups.map((group) => group.label)).size);
+      for (const group of groups) {
+        assert.equal(group.links.length, 1);
+        const url = new URL(group.links[0].href, 'https://poesis.cloud');
+        assert.equal(url.searchParams.get('source'), source);
+        const target = url.pathname.slice(1);
+        assert.equal(group.links[0].href, catalogHref(target, source));
+        assert.ok(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.length);
+      }
+    }
+  }
+  const source = 'capability:itip/automatic-it-truth-sourcing';
+  assert.equal(catalogHref('values', source), '/values?source=capability%3Aitip%2Fautomatic-it-truth-sourcing');
+  const capability = usageCapabilities.find((entry) => `capability:${entry.slug}` === source);
+  assert.deepEqual(catalogSnapshot.sources[source].targets.features, usageFeatures.filter((entry) => entry.solution.slug === capability.solution.slug && capability.capability.relations.features.includes(`${entry.product.slug}/${entry.feature.slug}`)).map((entry) => entry.slug));
+  for (const feature of catalogSnapshot.sources[source].targets.features) assert.ok(catalogSnapshot.sources[`feature:${feature}`].targets.capabilities.includes(capability.slug));
+});
+
+test('catalog filters intersect source actor and pain, reject unknowns, and restore from URLs', () => {
+  const source = 'capability:itip/automatic-it-truth-sourcing';
+  const query = new URLSearchParams({ source, actor: 'it-platform', pain: 'it-acquisition-blind-spots' });
+  const expected = ['configure-collection-boundaries', 'recover-incomplete-collection', 'review-evidence-refresh'];
+  assert.deepEqual(filterCatalog(catalogSnapshot, 'usage', query).slugs, expected);
+  assert.deepEqual(filterCatalog(catalogSnapshot, 'usage', new URLSearchParams(query.toString())).slugs, expected);
+  for (const type of catalogTypes) {
+    for (const invalid of ['source=__proto__', 'source=constructor', 'source=feature%3Aunknown', 'source=', 'actor=unknown', 'pain=unknown', `source=${encodeURIComponent(source)}&source=unknown`]) {
+      const selection = filterCatalog(catalogSnapshot, type, new URLSearchParams(invalid));
+      assert.equal(selection.invalid, true, invalid);
+      assert.deepEqual(selection.slugs, []);
+    }
+    assert.equal(filterCatalog(catalogSnapshot, type, new URLSearchParams()).slugs.length, catalogSnapshot.records[type].length);
+  }
+  const original = query.toString();
+  query.delete('source'); query.delete('actor'); query.delete('pain');
+  assert.equal(filterCatalog(catalogSnapshot, 'usage', query).active, false);
+  assert.deepEqual(filterCatalog(catalogSnapshot, 'usage', new URLSearchParams(original)).slugs, expected);
+});
+
+test('homepage groups retain exactly the six editorial child sets without requiring all pains', () => {
+  const expected = [
+    ['it-blind-change', 'it-framework-collision', 'it-tool-silos', 'it-governance-lockin', 'it-access-assignment-drift', 'it-fragmented-review-context', 'it-assumed-governance-coverage', 'it-unjustified-evidence-retention'],
+    ['it-audit-reconstruction', 'it-handcrafted-deliverables', 'it-unactionable-governance-findings'],
+    ['it-ea-drift', 'it-truth-drift', 'it-acquisition-blind-spots', 'it-stale-dependent-eligibility', 'it-unexamined-rule-regressions'],
+    ['it-ai-blindness'], ['it-unverified-generated-output', 'it-unqualified-agent-runtime', 'it-conflicting-agent-artifacts'], ['it-ungoverned-change', 'it-ungoverned-agents'],
+  ];
+  assert.deepEqual(homepagePainGroups.map((group) => group.pains), expected);
+  for (const group of homepagePainGroups) assert.deepEqual(filterCatalog(catalogSnapshot, 'pains', new URLSearchParams({ source: `homepage:${group.slug}` })).slugs.sort(), [...group.pains].sort());
+  assert.ok(poesisUsage.pains.some((pain) => !homepagePainGroups.some((group) => group.pains.includes(pain.slug))));
 });
 
 test('anchors and hrefs keep the published shape', () => {
@@ -398,7 +483,7 @@ test('workspace SEO retains registered platform-linked tasks and all usage title
   assert.equal(new Set(poesisUsage.useCases.map((useCase) => useCase.name.toLowerCase())).size, poesisUsage.useCases.length);
 });
 
-const attr = (node, name) => node.attrs?.find((attribute) => attribute.name === name)?.value;
+const attr = (node, name) => node?.attrs?.find((attribute) => attribute.name === name)?.value;
 const elements = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap((child) => elements(child, predicate))];
 const text = (node) => (node.nodeName === '#text' ? node.value : (node.childNodes ?? []).map(text).join(''));
 const documents = new Map();
@@ -407,6 +492,34 @@ const built = (pathname) => {
   if (!documents.has(path)) documents.set(path, parse(readFileSync(new URL(`../dist${path}/index.html`, import.meta.url), 'utf8')));
   return documents.get(path);
 };
+
+test('built catalogs publish matching filter payloads and compact platform footers on every surface', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  for (const type of catalogTypes) {
+    const document = built(`/${type}`);
+    const payload = elements(document, (node) => attr(node, 'id') === 'catalog-filter-data')[0];
+    assert.deepEqual(JSON.parse(text(payload)), { type, snapshot: JSON.parse(JSON.stringify(catalogSnapshot)) });
+    assert.equal(elements(document, (node) => attr(node, 'id') === 'catalog-active-source').length, 1);
+    assert.equal(elements(document, (node) => attr(node, 'id') === 'catalog-clear').length, 1);
+    assert.deepEqual(elements(document, (node) => attr(node, 'data-catalog-slug')).map((node) => attr(node, 'data-catalog-slug')), catalogSnapshot.records[type].map((record) => record.slug));
+  }
+  for (const [type, entries, itemKey] of [['features', usageFeatures, 'feature'], ['capabilities', usageCapabilities, 'capability'], ['affordances', usageAffordances, 'affordance']]) {
+    for (const entry of entries) {
+      const source = `${itemKey}:${entry.slug}`;
+      const expected = platformRelations(entry[itemKey]).flatMap((group) => group.links.map((link) => link.href));
+      const catalogCard = elements(built(`/${type}`), (node) => attr(node, 'data-catalog-slug') === entry.slug)[0];
+      const ownerPath = itemKey === 'affordance' ? '/' : itemKey === 'feature' ? `${solutionHref(entry.solution)}/products/${entry.product.slug}` : solutionHref(entry.solution);
+      const ownerAnchor = itemKey === 'affordance' ? `affordance-${entry.slug}` : entry[itemKey].slug;
+      const ownerCard = elements(built(ownerPath), (node) => attr(node, 'id') === ownerAnchor)[0];
+      for (const card of [catalogCard, ownerCard]) {
+        assert.ok(card, source);
+        const footer = elements(card, (node) => attr(node, 'class')?.split(' ').includes('proof-line'));
+        const links = footer.flatMap((line) => elements(line, (node) => node.tagName === 'a').map((node) => attr(node, 'href')));
+        assert.deepEqual(links, expected, source);
+        assert.ok(links.every((href) => new URL(href, 'https://poesis.cloud').searchParams.get('source') === source));
+      }
+    }
+  }
+});
 
 test('built pilot keeps needs first, canonical links, safe projection and useful fallback', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const document = built('/pilot');
@@ -476,10 +589,11 @@ test('built usage pages retain identity, derived badges, contextual links and SE
   for (const value of usageValues) {
     const item = elements(built('/values'), (node) => attr(node, 'id') === valueAnchor(value));
     assert.equal(item.length, 1, value.slug);
-    const badges = elements(item[0], (node) => attr(node, 'data-delivery-status'));
+    const head = elements(item[0], (node) => attr(node, 'class')?.includes('think-consequence__head'))[0];
+    const badges = elements(head, (node) => attr(node, 'data-delivery-status'));
     assert.equal(badges.length, valueStatus(value.slug) === undefined ? 0 : 1, value.slug);
     if (valueStatus(value.slug) === undefined) {
-      assert.match(text(item[0]), /No platform coverage declared/);
+      assert.match(text(item[0]), /No platform support declared/);
       assert.equal(elements(item[0], (node) => attr(node, 'href')?.startsWith('/solutions')).length, 0);
     }
   }
@@ -489,9 +603,8 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.equal(heading.length, 1);
     assert.equal(text(heading[0]), useCase.name);
     if (useCaseStatus(useCase) === undefined) {
-      assert.equal(elements(document, (node) => attr(node, 'data-delivery-status')).length, 0);
       assert.match(text(document), /No platform coverage declared/);
-      assert.equal(elements(document, (node) => attr(node, 'data-usage-value')).length, 0);
+      assert.equal(elements(document, (node) => attr(node, 'data-usage-value')).length, valuesForUseCase(useCase.slug).length);
     }
     assert.ok(text(elements(document, (node) => node.tagName === 'title')[0]).startsWith(useCase.name));
     assert.ok(elements(document, (node) => node.tagName === 'h2' && text(node) === 'Pain points').length);
@@ -527,7 +640,18 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     }
   }
   const homepage = built('/');
-  for (const pain of pains) assert.ok(elements(homepage, (node) => attr(node, 'id') === pain.slug).length, `legacy ${pain.slug}`);
+  assert.equal(elements(homepage, (node) => attr(node, 'class')?.includes('think-phase__subpains')).length, 0);
+  for (const group of homepagePainGroups) {
+    const links = elements(homepage, (node) => attr(node, 'href') === catalogHref('pains', `homepage:${group.slug}`));
+    assert.equal(links.length, 1);
+    assert.equal(text(links[0]), group.lead);
+    for (const slug of group.pains) {
+      const anchors = elements(homepage, (node) => attr(node, 'id') === slug);
+      assert.equal(anchors.length, 1, `legacy homepage pain anchor: ${slug}`);
+      assert.equal(text(anchors[0]), '');
+      assert.equal(elements(links[0], (node) => attr(node, 'id') === slug).length, 1, `anchor stays inside the main-bullet content: ${slug}`);
+    }
+  }
   const actorsPage = built('/actors');
   for (const profile of profiles) assert.ok(elements(actorsPage, (node) => attr(node, 'id') === profile.slug).length, `actor ${profile.slug}`);
   // The homepage keeps actor types as the usage filter rather than a separate section.
@@ -540,7 +664,7 @@ test('built usage pages retain identity, derived badges, contextual links and SE
       const document = built(`${solutionHref(solution)}/products/${product.slug}`);
       for (const feature of product.features) {
         const section = elements(document, (node) => attr(node, 'id') === feature.slug)[0];
-        assert.ok(elements(section, (node) => node.tagName === 'a' && attr(node, 'href')?.startsWith('/usage/')).length, `${product.slug}/${feature.slug}`);
+        assert.ok(elements(section, (node) => node.tagName === 'a' && attr(node, 'href') === catalogHref('usage', `feature:${solution.slug}/${product.slug}/${feature.slug}`)).length, `${product.slug}/${feature.slug}`);
       }
     }
   }

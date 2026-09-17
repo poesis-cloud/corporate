@@ -1,0 +1,2652 @@
+{
+  "$schema": "./schemas/poesis-usage.schema.json",
+  "domains": [
+    {
+      "slug": "it",
+      "name": "IT",
+      "label": "Poesis for IT",
+      "tags": [
+        "First domain — foundations and planned workflows"
+      ],
+      "blurb": "Planned IT definition, evidence review, appraisal and analysis workflows, over existing authentication, specification and engine foundations."
+    }
+  ],
+  "actorTypes": [
+    {
+      "slug": "it-service-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "IT service owner",
+      "tags": [
+        "Service management",
+        "Accountability"
+      ],
+      "icon": "briefcase",
+      "hook": "Accept service commitments against dependencies and evidence.",
+      "body": "Own service outcomes, agree operating boundaries, and coordinate affected owners during changes, incidents and recovery reviews."
+    },
+    {
+      "slug": "it-application-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Application owner",
+      "tags": [
+        "Application management",
+        "Accountability"
+      ],
+      "icon": "layers",
+      "hook": "Keep application responsibilities and service dependencies explicit.",
+      "body": "Maintain application commitments and lifecycle decisions, identify consuming services, and transfer responsibility with accepted evidence."
+    },
+    {
+      "slug": "it-risk-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "IT risk owner",
+      "tags": [
+        "Risk management",
+        "Exceptions"
+      ],
+      "icon": "shield",
+      "hook": "Own the consequences of a bounded risk decision.",
+      "body": "Assess exposure, propose compensating controls, and provide evidence for exception renewal or closure without assuming approval authority."
+    },
+    {
+      "slug": "it-exception-approver",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Exception approver",
+      "tags": [
+        "Risk management",
+        "Approval"
+      ],
+      "icon": "shield",
+      "hook": "Decide whether a scoped, time-bound exception is acceptable.",
+      "body": "Review justification, authority, expiry and compensating-control evidence before granting, renewing or revoking an exception."
+    },
+    {
+      "slug": "it-api-product-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "API product owner",
+      "tags": [
+        "API management",
+        "Compatibility"
+      ],
+      "icon": "repos",
+      "hook": "Evolve a shared interface with its consumers.",
+      "body": "Review contract changes, identify affected consumers, and agree migration and deprecation conditions supported by compatibility evidence."
+    },
+    {
+      "slug": "it-knowledge-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Operational knowledge owner",
+      "tags": [
+        "Knowledge management",
+        "Handover"
+      ],
+      "icon": "book-open",
+      "hook": "Transfer decisions and unresolved obligations with the service.",
+      "body": "Curate authoritative decisions, operating evidence and open questions so the receiving owner can explicitly accept a handover."
+    },
+    {
+      "slug": "it-vulnerability-manager",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Vulnerability manager",
+      "tags": [
+        "Security",
+        "Remediation"
+      ],
+      "icon": "shield",
+      "hook": "Prioritize vulnerabilities in the context of affected services.",
+      "body": "Reconcile findings with deployed components, assess exposure and business criticality, and route remediation to accountable owners."
+    },
+    {
+      "slug": "it-product-security-engineer",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Product security engineer",
+      "tags": [
+        "Security",
+        "Verification"
+      ],
+      "icon": "shield",
+      "hook": "Demonstrate whether a mitigation addresses the relevant exposure.",
+      "body": "Investigate applicability, propose fixes or compensating controls, and inspect verification evidence before closing a finding."
+    },
+    {
+      "slug": "it-procurement-manager",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "IT procurement manager",
+      "tags": [
+        "Procurement",
+        "Suppliers"
+      ],
+      "icon": "briefcase",
+      "hook": "Compare supplier commitments against the services that depend on them.",
+      "body": "Review contractual changes, renewal conditions and exit obligations with service and risk owners before committing a purchase."
+    },
+    {
+      "slug": "it-third-party-risk-analyst",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Third-party risk analyst",
+      "tags": [
+        "Suppliers",
+        "Assurance"
+      ],
+      "icon": "search",
+      "hook": "Connect supplier evidence to the scope of actual dependence.",
+      "body": "Assess assurance scope, evidence age, subcontractor dependencies and concentration exposure while preserving unresolved questions."
+    },
+    {
+      "slug": "it-resilience-manager",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "IT resilience manager",
+      "tags": [
+        "Resilience",
+        "Service continuity"
+      ],
+      "icon": "layers",
+      "hook": "Assess whether recovery evidence supports service commitments.",
+      "body": "Review disruption scenarios and exercise results with service and business owners, and record gaps between targets and demonstrated recovery."
+    },
+    {
+      "slug": "it-recovery-coordinator",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Disaster-recovery coordinator",
+      "tags": [
+        "Recovery",
+        "Operations"
+      ],
+      "icon": "compass",
+      "hook": "Coordinate recovery in a dependency-aware order.",
+      "body": "Prepare exercise sequences, identify shared-resource conflicts, and collect timed recovery and data-restoration evidence for review."
+    },
+    {
+      "slug": "it-data-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Data owner",
+      "tags": [
+        "Data governance",
+        "Accountability"
+      ],
+      "icon": "briefcase",
+      "hook": "Accept data commitments with producers and consumers.",
+      "body": "Decide acceptable uses and quality expectations, resolve conflicting consumer requirements, and approve contract changes within authority."
+    },
+    {
+      "slug": "it-data-steward",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Data steward",
+      "tags": [
+        "Data governance",
+        "Quality"
+      ],
+      "icon": "search",
+      "hook": "Make data-quality evidence and contract differences inspectable.",
+      "body": "Maintain definitions and lineage evidence, assess quality findings, and prepare changes for accountable owner and consumer review."
+    },
+    {
+      "slug": "it-incident-commander",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Incident commander",
+      "tags": [
+        "Incident management",
+        "Business impact"
+      ],
+      "icon": "compass",
+      "hook": "Trace a software incident to affected business activities.",
+      "body": "Coordinate response from observed disruption through deployed components and services to business processes and owners, distinguishing confirmed impact from possible exposure."
+    },
+    {
+      "slug": "it-business-process-owner",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Business-process owner",
+      "tags": [
+        "Business operations",
+        "IT dependence"
+      ],
+      "icon": "briefcase",
+      "hook": "Make the business consequences of an IT disruption explicit.",
+      "body": "Identify critical activities and service dependencies, confirm business disruption, agree workarounds, and set recovery priorities with incident and service owners."
+    },
+    {
+      "slug": "it-cto",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "CTO / CIO",
+      "tags": [
+        "Executive"
+      ],
+      "icon": "briefcase",
+      "hook": "Evaluate a shared definition model for a bounded IT decision.",
+      "body": "A pilot can compare reconciliation work, decision quality and governance costs. Integrated inventory, appraisal and generation remain planned; whole-estate savings are not assumed."
+    },
+    {
+      "slug": "it-architect",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Enterprise Architect",
+      "tags": [
+        "Architecture"
+      ],
+      "icon": "compass",
+      "hook": "Trace definitions to accepted intent and inspected evidence.",
+      "body": "Explore planned authoring, dependency analysis and artifact generation. Source revisions, deployed observations and simulation assumptions remain distinct evidence boundaries."
+    },
+    {
+      "slug": "it-ciso",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "CISO / Security leadership",
+      "tags": [
+        "Security & compliance"
+      ],
+      "icon": "shield",
+      "hook": "Make a stated appraisal scope and its missing evidence visible.",
+      "body": "Selected GDPR/NIS2 templates and quality vocabularies exist; binding, observations and appraisal are planned integrations. Measure coverage and reconstruction effort, not automatic legal compliance."
+    },
+    {
+      "slug": "it-platform",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Platform / Ops / SRE lead",
+      "tags": [
+        "Platform"
+      ],
+      "icon": "layers",
+      "hook": "Inspect the boundary between definitions and operations.",
+      "body": "API and execution source can support a bounded integration experiment. Observation identity, effect authority, failure receipts and recovery must be accepted for the selected environment."
+    },
+    {
+      "slug": "it-head-of-ai",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Head of AI",
+      "tags": [
+        "AI enablement"
+      ],
+      "icon": "spark",
+      "hook": "Evaluate AI answers against authorized, attributable context.",
+      "body": "Planned read-only context and copilot routes need citation, abstention and injection tests. Direct authoring is valid without sourcing; typed context alone does not make action safe."
+    },
+    {
+      "slug": "specification-reader",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Specification reader / modeler",
+      "tags": [
+        "Modeling"
+      ],
+      "icon": "book-open",
+      "hook": "Compare a system description with a declared modeling contract.",
+      "body": "Read source specifications and sourced vocabularies, inspect examples and record interpretation limits before choosing an implementation."
+    },
+    {
+      "slug": "research-reviewer",
+      "kind": "human",
+      "domainSlug": "it",
+      "name": "Research reviewer",
+      "tags": [
+        "Research"
+      ],
+      "icon": "search",
+      "hook": "Distinguish a research hypothesis from an accepted requirement.",
+      "body": "Compare explanations, inspect case evidence and follow decision records before proposing a specification change."
+    },
+    {
+      "slug": "integration-client",
+      "kind": "system",
+      "domainSlug": "it",
+      "name": "Authorized integration client",
+      "tags": [
+        "Integration"
+      ],
+      "icon": "repos",
+      "hook": "Exchange identified definitions within an explicit access boundary.",
+      "body": "A consuming service or tool requests pinned context, publishes reviewed drafts or consumes committed changes under its own authenticated identity."
+    },
+    {
+      "slug": "assessment-runner",
+      "kind": "system",
+      "domainSlug": "it",
+      "name": "Assessment runner",
+      "tags": [
+        "Assessment"
+      ],
+      "icon": "shield",
+      "hook": "Evaluate identified inputs and retain unknown results.",
+      "body": "A scheduler or appraisal client supplies pinned rules and instances, requests pure verdicts and routes findings to an accountable reviewer."
+    },
+    {
+      "slug": "delivery-agent",
+      "kind": "system",
+      "domainSlug": "it",
+      "name": "Delivery agent",
+      "tags": [
+        "Delivery"
+      ],
+      "icon": "spark",
+      "hook": "Produce artifacts under declared grants and review boundaries.",
+      "body": "A host-bound software agent receives a scoped task, resolves instructions and submits artifacts for checks and human review without assuming authority to deploy."
+    }
+  ],
+  "pains": [
+    {
+      "slug": "it-acquisition-blind-spots",
+      "tags": [
+        "Sourcing",
+        "Evidence freshness"
+      ],
+      "pain": "Collection scope, incomplete runs and stale evidence are mistaken for current coverage.",
+      "cost": "Reviews rely on uninspected or outdated inputs and repeat work when collection failures emerge late.",
+      "actorTypes": [
+        "it-platform",
+        "it-architect",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "configure-collection-boundaries",
+        "recover-incomplete-collection",
+        "review-evidence-refresh"
+      ]
+    },
+    {
+      "slug": "it-access-assignment-drift",
+      "tags": [
+        "Identity",
+        "Authorization"
+      ],
+      "pain": "Access assignments drift from responsibilities and identity-provider changes.",
+      "cost": "Excess privileges persist while legitimate work is blocked by missing or stale assignments.",
+      "actorTypes": [
+        "it-ciso",
+        "it-platform"
+      ],
+      "occursIn": [
+        "review-operation-privileges",
+        "restore-identity-synchronization"
+      ]
+    },
+    {
+      "slug": "it-fragmented-review-context",
+      "tags": [
+        "Governance review",
+        "Scope"
+      ],
+      "pain": "Reviewers work from different selections and lose related decisions across meeting notes.",
+      "cost": "Decisions cannot be compared or reconstructed against the same agenda, subject set and evidence boundaries.",
+      "actorTypes": [
+        "it-architect",
+        "it-service-owner",
+        "it-exception-approver"
+      ],
+      "occursIn": [
+        "conduct-governance-session",
+        "reuse-review-lens",
+        "inspect-subject-perspectives"
+      ]
+    },
+    {
+      "slug": "it-unactionable-governance-findings",
+      "tags": [
+        "Review",
+        "Remediation"
+      ],
+      "pain": "A blocking finding identifies a problem without a clear route to correction and renewed review.",
+      "cost": "Rejected proposals and uncovered obligations remain unresolved while reviewers repeat the same checks.",
+      "actorTypes": [
+        "it-architect",
+        "it-application-owner",
+        "it-ciso",
+        "it-risk-owner"
+      ],
+      "occursIn": [
+        "resolve-blocked-change",
+        "propose-appraisal-remediation"
+      ]
+    },
+    {
+      "slug": "it-assumed-governance-coverage",
+      "tags": [
+        "Ontology",
+        "Applicability"
+      ],
+      "pain": "Selected vocabulary and unbound templates are mistaken for complete, applicable obligations.",
+      "cost": "Subjects or concerns are omitted and requirements are applied without a justified adopting scope.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "specification-reader",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "reuse-governance-selection",
+        "inspect-vocabulary-coverage",
+        "bind-obligations-to-scope"
+      ]
+    },
+    {
+      "slug": "it-unverified-generated-output",
+      "tags": [
+        "Artifacts",
+        "Generation quality"
+      ],
+      "pain": "Incorrect bindings, unsupported narrative and partial files pass for completed deliverables.",
+      "cost": "Reviews discover missing evidence and output errors only after reports have been distributed.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-architect",
+        "it-platform",
+        "it-head-of-ai"
+      ],
+      "occursIn": [
+        "maintain-artifact-bindings",
+        "preview-artifact-bindings",
+        "constrain-generated-narrative",
+        "operate-recurring-reports",
+        "investigate-artifact-failure"
+      ]
+    },
+    {
+      "slug": "it-stale-dependent-eligibility",
+      "tags": [
+        "Lifecycle",
+        "Dependencies"
+      ],
+      "pain": "Dependent definitions remain trusted after a foundation is invalidated.",
+      "cost": "Continued use relies on obsolete eligibility and bypasses the renewed review required by changed foundations.",
+      "actorTypes": [
+        "it-architect",
+        "it-platform"
+      ],
+      "occursIn": [
+        "assess-invalidated-dependencies"
+      ]
+    },
+    {
+      "slug": "it-unjustified-evidence-retention",
+      "tags": [
+        "Retention",
+        "Evidence"
+      ],
+      "pain": "Evidence is discarded too early or retained indefinitely without a justified preservation policy.",
+      "cost": "Historical decisions become unreviewable or unnecessary retained information creates avoidable exposure.",
+      "actorTypes": [
+        "it-ciso",
+        "it-knowledge-owner",
+        "it-risk-owner"
+      ],
+      "occursIn": [
+        "agree-evidence-preservation"
+      ]
+    },
+    {
+      "slug": "it-unexamined-rule-regressions",
+      "tags": [
+        "Evaluation",
+        "Rule evolution"
+      ],
+      "pain": "A rule revision changes established verdicts without an inspected explanation.",
+      "cost": "New false positives, missed violations and unknown outcomes alter decisions before their causes are understood.",
+      "actorTypes": [
+        "assessment-runner",
+        "it-ciso",
+        "it-architect"
+      ],
+      "occursIn": [
+        "qualify-rule-revision"
+      ]
+    },
+    {
+      "slug": "it-unqualified-agent-runtime",
+      "tags": [
+        "Agentic delivery",
+        "Compatibility"
+      ],
+      "pain": "Host or model selection changes behavior without verifying workload quality, instruction delivery or disclosure limits.",
+      "cost": "Required guidance and checks disappear or unsuitable model routes produce costly, untrustworthy work.",
+      "actorTypes": [
+        "it-platform",
+        "it-head-of-ai"
+      ],
+      "occursIn": [
+        "qualify-model-routing",
+        "qualify-host-instructions"
+      ]
+    },
+    {
+      "slug": "it-conflicting-agent-artifacts",
+      "tags": [
+        "Collaboration",
+        "Artifacts"
+      ],
+      "pain": "Individually valid parallel agent outputs overwrite or contradict accepted work.",
+      "cost": "Combined artifacts lose coherence and attribution despite each isolated output passing its checks.",
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "occursIn": [
+        "reconcile-parallel-agent-outputs"
+      ]
+    },
+    {
+      "slug": "it-service-accountability-gap",
+      "tags": [
+        "Service ownership",
+        "Accountability"
+      ],
+      "pain": "Service commitments have no agreed map of dependencies and accountable owners.",
+      "cost": "Changes and ownership transfers leave obligations unassigned and affected services overlooked.",
+      "actorTypes": [
+        "it-service-owner",
+        "it-application-owner",
+        "it-business-process-owner"
+      ],
+      "occursIn": [
+        "accept-service-baseline",
+        "transfer-service-ownership"
+      ]
+    },
+    {
+      "slug": "it-permanent-temporary-exceptions",
+      "tags": [
+        "Risk acceptance",
+        "Exceptions"
+      ],
+      "pain": "Temporary exceptions remain in force after their justification or controls expire.",
+      "cost": "Exposure accumulates without a current decision, a responsible risk owner or proof that compensating controls still work.",
+      "actorTypes": [
+        "it-risk-owner",
+        "it-exception-approver",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "review-time-bound-exception",
+        "renew-or-close-exception"
+      ]
+    },
+    {
+      "slug": "it-unknown-contract-consumers",
+      "tags": [
+        "API evolution",
+        "Compatibility"
+      ],
+      "pain": "A shared API changes before all affected consumers and migration conditions are known.",
+      "cost": "Uncoordinated upgrades and deprecations disrupt dependent services and force emergency compatibility work.",
+      "actorTypes": [
+        "it-api-product-owner",
+        "it-application-owner",
+        "it-architect"
+      ],
+      "occursIn": [
+        "review-breaking-api-change",
+        "coordinate-api-deprecation"
+      ]
+    },
+    {
+      "slug": "it-context-free-vulnerability-queue",
+      "tags": [
+        "Vulnerability management",
+        "Service exposure"
+      ],
+      "pain": "Security findings are ranked without reliable deployed-service context or mitigation evidence.",
+      "cost": "Teams spend effort on the wrong exposure and close findings without establishing that affected services are protected.",
+      "actorTypes": [
+        "it-vulnerability-manager",
+        "it-product-security-engineer",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "prioritize-service-vulnerabilities",
+        "verify-vulnerability-mitigation"
+      ]
+    },
+    {
+      "slug": "it-detached-supplier-assurance",
+      "tags": [
+        "Suppliers",
+        "Assurance"
+      ],
+      "pain": "Supplier assurances and exit promises are detached from the services that depend on them.",
+      "cost": "Procurement and renewal decisions accept obligations or transition risks that service owners cannot substantiate.",
+      "actorTypes": [
+        "it-procurement-manager",
+        "it-third-party-risk-analyst",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "assess-supplier-service-change",
+        "review-supplier-exit-readiness"
+      ]
+    },
+    {
+      "slug": "it-unproven-recovery-commitments",
+      "tags": [
+        "Recovery",
+        "Resilience"
+      ],
+      "pain": "Recovery targets assume dependency sequences and restoration results that exercises have not demonstrated.",
+      "cost": "Services miss recovery commitments when shared resources, upstream dependencies or data restoration behave differently than assumed.",
+      "actorTypes": [
+        "it-resilience-manager",
+        "it-recovery-coordinator",
+        "it-service-owner",
+        "it-business-process-owner"
+      ],
+      "occursIn": [
+        "review-service-recovery-exercise",
+        "resolve-recovery-dependency-conflicts"
+      ]
+    },
+    {
+      "slug": "it-data-contract-expectation-gap",
+      "tags": [
+        "Data contracts",
+        "Quality"
+      ],
+      "pain": "Data producers and consumers discover incompatible meanings or quality expectations only after a change.",
+      "cost": "Downstream decisions and integrations fail while teams reconstruct what each party believed the data contract guaranteed.",
+      "actorTypes": [
+        "it-data-owner",
+        "it-data-steward",
+        "it-application-owner"
+      ],
+      "occursIn": [
+        "review-data-contract-change",
+        "resolve-data-quality-requirements"
+      ]
+    },
+    {
+      "slug": "it-incident-business-impact-blindness",
+      "tags": [
+        "Incident management",
+        "Business impact"
+      ],
+      "pain": "We know which software failed, but not which business processes are disrupted or whom to notify.",
+      "cost": "Response priorities follow technical alarms instead of confirmed business consequences, delaying workarounds and recovery for critical activities.",
+      "actorTypes": [
+        "it-incident-commander",
+        "it-service-owner",
+        "it-application-owner",
+        "it-business-process-owner",
+        "it-platform"
+      ],
+      "occursIn": [
+        "trace-incident-business-impact"
+      ]
+    },
+    {
+      "slug": "it-ea-drift",
+      "tags": [
+        "Enterprise architecture"
+      ],
+      "pain": "The architecture repository is out of date the day it’s written.",
+      "cost": "Hand-maintained models detach from the territory the moment delivery moves on — and every decision made on them inherits the drift.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto"
+      ]
+    },
+    {
+      "slug": "it-audit-reconstruction",
+      "tags": [
+        "Compliance automation"
+      ],
+      "pain": "Compliance is reconstructed in spreadsheets before every audit.",
+      "cost": "Posture exists only at audit time; between audits, nobody can answer what is actually covered.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "assessment-runner"
+      ],
+      "occursIn": [
+        "retrieve-decision-basis"
+      ]
+    },
+    {
+      "slug": "it-blind-change",
+      "tags": [
+        "Impact analysis"
+      ],
+      "pain": "Impact analysis is a guess made in a meeting.",
+      "cost": "Coupling is discovered in incident reviews, after the change shipped.",
+      "actorTypes": [
+        "it-architect",
+        "it-platform",
+        "it-cto"
+      ],
+      "occursIn": [
+        "assess-application-retirement"
+      ]
+    },
+    {
+      "slug": "it-handcrafted-deliverables",
+      "tags": [
+        "Artifact generation"
+      ],
+      "pain": "Every deliverable is hand-crafted, again and again.",
+      "cost": "ADR packs, evidence, baselines, and roadmaps are rebuilt by hand — and stale against each other by the time they ship.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto",
+        "delivery-agent"
+      ],
+      "occursIn": [
+        "maintain-artifact-bindings",
+        "operate-recurring-reports"
+      ]
+    },
+    {
+      "slug": "it-truth-drift",
+      "tags": [
+        "Truth sourcing"
+      ],
+      "pain": "Governance drifts from what actually runs.",
+      "cost": "The declared estate and the running estate diverge silently — until an audit or an incident exposes the gap.",
+      "actorTypes": [
+        "it-platform",
+        "it-architect",
+        "integration-client"
+      ]
+    },
+    {
+      "slug": "it-ai-blindness",
+      "tags": [
+        "AI-ready governance"
+      ],
+      "pain": "AI agents act on stale wikis and tribal knowledge.",
+      "cost": "Without a trustworthy machine-readable source of truth, agent autonomy is either blocked or reckless.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "integration-client"
+      ]
+    },
+    {
+      "slug": "it-ungoverned-change",
+      "tags": [
+        "Change governance"
+      ],
+      "pain": "Anything can change anything — there is no approval trail.",
+      "cost": "Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable.",
+      "actorTypes": [
+        "it-ciso",
+        "it-platform",
+        "integration-client"
+      ]
+    },
+    {
+      "slug": "it-framework-collision",
+      "tags": [
+        "Framework composition"
+      ],
+      "pain": "Every framework lives in its own silo — and they collide on your desk.",
+      "cost": "TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "specification-reader"
+      ],
+      "occursIn": [
+        "resolve-competing-obligations"
+      ]
+    },
+    {
+      "slug": "it-governance-lockin",
+      "tags": [
+        "Vendor neutrality"
+      ],
+      "pain": "Your governance model is trapped in a vendor’s proprietary format.",
+      "cost": "Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance.",
+      "actorTypes": [
+        "it-cto",
+        "it-architect",
+        "specification-reader",
+        "integration-client"
+      ],
+      "occursIn": [
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "it-tool-silos",
+      "tags": [
+        "Interoperability"
+      ],
+      "pain": "Architecture, compliance, and quality tools don’t speak to each other.",
+      "cost": "Each tool keeps its own model of the same IT reality; integrations are bespoke mappings that rot, and knowledge stays siloed per tool and per team.",
+      "actorTypes": [
+        "it-platform",
+        "it-architect",
+        "integration-client",
+        "specification-reader"
+      ],
+      "occursIn": [
+        "agree-domain-typing-contract",
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "it-ungoverned-agents",
+      "tags": [
+        "Agentic delivery"
+      ],
+      "pain": "AI agents ship work nobody scoped, gated, or can replay.",
+      "cost": "Agentic delivery state is trapped in chat sessions; pull requests appear without a mandate; there is no event log and no human authority at the layer where it matters.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "it-platform",
+        "delivery-agent"
+      ],
+      "occursIn": [
+        "approve-agent-mandate"
+      ]
+    },
+    {
+      "slug": "model-assumption-gap",
+      "tags": [
+        "Model evidence"
+      ],
+      "pain": "A modeling decision cites an example as though it were an executed test.",
+      "cost": "A reviewer cannot distinguish a plausible explanation from evidence that rules out alternatives.",
+      "actorTypes": [
+        "research-reviewer",
+        "specification-reader"
+      ],
+      "occursIn": [
+        "review-model-evidence",
+        "propose-grammar-extension"
+      ]
+    },
+    {
+      "slug": "manual-decision-handoff",
+      "tags": [
+        "Decision handoffs"
+      ],
+      "pain": "The reason for a decision stays in an email thread instead of reaching the next reviewer.",
+      "cost": "In a manual handoff, the next reviewer repeats interviews to recover assumptions and unresolved objections.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto",
+        "it-knowledge-owner",
+        "it-service-owner"
+      ],
+      "occursIn": [
+        "handover-operational-evidence",
+        "transfer-service-ownership"
+      ]
+    }
+  ],
+  "painGroups": [
+    {
+      "slug": "scattered-intent",
+      "lead": "Purpose, rules, and constraints scattered across people, meetings, documents, and tools.",
+      "pains": [
+        "it-blind-change",
+        "it-framework-collision",
+        "it-tool-silos",
+        "it-governance-lockin",
+        "it-access-assignment-drift",
+        "it-fragmented-review-context",
+        "it-assumed-governance-coverage",
+        "it-unjustified-evidence-retention"
+      ]
+    },
+    {
+      "slug": "reconstructed-handoffs",
+      "lead": "Every handoff reconstructed THINK — and lost a little of it each time.",
+      "pains": [
+        "it-audit-reconstruction",
+        "it-handcrafted-deliverables",
+        "it-unactionable-governance-findings"
+      ]
+    },
+    {
+      "slug": "definition-drift",
+      "lead": "THINK artifacts went stale as BUILD and RUN changed — definition and reality drifted apart.",
+      "pains": [
+        "it-ea-drift",
+        "it-truth-drift",
+        "it-acquisition-blind-spots",
+        "it-stale-dependent-eligibility",
+        "it-unexamined-rule-regressions"
+      ]
+    },
+    {
+      "slug": "accelerated-drift",
+      "lead": "Keep the speed: every artifact drifts further from intent, compounding at machine pace.",
+      "pains": [
+        "it-ai-blindness"
+      ]
+    },
+    {
+      "slug": "alignment-overhead",
+      "lead": "Restore alignment at every handoff: prompts, reviews, corrections, and controls consume the acceleration gain.",
+      "pains": [
+        "it-unverified-generated-output",
+        "it-unqualified-agent-runtime",
+        "it-conflicting-agent-artifacts"
+      ]
+    },
+    {
+      "slug": "scarce-attention",
+      "lead": "Human attention becomes the control plane — understanding, validation, coordination, and accountability remain scarce.",
+      "pains": [
+        "it-ungoverned-change",
+        "it-ungoverned-agents"
+      ]
+    }
+  ],
+  "useCases": [
+    {
+      "slug": "configure-collection-boundaries",
+      "name": "Configure repository collection boundaries",
+      "goal": "Select repository branches, paths and revision boundaries so inspected evidence matches the intended acquisition scope.",
+      "actorTypes": [
+        "it-platform",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-acquisition-blind-spots"
+      ]
+    },
+    {
+      "slug": "recover-incomplete-collection",
+      "name": "Diagnose and recover incomplete collection",
+      "goal": "Identify failed or partial acquisition runs, correct their causes and resume collection without presenting missing evidence as complete coverage.",
+      "actorTypes": [
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-acquisition-blind-spots"
+      ]
+    },
+    {
+      "slug": "review-evidence-refresh",
+      "name": "Set and review evidence-refresh expectations",
+      "goal": "Agree refresh expectations and inspect source age, failed refreshes and coverage limits before using collected evidence.",
+      "actorTypes": [
+        "it-platform",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-acquisition-blind-spots",
+        "it-truth-drift"
+      ]
+    },
+    {
+      "slug": "review-operation-privileges",
+      "name": "Review operation-specific privileges",
+      "goal": "Review tenant, object and action permissions against assigned responsibilities and remove unnecessary authority.",
+      "actorTypes": [
+        "it-ciso",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-access-assignment-drift"
+      ]
+    },
+    {
+      "slug": "restore-identity-synchronization",
+      "name": "Restore identity-provider synchronization",
+      "goal": "Reconcile external identity and group changes with local access assignments, inspect synchronization failures and verify revoked access is no longer granted.",
+      "actorTypes": [
+        "it-platform",
+        "it-ciso"
+      ],
+      "addressedPains": [
+        "it-access-assignment-drift"
+      ]
+    },
+    {
+      "slug": "conduct-governance-session",
+      "name": "Prepare and conduct a multi-item governance session",
+      "goal": "Prepare a related decision agenda, record participation and retain each revision-bound decision and condition without treating a meeting vote as authorization by itself.",
+      "actorTypes": [
+        "it-architect",
+        "it-exception-approver",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-fragmented-review-context"
+      ]
+    },
+    {
+      "slug": "resolve-blocked-change",
+      "name": "Resolve a blocked change request",
+      "goal": "Inspect blocking validation and lifecycle findings, correct the proposal and submit the revised scope for renewed review.",
+      "actorTypes": [
+        "it-architect",
+        "it-application-owner"
+      ],
+      "addressedPains": [
+        "it-unactionable-governance-findings"
+      ]
+    },
+    {
+      "slug": "retrieve-decision-basis",
+      "name": "Retrieve the basis of a historical decision",
+      "goal": "Retrieve the decided revision, recorded identity, supporting evidence and conditions relevant to a historical decision, retaining attribution gaps.",
+      "actorTypes": [
+        "it-ciso",
+        "it-knowledge-owner"
+      ],
+      "addressedPains": [
+        "it-audit-reconstruction",
+        "manual-decision-handoff"
+      ]
+    },
+    {
+      "slug": "reuse-review-lens",
+      "name": "Define and reuse a scoped review lens",
+      "goal": "Save explicit subject-selection and dependency-traversal rules and reuse them with visible snapshot boundaries across reviews.",
+      "actorTypes": [
+        "it-architect",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-fragmented-review-context"
+      ]
+    },
+    {
+      "slug": "inspect-subject-perspectives",
+      "name": "Inspect one subject across framework perspectives",
+      "goal": "Compare architecture, security and quality classifications of the same identified subject without confusing classification with obligation applicability.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso",
+        "it-data-steward"
+      ],
+      "addressedPains": [
+        "it-fragmented-review-context",
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "reuse-governance-selection",
+      "name": "Compose and reuse a governance selection",
+      "goal": "Save a pinned selection of governance packages and reuse it while separately reviewing applicability for each adopting scope.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso"
+      ],
+      "addressedPains": [
+        "it-framework-collision"
+      ]
+    },
+    {
+      "slug": "resolve-competing-obligations",
+      "name": "Resolve competing obligations before adoption",
+      "goal": "Compare overlapping requirements, record interpretations and obtain an accountable resolution of incompatible obligations before adoption.",
+      "actorTypes": [
+        "it-ciso",
+        "it-risk-owner",
+        "it-exception-approver"
+      ],
+      "addressedPains": [
+        "it-framework-collision"
+      ]
+    },
+    {
+      "slug": "inspect-vocabulary-coverage",
+      "name": "Identify gaps in selected vocabulary coverage",
+      "goal": "Compare selected vocabulary against an explicit subject and concern inventory, exposing uncovered areas without claiming legal completeness.",
+      "actorTypes": [
+        "it-architect",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "it-assumed-governance-coverage"
+      ]
+    },
+    {
+      "slug": "maintain-artifact-bindings",
+      "name": "Author and maintain reusable output bindings",
+      "goal": "Define versioned template fields and source bindings that produce consistent named artifact families from pinned definitions.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "preview-artifact-bindings",
+      "name": "Preview bindings before generating an artifact",
+      "goal": "Inspect sample binding resolution and missing inputs before accepting a template for document generation.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "constrain-generated-narrative",
+      "name": "Set grounding constraints for generated narrative",
+      "goal": "Specify source requirements and editorial constraints for generated fields, then review citations and unsupported statements before accepting output.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "operate-recurring-reports",
+      "name": "Operate recurring report production",
+      "goal": "Schedule version-pinned report production and detect failed or late runs before a review depends on the output.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "investigate-artifact-failure",
+      "name": "Investigate partial or failed generation",
+      "goal": "Inspect job completion, errors and partial outputs to decide what can be reused and what must be regenerated and reviewed.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "propose-appraisal-remediation",
+      "name": "Turn uncovered obligations into corrective proposals",
+      "goal": "Turn scoped findings into owned definition-change proposals and verify resolution through a subsequent appraisal rather than merely closing a task.",
+      "actorTypes": [
+        "it-ciso",
+        "it-risk-owner",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-unactionable-governance-findings"
+      ]
+    },
+    {
+      "slug": "bind-obligations-to-scope",
+      "name": "Bind selected obligations to an organizational scope",
+      "goal": "Establish the subjects, conditions and accountable interpretation that make selected obligations applicable to a specific adopting scope.",
+      "actorTypes": [
+        "it-ciso",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-assumed-governance-coverage"
+      ]
+    },
+    {
+      "slug": "assess-invalidated-dependencies",
+      "name": "Assess dependent definitions after foundation invalidation",
+      "goal": "Inspect dependent definition eligibility after a referenced foundation is invalidated and determine which continued uses require renewed review.",
+      "actorTypes": [
+        "it-architect",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-stale-dependent-eligibility"
+      ]
+    },
+    {
+      "slug": "agree-evidence-preservation",
+      "name": "Agree evidence-preservation requirements",
+      "goal": "Agree retention purpose, duration, access and disposal constraints for decision evidence, distinguishing agreed policy from demonstrated enforcement.",
+      "actorTypes": [
+        "it-ciso",
+        "it-knowledge-owner",
+        "it-risk-owner"
+      ],
+      "addressedPains": [
+        "it-unjustified-evidence-retention"
+      ]
+    },
+    {
+      "slug": "qualify-rule-revision",
+      "name": "Qualify a rule revision against reference cases",
+      "goal": "Compare old and proposed rule verdicts on pinned reference inputs, investigate changed or unknown results and record acceptance before adoption.",
+      "actorTypes": [
+        "assessment-runner",
+        "it-ciso",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-unexamined-rule-regressions"
+      ]
+    },
+    {
+      "slug": "agree-domain-typing-contract",
+      "name": "Agree a reusable domain typing contract",
+      "goal": "Agree a versioned vocabulary and its constraints with adopters, using examples and counterexamples to expose incompatible interpretations.",
+      "actorTypes": [
+        "specification-reader",
+        "it-data-steward",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "qualify-processor-interchange",
+      "name": "Qualify transfer between independent processors",
+      "goal": "Compare exported and imported definitions against an explicit conformance profile, including identity, lifecycle meaning and nonconformant draft preservation.",
+      "actorTypes": [
+        "integration-client",
+        "specification-reader",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-governance-lockin",
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "approve-agent-mandate",
+      "name": "Approve an agent resource and action mandate",
+      "goal": "Authorize only the resources and actions required by a bounded assignment, with explicit expiry, review boundaries and prohibited effects.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "it-exception-approver",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ]
+    },
+    {
+      "slug": "qualify-model-routing",
+      "name": "Qualify model routing for a workload",
+      "goal": "Compare candidate model routes against workload-specific quality, cost and disclosure criteria using retained evaluation evidence.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unqualified-agent-runtime"
+      ]
+    },
+    {
+      "slug": "qualify-host-instructions",
+      "name": "Qualify instruction delivery on another host",
+      "goal": "Verify that a target host receives the pinned instructions and declared checks, distinguishing delivery from model adherence before migration.",
+      "actorTypes": [
+        "it-platform",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-unqualified-agent-runtime"
+      ]
+    },
+    {
+      "slug": "reconcile-parallel-agent-outputs",
+      "name": "Reconcile conflicting parallel agent outputs",
+      "goal": "Resolve overlapping edits against a shared baseline while retaining attribution and revalidating the combined artifacts before acceptance.",
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-conflicting-agent-artifacts"
+      ]
+    },
+    {
+      "slug": "assess-application-retirement",
+      "name": "Assess application decommissioning prerequisites",
+      "goal": "Identify dependent consumers, retained obligations and missing evidence before approving an application retirement boundary; execution remains a separate operation.",
+      "actorTypes": [
+        "it-application-owner",
+        "it-service-owner",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-blind-change"
+      ]
+    },
+    {
+      "slug": "accept-service-baseline",
+      "name": "Accept a service responsibility baseline",
+      "goal": "Agree service commitments, application dependencies and accountable owners against a dated evidence baseline.",
+      "actorTypes": [
+        "it-service-owner",
+        "it-application-owner",
+        "it-business-process-owner"
+      ],
+      "addressedPains": [
+        "it-service-accountability-gap"
+      ]
+    },
+    {
+      "slug": "transfer-service-ownership",
+      "name": "Transfer service ownership",
+      "goal": "Obtain explicit acceptance of service responsibilities, active exceptions and unresolved obligations by the receiving owner.",
+      "actorTypes": [
+        "it-service-owner",
+        "it-application-owner",
+        "it-knowledge-owner"
+      ],
+      "addressedPains": [
+        "it-service-accountability-gap",
+        "manual-decision-handoff"
+      ]
+    },
+    {
+      "slug": "review-time-bound-exception",
+      "name": "Review a time-bound risk exception",
+      "goal": "Decide a scoped exception with explicit authority, expiry, risk ownership and compensating-control evidence.",
+      "actorTypes": [
+        "it-risk-owner",
+        "it-exception-approver",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-permanent-temporary-exceptions"
+      ]
+    },
+    {
+      "slug": "renew-or-close-exception",
+      "name": "Renew or close a risk exception",
+      "goal": "Review current exposure and control evidence before renewing, revoking or closing an exception at its review boundary.",
+      "actorTypes": [
+        "it-risk-owner",
+        "it-exception-approver"
+      ],
+      "addressedPains": [
+        "it-permanent-temporary-exceptions"
+      ]
+    },
+    {
+      "slug": "review-breaking-api-change",
+      "name": "Review a breaking API contract change",
+      "goal": "Identify affected consumers and inspect compatibility evidence before accepting an interface change and migration conditions.",
+      "actorTypes": [
+        "it-api-product-owner",
+        "it-architect",
+        "it-application-owner"
+      ],
+      "addressedPains": [
+        "it-unknown-contract-consumers"
+      ]
+    },
+    {
+      "slug": "coordinate-api-deprecation",
+      "name": "Coordinate an API deprecation",
+      "goal": "Agree consumer migration and retirement prerequisites while making unknown consumers and unresolved compatibility visible.",
+      "actorTypes": [
+        "it-api-product-owner",
+        "it-application-owner"
+      ],
+      "addressedPains": [
+        "it-unknown-contract-consumers"
+      ]
+    },
+    {
+      "slug": "handover-operational-evidence",
+      "name": "Hand over operational decisions and evidence",
+      "goal": "Give a receiving service owner authoritative decisions, source evidence and unresolved questions sufficient to review and accept a handover.",
+      "actorTypes": [
+        "it-knowledge-owner",
+        "it-service-owner",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "manual-decision-handoff"
+      ]
+    },
+    {
+      "slug": "prioritize-service-vulnerabilities",
+      "name": "Prioritize vulnerabilities by service exposure",
+      "goal": "Relate findings to deployed components, affected services and business criticality to assign justified remediation priorities and owners.",
+      "actorTypes": [
+        "it-vulnerability-manager",
+        "it-product-security-engineer",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-context-free-vulnerability-queue"
+      ]
+    },
+    {
+      "slug": "verify-vulnerability-mitigation",
+      "name": "Review vulnerability mitigation evidence",
+      "goal": "Decide whether observed verification supports closure of a finding or requires a separately approved, time-bound exception.",
+      "actorTypes": [
+        "it-product-security-engineer",
+        "it-vulnerability-manager",
+        "it-risk-owner"
+      ],
+      "addressedPains": [
+        "it-context-free-vulnerability-queue"
+      ]
+    },
+    {
+      "slug": "assess-supplier-service-change",
+      "name": "Assess a supplier change against service commitments",
+      "goal": "Review changed supplier terms and assurance evidence against dependent services, accountable owners and unresolved exposure.",
+      "actorTypes": [
+        "it-procurement-manager",
+        "it-third-party-risk-analyst",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-detached-supplier-assurance"
+      ]
+    },
+    {
+      "slug": "review-supplier-exit-readiness",
+      "name": "Review supplier exit readiness",
+      "goal": "Assess replacement dependencies, portability evidence and retained obligations before accepting a supplier exit plan.",
+      "actorTypes": [
+        "it-procurement-manager",
+        "it-third-party-risk-analyst",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-detached-supplier-assurance"
+      ]
+    },
+    {
+      "slug": "review-service-recovery-exercise",
+      "name": "Review a service recovery exercise",
+      "goal": "Compare observed recovery time and data restoration with service and business commitments, retaining untested scenarios and evidence gaps.",
+      "actorTypes": [
+        "it-resilience-manager",
+        "it-recovery-coordinator",
+        "it-service-owner",
+        "it-business-process-owner"
+      ],
+      "addressedPains": [
+        "it-unproven-recovery-commitments"
+      ]
+    },
+    {
+      "slug": "resolve-recovery-dependency-conflicts",
+      "name": "Resolve recovery dependency conflicts",
+      "goal": "Identify incompatible recovery sequences and shared-resource assumptions before agreeing a service recovery exercise plan.",
+      "actorTypes": [
+        "it-recovery-coordinator",
+        "it-resilience-manager",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-unproven-recovery-commitments"
+      ]
+    },
+    {
+      "slug": "review-data-contract-change",
+      "name": "Review a data contract change",
+      "goal": "Review schema, meaning and quality changes with affected producers and consumers before accepting migration conditions.",
+      "actorTypes": [
+        "it-data-owner",
+        "it-data-steward",
+        "it-application-owner"
+      ],
+      "addressedPains": [
+        "it-data-contract-expectation-gap"
+      ]
+    },
+    {
+      "slug": "resolve-data-quality-requirements",
+      "name": "Resolve competing data-quality requirements",
+      "goal": "Agree scoped quality expectations and evidence requirements when consumers need different freshness, completeness or accuracy.",
+      "actorTypes": [
+        "it-data-owner",
+        "it-data-steward",
+        "it-service-owner"
+      ],
+      "addressedPains": [
+        "it-data-contract-expectation-gap"
+      ]
+    },
+    {
+      "slug": "trace-incident-business-impact",
+      "name": "Trace a software incident to affected business processes",
+      "goal": "Trace an observed software incident through identified deployed components and service dependencies to affected business processes and owners, distinguishing confirmed disruption, possible exposure and missing evidence to prioritize response.",
+      "actorTypes": [
+        "it-incident-commander",
+        "it-service-owner",
+        "it-application-owner",
+        "it-business-process-owner",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-incident-business-impact-blindness"
+      ]
+    },
+    {
+      "slug": "read-governance-model",
+      "name": "Read and model a governance decision",
+      "goal": "Produce a reviewable model sketch with explicit types, obligations and lifecycle boundaries.",
+      "actorTypes": [
+        "specification-reader",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "describe-service-contract",
+      "name": "Describe a service contract and its attribution",
+      "goal": "Draft a typed HTTP service description that identifies the IT subject and the source of each assertion.",
+      "actorTypes": [
+        "specification-reader",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "describe-mixed-protocol-boundaries",
+      "name": "Describe payment request and notification boundaries",
+      "goal": "Review how payment submission, request failure and later status notifications differ at the customer boundary.",
+      "actorTypes": [
+        "specification-reader",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "describe-payment-settlement-boundaries",
+      "name": "Describe payment settlement and recovery boundaries",
+      "goal": "Review the handoff from a committed payment instruction to a recoverable settlement job.",
+      "actorTypes": [
+        "specification-reader",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "review-sourced-obligations",
+      "name": "Review sourced obligations before binding them",
+      "goal": "Prepare a source-linked shortlist of architecture, quality and regulatory requirements for a bounded IT review.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "it-framework-collision",
+        "it-assumed-governance-coverage"
+      ]
+    },
+    {
+      "slug": "upgrade-governance-packages",
+      "name": "Review a governance package upgrade",
+      "goal": "Adopt changed financial resilience, delivery and service-management requirements without silently changing accepted obligations.",
+      "actorTypes": [
+        "it-ciso",
+        "it-architect",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-framework-collision",
+        "it-ungoverned-change"
+      ]
+    },
+    {
+      "slug": "review-model-evidence",
+      "name": "Review a model research question",
+      "goal": "Trace a non-normative modeling question to its explanations and recorded decision status.",
+      "actorTypes": [
+        "research-reviewer",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "model-assumption-gap"
+      ]
+    },
+    {
+      "slug": "propose-grammar-extension",
+      "name": "Test and propose a grammar extension",
+      "goal": "Turn a demonstrated modeling limit into a reviewable compatibility-aware Change Proposal.",
+      "actorTypes": [
+        "research-reviewer",
+        "specification-reader"
+      ],
+      "addressedPains": [
+        "model-assumption-gap"
+      ]
+    },
+    {
+      "slug": "incorporate-accepted-grammar-extension",
+      "name": "Incorporate an accepted grammar extension",
+      "goal": "Incorporate an approved grammar change with explicit compatibility and migration boundaries.",
+      "actorTypes": [
+        "specification-reader",
+        "research-reviewer"
+      ],
+      "addressedPains": [
+        "it-tool-silos"
+      ]
+    },
+    {
+      "slug": "author-reviewed-definition",
+      "name": "Author and approve a shared definition",
+      "goal": "Replace a document-only change with an attributable, revision-bound definition decision.",
+      "actorTypes": [
+        "it-architect",
+        "it-ciso"
+      ],
+      "addressedPains": [
+        "it-ea-drift",
+        "it-ungoverned-change"
+      ]
+    },
+    {
+      "slug": "reconcile-code-evidence",
+      "name": "Reconcile code evidence into reviewed definitions",
+      "goal": "Turn competing source-revision candidates into attributable definition drafts for review.",
+      "actorTypes": [
+        "it-architect",
+        "it-platform",
+        "integration-client"
+      ],
+      "addressedPains": [
+        "it-ea-drift",
+        "it-truth-drift"
+      ]
+    },
+    {
+      "slug": "consume-authorized-context",
+      "name": "Consume authorized definition context",
+      "goal": "Give an integration client a policy-filtered, pinned context snapshot without granting authority to change systems.",
+      "actorTypes": [
+        "integration-client",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-ai-blindness"
+      ]
+    },
+    {
+      "slug": "react-to-definition-change",
+      "name": "React to a committed definition change",
+      "goal": "Refresh a downstream view from committed changes without repeated full polling.",
+      "actorTypes": [
+        "integration-client",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-ea-drift"
+      ]
+    },
+    {
+      "slug": "review-scoped-appraisal",
+      "name": "Review a scoped IT appraisal",
+      "goal": "Review versioned findings with explicit applicability, input identity and missing evidence.",
+      "actorTypes": [
+        "it-ciso",
+        "assessment-runner",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-audit-reconstruction"
+      ]
+    },
+    {
+      "slug": "review-recurring-service-appraisal",
+      "name": "Review recurring patient-portal appraisal",
+      "goal": "Review successive operational findings for a named portal deployment with visible observation coverage and freshness.",
+      "actorTypes": [
+        "it-ciso",
+        "it-platform",
+        "assessment-runner"
+      ],
+      "addressedPains": [
+        "it-audit-reconstruction",
+        "it-truth-drift"
+      ]
+    },
+    {
+      "slug": "inspect-change-impact",
+      "name": "Inspect a change before committing to it",
+      "goal": "Trace affected definitions and obligations, then record what remains unknown before deciding.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto",
+        "it-platform"
+      ],
+      "addressedPains": [
+        "it-blind-change"
+      ]
+    },
+    {
+      "slug": "ask-cited-it-question",
+      "name": "Ask an IT question and inspect its sources",
+      "goal": "Obtain a read-only answer whose claims can be checked against authorized definition snapshots.",
+      "actorTypes": [
+        "it-head-of-ai",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-ai-blindness"
+      ]
+    },
+    {
+      "slug": "generate-decision-pack",
+      "name": "Generate and review an architecture decision pack",
+      "goal": "Assemble an ADR pack and evidence summary from the same pinned inputs, then review the substantive result.",
+      "actorTypes": [
+        "it-architect",
+        "it-cto"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables"
+      ]
+    },
+    {
+      "slug": "execute-bounded-response",
+      "name": "Execute a bounded response and inspect the receipt",
+      "goal": "Perform a named authorized operation and retain enough evidence to decide whether recovery is needed.",
+      "actorTypes": [
+        "it-platform",
+        "integration-client",
+        "assessment-runner"
+      ],
+      "addressedPains": [
+        "it-ungoverned-change"
+      ]
+    },
+    {
+      "slug": "deliver-reviewed-artifact",
+      "name": "Deliver a reviewed artifact through a local workflow",
+      "goal": "Produce a scoped artifact through an attributable local method, checks and human review.",
+      "actorTypes": [
+        "delivery-agent",
+        "it-platform",
+        "it-head-of-ai"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents",
+        "it-unverified-generated-output"
+      ]
+    },
+    {
+      "slug": "install-and-publish-workspace",
+      "name": "Set up a workspace and publish checked artifacts",
+      "goal": "Reproduce a pinned local delivery environment and carry the same declared artifact checks into controlled CI publication.",
+      "actorTypes": [
+        "it-platform",
+        "delivery-agent"
+      ],
+      "addressedPains": [
+        "it-ungoverned-agents"
+      ]
+    },
+    {
+      "slug": "reuse-delivery-evidence",
+      "name": "Reuse captured delivery evidence as definition proposals",
+      "goal": "Turn a pinned artifact and its captured journal into inspectable candidates without confusing generated work with deployed behavior.",
+      "actorTypes": [
+        "integration-client",
+        "it-architect"
+      ],
+      "addressedPains": [
+        "it-handcrafted-deliverables",
+        "manual-decision-handoff"
+      ]
+    }
+  ],
+  "values": [
+    {
+      "slug": "value:inspectable-acquisition-coverage",
+      "originalTitle": "Inspect acquisition scope and freshness",
+      "title": "Inspect acquisition scope and freshness",
+      "body": "Distinguish inspected revisions from missing, failed or stale collection before relying on source evidence.",
+      "useCases": [
+        "configure-collection-boundaries",
+        "recover-incomplete-collection",
+        "review-evidence-refresh"
+      ]
+    },
+    {
+      "slug": "value:least-privilege-collaboration",
+      "originalTitle": "Align access with responsibilities",
+      "title": "Align access with responsibilities",
+      "body": "Review action-specific permissions and identity synchronization against current responsibilities, with revocation and failures explicitly verified.",
+      "useCases": [
+        "review-operation-privileges",
+        "restore-identity-synchronization"
+      ]
+    },
+    {
+      "slug": "value:repeatable-review-boundaries",
+      "originalTitle": "Repeatable review boundaries",
+      "title": "Repeatable review boundaries",
+      "body": "Reuse explicit selection and traversal rules so reviewers can compare decisions against identified subjects and snapshot boundaries.",
+      "useCases": [
+        "reuse-review-lens",
+        "inspect-subject-perspectives"
+      ]
+    },
+    {
+      "slug": "value:coherent-review-sessions",
+      "originalTitle": "Coherent records of related decisions",
+      "title": "Coherent records of related decisions",
+      "body": "Retain agendas, participation and per-revision decisions together while keeping discussion, voting and authorized lifecycle decisions distinct.",
+      "useCases": [
+        "conduct-governance-session",
+        "retrieve-decision-basis"
+      ]
+    },
+    {
+      "slug": "value:actionable-governance-findings",
+      "originalTitle": "Carry findings into corrective decisions",
+      "title": "Carry findings into corrective decisions",
+      "body": "Connect blocking findings and uncovered obligations to owned corrections, renewed review and subsequent evidence of resolution.",
+      "useCases": [
+        "resolve-blocked-change",
+        "propose-appraisal-remediation"
+      ]
+    },
+    {
+      "slug": "value:explicit-obligation-applicability",
+      "originalTitle": "Make obligation applicability explicit",
+      "title": "Make obligation applicability explicit",
+      "body": "Separate reusable templates and vocabulary coverage from the subjects, conditions and accountable interpretation that establish applicable obligations.",
+      "useCases": [
+        "inspect-vocabulary-coverage",
+        "bind-obligations-to-scope"
+      ]
+    },
+    {
+      "slug": "value:inspectable-artifact-completion",
+      "originalTitle": "Distinguish generated output from accepted completion",
+      "title": "Distinguish generated output from accepted completion",
+      "body": "Inspect binding resolution, grounding constraints, missing inputs and job outcomes before accepting or reusing a generated deliverable.",
+      "useCases": [
+        "preview-artifact-bindings",
+        "constrain-generated-narrative",
+        "operate-recurring-reports",
+        "investigate-artifact-failure"
+      ]
+    },
+    {
+      "slug": "value:proportionate-evidence-preservation",
+      "originalTitle": "Proportionate evidence preservation",
+      "title": "Proportionate evidence preservation",
+      "body": "Agree justified preservation periods, access and disposal constraints while keeping policy decisions distinct from verified retention enforcement.",
+      "useCases": [
+        "agree-evidence-preservation"
+      ]
+    },
+    {
+      "slug": "value:known-rule-revision-effects",
+      "originalTitle": "Understand verdict changes before rule adoption",
+      "title": "Understand verdict changes before rule adoption",
+      "body": "Compare rule revisions on pinned reference inputs and inspect changed and unknown results before accepting their effect on decisions.",
+      "useCases": [
+        "qualify-rule-revision"
+      ]
+    },
+    {
+      "slug": "value:qualified-runtime-selection",
+      "originalTitle": "Qualify delivery hosts and model routes",
+      "title": "Qualify delivery hosts and model routes",
+      "body": "Evaluate host instruction delivery and model routes against explicit workload quality, cost and disclosure criteria rather than assuming interchangeable behavior.",
+      "useCases": [
+        "qualify-host-instructions",
+        "qualify-model-routing"
+      ]
+    },
+    {
+      "slug": "value:service-accountability",
+      "originalTitle": "Clear accountability for service commitments",
+      "title": "Clear accountability for service commitments",
+      "body": "Establish who accepts each service commitment and dependency, including responsibilities transferred to a new owner.",
+      "useCases": [
+        "accept-service-baseline",
+        "transfer-service-ownership"
+      ]
+    },
+    {
+      "slug": "value:time-bounded-risk-acceptance",
+      "originalTitle": "Time-bounded risk acceptance",
+      "title": "Time-bounded risk acceptance",
+      "body": "Keep accepted exposure tied to accountable decisions, expiry and current compensating-control evidence rather than indefinite exceptions.",
+      "useCases": [
+        "review-time-bound-exception",
+        "renew-or-close-exception"
+      ]
+    },
+    {
+      "slug": "value:predictable-interface-evolution",
+      "originalTitle": "Predictable evolution of shared interfaces",
+      "title": "Predictable evolution of shared interfaces",
+      "body": "Coordinate contract changes and consumer migration against explicit compatibility evidence and retirement prerequisites.",
+      "useCases": [
+        "review-breaking-api-change",
+        "coordinate-api-deprecation"
+      ]
+    },
+    {
+      "slug": "value:usable-knowledge-transfer",
+      "originalTitle": "Transfer usable operational knowledge",
+      "title": "Transfer usable operational knowledge",
+      "body": "Carry authoritative decisions, unresolved obligations and inspected evidence into a handover the receiving service owner can accept.",
+      "useCases": [
+        "handover-operational-evidence",
+        "transfer-service-ownership"
+      ]
+    },
+    {
+      "slug": "value:exposure-led-remediation",
+      "originalTitle": "Remediation focused on consequential exposure",
+      "title": "Remediation focused on consequential exposure",
+      "body": "Direct security effort toward affected deployed services and business consequences, with mitigation effectiveness reviewed before closure.",
+      "useCases": [
+        "prioritize-service-vulnerabilities",
+        "verify-vulnerability-mitigation"
+      ]
+    },
+    {
+      "slug": "value:service-grounded-supplier-decisions",
+      "originalTitle": "Supplier decisions grounded in service exposure",
+      "title": "Supplier decisions grounded in service exposure",
+      "body": "Assess supplier changes and exits using dependent-service commitments, scoped assurance evidence and unresolved transition obligations.",
+      "useCases": [
+        "assess-supplier-service-change",
+        "review-supplier-exit-readiness"
+      ]
+    },
+    {
+      "slug": "value:evidence-backed-recovery",
+      "originalTitle": "Recovery commitments supported by evidence",
+      "title": "Recovery commitments supported by evidence",
+      "body": "Distinguish stated recovery targets from observed exercise results, dependency constraints and scenarios that remain untested.",
+      "useCases": [
+        "review-service-recovery-exercise",
+        "resolve-recovery-dependency-conflicts"
+      ]
+    },
+    {
+      "slug": "value:dependable-data-handoffs",
+      "originalTitle": "Dependable data handoffs",
+      "title": "Dependable data handoffs",
+      "body": "Agree the meaning and quality of exchanged data with its consumers, making contract changes and conflicting requirements explicit before adoption.",
+      "useCases": [
+        "review-data-contract-change",
+        "resolve-data-quality-requirements"
+      ]
+    },
+    {
+      "slug": "value:business-informed-incident-response",
+      "originalTitle": "Prioritize incident response by business consequences",
+      "title": "Prioritize incident response by business consequences",
+      "body": "Connect observed software disruption to affected business processes and accountable owners, separating confirmed impact from possible exposure so response and communication follow justified priorities.",
+      "useCases": [
+        "trace-incident-business-impact"
+      ]
+    },
+    {
+      "slug": "value:platform/analysis-power",
+      "originalTitle": "Decision insight",
+      "title": "Reduce uncertainty about a specified change",
+      "body": "Bring relevant context and affected definitions into a shared review, making dependency paths and missing evidence visible before deciding.",
+      "useCases": [
+        "inspect-change-impact",
+        "ask-cited-it-question"
+      ]
+    },
+    {
+      "slug": "value:platform/continuous-evaluation",
+      "originalTitle": "Earlier nonconformance awareness",
+      "title": "Reduce time that nonconformance remains unknown",
+      "body": "Use planned scoped evaluation to surface findings earlier, with observation coverage, freshness and unknown states visible to reviewers.",
+      "useCases": [
+        "review-scoped-appraisal",
+        "review-recurring-service-appraisal"
+      ]
+    },
+    {
+      "slug": "value:platform/governed-authority",
+      "originalTitle": "Attributable decisions",
+      "title": "Keep consequential changes attributable",
+      "body": "Connect consequential changes to identity, policy and revision-bound decisions as authenticated governance controls are completed.",
+      "useCases": [
+        "author-reviewed-definition",
+        "retrieve-decision-basis"
+      ]
+    },
+    {
+      "slug": "value:platform/accountable-autonomy",
+      "originalTitle": "Accountable delegation",
+      "title": "Delegate bounded work with evidence and recourse",
+      "body": "Build toward delegated workflows with explicit obligations, decision boundaries and controlled effects, retaining evidence for intervention and recovery.",
+      "useCases": [
+        "approve-agent-mandate",
+        "execute-bounded-response",
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:platform/resource-economy",
+      "originalTitle": "Reduced repeated work",
+      "title": "Reduce avoidable reconstruction and rework",
+      "body": "Reuse shared context and generated artifacts so effort can shift from repeated assembly to curation and review. Net savings depend on the workflow and compute costs.",
+      "useCases": [
+        "generate-decision-pack",
+        "reuse-delivery-evidence"
+      ]
+    },
+    {
+      "slug": "value:platform/audit-readiness",
+      "originalTitle": "Audit preparation",
+      "title": "Reduce evidence reconstruction effort",
+      "body": "Bring linked snapshots, decisions and provenance into a stated audit scope, with completeness assessed against that review rather than inferred from history alone.",
+      "useCases": [
+        "retrieve-decision-basis",
+        "review-scoped-appraisal",
+        "agree-evidence-preservation"
+      ]
+    },
+    {
+      "slug": "value:itip/01",
+      "originalTitle": "Governance that stops drifting.",
+      "title": "Keep governance closer to its evidence.",
+      "body": "Bring shared definitions, reviewed candidates and scoped appraisal together to simplify reconciliation. For running systems, keep observation coverage and freshness visible.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "author-reviewed-definition",
+        "review-recurring-service-appraisal"
+      ]
+    },
+    {
+      "slug": "value:itip/02",
+      "originalTitle": "A source of truth AI can act on.",
+      "title": "Give AI attributable context.",
+      "body": "Ground planned read-only answers in authorized, versioned definitions, with citations and abstention for review. Build that context through direct authoring or reviewed sourcing.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "author-reviewed-definition",
+        "ask-cited-it-question"
+      ]
+    },
+    {
+      "slug": "value:itip/03",
+      "originalTitle": "Every profile, every deliverable, one model.",
+      "title": "Coordinate IT work around shared definitions.",
+      "body": "Reuse common inputs across appraisal, analysis and document generation so profiles can review decisions against the same definitions. Outputs and scenarios remain subject to review.",
+      "useCases": [
+        "review-scoped-appraisal",
+        "inspect-change-impact",
+        "generate-decision-pack"
+      ]
+    },
+    {
+      "slug": "value:itip/04",
+      "originalTitle": "Ontologies composed, not siloed.",
+      "title": "Review obligations together.",
+      "body": "Reuse selected packages in one scoped review, with applicability, conflicting obligations and missing evidence visible for resolution.",
+      "useCases": [
+        "reuse-governance-selection",
+        "bind-obligations-to-scope",
+        "resolve-competing-obligations"
+      ]
+    },
+    {
+      "slug": "value:itip/web-application/01",
+      "originalTitle": "One place every IT profile works.",
+      "title": "A shared workspace for IT decisions.",
+      "body": "Author and review a common inventory through planned integrated workflows and scoped permissions, reducing handoffs between separate representations.",
+      "useCases": [
+        "author-reviewed-definition",
+        "review-operation-privileges"
+      ]
+    },
+    {
+      "slug": "value:itip/web-application/02",
+      "originalTitle": "Compliance observed, not reconstructed.",
+      "title": "Make scoped appraisal inspectable.",
+      "body": "Prepare reviews from versioned findings with visible coverage, observation age and unknown results. Legal interpretation stays with the reviewer.",
+      "useCases": [
+        "review-scoped-appraisal",
+        "review-recurring-service-appraisal"
+      ]
+    },
+    {
+      "slug": "value:itip/web-application/03",
+      "originalTitle": "Deliverables fall out of the model.",
+      "title": "Reduce repeated document assembly.",
+      "body": "Generate reviewable document families from reusable definitions and templates, then focus effort on review, correction and template upkeep.",
+      "useCases": [
+        "maintain-artifact-bindings",
+        "generate-decision-pack"
+      ]
+    },
+    {
+      "slug": "value:itip/web-application/04",
+      "originalTitle": "See the impact before you commit.",
+      "title": "Inspect possible effects before deciding.",
+      "body": "Follow dependency and obligation paths to affected definitions. Timing, probability and causal predictions belong to the further simulation scope.",
+      "useCases": [
+        "inspect-change-impact",
+        "assess-application-retirement"
+      ]
+    },
+    {
+      "slug": "value:itip/web-application/05",
+      "originalTitle": "Ask the model, not the wiki.",
+      "title": "Check answers against sources.",
+      "body": "Use the planned copilot to find relevant definitions and inspect cited evidence, snapshot age and uncertainty alongside each answer.",
+      "useCases": [
+        "ask-cited-it-question"
+      ]
+    },
+    {
+      "slug": "value:itip/definition-blackboard-code-sourcer/01",
+      "originalTitle": "Definitions author themselves.",
+      "title": "Reduce manual candidate authoring.",
+      "body": "Prepare proposals through staged analysis and optional inference so experts can focus on reconciliation and acceptance.",
+      "useCases": [
+        "reconcile-code-evidence"
+      ]
+    },
+    {
+      "slug": "value:itip/definition-blackboard-code-sourcer/02",
+      "originalTitle": "The model reflects what actually runs.",
+      "title": "Relate definitions to inspected revisions.",
+      "body": "Reconcile definitions against pinned source evidence. Relating them to running systems additionally requires deployed identity, configuration and fresh observations.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "review-evidence-refresh"
+      ]
+    },
+    {
+      "slug": "value:itip/definition-blackboard-code-sourcer/03",
+      "originalTitle": "Every definition is explainable.",
+      "title": "Inspect the basis of proposals.",
+      "body": "Review provenance and confidence alongside retained tool details, source revisions and competing evidence.",
+      "useCases": [
+        "reconcile-code-evidence"
+      ]
+    },
+    {
+      "slug": "value:itip/definition-blackboard-code-sourcer/04",
+      "originalTitle": "Private by design.",
+      "title": "Control sourcing data exposure.",
+      "body": "Bound the planned sourcing workflow with explicit policies for tool/model egress, credentials, telemetry and retention, including any data leaving the local process.",
+      "useCases": [
+        "configure-collection-boundaries",
+        "qualify-model-routing",
+        "agree-evidence-preservation"
+      ]
+    },
+    {
+      "slug": "value:sie/01",
+      "originalTitle": "A governed AI context.",
+      "title": "Make shared context attributable.",
+      "body": "Build toward policy-filtered snapshots that people and AI can inspect. Direct API authoring is independent of sourcing, with MCP planned as an additional interface.",
+      "useCases": [
+        "consume-authorized-context",
+        "author-reviewed-definition"
+      ]
+    },
+    {
+      "slug": "value:sie/02",
+      "originalTitle": "Harnessed operations.",
+      "title": "Constrain operations at declared boundaries.",
+      "body": "Combine eligibility, caller authority and adapter contracts to bound effectful execution. Keep pure verdict evaluation separate from actions that change a system.",
+      "useCases": [
+        "execute-bounded-response",
+        "review-operation-privileges"
+      ]
+    },
+    {
+      "slug": "value:sie/03",
+      "originalTitle": "One closed self-sustaining loop.",
+      "title": "Build toward bounded feedback loops.",
+      "body": "Connect definitions, observations, evaluation, authorized response and re-observation in future domain-specific loops, with explicit boundaries for each integration.",
+      "useCases": [
+        "review-recurring-service-appraisal",
+        "execute-bounded-response",
+        "react-to-definition-change"
+      ]
+    },
+    {
+      "slug": "value:sie/04",
+      "originalTitle": "Reality feeds governance.",
+      "title": "Use evidence to inform revisions.",
+      "body": "Carry reviewed candidates into authorized revisions with promotion lineage. Collection, approval and confirmation against running systems remain distinct steps.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "author-reviewed-definition"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-manager/01",
+      "originalTitle": "Governance you can’t corrupt.",
+      "title": "Make transitions inspectable.",
+      "body": "Check lifecycle advancement against defined transitions, with authentication, policy and current grammar alignment completing the governance boundary.",
+      "useCases": [
+        "author-reviewed-definition",
+        "assess-invalidated-dependencies"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-manager/02",
+      "originalTitle": "An API, not a document store.",
+      "title": "Access snapshots programmatically.",
+      "body": "Reuse structured snapshots across tools instead of manually exchanging documents, within each route's validated isolation, pagination and performance scope.",
+      "useCases": [
+        "consume-authorized-context"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-manager/03",
+      "originalTitle": "Audit-ready by construction.",
+      "title": "Reuse retained lifecycle evidence.",
+      "body": "Start review from retained version history. Linking actors, rationale and retention policy completes the evidence needed for a stated audit scope.",
+      "useCases": [
+        "retrieve-decision-basis",
+        "agree-evidence-preservation"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-manager/04",
+      "originalTitle": "The model announces its own changes.",
+      "title": "React to committed changes.",
+      "body": "Use planned change notifications to replace repeated polling, with replay and recovery for missed events.",
+      "useCases": [
+        "react-to-definition-change"
+      ]
+    },
+    {
+      "slug": "value:sie/operator/01",
+      "originalTitle": "Governance that executes.",
+      "title": "Connect eligible definitions to bounded action.",
+      "body": "Use defined mechanisms for named operations, adding verdicts, scheduling and feedback when building a complete domain loop.",
+      "useCases": [
+        "execute-bounded-response"
+      ]
+    },
+    {
+      "slug": "value:sie/operator/02",
+      "originalTitle": "Sandboxed, reproducible verdicts.",
+      "title": "Make pure verdicts reproducible.",
+      "body": "Replay planned pure evaluations against pinned rules, inputs and time, independently of effectful execution.",
+      "useCases": [
+        "review-scoped-appraisal",
+        "qualify-rule-revision"
+      ]
+    },
+    {
+      "slug": "value:sie/operator/03",
+      "originalTitle": "Only the model decides what runs.",
+      "title": "Make eligibility and authority explicit.",
+      "body": "Bound operations through governed eligibility together with caller and adapter policy as execution controls are completed.",
+      "useCases": [
+        "execute-bounded-response",
+        "review-operation-privileges"
+      ]
+    },
+    {
+      "slug": "value:sie/operator/04",
+      "originalTitle": "Always the current governed version.",
+      "title": "Identify the snapshot used.",
+      "body": "Trace execution to requested definition IDs. Coherent pinning will distinguish latest, historical and eligible snapshot policies explicitly.",
+      "useCases": [
+        "execute-bounded-response",
+        "review-scoped-appraisal"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-blackboard-manager/01",
+      "originalTitle": "The whole picture, from every partial view.",
+      "title": "Compare contributed partial views.",
+      "body": "Bring conflicting candidates into shared panels so reviewers can compare evidence and identify gaps in the collected views.",
+      "useCases": [
+        "reconcile-code-evidence"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-blackboard-manager/02",
+      "originalTitle": "Thinking here, deciding there.",
+      "title": "Separate exploration from acceptance.",
+      "body": "Collect candidates on the board, reconcile them in a client and govern promoted drafts in the Definition Manager through an explicit integration handoff.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "author-reviewed-definition"
+      ]
+    },
+    {
+      "slug": "value:sie/definition-blackboard-manager/03",
+      "originalTitle": "You can always answer “why is this in the model?”",
+      "title": "Trace retained proposal evidence.",
+      "body": "Revisit captured actors and sources, with reducer decisions and Ascription links extending the trail from proposal to accepted definition.",
+      "useCases": [
+        "reconcile-code-evidence",
+        "retrieve-decision-basis"
+      ]
+    },
+    {
+      "slug": "value:gsm/01",
+      "originalTitle": "What OpenTelemetry is to RUN, GSM is to THINK.",
+      "title": "Build toward shared definition semantics.",
+      "body": "Give compatible tools a common vocabulary for definitions, analogous to shared observability conventions. Interchange depends on implemented profiles and independent consumer compatibility.",
+      "useCases": [
+        "read-governance-model",
+        "agree-domain-typing-contract",
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "value:gsm/02",
+      "originalTitle": "Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.",
+      "title": "Make governed intent explicit.",
+      "body": "Describe a chosen domain through typed definitions, explicit obligations and a governed lifecycle, bringing declarative intent to scoped system modeling.",
+      "useCases": [
+        "read-governance-model",
+        "agree-domain-typing-contract"
+      ]
+    },
+    {
+      "slug": "value:gsm/03",
+      "originalTitle": "Governance as code, composed with policy as code.",
+      "title": "Connect governance and policy tools.",
+      "body": "Use shared definitions and obligations as inputs to planned policy, attestation, observation and delivery integrations, with dedicated adapters for each tool.",
+      "useCases": [
+        "read-governance-model",
+        "review-sourced-obligations",
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "value:gsm/04",
+      "originalTitle": "Trust the standard, not the vendor.",
+      "title": "Inspect the model and its sources.",
+      "body": "Evaluate adoption against versioned content, source mappings and visible research questions. Neutral stewardship remains a stated direction, distinct from consortium endorsement.",
+      "useCases": [
+        "review-model-evidence",
+        "review-sourced-obligations"
+      ]
+    },
+    {
+      "slug": "value:gsm/specifications/01",
+      "originalTitle": "Tools that interoperate, silos that fall.",
+      "title": "Reduce bespoke semantic translation.",
+      "body": "Reuse shared vocabulary and profiles when connecting tools that implement compatible contracts.",
+      "useCases": [
+        "agree-domain-typing-contract",
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "value:gsm/specifications/02",
+      "originalTitle": "Lock-in ends where the standard begins.",
+      "title": "Make portability requirements explicit.",
+      "body": "Compare migration routes against declared conformance requirements. Complete transfer still depends on nonconformant DRAFT preservation and independent endpoint compatibility.",
+      "useCases": [
+        "qualify-processor-interchange"
+      ]
+    },
+    {
+      "slug": "value:gsm/specifications/03",
+      "originalTitle": "The governance grammar keeps deepening.",
+      "title": "Adapt grammar through evidence.",
+      "body": "Address demonstrated modeling limits through planned, reviewed extensions with explicit compatibility decisions.",
+      "useCases": [
+        "propose-grammar-extension",
+        "incorporate-accepted-grammar-extension"
+      ]
+    },
+    {
+      "slug": "value:gsm/specifications/04",
+      "originalTitle": "Built for neutral stewardship.",
+      "title": "Build toward neutral stewardship.",
+      "body": "Pursue consortium stewardship through a visible model and reviewed evolution, with ownership, licensing and publication stated separately.",
+      "useCases": [
+        "review-model-evidence",
+        "propose-grammar-extension"
+      ]
+    },
+    {
+      "slug": "value:gsm/ontology/01",
+      "originalTitle": "Day-one governance, not a blank page.",
+      "title": "Start from reusable vocabulary.",
+      "body": "Build on selected sourced content, then focus authoring effort on installation, interpretation and bindings for your domain.",
+      "useCases": [
+        "review-sourced-obligations",
+        "bind-obligations-to-scope"
+      ]
+    },
+    {
+      "slug": "value:gsm/ontology/02",
+      "originalTitle": "The authority’s own taxonomy, clause by clause.",
+      "title": "Inspect source mappings.",
+      "body": "Review concepts in the source taxonomy with available clause references, checking coverage and legal applicability for your scope.",
+      "useCases": [
+        "review-sourced-obligations",
+        "inspect-vocabulary-coverage"
+      ]
+    },
+    {
+      "slug": "value:gsm/ontology/03",
+      "originalTitle": "Ontologies that compose, not collide.",
+      "title": "Review composition explicitly.",
+      "body": "Combine selected vocabularies through GSM governance, with reference resolution and obligation conflicts handled in review.",
+      "useCases": [
+        "reuse-governance-selection",
+        "resolve-competing-obligations"
+      ]
+    },
+    {
+      "slug": "value:gsm/ontology/04",
+      "originalTitle": "Every claim carries where it came from.",
+      "title": "Represent attribution explicitly.",
+      "body": "Record attribution in typed facets and connect it to consumer-verified actors and populated lineage.",
+      "useCases": [
+        "describe-service-contract"
+      ]
+    },
+    {
+      "slug": "value:gsm/ontology/05",
+      "originalTitle": "Maintained as the real world changes.",
+      "title": "Review evolving requirements.",
+      "body": "Use planned source monitoring and versioned updates to review changing requirements before choosing governed upgrades.",
+      "useCases": [
+        "upgrade-governance-packages"
+      ]
+    },
+    {
+      "slug": "value:gsm/research-lab/01",
+      "originalTitle": "The standard is tested before it is frozen.",
+      "title": "Challenge assumptions explicitly.",
+      "body": "Compare alternative explanations through research records and cases, distinguishing conceptual exploration from executed testing.",
+      "useCases": [
+        "review-model-evidence",
+        "propose-grammar-extension"
+      ]
+    },
+    {
+      "slug": "value:gsm/research-lab/02",
+      "originalTitle": "Research and specification never blur.",
+      "title": "Separate hypotheses from requirements.",
+      "body": "Keep exploratory records separate from normative requirements and promote findings through specification governance.",
+      "useCases": [
+        "review-model-evidence",
+        "incorporate-accepted-grammar-extension"
+      ]
+    },
+    {
+      "slug": "value:gsm/research-lab/03",
+      "originalTitle": "Open questions have stable names.",
+      "title": "Track open questions consistently.",
+      "body": "Reference the same research question across cases and decisions using stable identifiers and visible status.",
+      "useCases": [
+        "review-model-evidence"
+      ]
+    },
+    {
+      "slug": "value:saf/01",
+      "originalTitle": "Definitions that generate systems.",
+      "title": "Build toward traceable delivery.",
+      "body": "Generate reviewable artifacts through bounded workflows, then carry evidence forward through separate build, deployment and re-observation stages.",
+      "useCases": [
+        "deliver-reviewed-artifact",
+        "reuse-delivery-evidence"
+      ]
+    },
+    {
+      "slug": "value:saf/02",
+      "originalTitle": "A method, run by agents, as a harness.",
+      "title": "Make agentic work reviewable.",
+      "body": "Combine role contracts, workflow decisions and artifact evidence, with planned authenticated human gates bound to exact revisions.",
+      "useCases": [
+        "approve-agent-mandate",
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/03",
+      "originalTitle": "Local orchestrations, one organization.",
+      "title": "Coordinate through shared artifacts.",
+      "body": "Collaborate through versioned contracts and Git-backed artifacts, reconciling separate journals, merges and version differences explicitly.",
+      "useCases": [
+        "reconcile-parallel-agent-outputs",
+        "handover-operational-evidence"
+      ]
+    },
+    {
+      "slug": "value:saf/04",
+      "originalTitle": "Open, local-first, sovereign.",
+      "title": "Control local delivery data.",
+      "body": "Choose local tools and Git workflows, with explicit policies for model/tool egress, telemetry, remotes and backups.",
+      "useCases": [
+        "approve-agent-mandate",
+        "qualify-model-routing",
+        "install-and-publish-workspace"
+      ]
+    },
+    {
+      "slug": "value:saf/05",
+      "originalTitle": "Delivery history becomes governed context.",
+      "title": "Reuse delivery evidence.",
+      "body": "Derive candidates from pinned artifacts and journals through the planned bridge, then review and promote them through a client-owned stage.",
+      "useCases": [
+        "reuse-delivery-evidence"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-harness/01",
+      "originalTitle": "Deterministic rails for probabilistic agents.",
+      "title": "Inspect control decisions.",
+      "body": "Review persisted step and write-authorization decisions within mediated execution, alongside separate checks for output quality and human approval.",
+      "useCases": [
+        "approve-agent-mandate",
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-harness/02",
+      "originalTitle": "Invalid bytes never land.",
+      "title": "Catch invalid declared artifacts earlier.",
+      "body": "Check matched schemas before mediated writes so declared structural errors surface early. Coverage follows the supported parser, contract and transaction boundaries.",
+      "useCases": [
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-harness/03",
+      "originalTitle": "One method, any host.",
+      "title": "Reuse methods on supported hosts.",
+      "body": "Carry plain-file methods between supported host/model adapters, with explicit compatibility and mediation boundaries.",
+      "useCases": [
+        "qualify-host-instructions"
+      ]
+    },
+    {
+      "slug": "value:saf/safe-agentic-organization/01",
+      "originalTitle": "An org chart, not a swarm.",
+      "title": "Clarify responsibilities.",
+      "body": "Assign orchestration and specialist work to named roles, making ownership and handoffs visible in each workflow.",
+      "useCases": [
+        "approve-agent-mandate",
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/safe-agentic-organization/02",
+      "originalTitle": "A method agents must implement.",
+      "title": "Make expectations inspectable.",
+      "body": "Review deliverables against shared templates, practices and workflow contracts, with executable checks supplied by supported harness bindings.",
+      "useCases": [
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/safe-agentic-organization/03",
+      "originalTitle": "Agents propose, humans dispose.",
+      "title": "Keep decisions attributable.",
+      "body": "Bind advancement to authenticated human decisions on exact revisions and scope through the planned approval workflow.",
+      "useCases": [
+        "approve-agent-mandate",
+        "deliver-reviewed-artifact"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-workspace/01",
+      "originalTitle": "Your files, your history, your state.",
+      "title": "Keep artifacts in a chosen working tree.",
+      "body": "Own the Git working tree and its artifact history, with separate disclosure policies for journals, remotes, tools, models and backups.",
+      "useCases": [
+        "install-and-publish-workspace",
+        "qualify-model-routing"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-workspace/02",
+      "originalTitle": "Install once, deliver governed.",
+      "title": "Make supported setup repeatable.",
+      "body": "Use the planned installer for pinned setup, reruns, upgrades and rollback while preserving existing work.",
+      "useCases": [
+        "install-and-publish-workspace"
+      ]
+    },
+    {
+      "slug": "value:saf/agentic-workspace/03",
+      "originalTitle": "The same gates run in CI.",
+      "title": "Reuse declared checks in CI.",
+      "body": "Carry pinned artifact checks into planned CI pipelines, with environment validation and human decisions handled explicitly.",
+      "useCases": [
+        "install-and-publish-workspace"
+      ]
+    },
+    {
+      "slug": "value:saf/saf-sie-bridge/01",
+      "originalTitle": "What agents actually did, made governed context.",
+      "title": "Reuse captured delivery evidence.",
+      "body": "Make captured delivery evidence available for review and further reasoning through planned sourcing, with missing records and uncertainty kept visible.",
+      "useCases": [
+        "reuse-delivery-evidence"
+      ]
+    }
+  ]
+}

@@ -1,29 +1,11 @@
 ---
 /**
- * PlatformValues — the platform value list. Values are declared on the usage
- * side and realized by affordances, so both the delivery state and the proof
- * line are derived from the affordances that reference each value.
+ * PlatformValues — platform benefits composed from explicit use cases.
  */
-import DeliveryStatus from './DeliveryStatus.astro';
-import Icon from './Icon.astro';
-import { plannedClass, relationQualifiers } from '../data/poesis-platform.ts';
-import { platformValues, usageIcons, valueAnchor, valueStatus, valueSupports } from '../data/usage.ts';
+import CatalogCard from './CatalogCard.astro';
+import { platformValues } from '../data/usage.ts';
+import { valueCard } from '../data/catalog-card.ts';
 ---
-<ul class="think-consequence-list">
-  {platformValues.map((v) => (
-    <li id={valueAnchor(v)} class={plannedClass(valueStatus(v.slug))}>
-      <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.value} size={16} /></span><span class="think-consequence__step">Value · {v.originalTitle}</span><DeliveryStatus state={valueStatus(v.slug)} /></span>
-      <strong>{v.title}</strong>
-      <p>{v.body}</p>
-      <p class="proof-line">
-        <span>{relationQualifiers.platformValueAffordances()}</span>
-        {valueSupports(v.slug).map((support, i) => (
-          <>
-            {i > 0 && ' · '}
-            <a href={support.href}>{support.name} <DeliveryStatus state={support.state} compact /></a>
-          </>
-        ))}
-      </p>
-    </li>
-  ))}
+<ul class="think-consequence-list catalog-grid">
+  {platformValues.map((value) => <CatalogCard card={valueCard(value)} />)}
 </ul>

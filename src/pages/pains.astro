@@ -1,25 +1,17 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { poesisUsage, usageIcons, useCasesForPain } from '../data/usage.ts';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { poesisUsage } from '../data/usage.ts';
+import { painCard } from '../data/catalog-card.ts';
 
-const entries: DirectoryEntry[] = poesisUsage.pains.map((pain) => ({
-  anchor: pain.slug,
-  eyebrow: pain.tags.join(' · '),
-  icon: usageIcons.pain,
-  title: pain.pain,
-  body: pain.cost,
-  meta: pain.actorTypes.map((slug) => ({ label: poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name, href: `/actors#${slug}` })),
-  links: useCasesForPain(pain.slug).length ? [{ label: 'Related use cases', href: `/usage?pain=${pain.slug}#use-cases` }] : [],
-  empty: 'No use case assigned.',
-}));
+const cards = poesisUsage.pains.map(painCard);
 ---
 <CatalogLayout
   title="Poesis pain points"
-  description="Where IT governance work becomes difficult: the recorded pain points, who feels them and the use cases in which they occur."
+  description="Where IT governance work becomes difficult: independent pain points, who feels them and the use cases addressing them."
   heading="Pain points"
   lead="Where the work becomes difficult today, and what it costs. A pain point is recorded whether or not the platform already addresses it."
-  count={`${entries.length} pain points`}
+  count={`${cards.length} pain points`}
 >
-  <CatalogDirectory id="pain-contexts" eyebrow="Pains" title="Where work becomes difficult" entries={entries} kind="Pain" relation="Occurs in" />
+  <CatalogDirectory id="pain-contexts" eyebrow="Pains" title="Where work becomes difficult" cards={cards} />
 </CatalogLayout>

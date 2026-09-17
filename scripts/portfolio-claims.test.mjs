@@ -8,10 +8,10 @@ import { siteNavigation, footerNavigation } from '../src/data/site-navigation.ts
 import { evaluateRequirement, productTimeline, platformSolutions, affordances, affordanceStatus, validatePortfolio, featureStatus, capabilityShipped, capabilityStatus, realizations, realizationStatus, realizationRequirements, operationalVerdictStatus, semanticEdges, solutionHref } from '../src/data/poesis-platform.ts';
 import { pains, painRelations } from '../src/data/pains.ts';
 import { commitmentStatus, deliveryLabels, productStatus, milestoneStatus } from '../src/data/poesis-platform.ts';
-import { platformValues, solutionValues, productValues, valueAnchor, valueAliases, valueStatus, valueSupports, valueEdges, solutionValueAnchor } from '../src/data/usage.ts';
+import { platformValues, solutionValues, productValues, valueAnchor, valueAliases, valueStatus, valueCoverage, usageValues, valueEdges, solutionValueAnchor } from '../src/data/usage.ts';
 
 test('public commitments report implemented, in-progress or planned, never speculative', () => {
-  assert.deepEqual(deliveryLabels, { planned: 'Planned', partial: 'In progress', delivered: 'Implemented' });
+  assert.deepEqual(deliveryLabels, { planned: 'Planned', partial: 'Partial', delivered: 'Implemented' });
   assert.equal(commitmentStatus([]), 'planned');
   assert.equal(commitmentStatus(['planned', 'planned']), 'planned');
   assert.equal(commitmentStatus(['delivered']), 'delivered');
@@ -31,25 +31,13 @@ const readWorkspace = (path) => {
   }
 };
 const features = platformSolutions.flatMap((solution) => solution.products.flatMap((product) => product.features.map((feature) => ({ id: `${solution.slug}/${product.slug}/${feature.slug}`, ...feature }))));
-test('value commitments follow the platform items that reference them, never milestones or unrelated children', () => {
-  // Values live usage-side and carry no relations; their status is the
-  // commitment of the platform items that declare they realize the value.
-  for (const value of platformValues) {
-    assert.equal(valueStatus(value.slug), commitmentStatus(valueSupports(value.slug).map((support) => support.state)));
-    assert.ok(valueSupports(value.slug).every((support) => support.type === 'affordance'));
+test('value commitments follow every constituent use case, never milestones or unrelated children', () => {
+  for (const value of usageValues) {
+    const states = valueCoverage(value.slug).map((entry) => entry.state);
+    assert.equal(valueStatus(value.slug), states.some(Boolean) ? commitmentStatus(states.map((state) => state ?? 'planned')) : undefined);
+    if (states.some((state) => state !== 'delivered')) assert.notEqual(valueStatus(value.slug), 'delivered');
   }
-  for (const solution of platformSolutions) {
-    for (const value of solutionValues(solution.slug)) {
-      assert.equal(valueStatus(value.slug), commitmentStatus(solution.capabilities.filter((capability) => capability.values.includes(value.slug)).map((capability) => capabilityStatus(solution, capability))));
-    }
-    for (const product of solution.products) {
-      for (const value of productValues(solution.slug, product.slug)) {
-        const supportingFeatures = product.features.filter((feature) => feature.values.includes(value.slug));
-        assert.equal(valueStatus(value.slug), supportingFeatures.length ? commitmentStatus(supportingFeatures.map((feature) => feature.delivery.state)) : undefined);
-      }
-    }
-  }
-  assert.equal(valueStatus('value:gsm/specifications/04'), undefined);
+  assert.equal(valueStatus('value:service-accountability'), undefined);
   assert.equal(valueStatus('value:does-not-exist/01'), undefined);
   assert.equal(milestoneStatus({ features: [] }, { version: '1.0', shipped: true }), 'planned');
   const milestoneFeatures = [
@@ -201,8 +189,10 @@ test('validators reject malformed, duplicate and contradictory graphs; cross-cut
   graph = fresh(); graph[0].capabilities[0].delivery.state = 'delivered';
   assert.throws(() => validatePortfolio(graph), /Contradictory/);
   assert.throws(() => evaluateRequirement({ all: [], any: [] }, {}), /Ambiguous/);
-  graph = fresh(); graph[0].products[0].features[0].values.push(graph[0].products[0].features[0].values[0]);
+  graph = fresh(); graph[0].products[0].features[0].useCases.push(graph[0].products[0].features[0].useCases[0]);
   assert.throws(() => validatePortfolio(graph), /Duplicate/);
+  graph = fresh(); graph[0].products[0].features[0].values = [];
+  assert.throws(() => validatePortfolio(graph), /Independent usage references/);
   graph = fresh(); graph[0].products[0].features[0].useCases.push('');
   assert.throws(() => validatePortfolio(graph), /Invalid useCases reference/);
   graph = fresh(); graph[0].tags = [];
@@ -374,9 +364,9 @@ test('built core routes retain all feature, capability and legacy value anchors'
       for (const feature of product.features) {
         anchor(productHtml, feature.slug);
         const item = elements(document, (node) => attribute(node, 'id') === feature.slug)[0];
-        assert.equal(text(elements(item, (node) => node.tagName === 'strong')[0]), feature.name);
+        assert.equal(text(elements(item, (node) => node.tagName === 'h3')[0]), feature.name);
         assert.equal(text(elements(item, (node) => node.tagName === 'p')[0]), feature.blurb);
-        assert.ok(text(item).includes(`Feature · milestone v${feature.milestone.version}`));
+        assert.ok(text(item).includes(`v${feature.milestone.version}`));
         assert.ok(text(item).includes(featureStatus(feature).label));
       }
       for (const value of productValues(solution.slug, product.slug)) { anchor(productHtml, valueAnchor(value)); for (const alias of valueAliases(value)) anchor(productHtml, alias); }

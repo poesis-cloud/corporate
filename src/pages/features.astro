@@ -1,26 +1,17 @@
 ---
 import CatalogLayout from '../layouts/CatalogLayout.astro';
-import CatalogDirectory, { type DirectoryEntry } from '../components/CatalogDirectory.astro';
-import { featureHref, usageFeatures, usageRelations } from '../data/usage.ts';
-import { typeIcons } from '../data/poesis-platform.ts';
+import CatalogDirectory from '../components/CatalogDirectory.astro';
+import { usageFeatures } from '../data/usage.ts';
+import { featureCard } from '../data/catalog-card.ts';
 
-const entries: DirectoryEntry[] = usageFeatures.map((entry) => ({
-  anchor: `feature-${entry.slug.replace(/\//g, '-')}`,
-  eyebrow: `${entry.solution.name} / ${entry.product.name}`,
-  icon: typeIcons.feature,
-  title: entry.feature.name,
-  body: entry.feature.blurb,
-  status: entry.feature.delivery.state,
-  meta: [{ label: 'Product scope', href: featureHref(entry) }, { label: `${entry.feature.milestone.shipped ? 'Released' : 'Milestone'} ${entry.feature.milestone.version}` }],
-  relations: usageRelations(entry.feature),
-}));
+const cards = usageFeatures.map(featureCard);
 ---
 <CatalogLayout
   title="Poesis features"
   description="Every Poesis product feature with its delivery status, milestone and the use cases it declares it serves."
   heading="Features"
-  lead="The product scope itself. Each feature states whether it is implemented, in progress or planned, and which use cases it declares it serves."
-  count={`${entries.length} features`}
+  lead="The product scope itself. Each feature states whether it is implemented, partial or planned, and which use cases it declares it serves."
+  count={`${cards.length} features`}
 >
-  <CatalogDirectory id="features" eyebrow="Features" title="Product scope" entries={entries} variant="platform" />
+  <CatalogDirectory id="features" eyebrow="Features" title="Product scope" cards={cards} variant="platform" />
 </CatalogLayout>

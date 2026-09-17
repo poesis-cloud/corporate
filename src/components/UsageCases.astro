@@ -1,10 +1,14 @@
 ---
-import DeliveryStatus from './DeliveryStatus.astro';
+import CatalogCard from './CatalogCard.astro';
 import Icon from './Icon.astro';
-import { plannedClass } from '../data/poesis-platform.ts';
-import { painsForUseCase, poesisUsage, usageIcons, useCaseStatus, type UseCase } from '../data/usage.ts';
+import { painsForUseCase, type UseCase } from '../data/usage.ts';
+import { useCaseCard } from '../data/catalog-card.ts';
 interface Props { cases: UseCase[]; title?: string; browse?: boolean }
 const { cases, title = 'Use cases', browse = true } = Astro.props;
+const cards = cases.map((useCase) => {
+  const card = useCaseCard(useCase);
+  return { ...card, data: { ...card.data, 'data-pains': painsForUseCase(useCase.slug).map((pain) => pain.slug).join(' ') } };
+});
 ---
 <section class="section usage-section" aria-label={title}>
   <div class="container">
@@ -13,14 +17,7 @@ const { cases, title = 'Use cases', browse = true } = Astro.props;
       {browse && <a href="/usage">All use cases <Icon name="arrow-right" /></a>}
     </div>
     <ul class="think-consequence-list catalog-grid usage-case-list">
-      {cases.map((useCase) => (
-        <li class={plannedClass(useCaseStatus(useCase))} data-usage-case={useCase.slug} data-actors={useCase.actorTypes.join(' ')} data-pains={painsForUseCase(useCase.slug).map((pain) => pain.slug).join(' ')}>
-          <span class="think-consequence__head"><span class="think-consequence__icon"><Icon name={usageIcons.useCase} size={16} /></span><span class="think-consequence__step">Use case</span>{useCaseStatus(useCase) && <DeliveryStatus state={useCaseStatus(useCase)!} />}</span>
-          <h3><a href={`/usage/${useCase.slug}`}>{useCase.name}</a></h3>
-          <p>{useCase.goal}</p>
-          <p class="proof-line"><span>Pursued by</span>{useCase.actorTypes.map((slug, index) => <>{index > 0 && ' · '}<a href={`/usage?actor=${slug}#use-cases`}>{poesisUsage.actorTypes.find((actor) => actor.slug === slug)!.name}</a></>)}</p>
-        </li>
-      ))}
+      {cards.map((card) => <CatalogCard card={card} />)}
     </ul>
   </div>
 </section>

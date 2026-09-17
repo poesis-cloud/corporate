@@ -1,7 +1,6 @@
 ---
 /**
- * The usage relatives (pain points, use cases, values) a platform item declares.
- * Rendered above the platform relations so a card reads outward before inward.
+ * Shared relationship links, including source-scoped catalog navigation.
  */
 import DeliveryStatus from './DeliveryStatus.astro';
 import { plannedClass } from '../data/poesis-platform.ts';
@@ -14,14 +13,19 @@ interface Props {
 const { groups } = Astro.props;
 ---
 
-{groups.map((group) => (
-  <p class="proof-line">
-    <span>{group.label}</span>
-    {group.links.map((link, index) => (
+{groups.length > 0 && (
+  <p class="proof-line proof-line--merged">
+    {groups.map((group, groupIndex) => (
       <>
-        {index > 0 && ' · '}
-        <a class={plannedClass(link.state)} href={link.href}>{link.label} <DeliveryStatus state={link.state} compact /></a>
+        {groupIndex > 0 && ' · '}
+        {!(group.links.length === 1 && group.links[0].label === group.label) && <span>{group.label}</span>}
+        {group.links.map((link, index) => (
+          <>
+            {index > 0 && ' · '}
+            <a class={plannedClass(link.state)} href={link.href}>{link.label} <DeliveryStatus state={link.state} compact /></a>
+          </>
+        ))}
       </>
     ))}
   </p>
-))}
+)}
