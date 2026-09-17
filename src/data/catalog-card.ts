@@ -17,7 +17,7 @@
 import { commitmentStatus, solutionHref, solutionStatus, productStatus, capabilityStatus, affordanceStatus, type DeliveryState, type Product, type Solution } from './poesis-platform.ts';
 import { catalogRelations, platformRelations } from './catalog.ts';
 import {
-  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, useCasesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
+  affordanceHref, capabilityHref, featureHref, painsForUseCase, useCaseStatus, useCases, usageCapabilities, usageFeatures, useCasesForItem, useCasesForPain, useCasesForProduct, useCasesForSolution, useCasesForValue, valueAnchor, valueAliases, valueHref, valueStatus,
   type RelationGroup, type UsageAffordance, type UsageCapability, type UsageFeature, type UseCase, type Value,
 } from './usage.ts';
 import { qualityAnchor, qualityCategoryNames, qualityHref, type Quality } from './qualities.ts';
@@ -67,13 +67,47 @@ function aggregateUseCaseStatus(entries: UseCase[]): DeliveryState {
   return commitmentStatus(entries.map((entry) => useCaseStatus(entry) ?? 'planned'));
 }
 
-function thematicTags(tags: string[], fallback: string[] = ['IT']): string[] {
-  const themes = [...new Set(tags.filter(Boolean))];
-  return (themes.length ? themes : fallback).slice(0, 4);
+/**
+ * Themes come from the pain vocabulary an item is about. They are ranked by how
+ * often a theme recurs across the item's reach, so a broad item keeps the few
+ * concerns that actually characterise it rather than an arbitrary first four.
+ * An item with no theme shows none: a filler tag every item shares says nothing.
+ */
+function rankThemes(tags: string[]): string[] {
+  const counts = new Map<string, number>();
+  for (const tag of tags) if (tag) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  return [...counts].sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0])).slice(0, 4).map(([tag]) => tag);
 }
 
-function useCaseThemes(entries: UseCase[]): string[] {
-  return thematicTags(entries.flatMap((entry) => painsForUseCase(entry.slug).flatMap((pain) => pain.tags)));
+function useCaseTags(entries: UseCase[]): string[] {
+  return entries.flatMap((entry) => painsForUseCase(entry.slug).flatMap((pain) => pain.tags));
+}
+
+function featureTags(entry: UsageFeature): string[] {
+  return useCaseTags(useCasesForItem(entry.feature));
+}
+
+// Capabilities and affordances are seldom cited by a use case directly, so they
+// inherit the themes of the level they are realized by.
+function capabilityTags(entry: UsageCapability): string[] {
+  return [
+    ...useCaseTags(useCasesForItem(entry.capability)),
+    // Capabilities cite features as `product/feature`; usage slugs are solution-scoped.
+    ...entry.capability.relations.features.flatMap((reference) => {
+      const feature = usageFeatures.find((candidate) => candidate.slug === `${entry.solution.slug}/${reference}`);
+      return feature ? featureTags(feature) : [];
+    }),
+  ];
+}
+
+function affordanceTags(entry: UsageAffordance): string[] {
+  return [
+    ...useCaseTags(useCasesForItem(entry.affordance)),
+    ...entry.affordance.relations.capabilities.flatMap((reference) => {
+      const capability = usageCapabilities.find((candidate) => candidate.slug === reference);
+      return capability ? capabilityTags(capability) : [];
+    }),
+  ];
 }
 
 export function actorCard(actor: ActorType): CatalogCard {
@@ -85,7 +119,7 @@ export function actorCard(actor: ActorType): CatalogCard {
     hook: actor.hook,
     body: actor.body,
     status: aggregateUseCaseStatus(useCases.filter((useCase) => useCase.actorTypes.includes(actor.slug))),
-    tags: thematicTags(actor.tags),
+    tags: rankThemes(actor.tags),
     relations: catalogRelations(`actor:${actor.slug}`),
   };
 }
@@ -98,7 +132,7 @@ export function painCard(pain: UsagePain): CatalogCard {
     heading: pain.pain,
     body: pain.cost,
     status: aggregateUseCaseStatus(useCasesForPain(pain.slug)),
-    tags: thematicTags(pain.tags),
+    tags: rankThemes(pain.tags),
     relations: catalogRelations(`pain:${pain.slug}`),
     data: { 'data-usage-pain': pain.slug },
   };
@@ -113,7 +147,7 @@ export function useCaseCard(useCase: UseCase): CatalogCard {
     heading: useCase.name,
     body: useCase.goal,
     status: useCaseStatus(useCase) ?? 'planned',
-    tags: useCaseThemes([useCase]),
+    tags: rankThemes(useCaseTags([useCase])),
     relations: catalogRelations(`usage:${useCase.slug}`),
     data: { 'data-usage-case': useCase.slug, 'data-actors': useCase.actorTypes.join(' ') },
   };
@@ -130,7 +164,7 @@ export function valueCard(value: Value): CatalogCard {
     body: value.body,
     bodyHtml: true,
     status: valueStatus(value.slug) ?? 'planned',
-    tags: useCaseThemes(useCasesForValue(value.slug)),
+    tags: rankThemes(useCaseTags(useCasesForValue(value.slug))),
     relations: catalogRelations(`value:${value.slug}`),
     data: { 'data-usage-value': value.slug },
   };
@@ -146,7 +180,7 @@ export function affordanceCard(entry: UsageAffordance): CatalogCard {
     hook: entry.affordance.title,
     body: entry.affordance.blurb,
     status: affordanceStatus(entry.affordance),
-    tags: useCaseThemes(useCasesForItem(entry.affordance)),
+    tags: rankThemes(affordanceTags(entry)),
     relations: platformRelations(entry.affordance),
   };
 }
@@ -160,7 +194,7 @@ export function capabilityCard(entry: UsageCapability): CatalogCard {
     heading: entry.capability.name,
     body: entry.capability.blurb,
     status: capabilityStatus(entry.solution, entry.capability),
-    tags: useCaseThemes(useCasesForItem(entry.capability)),
+    tags: rankThemes(capabilityTags(entry)),
     relations: platformRelations(entry.capability),
   };
 }
@@ -175,7 +209,7 @@ export function featureCard(entry: UsageFeature): CatalogCard {
     heading: entry.feature.name,
     body: entry.feature.blurb,
     status: delivery.state,
-    tags: useCaseThemes(useCasesForItem(entry.feature)),
+    tags: rankThemes(featureTags(entry)),
     relations: platformRelations(entry.feature),
   };
 }
@@ -190,7 +224,7 @@ export function solutionCard(solution: Solution): CatalogCard {
     hook: solution.tagline,
     body: solution.description,
     status: solutionStatus(solution),
-    tags: useCaseThemes(useCasesForSolution(solution.slug)),
+    tags: rankThemes(useCaseTags(useCasesForSolution(solution.slug))),
     relations: catalogRelations(`solution:${solution.slug}`),
   };
 }
@@ -206,7 +240,7 @@ export function productCard(entry: { solution: Solution; product: Product }): Ca
     hook: product.tagline,
     body: product.description,
     status: productStatus(product),
-    tags: useCaseThemes(useCasesForProduct(solution.slug, product.slug)),
+    tags: rankThemes(useCaseTags(useCasesForProduct(solution.slug, product.slug))),
     relations: catalogRelations(`product:${solution.slug}/${product.slug}`),
   };
 }
@@ -223,7 +257,7 @@ export function qualityCard(quality: Quality): CatalogCard {
     hook: quality.claim,
     body: quality.body,
     status: quality.state ?? 'delivered',
-    tags: thematicTags(qualityCategoryNames(quality)),
+    tags: rankThemes(qualityCategoryNames(quality)),
   };
 }
 
@@ -237,6 +271,6 @@ export function serviceCard(service: Service): CatalogCard {
     hook: service.title,
     body: service.summary,
     status: service.availability === 'Planned' ? 'planned' : 'delivered',
-    tags: thematicTags([service.category]),
+    tags: rankThemes([service.category]),
   };
 }

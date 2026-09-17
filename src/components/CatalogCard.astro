@@ -31,8 +31,10 @@ const block = variant === 'platform' ? 'think-capability' : 'think-consequence';
   <Heading>{card.href ? <a href={card.href}>{card.heading}</a> : card.heading}</Heading>
   {card.hook && <p class="catalog-hook">{card.hook}</p>}
   {card.bodyHtml ? <p set:html={card.body} /> : <p>{card.body}</p>}
-  <ul class="catalog-tags" aria-label={`${card.heading} themes`}>
-    {card.tags.map((tag) => <li>{tag}</li>)}
-  </ul>
+  {card.tags.length ? (
+    <ul class="catalog-tags" aria-label={`${card.heading} themes`}>
+      {card.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  ) : null}
   {card.relations?.length ? <ItemRelations groups={card.relations} /> : null}
 </li>

@@ -631,6 +631,7 @@ test('built catalog cards keep only type and status in their heads and expose th
     assert.equal(text(breadcrumb).replace(/\s+/g, ' ').trim(), `Poesis / Catalog / ${heading}`, `${route}: current type breadcrumb`);
     const cards = elements(document, (node) => attr(node, 'data-catalog-slug'));
     assert.ok(cards.length, `${route}: cards`);
+    const routeTags = [];
     for (const card of cards) {
       const head = elements(card, (node) => attr(node, 'class')?.endsWith('__head'))[0];
       const step = elements(head, (node) => attr(node, 'class')?.endsWith('__step'))[0];
@@ -642,9 +643,15 @@ test('built catalog cards keep only type and status in their heads and expose th
       assert.ok(tagLabels.length, `${route}: nonempty metadata tags`);
       assert.ok(tagLabels.every((label) => !/^\d+(?:\/\d+)?\s+(?:actor types?|pains?|values?|constituent use cases?|features?|capabilities|products|qualities|with platform support)/i.test(label)), `${route}: no relationship counts in tags`);
       assert.ok(tagLabels.every((label) => !/^(?:Current v|Cross-solution|Feature-level support|Capability-level support|Affordance-level support|Support unregistered|By agreement|Planned$|implementation$|specification$|content$)/i.test(label)), `${route}: tags are thematic`);
+      // Every catalog item is IT, so the domain name is a filler rather than a theme.
+      assert.ok(tagLabels.every((label) => !/^(?:IT|Poesis|General|Other)$/i.test(label)), `${route}: tags discriminate beyond the domain`);
+      routeTags.push(tagLabels);
       const directTags = card.childNodes.indexOf(tags);
       const footer = card.childNodes.find((node) => attr(node, 'class')?.split(' ').includes('relation-previews'));
       if (footer) assert.ok(directTags < card.childNodes.indexOf(footer), `${route}: tags precede relation footer`);
+    }
+    if (cards.length > 3) {
+      assert.ok(new Set(routeTags.flat()).size > 1, `${route}: a whole view cannot share one theme`);
     }
   }
 });
