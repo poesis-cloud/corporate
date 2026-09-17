@@ -2,10 +2,9 @@
 /** The catalog index: three families with explicit relationships between types. */
 import CatalogLayout from '../layouts/CatalogLayout.astro';
 import Icon from '../components/Icon.astro';
+import ArchMap from '../components/ArchMap.astro';
+import UsageMap from '../components/UsageMap.astro';
 import { cardTypeIcons, cardTypeLabels, type CatalogItemType } from '../data/catalog-card.ts';
-import { platformSolutions } from '../data/poesis-platform.ts';
-import { poesisUsage, useCases, usageValues, usageAffordances, usageCapabilities, usageFeatures } from '../data/usage.ts';
-import { qualities } from '../data/qualities.ts';
 import { services } from '../data/services.ts';
 
 interface CatalogEntry {
@@ -17,122 +16,60 @@ interface CatalogEntry {
   body: string;
 }
 
-const productCount = platformSolutions.reduce((total, solution) => total + solution.products.length, 0);
-
-const groups: { id: string; eyebrow: string; title: string; lead: string; entries: CatalogEntry[] }[] = [
-  {
-    id: 'platform',
-    eyebrow: 'Platform catalog',
-    title: 'Platform',
-    lead: 'Two connected structures describe delivery: solutions contain products and their features; affordances are supported by capabilities realized through those features. Qualities characterize the platform, a solution or a product.',
-    entries: [
-      {
-        type: 'solution', href: '/catalog/solutions', label: 'Solutions', count: platformSolutions.length,
-        claim: 'Organize capabilities and products',
-        body: 'Each solution owns a coherent problem domain, commits to capabilities and groups the products that realize them.',
-      },
-      {
-        type: 'product', href: '/catalog/products', label: 'Products', count: productCount,
-        claim: 'Own the features that ship',
-        body: 'A product belongs to one solution, records its version and owns the features from which its delivery status is derived.',
-      },
-      {
-        type: 'affordance', href: '/catalog/affordances', label: 'Affordances', count: usageAffordances.length,
-        claim: 'State what the platform makes possible',
-        body: 'An affordance is a platform-level possibility supported by capabilities. Its status is derived, never independently declared.',
-      },
-      {
-        type: 'capability', href: '/catalog/capabilities', label: 'Capabilities', count: usageCapabilities.length,
-        claim: 'State what a solution can do',
-        body: 'A capability belongs to a solution and is realized by product features. Its status follows those features.',
-      },
-      {
-        type: 'feature', href: '/catalog/features', label: 'Features', count: usageFeatures.length,
-        claim: 'Record the delivered or planned unit',
-        body: 'A feature belongs to a product, serves use cases and establishes the delivery evidence inherited by capabilities and affordances.',
-      },
-      {
-        type: 'quality', href: '/catalog/qualities', label: 'Qualities', count: qualities.length,
-        claim: 'Characterize how a subject behaves',
-        body: 'Each atomic quality is borne by the platform, one solution or one product. Features, capabilities and affordances do not bear qualities.',
-      },
-    ],
-  },
-  {
-    id: 'usage',
-    eyebrow: 'Usage catalog',
-    title: 'Usage',
-    lead: 'Usage starts with actors and the pains they experience, expresses the work as use cases, and records the values sought from that work. Platform features connect delivery back to those use cases.',
-    entries: [
-      {
-        type: 'actor', href: '/catalog/actors', label: 'Actor types', count: poesisUsage.actorTypes.length,
-        claim: 'Identify who acts or is affected',
-        body: 'Actor types identify the human and system roles that experience pains, pursue use cases and seek value.',
-      },
-      {
-        type: 'pain', href: '/catalog/pains', label: 'Pain points', count: poesisUsage.pains.length,
-        claim: 'Describe the problem independently',
-        body: 'A pain records what obstructs an actor without embedding a Poesis remedy, keeping need separate from proposed coverage.',
-      },
-      {
-        type: 'usage', href: '/catalog/usage', label: 'Use cases', count: useCases.length,
-        claim: 'Express the work and intended outcome',
-        body: 'Each use case names its actors and addressed pains. Features declare which use cases they serve, making coverage traceable.',
-      },
-      {
-        type: 'value', href: '/catalog/values', label: 'Values', count: usageValues.length,
-        claim: 'Record the benefit being sought',
-        body: 'A value composes explicit use cases into a desired benefit while remaining separate from the delivery status of platform coverage.',
-      },
-    ],
-  },
-  {
-    id: 'services',
-    eyebrow: 'Services catalog',
-    title: 'Services',
-    lead: 'Services describe how Poesis expertise and platform operation are made available. Their availability is stated independently from platform delivery status.',
-    entries: [
-      {
-        type: 'service', href: '/catalog/services', label: 'Services', count: services.length,
-        claim: 'Describe an engagement or delivery route',
-        body: 'Consulting, managed cloud, sovereign deployment and capability building each define their proposition, outcomes, stages and availability.',
-      },
-    ],
-  },
-];
-
-const total = groups.reduce((sum, group) => sum + group.entries.length, 0);
+const serviceEntry: CatalogEntry = {
+  type: 'service', href: '/catalog/services', label: 'Services', count: services.length,
+  claim: 'Describe an engagement or delivery route',
+  body: 'Consulting, managed cloud, sovereign deployment and capability building each define their proposition, outcomes, stages and availability.',
+};
 ---
 <CatalogLayout
   title="Poesis catalog"
   description="The Poesis catalog: platform structure and coverage, usage needs and outcomes, and the services through which Poesis is delivered."
   heading="Catalog"
   lead="Three connected catalogs separate what Poesis is, what it is used for, and how it is delivered. Open an item type to inspect its complete inventory and relationships."
-  count={`${total} views`}
+  count="3 connected catalogs"
 >
-  {groups.map((group) => (
-    <section id={group.id} class="section">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">{group.eyebrow}</p>
-          <h2>{group.title}</h2>
-          <p class="lead">{group.lead}</p>
-        </div>
-        <ul class="think-consequence-list catalog-grid">
-          {group.entries.map((entry) => (
-            <li>
-              <span class="think-consequence__head">
-                <span class="think-consequence__icon"><Icon name={cardTypeIcons[entry.type]} size={16} /></span>
-                <span class="think-consequence__step">{cardTypeLabels[entry.type]}</span>
-              </span>
-              <h3><a href={entry.href}>{entry.label}</a></h3>
-              <strong>{entry.claim}</strong>
-              <p>{entry.body}</p>
-              <p class="catalog-meta">{entry.count} {entry.count === 1 ? 'entry' : 'entries'}</p>
-            </li>
-          ))}
-        </ul>
+  <section id="platform" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Platform catalog</p>
+        <h2>Platform</h2>
+        <p class="lead">Solutions contain products and their features; capabilities connect those implementation units to the affordances the platform makes possible. Expand the shared map to inspect the complete structure.</p>
       </div>
-    </section>
-  ))}
+      <ArchMap />
+    </div>
+  </section>
+
+  <section id="usage" class="section section--soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Usage catalog</p>
+        <h2>Usage</h2>
+        <p class="lead">Actors experience pains and pursue use cases; use cases address those pains and realize values. Expand each peer ledger to inspect the complete direct inventory without confusing relationship with ownership.</p>
+      </div>
+      <UsageMap />
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Services catalog</p>
+        <h2>Services</h2>
+        <p class="lead">Services describe how Poesis expertise and platform operation are made available. Their availability is stated independently from platform delivery status.</p>
+      </div>
+      <ul class="think-consequence-list catalog-grid">
+        <li>
+          <span class="think-consequence__head">
+            <span class="think-consequence__icon"><Icon name={cardTypeIcons[serviceEntry.type]} size={16} /></span>
+            <span class="think-consequence__step">{cardTypeLabels[serviceEntry.type]}</span>
+          </span>
+          <h3><a href={serviceEntry.href}>{serviceEntry.label}</a></h3>
+          <strong>{serviceEntry.claim}</strong>
+          <p>{serviceEntry.body}</p>
+          <p class="catalog-meta">{serviceEntry.count} {serviceEntry.count === 1 ? 'entry' : 'entries'}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 </CatalogLayout>

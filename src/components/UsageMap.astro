@@ -1,0 +1,138 @@
+---
+/**
+ * UsageMap — the usage catalog rendered as a relationship flow.
+ *
+ * Actors, pains, use cases and values are peer ledgers rather than a containment
+ * tree. Each lane groups its own records and links their canonical destinations.
+ */
+import DeliveryStatus from './DeliveryStatus.astro';
+import Icon from './Icon.astro';
+import { deliveryLabels, type DeliveryState } from '../data/poesis-platform.ts';
+import {
+  poesisUsage,
+  useCases,
+  usageValues,
+  useCasesForPain,
+  useCasesForValue,
+  useCaseStatus,
+  valueHref,
+} from '../data/usage.ts';
+
+const actorGroups = [
+  { label: 'People', items: poesisUsage.actorTypes.filter((actor) => actor.kind === 'human') },
+  { label: 'Systems', items: poesisUsage.actorTypes.filter((actor) => actor.kind === 'system') },
+].filter((group) => group.items.length);
+
+const caseGroups: Array<{ label: string; state?: DeliveryState; items: typeof useCases }> = [
+  { label: deliveryLabels.delivered, state: 'delivered', items: useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered') },
+  { label: deliveryLabels.partial, state: 'partial', items: useCases.filter((useCase) => useCaseStatus(useCase) === 'partial') },
+  { label: deliveryLabels.planned, state: 'planned', items: useCases.filter((useCase) => useCaseStatus(useCase) === 'planned') },
+  { label: 'Unregistered', items: useCases.filter((useCase) => useCaseStatus(useCase) === undefined) },
+].filter((group) => group.items.length);
+
+const valueParts = (slug: string) => slug.replace(/^value:/, '').split('/');
+const valueGroups = [
+  { label: 'Platform', items: usageValues.filter((value) => valueParts(value.slug)[0] === 'platform') },
+  { label: 'Solutions', items: usageValues.filter((value) => valueParts(value.slug).length === 2 && valueParts(value.slug)[0] !== 'platform') },
+  { label: 'Products', items: usageValues.filter((value) => valueParts(value.slug).length === 3) },
+  { label: 'Independent', items: usageValues.filter((value) => valueParts(value.slug).length === 1) },
+].filter((group) => group.items.length);
+
+const countLabel = (count: number, singular: string) => `${count} ${count === 1 ? singular : `${singular}s`}`;
+const supportLabel = (useCase: (typeof useCases)[number]) => {
+  if (useCase.features?.length) return countLabel(useCase.features.length, 'feature');
+  if (useCase.capabilities?.length) return countLabel(useCase.capabilities.length, 'capability');
+  if (useCase.affordances?.length) return countLabel(useCase.affordances.length, 'affordance');
+  return 'No platform support registered';
+};
+---
+<div class="usage-map" role="region" aria-label="Poesis usage map — actors experience pains, pains are addressed through use cases, and use cases realize values">
+  <div class="usage-map__legend" aria-hidden="true">
+    <span>Poesis Usage Map · direct relationships</span>
+    <span>Expand a group to inspect its complete inventory</span>
+  </div>
+
+  <div class="usage-map__flow">
+    <section class="usage-map__lane usage-map__lane--actors" aria-labelledby="usage-map-actors">
+      <header class="usage-map__head">
+        <span class="usage-map__icon"><Icon name="users" size={16} /></span>
+        <div><span>Who acts or is affected</span><h3 id="usage-map-actors"><a href="/catalog/actors">Actor types</a></h3></div>
+        <strong>{poesisUsage.actorTypes.length}</strong>
+      </header>
+      {actorGroups.map((group) => (
+        <details class="usage-map__group">
+          <summary>{group.label}<span>{group.items.length}</span></summary>
+          <nav class="usage-map__items" aria-label={`${group.label} actor types`}>
+            {group.items.map((actor) => {
+              const caseCount = useCases.filter((useCase) => useCase.actorTypes.includes(actor.slug)).length;
+              return <a class="usage-map__item" href={`/catalog/actors#${actor.slug}`} data-usage-map-type="actor" data-usage-map-slug={actor.slug}><span>{actor.name}</span><small>{countLabel(caseCount, 'use case')}</small></a>;
+            })}
+          </nav>
+        </details>
+      ))}
+    </section>
+
+    <div class="usage-map__link"><span>experience</span></div>
+
+    <section class="usage-map__lane usage-map__lane--pains" aria-labelledby="usage-map-pains">
+      <header class="usage-map__head">
+        <span class="usage-map__icon"><Icon name="alert" size={16} /></span>
+        <div><span>What obstructs them</span><h3 id="usage-map-pains"><a href="/catalog/pains">Pain points</a></h3></div>
+        <strong>{poesisUsage.pains.length}</strong>
+      </header>
+      <details class="usage-map__group">
+        <summary>Pain points<span>{poesisUsage.pains.length}</span></summary>
+        <nav class="usage-map__items" aria-label="Pain points">
+          {poesisUsage.pains.map((pain) => {
+            const caseCount = useCasesForPain(pain.slug).length;
+            return <a class="usage-map__item" href={`/catalog/pains#${pain.slug}`} data-usage-map-type="pain" data-usage-map-slug={pain.slug}><span>{pain.pain}</span><small>{countLabel(caseCount, 'use case')}</small></a>;
+          })}
+        </nav>
+      </details>
+    </section>
+
+    <div class="usage-map__link"><span>addressed through</span></div>
+
+    <section class="usage-map__lane usage-map__lane--cases" aria-labelledby="usage-map-cases">
+      <header class="usage-map__head">
+        <span class="usage-map__icon"><Icon name="target" size={16} /></span>
+        <div><span>What they seek to accomplish</span><h3 id="usage-map-cases"><a href="/catalog/usage">Use cases</a></h3></div>
+        <strong>{useCases.length}</strong>
+      </header>
+      {caseGroups.map((group) => (
+        <details class="usage-map__group">
+          <summary>{group.label}<span>{group.items.length}</span></summary>
+          <nav class="usage-map__items" aria-label={`${group.label} use cases`}>
+            {group.items.map((useCase) => (
+              <a class="usage-map__item" href={`/usage/${useCase.slug}`} data-usage-map-type="usage" data-usage-map-slug={useCase.slug}>
+                <span>{useCase.name}</span>
+                <small>{group.state && <DeliveryStatus state={group.state} />} {supportLabel(useCase)}</small>
+              </a>
+            ))}
+          </nav>
+        </details>
+      ))}
+    </section>
+
+    <div class="usage-map__link"><span>realize</span></div>
+
+    <section class="usage-map__lane usage-map__lane--values" aria-labelledby="usage-map-values">
+      <header class="usage-map__head">
+        <span class="usage-map__icon"><Icon name="lightbulb" size={16} /></span>
+        <div><span>Why the work matters</span><h3 id="usage-map-values"><a href="/catalog/values">Values</a></h3></div>
+        <strong>{usageValues.length}</strong>
+      </header>
+      {valueGroups.map((group) => (
+        <details class="usage-map__group">
+          <summary>{group.label}<span>{group.items.length}</span></summary>
+          <nav class="usage-map__items" aria-label={`${group.label} values`}>
+            {group.items.map((value) => {
+              const caseCount = useCasesForValue(value.slug).length;
+              return <a class="usage-map__item" href={valueHref(value)} data-usage-map-type="value" data-usage-map-slug={value.slug}><span>{value.title}</span><small>{countLabel(caseCount, 'use case')}</small></a>;
+            })}
+          </nav>
+        </details>
+      ))}
+    </section>
+  </div>
+</div>

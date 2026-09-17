@@ -617,6 +617,52 @@ test('built catalogs publish matching filter payloads and compact platform foote
   }
 });
 
+test('built catalog index presents shared platform architecture and complete direct usage map', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  const catalog = built('/catalog');
+  const homepage = built('/');
+  const catalogPlatform = elements(catalog, (node) => attr(node, 'class')?.split(' ').includes('arch'))[0];
+  const homepagePlatform = elements(homepage, (node) => attr(node, 'class')?.split(' ').includes('arch'))[0];
+  assert.ok(catalogPlatform);
+  assert.ok(homepagePlatform);
+  assert.equal(elements(catalogPlatform, (node) => attr(node, 'class')?.split(' ').includes('arch-scope')).length, elements(homepagePlatform, (node) => attr(node, 'class')?.split(' ').includes('arch-scope')).length);
+  assert.deepEqual(elements(catalogPlatform, (node) => node.tagName === 'a').map((node) => attr(node, 'href')), elements(homepagePlatform, (node) => node.tagName === 'a').map((node) => attr(node, 'href')));
+
+  const usageMap = elements(catalog, (node) => attr(node, 'class')?.split(' ').includes('usage-map'))[0];
+  assert.ok(usageMap);
+  assert.equal(elements(usageMap, (node) => attr(node, 'class')?.split(' ').includes('usage-map__lane')).length, 4);
+  assert.deepEqual(elements(usageMap, (node) => attr(node, 'class')?.split(' ').includes('usage-map__link')).map(text).map((label) => label.trim()), ['experience', 'addressed through', 'realize']);
+  assert.ok(elements(usageMap, (node) => node.tagName === 'details').every((details) => attr(details, 'open') === undefined));
+  const groupedCases = ['delivered', 'partial', 'planned', undefined].flatMap((state) => poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === state));
+  const valueParts = (slug) => slug.replace(/^value:/, '').split('/');
+  const groupedValues = [
+    (value) => valueParts(value.slug)[0] === 'platform',
+    (value) => valueParts(value.slug).length === 2 && valueParts(value.slug)[0] !== 'platform',
+    (value) => valueParts(value.slug).length === 3,
+    (value) => valueParts(value.slug).length === 1,
+  ].flatMap((belongs) => usageValues.filter(belongs));
+  for (const [type, records, href] of [
+    ['actor', [...poesisUsage.actorTypes.filter((actor) => actor.kind === 'human'), ...poesisUsage.actorTypes.filter((actor) => actor.kind === 'system')], (record) => `/catalog/actors#${record.slug}`],
+    ['pain', poesisUsage.pains, (record) => `/catalog/pains#${record.slug}`],
+    ['usage', groupedCases, (record) => `/usage/${record.slug}`],
+    ['value', groupedValues, (record) => valueHref(record)],
+  ]) {
+    const links = elements(usageMap, (node) => attr(node, 'data-usage-map-type') === type);
+    assert.equal(links.length, records.length, `${type}: no omitted or duplicate records`);
+    assert.deepEqual(links.map((node) => attr(node, 'data-usage-map-slug')).toSorted(), records.map((record) => record.slug).toSorted(), `${type}: complete inventory membership`);
+    assert.deepEqual(links.map((node) => attr(node, 'data-usage-map-slug')), records.map((record) => record.slug), `${type}: complete stable order`);
+    assert.deepEqual(links.map((node) => attr(node, 'href')), records.map(href), `${type}: canonical destinations`);
+  }
+  const unsupportedCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === undefined);
+  const unregistered = elements(usageMap, (node) => node.tagName === 'details' && text(elements(node, (candidate) => candidate.tagName === 'summary')[0]).includes('Unregistered'))[0];
+  if (unsupportedCases.length) {
+    assert.ok(unregistered);
+    assert.deepEqual(elements(unregistered, (node) => attr(node, 'data-usage-map-type') === 'usage').map((node) => attr(node, 'data-usage-map-slug')), unsupportedCases.map((useCase) => useCase.slug));
+  } else {
+    assert.equal(unregistered, undefined);
+  }
+  for (const href of ['/catalog/actors', '/catalog/pains', '/catalog/usage', '/catalog/values']) assert.ok(elements(usageMap, (node) => attr(node, 'href') === href).length, href);
+});
+
 test('built pilot keeps needs first, canonical links, safe projection and useful fallback', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const document = built('/pilot');
   const catalog = projectPilotCatalog();
