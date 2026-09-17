@@ -7,7 +7,8 @@
  * feature → /solutions/[solution]/products/[product]#[feature].
  * A solution's capabilities link to their anchor on the solution page.
  */
-import { platformSolutions, productTimeline, featureStatus, capabilityStatus, plannedClass, productStatus, solutionHref, typeIcons } from '../data/poesis-platform.ts';
+import { platformSolutions, productTimeline, featureStatus, capabilityStatus, plannedClass, solutionHref, typeIcons, affordances, affordanceStatus } from '../data/poesis-platform.ts';
+import { solutionQualities, productQualities, platformQualities, qualityHref } from '../data/qualities.ts';
 import DeliveryStatus from './DeliveryStatus.astro';
 import ProductRoadmapMini from './ProductRoadmapMini.astro';
 import Icon from './Icon.astro';
@@ -16,14 +17,42 @@ const stack = platformSolutions.filter((s) => s.slug !== 'saf');
 const framework = platformSolutions.find((s) => s.slug === 'saf')!;
 const frameworkHref = solutionHref(framework);
 ---
-<div class="arch" aria-label="Poesis portfolio — solutions, products, and features architecture map">
+<div class="arch" aria-label="Poesis Platform — affordances, qualities, solutions, products, capabilities, and features architecture map">
   <div class="arch-legend" aria-hidden="true">
-    <span>Poesis Platform Map · solutions ⊃ products ⊃ features</span>
+    <span>Poesis Platform Map · platform ⊃ solutions ⊃ products ⊃ features</span>
     <span>Scoped claims · historical milestones shown separately</span>
   </div>
 
-  <div class="arch-grid">
-    <div class="arch-stack">
+  <div class="arch-platform">
+    <article class="arch-scope arch-scope--platform" aria-labelledby="arch-platform-heading">
+      <div class="arch-scope-meta">
+        <span class="arch-icon"><Icon name="layers" size={16} /></span>
+        <span class="tag tag--accent-2">Platform</span>
+      </div>
+      <h3 id="arch-platform-heading"><a href="/">Poesis Platform</a></h3>
+      <p>The cross-solution capstone: affordances realized by contributing capabilities across every solution, and the qualities the platform bears as a whole.</p>
+      <details class="arch-group">
+        <summary>Affordances</summary>
+        <nav class="arch-comps" aria-label="Platform affordances">
+          {affordances.map((a) => (
+            <a class:list={['arch-comp', plannedClass(affordanceStatus(a))]} href={`/#affordance-${a.slug}`}>{a.name} <DeliveryStatus state={affordanceStatus(a)} /></a>
+          ))}
+        </nav>
+      </details>
+      {platformQualities.length > 0 && (
+        <details class="arch-group">
+          <summary>Qualities</summary>
+          <nav class="arch-comps" aria-label="Platform qualities">
+            {platformQualities.map((q) => (
+              <a class="arch-comp" href={qualityHref(q)}>{q.name} {q.state && <DeliveryStatus state={q.state} />}</a>
+            ))}
+          </nav>
+        </details>
+      )}
+      <details class="arch-group arch-group--solutions" open>
+        <summary>Solutions</summary>
+        <div class="arch-grid">
+          <div class="arch-stack">
         {stack.map((s, i) => (
           <>            {i > 0 && <div class="arch-joint" aria-hidden="true"><span>{i === 1 ? 'planned integration' : 'specification contract'}</span></div>}
             <article class="arch-scope arch-scope--standard" aria-labelledby={`arch-solution-${s.slug}`}>
@@ -41,13 +70,23 @@ const frameworkHref = solutionHref(framework);
                   ))}
                 </nav>
               </details>
+              {solutionQualities(s.slug).length > 0 && (
+                <details class="arch-group">
+                  <summary>Qualities</summary>
+                  <nav class="arch-comps" aria-label={`${s.name} qualities`}>
+                    {solutionQualities(s.slug).map((q) => (
+                      <a class="arch-comp" href={qualityHref(q)}>{q.name} {q.state && <DeliveryStatus state={q.state} />}</a>
+                    ))}
+                  </nav>
+                </details>
+              )}
               <details class="arch-group">
                 <summary>Products</summary>
                 <div class="arch-products">
                   {s.products.map((p) => {
                     return (
-                    <section class:list={['arch-product', plannedClass(productStatus(p))]} aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
-                      <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
+                    <section class="arch-product" aria-labelledby={`arch-product-${s.slug}-${p.slug}`}>
+                      <span class="arch-version">Current v{p.currentVersion}</span>
                       <h4 id={`arch-product-${s.slug}-${p.slug}`}>
                         <a href={`${solutionHref(s)}/products/${p.slug}`}>{p.name}</a>
                       </h4>
@@ -69,6 +108,16 @@ const frameworkHref = solutionHref(framework);
                           })}
                         </nav>
                       </details>
+                      {productQualities(s.slug, p.slug).length > 0 && (
+                        <details class="arch-group">
+                          <summary>Qualities</summary>
+                          <nav class="arch-comps" aria-label={`${p.name} qualities`}>
+                            {productQualities(s.slug, p.slug).map((q) => (
+                              <a class="arch-comp" href={qualityHref(q)}>{q.name} {q.state && <DeliveryStatus state={q.state} />}</a>
+                            ))}
+                          </nav>
+                        </details>
+                      )}
                     </section>
                     );
                   })}
@@ -77,11 +126,11 @@ const frameworkHref = solutionHref(framework);
             </article>
           </>
         ))}
-    </div>
+          </div>
 
-    <div class="arch-bridge" aria-hidden="true"><span>planned definition / artifact integration</span></div>
+          <div class="arch-bridge" aria-hidden="true"><span>planned definition / artifact integration</span></div>
 
-    <aside class="arch-side">
+          <aside class="arch-side">
           <article class="arch-scope arch-scope--framework" aria-labelledby={`arch-solution-${framework.slug}`}>
             <div class="arch-scope-meta">
               <span class="arch-icon"><Icon name={typeIcons.solution} size={16} /></span>
@@ -97,13 +146,23 @@ const frameworkHref = solutionHref(framework);
                 ))}
               </nav>
             </details>
+            {solutionQualities(framework.slug).length > 0 && (
+              <details class="arch-group">
+                <summary>Qualities</summary>
+                <nav class="arch-comps" aria-label={`${framework.name} qualities`}>
+                  {solutionQualities(framework.slug).map((q) => (
+                    <a class="arch-comp" href={qualityHref(q)}>{q.name} {q.state && <DeliveryStatus state={q.state} />}</a>
+                  ))}
+                </nav>
+              </details>
+            )}
             <details class="arch-group">
               <summary>Products</summary>
               <div class="arch-products">
                 {framework.products.map((p) => {
                   return (
-                  <section class:list={['arch-product', plannedClass(productStatus(p))]} aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
-                    <span class="arch-version"><DeliveryStatus state={productStatus(p)} /> · recorded v{p.currentVersion}</span>
+                  <section class="arch-product" aria-labelledby={`arch-product-${framework.slug}-${p.slug}`}>
+                    <span class="arch-version">Current v{p.currentVersion}</span>
                     <h4 id={`arch-product-${framework.slug}-${p.slug}`}>
                       <a href={`${frameworkHref}/products/${p.slug}`}>{p.name}</a>
                     </h4>
@@ -125,19 +184,32 @@ const frameworkHref = solutionHref(framework);
                         })}
                       </nav>
                     </details>
+                    {productQualities(framework.slug, p.slug).length > 0 && (
+                      <details class="arch-group">
+                        <summary>Qualities</summary>
+                        <nav class="arch-comps" aria-label={`${p.name} qualities`}>
+                          {productQualities(framework.slug, p.slug).map((q) => (
+                            <a class="arch-comp" href={qualityHref(q)}>{q.name} {q.state && <DeliveryStatus state={q.state} />}</a>
+                          ))}
+                        </nav>
+                      </details>
+                    )}
                   </section>
                   );
                 })}
               </div>
             </details>
           </article>
-        </aside>
+          </aside>
+        </div>
+      </details>
+    </article>
   </div>
 
   <p class="arch-note">
     <span class="arch-note__label">Version convention</span>
-    Recorded versions preserve release history, not current feature acceptance.
-    <DeliveryStatus state="delivered" /> and <DeliveryStatus state="planned" /> describe the stated scope, not hosted availability or certification.
+    Product versions shown are current, not historical milestones.
+    <DeliveryStatus state="delivered" /> and <DeliveryStatus state="planned" /> describe feature, capability and affordance scope, not hosted availability or certification.
   </p>
 </div>
 

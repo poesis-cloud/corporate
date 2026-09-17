@@ -45,6 +45,7 @@ import {
 import { profiles } from '../src/data/profiles.ts';
 import { pains, homepagePainGroups } from '../src/data/pains.ts';
 import { catalogSnapshot, catalogRelations, platformRelations, relationRules } from '../src/data/catalog.ts';
+import { cardTypeLabels } from '../src/data/catalog-card.ts';
 import { catalogTypes, catalogPath, catalogHref, filterCatalog } from '../src/data/catalog-query.ts';
 import { catalogViews, siteNavigation } from '../src/data/site-navigation.ts';
 import { projectPilotCatalog } from '../src/data/pilot-catalog.ts';
@@ -617,6 +618,34 @@ test('built catalogs publish matching filter payloads and compact platform foote
   }
 });
 
+test('built catalog cards keep only type and status in their heads and move metadata to tags', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
+  const views = [
+    ['actors', 'actor'], ['pains', 'pain'], ['usage', 'usage'], ['values', 'value'],
+    ['features', 'feature'], ['capabilities', 'capability'], ['affordances', 'affordance'],
+    ['qualities', 'quality'], ['solutions', 'solution'], ['products', 'product'], ['services', 'service'],
+  ];
+  for (const [route, type] of views) {
+    const document = built(`/catalog/${route}`);
+    const heading = text(elements(document, (node) => node.tagName === 'h1')[0]).trim();
+    const breadcrumb = elements(document, (node) => attr(node, 'class')?.split(' ').includes('eyebrow') && elements(node, (child) => attr(child, 'aria-current') === 'page').length)[0];
+    assert.equal(text(breadcrumb).replace(/\s+/g, ' ').trim(), `Poesis / Catalog / ${heading}`, `${route}: current type breadcrumb`);
+    const cards = elements(document, (node) => attr(node, 'data-catalog-slug'));
+    assert.ok(cards.length, `${route}: cards`);
+    for (const card of cards) {
+      const head = elements(card, (node) => attr(node, 'class')?.endsWith('__head'))[0];
+      const step = elements(head, (node) => attr(node, 'class')?.endsWith('__step'))[0];
+      assert.equal(text(step).trim(), cardTypeLabels[type], `${route}: head contains type only`);
+      assert.equal(elements(head, (node) => attr(node, 'class')?.split(' ').includes('delivery-status')).length, 1, `${route}: one status`);
+      const tags = elements(card, (node) => attr(node, 'class') === 'catalog-tags')[0];
+      assert.ok(tags, `${route}: metadata tags`);
+      assert.ok(elements(tags, (node) => node.tagName === 'li').length, `${route}: nonempty metadata tags`);
+      const directTags = card.childNodes.indexOf(tags);
+      const footer = card.childNodes.find((node) => attr(node, 'class')?.split(' ').includes('relation-previews'));
+      if (footer) assert.ok(directTags < card.childNodes.indexOf(footer), `${route}: tags precede relation footer`);
+    }
+  }
+});
+
 test('built catalog index presents shared platform architecture and complete direct usage map', { skip: process.env.CHECK_BUILT_USAGE !== '1' }, () => {
   const catalog = built('/catalog');
   const homepage = built('/');
@@ -624,6 +653,11 @@ test('built catalog index presents shared platform architecture and complete dir
   const homepagePlatform = elements(homepage, (node) => attr(node, 'class')?.split(' ').includes('arch'))[0];
   assert.ok(catalogPlatform);
   assert.ok(homepagePlatform);
+  const platformScope = elements(catalogPlatform, (node) => attr(node, 'class')?.split(' ').includes('arch-scope--platform'))[0];
+  const solutions = elements(platformScope, (node) => attr(node, 'class')?.split(' ').includes('arch-group--solutions'))[0];
+  assert.ok(platformScope, 'Platform is the global map scope');
+  assert.notEqual(attr(solutions, 'open'), undefined, 'Solutions are open by default');
+  assert.equal(elements(solutions, (node) => attr(node, 'class')?.split(' ').includes('arch-scope--standard') || attr(node, 'class')?.split(' ').includes('arch-scope--framework')).length, poesisPlatform.solutions.length, 'Every solution is incorporated by Platform');
   assert.equal(elements(catalogPlatform, (node) => attr(node, 'class')?.split(' ').includes('arch-scope')).length, elements(homepagePlatform, (node) => attr(node, 'class')?.split(' ').includes('arch-scope')).length);
   assert.deepEqual(elements(catalogPlatform, (node) => node.tagName === 'a').map((node) => attr(node, 'href')), elements(homepagePlatform, (node) => node.tagName === 'a').map((node) => attr(node, 'href')));
 
@@ -700,15 +734,13 @@ test('built pilot keeps needs first, canonical links, safe projection and useful
     if (target.hash) assert.ok(elements(destination, (node) => attr(node, 'id') === decodeURIComponent(target.hash.slice(1))).length, record.href);
   }
   const homepage = built('/');
-  for (const identity of ['homepage-hero-pilot', 'homepage-pilot']) {
+  for (const identity of ['homepage-hero-pilot', 'homepage-usage-pilot']) {
     const cta = elements(homepage, (node) => attr(node, 'data-demo-cta') === identity);
     assert.equal(cta.length, 1);
     assert.equal(attr(cta[0], 'href'), '/pilot');
   }
-  const section = elements(homepage, (node) => attr(node, 'id') === 'pilot')[0];
-  assert.match(text(section), /ITIP \+ SIE SaaS/);
-  assert.match(text(section), /success criteria, evidence, timing and constraints/);
-  assert.equal(elements(section, (node) => attr(node, 'data-select-kind')).length, 0);
+  assert.equal(elements(homepage, (node) => attr(node, 'id') === 'pilot').length, 0);
+  assert.equal(elements(homepage, (node) => attr(node, 'href') === '#pilot').length, 0);
   assert.ok(readFileSync(new URL('../dist/sitemap-0.xml', import.meta.url), 'utf8').includes('/pilot/</loc>'));
 });
 
@@ -723,8 +755,8 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.ok(elements(card, (node) => attr(node, 'href') === `/usage/${useCase.slug}`).length);
     const head = elements(card, (node) => attr(node, 'class')?.includes('think-consequence__head'))[0];
     const badges = elements(head, (node) => attr(node, 'data-delivery-status'));
-    assert.equal(badges.length, useCaseStatus(useCase) === undefined ? 0 : 1);
-    if (badges.length) assert.equal(attr(badges[0], 'data-delivery-status'), useCaseStatus(useCase));
+    assert.equal(badges.length, 1);
+    assert.equal(attr(badges[0], 'data-delivery-status'), useCaseStatus(useCase) ?? 'planned');
     assert.ok(sitemap.includes(`/usage/${useCase.slug}/</loc>`), `sitemap ${useCase.slug}`);
   }
   for (const entity of [...poesisUsage.actorTypes]) assert.equal(elements(built('/catalog/actors'), (node) => attr(node, 'id') === entity.slug).length, 1, entity.slug);
@@ -734,9 +766,10 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     assert.equal(item.length, 1, value.slug);
     const head = elements(item[0], (node) => attr(node, 'class')?.includes('think-consequence__head'))[0];
     const badges = elements(head, (node) => attr(node, 'data-delivery-status'));
-    assert.equal(badges.length, valueStatus(value.slug) === undefined ? 0 : 1, value.slug);
+    assert.equal(badges.length, 1, value.slug);
+    assert.equal(attr(badges[0], 'data-delivery-status'), valueStatus(value.slug) ?? 'planned');
     if (valueStatus(value.slug) === undefined) {
-      assert.match(text(item[0]), /No platform support declared/);
+      assert.match(text(item[0]), /No platform support/);
       assert.equal(elements(item[0], (node) => attr(node, 'href')?.startsWith('/solutions')).length, 0);
     }
   }
@@ -757,7 +790,7 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     for (const value of valuesForUseCase(useCase.slug)) {
       const item = elements(document, (node) => attr(node, 'data-usage-value') === value.slug)[0];
       assert.ok(item, `${useCase.slug}: ${value.slug}`);
-      assert.equal(attr(elements(item, (node) => attr(node, 'data-delivery-status'))[0], 'data-delivery-status'), valueStatus(value.slug));
+      assert.equal(attr(elements(item, (node) => attr(node, 'data-delivery-status'))[0], 'data-delivery-status'), valueStatus(value.slug) ?? 'planned');
     }
     for (const pain of painsForUseCase(useCase.slug)) assert.ok(elements(document, (node) => attr(node, 'data-usage-pain') === pain.slug).length, `${useCase.slug}: ${pain.slug}`);
     for (const link of elements(document, (node) => node.tagName === 'a')) {

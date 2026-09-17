@@ -844,6 +844,12 @@ a:hover {
   border-color: rgba(129, 140, 248, .25);
 }
 
+.tag--accent-2 {
+  background: rgba(56, 189, 248, .12);
+  color: var(--accent-2);
+  border-color: rgba(56, 189, 248, .25);
+}
+
 .tag--value {
   background: rgba(251, 191, 36, .12);
   color: #fbbf24;
@@ -1480,6 +1486,32 @@ a:hover {
   border-color: rgba(129, 140, 248, .55);
 }
 
+.arch-platform {
+  margin-bottom: 1.1rem;
+}
+
+.arch-scope--platform {
+  border-color: rgba(56, 189, 248, .35);
+}
+
+.arch-scope--platform:hover {
+  border-color: rgba(56, 189, 248, .55);
+}
+
+.arch-scope--platform>.arch-scope-meta .arch-icon {
+  border-color: rgba(56, 189, 248, .35);
+  color: var(--accent-2);
+}
+
+.arch-scope--platform>.arch-group>summary,
+.arch-scope--platform>.arch-group>summary::before {
+  color: var(--accent-2);
+}
+
+.arch-group--solutions>.arch-grid {
+  margin-top: .25rem;
+}
+
 .arch-scope-meta {
   display: flex;
   align-items: center;
@@ -1844,9 +1876,17 @@ a:hover {
   background: rgba(255, 255, 255, .025);
 }
 
-.usage-map__lane--pains { --usage-map-accent: #f8aa4a; }
-.usage-map__lane--cases { --usage-map-accent: var(--accent-3); }
-.usage-map__lane--values { --usage-map-accent: #e6c968; }
+.usage-map__lane--pains {
+  --usage-map-accent: #f8aa4a;
+}
+
+.usage-map__lane--cases {
+  --usage-map-accent: var(--accent-3);
+}
+
+.usage-map__lane--values {
+  --usage-map-accent: #e6c968;
+}
 
 .usage-map__head {
   display: grid;
@@ -1907,12 +1947,28 @@ a:hover {
   text-transform: uppercase;
 }
 
-.usage-map__group>summary::-webkit-details-marker { display: none; }
-.usage-map__group>summary::before { content: "▸"; transition: transform .15s ease; }
-.usage-map__group[open]>summary::before { transform: rotate(90deg); }
+.usage-map__group>summary::-webkit-details-marker {
+  display: none;
+}
+
+.usage-map__group>summary::before {
+  content: "▸";
+  transition: transform .15s ease;
+}
+
+.usage-map__group[open]>summary::before {
+  transform: rotate(90deg);
+}
+
 .usage-map__group>summary:hover,
-.usage-map__group>summary:focus-visible { color: var(--ink); }
-.usage-map__group>summary span { margin-left: auto; color: var(--muted); }
+.usage-map__group>summary:focus-visible {
+  color: var(--ink);
+}
+
+.usage-map__group>summary span {
+  margin-left: auto;
+  color: var(--muted);
+}
 
 .usage-map__items {
   display: flex;
@@ -1983,9 +2039,19 @@ a:hover {
 }
 
 @media (max-width: 1050px) {
-  .usage-map__flow { grid-template-columns: 1fr; }
-  .usage-map__link { min-width: 0; padding: .35rem 0; }
-  .usage-map__link span { writing-mode: horizontal-tb; }
+  .usage-map__flow {
+    grid-template-columns: 1fr;
+  }
+
+  .usage-map__link {
+    min-width: 0;
+    padding: .35rem 0;
+  }
+
+  .usage-map__link span {
+    writing-mode: horizontal-tb;
+  }
+
   .usage-map__link span::before,
   .usage-map__link span::after {
     width: 2rem;
@@ -1995,8 +2061,14 @@ a:hover {
 }
 
 @media (max-width: 520px) {
-  .usage-map { padding: .9rem; }
-  .usage-map__legend { flex-direction: column; gap: .15rem; }
+  .usage-map {
+    padding: .9rem;
+  }
+
+  .usage-map__legend {
+    flex-direction: column;
+    gap: .15rem;
+  }
 }
 
 .stack>*+* {
@@ -2852,17 +2924,32 @@ a:hover {
   row-gap: clamp(1.6rem, 3vw, 2.2rem);
 }
 
-/* The hook qualifies the identity above it; the meta states a count or a
-   milestone. Neither is the body, so neither reads like it. */
+/* The hook qualifies the identity above it. */
 .catalog-hook {
   margin: 0;
   color: var(--ink-soft);
 }
 
-.catalog-meta {
-  margin: .1rem 0 0;
-  color: var(--muted);
-  font-size: .75rem;
+.catalog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin: .35rem 0 .05rem;
+  padding: 0;
+  list-style: none;
+}
+
+.catalog-tags li,
+.think-consequence-list .catalog-tags li {
+  display: inline-flex;
+  width: auto;
+  padding: .16rem .45rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  line-height: 1.35;
 }
 
 .catalog-grid .proof-line a {
@@ -3345,20 +3432,6 @@ a:hover {
 .arch-scope--framework .arch-comp.is-planned:hover,
 .arch-scope--framework .arch-comp.is-planned:focus-visible {
   border-left-color: var(--planned);
-  color: var(--planned);
-}
-
-.arch-product.is-planned,
-.arch-scope--framework .arch-product.is-planned {
-  border-color: var(--planned-line);
-}
-
-.arch-product.is-planned:hover,
-.arch-scope--framework .arch-product.is-planned:hover {
-  border-color: var(--planned);
-}
-
-.arch-product.is-planned .arch-version {
   color: var(--planned);
 }
 

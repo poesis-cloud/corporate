@@ -90,7 +90,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
         label: 'Engagements',
         items: [
           { href: '/services/consulting', label: 'Agentic Use Case Discovery' },
-          { href: '/#pilot', label: 'Poesis Pilot' },
+          { href: '/pilot', label: 'Poesis Pilot' },
           { href: '/services/on-prem-integration-administration', label: 'Enterprise Implementation' },
         ],
       },
