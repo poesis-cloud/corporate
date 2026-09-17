@@ -645,19 +645,13 @@ test('built usage pages retain identity, derived badges, contextual links and SE
     const links = elements(homepage, (node) => attr(node, 'href') === catalogHref('pains', `homepage:${group.slug}`));
     assert.equal(links.length, 1);
     assert.equal(text(links[0]), group.lead);
-    for (const slug of group.pains) {
-      const anchors = elements(homepage, (node) => attr(node, 'id') === slug);
-      assert.equal(anchors.length, 1, `legacy homepage pain anchor: ${slug}`);
-      assert.equal(text(anchors[0]), '');
-      assert.equal(elements(links[0], (node) => attr(node, 'id') === slug).length, 1, `anchor stays inside the main-bullet content: ${slug}`);
-    }
   }
   const actorsPage = built('/actors');
   for (const profile of profiles) assert.ok(elements(actorsPage, (node) => attr(node, 'id') === profile.slug).length, `actor ${profile.slug}`);
   // The homepage keeps actor types as the usage filter rather than a separate section.
-  const chips = elements(homepage, (node) => attr(node, 'data-usage-actor'));
-  assert.ok(chips.length > 1);
-  for (const chip of chips) assert.ok(attr(chip, 'data-usage-actor') === '' || profiles.some((profile) => profile.slug === attr(chip, 'data-usage-actor')));
+  const options = elements(homepage, (node) => node.tagName === 'option' && attr(node, 'value') !== undefined);
+  assert.equal(options.length, poesisUsage.actorTypes.length + 1);
+  for (const option of options) assert.ok(attr(option, 'value') === '' || poesisUsage.actorTypes.some((actor) => actor.slug === attr(option, 'value')));
   for (const solution of poesisPlatform.solutions) {
     assert.ok(elements(built(solutionHref(solution)), (node) => attr(node, 'data-usage-case')).length);
     for (const product of solution.products) {

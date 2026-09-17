@@ -10,12 +10,15 @@ import { useCaseCard } from '../data/catalog-card.ts';
 import { plannedClass } from '../data/poesis-platform.ts';
 import ThinkBottleneckDiagram from '../components/ThinkBottleneckDiagram.astro';
 import ThinkTherapyDiagram from '../components/ThinkTherapyDiagram.astro';
-import { profilesForDomain } from '../data/profiles.ts';
+import { actorTypes } from '../data/usage-actors.ts';
 import { services } from '../data/services.ts';
 
 /** The homepage shows what the platform already serves; the catalogs hold the full backlog. */
 const currentUseCases = poesisUsage.useCases.filter((useCase) => useCaseStatus(useCase) === 'delivered');
-const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.some((useCase) => useCase.actorTypes.includes(actor.slug)));
+const usageActorGroups = [
+  { label: 'People', actors: actorTypes.filter((actor) => actor.kind === 'human') },
+  { label: 'Systems', actors: actorTypes.filter((actor) => actor.kind === 'system') },
+].filter((group) => group.actors.length > 0);
 ---
 <BaseLayout title="The Organizational Intelligence Platform" pageType="Home">
   <section class="hero home-hero hero--split">
@@ -60,7 +63,7 @@ const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.so
       <div class="section-head">
         <p class="eyebrow">Affordances</p>
         <h2>The Poesis Gene Therapy</h2>
-        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for GenAI, people, and programmatic tools, to safely accelerate BUILD and RUN at the expected rate.</strong></p>
+        <p class="lead"><strong>Poesis resolves the historical THINK pathology &mdash; for AI, people, and programmatic tools, to accelerate THINK, BUILD and RUN at the expected rate and safety.</strong></p>
       </div>
       <ThinkTherapyDiagram />
     </div>
@@ -74,13 +77,18 @@ const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.so
         <p class="lead">To the people and the machines who think, build, and run it. Definitions stop being prose: a structured causal context that can be reasoned over, taught, governed, simulated, and continuously evaluated.</p>
       </div>
 
+      <h3 class="home-usage-subhead">Who is it for</h3>
       <div class="home-usage-filter">
-        <p class="home-usage-filter__label" id="usage-filter-label">Pick who you are</p>
-        <div class="home-usage-chips" role="group" aria-labelledby="usage-filter-label">
-          <button type="button" class="home-usage-chip is-current" data-usage-actor="" aria-pressed="true">Everyone</button>
-          {usageActors.map((actor) => (
-            <button type="button" class="home-usage-chip" data-usage-actor={actor.slug} data-hook={actor.hook} aria-pressed="false">{actor.name}</button>
-          ))}
+        <div class="field home-usage-field">
+          <label for="usage-actor">Actor type</label>
+          <select id="usage-actor">
+            <option value="">Everyone</option>
+            {usageActorGroups.map((group) => (
+              <optgroup label={group.label}>
+                {group.actors.map((actor) => <option value={actor.slug} data-hook={actor.hook}>{actor.name}</option>)}
+              </optgroup>
+            ))}
+          </select>
         </div>
         <p class="home-usage-hook" id="usage-actor-hook" hidden></p>
       </div>
@@ -94,7 +102,10 @@ const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.so
       <h3 class="home-usage-subhead">What it is worth</h3>
       <PlatformValues />
 
-      <p class="home-usage-browse"><a href="/usage">All use cases &rarr;</a> <a href="/actors">All actor types &rarr;</a> <a href="/values">All values &rarr;</a></p>
+      <div class="hero-cta home-usage-cta">
+        <a class="btn btn-primary" href="/pilot" data-demo-cta="homepage-usage-pilot"><Icon name="play" /> Shape your Pilot</a>
+        <a class="btn btn-ghost" href="/usage"><Icon name="grid" /> Discover the catalog</a>
+      </div>
     </div>
   </section>
 
@@ -215,42 +226,35 @@ const usageActors = profilesForDomain('it').filter((actor) => currentUseCases.so
 </BaseLayout>
 
 <script>
-  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-usage-actor]')];
+  const picker = document.querySelector<HTMLSelectElement>('#usage-actor');
   const cases = [...document.querySelectorAll<HTMLElement>('.home-usage-cases > [data-usage-case]')];
   const hook = document.querySelector<HTMLElement>('#usage-actor-hook');
   const empty = document.querySelector<HTMLElement>('#usage-empty');
-  if (chips.length && cases.length && hook && empty) {
-    const select = (chip: HTMLButtonElement) => {
-      const actor = chip.dataset.usageActor ?? '';
+  if (picker && cases.length && hook && empty) {
+    const apply = () => {
+      const actor = picker.value;
       let shown = 0;
       for (const card of cases) {
         card.hidden = Boolean(actor) && !card.dataset.actors?.split(' ').includes(actor);
         if (!card.hidden) shown++;
       }
-      for (const other of chips) {
-        other.classList.toggle('is-current', other === chip);
-        other.setAttribute('aria-pressed', String(other === chip));
-      }
-      hook.textContent = chip.dataset.hook ?? '';
-      hook.hidden = !chip.dataset.hook;
+      const selected = picker.selectedOptions[0];
+      hook.textContent = selected?.dataset.hook ?? '';
+      hook.hidden = !selected?.dataset.hook;
       empty.hidden = shown > 0;
     };
-    for (const chip of chips) chip.addEventListener('click', () => select(chip));
+    picker.addEventListener('change', apply);
+    apply();
   }
 </script>
 
 <style>
-  .home-usage-filter { margin: 2.5rem 0 1rem; }
-  .home-usage-filter__label { margin: 0 0 .75rem; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .home-usage-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .home-usage-chip { padding: .45rem .9rem; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: .9rem; cursor: pointer; }
-  .home-usage-chip:hover, .home-usage-chip:focus-visible { border-color: var(--accent); }
-  .home-usage-chip.is-current { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .home-usage-filter { margin: 0 0 1rem; }
+  .home-usage-field { max-width: 24rem; }
   .home-usage-hook { margin: 1rem 0 0; font-size: 1.05rem; }
-  .home-usage-subhead { margin: 2.5rem 0 0; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .home-usage-cases { margin-top: 1.75rem; }
+  .home-usage-subhead { margin: 2.5rem 0 1.75rem; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .home-usage-cases > li[hidden] { display: none; }
   .home-usage-empty { margin: 1.5rem 0 0; color: var(--muted); }
-  .home-usage-browse { margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .home-usage-cta { margin-top: 2.5rem; }
   @media (max-width: 640px) { .home-usage-cases { grid-template-columns: minmax(0, 1fr); } }
 </style>
