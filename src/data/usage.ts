@@ -1,8 +1,8 @@
 /**
  * usage.ts — the usage side of the model.
  *
- * Platform items reference only use cases. Cases address independent pains;
- * values compose cases. Support is projected through those explicit links,
+ * Platform items reference only use cases. Cases own their actors, addressed
+ * pains and realized values. Support is projected through those explicit links,
  * with missing constituent support retained in composite delivery status.
  *
  * This module is also the only place where platform references are proven to
@@ -24,6 +24,7 @@ export interface UseCase {
   goal: string;
   actorTypes: string[];
   addressedPains: string[];
+  values: string[];
 }
 export interface UsageGraph { actorTypes: typeof actorTypes; pains: UsagePain[]; useCases: UseCase[] }
 
@@ -47,9 +48,14 @@ export function featureHref(entry: UsageFeature): string { return `${solutionHre
 export function capabilityHref(entry: UsageCapability): string { return `${solutionHref(entry.solution)}#${entry.capability.slug}`; }
 export function affordanceHref(entry: UsageAffordance): string { return `/#affordance-${entry.affordance.slug}`; }
 
+/** Use cases that explicitly realize this independent value. */
+export function useCasesForValue(slug: string): UseCase[] {
+  return useCases.filter((useCase) => useCase.values.includes(slug));
+}
+
 /** Platform items supporting any constituent case, deduplicated in type order. */
 export function valueSupports(slug: string): ValueSupport[] {
-  const references = valueBySlug(slug)?.useCases ?? [];
+  const references = useCasesForValue(slug).map((useCase) => useCase.slug);
   return [
     ...usageFeatures.filter((entry) => entry.feature.useCases.some((reference) => references.includes(reference))).map((entry) => ({ type: 'feature' as const, slug: entry.slug, name: entry.feature.name, href: featureHref(entry), state: entry.feature.delivery.state })),
     ...usageCapabilities.filter((entry) => entry.capability.useCases.some((reference) => references.includes(reference))).map((entry) => ({ type: 'capability' as const, slug: entry.slug, name: entry.capability.name, href: capabilityHref(entry), state: capabilityStatus(entry.solution, entry.capability) })),
@@ -57,7 +63,7 @@ export function valueSupports(slug: string): ValueSupport[] {
   ];
 }
 export function valueCoverage(slug: string) {
-  return (valueBySlug(slug)?.useCases ?? []).map((reference) => ({ useCase: useCases.find((item) => item.slug === reference)!, state: useCaseStatus({ slug: reference }) }));
+  return useCasesForValue(slug).map((useCase) => ({ useCase, state: useCaseStatus(useCase) }));
 }
 export function valueStatus(slug: string): DeliveryState | undefined {
   const states = valueCoverage(slug).map((entry) => entry.state);
@@ -85,7 +91,8 @@ export function capabilitiesForUseCase(slug: string): UsageCapability[] { return
 export function affordancesForUseCase(slug: string): UsageAffordance[] { return usageAffordances.filter((entry) => entry.affordance.useCases.includes(slug)); }
 /** Values explicitly composing this use case, independently of platform support. */
 export function valuesForUseCase(slug: string): Value[] {
-  return usageValues.filter((value) => value.useCases.includes(slug));
+  const references = new Set(useCases.find((useCase) => useCase.slug === slug)?.values ?? []);
+  return usageValues.filter((value) => references.has(value.slug));
 }
 /**
  * Explicit remediation only. Occurrence does not establish an addressing link.
@@ -118,7 +125,7 @@ export function useCasesForSolution(solutionSlug: string): UseCase[] {
 export const usageIcons = { useCase: 'target', pain: 'alert', value: typeIcons.value };
 
 export interface RelationLink { label: string; href: string; state?: DeliveryState }
-export interface RelationGroup { label: string; links: RelationLink[] }
+export interface RelationGroup { label: string; qualifier: string; links: RelationLink[] }
 
 /**
  * The usage relatives a platform item declares, in pain → use case → value order.
@@ -126,9 +133,9 @@ export interface RelationGroup { label: string; links: RelationLink[] }
  */
 export function usageRelations(item: UsageRefs): RelationGroup[] {
   return [
-    { label: 'Pain points', links: painsForItem(item).map((pain) => ({ label: pain.pain, href: `/catalog/pains#${pain.slug}` })) },
-    { label: 'Use cases', links: useCases.filter((useCase) => item.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) })) },
-    { label: 'Values', links: valuesForItem(item).map((value) => ({ label: value.title, href: valueHref(value), state: valueStatus(value.slug) })) },
+    { label: 'Pain points', qualifier: 'Addresses', links: painsForItem(item).map((pain) => ({ label: pain.pain, href: `/catalog/pains#${pain.slug}` })) },
+    { label: 'Values', qualifier: 'Supports', links: valuesForItem(item).map((value) => ({ label: value.title, href: valueHref(value), state: valueStatus(value.slug) })) },
+    { label: 'Use cases', qualifier: 'Serves', links: useCases.filter((useCase) => item.useCases.includes(useCase.slug)).map((useCase) => ({ label: useCase.name, href: `/usage/${useCase.slug}`, state: useCaseStatus(useCase) })) },
   ].filter((group) => group.links.length);
 }
 
@@ -137,7 +144,8 @@ export function painsForItem(item: UsageRefs): UsagePain[] {
   return usagePains.filter((pain) => references.has(pain.slug));
 }
 export function valuesForItem(item: UsageRefs): Value[] {
-  return usageValues.filter((value) => value.useCases.some((slug) => item.useCases.includes(slug)));
+  const references = new Set(useCases.filter((useCase) => item.useCases.includes(useCase.slug)).flatMap((useCase) => useCase.values));
+  return usageValues.filter((value) => references.has(value.slug));
 }
 
 /**
@@ -166,27 +174,22 @@ export function validateUsage(graph: UsageGraph = poesisUsage, values: Value[] =
   const caseSlugs = new Set(graph.useCases.map((useCase) => useCase.slug));
   const actorSlugs = new Set(graph.actorTypes.map((actor) => actor.slug));
   const painSlugs = new Set(graph.pains.map((pain) => pain.slug));
+  const valueSlugs = new Set(values.map((value) => value.slug));
 
+  for (const value of values) {
+    if (!/^value:(?:[a-z0-9]+(?:-[a-z0-9]+)*|platform\/[a-z0-9-]+|[a-z0-9-]+(?:\/[a-z0-9-]+)?\/[0-9]{2})$/.test(value.slug) || value.slug.endsWith('/00')) throw new Error(`Invalid value identity: ${value.slug}`);
+    if (!value.originalTitle.trim() || !value.title.trim() || !value.body.trim()) throw new Error(`Empty value claim: ${value.slug}`);
+  }
   for (const useCase of graph.useCases) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(useCase.slug)) throw new Error(`Invalid use case slug: ${useCase.slug}`);
     if (!useCase.name.trim() || !useCase.goal.trim()) throw new Error(`Incomplete use case: ${useCase.slug}`);
     if (!useCase.actorTypes.length) throw new Error(`Unattributed use case: ${useCase.slug}`);
     unique(useCase.actorTypes, `use case actor on ${useCase.slug}`);
     unique(useCase.addressedPains, `addressed pain on ${useCase.slug}`);
+    unique(useCase.values, `realized value on ${useCase.slug}`);
     for (const reference of useCase.addressedPains) if (!painSlugs.has(reference)) throw new Error(`Unknown addressed pain: ${reference}`);
+    for (const reference of useCase.values) if (!valueSlugs.has(reference)) throw new Error(`Unknown realized value: ${reference}`);
     for (const actor of useCase.actorTypes) if (!actorSlugs.has(actor)) throw new Error(`Unknown actor type: ${actor}`);
-  }
-  for (const pain of graph.pains) {
-    if (!pain.actorTypes.length) throw new Error(`Unattributed pain: ${pain.slug}`);
-    for (const actor of pain.actorTypes) if (!actorSlugs.has(actor)) throw new Error(`Unknown actor type: ${actor}`);
-    for (const reference of pain.occursIn ?? []) if (!caseSlugs.has(reference)) throw new Error(`Unknown pain use case: ${reference}`);
-  }
-  for (const value of values) {
-    if (!/^value:(?:[a-z0-9]+(?:-[a-z0-9]+)*|platform\/[a-z0-9-]+|[a-z0-9-]+(?:\/[a-z0-9-]+)?\/[0-9]{2})$/.test(value.slug) || value.slug.endsWith('/00')) throw new Error(`Invalid value identity: ${value.slug}`);
-    if (!value.originalTitle.trim() || !value.title.trim() || !value.body.trim()) throw new Error(`Empty value claim: ${value.slug}`);
-    if (!value.useCases.length) throw new Error(`Empty value composition: ${value.slug}`);
-    unique(value.useCases, `constituent use case on ${value.slug}`);
-    for (const reference of value.useCases) if (!caseSlugs.has(reference)) throw new Error(`Unknown constituent use case: ${reference}`);
   }
 
   const check = (label: string, item: UsageRefs) => {

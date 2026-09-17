@@ -49,19 +49,14 @@
     },
     "pain": {
       "type": "object",
-      "description": "An independent pain. Pains never reference what addresses them; support is projected from use cases.",
+      "description": "An independent pain. A pain owns no graph references; use cases name the pains they address.",
       "additionalProperties": false,
-      "required": ["slug", "tags", "pain", "cost", "actorTypes"],
+      "required": ["slug", "tags", "pain", "cost"],
       "properties": {
         "slug": { "$ref": "#/$defs/slug" },
         "tags": { "type": "array", "items": { "$ref": "#/$defs/text" } },
         "pain": { "$ref": "#/$defs/text" },
-        "cost": { "$ref": "#/$defs/text" },
-        "actorTypes": { "$ref": "#/$defs/slugList" },
-        "occursIn": {
-          "description": "Use cases the pain occurs in.",
-          "$ref": "#/$defs/slugList"
-        }
+        "cost": { "$ref": "#/$defs/text" }
       }
     },
     "painGroup": {
@@ -78,26 +73,29 @@
     "useCase": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["slug", "name", "goal", "actorTypes", "addressedPains"],
+      "required": ["slug", "name", "goal", "actorTypes", "addressedPains", "values"],
       "properties": {
         "slug": { "$ref": "#/$defs/slug" },
         "name": { "$ref": "#/$defs/text" },
         "goal": { "$ref": "#/$defs/text" },
         "actorTypes": { "$ref": "#/$defs/nonEmptySlugList" },
-        "addressedPains": { "$ref": "#/$defs/slugList" }
+        "addressedPains": { "$ref": "#/$defs/slugList" },
+        "values": {
+          "description": "Values this use case realizes.",
+          "$ref": "#/$defs/slugList"
+        }
       }
     },
     "value": {
       "type": "object",
-      "description": "A value composes explicit use cases; its delivery status accounts for every constituent case, including missing support.",
+      "description": "An independent desired benefit. A value owns no graph references; use cases name the values they realize.",
       "additionalProperties": false,
-      "required": ["slug", "originalTitle", "title", "body", "useCases"],
+      "required": ["slug", "originalTitle", "title", "body"],
       "properties": {
         "slug": { "type": "string", "pattern": "^value:" },
         "originalTitle": { "$ref": "#/$defs/text" },
         "title": { "$ref": "#/$defs/text" },
-        "body": { "$ref": "#/$defs/text" },
-        "useCases": { "$ref": "#/$defs/nonEmptySlugList" }
+        "body": { "$ref": "#/$defs/text" }
       }
     }
   }

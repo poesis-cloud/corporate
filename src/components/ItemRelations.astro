@@ -18,7 +18,9 @@ const { groups } = Astro.props;
     {groups.map((group, groupIndex) => (
       <>
         {groupIndex > 0 && ' · '}
-        {!(group.links.length === 1 && group.links[0].label === group.label) && <span>{group.label}</span>}
+        <span class="proof-line__qualifier">
+          {group.qualifier}{group.label && !(group.links.length === 1 && group.links[0].label === group.label) ? ` ${group.label}` : ''}:
+        </span>{' '}
         {group.links.map((link, index) => (
           <>
             {index > 0 && ' · '}

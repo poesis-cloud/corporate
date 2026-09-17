@@ -1,8 +1,8 @@
 /**
  * Usage-model tests.
  *
- * Platform items serve use cases; values compose cases and cases address
- * independent pains. These tests cover graph ownership, conservative coverage,
+ * Platform items serve use cases; cases own actors, addressed pains and
+ * realized values. These tests cover graph ownership, conservative coverage,
  * static catalog navigation and preservation of public identities.
  */
 import assert from 'node:assert/strict';
@@ -16,6 +16,7 @@ import {
   usageCoverage,
   useCaseStatus,
   useCasesForPain,
+  useCasesForValue,
   useCasesForFeature,
   useCasesForProduct,
   useCasesForSolution,
@@ -42,7 +43,7 @@ import {
 } from '../src/data/usage.ts';
 import { profiles } from '../src/data/profiles.ts';
 import { pains, homepagePainGroups } from '../src/data/pains.ts';
-import { catalogSnapshot, platformRelations } from '../src/data/catalog.ts';
+import { catalogSnapshot, catalogRelations, platformRelations, relationRules } from '../src/data/catalog.ts';
 import { catalogTypes, catalogPath, catalogHref, filterCatalog } from '../src/data/catalog-query.ts';
 import { catalogViews, siteNavigation } from '../src/data/site-navigation.ts';
 import { projectPilotCatalog } from '../src/data/pilot-catalog.ts';
@@ -165,8 +166,9 @@ test('platform items own the references and every reference resolves', () => {
     for (const pain of painsForItem(item)) assert.ok(painSlugs.has(pain.slug));
     for (const slug of item.useCases) assert.ok(caseSlugs.has(slug), `${item.slug}: ${slug}`);
   }
-  for (const value of usageValues) assert.deepEqual(Object.keys(value).sort(), ['body', 'originalTitle', 'slug', 'title', 'useCases']);
-  for (const useCase of poesisUsage.useCases) assert.deepEqual(Object.keys(useCase).sort(), ['actorTypes', 'addressedPains', 'goal', 'name', 'slug']);
+  for (const value of usageValues) assert.deepEqual(Object.keys(value).sort(), ['body', 'originalTitle', 'slug', 'title']);
+  for (const pain of poesisUsage.pains) assert.deepEqual(Object.keys(pain).sort(), ['cost', 'pain', 'slug', 'tags']);
+  for (const useCase of poesisUsage.useCases) assert.deepEqual(Object.keys(useCase).sort(), ['actorTypes', 'addressedPains', 'goal', 'name', 'slug', 'values']);
 });
 
 test('value ownership preserves placement while support follows constituent use cases', () => {
@@ -185,11 +187,15 @@ test('value ownership preserves placement while support follows constituent use 
     }
   }
   const wrong = structuredClone(usageValues);
+  const wrongGraph = structuredClone(poesisUsage);
+  for (const useCase of wrongGraph.useCases) useCase.values = useCase.values.map((slug) => slug === wrong[0].slug ? 'value:wrong-owner/00' : slug);
   wrong[0] = { ...wrong[0], slug: 'value:wrong-owner/00' };
-  assert.throws(() => validateUsage(poesisUsage, wrong), /Invalid value identity/);
+  assert.throws(() => validateUsage(wrongGraph, wrong), /Invalid value identity/);
   const mixedCase = structuredClone(usageValues);
+  const mixedGraph = structuredClone(poesisUsage);
+  for (const useCase of mixedGraph.useCases) useCase.values = useCase.values.map((slug) => slug === mixedCase[0].slug ? 'value:Itip/01' : slug);
   mixedCase[0] = { ...mixedCase[0], slug: 'value:Itip/01' };
-  assert.throws(() => validateUsage(poesisUsage, mixedCase), /Invalid value identity/);
+  assert.throws(() => validateUsage(mixedGraph, mixedCase), /Invalid value identity/);
 });
 
 function valueOwnerDepth(slug) {
@@ -205,13 +211,13 @@ test('validation rejects dangling references but accepts independent usage recor
   duplicateValues.push(duplicateValues[0]);
   assert.throws(() => validateUsage(poesisUsage, duplicateValues), /Duplicate/);
   const dangling = structuredClone(poesisUsage);
-  dangling.pains[0].actorTypes = ['unknown'];
+  dangling.useCases[0].actorTypes = ['unknown'];
   assert.throws(() => validateUsage(dangling), /Unknown/);
   const unreachable = structuredClone(poesisUsage);
-  unreachable.useCases.push({ slug: 'orphan-case', name: 'Orphan case', goal: 'No platform item serves it.', actorTypes: ['it-architect'], addressedPains: [] });
+  unreachable.useCases.push({ slug: 'orphan-case', name: 'Orphan case', goal: 'No platform item serves it.', actorTypes: ['it-architect'], addressedPains: [], values: [] });
   assert.doesNotThrow(() => validateUsage(unreachable));
   assert.equal(useCaseStatus(unreachable.useCases.at(-1)), undefined);
-  const independentValue = { slug: 'value:unmapped-test-benefit', originalTitle: 'Service accountability', title: 'Service accountability', body: 'Clear responsibility for service commitments.', useCases: ['orphan-case'] };
+  const independentValue = { slug: 'value:unmapped-test-benefit', originalTitle: 'Service accountability', title: 'Service accountability', body: 'Clear responsibility for service commitments.' };
   assert.doesNotThrow(() => validateUsage(unreachable, [...usageValues, independentValue]));
   assert.equal(valueStatus(independentValue.slug), undefined);
   assert.equal(valueHref(independentValue), `/catalog/values#${valueAnchor(independentValue)}`);
@@ -224,7 +230,7 @@ test('derivation preserves declared coverage without fabricating support for ind
   for (const useCase of poesisUsage.useCases) {
     if (useCaseStatus(useCase) === undefined) {
       assert.deepEqual(featuresForUseCase(useCase.slug), []);
-      assert.ok(valuesForUseCase(useCase.slug).every((value) => value.useCases.includes(useCase.slug)));
+      assert.deepEqual(valuesForUseCase(useCase.slug).map((value) => value.slug), useCase.values);
       assert.ok(painsForUseCase(useCase.slug).length, useCase.slug);
     } else {
       assert.ok(featuresForUseCase(useCase.slug).length || capabilitiesForUseCase(useCase.slug).length || affordancesForUseCase(useCase.slug).length, useCase.slug);
@@ -242,6 +248,7 @@ test('derivation preserves declared coverage without fabricating support for ind
   }
   assert.equal(valueEdges.length, new Set(valueEdges.map((edge) => edge.id)).size);
   for (const value of usageValues) {
+    assert.deepEqual(useCasesForValue(value.slug).map((useCase) => useCase.slug), poesisUsage.useCases.filter((useCase) => useCase.values.includes(value.slug)).map((useCase) => useCase.slug));
     const states = valueCoverage(value.slug).map((entry) => entry.state);
     assert.equal(valueStatus(value.slug), states.some(Boolean) ? commitmentStatus(states.map((state) => state ?? 'planned')) : undefined);
     if (valueStatus(value.slug) === 'delivered') assert.ok(states.every((state) => state === 'delivered'));
@@ -362,61 +369,93 @@ test('legacy adapters retain canonical content and identity without an alternate
   assert.ok(pains.some((pain) => !pain.addressedBy.length));
 });
 
-test('composition validates nonempty known unique members and remediation never follows occurrence', () => {
-  for (const references of [[], ['unknown'], ['read-governance-model', 'read-governance-model']]) {
-    const values = structuredClone(usageValues);
-    values[0].useCases = references;
-    assert.throws(() => validateUsage(poesisUsage, values), /Empty value composition|Unknown constituent|Duplicate constituent/);
+test('use cases validate owned value and pain references while independent records own none', () => {
+  for (const references of [['unknown'], [usageValues[0].slug, usageValues[0].slug]]) {
+    const graph = structuredClone(poesisUsage);
+    graph.useCases[0].values = references;
+    assert.throws(() => validateUsage(graph), /Unknown realized value|Duplicate realized value/);
   }
   for (const references of [['unknown'], ['it-tool-silos', 'it-tool-silos']]) {
     const graph = structuredClone(poesisUsage);
     graph.useCases[0].addressedPains = references;
     assert.throws(() => validateUsage(graph), /Unknown addressed pain|Duplicate addressed pain/);
   }
-  const pain = poesisUsage.pains.find((pain) => pain.slug === 'it-assumed-governance-coverage');
-  assert.ok(pain.occursIn.includes('reuse-governance-selection'));
-  assert.ok(!painsForUseCase('reuse-governance-selection').includes(pain));
   const graph = structuredClone(poesisUsage);
-  graph.pains.push({ slug: 'independent-test-pain', pain: 'An independent pain', cost: 'Unaddressed cost', actorTypes: ['it-platform'], tags: ['Test'] });
+  graph.pains.push({ slug: 'independent-test-pain', pain: 'An independent pain', cost: 'Unaddressed cost', tags: ['Test'] });
   assert.doesNotThrow(() => validateUsage(graph));
 });
 
 test('composite status cannot hide missing constituent support behind delivered members', () => {
-  const value = { slug: 'value:test-composite', originalTitle: 'Test composition', title: 'Test composition', body: 'Test coverage', useCases: ['read-governance-model', 'accept-service-baseline'] };
+  const value = { slug: 'value:test-composite', originalTitle: 'Test composition', title: 'Test composition', body: 'Test coverage' };
+  const delivered = poesisUsage.useCases.find((useCase) => useCase.slug === 'read-governance-model');
+  const unsupported = poesisUsage.useCases.find((useCase) => useCase.slug === 'accept-service-baseline');
   usageValues.push(value);
   try {
-    assert.equal(useCaseStatus({ slug: value.useCases[0] }), 'delivered');
-    assert.equal(useCaseStatus({ slug: value.useCases[1] }), undefined);
+    delivered.values.push(value.slug);
+    unsupported.values.push(value.slug);
+    assert.equal(useCaseStatus(delivered), 'delivered');
+    assert.equal(useCaseStatus(unsupported), undefined);
     assert.equal(valueStatus(value.slug), 'partial');
-    value.useCases = ['accept-service-baseline'];
+    delivered.values.pop();
     assert.equal(valueStatus(value.slug), undefined);
-    value.useCases = ['read-governance-model'];
+    delivered.values.push(value.slug);
+    unsupported.values.pop();
     assert.equal(valueStatus(value.slug), 'delivered');
-  } finally { usageValues.pop(); }
+  } finally {
+    delivered.values = delivered.values.filter((slug) => slug !== value.slug);
+    unsupported.values = unsupported.values.filter((slug) => slug !== value.slug);
+    usageValues.pop();
+  }
 });
 
-test('catalog navigation uses one canonical link per nonempty relationship type', () => {
-  for (const [type, entries, itemKey] of [['feature', usageFeatures, 'feature'], ['capability', usageCapabilities, 'capability'], ['affordance', usageAffordances, 'affordance']]) {
-    for (const entry of entries) {
-      const source = `${type}:${entry.slug}`;
-      const groups = platformRelations(entry[itemKey]);
-      assert.equal(groups.length, catalogTypes.filter((target) => catalogSnapshot.sources[source].targets[target].length).length);
-      assert.equal(groups.length, new Set(groups.map((group) => group.label)).size);
-      for (const group of groups) {
-        assert.equal(group.links.length, 1);
-        const url = new URL(group.links[0].href, 'https://poesis.cloud');
-        assert.equal(url.searchParams.get('source'), source);
-        const target = url.pathname.split('/').at(-1);
-        assert.equal(group.links[0].href, catalogHref(target, source));
-        assert.ok(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.length);
-      }
+test('catalog navigation exposes only qualified direct relations in the declared order', () => {
+  assert.deepEqual(relationRules, {
+    affordance: [
+      { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Supports', targets: ['values'] }, { qualifier: 'Serves', targets: ['usage'] },
+      { qualifier: 'Used by', targets: ['actors'] }, { qualifier: 'Realized by', targets: ['capabilities'] },
+    ],
+    capability: [
+      { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Supports', targets: ['values'] }, { qualifier: 'Serves', targets: ['usage'] },
+      { qualifier: 'Used by', targets: ['actors'] }, { qualifier: 'Realized by', targets: ['features'] },
+    ],
+    feature: [
+      { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Supports', targets: ['values'] },
+      { qualifier: 'Serves', targets: ['usage'] }, { qualifier: 'Used by', targets: ['actors'] },
+    ],
+    platform: [{ qualifier: 'Offers', targets: ['affordances'] }, { qualifier: 'Characterized by', targets: ['qualities'] }, { qualifier: 'Composed of', targets: ['solutions'] }],
+    solution: [{ qualifier: 'Provides', targets: ['capabilities'] }, { qualifier: 'Characterized by', targets: ['qualities'] }, { qualifier: 'Contains', targets: ['products'] }],
+    product: [{ qualifier: 'Implements', targets: ['features'] }, { qualifier: 'Characterized by', targets: ['qualities'] }],
+    actor: [{ qualifier: 'Supported by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Experiences', targets: ['pains'] }, { qualifier: 'Pursues', targets: ['usage'] }],
+    pain: [{ qualifier: 'Addressed by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Experienced by', targets: ['actors'] }, { qualifier: 'Addressed through', targets: ['usage'] }],
+    usage: [{ qualifier: 'Supported by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Addresses', targets: ['pains'] }, { qualifier: 'Realizes', targets: ['values'] }, { qualifier: 'Performed by', targets: ['actors'] }],
+    value: [{ qualifier: 'Supported by', targets: ['affordances', 'capabilities', 'features'] }, { qualifier: 'Realized through', targets: ['usage'] }],
+    quality: [],
+  });
+  for (const [source, record] of Object.entries(catalogSnapshot.sources).filter(([source]) => !source.startsWith('homepage:'))) {
+    const type = source === 'platform' ? 'platform' : source.split(':')[0];
+    const rules = relationRules[type];
+    const allowed = new Set(rules.flatMap((rule) => rule.targets));
+    assert.deepEqual(catalogTypes.filter((target) => record.targets[target].length && !allowed.has(target)), [], `${source}: indirect target`);
+    const groups = catalogRelations(source);
+    const expected = rules.flatMap((rule) => {
+      const related = rule.targets.filter((target) => record.targets[target].length);
+      return related.length ? [{ qualifier: rule.qualifier, targets: related }] : [];
+    });
+    assert.deepEqual(groups.map((group) => ({ qualifier: group.qualifier, targets: group.links.map((link) => new URL(link.href, 'https://poesis.cloud').pathname.split('/').at(-1)) })), expected, source);
+    for (const group of groups) for (const link of group.links) {
+      const url = new URL(link.href, 'https://poesis.cloud');
+      const target = url.pathname.split('/').at(-1);
+      assert.equal(url.searchParams.get('source'), source);
+      assert.equal(link.href, catalogHref(target, source));
+      assert.ok(filterCatalog(catalogSnapshot, target, url.searchParams).slugs.length);
     }
   }
+  assert.deepEqual(catalogRelations('affordance:norm-evaluation').flatMap((group) => group.links.map((link) => new URL(link.href, 'https://poesis.cloud').pathname.split('/').at(-1))), ['pains', 'values', 'usage', 'actors', 'capabilities']);
   const source = 'capability:itip/automatic-it-truth-sourcing';
   assert.equal(catalogHref('values', source), '/catalog/values?source=capability%3Aitip%2Fautomatic-it-truth-sourcing');
   const capability = usageCapabilities.find((entry) => `capability:${entry.slug}` === source);
-  assert.deepEqual(catalogSnapshot.sources[source].targets.features, usageFeatures.filter((entry) => entry.solution.slug === capability.solution.slug && capability.capability.relations.features.includes(`${entry.product.slug}/${entry.feature.slug}`)).map((entry) => entry.slug));
-  for (const feature of catalogSnapshot.sources[source].targets.features) assert.ok(catalogSnapshot.sources[`feature:${feature}`].targets.capabilities.includes(capability.slug));
+  assert.deepEqual(catalogSnapshot.sources[source].targets.features, capability.capability.relations.features.map((reference) => `${capability.solution.slug}/${reference}`));
+  for (const feature of catalogSnapshot.sources[source].targets.features) assert.equal(catalogSnapshot.sources[`feature:${feature}`].targets.capabilities.length, 0);
 });
 
 test('catalog filters intersect source actor and pain, reject unknowns, and restore from URLs', () => {

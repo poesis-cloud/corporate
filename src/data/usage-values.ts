@@ -1,8 +1,9 @@
 /**
  * usage-values.ts — the single value ledger.
  *
- * A value composes explicit use cases. Its delivery status accounts for every
- * constituent case, including missing support; see `valueStatus` in usage.ts.
+ * A value is an independent desired benefit and owns no graph references.
+ * Use cases declare the values they realize; inverse lookups and delivery
+ * status are derived in usage.ts.
  *
  * Slug grammar preserves editorial placement, not exclusive support ownership:
  *
@@ -22,7 +23,6 @@ export interface Value {
   originalTitle: string;
   title: string;
   body: string;
-  useCases: string[];
 }
 
 export const usageValues: Value[] = catalog.values;

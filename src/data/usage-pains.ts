@@ -9,8 +9,6 @@ export interface UsagePain {
     pain: string;
     /** What the pain costs today. */
     cost: string;
-    actorTypes: string[];
-    occursIn?: string[];
 }
 
 export const usagePains: UsagePain[] = catalog.pains;

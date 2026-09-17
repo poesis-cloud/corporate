@@ -349,17 +349,7 @@
         "Evidence freshness"
       ],
       "pain": "Collection scope, incomplete runs and stale evidence are mistaken for current coverage.",
-      "cost": "Reviews rely on uninspected or outdated inputs and repeat work when collection failures emerge late.",
-      "actorTypes": [
-        "it-platform",
-        "it-architect",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "configure-collection-boundaries",
-        "recover-incomplete-collection",
-        "review-evidence-refresh"
-      ]
+      "cost": "Reviews rely on uninspected or outdated inputs and repeat work when collection failures emerge late."
     },
     {
       "slug": "it-access-assignment-drift",
@@ -368,15 +358,7 @@
         "Authorization"
       ],
       "pain": "Access assignments drift from responsibilities and identity-provider changes.",
-      "cost": "Excess privileges persist while legitimate work is blocked by missing or stale assignments.",
-      "actorTypes": [
-        "it-ciso",
-        "it-platform"
-      ],
-      "occursIn": [
-        "review-operation-privileges",
-        "restore-identity-synchronization"
-      ]
+      "cost": "Excess privileges persist while legitimate work is blocked by missing or stale assignments."
     },
     {
       "slug": "it-fragmented-review-context",
@@ -385,17 +367,7 @@
         "Scope"
       ],
       "pain": "Reviewers work from different selections and lose related decisions across meeting notes.",
-      "cost": "Decisions cannot be compared or reconstructed against the same agenda, subject set and evidence boundaries.",
-      "actorTypes": [
-        "it-architect",
-        "it-service-owner",
-        "it-exception-approver"
-      ],
-      "occursIn": [
-        "conduct-governance-session",
-        "reuse-review-lens",
-        "inspect-subject-perspectives"
-      ]
+      "cost": "Decisions cannot be compared or reconstructed against the same agenda, subject set and evidence boundaries."
     },
     {
       "slug": "it-unactionable-governance-findings",
@@ -404,17 +376,7 @@
         "Remediation"
       ],
       "pain": "A blocking finding identifies a problem without a clear route to correction and renewed review.",
-      "cost": "Rejected proposals and uncovered obligations remain unresolved while reviewers repeat the same checks.",
-      "actorTypes": [
-        "it-architect",
-        "it-application-owner",
-        "it-ciso",
-        "it-risk-owner"
-      ],
-      "occursIn": [
-        "resolve-blocked-change",
-        "propose-appraisal-remediation"
-      ]
+      "cost": "Rejected proposals and uncovered obligations remain unresolved while reviewers repeat the same checks."
     },
     {
       "slug": "it-assumed-governance-coverage",
@@ -423,18 +385,7 @@
         "Applicability"
       ],
       "pain": "Selected vocabulary and unbound templates are mistaken for complete, applicable obligations.",
-      "cost": "Subjects or concerns are omitted and requirements are applied without a justified adopting scope.",
-      "actorTypes": [
-        "it-architect",
-        "it-ciso",
-        "specification-reader",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "reuse-governance-selection",
-        "inspect-vocabulary-coverage",
-        "bind-obligations-to-scope"
-      ]
+      "cost": "Subjects or concerns are omitted and requirements are applied without a justified adopting scope."
     },
     {
       "slug": "it-unverified-generated-output",
@@ -443,20 +394,7 @@
         "Generation quality"
       ],
       "pain": "Incorrect bindings, unsupported narrative and partial files pass for completed deliverables.",
-      "cost": "Reviews discover missing evidence and output errors only after reports have been distributed.",
-      "actorTypes": [
-        "it-knowledge-owner",
-        "it-architect",
-        "it-platform",
-        "it-head-of-ai"
-      ],
-      "occursIn": [
-        "maintain-artifact-bindings",
-        "preview-artifact-bindings",
-        "constrain-generated-narrative",
-        "operate-recurring-reports",
-        "investigate-artifact-failure"
-      ]
+      "cost": "Reviews discover missing evidence and output errors only after reports have been distributed."
     },
     {
       "slug": "it-stale-dependent-eligibility",
@@ -465,14 +403,7 @@
         "Dependencies"
       ],
       "pain": "Dependent definitions remain trusted after a foundation is invalidated.",
-      "cost": "Continued use relies on obsolete eligibility and bypasses the renewed review required by changed foundations.",
-      "actorTypes": [
-        "it-architect",
-        "it-platform"
-      ],
-      "occursIn": [
-        "assess-invalidated-dependencies"
-      ]
+      "cost": "Continued use relies on obsolete eligibility and bypasses the renewed review required by changed foundations."
     },
     {
       "slug": "it-unjustified-evidence-retention",
@@ -481,15 +412,7 @@
         "Evidence"
       ],
       "pain": "Evidence is discarded too early or retained indefinitely without a justified preservation policy.",
-      "cost": "Historical decisions become unreviewable or unnecessary retained information creates avoidable exposure.",
-      "actorTypes": [
-        "it-ciso",
-        "it-knowledge-owner",
-        "it-risk-owner"
-      ],
-      "occursIn": [
-        "agree-evidence-preservation"
-      ]
+      "cost": "Historical decisions become unreviewable or unnecessary retained information creates avoidable exposure."
     },
     {
       "slug": "it-unexamined-rule-regressions",
@@ -498,15 +421,7 @@
         "Rule evolution"
       ],
       "pain": "A rule revision changes established verdicts without an inspected explanation.",
-      "cost": "New false positives, missed violations and unknown outcomes alter decisions before their causes are understood.",
-      "actorTypes": [
-        "assessment-runner",
-        "it-ciso",
-        "it-architect"
-      ],
-      "occursIn": [
-        "qualify-rule-revision"
-      ]
+      "cost": "New false positives, missed violations and unknown outcomes alter decisions before their causes are understood."
     },
     {
       "slug": "it-unqualified-agent-runtime",
@@ -515,15 +430,7 @@
         "Compatibility"
       ],
       "pain": "Host or model selection changes behavior without verifying workload quality, instruction delivery or disclosure limits.",
-      "cost": "Required guidance and checks disappear or unsuitable model routes produce costly, untrustworthy work.",
-      "actorTypes": [
-        "it-platform",
-        "it-head-of-ai"
-      ],
-      "occursIn": [
-        "qualify-model-routing",
-        "qualify-host-instructions"
-      ]
+      "cost": "Required guidance and checks disappear or unsuitable model routes produce costly, untrustworthy work."
     },
     {
       "slug": "it-conflicting-agent-artifacts",
@@ -532,14 +439,7 @@
         "Artifacts"
       ],
       "pain": "Individually valid parallel agent outputs overwrite or contradict accepted work.",
-      "cost": "Combined artifacts lose coherence and attribution despite each isolated output passing its checks.",
-      "actorTypes": [
-        "it-platform",
-        "delivery-agent"
-      ],
-      "occursIn": [
-        "reconcile-parallel-agent-outputs"
-      ]
+      "cost": "Combined artifacts lose coherence and attribution despite each isolated output passing its checks."
     },
     {
       "slug": "it-service-accountability-gap",
@@ -548,16 +448,7 @@
         "Accountability"
       ],
       "pain": "Service commitments have no agreed map of dependencies and accountable owners.",
-      "cost": "Changes and ownership transfers leave obligations unassigned and affected services overlooked.",
-      "actorTypes": [
-        "it-service-owner",
-        "it-application-owner",
-        "it-business-process-owner"
-      ],
-      "occursIn": [
-        "accept-service-baseline",
-        "transfer-service-ownership"
-      ]
+      "cost": "Changes and ownership transfers leave obligations unassigned and affected services overlooked."
     },
     {
       "slug": "it-permanent-temporary-exceptions",
@@ -566,16 +457,7 @@
         "Exceptions"
       ],
       "pain": "Temporary exceptions remain in force after their justification or controls expire.",
-      "cost": "Exposure accumulates without a current decision, a responsible risk owner or proof that compensating controls still work.",
-      "actorTypes": [
-        "it-risk-owner",
-        "it-exception-approver",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "review-time-bound-exception",
-        "renew-or-close-exception"
-      ]
+      "cost": "Exposure accumulates without a current decision, a responsible risk owner or proof that compensating controls still work."
     },
     {
       "slug": "it-unknown-contract-consumers",
@@ -584,16 +466,7 @@
         "Compatibility"
       ],
       "pain": "A shared API changes before all affected consumers and migration conditions are known.",
-      "cost": "Uncoordinated upgrades and deprecations disrupt dependent services and force emergency compatibility work.",
-      "actorTypes": [
-        "it-api-product-owner",
-        "it-application-owner",
-        "it-architect"
-      ],
-      "occursIn": [
-        "review-breaking-api-change",
-        "coordinate-api-deprecation"
-      ]
+      "cost": "Uncoordinated upgrades and deprecations disrupt dependent services and force emergency compatibility work."
     },
     {
       "slug": "it-context-free-vulnerability-queue",
@@ -602,16 +475,7 @@
         "Service exposure"
       ],
       "pain": "Security findings are ranked without reliable deployed-service context or mitigation evidence.",
-      "cost": "Teams spend effort on the wrong exposure and close findings without establishing that affected services are protected.",
-      "actorTypes": [
-        "it-vulnerability-manager",
-        "it-product-security-engineer",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "prioritize-service-vulnerabilities",
-        "verify-vulnerability-mitigation"
-      ]
+      "cost": "Teams spend effort on the wrong exposure and close findings without establishing that affected services are protected."
     },
     {
       "slug": "it-detached-supplier-assurance",
@@ -620,16 +484,7 @@
         "Assurance"
       ],
       "pain": "Supplier assurances and exit promises are detached from the services that depend on them.",
-      "cost": "Procurement and renewal decisions accept obligations or transition risks that service owners cannot substantiate.",
-      "actorTypes": [
-        "it-procurement-manager",
-        "it-third-party-risk-analyst",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "assess-supplier-service-change",
-        "review-supplier-exit-readiness"
-      ]
+      "cost": "Procurement and renewal decisions accept obligations or transition risks that service owners cannot substantiate."
     },
     {
       "slug": "it-unproven-recovery-commitments",
@@ -638,17 +493,7 @@
         "Resilience"
       ],
       "pain": "Recovery targets assume dependency sequences and restoration results that exercises have not demonstrated.",
-      "cost": "Services miss recovery commitments when shared resources, upstream dependencies or data restoration behave differently than assumed.",
-      "actorTypes": [
-        "it-resilience-manager",
-        "it-recovery-coordinator",
-        "it-service-owner",
-        "it-business-process-owner"
-      ],
-      "occursIn": [
-        "review-service-recovery-exercise",
-        "resolve-recovery-dependency-conflicts"
-      ]
+      "cost": "Services miss recovery commitments when shared resources, upstream dependencies or data restoration behave differently than assumed."
     },
     {
       "slug": "it-data-contract-expectation-gap",
@@ -657,16 +502,7 @@
         "Quality"
       ],
       "pain": "Data producers and consumers discover incompatible meanings or quality expectations only after a change.",
-      "cost": "Downstream decisions and integrations fail while teams reconstruct what each party believed the data contract guaranteed.",
-      "actorTypes": [
-        "it-data-owner",
-        "it-data-steward",
-        "it-application-owner"
-      ],
-      "occursIn": [
-        "review-data-contract-change",
-        "resolve-data-quality-requirements"
-      ]
+      "cost": "Downstream decisions and integrations fail while teams reconstruct what each party believed the data contract guaranteed."
     },
     {
       "slug": "it-incident-business-impact-blindness",
@@ -675,17 +511,7 @@
         "Business impact"
       ],
       "pain": "We know which software failed, but not which business processes are disrupted or whom to notify.",
-      "cost": "Response priorities follow technical alarms instead of confirmed business consequences, delaying workarounds and recovery for critical activities.",
-      "actorTypes": [
-        "it-incident-commander",
-        "it-service-owner",
-        "it-application-owner",
-        "it-business-process-owner",
-        "it-platform"
-      ],
-      "occursIn": [
-        "trace-incident-business-impact"
-      ]
+      "cost": "Response priorities follow technical alarms instead of confirmed business consequences, delaying workarounds and recovery for critical activities."
     },
     {
       "slug": "it-ea-drift",
@@ -693,11 +519,7 @@
         "Enterprise architecture"
       ],
       "pain": "The architecture repository is out of date the day it’s written.",
-      "cost": "Hand-maintained models detach from the territory the moment delivery moves on — and every decision made on them inherits the drift.",
-      "actorTypes": [
-        "it-architect",
-        "it-cto"
-      ]
+      "cost": "Hand-maintained models detach from the territory the moment delivery moves on — and every decision made on them inherits the drift."
     },
     {
       "slug": "it-audit-reconstruction",
@@ -705,15 +527,7 @@
         "Compliance automation"
       ],
       "pain": "Compliance is reconstructed in spreadsheets before every audit.",
-      "cost": "Posture exists only at audit time; between audits, nobody can answer what is actually covered.",
-      "actorTypes": [
-        "it-ciso",
-        "it-architect",
-        "assessment-runner"
-      ],
-      "occursIn": [
-        "retrieve-decision-basis"
-      ]
+      "cost": "Posture exists only at audit time; between audits, nobody can answer what is actually covered."
     },
     {
       "slug": "it-blind-change",
@@ -721,15 +535,7 @@
         "Impact analysis"
       ],
       "pain": "Impact analysis is a guess made in a meeting.",
-      "cost": "Coupling is discovered in incident reviews, after the change shipped.",
-      "actorTypes": [
-        "it-architect",
-        "it-platform",
-        "it-cto"
-      ],
-      "occursIn": [
-        "assess-application-retirement"
-      ]
+      "cost": "Coupling is discovered in incident reviews, after the change shipped."
     },
     {
       "slug": "it-handcrafted-deliverables",
@@ -737,16 +543,7 @@
         "Artifact generation"
       ],
       "pain": "Every deliverable is hand-crafted, again and again.",
-      "cost": "ADR packs, evidence, baselines, and roadmaps are rebuilt by hand — and stale against each other by the time they ship.",
-      "actorTypes": [
-        "it-architect",
-        "it-cto",
-        "delivery-agent"
-      ],
-      "occursIn": [
-        "maintain-artifact-bindings",
-        "operate-recurring-reports"
-      ]
+      "cost": "ADR packs, evidence, baselines, and roadmaps are rebuilt by hand — and stale against each other by the time they ship."
     },
     {
       "slug": "it-truth-drift",
@@ -754,12 +551,7 @@
         "Truth sourcing"
       ],
       "pain": "Governance drifts from what actually runs.",
-      "cost": "The declared estate and the running estate diverge silently — until an audit or an incident exposes the gap.",
-      "actorTypes": [
-        "it-platform",
-        "it-architect",
-        "integration-client"
-      ]
+      "cost": "The declared estate and the running estate diverge silently — until an audit or an incident exposes the gap."
     },
     {
       "slug": "it-ai-blindness",
@@ -767,11 +559,7 @@
         "AI-ready governance"
       ],
       "pain": "AI agents act on stale wikis and tribal knowledge.",
-      "cost": "Without a trustworthy machine-readable source of truth, agent autonomy is either blocked or reckless.",
-      "actorTypes": [
-        "it-head-of-ai",
-        "integration-client"
-      ]
+      "cost": "Without a trustworthy machine-readable source of truth, agent autonomy is either blocked or reckless."
     },
     {
       "slug": "it-ungoverned-change",
@@ -779,12 +567,7 @@
         "Change governance"
       ],
       "pain": "Anything can change anything — there is no approval trail.",
-      "cost": "Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable.",
-      "actorTypes": [
-        "it-ciso",
-        "it-platform",
-        "integration-client"
-      ]
+      "cost": "Definitions, standards, and obligations mutate without review; who approved what, and when, is unanswerable."
     },
     {
       "slug": "it-framework-collision",
@@ -792,15 +575,7 @@
         "Framework composition"
       ],
       "pain": "Every framework lives in its own silo — and they collide on your desk.",
-      "cost": "TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident.",
-      "actorTypes": [
-        "it-ciso",
-        "it-architect",
-        "specification-reader"
-      ],
-      "occursIn": [
-        "resolve-competing-obligations"
-      ]
+      "cost": "TOGAF, ISO, GDPR, and NIS2 each demand their own registry and their own reconciliation; overlaps and conflicts are discovered by accident."
     },
     {
       "slug": "it-governance-lockin",
@@ -808,16 +583,7 @@
         "Vendor neutrality"
       ],
       "pain": "Your governance model is trapped in a vendor’s proprietary format.",
-      "cost": "Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance.",
-      "actorTypes": [
-        "it-cto",
-        "it-architect",
-        "specification-reader",
-        "integration-client"
-      ],
-      "occursIn": [
-        "qualify-processor-interchange"
-      ]
+      "cost": "Obligations, architecture, and compliance mappings live in tool-specific silos — migrating tools means re-authoring your governance."
     },
     {
       "slug": "it-tool-silos",
@@ -825,17 +591,7 @@
         "Interoperability"
       ],
       "pain": "Architecture, compliance, and quality tools don’t speak to each other.",
-      "cost": "Each tool keeps its own model of the same IT reality; integrations are bespoke mappings that rot, and knowledge stays siloed per tool and per team.",
-      "actorTypes": [
-        "it-platform",
-        "it-architect",
-        "integration-client",
-        "specification-reader"
-      ],
-      "occursIn": [
-        "agree-domain-typing-contract",
-        "qualify-processor-interchange"
-      ]
+      "cost": "Each tool keeps its own model of the same IT reality; integrations are bespoke mappings that rot, and knowledge stays siloed per tool and per team."
     },
     {
       "slug": "it-ungoverned-agents",
@@ -843,15 +599,7 @@
         "Agentic delivery"
       ],
       "pain": "AI agents ship work nobody scoped, gated, or can replay.",
-      "cost": "Agentic delivery state is trapped in chat sessions; pull requests appear without a mandate; there is no event log and no human authority at the layer where it matters.",
-      "actorTypes": [
-        "it-head-of-ai",
-        "it-platform",
-        "delivery-agent"
-      ],
-      "occursIn": [
-        "approve-agent-mandate"
-      ]
+      "cost": "Agentic delivery state is trapped in chat sessions; pull requests appear without a mandate; there is no event log and no human authority at the layer where it matters."
     },
     {
       "slug": "model-assumption-gap",
@@ -859,15 +607,7 @@
         "Model evidence"
       ],
       "pain": "A modeling decision cites an example as though it were an executed test.",
-      "cost": "A reviewer cannot distinguish a plausible explanation from evidence that rules out alternatives.",
-      "actorTypes": [
-        "research-reviewer",
-        "specification-reader"
-      ],
-      "occursIn": [
-        "review-model-evidence",
-        "propose-grammar-extension"
-      ]
+      "cost": "A reviewer cannot distinguish a plausible explanation from evidence that rules out alternatives."
     },
     {
       "slug": "manual-decision-handoff",
@@ -875,17 +615,7 @@
         "Decision handoffs"
       ],
       "pain": "The reason for a decision stays in an email thread instead of reaching the next reviewer.",
-      "cost": "In a manual handoff, the next reviewer repeats interviews to recover assumptions and unresolved objections.",
-      "actorTypes": [
-        "it-architect",
-        "it-cto",
-        "it-knowledge-owner",
-        "it-service-owner"
-      ],
-      "occursIn": [
-        "handover-operational-evidence",
-        "transfer-service-ownership"
-      ]
+      "cost": "In a manual handoff, the next reviewer repeats interviews to recover assumptions and unresolved objections."
     }
   ],
   "painGroups": [
@@ -959,6 +689,10 @@
       ],
       "addressedPains": [
         "it-acquisition-blind-spots"
+      ],
+      "values": [
+        "value:inspectable-acquisition-coverage",
+        "value:itip/definition-blackboard-code-sourcer/04"
       ]
     },
     {
@@ -970,6 +704,9 @@
       ],
       "addressedPains": [
         "it-acquisition-blind-spots"
+      ],
+      "values": [
+        "value:inspectable-acquisition-coverage"
       ]
     },
     {
@@ -983,6 +720,10 @@
       "addressedPains": [
         "it-acquisition-blind-spots",
         "it-truth-drift"
+      ],
+      "values": [
+        "value:inspectable-acquisition-coverage",
+        "value:itip/definition-blackboard-code-sourcer/02"
       ]
     },
     {
@@ -995,6 +736,12 @@
       ],
       "addressedPains": [
         "it-access-assignment-drift"
+      ],
+      "values": [
+        "value:least-privilege-collaboration",
+        "value:itip/web-application/01",
+        "value:sie/02",
+        "value:sie/operator/03"
       ]
     },
     {
@@ -1007,6 +754,9 @@
       ],
       "addressedPains": [
         "it-access-assignment-drift"
+      ],
+      "values": [
+        "value:least-privilege-collaboration"
       ]
     },
     {
@@ -1020,6 +770,9 @@
       ],
       "addressedPains": [
         "it-fragmented-review-context"
+      ],
+      "values": [
+        "value:coherent-review-sessions"
       ]
     },
     {
@@ -1032,6 +785,9 @@
       ],
       "addressedPains": [
         "it-unactionable-governance-findings"
+      ],
+      "values": [
+        "value:actionable-governance-findings"
       ]
     },
     {
@@ -1045,6 +801,13 @@
       "addressedPains": [
         "it-audit-reconstruction",
         "manual-decision-handoff"
+      ],
+      "values": [
+        "value:coherent-review-sessions",
+        "value:platform/governed-authority",
+        "value:platform/audit-readiness",
+        "value:sie/definition-manager/03",
+        "value:sie/definition-blackboard-manager/03"
       ]
     },
     {
@@ -1057,6 +820,9 @@
       ],
       "addressedPains": [
         "it-fragmented-review-context"
+      ],
+      "values": [
+        "value:repeatable-review-boundaries"
       ]
     },
     {
@@ -1071,6 +837,9 @@
       "addressedPains": [
         "it-fragmented-review-context",
         "it-tool-silos"
+      ],
+      "values": [
+        "value:repeatable-review-boundaries"
       ]
     },
     {
@@ -1083,6 +852,10 @@
       ],
       "addressedPains": [
         "it-framework-collision"
+      ],
+      "values": [
+        "value:itip/04",
+        "value:gsm/ontology/03"
       ]
     },
     {
@@ -1096,6 +869,10 @@
       ],
       "addressedPains": [
         "it-framework-collision"
+      ],
+      "values": [
+        "value:itip/04",
+        "value:gsm/ontology/03"
       ]
     },
     {
@@ -1108,6 +885,10 @@
       ],
       "addressedPains": [
         "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:explicit-obligation-applicability",
+        "value:gsm/ontology/02"
       ]
     },
     {
@@ -1121,6 +902,9 @@
       "addressedPains": [
         "it-handcrafted-deliverables",
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:itip/web-application/03"
       ]
     },
     {
@@ -1133,6 +917,9 @@
       ],
       "addressedPains": [
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:inspectable-artifact-completion"
       ]
     },
     {
@@ -1145,6 +932,9 @@
       ],
       "addressedPains": [
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:inspectable-artifact-completion"
       ]
     },
     {
@@ -1158,6 +948,9 @@
       "addressedPains": [
         "it-handcrafted-deliverables",
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:inspectable-artifact-completion"
       ]
     },
     {
@@ -1170,6 +963,9 @@
       ],
       "addressedPains": [
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:inspectable-artifact-completion"
       ]
     },
     {
@@ -1183,6 +979,9 @@
       ],
       "addressedPains": [
         "it-unactionable-governance-findings"
+      ],
+      "values": [
+        "value:actionable-governance-findings"
       ]
     },
     {
@@ -1195,6 +994,11 @@
       ],
       "addressedPains": [
         "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:explicit-obligation-applicability",
+        "value:itip/04",
+        "value:gsm/ontology/01"
       ]
     },
     {
@@ -1207,6 +1011,9 @@
       ],
       "addressedPains": [
         "it-stale-dependent-eligibility"
+      ],
+      "values": [
+        "value:sie/definition-manager/01"
       ]
     },
     {
@@ -1220,6 +1027,12 @@
       ],
       "addressedPains": [
         "it-unjustified-evidence-retention"
+      ],
+      "values": [
+        "value:proportionate-evidence-preservation",
+        "value:platform/audit-readiness",
+        "value:itip/definition-blackboard-code-sourcer/04",
+        "value:sie/definition-manager/03"
       ]
     },
     {
@@ -1233,6 +1046,10 @@
       ],
       "addressedPains": [
         "it-unexamined-rule-regressions"
+      ],
+      "values": [
+        "value:known-rule-revision-effects",
+        "value:sie/operator/02"
       ]
     },
     {
@@ -1246,6 +1063,11 @@
       ],
       "addressedPains": [
         "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/01",
+        "value:gsm/02",
+        "value:gsm/specifications/01"
       ]
     },
     {
@@ -1260,6 +1082,12 @@
       "addressedPains": [
         "it-governance-lockin",
         "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/01",
+        "value:gsm/03",
+        "value:gsm/specifications/01",
+        "value:gsm/specifications/02"
       ]
     },
     {
@@ -1273,6 +1101,14 @@
       ],
       "addressedPains": [
         "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:platform/accountable-autonomy",
+        "value:saf/02",
+        "value:saf/04",
+        "value:saf/agentic-harness/01",
+        "value:saf/safe-agentic-organization/01",
+        "value:saf/safe-agentic-organization/03"
       ]
     },
     {
@@ -1285,6 +1121,12 @@
       ],
       "addressedPains": [
         "it-unqualified-agent-runtime"
+      ],
+      "values": [
+        "value:qualified-runtime-selection",
+        "value:itip/definition-blackboard-code-sourcer/04",
+        "value:saf/04",
+        "value:saf/agentic-workspace/01"
       ]
     },
     {
@@ -1297,6 +1139,10 @@
       ],
       "addressedPains": [
         "it-unqualified-agent-runtime"
+      ],
+      "values": [
+        "value:qualified-runtime-selection",
+        "value:saf/agentic-harness/03"
       ]
     },
     {
@@ -1309,6 +1155,9 @@
       ],
       "addressedPains": [
         "it-conflicting-agent-artifacts"
+      ],
+      "values": [
+        "value:saf/03"
       ]
     },
     {
@@ -1322,6 +1171,9 @@
       ],
       "addressedPains": [
         "it-blind-change"
+      ],
+      "values": [
+        "value:itip/web-application/04"
       ]
     },
     {
@@ -1335,6 +1187,9 @@
       ],
       "addressedPains": [
         "it-service-accountability-gap"
+      ],
+      "values": [
+        "value:service-accountability"
       ]
     },
     {
@@ -1349,6 +1204,10 @@
       "addressedPains": [
         "it-service-accountability-gap",
         "manual-decision-handoff"
+      ],
+      "values": [
+        "value:service-accountability",
+        "value:usable-knowledge-transfer"
       ]
     },
     {
@@ -1362,6 +1221,9 @@
       ],
       "addressedPains": [
         "it-permanent-temporary-exceptions"
+      ],
+      "values": [
+        "value:time-bounded-risk-acceptance"
       ]
     },
     {
@@ -1374,6 +1236,9 @@
       ],
       "addressedPains": [
         "it-permanent-temporary-exceptions"
+      ],
+      "values": [
+        "value:time-bounded-risk-acceptance"
       ]
     },
     {
@@ -1387,6 +1252,9 @@
       ],
       "addressedPains": [
         "it-unknown-contract-consumers"
+      ],
+      "values": [
+        "value:predictable-interface-evolution"
       ]
     },
     {
@@ -1399,6 +1267,9 @@
       ],
       "addressedPains": [
         "it-unknown-contract-consumers"
+      ],
+      "values": [
+        "value:predictable-interface-evolution"
       ]
     },
     {
@@ -1412,6 +1283,10 @@
       ],
       "addressedPains": [
         "manual-decision-handoff"
+      ],
+      "values": [
+        "value:usable-knowledge-transfer",
+        "value:saf/03"
       ]
     },
     {
@@ -1425,6 +1300,9 @@
       ],
       "addressedPains": [
         "it-context-free-vulnerability-queue"
+      ],
+      "values": [
+        "value:exposure-led-remediation"
       ]
     },
     {
@@ -1438,6 +1316,9 @@
       ],
       "addressedPains": [
         "it-context-free-vulnerability-queue"
+      ],
+      "values": [
+        "value:exposure-led-remediation"
       ]
     },
     {
@@ -1451,6 +1332,9 @@
       ],
       "addressedPains": [
         "it-detached-supplier-assurance"
+      ],
+      "values": [
+        "value:service-grounded-supplier-decisions"
       ]
     },
     {
@@ -1464,6 +1348,9 @@
       ],
       "addressedPains": [
         "it-detached-supplier-assurance"
+      ],
+      "values": [
+        "value:service-grounded-supplier-decisions"
       ]
     },
     {
@@ -1478,6 +1365,9 @@
       ],
       "addressedPains": [
         "it-unproven-recovery-commitments"
+      ],
+      "values": [
+        "value:evidence-backed-recovery"
       ]
     },
     {
@@ -1491,6 +1381,9 @@
       ],
       "addressedPains": [
         "it-unproven-recovery-commitments"
+      ],
+      "values": [
+        "value:evidence-backed-recovery"
       ]
     },
     {
@@ -1504,6 +1397,9 @@
       ],
       "addressedPains": [
         "it-data-contract-expectation-gap"
+      ],
+      "values": [
+        "value:dependable-data-handoffs"
       ]
     },
     {
@@ -1517,6 +1413,9 @@
       ],
       "addressedPains": [
         "it-data-contract-expectation-gap"
+      ],
+      "values": [
+        "value:dependable-data-handoffs"
       ]
     },
     {
@@ -1532,6 +1431,9 @@
       ],
       "addressedPains": [
         "it-incident-business-impact-blindness"
+      ],
+      "values": [
+        "value:business-informed-incident-response"
       ]
     },
     {
@@ -1544,6 +1446,11 @@
       ],
       "addressedPains": [
         "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/01",
+        "value:gsm/02",
+        "value:gsm/03"
       ]
     },
     {
@@ -1556,6 +1463,9 @@
       ],
       "addressedPains": [
         "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/ontology/04"
       ]
     },
     {
@@ -1568,7 +1478,8 @@
       ],
       "addressedPains": [
         "it-tool-silos"
-      ]
+      ],
+      "values": []
     },
     {
       "slug": "describe-payment-settlement-boundaries",
@@ -1580,7 +1491,8 @@
       ],
       "addressedPains": [
         "it-tool-silos"
-      ]
+      ],
+      "values": []
     },
     {
       "slug": "review-sourced-obligations",
@@ -1594,6 +1506,12 @@
       "addressedPains": [
         "it-framework-collision",
         "it-assumed-governance-coverage"
+      ],
+      "values": [
+        "value:gsm/03",
+        "value:gsm/04",
+        "value:gsm/ontology/01",
+        "value:gsm/ontology/02"
       ]
     },
     {
@@ -1608,6 +1526,9 @@
       "addressedPains": [
         "it-framework-collision",
         "it-ungoverned-change"
+      ],
+      "values": [
+        "value:gsm/ontology/05"
       ]
     },
     {
@@ -1620,6 +1541,13 @@
       ],
       "addressedPains": [
         "model-assumption-gap"
+      ],
+      "values": [
+        "value:gsm/04",
+        "value:gsm/specifications/04",
+        "value:gsm/research-lab/01",
+        "value:gsm/research-lab/02",
+        "value:gsm/research-lab/03"
       ]
     },
     {
@@ -1632,6 +1560,11 @@
       ],
       "addressedPains": [
         "model-assumption-gap"
+      ],
+      "values": [
+        "value:gsm/specifications/03",
+        "value:gsm/specifications/04",
+        "value:gsm/research-lab/01"
       ]
     },
     {
@@ -1644,6 +1577,10 @@
       ],
       "addressedPains": [
         "it-tool-silos"
+      ],
+      "values": [
+        "value:gsm/specifications/03",
+        "value:gsm/research-lab/02"
       ]
     },
     {
@@ -1657,6 +1594,16 @@
       "addressedPains": [
         "it-ea-drift",
         "it-ungoverned-change"
+      ],
+      "values": [
+        "value:platform/governed-authority",
+        "value:itip/01",
+        "value:itip/02",
+        "value:itip/web-application/01",
+        "value:sie/01",
+        "value:sie/04",
+        "value:sie/definition-manager/01",
+        "value:sie/definition-blackboard-manager/02"
       ]
     },
     {
@@ -1671,6 +1618,17 @@
       "addressedPains": [
         "it-ea-drift",
         "it-truth-drift"
+      ],
+      "values": [
+        "value:itip/01",
+        "value:itip/02",
+        "value:itip/definition-blackboard-code-sourcer/01",
+        "value:itip/definition-blackboard-code-sourcer/02",
+        "value:itip/definition-blackboard-code-sourcer/03",
+        "value:sie/04",
+        "value:sie/definition-blackboard-manager/01",
+        "value:sie/definition-blackboard-manager/02",
+        "value:sie/definition-blackboard-manager/03"
       ]
     },
     {
@@ -1683,6 +1641,10 @@
       ],
       "addressedPains": [
         "it-ai-blindness"
+      ],
+      "values": [
+        "value:sie/01",
+        "value:sie/definition-manager/02"
       ]
     },
     {
@@ -1695,6 +1657,10 @@
       ],
       "addressedPains": [
         "it-ea-drift"
+      ],
+      "values": [
+        "value:sie/03",
+        "value:sie/definition-manager/04"
       ]
     },
     {
@@ -1708,6 +1674,14 @@
       ],
       "addressedPains": [
         "it-audit-reconstruction"
+      ],
+      "values": [
+        "value:platform/continuous-evaluation",
+        "value:platform/audit-readiness",
+        "value:itip/03",
+        "value:itip/web-application/02",
+        "value:sie/operator/02",
+        "value:sie/operator/04"
       ]
     },
     {
@@ -1722,6 +1696,12 @@
       "addressedPains": [
         "it-audit-reconstruction",
         "it-truth-drift"
+      ],
+      "values": [
+        "value:platform/continuous-evaluation",
+        "value:itip/01",
+        "value:itip/web-application/02",
+        "value:sie/03"
       ]
     },
     {
@@ -1735,6 +1715,11 @@
       ],
       "addressedPains": [
         "it-blind-change"
+      ],
+      "values": [
+        "value:platform/analysis-power",
+        "value:itip/03",
+        "value:itip/web-application/04"
       ]
     },
     {
@@ -1747,6 +1732,11 @@
       ],
       "addressedPains": [
         "it-ai-blindness"
+      ],
+      "values": [
+        "value:platform/analysis-power",
+        "value:itip/02",
+        "value:itip/web-application/05"
       ]
     },
     {
@@ -1759,6 +1749,11 @@
       ],
       "addressedPains": [
         "it-handcrafted-deliverables"
+      ],
+      "values": [
+        "value:platform/resource-economy",
+        "value:itip/03",
+        "value:itip/web-application/03"
       ]
     },
     {
@@ -1772,6 +1767,14 @@
       ],
       "addressedPains": [
         "it-ungoverned-change"
+      ],
+      "values": [
+        "value:platform/accountable-autonomy",
+        "value:sie/02",
+        "value:sie/03",
+        "value:sie/operator/01",
+        "value:sie/operator/03",
+        "value:sie/operator/04"
       ]
     },
     {
@@ -1786,6 +1789,16 @@
       "addressedPains": [
         "it-ungoverned-agents",
         "it-unverified-generated-output"
+      ],
+      "values": [
+        "value:platform/accountable-autonomy",
+        "value:saf/01",
+        "value:saf/02",
+        "value:saf/agentic-harness/01",
+        "value:saf/agentic-harness/02",
+        "value:saf/safe-agentic-organization/01",
+        "value:saf/safe-agentic-organization/02",
+        "value:saf/safe-agentic-organization/03"
       ]
     },
     {
@@ -1798,6 +1811,12 @@
       ],
       "addressedPains": [
         "it-ungoverned-agents"
+      ],
+      "values": [
+        "value:saf/04",
+        "value:saf/agentic-workspace/01",
+        "value:saf/agentic-workspace/02",
+        "value:saf/agentic-workspace/03"
       ]
     },
     {
@@ -1811,6 +1830,12 @@
       "addressedPains": [
         "it-handcrafted-deliverables",
         "manual-decision-handoff"
+      ],
+      "values": [
+        "value:platform/resource-economy",
+        "value:saf/01",
+        "value:saf/05",
+        "value:saf/saf-sie-bridge/01"
       ]
     }
   ],
@@ -1819,834 +1844,505 @@
       "slug": "value:inspectable-acquisition-coverage",
       "originalTitle": "Inspect acquisition scope and freshness",
       "title": "Inspect acquisition scope and freshness",
-      "body": "Distinguish inspected revisions from missing, failed or stale collection before relying on source evidence.",
-      "useCases": [
-        "configure-collection-boundaries",
-        "recover-incomplete-collection",
-        "review-evidence-refresh"
-      ]
+      "body": "Distinguish inspected revisions from missing, failed or stale collection before relying on source evidence."
     },
     {
       "slug": "value:least-privilege-collaboration",
       "originalTitle": "Align access with responsibilities",
       "title": "Align access with responsibilities",
-      "body": "Review action-specific permissions and identity synchronization against current responsibilities, with revocation and failures explicitly verified.",
-      "useCases": [
-        "review-operation-privileges",
-        "restore-identity-synchronization"
-      ]
+      "body": "Review action-specific permissions and identity synchronization against current responsibilities, with revocation and failures explicitly verified."
     },
     {
       "slug": "value:repeatable-review-boundaries",
       "originalTitle": "Repeatable review boundaries",
       "title": "Repeatable review boundaries",
-      "body": "Reuse explicit selection and traversal rules so reviewers can compare decisions against identified subjects and snapshot boundaries.",
-      "useCases": [
-        "reuse-review-lens",
-        "inspect-subject-perspectives"
-      ]
+      "body": "Reuse explicit selection and traversal rules so reviewers can compare decisions against identified subjects and snapshot boundaries."
     },
     {
       "slug": "value:coherent-review-sessions",
       "originalTitle": "Coherent records of related decisions",
       "title": "Coherent records of related decisions",
-      "body": "Retain agendas, participation and per-revision decisions together while keeping discussion, voting and authorized lifecycle decisions distinct.",
-      "useCases": [
-        "conduct-governance-session",
-        "retrieve-decision-basis"
-      ]
+      "body": "Retain agendas, participation and per-revision decisions together while keeping discussion, voting and authorized lifecycle decisions distinct."
     },
     {
       "slug": "value:actionable-governance-findings",
       "originalTitle": "Carry findings into corrective decisions",
       "title": "Carry findings into corrective decisions",
-      "body": "Connect blocking findings and uncovered obligations to owned corrections, renewed review and subsequent evidence of resolution.",
-      "useCases": [
-        "resolve-blocked-change",
-        "propose-appraisal-remediation"
-      ]
+      "body": "Connect blocking findings and uncovered obligations to owned corrections, renewed review and subsequent evidence of resolution."
     },
     {
       "slug": "value:explicit-obligation-applicability",
       "originalTitle": "Make obligation applicability explicit",
       "title": "Make obligation applicability explicit",
-      "body": "Separate reusable templates and vocabulary coverage from the subjects, conditions and accountable interpretation that establish applicable obligations.",
-      "useCases": [
-        "inspect-vocabulary-coverage",
-        "bind-obligations-to-scope"
-      ]
+      "body": "Separate reusable templates and vocabulary coverage from the subjects, conditions and accountable interpretation that establish applicable obligations."
     },
     {
       "slug": "value:inspectable-artifact-completion",
       "originalTitle": "Distinguish generated output from accepted completion",
       "title": "Distinguish generated output from accepted completion",
-      "body": "Inspect binding resolution, grounding constraints, missing inputs and job outcomes before accepting or reusing a generated deliverable.",
-      "useCases": [
-        "preview-artifact-bindings",
-        "constrain-generated-narrative",
-        "operate-recurring-reports",
-        "investigate-artifact-failure"
-      ]
+      "body": "Inspect binding resolution, grounding constraints, missing inputs and job outcomes before accepting or reusing a generated deliverable."
     },
     {
       "slug": "value:proportionate-evidence-preservation",
       "originalTitle": "Proportionate evidence preservation",
       "title": "Proportionate evidence preservation",
-      "body": "Agree justified preservation periods, access and disposal constraints while keeping policy decisions distinct from verified retention enforcement.",
-      "useCases": [
-        "agree-evidence-preservation"
-      ]
+      "body": "Agree justified preservation periods, access and disposal constraints while keeping policy decisions distinct from verified retention enforcement."
     },
     {
       "slug": "value:known-rule-revision-effects",
       "originalTitle": "Understand verdict changes before rule adoption",
       "title": "Understand verdict changes before rule adoption",
-      "body": "Compare rule revisions on pinned reference inputs and inspect changed and unknown results before accepting their effect on decisions.",
-      "useCases": [
-        "qualify-rule-revision"
-      ]
+      "body": "Compare rule revisions on pinned reference inputs and inspect changed and unknown results before accepting their effect on decisions."
     },
     {
       "slug": "value:qualified-runtime-selection",
       "originalTitle": "Qualify delivery hosts and model routes",
       "title": "Qualify delivery hosts and model routes",
-      "body": "Evaluate host instruction delivery and model routes against explicit workload quality, cost and disclosure criteria rather than assuming interchangeable behavior.",
-      "useCases": [
-        "qualify-host-instructions",
-        "qualify-model-routing"
-      ]
+      "body": "Evaluate host instruction delivery and model routes against explicit workload quality, cost and disclosure criteria rather than assuming interchangeable behavior."
     },
     {
       "slug": "value:service-accountability",
       "originalTitle": "Clear accountability for service commitments",
       "title": "Clear accountability for service commitments",
-      "body": "Establish who accepts each service commitment and dependency, including responsibilities transferred to a new owner.",
-      "useCases": [
-        "accept-service-baseline",
-        "transfer-service-ownership"
-      ]
+      "body": "Establish who accepts each service commitment and dependency, including responsibilities transferred to a new owner."
     },
     {
       "slug": "value:time-bounded-risk-acceptance",
       "originalTitle": "Time-bounded risk acceptance",
       "title": "Time-bounded risk acceptance",
-      "body": "Keep accepted exposure tied to accountable decisions, expiry and current compensating-control evidence rather than indefinite exceptions.",
-      "useCases": [
-        "review-time-bound-exception",
-        "renew-or-close-exception"
-      ]
+      "body": "Keep accepted exposure tied to accountable decisions, expiry and current compensating-control evidence rather than indefinite exceptions."
     },
     {
       "slug": "value:predictable-interface-evolution",
       "originalTitle": "Predictable evolution of shared interfaces",
       "title": "Predictable evolution of shared interfaces",
-      "body": "Coordinate contract changes and consumer migration against explicit compatibility evidence and retirement prerequisites.",
-      "useCases": [
-        "review-breaking-api-change",
-        "coordinate-api-deprecation"
-      ]
+      "body": "Coordinate contract changes and consumer migration against explicit compatibility evidence and retirement prerequisites."
     },
     {
       "slug": "value:usable-knowledge-transfer",
       "originalTitle": "Transfer usable operational knowledge",
       "title": "Transfer usable operational knowledge",
-      "body": "Carry authoritative decisions, unresolved obligations and inspected evidence into a handover the receiving service owner can accept.",
-      "useCases": [
-        "handover-operational-evidence",
-        "transfer-service-ownership"
-      ]
+      "body": "Carry authoritative decisions, unresolved obligations and inspected evidence into a handover the receiving service owner can accept."
     },
     {
       "slug": "value:exposure-led-remediation",
       "originalTitle": "Remediation focused on consequential exposure",
       "title": "Remediation focused on consequential exposure",
-      "body": "Direct security effort toward affected deployed services and business consequences, with mitigation effectiveness reviewed before closure.",
-      "useCases": [
-        "prioritize-service-vulnerabilities",
-        "verify-vulnerability-mitigation"
-      ]
+      "body": "Direct security effort toward affected deployed services and business consequences, with mitigation effectiveness reviewed before closure."
     },
     {
       "slug": "value:service-grounded-supplier-decisions",
       "originalTitle": "Supplier decisions grounded in service exposure",
       "title": "Supplier decisions grounded in service exposure",
-      "body": "Assess supplier changes and exits using dependent-service commitments, scoped assurance evidence and unresolved transition obligations.",
-      "useCases": [
-        "assess-supplier-service-change",
-        "review-supplier-exit-readiness"
-      ]
+      "body": "Assess supplier changes and exits using dependent-service commitments, scoped assurance evidence and unresolved transition obligations."
     },
     {
       "slug": "value:evidence-backed-recovery",
       "originalTitle": "Recovery commitments supported by evidence",
       "title": "Recovery commitments supported by evidence",
-      "body": "Distinguish stated recovery targets from observed exercise results, dependency constraints and scenarios that remain untested.",
-      "useCases": [
-        "review-service-recovery-exercise",
-        "resolve-recovery-dependency-conflicts"
-      ]
+      "body": "Distinguish stated recovery targets from observed exercise results, dependency constraints and scenarios that remain untested."
     },
     {
       "slug": "value:dependable-data-handoffs",
       "originalTitle": "Dependable data handoffs",
       "title": "Dependable data handoffs",
-      "body": "Agree the meaning and quality of exchanged data with its consumers, making contract changes and conflicting requirements explicit before adoption.",
-      "useCases": [
-        "review-data-contract-change",
-        "resolve-data-quality-requirements"
-      ]
+      "body": "Agree the meaning and quality of exchanged data with its consumers, making contract changes and conflicting requirements explicit before adoption."
     },
     {
       "slug": "value:business-informed-incident-response",
       "originalTitle": "Prioritize incident response by business consequences",
       "title": "Prioritize incident response by business consequences",
-      "body": "Connect observed software disruption to affected business processes and accountable owners, separating confirmed impact from possible exposure so response and communication follow justified priorities.",
-      "useCases": [
-        "trace-incident-business-impact"
-      ]
+      "body": "Connect observed software disruption to affected business processes and accountable owners, separating confirmed impact from possible exposure so response and communication follow justified priorities."
     },
     {
       "slug": "value:platform/analysis-power",
       "originalTitle": "Decision insight",
       "title": "Reduce uncertainty about a specified change",
-      "body": "Bring relevant context and affected definitions into a shared review, making dependency paths and missing evidence visible before deciding.",
-      "useCases": [
-        "inspect-change-impact",
-        "ask-cited-it-question"
-      ]
+      "body": "Bring relevant context and affected definitions into a shared review, making dependency paths and missing evidence visible before deciding."
     },
     {
       "slug": "value:platform/continuous-evaluation",
       "originalTitle": "Earlier nonconformance awareness",
       "title": "Reduce time that nonconformance remains unknown",
-      "body": "Use planned scoped evaluation to surface findings earlier, with observation coverage, freshness and unknown states visible to reviewers.",
-      "useCases": [
-        "review-scoped-appraisal",
-        "review-recurring-service-appraisal"
-      ]
+      "body": "Use planned scoped evaluation to surface findings earlier, with observation coverage, freshness and unknown states visible to reviewers."
     },
     {
       "slug": "value:platform/governed-authority",
       "originalTitle": "Attributable decisions",
       "title": "Keep consequential changes attributable",
-      "body": "Connect consequential changes to identity, policy and revision-bound decisions as authenticated governance controls are completed.",
-      "useCases": [
-        "author-reviewed-definition",
-        "retrieve-decision-basis"
-      ]
+      "body": "Connect consequential changes to identity, policy and revision-bound decisions as authenticated governance controls are completed."
     },
     {
       "slug": "value:platform/accountable-autonomy",
       "originalTitle": "Accountable delegation",
       "title": "Delegate bounded work with evidence and recourse",
-      "body": "Build toward delegated workflows with explicit obligations, decision boundaries and controlled effects, retaining evidence for intervention and recovery.",
-      "useCases": [
-        "approve-agent-mandate",
-        "execute-bounded-response",
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Build toward delegated workflows with explicit obligations, decision boundaries and controlled effects, retaining evidence for intervention and recovery."
     },
     {
       "slug": "value:platform/resource-economy",
       "originalTitle": "Reduced repeated work",
       "title": "Reduce avoidable reconstruction and rework",
-      "body": "Reuse shared context and generated artifacts so effort can shift from repeated assembly to curation and review. Net savings depend on the workflow and compute costs.",
-      "useCases": [
-        "generate-decision-pack",
-        "reuse-delivery-evidence"
-      ]
+      "body": "Reuse shared context and generated artifacts so effort can shift from repeated assembly to curation and review. Net savings depend on the workflow and compute costs."
     },
     {
       "slug": "value:platform/audit-readiness",
       "originalTitle": "Audit preparation",
       "title": "Reduce evidence reconstruction effort",
-      "body": "Bring linked snapshots, decisions and provenance into a stated audit scope, with completeness assessed against that review rather than inferred from history alone.",
-      "useCases": [
-        "retrieve-decision-basis",
-        "review-scoped-appraisal",
-        "agree-evidence-preservation"
-      ]
+      "body": "Bring linked snapshots, decisions and provenance into a stated audit scope, with completeness assessed against that review rather than inferred from history alone."
     },
     {
       "slug": "value:itip/01",
       "originalTitle": "Governance that stops drifting.",
       "title": "Keep governance closer to its evidence.",
-      "body": "Bring shared definitions, reviewed candidates and scoped appraisal together to simplify reconciliation. For running systems, keep observation coverage and freshness visible.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "author-reviewed-definition",
-        "review-recurring-service-appraisal"
-      ]
+      "body": "Bring shared definitions, reviewed candidates and scoped appraisal together to simplify reconciliation. For running systems, keep observation coverage and freshness visible."
     },
     {
       "slug": "value:itip/02",
       "originalTitle": "A source of truth AI can act on.",
       "title": "Give AI attributable context.",
-      "body": "Ground planned read-only answers in authorized, versioned definitions, with citations and abstention for review. Build that context through direct authoring or reviewed sourcing.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "author-reviewed-definition",
-        "ask-cited-it-question"
-      ]
+      "body": "Ground planned read-only answers in authorized, versioned definitions, with citations and abstention for review. Build that context through direct authoring or reviewed sourcing."
     },
     {
       "slug": "value:itip/03",
       "originalTitle": "Every profile, every deliverable, one model.",
       "title": "Coordinate IT work around shared definitions.",
-      "body": "Reuse common inputs across appraisal, analysis and document generation so profiles can review decisions against the same definitions. Outputs and scenarios remain subject to review.",
-      "useCases": [
-        "review-scoped-appraisal",
-        "inspect-change-impact",
-        "generate-decision-pack"
-      ]
+      "body": "Reuse common inputs across appraisal, analysis and document generation so profiles can review decisions against the same definitions. Outputs and scenarios remain subject to review."
     },
     {
       "slug": "value:itip/04",
       "originalTitle": "Ontologies composed, not siloed.",
       "title": "Review obligations together.",
-      "body": "Reuse selected packages in one scoped review, with applicability, conflicting obligations and missing evidence visible for resolution.",
-      "useCases": [
-        "reuse-governance-selection",
-        "bind-obligations-to-scope",
-        "resolve-competing-obligations"
-      ]
+      "body": "Reuse selected packages in one scoped review, with applicability, conflicting obligations and missing evidence visible for resolution."
     },
     {
       "slug": "value:itip/web-application/01",
       "originalTitle": "One place every IT profile works.",
       "title": "A shared workspace for IT decisions.",
-      "body": "Author and review a common inventory through planned integrated workflows and scoped permissions, reducing handoffs between separate representations.",
-      "useCases": [
-        "author-reviewed-definition",
-        "review-operation-privileges"
-      ]
+      "body": "Author and review a common inventory through planned integrated workflows and scoped permissions, reducing handoffs between separate representations."
     },
     {
       "slug": "value:itip/web-application/02",
       "originalTitle": "Compliance observed, not reconstructed.",
       "title": "Make scoped appraisal inspectable.",
-      "body": "Prepare reviews from versioned findings with visible coverage, observation age and unknown results. Legal interpretation stays with the reviewer.",
-      "useCases": [
-        "review-scoped-appraisal",
-        "review-recurring-service-appraisal"
-      ]
+      "body": "Prepare reviews from versioned findings with visible coverage, observation age and unknown results. Legal interpretation stays with the reviewer."
     },
     {
       "slug": "value:itip/web-application/03",
       "originalTitle": "Deliverables fall out of the model.",
       "title": "Reduce repeated document assembly.",
-      "body": "Generate reviewable document families from reusable definitions and templates, then focus effort on review, correction and template upkeep.",
-      "useCases": [
-        "maintain-artifact-bindings",
-        "generate-decision-pack"
-      ]
+      "body": "Generate reviewable document families from reusable definitions and templates, then focus effort on review, correction and template upkeep."
     },
     {
       "slug": "value:itip/web-application/04",
       "originalTitle": "See the impact before you commit.",
       "title": "Inspect possible effects before deciding.",
-      "body": "Follow dependency and obligation paths to affected definitions. Timing, probability and causal predictions belong to the further simulation scope.",
-      "useCases": [
-        "inspect-change-impact",
-        "assess-application-retirement"
-      ]
+      "body": "Follow dependency and obligation paths to affected definitions. Timing, probability and causal predictions belong to the further simulation scope."
     },
     {
       "slug": "value:itip/web-application/05",
       "originalTitle": "Ask the model, not the wiki.",
       "title": "Check answers against sources.",
-      "body": "Use the planned copilot to find relevant definitions and inspect cited evidence, snapshot age and uncertainty alongside each answer.",
-      "useCases": [
-        "ask-cited-it-question"
-      ]
+      "body": "Use the planned copilot to find relevant definitions and inspect cited evidence, snapshot age and uncertainty alongside each answer."
     },
     {
       "slug": "value:itip/definition-blackboard-code-sourcer/01",
       "originalTitle": "Definitions author themselves.",
       "title": "Reduce manual candidate authoring.",
-      "body": "Prepare proposals through staged analysis and optional inference so experts can focus on reconciliation and acceptance.",
-      "useCases": [
-        "reconcile-code-evidence"
-      ]
+      "body": "Prepare proposals through staged analysis and optional inference so experts can focus on reconciliation and acceptance."
     },
     {
       "slug": "value:itip/definition-blackboard-code-sourcer/02",
       "originalTitle": "The model reflects what actually runs.",
       "title": "Relate definitions to inspected revisions.",
-      "body": "Reconcile definitions against pinned source evidence. Relating them to running systems additionally requires deployed identity, configuration and fresh observations.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "review-evidence-refresh"
-      ]
+      "body": "Reconcile definitions against pinned source evidence. Relating them to running systems additionally requires deployed identity, configuration and fresh observations."
     },
     {
       "slug": "value:itip/definition-blackboard-code-sourcer/03",
       "originalTitle": "Every definition is explainable.",
       "title": "Inspect the basis of proposals.",
-      "body": "Review provenance and confidence alongside retained tool details, source revisions and competing evidence.",
-      "useCases": [
-        "reconcile-code-evidence"
-      ]
+      "body": "Review provenance and confidence alongside retained tool details, source revisions and competing evidence."
     },
     {
       "slug": "value:itip/definition-blackboard-code-sourcer/04",
       "originalTitle": "Private by design.",
       "title": "Control sourcing data exposure.",
-      "body": "Bound the planned sourcing workflow with explicit policies for tool/model egress, credentials, telemetry and retention, including any data leaving the local process.",
-      "useCases": [
-        "configure-collection-boundaries",
-        "qualify-model-routing",
-        "agree-evidence-preservation"
-      ]
+      "body": "Bound the planned sourcing workflow with explicit policies for tool/model egress, credentials, telemetry and retention, including any data leaving the local process."
     },
     {
       "slug": "value:sie/01",
       "originalTitle": "A governed AI context.",
       "title": "Make shared context attributable.",
-      "body": "Build toward policy-filtered snapshots that people and AI can inspect. Direct API authoring is independent of sourcing, with MCP planned as an additional interface.",
-      "useCases": [
-        "consume-authorized-context",
-        "author-reviewed-definition"
-      ]
+      "body": "Build toward policy-filtered snapshots that people and AI can inspect. Direct API authoring is independent of sourcing, with MCP planned as an additional interface."
     },
     {
       "slug": "value:sie/02",
       "originalTitle": "Harnessed operations.",
       "title": "Constrain operations at declared boundaries.",
-      "body": "Combine eligibility, caller authority and adapter contracts to bound effectful execution. Keep pure verdict evaluation separate from actions that change a system.",
-      "useCases": [
-        "execute-bounded-response",
-        "review-operation-privileges"
-      ]
+      "body": "Combine eligibility, caller authority and adapter contracts to bound effectful execution. Keep pure verdict evaluation separate from actions that change a system."
     },
     {
       "slug": "value:sie/03",
       "originalTitle": "One closed self-sustaining loop.",
       "title": "Build toward bounded feedback loops.",
-      "body": "Connect definitions, observations, evaluation, authorized response and re-observation in future domain-specific loops, with explicit boundaries for each integration.",
-      "useCases": [
-        "review-recurring-service-appraisal",
-        "execute-bounded-response",
-        "react-to-definition-change"
-      ]
+      "body": "Connect definitions, observations, evaluation, authorized response and re-observation in future domain-specific loops, with explicit boundaries for each integration."
     },
     {
       "slug": "value:sie/04",
       "originalTitle": "Reality feeds governance.",
       "title": "Use evidence to inform revisions.",
-      "body": "Carry reviewed candidates into authorized revisions with promotion lineage. Collection, approval and confirmation against running systems remain distinct steps.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "author-reviewed-definition"
-      ]
+      "body": "Carry reviewed candidates into authorized revisions with promotion lineage. Collection, approval and confirmation against running systems remain distinct steps."
     },
     {
       "slug": "value:sie/definition-manager/01",
       "originalTitle": "Governance you can’t corrupt.",
       "title": "Make transitions inspectable.",
-      "body": "Check lifecycle advancement against defined transitions, with authentication, policy and current grammar alignment completing the governance boundary.",
-      "useCases": [
-        "author-reviewed-definition",
-        "assess-invalidated-dependencies"
-      ]
+      "body": "Check lifecycle advancement against defined transitions, with authentication, policy and current grammar alignment completing the governance boundary."
     },
     {
       "slug": "value:sie/definition-manager/02",
       "originalTitle": "An API, not a document store.",
       "title": "Access snapshots programmatically.",
-      "body": "Reuse structured snapshots across tools instead of manually exchanging documents, within each route's validated isolation, pagination and performance scope.",
-      "useCases": [
-        "consume-authorized-context"
-      ]
+      "body": "Reuse structured snapshots across tools instead of manually exchanging documents, within each route's validated isolation, pagination and performance scope."
     },
     {
       "slug": "value:sie/definition-manager/03",
       "originalTitle": "Audit-ready by construction.",
       "title": "Reuse retained lifecycle evidence.",
-      "body": "Start review from retained version history. Linking actors, rationale and retention policy completes the evidence needed for a stated audit scope.",
-      "useCases": [
-        "retrieve-decision-basis",
-        "agree-evidence-preservation"
-      ]
+      "body": "Start review from retained version history. Linking actors, rationale and retention policy completes the evidence needed for a stated audit scope."
     },
     {
       "slug": "value:sie/definition-manager/04",
       "originalTitle": "The model announces its own changes.",
       "title": "React to committed changes.",
-      "body": "Use planned change notifications to replace repeated polling, with replay and recovery for missed events.",
-      "useCases": [
-        "react-to-definition-change"
-      ]
+      "body": "Use planned change notifications to replace repeated polling, with replay and recovery for missed events."
     },
     {
       "slug": "value:sie/operator/01",
       "originalTitle": "Governance that executes.",
       "title": "Connect eligible definitions to bounded action.",
-      "body": "Use defined mechanisms for named operations, adding verdicts, scheduling and feedback when building a complete domain loop.",
-      "useCases": [
-        "execute-bounded-response"
-      ]
+      "body": "Use defined mechanisms for named operations, adding verdicts, scheduling and feedback when building a complete domain loop."
     },
     {
       "slug": "value:sie/operator/02",
       "originalTitle": "Sandboxed, reproducible verdicts.",
       "title": "Make pure verdicts reproducible.",
-      "body": "Replay planned pure evaluations against pinned rules, inputs and time, independently of effectful execution.",
-      "useCases": [
-        "review-scoped-appraisal",
-        "qualify-rule-revision"
-      ]
+      "body": "Replay planned pure evaluations against pinned rules, inputs and time, independently of effectful execution."
     },
     {
       "slug": "value:sie/operator/03",
       "originalTitle": "Only the model decides what runs.",
       "title": "Make eligibility and authority explicit.",
-      "body": "Bound operations through governed eligibility together with caller and adapter policy as execution controls are completed.",
-      "useCases": [
-        "execute-bounded-response",
-        "review-operation-privileges"
-      ]
+      "body": "Bound operations through governed eligibility together with caller and adapter policy as execution controls are completed."
     },
     {
       "slug": "value:sie/operator/04",
       "originalTitle": "Always the current governed version.",
       "title": "Identify the snapshot used.",
-      "body": "Trace execution to requested definition IDs. Coherent pinning will distinguish latest, historical and eligible snapshot policies explicitly.",
-      "useCases": [
-        "execute-bounded-response",
-        "review-scoped-appraisal"
-      ]
+      "body": "Trace execution to requested definition IDs. Coherent pinning will distinguish latest, historical and eligible snapshot policies explicitly."
     },
     {
       "slug": "value:sie/definition-blackboard-manager/01",
       "originalTitle": "The whole picture, from every partial view.",
       "title": "Compare contributed partial views.",
-      "body": "Bring conflicting candidates into shared panels so reviewers can compare evidence and identify gaps in the collected views.",
-      "useCases": [
-        "reconcile-code-evidence"
-      ]
+      "body": "Bring conflicting candidates into shared panels so reviewers can compare evidence and identify gaps in the collected views."
     },
     {
       "slug": "value:sie/definition-blackboard-manager/02",
       "originalTitle": "Thinking here, deciding there.",
       "title": "Separate exploration from acceptance.",
-      "body": "Collect candidates on the board, reconcile them in a client and govern promoted drafts in the Definition Manager through an explicit integration handoff.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "author-reviewed-definition"
-      ]
+      "body": "Collect candidates on the board, reconcile them in a client and govern promoted drafts in the Definition Manager through an explicit integration handoff."
     },
     {
       "slug": "value:sie/definition-blackboard-manager/03",
       "originalTitle": "You can always answer “why is this in the model?”",
       "title": "Trace retained proposal evidence.",
-      "body": "Revisit captured actors and sources, with reducer decisions and Ascription links extending the trail from proposal to accepted definition.",
-      "useCases": [
-        "reconcile-code-evidence",
-        "retrieve-decision-basis"
-      ]
+      "body": "Revisit captured actors and sources, with reducer decisions and Ascription links extending the trail from proposal to accepted definition."
     },
     {
       "slug": "value:gsm/01",
       "originalTitle": "What OpenTelemetry is to RUN, GSM is to THINK.",
       "title": "Build toward shared definition semantics.",
-      "body": "Give compatible tools a common vocabulary for definitions, analogous to shared observability conventions. Interchange depends on implemented profiles and independent consumer compatibility.",
-      "useCases": [
-        "read-governance-model",
-        "agree-domain-typing-contract",
-        "qualify-processor-interchange"
-      ]
+      "body": "Give compatible tools a common vocabulary for definitions, analogous to shared observability conventions. Interchange depends on implemented profiles and independent consumer compatibility."
     },
     {
       "slug": "value:gsm/02",
       "originalTitle": "Kubernetes defines infrastructure to operate it. GSM defines the world to govern it.",
       "title": "Make governed intent explicit.",
-      "body": "Describe a chosen domain through typed definitions, explicit obligations and a governed lifecycle, bringing declarative intent to scoped system modeling.",
-      "useCases": [
-        "read-governance-model",
-        "agree-domain-typing-contract"
-      ]
+      "body": "Describe a chosen domain through typed definitions, explicit obligations and a governed lifecycle, bringing declarative intent to scoped system modeling."
     },
     {
       "slug": "value:gsm/03",
       "originalTitle": "Governance as code, composed with policy as code.",
       "title": "Connect governance and policy tools.",
-      "body": "Use shared definitions and obligations as inputs to planned policy, attestation, observation and delivery integrations, with dedicated adapters for each tool.",
-      "useCases": [
-        "read-governance-model",
-        "review-sourced-obligations",
-        "qualify-processor-interchange"
-      ]
+      "body": "Use shared definitions and obligations as inputs to planned policy, attestation, observation and delivery integrations, with dedicated adapters for each tool."
     },
     {
       "slug": "value:gsm/04",
       "originalTitle": "Trust the standard, not the vendor.",
       "title": "Inspect the model and its sources.",
-      "body": "Evaluate adoption against versioned content, source mappings and visible research questions. Neutral stewardship remains a stated direction, distinct from consortium endorsement.",
-      "useCases": [
-        "review-model-evidence",
-        "review-sourced-obligations"
-      ]
+      "body": "Evaluate adoption against versioned content, source mappings and visible research questions. Neutral stewardship remains a stated direction, distinct from consortium endorsement."
     },
     {
       "slug": "value:gsm/specifications/01",
       "originalTitle": "Tools that interoperate, silos that fall.",
       "title": "Reduce bespoke semantic translation.",
-      "body": "Reuse shared vocabulary and profiles when connecting tools that implement compatible contracts.",
-      "useCases": [
-        "agree-domain-typing-contract",
-        "qualify-processor-interchange"
-      ]
+      "body": "Reuse shared vocabulary and profiles when connecting tools that implement compatible contracts."
     },
     {
       "slug": "value:gsm/specifications/02",
       "originalTitle": "Lock-in ends where the standard begins.",
       "title": "Make portability requirements explicit.",
-      "body": "Compare migration routes against declared conformance requirements. Complete transfer still depends on nonconformant DRAFT preservation and independent endpoint compatibility.",
-      "useCases": [
-        "qualify-processor-interchange"
-      ]
+      "body": "Compare migration routes against declared conformance requirements. Complete transfer still depends on nonconformant DRAFT preservation and independent endpoint compatibility."
     },
     {
       "slug": "value:gsm/specifications/03",
       "originalTitle": "The governance grammar keeps deepening.",
       "title": "Adapt grammar through evidence.",
-      "body": "Address demonstrated modeling limits through planned, reviewed extensions with explicit compatibility decisions.",
-      "useCases": [
-        "propose-grammar-extension",
-        "incorporate-accepted-grammar-extension"
-      ]
+      "body": "Address demonstrated modeling limits through planned, reviewed extensions with explicit compatibility decisions."
     },
     {
       "slug": "value:gsm/specifications/04",
       "originalTitle": "Built for neutral stewardship.",
       "title": "Build toward neutral stewardship.",
-      "body": "Pursue consortium stewardship through a visible model and reviewed evolution, with ownership, licensing and publication stated separately.",
-      "useCases": [
-        "review-model-evidence",
-        "propose-grammar-extension"
-      ]
+      "body": "Pursue consortium stewardship through a visible model and reviewed evolution, with ownership, licensing and publication stated separately."
     },
     {
       "slug": "value:gsm/ontology/01",
       "originalTitle": "Day-one governance, not a blank page.",
       "title": "Start from reusable vocabulary.",
-      "body": "Build on selected sourced content, then focus authoring effort on installation, interpretation and bindings for your domain.",
-      "useCases": [
-        "review-sourced-obligations",
-        "bind-obligations-to-scope"
-      ]
+      "body": "Build on selected sourced content, then focus authoring effort on installation, interpretation and bindings for your domain."
     },
     {
       "slug": "value:gsm/ontology/02",
       "originalTitle": "The authority’s own taxonomy, clause by clause.",
       "title": "Inspect source mappings.",
-      "body": "Review concepts in the source taxonomy with available clause references, checking coverage and legal applicability for your scope.",
-      "useCases": [
-        "review-sourced-obligations",
-        "inspect-vocabulary-coverage"
-      ]
+      "body": "Review concepts in the source taxonomy with available clause references, checking coverage and legal applicability for your scope."
     },
     {
       "slug": "value:gsm/ontology/03",
       "originalTitle": "Ontologies that compose, not collide.",
       "title": "Review composition explicitly.",
-      "body": "Combine selected vocabularies through GSM governance, with reference resolution and obligation conflicts handled in review.",
-      "useCases": [
-        "reuse-governance-selection",
-        "resolve-competing-obligations"
-      ]
+      "body": "Combine selected vocabularies through GSM governance, with reference resolution and obligation conflicts handled in review."
     },
     {
       "slug": "value:gsm/ontology/04",
       "originalTitle": "Every claim carries where it came from.",
       "title": "Represent attribution explicitly.",
-      "body": "Record attribution in typed facets and connect it to consumer-verified actors and populated lineage.",
-      "useCases": [
-        "describe-service-contract"
-      ]
+      "body": "Record attribution in typed facets and connect it to consumer-verified actors and populated lineage."
     },
     {
       "slug": "value:gsm/ontology/05",
       "originalTitle": "Maintained as the real world changes.",
       "title": "Review evolving requirements.",
-      "body": "Use planned source monitoring and versioned updates to review changing requirements before choosing governed upgrades.",
-      "useCases": [
-        "upgrade-governance-packages"
-      ]
+      "body": "Use planned source monitoring and versioned updates to review changing requirements before choosing governed upgrades."
     },
     {
       "slug": "value:gsm/research-lab/01",
       "originalTitle": "The standard is tested before it is frozen.",
       "title": "Challenge assumptions explicitly.",
-      "body": "Compare alternative explanations through research records and cases, distinguishing conceptual exploration from executed testing.",
-      "useCases": [
-        "review-model-evidence",
-        "propose-grammar-extension"
-      ]
+      "body": "Compare alternative explanations through research records and cases, distinguishing conceptual exploration from executed testing."
     },
     {
       "slug": "value:gsm/research-lab/02",
       "originalTitle": "Research and specification never blur.",
       "title": "Separate hypotheses from requirements.",
-      "body": "Keep exploratory records separate from normative requirements and promote findings through specification governance.",
-      "useCases": [
-        "review-model-evidence",
-        "incorporate-accepted-grammar-extension"
-      ]
+      "body": "Keep exploratory records separate from normative requirements and promote findings through specification governance."
     },
     {
       "slug": "value:gsm/research-lab/03",
       "originalTitle": "Open questions have stable names.",
       "title": "Track open questions consistently.",
-      "body": "Reference the same research question across cases and decisions using stable identifiers and visible status.",
-      "useCases": [
-        "review-model-evidence"
-      ]
+      "body": "Reference the same research question across cases and decisions using stable identifiers and visible status."
     },
     {
       "slug": "value:saf/01",
       "originalTitle": "Definitions that generate systems.",
       "title": "Build toward traceable delivery.",
-      "body": "Generate reviewable artifacts through bounded workflows, then carry evidence forward through separate build, deployment and re-observation stages.",
-      "useCases": [
-        "deliver-reviewed-artifact",
-        "reuse-delivery-evidence"
-      ]
+      "body": "Generate reviewable artifacts through bounded workflows, then carry evidence forward through separate build, deployment and re-observation stages."
     },
     {
       "slug": "value:saf/02",
       "originalTitle": "A method, run by agents, as a harness.",
       "title": "Make agentic work reviewable.",
-      "body": "Combine role contracts, workflow decisions and artifact evidence, with planned authenticated human gates bound to exact revisions.",
-      "useCases": [
-        "approve-agent-mandate",
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Combine role contracts, workflow decisions and artifact evidence, with planned authenticated human gates bound to exact revisions."
     },
     {
       "slug": "value:saf/03",
       "originalTitle": "Local orchestrations, one organization.",
       "title": "Coordinate through shared artifacts.",
-      "body": "Collaborate through versioned contracts and Git-backed artifacts, reconciling separate journals, merges and version differences explicitly.",
-      "useCases": [
-        "reconcile-parallel-agent-outputs",
-        "handover-operational-evidence"
-      ]
+      "body": "Collaborate through versioned contracts and Git-backed artifacts, reconciling separate journals, merges and version differences explicitly."
     },
     {
       "slug": "value:saf/04",
       "originalTitle": "Open, local-first, sovereign.",
       "title": "Control local delivery data.",
-      "body": "Choose local tools and Git workflows, with explicit policies for model/tool egress, telemetry, remotes and backups.",
-      "useCases": [
-        "approve-agent-mandate",
-        "qualify-model-routing",
-        "install-and-publish-workspace"
-      ]
+      "body": "Choose local tools and Git workflows, with explicit policies for model/tool egress, telemetry, remotes and backups."
     },
     {
       "slug": "value:saf/05",
       "originalTitle": "Delivery history becomes governed context.",
       "title": "Reuse delivery evidence.",
-      "body": "Derive candidates from pinned artifacts and journals through the planned bridge, then review and promote them through a client-owned stage.",
-      "useCases": [
-        "reuse-delivery-evidence"
-      ]
+      "body": "Derive candidates from pinned artifacts and journals through the planned bridge, then review and promote them through a client-owned stage."
     },
     {
       "slug": "value:saf/agentic-harness/01",
       "originalTitle": "Deterministic rails for probabilistic agents.",
       "title": "Inspect control decisions.",
-      "body": "Review persisted step and write-authorization decisions within mediated execution, alongside separate checks for output quality and human approval.",
-      "useCases": [
-        "approve-agent-mandate",
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Review persisted step and write-authorization decisions within mediated execution, alongside separate checks for output quality and human approval."
     },
     {
       "slug": "value:saf/agentic-harness/02",
       "originalTitle": "Invalid bytes never land.",
       "title": "Catch invalid declared artifacts earlier.",
-      "body": "Check matched schemas before mediated writes so declared structural errors surface early. Coverage follows the supported parser, contract and transaction boundaries.",
-      "useCases": [
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Check matched schemas before mediated writes so declared structural errors surface early. Coverage follows the supported parser, contract and transaction boundaries."
     },
     {
       "slug": "value:saf/agentic-harness/03",
       "originalTitle": "One method, any host.",
       "title": "Reuse methods on supported hosts.",
-      "body": "Carry plain-file methods between supported host/model adapters, with explicit compatibility and mediation boundaries.",
-      "useCases": [
-        "qualify-host-instructions"
-      ]
+      "body": "Carry plain-file methods between supported host/model adapters, with explicit compatibility and mediation boundaries."
     },
     {
       "slug": "value:saf/safe-agentic-organization/01",
       "originalTitle": "An org chart, not a swarm.",
       "title": "Clarify responsibilities.",
-      "body": "Assign orchestration and specialist work to named roles, making ownership and handoffs visible in each workflow.",
-      "useCases": [
-        "approve-agent-mandate",
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Assign orchestration and specialist work to named roles, making ownership and handoffs visible in each workflow."
     },
     {
       "slug": "value:saf/safe-agentic-organization/02",
       "originalTitle": "A method agents must implement.",
       "title": "Make expectations inspectable.",
-      "body": "Review deliverables against shared templates, practices and workflow contracts, with executable checks supplied by supported harness bindings.",
-      "useCases": [
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Review deliverables against shared templates, practices and workflow contracts, with executable checks supplied by supported harness bindings."
     },
     {
       "slug": "value:saf/safe-agentic-organization/03",
       "originalTitle": "Agents propose, humans dispose.",
       "title": "Keep decisions attributable.",
-      "body": "Bind advancement to authenticated human decisions on exact revisions and scope through the planned approval workflow.",
-      "useCases": [
-        "approve-agent-mandate",
-        "deliver-reviewed-artifact"
-      ]
+      "body": "Bind advancement to authenticated human decisions on exact revisions and scope through the planned approval workflow."
     },
     {
       "slug": "value:saf/agentic-workspace/01",
       "originalTitle": "Your files, your history, your state.",
       "title": "Keep artifacts in a chosen working tree.",
-      "body": "Own the Git working tree and its artifact history, with separate disclosure policies for journals, remotes, tools, models and backups.",
-      "useCases": [
-        "install-and-publish-workspace",
-        "qualify-model-routing"
-      ]
+      "body": "Own the Git working tree and its artifact history, with separate disclosure policies for journals, remotes, tools, models and backups."
     },
     {
       "slug": "value:saf/agentic-workspace/02",
       "originalTitle": "Install once, deliver governed.",
       "title": "Make supported setup repeatable.",
-      "body": "Use the planned installer for pinned setup, reruns, upgrades and rollback while preserving existing work.",
-      "useCases": [
-        "install-and-publish-workspace"
-      ]
+      "body": "Use the planned installer for pinned setup, reruns, upgrades and rollback while preserving existing work."
     },
     {
       "slug": "value:saf/agentic-workspace/03",
       "originalTitle": "The same gates run in CI.",
       "title": "Reuse declared checks in CI.",
-      "body": "Carry pinned artifact checks into planned CI pipelines, with environment validation and human decisions handled explicitly.",
-      "useCases": [
-        "install-and-publish-workspace"
-      ]
+      "body": "Carry pinned artifact checks into planned CI pipelines, with environment validation and human decisions handled explicitly."
     },
     {
       "slug": "value:saf/saf-sie-bridge/01",
       "originalTitle": "What agents actually did, made governed context.",
       "title": "Reuse captured delivery evidence.",
-      "body": "Make captured delivery evidence available for review and further reasoning through planned sourcing, with missing records and uncertainty kept visible.",
-      "useCases": [
-        "reuse-delivery-evidence"
-      ]
+      "body": "Make captured delivery evidence available for review and further reasoning through planned sourcing, with missing records and uncertainty kept visible."
     }
   ]
 }

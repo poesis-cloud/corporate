@@ -1,4 +1,4 @@
-export const catalogTypes = ['actors', 'pains', 'usage', 'values', 'features', 'capabilities', 'affordances', 'solutions', 'products'] as const;
+export const catalogTypes = ['actors', 'pains', 'usage', 'values', 'features', 'capabilities', 'affordances', 'qualities', 'solutions', 'products'] as const;
 export type CatalogType = typeof catalogTypes[number];
 export interface CatalogRecord { slug: string; actors: string[]; pains: string[] }
 export interface CatalogSource { label: string; targets: Record<CatalogType, string[]> }
