@@ -2500,20 +2500,17 @@ a:hover {
 
 .think-therapy {
   display: grid;
-  grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.6fr);
+  grid-template-columns: 1fr;
   gap: clamp(1.25rem, 3vw, 2.5rem);
-  align-items: stretch;
 }
 
 .think-therapy__aside {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
+/* Same vertical THINK-on-top flow as the pain-point boxes, stretched full width. */
 .think-therapy .think-phase__flow {
-  flex: 1;
-  grid-template-rows: 1fr auto 1fr;
   margin: 1.5rem 0 1rem;
 }
 
@@ -2534,17 +2531,13 @@ a:hover {
   font-size: .76rem;
 }
 
+/* Same panel opening as .think-phase__foot in the pain-point boxes: rule above, label below it. */
 .think-therapy__body {
   display: flex;
   flex-direction: column;
   gap: .75rem;
-  margin-top: 1.5rem;
-}
-
-/* The label titles the panel, so the rule closes it rather than opening it. */
-.think-therapy__body .think-phase__details-label {
-  padding-bottom: .7rem;
-  border-bottom: 1px solid rgba(45, 212, 191, .3);
+  padding-top: .85rem;
+  border-top: 1px solid rgba(45, 212, 191, .3);
 }
 
 .think-therapy__legend {
@@ -3601,10 +3594,6 @@ a:hover {
   }
 
   .think-story__phases {
-    grid-template-columns: 1fr;
-  }
-
-  .think-therapy {
     grid-template-columns: 1fr;
   }
 
