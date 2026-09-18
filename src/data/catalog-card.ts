@@ -58,6 +58,7 @@ export interface CatalogCard {
   /** Set when the body is authored as markup rather than plain text. */
   bodyHtml?: boolean;
   status: DeliveryState;
+  availability?: Service['availability'];
   tags: string[];
   relations?: RelationGroup[];
   data?: Record<string, string>;
@@ -245,6 +246,7 @@ export function serviceCard(service: Service): CatalogCard {
     hook: service.title,
     body: service.summary,
     status: service.availability === 'Planned' ? 'planned' : 'delivered',
+    availability: service.availability,
     tags: rankThemes([service.category]),
   };
 }

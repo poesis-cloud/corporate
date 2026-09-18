@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { parse } from 'parse5';
-import { services } from '../src/data/services.ts';
+import { services, serviceHref, validateServices } from '../src/data/services.ts';
 import { siteNavigation, footerNavigation } from '../src/data/site-navigation.ts';
 import { evaluateRequirement, productTimeline, platformSolutions, affordances, affordanceStatus, validatePortfolio, featureStatus, capabilityShipped, capabilityStatus, realizations, realizationStatus, realizationRequirements, operationalVerdictStatus, semanticEdges, solutionHref } from '../src/data/poesis-platform.ts';
 import { pains, painRelations } from '../src/data/pains.ts';
@@ -73,7 +73,18 @@ test('service and partnership navigation retains the matching detail destination
     assert.ok(navigation.some((item) => item.href === choice.href), choice.href);
     assert.ok(footer.some((item) => item.href === choice.href), choice.href);
   }
-  assert.ok(services.every((service) => service.href === `/services/${service.slug}`));
+  assert.ok(services.every((service) => service.href === serviceHref(service)));
+  assert.equal(services[0].href, '/pilot');
+});
+
+test('services publish exactly the seven ordered offers with only the Pilot available', () => {
+  validateServices();
+  const labels = ['Poesis Pilot', 'Autonomous Enterprise Transformation', 'Agentic Transformation', 'Organizational Context Engineering', 'ITIP SaaS', 'SIE SaaS', 'GSM Certification'];
+  assert.deepEqual(services.map((service) => service.label), labels);
+  assert.deepEqual(services.map((service) => service.availability), ['By agreement', ...Array(6).fill('Planned')]);
+  assert.deepEqual(siteNavigation.find((group) => group.label === 'Services').sections.flatMap((section) => section.items.map((item) => item.label)), labels);
+  assert.deepEqual(footerNavigation.find((group) => group.label === 'Services').items.map((item) => item.label), labels);
+  assert.ok(services.every((service) => !['consulting', 'saas', 'on-prem-integration-administration', 'certification'].includes(service.slug)));
 });
 
 test('AND requires the whole scope while OR preserves accepted alternatives', () => {
@@ -450,15 +461,15 @@ test('all built values and scoped claims carry accessible status icons with depe
   for (const card of elements(partnership, (node) => hasClass(node, 'value-card'))) assertStatus(firstStatus(card), 'planned');
 });
 
-test('built listing destinations contain the intended choices and detail pages link back', { skip: !process.env.CHECK_BUILT_PORTFOLIO }, () => {
-  const home = parse(read('../dist/index.html'));
-  for (const [id, choices] of [['services', services], ['partnerships', partnerships]]) {
+for (const [id, choices] of [['services', services], ['partnerships', partnerships]]) {
+  test(`built ${id} listing contains the intended choices and detail pages link back`, { skip: !process.env.CHECK_BUILT_PORTFOLIO }, () => {
+    const home = parse(read('../dist/index.html'));
     const matches = elements(home, (node) => attribute(node, 'id') === id);
     assert.equal(matches.length, 1, `unique ${id} destination`);
     const section = matches[0];
     assert.equal(section.tagName, 'section', `${id} must be a real section, not an alias`);
     assert.notEqual(attribute(section, 'aria-hidden'), 'true');
-    assert.equal(text(elements(section, (node) => node.tagName === 'h2')[0]), id === 'services' ? 'Services' : 'Partnerships');
+    assert.equal(text(elements(section, (node) => node.tagName === 'h2')[0]), id === 'services' ? 'From first proof to organizational transformation.' : 'Partnerships');
     const links = elements(section, (node) => node.tagName === 'a');
     assert.deepEqual(links.map((link) => attribute(link, 'href')), choices.map((choice) => choice.href));
     for (const choice of choices) {
@@ -467,15 +478,21 @@ test('built listing destinations contain the intended choices and detail pages l
       const detail = parse(read(`../dist${choice.href}/index.html`));
       assert.ok(elements(detail, (node) => node.tagName === 'a' && attribute(node, 'href') === `/#${id}`).length, `${choice.href} listing backlink`);
       const heading = text(elements(detail, (node) => node.tagName === 'h1')[0]);
-      assert.ok(choice.title ? heading === choice.title : heading.startsWith(choice.label), `${choice.href} detail heading`);
+      assert.ok(id === 'services' ? heading === choice.label : choice.title ? heading === choice.title : heading.startsWith(choice.label), `${choice.href} detail heading`);
       if (choice.availability) {
         const item = elements(section, (node) => node.tagName === 'li' && text(node).includes(choice.label))[0];
         assert.ok(text(item).includes(choice.availability));
         assert.ok(text(item).includes(choice.summary));
+        assert.equal(attribute(elements(item, (node) => attribute(node, 'data-service-availability'))[0], 'data-service-availability'), choice.availability);
+        assert.ok(text(detail).includes(choice.availabilityNote));
+        if (choice.slug !== 'pilot') {
+          assert.ok(text(detail).includes('Planned offer'));
+          assert.equal(elements(detail, (node) => hasClass(node, 'service-stages'))[0].childNodes.filter((node) => node.tagName === 'li').length, choice.stages.length);
+        }
       }
     }
-  }
-});
+  });
+}
 
 test('built roadmap labels distinguish shipped releases from planned milestones independently of scope', { skip: !process.env.CHECK_BUILT_PORTFOLIO }, () => {
   const home = parse(read('../dist/index.html'));

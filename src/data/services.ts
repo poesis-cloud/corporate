@@ -30,8 +30,8 @@ export interface Service {
   stages: ServicePoint[];
 }
 
-/** The canonical service route. Services no longer store a href to drift from. */
-export function serviceHref(service: Pick<Service, 'slug'>): string { return `/services/${service.slug}`; }
+/** The Pilot retains its dedicated engagement route. */
+export function serviceHref(service: Pick<Service, 'slug'>): string { return service.slug === 'pilot' ? '/pilot' : `/services/${service.slug}`; }
 
 const authored = catalog.services as Omit<Service, 'href'>[];
 

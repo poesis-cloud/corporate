@@ -1,5 +1,6 @@
 import { platformSolutions, solutionHref } from './poesis-platform.ts';
 import { alternatives } from './alternatives.ts';
+import { services } from './services.ts';
 
 export interface SiteNavigationItem {
   href: string;
@@ -87,21 +88,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
     label: 'Services',
     sections: [
       {
-        label: 'Engagements',
-        items: [
-          { href: '/services/consulting', label: 'Agentic Use Case Discovery' },
-          { href: '/pilot', label: 'Poesis Pilot' },
-          { href: '/services/on-prem-integration-administration', label: 'Enterprise Implementation' },
-        ],
-      },
-      {
-        label: 'Delivery',
-        items: [
-          { href: '/services/consulting', label: 'Consulting' },
-          { href: '/services/saas', label: 'SaaS' },
-          { href: '/services/on-prem-integration-administration', label: 'On-prem' },
-          { href: '/services/certification', label: 'Certification' },
-        ],
+        items: services.map(({ href, label }) => ({ href, label })),
       },
     ],
   },
@@ -156,7 +143,7 @@ export const siteNavigation: SiteNavigationGroup[] = [
 
 const footerLabels: Record<string, string[]> = {
   Platform: ['Platform Overview', 'Use Cases', 'IT Intelligence Platform', 'Systemic Intelligence Engine', 'Generative System Model', 'Systemic Agentic Framework'],
-  Services: ['Poesis Pilot', 'Consulting', 'SaaS', 'On-prem', 'Certification'],
+  Services: services.map((service) => service.label),
   Partnerships: ['LLM Vendor Partnership'],
   Developers: ['Documentation', 'Community', 'Repositories', 'Projects', 'Organization'],
   Insights: ['Articles', 'Research'],

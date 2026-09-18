@@ -2,158 +2,221 @@
     "$schema": "./schemas/poesis-services.schema.json",
     "services": [
         {
-            "slug": "consulting",
+            "slug": "pilot",
             "availability": "By agreement",
-            "availabilityNote": "Inquiry and scoping first; delivery scope, capacity and evidence criteria are agreed per engagement.",
-            "label": "Consulting",
-            "category": "Transformation",
-            "title": "Transform the operating system of IT.",
-            "summary": "AI-generative and agentic transformation, grounded in systemic governance and focused first on the organization of IT.",
-            "lead": "Agentic transformation, with a method: move from isolated AI experiments to an operating model in which definitions, decisions, and agentic work remain connected to accountable governance.",
-            "proposition": "Poesis consulting joins systems thinking, enterprise architecture, and agentic engineering around a concrete transformation path. IT is the first proving ground because it exposes the organization's structures, constraints, dependencies, and delivery feedback loops.",
+            "availabilityNote": "Available by agreement. Scope, access, product readiness, timing and terms are confirmed before kickoff; a pilot is not a general-availability SaaS subscription.",
+            "label": "Poesis Pilot",
+            "category": "Evaluation",
+            "title": "Prove the value in your own context.",
+            "summary": "Evaluate Poesis against a real organizational problem, with an agreed scope, a baseline and evidence that supports your next investment decision.",
+            "lead": "Before committing to a transformation, establish what Poesis can change in the work that matters to you. Start with the value you seek, the pain you face and a result you can judge.",
+            "proposition": "A guided ITIP + SIE evaluation connects your chosen needs to a feasible product scope. Together we agree the evidence, responsibilities and decision criteria, then distinguish demonstrated value from work that remains ahead.",
             "outcomes": [
                 {
-                    "title": "A governable target model",
-                    "description": "Make decision rights, systemic definitions, constraints, and human disposition explicit before automating consequential work."
+                    "title": "A decision-ready brief",
+                    "description": "A shared problem statement, selected use cases, data boundaries and explicit success criteria."
                 },
                 {
-                    "title": "A focused AI portfolio",
-                    "description": "Select use cases by systemic leverage and evidence potential, rather than by novelty or model availability alone."
+                    "title": "Evidence in your context",
+                    "description": "An evaluation of the agreed scope against the baseline, including limitations and unmet needs."
                 },
                 {
-                    "title": "An executable first proof",
-                    "description": "Turn the target model into a bounded implementation that can be evaluated against operational outcomes."
+                    "title": "A justified next step",
+                    "description": "A recommendation to proceed, refine or stop, with dependencies and further investment made explicit."
                 }
             ],
             "stages": [
                 {
-                    "title": "Diagnose",
-                    "description": "Map the current operating system of IT, its governing definitions, friction points, and feedback gaps."
+                    "title": "Frame",
+                    "description": "Choose a worthwhile problem and agree feasibility, access, terms and evidence before kickoff."
                 },
                 {
-                    "title": "Design",
-                    "description": "Shape the target governance, architecture, and agentic workflows using the Poesis reference design where it fits."
+                    "title": "Evaluate",
+                    "description": "Exercise the agreed workflows with your examples and review results with the people accountable for the work."
                 },
                 {
-                    "title": "Prove",
-                    "description": "Implement a controlled slice, collect evidence, and use the result to direct the next transformation increment."
+                    "title": "Decide",
+                    "description": "Compare the evidence with success criteria and identify the smallest justified next commitment."
                 }
             ]
         },
         {
-            "slug": "saas",
+            "slug": "autonomous-enterprise-transformation",
             "availability": "Planned",
-            "availabilityNote": "No provisioned hosted offer is established. Provisioning, isolation, recovery, support and product behavior require acceptance before availability is claimed.",
-            "label": "SaaS",
-            "category": "Managed cloud",
-            "title": "Run Poesis as a managed service.",
-            "summary": "A managed cloud path for owning the Poesis stack without operating its underlying platform engineering.",
-            "lead": "A planned managed-service route, with explicit product scope and operating responsibilities to be agreed before provisioning.",
-            "proposition": "The SaaS service is designed for organizations that want durable access to Poesis capabilities, continuous platform evolution, and a clear operating boundary between their governance and the managed technical substrate.",
+            "availabilityNote": "Planned advisory and transformation offer. Autonomy is a progressive design objective, not a claim of a fully autonomous enterprise or an available end-to-end delivery service.",
+            "label": "Autonomous Enterprise Transformation",
+            "category": "Operating model",
+            "title": "Design the organization that can govern its own evolution.",
+            "summary": "Connect strategy, decision rights, organizational design and feedback into a practical path toward greater autonomy, without losing human accountability.",
+            "lead": "Automating disconnected tasks does not make an enterprise autonomous. Leaders need an operating model in which people, AI and software act toward shared purposes, within explicit authority, and adapt from evidence.",
+            "proposition": "Poesis approaches transformation through systemics: define purposes and functions, expose dependencies, establish governance and close feedback loops. GSM supplies a common language for the organization's definitions; SIE is designed to govern their evolution and execution. The engagement translates that architecture into a staged transformation, beginning where value and controllability can be demonstrated.",
             "outcomes": [
                 {
-                    "title": "Managed platform operations",
-                    "description": "Reduce the infrastructure and lifecycle burden of operating the Poesis stack as its components evolve."
+                    "title": "An explicit target operating model",
+                    "description": "Purpose, functions, responsibilities and decision rights connected across organizational boundaries, with human authority preserved."
                 },
                 {
-                    "title": "Faster learning cycles",
-                    "description": "Move from definition and configuration to governed experiments without first assembling a platform team."
+                    "title": "A sequenced transformation portfolio",
+                    "description": "Prioritized changes selected for systemic impact, feasibility and risk, with dependencies and acceptance criteria."
                 },
                 {
-                    "title": "Visible operating boundaries",
-                    "description": "Keep tenant definitions and human authority distinct from the technical responsibilities of the managed service."
+                    "title": "A measurable autonomy roadmap",
+                    "description": "Defined delegation boundaries, escalation paths and feedback measures that determine when greater autonomy is justified."
                 }
             ],
             "stages": [
                 {
-                    "title": "Shape the environment",
-                    "description": "Agree tenancy, identity, data boundaries, integrations, and the initial governed use cases."
+                    "title": "Diagnose the system",
+                    "description": "Map strategic intent, operating tensions, decision delays and the gaps between governance and actual work."
                 },
                 {
-                    "title": "Connect the estate",
-                    "description": "Integrate approved sources and systems through explicit interfaces and controlled access paths."
+                    "title": "Design the transition",
+                    "description": "Define the target model, governance changes and first transformation increment with accountable owners."
                 },
                 {
-                    "title": "Operate and evolve",
-                    "description": "Run the service, observe outcomes, and evolve definitions and capabilities through governed increments."
+                    "title": "Learn before expanding",
+                    "description": "Plan bounded evaluations and review their evidence before extending delegation or organizational scope."
                 }
             ]
         },
         {
-            "slug": "on-prem-integration-administration",
-            "availability": "By agreement",
-            "availabilityNote": "A scoped integration engagement, not a claim that every product or environment is production-ready.",
-            "label": "On-prem integration & administration",
-            "category": "Sovereign deployment",
-            "title": "Keep governed AI inside your control boundary.",
-            "summary": "Deployment, integration, and administration of Poesis products in regulated, sovereign, and enterprise environments.",
-            "lead": "Place the Poesis stack within the infrastructure, security, and operational boundaries your organization is accountable for.",
-            "proposition": "On-premises integration maps components, models, tool egress, telemetry, remotes and backups to explicit controls. Local deployment alone does not establish sovereignty; supported routes and recovery require acceptance.",
-            "outcomes": [
-                {
-                    "title": "Control-boundary alignment",
-                    "description": "Map platform components, model endpoints, data paths, and identities to the organization's security zones."
-                },
-                {
-                    "title": "Enterprise integration",
-                    "description": "Connect Poesis products to approved repositories, platforms, observability, and identity services."
-                },
-                {
-                    "title": "Operable ownership",
-                    "description": "Establish administration, maintenance, evidence, and escalation practices for the deployed estate."
-                }
-            ],
-            "stages": [
-                {
-                    "title": "Architect",
-                    "description": "Define the target topology, trust boundaries, integration contracts, and operational responsibilities."
-                },
-                {
-                    "title": "Deploy and integrate",
-                    "description": "Install the selected components and connect them through environment-specific, testable interfaces."
-                },
-                {
-                    "title": "Administer",
-                    "description": "Operate the platform with runbooks, observability, lifecycle controls, and a clear support boundary."
-                }
-            ]
-        },
-        {
-            "slug": "certification",
+            "slug": "agentic-transformation",
             "availability": "Planned",
-            "availabilityNote": "A proposed Poesis-owned qualification path, not standards-body accreditation or an already operated certification service.",
-            "label": "Certification",
-            "category": "Capability building",
-            "title": "Build trusted delivery capability around Poesis.",
-            "summary": "A Poesis-owned certification path for practitioners and partners delivering systemic, governed AI transformation.",
-            "lead": "Create a shared threshold for the knowledge, applied judgment, and delivery evidence required to work credibly with Poesis.",
-            "proposition": "Certification is designed to scale delivery without diluting the systemic and governance principles behind the products. It joins conceptual fluency with applied work, so recognition depends on demonstrated capability rather than attendance alone.",
+            "availabilityNote": "Planned service, including use case discovery. Delivery scope, integrations and operating capacity are not yet offered as a standard engagement; a Poesis Pilot can be discussed separately.",
+            "label": "Agentic Transformation",
+            "category": "AI adoption",
+            "title": "Find the work worth delegating. Make delegation accountable.",
+            "summary": "Discover and prioritize agentic use cases, redesign the workflows around them, and define how results, cost and risk will be evaluated.",
+            "lead": "An impressive agent demonstration is not an operating capability. The opportunity lies in choosing work where AI can produce useful results, giving it the right context and tools, and knowing when a person must decide.",
+            "proposition": "Poesis connects use case discovery to workflow and governance design. The planned approach draws on SAF's explicit roles, instructions, artifact contracts and human gates, with GSM-based organizational definitions to anchor context. Each candidate is assessed against simpler automation, integration effort and measurable value before agentic complexity is introduced.",
+            "outcomes": [
+                {
+                    "title": "A ranked use case portfolio",
+                    "description": "Opportunities assessed for business value, frequency, context readiness, integration cost and consequences of failure."
+                },
+                {
+                    "title": "Workflows with clear authority",
+                    "description": "Human and agent roles, tool permissions, handoffs, review gates and escalation paths designed around the work."
+                },
+                {
+                    "title": "An evaluation and adoption plan",
+                    "description": "Representative cases, quality thresholds, latency and cost budgets, plus ownership and training for day-to-day use."
+                }
+            ],
+            "stages": [
+                {
+                    "title": "Discover",
+                    "description": "Investigate real tasks with their owners and shortlist opportunities where delegation can improve an observable result."
+                },
+                {
+                    "title": "Engineer the workflow",
+                    "description": "Specify context, tools, instructions and controls; define a bounded implementation and the tests it must pass."
+                },
+                {
+                    "title": "Evaluate and adopt",
+                    "description": "Use evidence from representative work to decide what to automate, retain under review or leave with people."
+                }
+            ]
+        },
+        {
+            "slug": "organizational-context-engineering",
+            "availability": "Planned",
+            "availabilityNote": "Planned service. Source access, modeling scope and consuming tools will be agreed per engagement; automated sourcing and runtime integrations remain subject to product readiness.",
+            "label": "Organizational Context Engineering",
+            "category": "Context foundation",
+            "title": "Give humans and AI a shared understanding of the organization.",
+            "summary": "Turn fragmented organizational knowledge into structured, governed context: purposes, responsibilities, dependencies, rules and the evidence behind them.",
+            "lead": "Documents can tell an agent what was written. They do not necessarily tell it which definition is current, who has authority, what depends on a decision or which constraints apply. Useful organizational context must make those distinctions explicit.",
+            "proposition": "Poesis uses GSM to structure organizational definitions and SIE's lifecycle design to distinguish proposed knowledge from accepted authority. The planned engagement combines domain modeling, source mapping, provenance and review with task-specific context contracts. It complements retrieval and prompt engineering by defining what retrieved information means and when it is fit to guide action.",
+            "outcomes": [
+                { "title": "A coherent organizational model", "description": "A scoped vocabulary connecting purposes, functions, responsibilities, interactions and governing constraints." },
+                { "title": "Traceable, reviewable context", "description": "Source provenance, ownership and revision rules that separate observations and proposals from accepted definitions." },
+                { "title": "Context contracts for consumers", "description": "Defined information needs, access boundaries, freshness criteria and evaluation cases for humans, agents and applications." }
+            ],
+            "stages": [
+                { "title": "Map the decisions", "description": "Identify who needs context, what decisions it must support and where incomplete or contradictory information causes failure." },
+                { "title": "Model and reconcile", "description": "Structure the relevant knowledge, expose conflicts and agree who can review and accept each definition." },
+                { "title": "Connect and evaluate", "description": "Design supported retrieval and integration paths, then test relevance, traceability and freshness on representative tasks." }
+            ]
+        },
+        {
+            "slug": "itip-saas",
+            "availability": "Planned",
+            "availabilityNote": "Planned managed application; no self-service subscription is available. Hosting, tenancy, integrations, supported features and service commitments require acceptance before launch.",
+            "label": "ITIP SaaS",
+            "category": "Managed IT application",
+            "title": "Turn IT knowledge into better-governed decisions.",
+            "summary": "A planned managed IT Intelligence Platform for application and service context, dependency analysis, governance review and evidence-led IT decisions.",
+            "lead": "IT leaders and architects need to understand what they operate, how it supports the business and where change creates exposure. That understanding is hard to maintain when inventories, architecture models and compliance evidence evolve separately.",
+            "proposition": "ITIP is the IT-domain application over SIE: a shared workspace designed to connect IT definitions, relationships, governance and appraisal in the language of IT work. The SaaS offer is intended to provide that application without requiring customers to assemble and operate the underlying platform. It differs from SIE SaaS by delivering the IT-facing experience, not just engine APIs.",
+            "outcomes": [
+                { "title": "Shared IT context", "description": "A planned governed view of applications, services, responsibilities and dependencies, with source coverage and unresolved gaps visible." },
+                { "title": "Evidence-led change decisions", "description": "Designed support for dependency and impact analysis, architecture reviews and prioritization against business concerns." },
+                { "title": "Governance in daily IT work", "description": "A planned review and appraisal experience connecting applicable constraints, findings and accountable follow-up." }
+            ],
+            "stages": [
+                { "title": "Choose the first IT scope", "description": "Identify an application or service portfolio, decision owners and the decisions the workspace should improve." },
+                { "title": "Establish trusted context", "description": "Agree source coverage, reconcile definitions and configure the supported governance and review scope." },
+                { "title": "Embed in decision routines", "description": "Introduce the workspace into architecture, change and appraisal reviews, measuring usefulness and information freshness." }
+            ]
+        },
+        {
+            "slug": "sie-saas",
+            "availability": "Planned",
+            "availabilityNote": "Planned managed engine; no production API subscription is available. API scope, isolation, security, recovery, quotas and service commitments must be validated before launch.",
+            "label": "SIE SaaS",
+            "category": "Managed engine & APIs",
+            "title": "Build on governed definitions, not another isolated knowledge store.",
+            "summary": "A planned managed Systemic Intelligence Engine for builders integrating GSM definitions, lifecycle governance and controlled execution into their own applications.",
+            "lead": "Application and AI platform builders need more than storage: they need a consistent way to type organizational knowledge, control its evolution and distinguish accepted definitions from tentative contributions.",
+            "proposition": "SIE provides the engine layer behind Poesis. Its architecture combines definition management, lifecycle governance, collaborative sourcing and governed mechanism execution. The SaaS offer is intended to expose an agreed set of these services through managed interfaces, so customers can build domain applications and integrations without operating the full engine stack. Unlike ITIP SaaS, it does not supply an IT-domain user workspace.",
+            "outcomes": [
+                { "title": "A governed definition foundation", "description": "Planned managed access to typed, versioned definitions and lifecycle controls for your application domain." },
+                { "title": "Controlled integration contracts", "description": "Explicit APIs, identities, authorization boundaries and provenance requirements for applications and agent tooling." },
+                { "title": "An agreed operational boundary", "description": "A defined split between managed engine responsibilities and your domain logic, models, tools and downstream effects." }
+            ],
+            "stages": [
+                { "title": "Define the application contract", "description": "Identify the domain model, consuming applications and engine services required, including non-functional needs." },
+                { "title": "Qualify the integration", "description": "Test the supported interfaces, lifecycle behavior and tenant boundaries against representative workloads." },
+                { "title": "Prepare for operation", "description": "Agree monitoring, change handling, recovery and exit arrangements before considering a production commitment." }
+            ]
+        },
+        {
+            "slug": "gsm-certification",
+            "availability": "Planned",
+            "availabilityNote": "Planned Poesis-issued practitioner qualification in GSM. No credential is currently awarded; this is neither external standards-body accreditation nor certification of an organization's compliance.",
+            "label": "GSM Certification",
+            "category": "Professional qualification",
+            "title": "Demonstrate the judgment behind a coherent organizational model.",
+            "summary": "A planned qualification for practitioners applying systemics, GSM modeling and governance through assessed cases and reviewable evidence.",
+            "lead": "A shared modeling language is only useful when practitioners apply it consistently. Organizations and partners need a way to assess whether someone can translate a real situation into coherent definitions, governance and defensible design decisions.",
+            "proposition": "The planned GSM Certification connects conceptual understanding with applied modeling. Practitioners would demonstrate how purposes, functions, interactions and governance fit together, justify their choices and handle ambiguity. Assessment is intended to recognize demonstrated competence rather than course attendance or familiarity with terminology alone.",
             "outcomes": [
                 {
                     "title": "Practitioner assurance",
-                    "description": "Make the expected knowledge of GSM, the Poesis stack, and governed agentic delivery explicit and assessable."
+                    "description": "An assessable baseline for systemics, GSM concepts, definition lifecycle and the distinction between definitions and operational reality."
                 },
                 {
                     "title": "Partner consistency",
-                    "description": "Give implementation partners a common delivery baseline while preserving room for domain specialization."
+                    "description": "Shared assessment criteria for modeling and governance work, while preserving room for domain-specific knowledge."
                 },
                 {
                     "title": "Evidence-led progression",
-                    "description": "Connect recognition and renewal to applied work, continuing learning, and accountable practice."
+                    "description": "A proposed progression based on reviewed cases and continuing competence, with credential scope and renewal rules defined before launch."
                 }
             ],
             "stages": [
                 {
                     "title": "Learn the foundations",
-                    "description": "Develop fluency in systemic governance, GSM semantics, and the roles of SIE, ITIP, and the delivery framework."
+                    "description": "Develop fluency in systemics, GSM primitives, typing and governance, using a declared version of the model."
                 },
                 {
                     "title": "Demonstrate practice",
-                    "description": "Apply the concepts to realistic cases and produce reviewable evidence of sound judgment and execution."
+                    "description": "Model realistic cases and explain the assumptions, tradeoffs and governance decisions to an assessor."
                 },
                 {
                     "title": "Maintain standing",
-                    "description": "Keep certification current through continued practice, product evolution, and periodic reassessment."
+                    "description": "Follow the planned renewal requirements as the model and assessment framework evolve."
                 }
             ]
         }

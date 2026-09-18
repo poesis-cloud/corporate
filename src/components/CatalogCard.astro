@@ -26,7 +26,7 @@ const block = variant === 'platform' ? 'think-capability' : 'think-consequence';
   <span class={`${block}__head`}>
     <span class={`${block}__icon`}><Icon name={cardTypeIcons[card.type]} size={16} /></span>
     <span class={`${block}__step`}>{cardTypeLabels[card.type]}</span>
-    <DeliveryStatus state={card.status} />
+    {card.availability ? <span class:list={['service-availability', { 'service-availability--planned': card.availability === 'Planned' }]} data-service-availability={card.availability}><Icon name={card.availability === 'Planned' ? 'clock' : 'check-badge'} size={14} />{card.availability}</span> : <DeliveryStatus state={card.status} />}
   </span>
   <Heading>{card.href ? <a href={card.href}>{card.heading}</a> : card.heading}</Heading>
   {card.hook && <p class="catalog-hook">{card.hook}</p>}
@@ -38,3 +38,8 @@ const block = variant === 'platform' ? 'think-capability' : 'think-consequence';
   ) : null}
   {card.relations?.length ? <ItemRelations groups={card.relations} /> : null}
 </li>
+
+<style>
+  .service-availability { display: inline-flex; align-items: center; gap: .3em; color: var(--status-delivered); font-size: .75rem; font-weight: 500; letter-spacing: 0; line-height: 1.4; white-space: nowrap; }
+  .service-availability--planned { color: var(--status-planned); }
+</style>

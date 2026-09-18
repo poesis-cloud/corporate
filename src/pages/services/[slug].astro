@@ -4,7 +4,7 @@ import Icon from '../../components/Icon.astro';
 import { services, type Service } from '../../data/services.ts';
 
 export function getStaticPaths() {
-  return services.map((service) => ({
+  return services.filter((service) => service.slug !== 'pilot').map((service) => ({
     params: { slug: service.slug },
     props: { service },
   }));
@@ -16,25 +16,27 @@ interface Props {
 
 const { service } = Astro.props;
 ---
-<BaseLayout title={service.title.replace(/\.$/, '')} description={service.summary} pageType="Service">
-  <section class="hero service-hero">
+<BaseLayout title={service.label} description={service.summary} pageType="Service">
+  <section class="section service-intro" aria-labelledby="service-title">
     <div class="container">
-      <p class="eyebrow"><a href="/#services">{service.category} · Service</a><span class="claim-status">{service.availability}</span></p>
-      <h1>{service.title}</h1>
+      <p class="eyebrow"><a href="/#services">Services</a> / {service.category}</p>
+      <p class="service-availability"><Icon name="clock" size={15} /> {service.availability} offer</p>
+      <h1 id="service-title">{service.label}</h1>
+      <p class="service-promise">{service.title}</p>
       <p class="lead">{service.lead}</p>
-      <p>{service.availabilityNote}</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Discuss your context</a>
-        <a class="btn btn-ghost" href="/#services"><Icon name="list" /> All services</a>
+        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Discuss future requirements</a>
+        <a class="btn btn-ghost" href="/pilot"><Icon name="play" /> Start with a Pilot</a>
       </div>
+      <p class="service-boundary">{service.availabilityNote}</p>
     </div>
   </section>
 
   <section class="section section--soft">
     <div class="container service-proposition">
       <div>
-        <p class="eyebrow">Service intent</p>
-        <h2>Transformation with an explicit operating boundary.</h2>
+        <p class="eyebrow">The Poesis approach</p>
+        <h2>Connect the work to the system around it.</h2>
       </div>
       <p class="lead">{service.proposition}</p>
     </div>
@@ -43,25 +45,26 @@ const { service } = Astro.props;
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Outcomes</p>
-        <h2>What this service is designed to establish.</h2>
+        <p class="eyebrow">Intended outcomes</p>
+        <h2>What you would take forward.</h2>
       </div>
-      <div class="grid grid-3">
+      <ul class="service-outcomes">
         {service.outcomes.map((outcome) => (
-          <article class="card card--feature">
+          <li>
+            <span class="service-outcome-icon"><Icon name="check-badge" size={23} /></span>
             <h3>{outcome.title}</h3>
             <p>{outcome.description}</p>
-          </article>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
   <section class="section section--ink">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Engagement path</p>
-        <h2>Move in bounded, evidence-producing stages.</h2>
+        <p class="eyebrow">Proposed engagement</p>
+        <h2>From your starting point to a justified next step.</h2>
       </div>
       <ol class="service-stages">
         {service.stages.map((stage, index) => (
@@ -78,23 +81,35 @@ const { service } = Astro.props;
   </section>
 
   <section class="section">
-    <div class="container center">
-      <p class="eyebrow centered-eyebrow">Next step</p>
-      <h2>Start with the boundary that matters most.</h2>
-      <p class="lead closing-lead">We will locate the smallest engagement that can produce useful evidence without losing sight of the system around it.</p>
-      <p><a class="btn btn-primary" href="/contact"><Icon name="message" /> Talk to Poesis</a></p>
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Next step</p>
+        <h2>Bring the problem you need to solve.</h2>
+        <p class="lead">Share your context and requirements for this planned offer. For an evaluation available by agreement now, begin with a Poesis Pilot.</p>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/contact"><Icon name="message" /> Discuss future requirements</a>
+        <a class="btn btn-ghost" href="/pilot"><Icon name="play" /> Shape your Pilot</a>
+      </div>
+      <nav class="service-navigation" aria-label="All services">
+        {services.map((choice) => <a href={choice.href} aria-current={choice.slug === service.slug ? 'page' : undefined}>{choice.label}<Icon name="arrow-right" size={15} /></a>)}
+      </nav>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .service-hero .eyebrow {
-    flex-wrap: wrap;
-  }
-
-  .service-hero .eyebrow a {
-    color: inherit;
-  }
+  .service-intro { padding-top: 3rem; padding-bottom: 2.5rem; }
+  .service-intro .eyebrow { flex-wrap: wrap; }
+  .service-intro .eyebrow a { color: inherit; }
+  .service-intro h1 { font-size: 2.75rem; line-height: 1.15; max-width: 28ch; margin: .7rem 0 1.2rem; }
+  .service-promise { font-size: 1.35rem; color: var(--accent-ink); line-height: 1.45; max-width: 56ch; margin: 0 0 1rem; }
+  .service-intro .lead { max-width: 72ch; }
+  .service-availability { display: flex; align-items: center; gap: .45rem; color: var(--status-planned); font: .8rem var(--font-mono); margin: 1.4rem 0 0; }
+  .service-boundary { max-width: 88ch; margin: 1.5rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .85rem; color: var(--ink-soft); }
+  h1, h2, h3 { letter-spacing: 0; overflow-wrap: anywhere; }
+  h2 { font-size: 1.65rem; line-height: 1.3; }
+  h3 { font-size: 1.05rem; line-height: 1.4; }
 
   .service-proposition {
     display: grid;
@@ -109,7 +124,14 @@ const { service } = Astro.props;
 
   .service-proposition .lead {
     margin: 0;
+    font-size: 1rem;
+    line-height: 1.75;
   }
+
+  .service-outcomes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; list-style: none; margin: 0; padding: 0; }
+  .service-outcomes li { border-top: 1px solid var(--line-strong); padding-top: 1.2rem; min-width: 0; }
+  .service-outcome-icon { color: var(--accent); display: block; margin-bottom: 1rem; }
+  .service-outcomes p, .service-stages p { color: var(--ink-soft); font-size: .95rem; }
 
   .service-stages {
     display: grid;
@@ -144,22 +166,28 @@ const { service } = Astro.props;
     margin-bottom: 0;
   }
 
-  .centered-eyebrow {
-    justify-content: center;
-  }
-
-  .closing-lead {
-    margin-inline: auto;
-  }
+  .service-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; margin-top: 2.5rem; }
+  .service-navigation a { display: flex; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--line); padding: .9rem 0; font-size: .9rem; overflow-wrap: anywhere; }
+  .service-navigation a :global(svg) { flex-shrink: 0; }
+  .service-navigation a[aria-current='page'] { color: var(--ink); }
 
   @media (max-width: 820px) {
     .service-proposition,
-    .service-stages {
+    .service-stages,
+    .service-outcomes,
+    .service-navigation {
       grid-template-columns: 1fr;
     }
 
     .stage-number {
       margin-bottom: 1.2rem;
     }
+  }
+
+  @media (max-width: 640px) {
+    .service-intro h1 { font-size: 2rem; }
+    .service-promise { font-size: 1.15rem; }
+    .hero-cta { align-items: stretch; }
+    .hero-cta .btn { white-space: normal; text-align: center; }
   }
 </style>

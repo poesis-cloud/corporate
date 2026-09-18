@@ -4,14 +4,19 @@ import Icon from '../components/Icon.astro';
 import DeliveryStatus from '../components/DeliveryStatus.astro';
 import { projectPilotCatalog } from '../data/pilot-catalog.ts';
 import { safePilotJson, tailoringFields } from '../data/pilot.ts';
+import { serviceBySlug } from '../data/services.ts';
 const catalog = projectPilotCatalog();
+const pilot = serviceBySlug('pilot')!;
 ---
-<BaseLayout title="Your Poesis pilot" description="Frame an ITIP + SIE SaaS evaluation around your desired values, pain points and evidence. Scope and operating readiness remain to agree." pageType="Pilot">
+<BaseLayout title={pilot.label} description={pilot.summary} pageType="Pilot">
   <section class="pilot-intro container">
-    <p class="eyebrow">Poesis pilot / ITIP + SIE SaaS</p>
-    <h1>Start with what matters.</h1>
-    <p class="lead">The value you seek. The pain you want to address. A pilot shaped around your scope, your evidence and your definition of success.</p>
+    <p class="eyebrow"><a href="/#services">Services</a> / Evaluation</p>
+    <p class="pilot-availability"><Icon name="check-badge" size={15} /> {pilot.availability}</p>
+    <h1>{pilot.label}</h1>
+    <p class="pilot-promise">{pilot.title}</p>
+    <p class="lead">{pilot.lead}</p>
     <p class="pilot-caveat">A guided evaluation on ITIP + SIE SaaS. Together, we agree the scope, access and terms before kickoff.</p>
+    <p class="pilot-caveat">{pilot.availabilityNote}</p>
     <div id="pilot-fallback">
       <p>Discuss your desired outcomes, current difficulties, evidence, timing and constraints with Poesis. A workflow shortlist is optional.</p>
       <div class="hero-cta"><a href="/contact" class="btn btn-primary"><Icon name="mail" /> Discuss a pilot</a><a href="/catalog/values" class="btn btn-ghost">Browse values</a><a href="/catalog/pains" class="btn btn-ghost">Browse pain points</a></div>
@@ -95,6 +100,8 @@ const catalog = projectPilotCatalog();
 <style>
   .pilot-intro { padding-top: 3rem; padding-bottom: 1.5rem; }
   .pilot-intro h1 { font-size: 2.75rem; max-width: 24ch; letter-spacing: 0; margin: .65rem 0 1rem; }
+  .pilot-promise { font-size: 1.35rem; color: var(--accent-ink); line-height: 1.45; margin: 0 0 1rem; }
+  .pilot-availability { display: flex; align-items: center; gap: .45rem; color: var(--status-delivered); font: .8rem var(--font-mono); margin: 1.4rem 0 0; }
   .pilot-intro .lead { max-width: 65ch; }
   .pilot-caveat { color: var(--ink-soft); font-size: .88rem; line-height: 1.6; }
   #pilot-builder { padding-bottom: 4rem; }
